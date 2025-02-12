@@ -1,0 +1,659 @@
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 1400px) {
+  .box-serch {
+    width: 2.5rem !important;
+    height: 2.5rem;
+  }
+  .shoping-cart {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  /* -------------------------- */
+
+  .header-image-box {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+  }
+
+  .header-image-box > .image-big {
+    width: 100% !important;
+    grid-column: 1 / 5;
+    grid-row: 1 / 8;
+  }
+
+  .col-sm-6 {
+    grid-row: 8 / 9;
+    height: 215px;
+  }
+
+  .box-img-header {
+    margin-top: 0;
+  }
+
+  .image {
+    border-radius: 0;
+  }
+
+  /* -------------------------------------- */
+
+  /* -------------------------------------- */
+
+  footer > div > div:last-child {
+    display: grid;
+    grid-template-columns: 2fr repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 2rem;
+    justify-items: end;
+  }
+
+  footer > div > div:last-child > div:first-child {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    width: 100%;
+    text-align: center;
+  }
+  footer > div > div:last-child > div {
+    width: fit-content;
+  }
+
+  .box-email-footer {
+    justify-self: baseline;
+  }
+
+  /* -------------------------------------------------- */
+
+  .navbar-syna > div {
+    width: 91%;
+  }
+  /* -------------------------------------------------- */
+  .box-email-footer {
+    width: 100% !important;
+  }
+  /* -------------------------------------------------- */
+
+  .box-articles > div > div:last-child {
+    text-align: center;
+  }
+
+  .box-articles > div > div:last-child > a {
+    justify-content: center;
+  }
+
+  /* -------------------------------------------------- */
+  .box-baner-last > div > div > h3 {
+    font-size: 28px;
+  }
+  .box-baner-last > div > h4 {
+    font-size: 32px;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 1200px) {
+  .box-serch {
+    width: 3rem !important;
+    height: 3rem;
+  }
+
+  .shoping-cart {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .shoping-cart {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  /* ------------------------------- */
+
+  .box-top {
+    width: 100%;
+  }
+
+  .box-bottom {
+    width: 100%;
+  }
+
+  .ih-item img {
+    left: 0;
+    width: 100%;
+  }
+
+  /* -------------------------------------- */
+
+  /* ------------------------------------------- */
+
+  .box-baner {
+    flex-wrap: wrap;
+    height: 850px;
+  }
+  .box-baner > div {
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+  }
+
+  /* ------------------------------------------- */
+
+  footer > div > div:last-child {
+    grid-template-columns: 2fr repeat(2, 1.5fr);
+  }
+
+  /* ------------------------------------------- */
+  .navbar-syna > div {
+    width: 87%;
+  }
+
+  .navbar-syna > div > div:first-child > div:first-child > p {
+    font-size: 26px;
+  }
+  .navbar-syna > div > div:first-child > div:first-child > h4 {
+    font-size: 36px;
+  }
+
+  .navbar-syna > div > div > div:last-child > a {
+    font-size: 12px;
+  }
+
+  /* ------------------------------------------------------ */
+  .cantainer-discounts-goods > div > div:nth-child(4),
+  .discounts-goods-slider > div > div:nth-child(4) {
+    width: 90%;
+  }
+  /* ------------------------------------------------------ */
+  .discounts-box {
+    width: 100%;
+  }
+  .discounts-box > div {
+    border-radius: 0;
+    gap: 0;
+  }
+
+  /* -------------------------------------------------- */
+  .box-baner-last > div > div > h3 {
+    font-size: 24px;
+  }
+  .box-baner-last > div > h4 {
+    font-size: 28px;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 992px) {
+  .menu-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100vh;
+    padding: 0;
+    background-color: #fff;
+    flex-direction: column !important;
+    gap: 5px !important;
+    justify-content: start !important;
+    z-index: 10;
+  }
+  .menu-home > li {
+    width: 100%;
+    margin: 0 auto;
+    text-align: end;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .menu-home > li > a {
+    padding-right: 10px;
+  }
+
+  .menu {
+    overflow: scroll !important;
+  }
+
+  /* ---------------------------------------- */
+
+  .box-serch,
+  .shoping-cart,
+  .page {
+    transform: scale(0.8);
+  }
+
+  .box-serch:hover,
+  .shoping-cart:hover,
+  .page:hover {
+    transform: scale(1);
+  }
+
+  /* -------------------------------------- */
+
+  footer > div > div:last-child {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, min-content);
+    justify-items: center;
+  }
+
+  .box-email-footer {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+  }
+
+  /* -------------------------------------- */
+  .box-articles > div {
+    width: 100%;
+  }
+
+  /* -------------------------------------- */
+  .navbar-syna > div {
+    width: 81%;
+  }
+
+  .navbar-syna > div > div:first-child > div:first-child > p {
+    font-size: 22px;
+  }
+  .navbar-syna > div > div:first-child > div:first-child > h4 {
+    font-size: 32px;
+  }
+
+  .navbar-syna > div > div:first-child {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    text-align: end;
+    color: #fff;
+    width: 92%;
+    justify-content: space-evenly;
+  }
+
+  /* ------------------------------------------------------ */
+  .discounts-box {
+    height: 100%;
+  }
+  .discounts-box > div {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .discounts-title {
+    padding-top: 15px;
+    gap: 30px;
+  }
+  .discounts-title h2 {
+    width: auto;
+    text-align: center;
+  }
+  .discounts-title div {
+    justify-content: center;
+  }
+
+  /* ---------------------------------- */
+  .box-baner-last > div {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 5px;
+  }
+
+  .box-baner-last > div > div {
+    gap: 140px;
+  }
+  .box-baner-last > div > div,
+  .box-baner-last > div > h4,
+  .box-baner-last > div > div > a {
+    align-self: center;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 768px) {
+  .text-navbar-blue > h6 {
+    font-size: 0.6rem;
+  }
+
+  /* ----------------------------------- */
+
+  .discounts-box {
+    width: 100%;
+  }
+  .discounts-box > div {
+    border-radius: 0;
+  }
+
+  /* ----------------------------- */
+  .box-arrows-slider {
+    justify-content: space-evenly;
+  }
+
+  /* ----------------------------- */
+  .box-baner {
+    width: 100%;
+  }
+  .box-baner > div {
+    border-radius: 0;
+  }
+  .box-baner > div > div {
+    border-radius: 0;
+  }
+
+  /* ----------------------------- */
+  .box-baner-last {
+    width: 100%;
+  }
+  .box-baner-last > div {
+    border-radius: 0;
+  }
+
+  /* ----------------------------- */
+
+  .navbar-syna {
+    border-radius: 0;
+  }
+
+  .navbar-syna > div {
+    width: 72%;
+    justify-content: center;
+  }
+
+  .navbar-syna > div > div:first-child > div:first-child > p {
+    font-size: 18px;
+  }
+  .navbar-syna > div > div:first-child > div:first-child > h4 {
+    font-size: 28px;
+  }
+
+  .navbar-syna > div > div > div:last-child > a {
+    font-size: 10px;
+  }
+
+  .navbar-syna > div > div:first-child {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 70%;
+  }
+
+  .navbar-syna > div > div:last-child > div:first-child {
+    position: absolute;
+    right: -120px;
+    bottom: -40px;
+  }
+  .navbar-syna > div > div:last-child > div:last-child {
+    position: absolute;
+    right: -120px;
+    bottom: -40px;
+  }
+
+  .navbar-syna > div > div:first-child > div:last-child {
+    align-self: baseline;
+    padding: 0;
+    padding-top: 25px;
+  }
+
+  /* ------------------------------------------- */
+
+  /* .mySwiper1 {
+  width: 95%;
+  height: 27rem;
+} */
+
+  /* ------------------------------------------- */
+
+  .discounts-box > div {
+    padding: 10px;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 600px) {
+  .discounts-box > div {
+    height: 800px !important;
+  }
+
+  .cantain-box-slider > div:first-child,
+  .cantain-box-articles > div:first-child {
+    margin-bottom: 0;
+    gap: 3rem;
+    flex-direction: column;
+  }
+
+  .cantain-box-slider > div:first-child > div:first-child,
+  .cantain-box-articles > div:first-child > div:first-child {
+    border-right: 10px solid #2563eb;
+    border-left: 10px solid #2563eb;
+    padding: 0 15px;
+  }
+
+  .mySwiper2,
+  .mySwiper3 {
+    padding-top: 10px;
+  }
+  .mySwiper2 .swiper-slide {
+    align-self: center;
+    padding-top: 10px;
+  }
+
+  .mySwiper2,
+  .mySwiper3 {
+    position: unset;
+  }
+  .swiper-pagination {
+    rotate: 90deg;
+    transform: translate3d(0, 0, 0) !important;
+    right: 50% !important;
+    left: 50% !important;
+    translate: -120px 178px;
+  }
+  .mySwiper3 > .swiper-pagination {
+    translate: 0 160px !important;
+    display: grid;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 576px) {
+  .box-apps {
+    background-color: #2563eb;
+    /* width: 150px; */
+    padding: 5px;
+  }
+
+  .box-top {
+    height: 35rem;
+    flex-direction: column;
+  }
+  .box-bottom {
+    height: 35rem;
+    flex-direction: column;
+  }
+
+  .image-slider {
+    height: 30rem;
+  }
+
+  .container-boxs-small {
+    padding: 0;
+    gap: 2.5rem !important;
+  }
+
+  /* ---------------------------- */
+
+  .category-box-text {
+    font-size: 1rem;
+  }
+
+  /* ---------------------------- */
+
+  .cantain-box-slider {
+    width: 95%;
+    gap: 25px;
+  }
+
+  /* -------------------------------- */
+  .box-baner > div {
+    border-radius: 0 !important;
+  }
+  .box-baner > div > div {
+    align-items: center;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .baner-left > div > .discounts-title {
+    align-self: center;
+    padding: 0;
+  }
+
+  /* --------------------------------- */
+  .discounts-box > div {
+    border-radius: 0;
+    padding: 20px 10px;
+  }
+
+  /* --------------------------------- */
+
+  footer > div > div:last-child {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, min-content);
+  }
+
+  footer > div > div:last-child > div:first-child {
+    grid-column: 1;
+  }
+
+  .box-email-footer {
+    grid-column: auto;
+    grid-row: 4 / 5;
+  }
+
+  footer > div > div:last-child > div:nth-child(3) {
+    grid-row: 3;
+  }
+
+  footer > div > div:last-child > div:nth-child(2),
+  footer > div > div:last-child > div:nth-child(3),
+  footer > div > div:last-child > div:nth-child(4) {
+    padding-top: 20px;
+  }
+
+  /* ---------------------------------------------- */
+  /* .cantain-box-slider > div:first-child > div:first-child > h5,
+  .cantain-box-articles > div:first-child > div:first-child > h5 {
+    font-size: 18px;
+    font-weight: 900;
+  } */
+
+  /* ---------------------------------------------- */
+
+  .box-baner-last > div > div > h3 {
+    font-size: 20px;
+  }
+  .box-baner-last > div > h4 {
+    font-size: 24px;
+  }
+
+  /* ---------------------------------------------- */
+  .navbar-syna > div > div:first-child > div:first-child > p {
+    font-size: 14px;
+  }
+  .navbar-syna > div > div:first-child > div:first-child > h4 {
+    font-size: 24px;
+  }
+
+  .navbar-syna > div > div > div:last-child > a {
+    font-size: 10px;
+  }
+
+  .navbar-syna > div > div > div:last-child > a {
+    gap: 15px;
+    padding: 7px 15px;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+@media screen and (max-width: 420px) {
+  .discounts-goods > div > div,
+  .swiper-slide {
+    width: 100%;
+  }
+  /* ----------------------------------------------- */
+
+  .box-baner-last > div > div > h3 {
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+  .box-baner-last > div > h4 {
+    font-size: 24px;
+  }
+  /* ----------------------------------------------- */
+  .baner-left > div > h4 {
+    font-size: 40px;
+  }
+  .baner-right > div > h4 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  /* ----------------------------------------------- */
+  .navbar-syna > div > div:first-child {
+    width: 90%;
+    /* text-align: center; */
+    padding-right: 10px;
+  }
+  .navbar-syna > div > div:first-child > div {
+    align-self: flex-end !important;
+  }
+
+  .navbar-syna > div {
+    width: 90%;
+    justify-content: end;
+  }
+
+  .navbar-syna > div {
+    background-image: linear-gradient(
+      to right,
+      rgba(124, 198, 221, 0),
+      rgba(115, 188, 210, 1) 25%,
+      rgba(78, 170, 199, 1) 70%
+    );
+  }
+}
+@media screen and (max-width: 365px) {
+  .swiper-pagination {
+    translate: -120px 195px;
+  }
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+@media screen and (max-width: 300px) {
+  .category-box-text {
+    font-size: 0.7rem;
+    letter-spacing: 0 !important;
+  }
+  .cantainer-discounts-goods > div > div:nth-child(3) > p,
+  .discounts-goods-slider > div > div:nth-child(3) > p {
+    font-size: 10px;
+  }
+
+  /* ----------------------------------------------- */
+
+  .cantain-box-slider > div:first-child > div:first-child > h5,
+  .cantain-box-articles > div:first-child > div:first-child > h5 {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  /* ----------------------------------------------- */
+  .baner-left > div > h4 {
+    font-size: 32px;
+  }
+  .baner-right > div > h4 {
+    font-size: 32px;
+  }
+}

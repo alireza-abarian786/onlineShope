@@ -1,0 +1,516 @@
+@import './navbar/navbar.css';
+@import './product/box.css';
+@import './cart/cart.css';
+@import './footer/footer.css';
+@import './category.css';
+
+/* --------------------------------------------------------------****** Style All ********-------------------------------------------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  background-color: #f7f9fa;
+  font-family: picoopic !important;
+}
+
+a,
+li {
+  list-style-type: none;
+  text-decoration: none !important;
+}
+
+.cantain {
+  width: 100%;
+  height: 100vh;
+}
+
+.blue-bar,
+.header-image-box,
+.category-box {
+  position: relative;
+  /* z-index: -1; */
+}
+
+/* ------------------------------------------------- */
+
+.header-image-box {
+  width: 95%;
+  height: 450px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 250px repeat(1, 1fr) 250px;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 65px 30px;
+  margin-top: 150px;
+}
+
+.header-image-box > div {
+  width: 100%;
+  /* background-color: #8497b7; */
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.header-image-box > div > h6 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.header-image-box > div > h6 {
+  text-shadow: 2px 6px 10px #702ae7;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------ihover style */
+
+.info > h3 {
+  letter-spacing: 1px;
+}
+.ih-item.square.effect13 .info p {
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-size: 1rem;
+}
+
+.ih-item img {
+  /* left: -20px; */
+  position: relative;
+  width: auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* -------------------------------------------------------------------- */
+
+.header-image-box > .image-big {
+  overflow: auto;
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  position: relative;
+  justify-content: end;
+  direction: rtl;
+  justify-content: flex-start;
+}
+
+.header-image-box > div {
+  position: relative;
+  overflow: hidden;
+}
+
+.boxs-left {
+  box-shadow: -8px -9px 1px #c3c9d2;
+}
+
+.boxs-right {
+  box-shadow: 8px -9px 1px #c3c9d2;
+}
+
+.circles-box > div {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+}
+
+.circle-move {
+  position: absolute;
+  right: 456px;
+  background-color: #fff;
+  transition: 0.3s ease-in-out 0.1s;
+}
+
+.image {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.box-top,
+.box-bottom {
+  height: 30rem;
+}
+
+.box-img-header {
+  margin-top: 2rem;
+}
+
+.image-slider {
+  height: 30rem;
+}
+
+.container-boxs-small {
+  padding: 30px;
+}
+
+/* --------------------------------------------------------------****** Baner 1 ********-------------------------------------------------------------------- */
+
+.navbar-syna {
+  width: 100%;
+  height: 180px;
+  border-radius: 20px;
+  background-image: url("../images/gamer.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: center;
+
+  display: flex;
+  justify-content: end;
+  overflow: hidden;
+}
+
+.navbar-syna > div {
+  width: 95%;
+  background-image: linear-gradient(to right, rgba(124, 198, 221, 0), rgba(115, 188, 210, 1) 11%, rgba(78, 170, 199, 1) 25%);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.navbar-syna > div > div:first-child {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  text-align: end;
+  color: #fff;
+  width: 92%;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.navbar-syna > div > div:first-child > div:first-child > p {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.navbar-syna > div > div:first-child > div:first-child > h4 {
+  font-size: 42px;
+  font-weight: 900;
+  opacity: 0.5;
+}
+
+.navbar-syna > div > div:first-child > div:last-child {
+  align-self: end;
+  padding-bottom: 25px;
+}
+
+.navbar-syna > div > div > div:last-child > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  background-color: #3791ad8a;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 18px;
+}
+.navbar-syna > div > div > div:last-child > a:hover {
+  gap: 15px;
+  background-color: #fff;
+  color: #3791ad8a;
+  transition: all 0.4s ease 0.1ms;
+}
+
+.navbar-syna > div > div > div:last-child > a > svg {
+  width: 25px;
+}
+
+.navbar-syna > div > div > div:last-child > a > span {
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.navbar-syna > div > div:last-child {
+  position: relative;
+  height: 100%;
+}
+
+.navbar-syna > div > div:last-child > div:first-child,
+.navbar-syna > div > div:last-child > div:last-child {
+  width: 100px;
+  height: 100px;
+  background-color: #70b5cb;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-syna > div > div:last-child > div:first-child {
+  position: absolute;
+  right: -25px;
+  top: -40px;
+}
+
+.navbar-syna > div > div:last-child > div:last-child {
+  position: absolute;
+  right: -25px;
+  bottom: -40px;
+}
+
+.navbar-syna > div > div:last-child > div:first-child > div {
+  width: 75px;
+  height: 75px;
+  background-color: #9ac4d1;
+  border-radius: 100%;
+}
+
+.navbar-syna > div > div:last-child > div:last-child > div {
+  width: 75px;
+  height: 75px;
+  background-color: #9ac4d1;
+  border-radius: 100%;
+}
+
+/* --------------------------------------------------------------****** Baner 3 ********-------------------------------------------------------------------- */
+
+.box-baner {
+  width: 95%;
+  height: 450px;
+  margin: 100px auto 100px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.baner-left {
+  width: 50%;
+  height: 100%;
+  background-image: url("../images/box-left.webp");
+  background-size: cover;
+  background-position-x: -393px;
+  display: flex;
+  flex-direction: row-reverse;
+  background-repeat: no-repeat;
+  border-radius: 15px 0 0 15px;
+}
+
+.baner-left > div {
+  border-radius: 15px 0 0 15px;
+  background-image: url(),
+    linear-gradient(to left, #2563eb 10%, #5b89f0 60%, #b40190b3);
+  width: 100%;
+  padding-bottom: 30px;
+  padding-right: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 50px;
+}
+
+.baner-left > div > h4 {
+  color: #fff;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  width: 100%;
+  text-align: end;
+  word-spacing: 10px;
+  text-align: center;
+}
+
+.baner-left > div > .discounts-title {
+  padding-right: 60px;
+}
+
+.baner-right {
+  width: 50%;
+  height: 100%;
+  background-image: url("../images/box-right.jpg");
+  background-size: cover;
+  background-position-x: 90px;
+  display: flex;
+  background-repeat: no-repeat;
+  border-radius: 0 15px 15px 0;
+}
+
+.baner-right > div {
+  background-image: linear-gradient(
+    to right,
+    #2563eb 10%,
+    #5b89f0 60%,
+    #b40190b3
+  );
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 80px;
+  padding-bottom: 100px;
+  border-radius: 0 15px 15px 0;
+}
+
+.baner-right > div > h4 {
+  color: #fff;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  width: 380px;
+  text-align: end;
+  word-spacing: 10px;
+}
+
+/* --------------------------------------------------------------****** baner 4 ********-------------------------------------------------------------------- */
+
+.box-baner-last {
+  width: 95%;
+  margin: 0 auto;
+  color: #fff;
+  margin: 100px auto 100px auto;
+}
+.box-baner-last > div {
+  height: 350px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 20px;
+  background-image: url("../images/2.jpg");
+  background-size: cover;
+  background-repeat: round;
+  background-blend-mode: soft-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  text-align: end;
+  padding: 25px 50px;
+}
+
+.box-baner-last > div > div {
+  align-self: end;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  justify-content: center;
+  gap: 170px;
+}
+
+.box-baner-last > div > div > h3 {
+  font-size: 32px;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+}
+
+.box-baner-last > div > div > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}
+.box-baner-last > div > div > a:hover {
+  transform: scale(1.2);
+}
+
+.box-baner-last > div > div > a > svg {
+  padding-top: 6px;
+  width: 18px;
+}
+
+.box-baner-last > div > h4 {
+  font-size: 36px;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  align-self: end;
+  padding-bottom: 30px;
+}
+
+.box-baner-last > div > h4 span {
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------****** Articles ********-------------------------------------------------------------------- */
+.box-articles {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  row-gap: 5rem;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.box-articles > div > div:first-child {
+  width: 100%;
+  height: 400px;
+}
+
+.box-articles > div > div:first-child > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.box-articles > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: end;
+  gap: 20px;
+  padding-top: 30px;
+}
+
+.box-articles > div {
+  width: 500px;
+}
+
+.box-articles > div > div:last-child > h6 {
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.box-articles > div > div:last-child > p {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: gray;
+}
+
+.box-articles > div > div:last-child > a {
+  text-align: left;
+  color: #2563eb;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.box-articles > div > div:last-child > a:hover {
+  transform: scale(1.1);
+}
+
+.box-articles > div > div:last-child > a > svg {
+  width: 20px;
+}
+
+
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+.arrow-discounts-title {
+    width: 10rem;
+    color: #fff;
+    float: inline-start;
+}
+
+.box-arrows-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+

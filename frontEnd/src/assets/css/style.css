@@ -1,0 +1,125 @@
+.bacground {
+
+    background-image: url('../images/sky-2.jpg');
+    background-size: 100%;
+    filter: opacity(10%);
+    z-index: -1;
+    
+}
+
+.contain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 100px;
+}
+
+.box-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 400px;
+    /* height: 500px; */
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: #5d95e7;
+}
+
+.box-form > p {
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+form > div > p {
+    text-align: end;
+    transition: all 0.4s ease 0.01ms;
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px;
+    color: #fff;
+}
+
+.box-form > p > span > a {
+    color: #fff;
+    padding-right: 5px;
+}
+
+.box-form > form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    padding: 20px;
+}
+
+.box-form > form > div{
+    width: 100%;
+}
+
+.box-form > form > input,
+.box-form > form > div > input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-weight: 300;
+    font-size: smaller;
+}
+
+.box-form > form > button {
+    width: 100%;
+    height: 40px;
+    margin-top: 30px;
+
+    /* border-radius: 5px;
+    background-color:#2166b9;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer; */
+}
+
+.swal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+  
+.swal-footer {
+    background-color: rgb(245, 248, 250);
+    margin-top: 32px;
+    border-top: 1px solid #E9EEF1;
+    overflow: hidden;
+}
+
+.swal-button {
+    background-color: #3f89b8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

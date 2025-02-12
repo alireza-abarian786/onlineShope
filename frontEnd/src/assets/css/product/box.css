@@ -1,0 +1,478 @@
+/* -------------------------****** Start Box Product ********-------------------------------------------------------------------- */
+
+.cantain-box-slider,
+.cantain-box-articles {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  margin: 100px auto 100px auto;
+}
+
+.cantain-box-slider > div:first-child,
+.cantain-box-articles > div:first-child {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-bottom: 50px;
+}
+
+.cantain-box-slider > div:first-child > div:first-child,
+.cantain-box-articles > div:first-child > div:first-child {
+  border-right: 10px solid #2563eb;
+  border-radius: 8px;
+  padding-right: 30px;
+}
+
+.cantain-box-slider > div:first-child > div:first-child > h5,
+.cantain-box-articles > div:first-child > div:first-child > h5 {
+  font-size: 22px;
+  font-weight: 900;
+}
+.cantain-box-slider > div:first-child > div:first-child > h5,
+.cantain-box-articles > div:first-child > div:first-child > h5 {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.cantain-box-slider > div:first-child > a:last-child,
+.cantain-box-articles > div:first-child > a:last-child {
+  border: 2px solid #2563eb;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.cantain-box-slider > div:first-child > a:last-child:hover,
+.cantain-box-articles > div:first-child > a:last-child:hover {
+  color: #fff;
+  background-color: #2563eb;
+  transition: all 0.4s ease 0.1ms;
+}
+
+.cantain-box-slider > div:first-child > a:last-child p,
+.cantain-box-articles > div:first-child > a:last-child p {
+  margin-bottom: 0 !important;
+}
+
+.arrow-left-box-slider {
+  width: 40px;
+  color: #2563eb;
+  cursor: pointer;
+}
+/* ========================================= */
+.discounts-box-slider {
+  width: 100%;
+}
+
+.discounts-box-slider > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: color-burn;
+  overflow: overlay;
+  scrollbar-width: none;
+}
+
+/* ============================================== */
+
+.arrow-right-box-slider {
+  width: 40px;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.box-star {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: darkorange;
+  gap: 5px;
+}
+
+.box-star span {
+  color: #000;
+  font-size: 14px;
+}
+
+.box-star svg {
+  width: 20px;
+}
+
+/* --------------------------------------------------------------****** Box Slider Discounts ********-------------------------------------------------------------------- */
+
+.discounts-box {
+  width: 95%;
+  height: 500px;
+  margin: 150px auto;
+  position: relative;
+}
+
+.discounts-box > div {
+  width: 100%;
+  height: 100%;
+  background-color: #2563eba6;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding: 0 30px;
+  gap: 50px;
+  background-image: url("../images/img.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: color-burn;
+  overflow: overlay;
+  scrollbar-width: none;
+}
+
+.discounts-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: end;
+  justify-content: center;
+  align-self: center;
+}
+.discounts-title > h2 {
+  font-size: 52px;
+  width: 360px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.discounts-title > h2 > span {
+  font-size: 46px;
+}
+.discounts-title > h2 > span > span {
+  color: #9bdef2;
+}
+
+.discounts-title > div {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 40px;
+  width: 100%;
+}
+
+.discounts-title > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.discounts-title > div > div > div {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+}
+.discounts-title > div > div > div > h6 {
+  font-size: 1.7rem !important;
+  margin: 0 !important;
+}
+
+.discounts-title > div > div > p {
+  margin: 0 !important;
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.discounts-arrow {
+  position: absolute;
+  top: 4%;
+  left: 1%;
+  width: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 5px;
+  z-index: 10;
+  transition: scroll 5s ease-in-out;
+}
+
+.discounts-arrow > svg {
+  cursor: pointer;
+}
+
+.discounts-goods > div > div {
+  width: 350px;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.discounts-goods > div > div:hover {
+  transform: translateY(-10px);
+  transition: all 0.4s ease 0.1ms;
+  cursor: pointer;
+}
+
+.swiper-pagination-discounts span {
+  background-color: #fff;
+}
+.swiper-pagination-discounts span .swiper-pagination-bullet-active {
+  background-color: #fff !important;
+}
+
+.cantainer-discounts-goods {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  align-items: end;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.cantainer-discounts-goods > div > div:first-child,
+.discounts-goods-slider > div > div:first-child {
+  background-color: #fff;
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-size: cover;
+}
+
+.cantainer-discounts-goods > div > div:first-child > img,
+.discounts-goods-slider > div > div:first-child > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  /* object-fit: contain; */
+}
+
+.is-mark {
+  color: #fff !important;
+  background-color: #333 !important;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+}
+
+.not-mark {
+  color: #333 !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.cantainer-discounts-goods > div > div:first-child > div,
+.discounts-goods-slider > div > div:first-child > div {
+  position: absolute;
+  top: 5%;
+  left: 4%;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+  border-radius: 10px;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+  /* background-color: #fff; */
+}
+
+.cantainer-discounts-goods > div > div:first-child > div > svg,
+.discounts-goods-slider > div > div:first-child > div > svg {
+  transform: rotate(-45deg);
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(2),
+.discounts-goods-slider > div > div:nth-child(2) {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child,
+.discounts-goods-slider > div > div:nth-child(2) > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child > svg,
+.discounts-goods-slider > div > div:nth-child(2) > div:first-child > svg {
+  width: 20px;
+  margin-top: 5px;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child > a,
+.discounts-goods-slider > div > div:nth-child(2) > div:first-child > a {
+  font-size: 14px;
+  color: #747373;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(2) > div:last-child,
+.discounts-goods-slider > div > div:nth-child(2) > div:last-child {
+  width: 35%;
+  border: 1.5px solid rgba(117, 117, 117, 0.2);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(2) > div:last-child > div,
+.discounts-goods-slider > div > div:nth-child(2) > div:last-child > div {
+  width: 50%;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+}
+.cantainer-discounts-goods
+  > div
+  > div:nth-child(2)
+  > div:last-child
+  > div:first-child,
+.discounts-goods-slider
+  > div
+  > div:nth-child(2)
+  > div:last-child
+  > div:first-child {
+  border-right: 1.5px solid rgba(117, 117, 117, 0.2);
+  color: rgba(117, 117, 117, 0.2);
+}
+
+.cantainer-discounts-goods
+  > div
+  > div:nth-child(2)
+  > div:last-child
+  > div
+  > svg,
+.discounts-goods-slider > div > div:nth-child(2) > div:last-child > div > svg {
+  width: 50%;
+  cursor: pointer;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(3),
+.discounts-goods-slider > div > div:nth-child(3) {
+  width: 100%;
+  height: 20%;
+  border-top: 1.5px solid rgba(117, 117, 117, 0.2);
+  border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);
+  text-align: end;
+  padding: 10px;
+  position: relative;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(3) > h6,
+.discounts-goods-slider > div > div:nth-child(3) > h6 {
+  /* font-weight: 500; */
+  font-size: 14px;
+  /* margin-bottom: 8px; */
+}
+
+.cantainer-discounts-goods > div > div:nth-child(3) > p,
+.discounts-goods-slider > div > div:nth-child(3) > p {
+  font-size: 10px;
+  color: #747373;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(4),
+.discounts-goods-slider > div > div:nth-child(4) {
+  transition: all 0.3s ease 0.01ms;
+  border-radius: 10px;
+  width: 70%;
+  height: 10%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  align-self: baseline;
+}
+
+.cantainer-discounts-goods > div > div:nth-child(4) > svg,
+.discounts-goods-slider > div > div:nth-child(4) > svg {
+  width: 40%;
+  height: 100%;
+  padding: 7px;
+}
+
+.add-cart > p {
+  /* color: #747373; */
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.box-img {
+  overflow: hidden;
+}
+
+.glide__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------- */
+
+.mySwiper2 , .mySwiper3{
+  width: 100%;
+  height: 27rem;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
+.mySwiper2 .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mySwiper2 .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  bottom: -6px !important;
+}

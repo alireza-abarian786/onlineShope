@@ -1,0 +1,660 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "هدفون بی‌سیم",
+      "price": 5500000,
+      "stock": 10,
+      "image": "headphone.jpg"
+    },
+    {
+      "id": "2",
+      "name": "ماوس گیمینگ",
+      "price": 800000,
+      "stock": 15,
+      "image": "mouse.jpg"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@test.com",
+      "password": "123456"
+    },
+    {
+      "id": "2",
+      "username": "alireza",
+      "email": "ali@test.com",
+      "password": "654321"
+    },
+    {
+      "id": "d3c8",
+      "username": "amirr",
+      "password": "ddddddddddddd",
+      "phone": "22222222222"
+    },
+    {
+      "id": "7a47",
+      "username": "amirre",
+      "password": "vvvvvvvvv",
+      "phone": "00000000000"
+    },
+    {
+      "id": "910f",
+      "username": "aminn",
+      "password": "000000000000",
+      "phone": "00012323222"
+    },
+    {
+      "id": "b481",
+      "username": "علیرضا",
+      "password": "0101010101",
+      "phone": "12341231212"
+    }
+  ],
+  "category": {
+    "phone": [
+      {
+        "id": 1,
+        "title": "موبایل 1",
+        "description": "توضیحات موبایل 1",
+        "image": [
+          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "موبایل 2",
+        "description": "توضیحات موبایل 2",
+        "image": [
+          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "موبایل 3",
+        "description": "توضیحات موبایل 3",
+        "image": [
+          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg"
+        ],
+        "score": "3"
+      },
+      {
+        "id": 4,
+        "title": "موبایل 4",
+        "description": "توضیحات موبایل 4",
+        "image": [
+          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg"
+        ],
+        "score": "4"
+      },
+      {
+        "id": 5,
+        "title": "موبایل 5",
+        "description": "توضیحات موبایل 5",
+        "image": [
+          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg",
+          "../src/assets/images/phone/phone-1/img-3.jpg"
+        ],
+        "score": "5"
+      }
+    ],
+    "sports": [
+      {
+        "id": 1,
+        "title": "ورزشی 1",
+        "description": "توضیحات ورزشی 1",
+        "image": [
+          "../src/assets/images/sports/sport-1.jpg",
+          "../src/assets/images/sports/sport-2.webp",
+          "../src/assets/images/sports/sport-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "ورزشی 2",
+        "description": "توضیحات ورزشی 2",
+        "image": [
+          "../src/assets/images/sports/sport-3.webp",
+          "../src/assets/images/sports/sport-1.jpg",
+          "../src/assets/images/sports/sport-2.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "ورزشی 3",
+        "description": "توضیحات ورزشی 3",
+        "image": [
+          "../src/assets/images/sports/sport-2.webp",
+          "../src/assets/images/sports/sport-1.jpg",
+          "../src/assets/images/sports/sport-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "clothing": [
+      {
+        "id": 1,
+        "title": "مد و پوشاک 1",
+        "description": "توضیحات پوشاک 1",
+        "image": [
+          "../images/modes/mode-1.jpg",
+          "../images/modes/mode-2.jpg",
+          "../images/modes/mode-3.jpg"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "مد و پوشاک 2",
+        "description": "توضیحات پوشاک 2",
+        "image": [
+          "../images/modes/mode-2.jpg",
+          "../images/modes/mode-1.jpg",
+          "../images/modes/mode-3.jpg"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "مد و پوشاک 3",
+        "description": "توضیحات پوشاک 3",
+        "image": [
+          "../images/modes/mode-3.jpg",
+          "../images/modes/mode-1.jpg",
+          "../images/modes/mode-2.jpg"
+        ],
+        "score": "3"
+      }
+    ],
+    "jewellery": [
+      {
+        "id": 1,
+        "title": "جواهرات 1",
+        "description": "توضیحات جواهرات 1",
+        "image": [
+          "../images/jewellerys/jewellery-2.WEBP",
+          "../images/jewellerys/jewellery-1.WEBP",
+          "../images/jewellerys/jewellery-3.WEBP"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "جواهرات 2",
+        "description": "توضیحات جواهرات 2",
+        "image": [
+          "../images/jewellerys/jewellery-1.WEBP",
+          "../images/jewellerys/jewellery-2.WEBP",
+          "../images/jewellerys/jewellery-3.WEBP"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "جواهرات 3",
+        "description": "توضیحات جواهرات 3",
+        "image": [
+          "../images/jewellerys/jewellery-3.WEBP",
+          "../images/jewellerys/jewellery-1.WEBP",
+          "../images/jewellerys/jewellery-2.WEBP"
+        ],
+        "score": "3"
+      }
+    ],
+    "digital": [
+      {
+        "id": 1,
+        "title": "لوازم دیجیتالی 1",
+        "description": "توضیحات لوازم دیجیتالی 1",
+        "image": [
+          "../images/digitals/digital-2.jpg",
+          "../images/digitals/digital-1.jpg",
+          "../images/digitals/digital-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم دیجیتالی 2",
+        "description": "توضیحات لوازم دیجیتالی 2",
+        "image": [
+          "../images/digitals/digital-1.jpg",
+          "../images/digitals/digital-2.jpg",
+          "../images/digitals/digital-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم دیجیتالی 3",
+        "description": "توضیحات لوازم دیجیتالی 3",
+        "image": [
+          "../images/digitals/digital-3.webp",
+          "../images/digitals/digital-1.jpg",
+          "../images/digitals/digital-2.jpg"
+        ],
+        "score": "3"
+      }
+    ],
+    "stationery": [
+      {
+        "id": 1,
+        "title": "لوازم التحریر 1",
+        "description": "توضیحات لوازم التحریر 1",
+        "image": [
+          "../images/stationerys/stationery-2.webp",
+          "../images/stationerys/stationery-1.webp",
+          "../images/stationerys/stationery-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم التحریر 2",
+        "description": "توضیحات لوازم التحریر 2",
+        "image": [
+          "../images/stationerys/stationery-1.webp",
+          "../images/stationerys/stationery-2.webp",
+          "../images/stationerys/stationery-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم التحریر 3",
+        "description": "توضیحات لوازم التحریر 3",
+        "image": [
+          "../images/stationerys/stationery-3.webp",
+          "../images/stationerys/stationery-2.webp",
+          "../images/stationerys/stationery-1.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "kitchen": [
+      {
+        "id": 1,
+        "title": "لوازم آشپز خانه 1",
+        "description": "توضیحات لوازم آشپز خانه 1",
+        "image": [
+          "../images/kitchens/kitchen-1.webp",
+          "../images/kitchens/kitchen-2.webp",
+          "../images/kitchens/kitchen-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم آشپز خانه 2",
+        "description": "توضیحات لوازم آشپز خانه 2",
+        "image": [
+          "../images/kitchens/kitchen-1.webp",
+          "../images/kitchens/kitchen-2.webp",
+          "../images/kitchens/kitchen-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم آشپز خانه 3",
+        "description": "توضیحات لوازم آشپز خانه 3",
+        "image": [
+          "../images/kitchens/kitchen-1.webp",
+          "../images/kitchens/kitchen-2.webp",
+          "../images/kitchens/kitchen-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "electric": [
+      {
+        "id": 1,
+        "title": "لوازم الکتریکی 1",
+        "description": "توضیحات لوازم الکتریکی 1",
+        "image": [
+          "../images/electrics/electric-1.webp",
+          "../images/electrics/electric-2.webp",
+          "../images/electrics/electric-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم الکتریکی 2",
+        "description": "توضیحات لوازم الکتریکی 2",
+        "image": [
+          "../images/electrics/electric-1.webp",
+          "../images/electrics/electric-2.webp",
+          "../images/electrics/electric-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم الکتریکی 3",
+        "description": "توضیحات لوازم الکتریکی 3",
+        "image": [
+          "../images/electrics/electric-1.webp",
+          "../images/electrics/electric-2.webp",
+          "../images/electrics/electric-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "sanitary": [
+      {
+        "id": 1,
+        "title": "لوازم بهداشتی 1",
+        "description": "توضیحات لوازم بهداشتی 1",
+        "image": [
+          "../images/sanitarys/sanitary-1.webp",
+          "../images/sanitarys/sanitary-2.webp",
+          "../images/sanitarys/sanitary-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم بهداشتی 2",
+        "description": "توضیحات لوازم بهداشتی 2",
+        "image": [
+          "../images/sanitarys/sanitary-1.webp",
+          "../images/sanitarys/sanitary-2.webp",
+          "../images/sanitarys/sanitary-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم بهداشتی 3",
+        "description": "توضیحات لوازم بهداشتی 3",
+        "image": [
+          "../images/sanitarys/sanitary-1.webp",
+          "../images/sanitarys/sanitary-2.webp",
+          "../images/sanitarys/sanitary-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "vehicles": [
+      {
+        "id": 1,
+        "title": "وسایل نقلیه 1",
+        "description": "توضیحات وسایل نقلیه 1",
+        "image": [
+          "../images/vehicless/vehicles-1.webp",
+          "../images/vehicless/vehicles-2.webp",
+          "../images/vehicless/vehicles-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "وسایل نقلیه 2",
+        "description": "توضیحات وسایل نقلیه 2",
+        "image": [
+          "../images/vehicless/vehicles-1.webp",
+          "../images/vehicless/vehicles-2.webp",
+          "../images/vehicless/vehicles-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "وسایل نقلیه 3",
+        "description": "توضیحات وسایل نقلیه 3",
+        "image": [
+          "../images/vehicless/vehicles-1.webp",
+          "../images/vehicless/vehicles-2.webp",
+          "../images/vehicless/vehicles-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "tools": [
+      {
+        "id": 1,
+        "title": "ابزار آلات 1",
+        "description": "توضیحات ابزار آلات 1",
+        "image": [
+          "../images/tools/tool-1.webp",
+          "../images/tools/tool-2.webp",
+          "../images/tools/tool-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "ابزار آلات 2",
+        "description": "توضیحات ابزار آلات 2",
+        "image": [
+          "../images/tools/tool-1.webp",
+          "../images/tools/tool-2.webp",
+          "../images/tools/tool-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "ابزار آلات 3",
+        "description": "توضیحات ابزار آلات 3",
+        "image": [
+          "../images/tools/tool-1.webp",
+          "../images/tools/tool-2.webp",
+          "../images/tools/tool-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "edible": [
+      {
+        "id": 1,
+        "title": "لوازم خوراکی 1",
+        "description": "توضیحات لوازم خوراکی 1",
+        "image": [
+          "../images/edibles/edible-1.webp",
+          "../images/edibles/edible-2.webp",
+          "../images/edibles/edible-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم خوراکی 2",
+        "description": "توضیحات لوازم خوراکی 2",
+        "image": [
+          "../images/edibles/edible-1.webp",
+          "../images/edibles/edible-2.webp",
+          "../images/edibles/edible-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم خوراکی 3",
+        "description": "توضیحات لوازم خوراکی 3",
+        "image": [
+          "../images/edibles/edible-1.webp",
+          "../images/edibles/edible-2.webp",
+          "../images/edibles/edible-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "child": [
+      {
+        "id": 1,
+        "title": "لوازم کودک 1",
+        "description": "توضیحات لوازم کودک 1",
+        "image": [
+          "../images/childs/child-1.webp",
+          "../images/childs/child-2.webp",
+          "../images/childs/child-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم کودک 2",
+        "description": "توضیحات لوازم کودک 2",
+        "image": [
+          "../images/childs/child-1.webp",
+          "../images/childs/child-2.webp",
+          "../images/childs/child-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم کودک 3",
+        "description": "توضیحات لوازم کودک 3",
+        "image": [
+          "../images/childs/child-1.webp",
+          "../images/childs/child-2.webp",
+          "../images/childs/child-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "native": [
+      {
+        "id": 1,
+        "title": "لوازم محلی و بومی 1",
+        "description": "توضیحات لوازم محلی و بومی 1",
+        "image": [
+          "../images/natives/native-1.webp",
+          "../images/natives/native-2.webp",
+          "../images/natives/native-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم محلی و بومی 2",
+        "description": "توضیحات لوازم محلی و بومی 2",
+        "image": [
+          "../images/natives/native-1.webp",
+          "../images/natives/native-2.webp",
+          "../images/natives/native-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم محلی و بومی 3",
+        "description": "توضیحات لوازم محلی و بومی 3",
+        "image": [
+          "../images/natives/native-1.webp",
+          "../images/natives/native-2.webp",
+          "../images/natives/native-3.webp"
+        ],
+        "score": "3"
+      }
+    ],
+    "medicine": [
+      {
+        "id": 1,
+        "title": "لوازم پزشکی و دارو 1",
+        "description": "توضیحات لوازم پزشکی و دارو 1",
+        "image": [
+          "../images/medicines/medicine-1.webp",
+          "../images/medicines/medicine-2.webp",
+          "../images/medicines/medicine-3.webp"
+        ],
+        "score": "1"
+      },
+      {
+        "id": 2,
+        "title": "لوازم پزشکی و دارو 2",
+        "description": "توضیحات لوازم پزشکی و دارو 2",
+        "image": [
+          "../images/medicines/medicine-1.webp",
+          "../images/medicines/medicine-2.webp",
+          "../images/medicines/medicine-3.webp"
+        ],
+        "score": "2"
+      },
+      {
+        "id": 3,
+        "title": "لوازم پزشکی و دارو 3",
+        "description": "توضیحات لوازم پزشکی و دارو 3",
+        "image": [
+          "../images/medicines/medicine-1.webp",
+          "../images/medicines/medicine-2.webp",
+          "../images/medicines/medicine-3.webp"
+        ],
+        "score": "3"
+      }
+    ]
+  },
+  "bookmarks": [
+    {
+      "id": "1739355171991",
+      "image": "http://127.0.0.1:5500/frontEnd/src/assets/images/kitchen/img-1.jpg",
+      "title": "آشپز خانه چهار",
+      "description": "\n                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و\n                  با استفاده از طراحان گرافیک\n                ",
+      "score": "5"
+    }
+  ],
+  "email": [
+    {
+      "id": "3194",
+      "email": "alireza@gmail.com"
+    },
+    {
+      "id": "8a6e",
+      "email": "a25542@gmail.com"
+    }
+  ],
+  "blog": [
+    {
+      "id": "1",
+      "title": "لوازم پزشکی و دارو 1",
+      "description": "توضیحات لوازم پزشکی و دارو 1",
+      "image": [
+        "../images/medicines/medicine-1.webp",
+        "../images/medicines/medicine-2.webp",
+        "../images/medicines/medicine-3.webp"
+      ],
+      "score": "1"
+    },
+    {
+      "id": "2",
+      "title": "لوازم پزشکی و دارو 2",
+      "description": "توضیحات لوازم پزشکی و دارو 2",
+      "image": [
+        "../images/medicines/medicine-1.webp",
+        "../images/medicines/medicine-2.webp",
+        "../images/medicines/medicine-3.webp"
+      ],
+      "score": "2"
+    },
+    {
+      "id": "3",
+      "title": "لوازم پزشکی و دارو 3",
+      "description": "توضیحات لوازم پزشکی و دارو 3",
+      "image": [
+        "../images/medicines/medicine-1.webp",
+        "../images/medicines/medicine-2.webp",
+        "../images/medicines/medicine-3.webp"
+      ],
+      "score": "3"
+    }
+  ],
+  "cart": []
+}
