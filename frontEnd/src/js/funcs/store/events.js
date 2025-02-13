@@ -3,10 +3,10 @@ import { handleAddToCart} from "./box.js";
 import { toggleBookmark, initializeStatus } from "./bookMarks.js";
 import { initializeNavigation } from "./navigation.js";
 import { toggleCart, closeCart } from "./cart.js";
-import { isLogin , changeSrcLoginBtn} from "../utils.js";
+import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide , settingSliderSwiper} from "../sliders.js";
-import { showModal } from "./ui.js";
+// import { showModal } from "./ui.js";
 
 document.addEventListener('DOMContentLoaded', () => {    
     settingSliderGlide()
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 
     isLogin(getLocalStorage('login'))
-    changeSrcLoginBtn()
+    // changeSrcLoginBtn()
 
 });
 // document.addEventListener('DOMContentLoaded', () => {            

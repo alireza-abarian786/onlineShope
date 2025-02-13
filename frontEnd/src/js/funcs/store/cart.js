@@ -20,7 +20,7 @@ function addToCart(product) {
 }
 
 //🛒 تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
-function toggleCart() {
+function toggleCart() {    
     const shopingCart = document.querySelector('.shoping-cart');
     const openCart = document.querySelector('.open-cart');
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
@@ -34,6 +34,7 @@ function toggleCart() {
         //🛒 نمایش دادن سبد خرید
         openCart.classList.add('is-content');
         cantainerOpenCart.style.visibility = 'visible';
+        cantainerOpenCart.style.height = document.body.offsetHeight + 'px'
 
         //🛒 حذف نوتیف سبد خرید
         notifCart.classList.remove('is-notif');
@@ -85,18 +86,16 @@ function removeFromCart(event) {
     notifCart.classList.remove('is-notif');
 
     //❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
-    let titleCart = itemElement.querySelector("h6").textContent
+    let titleCart = itemElement.querySelector("h6").textContent    
     document.querySelectorAll('.glide').forEach(box => {
-        let titleBox = box.querySelector(".box-discription h6").textContent
-
+        let titleBox = box.querySelector(".box-discription h6").textContent        
         if (titleCart === titleBox) {
             // ✅ تغییر محتوای دکمه
             box.querySelector('.add-cart').classList.remove("text-bg-primary");
             box.querySelector('.add-cart p').textContent = "اضافه به سبد خرید"
-            showModal(`❌🧺 ${titleBox} از سبد خرید شما حذف شد`)
         }
     })
-    
+    showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)    
 }
 
 //🛒 تابع زیاد کردن تعداد محصول در سبد خرید
@@ -116,6 +115,7 @@ function decreaseQuantity(event) {
 
 //🛒 تابع حذف همه موارد موجود از سبد خرید
 function removeAllFromCart(event) {
+    
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     const openCart = document.querySelector('.open-cart');
     const notifCart = document.querySelector('.notif-cart');
@@ -125,12 +125,13 @@ function removeAllFromCart(event) {
     notifCart.classList.remove('is-notif');
     
     localStorage.removeItem("cart")
+    console.log(10);
     document.querySelectorAll('.glide').forEach(box => {    
         // ✅ تغییر محتوای دکمه
         box.querySelector('.add-cart').classList.remove("text-bg-primary");
         box.querySelector('.add-cart p').textContent = "اضافه به سبد خرید"
-        showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
     })
+    showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
 }
 
 // 🛒 تابع ست کردن رویداد کلیک روی دکمه های موجود در سبد خرید
@@ -179,4 +180,4 @@ function closeCart() {
     });
 }
 
-export {attachCartEventListeners ,addToCart ,toggleCart ,initializeCart ,closeCart}
+export {attachCartEventListeners ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart}

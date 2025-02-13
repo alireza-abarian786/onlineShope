@@ -1,5 +1,7 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
-import { isLogin , changeSrcLoginBtn} from './funcs/utils.js';
+import { isLogin } from './funcs/utils.js';
+import { toggleCart , closeCart } from './funcs/store/cart.js';
+import { attachCartEventListeners} from './funcs/store/cart.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -16,16 +18,14 @@ let phoneText = document.querySelector('.phone-text')
 let usernameValid , passwordValid , phoneValid;
 
 // ------------------------------------------------------------------------------------------- all
-// document.querySelector(".formFunc").addEventListener("submit", (e) => {
-//     e.preventDefault();
-// });
-
-window.addEventListener("load" , () => {
+window.addEventListener("DOMContentLoaded" , () => {
     let loginName = getLocalStorage('login');                
     isLogin(loginName);
     SignUpUser()
     statusLogin()
-    changeSrcLoginBtn()
+
+    toggleCart()
+    closeCart()
 })
 
 // ------------------------------------------------------------------------------------------- login
@@ -69,7 +69,7 @@ function loginCheked(loginName , username) {
         }).then((result) => {
             clearInput();
             if (result.isConfirmed) {
-                window.location.href = '../index.html'; // آدرس صفحه مقصد
+                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
             }
         })
         
@@ -89,7 +89,7 @@ function loginCheked(loginName , username) {
             clearInput();
             isLogin(loginName);
             if (result.isConfirmed) {
-                window.location.href = '../index.html'; // آدرس صفحه مقصد
+                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
             }
         })             
     }
@@ -153,7 +153,7 @@ let statusLogin = async () => {
             cancelButtonText: 'لغو'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '../index.html'; // آدرس صفحه مقصد
+                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
             }
         })
     }

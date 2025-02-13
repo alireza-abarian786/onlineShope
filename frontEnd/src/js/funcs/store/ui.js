@@ -47,7 +47,7 @@ let showModal = (text) => {
                 <div id="liveToast" class="toast text-bg-primary w-auto" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <strong>باخرز استور</strong>
-                    <small class="me-auto">اکنون</small>
+                    <small class="ms-auto">اکنون</small>
                     <button type="button" class="btn-close mx-1" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">${text}</div>
