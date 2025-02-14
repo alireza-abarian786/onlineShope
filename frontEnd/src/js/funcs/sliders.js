@@ -1,5 +1,5 @@
 // ست شده روی عکس های باکس محصول Glide تابع تنظیمات اسلایدر 
-function settingSliderGlide() {  
+function settingSliderGlide() {    
   // گرفتن تمام باکس‌های اسلایدر و مشخص کردن ویژگی های آن
   document.querySelectorAll('.glide').forEach((slider, index) => {
     new Glide(slider, {

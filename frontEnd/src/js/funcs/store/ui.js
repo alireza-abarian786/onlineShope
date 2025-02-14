@@ -12,22 +12,39 @@ export function renderCartItems(cartItems) {
     container.innerHTML = ''; // پاک کردن آیتم‌های قبلی
 
     //🛒 ساخت باکس محصول و افزودن به سبد خرید
-    cartItems.forEach((item) => {
+    cartItems.forEach((item) => {        
         const cartHTML = `
             <div class="box-goods d-flex align-items-end" data-id="${item.id}">
                 <div>
                     <span class="plus-btn">+</span>
-                    <span class="number">1</span>
+                    <span class="number">${item.quantity ? item.quantity : 1}</span>
                     <span class="minus-btn">-</span>
                 </div>
                 <div class='d-flex align-items-start flex-column'>
-                    <div class='d-flex mb-2 w-75 align-self-end'>
-                        <p class='text-white fw-light p-1 rounded m-0 w-50 h-100 ms-1'>${item.description}</p>
-                        <img src="${item.image}" alt="img" class='w-50 h-100 rounded '>
+                    <div class='box-info-product d-flex flex-dirction-column h-100 align-self-end justify-content-end'>
+                        <div class='w-100 h-100 d-flex flex-row-reverse'>
+                            <div class='mx-1 h-100'>
+                                <h6 class='bg-white rounded text-center'>${item.title}</h6>
+                                <p class='text-white fw-light p-1 m-0 rounded w-100 h-100'>${item.description}</p>
+                            </div>
+                            <div class='box-services d-flex flex-column align-items-center justify-content-between'>
+                                <button type="button" class="btn mb-1 bg-danger remove-btn"><i class='fa fa-close'></i> </button>
+                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa fa-heart'></i> </div>
+                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa fa-truck'></i> </div>
+                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa-solid fa-shipping-fast'></i> </div>
+                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa-solid fa-box'></i> </div>
+                            </div>
+                        </div>
+                        <img src="${item.image}" alt="img" class='h-100 rounded'>
                     </div>
-                    <h6 class='w-100 text-start bg-white p-2 rounded text-center'>${item.title}</h6>
+                    <div class='w-100 text-start text-white px-2 pt-2 pb-1 rounded d-flex justify-content-between'>
+                        <span class='d-flex'>
+                            تومان
+                            <span class='price ms-1'>${item.discount === 0 ? item.totalPrice ? item.totalPrice.toLocaleString() : item.price.toLocaleString() : item.totalPrice ? item.totalPrice.toLocaleString() : item.discount.toLocaleString()}</span>
+                        </span>
+                        <span>:قیمت محصول</span>
+                    </div>
                 </div>
-                <button type="button" class="btn-close bg-danger remove-btn"></button>
             </div>
         `;
         container.insertAdjacentHTML('afterbegin', cartHTML);

@@ -4,11 +4,19 @@ import { getLocalStorage , setLocalStorage } from "./storage.js";
 // گرفتن اطلاعات مورد نظر از محصول
 function getProductData(element) {
     let card = element.closest(".swiper-slide");
+    let item;
+    if (card.querySelector(".box-price .discount") !== null) {
+        item = card.querySelector(".box-price .discount span").textContent
+    } else {
+        item = 0
+    }    
     return {
         id: Date.now(),
         image: card.querySelector(".box-img img").src,
         title: card.querySelector(".box-discription h6").textContent,
         description: card.querySelector(".box-discription p").textContent,
+        price: +card.querySelector(".box-price .price span").textContent,
+        discount: +item,
         score: card.querySelector(".box-discription span").textContent,
     };
 }
@@ -16,12 +24,12 @@ function getProductData(element) {
 // 🛒 تابع تغییر دکمه "افزودن به سبد خرید" با کلیک روی ان
 function toggleAddCart(event) {    
     let product = getProductData(event.target);
-    let addCart = getLocalStorage('cart');
+    let addCart = getLocalStorage('cart');    
     
     // 🛒 بررسی وجود یا عدم وجود محصول در سبد خرید
     let index = addCart.findIndex(item => item.title === product.title);
     let card = event.target.closest('.swiper-slide')    
-
+    
     if (index === -1) {         
         // 🛒 افزودن محصول به سبد خرید
         card.querySelector('.add-cart').classList.add("text-bg-primary");
@@ -33,7 +41,7 @@ function toggleAddCart(event) {
 }
 
 // تابع افزودن محصول به سبد خرید
-function handleAddToCart(event) {
+function handleAddToCart(event) {    
     let product = getProductData(event.target);
     
     toggleAddCart(event) // "فراخوانی تغییر دکمه "افزودن به سبد خرید
@@ -47,6 +55,17 @@ let getIDProductMarkedToJson = (element) => {
         id: Date.now(),
         title: card.querySelector(".box-discription h6").textContent,
     };
+}
+
+let addToDataBase = async () => {
+    let res = await fetch('http://localhost:3000/products' , {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    })
+    let data = await res.json()
 }
 
 export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson}

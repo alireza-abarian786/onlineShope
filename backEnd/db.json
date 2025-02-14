@@ -64,64 +64,74 @@
       {
         "id": 1,
         "title": "موبایل 1",
-        "description": "توضیحات موبایل 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
-          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "./src/assets/images/phone/phone-1/img-0.jpg",
           "../src/assets/images/phone/phone-1/img-3.jpg",
-          "../src/assets/images/phone/phone-1/img-3.jpg"
+          "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
-        "score": "1"
+        "score": "1",
+        "price":"150000",
+        "discount":"0"
       },
       {
         "id": 2,
         "title": "موبایل 2",
-        "description": "توضیحات موبایل 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
-          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "./src/assets/images/phone/phone-1/img-0.jpg",
           "../src/assets/images/phone/phone-1/img-3.jpg",
-          "../src/assets/images/phone/phone-1/img-3.jpg"
+          "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
-        "score": "2"
+        "score": "2",
+        "price":"150000",
+        "discount":"50000"
       },
       {
         "id": 3,
         "title": "موبایل 3",
-        "description": "توضیحات موبایل 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
-          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "./src/assets/images/phone/phone-1/img-0.jpg",
           "../src/assets/images/phone/phone-1/img-3.jpg",
-          "../src/assets/images/phone/phone-1/img-3.jpg"
+          "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
-        "score": "3"
+        "score": "3",
+        "price":"150000",
+        "discount":"0"
       },
       {
         "id": 4,
         "title": "موبایل 4",
-        "description": "توضیحات موبایل 4",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
-          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "./src/assets/images/phone/phone-1/img-0.jpg",
           "../src/assets/images/phone/phone-1/img-3.jpg",
-          "../src/assets/images/phone/phone-1/img-3.jpg"
+          "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
-        "score": "4"
+        "score": "4",
+        "price":"150000",
+        "discount":"50000"
       },
       {
         "id": 5,
         "title": "موبایل 5",
-        "description": "توضیحات موبایل 5",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
-          "../src/assets/images/phone/phone-1/img-2.jpg",
+          "./src/assets/images/phone/phone-1/img-0.jpg",
           "../src/assets/images/phone/phone-1/img-3.jpg",
-          "../src/assets/images/phone/phone-1/img-3.jpg"
+          "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
-        "score": "5"
+        "score": "5",
+        "price":"150000",
+        "discount":"0"
       }
     ],
     "sports": [
       {
         "id": 1,
         "title": "ورزشی 1",
-        "description": "توضیحات ورزشی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../src/assets/images/sports/sport-1.jpg",
           "../src/assets/images/sports/sport-2.webp",
@@ -132,7 +142,7 @@
       {
         "id": 2,
         "title": "ورزشی 2",
-        "description": "توضیحات ورزشی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../src/assets/images/sports/sport-3.webp",
           "../src/assets/images/sports/sport-1.jpg",
@@ -143,7 +153,7 @@
       {
         "id": 3,
         "title": "ورزشی 3",
-        "description": "توضیحات ورزشی 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../src/assets/images/sports/sport-2.webp",
           "../src/assets/images/sports/sport-1.jpg",
@@ -156,7 +166,7 @@
       {
         "id": 1,
         "title": "مد و پوشاک 1",
-        "description": "توضیحات پوشاک 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../images/modes/mode-1.jpg",
           "../images/modes/mode-2.jpg",
@@ -167,7 +177,7 @@
       {
         "id": 2,
         "title": "مد و پوشاک 2",
-        "description": "توضیحات پوشاک 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../images/modes/mode-2.jpg",
           "../images/modes/mode-1.jpg",
@@ -178,7 +188,7 @@
       {
         "id": 3,
         "title": "مد و پوشاک 3",
-        "description": "توضیحات پوشاک 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
         "image": [
           "../images/modes/mode-3.jpg",
           "../images/modes/mode-1.jpg",
@@ -191,7 +201,7 @@
       {
         "id": 1,
         "title": "جواهرات 1",
-        "description": "توضیحات جواهرات 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/jewellerys/jewellery-2.WEBP",
           "../images/jewellerys/jewellery-1.WEBP",
@@ -202,7 +212,7 @@
       {
         "id": 2,
         "title": "جواهرات 2",
-        "description": "توضیحات جواهرات 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/jewellerys/jewellery-1.WEBP",
           "../images/jewellerys/jewellery-2.WEBP",
@@ -213,7 +223,7 @@
       {
         "id": 3,
         "title": "جواهرات 3",
-        "description": "توضیحات جواهرات 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/jewellerys/jewellery-3.WEBP",
           "../images/jewellerys/jewellery-1.WEBP",
@@ -226,7 +236,7 @@
       {
         "id": 1,
         "title": "لوازم دیجیتالی 1",
-        "description": "توضیحات لوازم دیجیتالی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/digitals/digital-2.jpg",
           "../images/digitals/digital-1.jpg",
@@ -237,7 +247,7 @@
       {
         "id": 2,
         "title": "لوازم دیجیتالی 2",
-        "description": "توضیحات لوازم دیجیتالی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/digitals/digital-1.jpg",
           "../images/digitals/digital-2.jpg",
@@ -248,7 +258,7 @@
       {
         "id": 3,
         "title": "لوازم دیجیتالی 3",
-        "description": "توضیحات لوازم دیجیتالی 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/digitals/digital-3.webp",
           "../images/digitals/digital-1.jpg",
@@ -261,7 +271,7 @@
       {
         "id": 1,
         "title": "لوازم التحریر 1",
-        "description": "توضیحات لوازم التحریر 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/stationerys/stationery-2.webp",
           "../images/stationerys/stationery-1.webp",
@@ -272,7 +282,7 @@
       {
         "id": 2,
         "title": "لوازم التحریر 2",
-        "description": "توضیحات لوازم التحریر 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/stationerys/stationery-1.webp",
           "../images/stationerys/stationery-2.webp",
@@ -283,7 +293,7 @@
       {
         "id": 3,
         "title": "لوازم التحریر 3",
-        "description": "توضیحات لوازم التحریر 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/stationerys/stationery-3.webp",
           "../images/stationerys/stationery-2.webp",
@@ -296,7 +306,7 @@
       {
         "id": 1,
         "title": "لوازم آشپز خانه 1",
-        "description": "توضیحات لوازم آشپز خانه 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/kitchens/kitchen-1.webp",
           "../images/kitchens/kitchen-2.webp",
@@ -307,7 +317,7 @@
       {
         "id": 2,
         "title": "لوازم آشپز خانه 2",
-        "description": "توضیحات لوازم آشپز خانه 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/kitchens/kitchen-1.webp",
           "../images/kitchens/kitchen-2.webp",
@@ -318,7 +328,7 @@
       {
         "id": 3,
         "title": "لوازم آشپز خانه 3",
-        "description": "توضیحات لوازم آشپز خانه 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/kitchens/kitchen-1.webp",
           "../images/kitchens/kitchen-2.webp",
@@ -331,7 +341,7 @@
       {
         "id": 1,
         "title": "لوازم الکتریکی 1",
-        "description": "توضیحات لوازم الکتریکی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/electrics/electric-1.webp",
           "../images/electrics/electric-2.webp",
@@ -342,7 +352,7 @@
       {
         "id": 2,
         "title": "لوازم الکتریکی 2",
-        "description": "توضیحات لوازم الکتریکی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/electrics/electric-1.webp",
           "../images/electrics/electric-2.webp",
@@ -353,7 +363,7 @@
       {
         "id": 3,
         "title": "لوازم الکتریکی 3",
-        "description": "توضیحات لوازم الکتریکی 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/electrics/electric-1.webp",
           "../images/electrics/electric-2.webp",
@@ -366,7 +376,7 @@
       {
         "id": 1,
         "title": "لوازم بهداشتی 1",
-        "description": "توضیحات لوازم بهداشتی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/sanitarys/sanitary-1.webp",
           "../images/sanitarys/sanitary-2.webp",
@@ -377,7 +387,7 @@
       {
         "id": 2,
         "title": "لوازم بهداشتی 2",
-        "description": "توضیحات لوازم بهداشتی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/sanitarys/sanitary-1.webp",
           "../images/sanitarys/sanitary-2.webp",
@@ -388,7 +398,7 @@
       {
         "id": 3,
         "title": "لوازم بهداشتی 3",
-        "description": "توضیحات لوازم بهداشتی 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/sanitarys/sanitary-1.webp",
           "../images/sanitarys/sanitary-2.webp",
@@ -401,7 +411,7 @@
       {
         "id": 1,
         "title": "وسایل نقلیه 1",
-        "description": "توضیحات وسایل نقلیه 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/vehicless/vehicles-1.webp",
           "../images/vehicless/vehicles-2.webp",
@@ -412,7 +422,7 @@
       {
         "id": 2,
         "title": "وسایل نقلیه 2",
-        "description": "توضیحات وسایل نقلیه 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/vehicless/vehicles-1.webp",
           "../images/vehicless/vehicles-2.webp",
@@ -423,7 +433,7 @@
       {
         "id": 3,
         "title": "وسایل نقلیه 3",
-        "description": "توضیحات وسایل نقلیه 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/vehicless/vehicles-1.webp",
           "../images/vehicless/vehicles-2.webp",
@@ -436,7 +446,7 @@
       {
         "id": 1,
         "title": "ابزار آلات 1",
-        "description": "توضیحات ابزار آلات 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/tools/tool-1.webp",
           "../images/tools/tool-2.webp",
@@ -447,7 +457,7 @@
       {
         "id": 2,
         "title": "ابزار آلات 2",
-        "description": "توضیحات ابزار آلات 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/tools/tool-1.webp",
           "../images/tools/tool-2.webp",
@@ -458,7 +468,7 @@
       {
         "id": 3,
         "title": "ابزار آلات 3",
-        "description": "توضیحات ابزار آلات 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/tools/tool-1.webp",
           "../images/tools/tool-2.webp",
@@ -471,7 +481,7 @@
       {
         "id": 1,
         "title": "لوازم خوراکی 1",
-        "description": "توضیحات لوازم خوراکی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/edibles/edible-1.webp",
           "../images/edibles/edible-2.webp",
@@ -482,7 +492,7 @@
       {
         "id": 2,
         "title": "لوازم خوراکی 2",
-        "description": "توضیحات لوازم خوراکی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/edibles/edible-1.webp",
           "../images/edibles/edible-2.webp",
@@ -493,8 +503,8 @@
       {
         "id": 3,
         "title": "لوازم خوراکی 3",
-        "description": "توضیحات لوازم خوراکی 3",
-        "image": [
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
+        "image":[
           "../images/edibles/edible-1.webp",
           "../images/edibles/edible-2.webp",
           "../images/edibles/edible-3.webp"
@@ -506,7 +516,7 @@
       {
         "id": 1,
         "title": "لوازم کودک 1",
-        "description": "توضیحات لوازم کودک 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/childs/child-1.webp",
           "../images/childs/child-2.webp",
@@ -517,7 +527,7 @@
       {
         "id": 2,
         "title": "لوازم کودک 2",
-        "description": "توضیحات لوازم کودک 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/childs/child-1.webp",
           "../images/childs/child-2.webp",
@@ -528,7 +538,7 @@
       {
         "id": 3,
         "title": "لوازم کودک 3",
-        "description": "توضیحات لوازم کودک 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/childs/child-1.webp",
           "../images/childs/child-2.webp",
@@ -541,7 +551,7 @@
       {
         "id": 1,
         "title": "لوازم محلی و بومی 1",
-        "description": "توضیحات لوازم محلی و بومی 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/natives/native-1.webp",
           "../images/natives/native-2.webp",
@@ -552,7 +562,7 @@
       {
         "id": 2,
         "title": "لوازم محلی و بومی 2",
-        "description": "توضیحات لوازم محلی و بومی 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/natives/native-1.webp",
           "../images/natives/native-2.webp",
@@ -563,7 +573,7 @@
       {
         "id": 3,
         "title": "لوازم محلی و بومی 3",
-        "description": "توضیحات لوازم محلی و بومی 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/natives/native-1.webp",
           "../images/natives/native-2.webp",
@@ -576,7 +586,7 @@
       {
         "id": 1,
         "title": "لوازم پزشکی و دارو 1",
-        "description": "توضیحات لوازم پزشکی و دارو 1",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/medicines/medicine-1.webp",
           "../images/medicines/medicine-2.webp",
@@ -587,7 +597,7 @@
       {
         "id": 2,
         "title": "لوازم پزشکی و دارو 2",
-        "description": "توضیحات لوازم پزشکی و دارو 2",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/medicines/medicine-1.webp",
           "../images/medicines/medicine-2.webp",
@@ -598,7 +608,7 @@
       {
         "id": 3,
         "title": "لوازم پزشکی و دارو 3",
-        "description": "توضیحات لوازم پزشکی و دارو 3",
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/medicines/medicine-1.webp",
           "../images/medicines/medicine-2.webp",
@@ -608,59 +618,8 @@
       }
     ]
   },
-  "bookmarks": [
-    {
-      "id": "1739355171991",
-      "image": "http://127.0.0.1:5500/frontEnd/src/assets/images/kitchen/img-1.jpg",
-      "title": "آشپز خانه چهار",
-      "description": "\n                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و\n                  با استفاده از طراحان گرافیک\n                ",
-      "score": "5"
-    }
-  ],
-  "email": [
-    {
-      "id": "3194",
-      "email": "alireza@gmail.com"
-    },
-    {
-      "id": "8a6e",
-      "email": "a25542@gmail.com"
-    }
-  ],
-  "blog": [
-    {
-      "id": "1",
-      "title": "لوازم پزشکی و دارو 1",
-      "description": "توضیحات لوازم پزشکی و دارو 1",
-      "image": [
-        "../images/medicines/medicine-1.webp",
-        "../images/medicines/medicine-2.webp",
-        "../images/medicines/medicine-3.webp"
-      ],
-      "score": "1"
-    },
-    {
-      "id": "2",
-      "title": "لوازم پزشکی و دارو 2",
-      "description": "توضیحات لوازم پزشکی و دارو 2",
-      "image": [
-        "../images/medicines/medicine-1.webp",
-        "../images/medicines/medicine-2.webp",
-        "../images/medicines/medicine-3.webp"
-      ],
-      "score": "2"
-    },
-    {
-      "id": "3",
-      "title": "لوازم پزشکی و دارو 3",
-      "description": "توضیحات لوازم پزشکی و دارو 3",
-      "image": [
-        "../images/medicines/medicine-1.webp",
-        "../images/medicines/medicine-2.webp",
-        "../images/medicines/medicine-3.webp"
-      ],
-      "score": "3"
-    }
-  ],
+  "bookmarks": [],
+  "email": [],
+  "blog": [],
   "cart": []
 }

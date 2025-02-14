@@ -1,7 +1,7 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
 import { isLogin } from './funcs/utils.js';
 import { toggleCart , closeCart } from './funcs/store/cart.js';
-import { attachCartEventListeners} from './funcs/store/cart.js';
+import { initializeCart } from './funcs/store/cart.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded" , () => {
 
     toggleCart()
     closeCart()
+    initializeCart()
 })
 
 // ------------------------------------------------------------------------------------------- login

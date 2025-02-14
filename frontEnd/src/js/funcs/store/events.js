@@ -5,12 +5,11 @@ import { initializeNavigation } from "./navigation.js";
 import { toggleCart, closeCart } from "./cart.js";
 import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
-import { settingSliderGlide , settingSliderSwiper} from "../sliders.js";
-// import { showModal } from "./ui.js";
+import { settingSliderGlide} from "../sliders.js";
+import { showModal } from "./ui.js";
 
 document.addEventListener('DOMContentLoaded', () => {    
     settingSliderGlide()
-    settingSliderSwiper()
     initializeCart();             // 🛒 فراخوانی توابع محتوای سبد خرید
     initializeNavigation();     // ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
     toggleCart();              // 🛒 فراخوانی تابع باز کردن سبد خرید
@@ -19,9 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 
     isLogin(getLocalStorage('login'))
-    // changeSrcLoginBtn()
-
 });
+
 // document.addEventListener('DOMContentLoaded', () => {            
 //     if (getLocalStorage('mark').length === 0) {
 //         fetch('http://localhost:3000/bookmarks')
@@ -42,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // });
 
 //🛒 ست کردن رویداد کلیک روی دکمه افزودن محصول به سبد خرید
+
 document.querySelectorAll('.add-cart').forEach(button => {
     button.addEventListener('click', handleAddToCart);
 });

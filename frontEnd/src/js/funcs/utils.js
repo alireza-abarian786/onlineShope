@@ -11,7 +11,6 @@ let searchParams = (key) => {
 function isLogin(username) {    
     if (username.length !== 0) {
         loginBtnText.innerHTML = username
-        // loginBtn.setAttribute('href' , './doshboard.html') 
         if (window.location.href === 'http://127.0.0.1:5500/index.html') {
             
             loginBtn.setAttribute('href' , './frontEnd/html/doshboard.html') 
@@ -24,13 +23,11 @@ function isLogin(username) {
     }
 }
 
-// let changeSrcLoginBtn = () => {
+let getSearchProduct = (arr , property , value) => {
+    // value = value.replace(/\s/g, '').replace('', ' ')  // حذف اسپیس  
     
-//     if (window.location.href === 'http://127.0.0.1:5500/index.html') {
-//         loginBtn.setAttribute('href' , './html/doshboard.html') 
-//     } else {
-//         loginBtn.setAttribute('href' , './doshboard.html') 
-//     }
-// }
+    let getProduct = arr.filter(product => product[property].includes(value))
+    return getProduct
+}
 
-export {searchParams , isLogin}
+export {searchParams , isLogin , getSearchProduct}

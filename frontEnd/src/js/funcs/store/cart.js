@@ -8,7 +8,7 @@ function addToCart(product) {
 
     //🛒 بررسی آیا این محصول از قبل در سبد خرید هست یا نه
     let exists = cartItems.some(item => item.title === product.title);
-    if (!exists) {
+    if (!exists) { 
         cartItems.push(product);
         setLocalStorage('cart', cartItems);
         updateCartNotification(cartItems);
@@ -84,7 +84,7 @@ function removeFromCart(event) {
     }
     
     notifCart.classList.remove('is-notif');
-
+    
     //❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
     let titleCart = itemElement.querySelector("h6").textContent    
     document.querySelectorAll('.glide').forEach(box => {
@@ -98,10 +98,30 @@ function removeFromCart(event) {
     showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)    
 }
 
+let price;
 //🛒 تابع زیاد کردن تعداد محصول در سبد خرید
-function increaseQuantity(event) {
-    let numberElement = event.target.nextElementSibling;
+function increaseQuantity(event) {    
+    let boxProduct = event.target.closest('.box-goods')
+    
+    let titleProduct = boxProduct.querySelector('h6');
+    let priceElem = boxProduct.querySelector(".price");    
+    let getPriceLocal = getLocalStorage("cart")
+    let objProduct = getPriceLocal.find(item => item.title === titleProduct.textContent)
+    let numberElement = boxProduct.querySelector('.number')
+
     numberElement.innerHTML = Number(numberElement.innerHTML) + 1;
+    if (objProduct.discount === 0) {
+        price = objProduct.price * Number(numberElement.innerHTML)
+    } else {
+        price = objProduct.discount * Number(numberElement.innerHTML)        
+    }
+
+    priceElem.textContent = price.toLocaleString()
+
+    objProduct.quantity = +numberElement.innerHTML;
+    objProduct.totalPrice = price;
+
+    setLocalStorage('cart' , getPriceLocal)
 }
 
 //🛒 تابع کم کردن تعداد محصول در سبد خرید

@@ -46,13 +46,13 @@ function toggleBookmark(event) {
 }
 
 // ✅ تابع بررسی وضعیت بوکمارک یا سبد خرید بودن یا نبودن محصولات
-function initializeStatus(key , element , isLocal , notLocal) {
+function initializeStatus(key , element , isLocal , notLocal) {    
     let bookmarks = getLocalStorage(key);
 
     // 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید
     document.querySelectorAll(element).forEach(btn => {
         let card = btn.closest(".swiper-slide");
-        let title = card.querySelector(".box-discription h6").textContent;
+        let title = card.querySelector(".box-discription h6").textContent;        
 
         // ⚡ محصولاتی که بوکمارک یا خرید شدن رو با اعمال تغییرات مشخص کن
         if (bookmarks.some(item => item.title === title)) {            

@@ -1,6 +1,7 @@
 // ⬅️➡️ تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
 function initializeNavigation() {
-
+    
+    
     //➡️ دکمه حرکت سمت راست
     document.querySelectorAll('.next').forEach(btn => {
         btn.addEventListener('click', () => {

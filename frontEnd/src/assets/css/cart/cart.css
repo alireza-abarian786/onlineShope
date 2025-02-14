@@ -125,7 +125,13 @@
 }
 
 .box-goods h6 {
-    font-size: 16px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 2px 0 5px 0;
+}
+.box-goods h6 + div{
+    background-color: #5d95e7;
+    font-size: 14px;
     letter-spacing: 1px;
 }
 
@@ -135,16 +141,34 @@
     direction: rtl;
 }
 
-.box-goods > button {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+
+.box-info-product {
+    width: 100%;
+}
+
+.box-info-product img {
+    width: 35%;
+}
+
+.box-services {
+    width: 25%;
+    
+}
+.box-services > button {
     cursor: pointer;
-    font-size: 8px;
-    height: 10px;
-    width: 20px;
+    height: 23px !important;
+    /* width: 25px !important; */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 11px;
+}
+.box-services i {
+   font-size: 14px;
+}
+.box-services div {
+    cursor: pointer;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -119,7 +119,7 @@
 
 .discounts-box {
   width: 95%;
-  height: 500px;
+  height: 550px;
   margin: 150px auto;
   position: relative;
 }
@@ -222,7 +222,7 @@
 
 .discounts-goods > div > div {
   width: 350px;
-  height: 400px;
+  height: 450px;
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
@@ -256,7 +256,7 @@
 .discounts-goods-slider > div > div:first-child {
   background-color: #fff;
   width: 100%;
-  height: 50%;
+  /* height: 50%; */
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -385,11 +385,11 @@
 .cantainer-discounts-goods > div > div:nth-child(3),
 .discounts-goods-slider > div > div:nth-child(3) {
   width: 100%;
-  height: 20%;
+  /* height: 20%; */
   border-top: 1.5px solid rgba(117, 117, 117, 0.2);
   border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);
   text-align: end;
-  padding: 10px;
+  padding: 7px 0;
   position: relative;
 }
 
@@ -406,14 +406,37 @@
   color: #747373;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(4),
-.discounts-goods-slider > div > div:nth-child(4) {
+.box-price {
+  border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);
+  padding: 5px 0;
+  position: relative;
+  font-size: 12px;
+}
+
+.price-before::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #dc3545;
+  position: absolute;
+  top: 50%;
+}
+
+.box-price p {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  /* color: #747385; */
+}
+
+.add-cart {
   transition: all 0.3s ease 0.01ms;
   border-radius: 10px;
   width: 70%;
   height: 10%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   margin: 10px;
+  margin-bottom: 5px;
   display: flex;
   /* align-items: center; */
   justify-content: space-evenly;
@@ -423,8 +446,7 @@
   align-self: baseline;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(4) > svg,
-.discounts-goods-slider > div > div:nth-child(4) > svg {
+.add-cart > svg {
   width: 40%;
   height: 100%;
   padding: 7px;
@@ -453,7 +475,7 @@
 
 .mySwiper2 , .mySwiper3{
   width: 100%;
-  height: 27rem;
+  height: 30rem;
   align-self: flex-end;
   margin-bottom: 10px;
 }
