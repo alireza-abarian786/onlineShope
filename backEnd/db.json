@@ -71,8 +71,8 @@
           "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
         "score": "1",
-        "price":"150000",
-        "discount":"0"
+        "price": "150000",
+        "discount": "0"
       },
       {
         "id": 2,
@@ -84,8 +84,8 @@
           "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
         "score": "2",
-        "price":"150000",
-        "discount":"50000"
+        "price": "150000",
+        "discount": "50000"
       },
       {
         "id": 3,
@@ -97,8 +97,8 @@
           "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
         "score": "3",
-        "price":"150000",
-        "discount":"0"
+        "price": "150000",
+        "discount": "0"
       },
       {
         "id": 4,
@@ -110,8 +110,8 @@
           "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
         "score": "4",
-        "price":"150000",
-        "discount":"50000"
+        "price": "150000",
+        "discount": "50000"
       },
       {
         "id": 5,
@@ -123,15 +123,15 @@
           "../src/assets/images/phone/phone-1/img-1.jpg"
         ],
         "score": "5",
-        "price":"150000",
-        "discount":"0"
+        "price": "150000",
+        "discount": "0"
       }
     ],
     "sports": [
       {
         "id": 1,
         "title": "ورزشی 1",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../src/assets/images/sports/sport-1.jpg",
           "../src/assets/images/sports/sport-2.webp",
@@ -142,7 +142,7 @@
       {
         "id": 2,
         "title": "ورزشی 2",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../src/assets/images/sports/sport-3.webp",
           "../src/assets/images/sports/sport-1.jpg",
@@ -153,7 +153,7 @@
       {
         "id": 3,
         "title": "ورزشی 3",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../src/assets/images/sports/sport-2.webp",
           "../src/assets/images/sports/sport-1.jpg",
@@ -166,7 +166,7 @@
       {
         "id": 1,
         "title": "مد و پوشاک 1",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/modes/mode-1.jpg",
           "../images/modes/mode-2.jpg",
@@ -177,7 +177,7 @@
       {
         "id": 2,
         "title": "مد و پوشاک 2",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/modes/mode-2.jpg",
           "../images/modes/mode-1.jpg",
@@ -188,7 +188,7 @@
       {
         "id": 3,
         "title": "مد و پوشاک 3",
-        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",        
+        "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
         "image": [
           "../images/modes/mode-3.jpg",
           "../images/modes/mode-1.jpg",
@@ -504,7 +504,7 @@
         "id": 3,
         "title": "لوازم خوراکی 3",
         "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک",
-        "image":[
+        "image": [
           "../images/edibles/edible-1.webp",
           "../images/edibles/edible-2.webp",
           "../images/edibles/edible-3.webp"
@@ -618,7 +618,17 @@
       }
     ]
   },
-  "bookmarks": [],
+  "bookmarks": [
+    {
+      "id": "1739625686466",
+      "image": "http://127.0.0.1:5500/frontEnd/src/assets/images/kitchen/img-1.jpg",
+      "title": "محصول دوم باکس تخفیفات",
+      "description": "\n                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و\n                    با استفاده از طراحان گرافیک\n                  ",
+      "price": "150,000",
+      "discount": "50,000",
+      "score": "5"
+    }
+  ],
   "email": [],
   "blog": [],
   "cart": []

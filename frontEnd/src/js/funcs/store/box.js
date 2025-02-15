@@ -3,21 +3,15 @@ import { getLocalStorage , setLocalStorage } from "./storage.js";
 
 // گرفتن اطلاعات مورد نظر از محصول
 function getProductData(element) {
-    let card = element.closest(".swiper-slide");
-    let item;
-    if (card.querySelector(".box-price .discount") !== null) {
-        item = card.querySelector(".box-price .discount span").textContent
-    } else {
-        item = 0
-    }    
+    let card = element.closest(".swiper-slide"); 
     return {
         id: Date.now(),
         image: card.querySelector(".box-img img").src,
         title: card.querySelector(".box-discription h6").textContent,
         description: card.querySelector(".box-discription p").textContent,
-        price: +card.querySelector(".box-price .price span").textContent,
-        discount: +item,
-        score: card.querySelector(".box-discription span").textContent,
+        price: parseInt(card.querySelector(".box-price .price span").textContent),
+        discount: card.querySelector(".box-price .discount span") ? parseInt(card.querySelector(".box-price .discount span").textContent) : 0,
+        score: parseInt(card.querySelector(".box-discription span").textContent),
     };
 }
 

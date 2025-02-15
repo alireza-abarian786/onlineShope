@@ -3,18 +3,18 @@ function initializeNavigation() {
     
     
     //➡️ دکمه حرکت سمت راست
-    document.querySelectorAll('.next').forEach(btn => {
+    document.querySelectorAll('.glide__arrow--right').forEach(btn => {
         btn.addEventListener('click', () => {
-            btn.style.color = '#2563eb';
-            btn.parentElement.previousElementSibling.children[0].style.color = '#75757533';
+            btn.children[0].style.color = '#2563eb';
+            btn.previousElementSibling.children[0].style.color = '#75757533';
         });
     });
 
     //⬅️ دکمه حرکت سمت چپ
-    document.querySelectorAll('.pretive').forEach(btn => {
+    document.querySelectorAll('.glide__arrow--left').forEach(btn => {
         btn.addEventListener('click', () => {
-            btn.parentElement.nextElementSibling.children[0].style.color = '#75757533';
-            btn.style.color = '#2563eb';
+            btn.children[0].style.color = '#2563eb';
+            btn.nextElementSibling.children[0].style.color = '#75757533';
         });
     });
 }

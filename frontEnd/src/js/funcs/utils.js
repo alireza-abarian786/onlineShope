@@ -30,4 +30,12 @@ let getSearchProduct = (arr , property , value) => {
     return getProduct
 }
 
-export {searchParams , isLogin , getSearchProduct}
+// فعال‌سازی تمام تولتیپ‌ها
+function initTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipEl) => {
+        new bootstrap.Tooltip(tooltipEl);
+    });
+}
+
+export {searchParams , isLogin , getSearchProduct , initTooltips}

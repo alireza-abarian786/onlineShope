@@ -70,7 +70,7 @@
     height: max-content;
     border-radius: 10px;
     position: absolute;
-    top: 115px;
+    top: 40px;
     left: 0.5%;
     z-index: 15;
     background-color: #fff;
@@ -125,9 +125,9 @@
 }
 
 .box-goods h6 {
-    font-size: 14px;
-    letter-spacing: 1px;
-    padding: 2px 0 5px 0;
+    font-size: 12px;
+    /* letter-spacing: 1px; */
+    padding: 7px;
 }
 .box-goods h6 + div{
     background-color: #5d95e7;
@@ -143,7 +143,7 @@
 
 
 .box-info-product {
-    width: 100%;
+    height: 100px;
 }
 
 .box-info-product img {
@@ -154,13 +154,12 @@
     width: 25%;
     
 }
-.box-services > button {
-    cursor: pointer;
-    height: 23px !important;
-    /* width: 25px !important; */
+.remove-btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 29px;
+    height: 29px;
 }
 .box-services i {
    font-size: 14px;

@@ -1,4 +1,5 @@
 import { attachCartEventListeners } from "./cart.js";
+import { initTooltips } from "../utils.js";
 
 //🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 export function updateCartNotification(cartItems) {
@@ -20,22 +21,27 @@ export function renderCartItems(cartItems) {
                     <span class="number">${item.quantity ? item.quantity : 1}</span>
                     <span class="minus-btn">-</span>
                 </div>
-                <div class='d-flex align-items-start flex-column'>
-                    <div class='box-info-product d-flex flex-dirction-column h-100 align-self-end justify-content-end'>
-                        <div class='w-100 h-100 d-flex flex-row-reverse'>
-                            <div class='mx-1 h-100'>
-                                <h6 class='bg-white rounded text-center'>${item.title}</h6>
-                                <p class='text-white fw-light p-1 m-0 rounded w-100 h-100'>${item.description}</p>
+                <div class=''>
+                    <div class='box-info-product d-flex flex-column align-items-center'>
+                    
+                        <div class='row w-100 h-100'>
+                            <div class='col'>
+                                <div class='row'>
+                                    <div class='col-1 p-0'>
+                                        <button type="button" class="btn btn-warning mb-1 rounded remove-btn"><i class='fa fa-close'></i> </button>
+                                    </div>
+                                    <div class='col-11 pe-1'>
+                                        <h6 class='bg-white rounded text-center'>${item.title}</h6>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <p class='text-white fw-light px-2 m-0 rounded'>${item.description}</p>
+                                </div>
                             </div>
-                            <div class='box-services d-flex flex-column align-items-center justify-content-between'>
-                                <button type="button" class="btn mb-1 bg-danger remove-btn"><i class='fa fa-close'></i> </button>
-                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa fa-heart'></i> </div>
-                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa fa-truck'></i> </div>
-                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa-solid fa-shipping-fast'></i> </div>
-                                <div class="w-100 rounded mb-1 bg-white"> <i class='fa-solid fa-box'></i> </div>
+                            <div class='col-4 p-0'>
+                                <img src="${item.image}" alt="img" class='rounded w-100 h-100'>
                             </div>
                         </div>
-                        <img src="${item.image}" alt="img" class='h-100 rounded'>
                     </div>
                     <div class='w-100 text-start text-white px-2 pt-2 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
@@ -52,6 +58,9 @@ export function renderCartItems(cartItems) {
 
     //🛒  فراخوانی تابع فعال کردن دکمه های سبد خرید 
     attachCartEventListeners();
+
+    // فعال‌سازی تمام تولتیپ‌ها
+    initTooltips()
 }
 
 

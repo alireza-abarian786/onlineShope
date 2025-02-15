@@ -108,17 +108,17 @@ function increaseQuantity(event) {
     let getPriceLocal = getLocalStorage("cart")
     let objProduct = getPriceLocal.find(item => item.title === titleProduct.textContent)
     let numberElement = boxProduct.querySelector('.number')
-
     numberElement.innerHTML = Number(numberElement.innerHTML) + 1;
+    
     if (objProduct.discount === 0) {
-        price = objProduct.price * Number(numberElement.innerHTML)
+        price = objProduct.price * numberElement.innerHTML
     } else {
-        price = objProduct.discount * Number(numberElement.innerHTML)        
+        price = objProduct.discount * numberElement.innerHTML        
     }
-
+    
     priceElem.textContent = price.toLocaleString()
 
-    objProduct.quantity = +numberElement.innerHTML;
+    objProduct.quantity = numberElement.innerHTML;
     objProduct.totalPrice = price;
 
     setLocalStorage('cart' , getPriceLocal)
@@ -126,11 +126,30 @@ function increaseQuantity(event) {
 
 //🛒 تابع کم کردن تعداد محصول در سبد خرید
 function decreaseQuantity(event) {
-    let numberElement = event.target.previousElementSibling;
-    let currentValue = Number(numberElement.innerHTML);
+    let boxProduct = event.target.closest(".box-goods")
+
+    let titleProduct = boxProduct.querySelector('h6');
+    let priceElem = boxProduct.querySelector(".price");    
+    let getPriceLocal = getLocalStorage("cart")
+    let objProduct = getPriceLocal.find(item => item.title === titleProduct.textContent)
+    let numberElement = boxProduct.querySelector('.number');
+    let currentValue = Number(numberElement.innerHTML);    
+    
     if (currentValue > 1) {
         numberElement.innerHTML = currentValue - 1;
-    }
+        if (objProduct.discount === 0) {
+            price = objProduct.totalPrice - objProduct.price
+        } else {
+            price = objProduct.totalPrice - objProduct.discount
+        }
+    }    
+
+    priceElem.textContent = price.toLocaleString()
+
+    objProduct.quantity = numberElement.innerHTML;
+    objProduct.totalPrice = price;
+
+    setLocalStorage('cart' , getPriceLocal)
 }
 
 //🛒 تابع حذف همه موارد موجود از سبد خرید
