@@ -52,7 +52,7 @@ let getIDProductMarkedToJson = (element) => {
 }
 
 let addToDataBase = async () => {
-    let res = await fetch('http://localhost:3000/products' , {
+    let res = await fetch('http://localhost:4000/products' , {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -62,4 +62,29 @@ let addToDataBase = async () => {
     let data = await res.json()
 }
 
-export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson}
+// تابع مریوط به دکمه های باکس محصول
+let clickButtonsProduct = async () => {
+
+    //🧺 دکمه افزودن به سبد خرید
+    document.querySelectorAll('.add-cart').forEach(button => {
+        button.addEventListener('click', handleAddToCart);
+    });
+
+    //➡️ دکمه حرکت سمت راست
+    document.querySelectorAll('.glide__arrow--right').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.children[0].style.color = '#2563eb';
+            btn.previousElementSibling.children[0].style.color = '#75757533';
+        });
+    });
+
+    //⬅️ دکمه حرکت سمت چپ
+    document.querySelectorAll('.glide__arrow--left').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.children[0].style.color = '#2563eb';
+            btn.nextElementSibling.children[0].style.color = '#75757533';
+        });
+    });
+}
+
+export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson , clickButtonsProduct}

@@ -38,4 +38,6 @@ function initTooltips() {
     });
 }
 
+
+
 export {searchParams , isLogin , getSearchProduct , initTooltips}

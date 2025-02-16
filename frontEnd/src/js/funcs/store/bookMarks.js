@@ -77,5 +77,12 @@ let removeBookMarkItem = async (id) => {
     let res = await fetch(`http://localhost:3000/bookmarks/${id}`, {method: 'DELETE',})
 }
 
+let clickAddBookMark = () => {
+    //🛒 ست کردن رویداد کلیک روی دکمه بوکمارک شدن محصول
+    document.querySelectorAll('.icon-bookmark').forEach(icon => {    
+        icon.addEventListener('click', toggleBookmark);
+    });
+}
 
-export {toggleBookmark , initializeStatus}
+
+export {toggleBookmark , initializeStatus , clickAddBookMark}

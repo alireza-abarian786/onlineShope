@@ -55,35 +55,4 @@ setInterval(() => updateTimer(targetDate2, daysElement2, hoursElement2, minutesE
 updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement)
 updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2)
 
-
-
-
-
-
-
-
-
-function timerBox1() {
-  // تاریخ هدف (مثال: اوایل سال 2024)
-  const targetDate = new Date("2025-02-17T00:00:00");
-
-  // ارجاع به عناصر HTML
-  const daysElement = document.getElementById("days");
-  const hoursElement = document.getElementById("hours");
-  const minutesElement = document.getElementById("minutes");
-  const secondsElement = document.getElementById("seconds");
-
-}
-function timerBox2() {
-  // تاریخ هدف (مثال: اوایل سال 2024)
-  const targetDate = new Date("2025-03-17T00:00:00");
-
-  // ارجاع به عناصر HTML
-  const daysElement = document.getElementById("days2");
-  const hoursElement = document.getElementById("hours2");
-  const minutesElement = document.getElementById("minutes2");
-  const secondsElement = document.getElementById("seconds2");
-
-}
-
-export { timerBox1, timerBox2 };
+export { updateTimer };

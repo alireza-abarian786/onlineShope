@@ -73,6 +73,27 @@ function settingSliderSwiper() {
     },
   });
 
+  let swiper4 = new Swiper(".mySwiper4", {
+    // modules: [Autoplay, Pagination],
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1, direction: "vertical", spaceBetween: 50 },
+      600: { spaceBetween: 10 },
+      720: { slidesPerView: 2, spaceBetween: 50 },
+      930: { slidesPerView: 3, spaceBetween: 10 },
+      1024: { slidesPerView: 3, spaceBetween: 50 },
+      1330: { slidesPerView: 4, spaceBetween: 10 },
+      1455: { slidesPerView: 3, spaceBetween: 10 },
+    },
+  });
+
   // تابع توقف و شروع autoplay هنگام حرکت موس روی اسلایدر
   function mouseMoveOnSliders(elem, variable) {
     let slider = document.querySelector(elem);
@@ -115,6 +136,7 @@ function settingSliderSwiper() {
   // فراخوانی تنظیمات موس برای دسته بندی ها و باکس‌های محصول
   mouseMoveOnSliders(".mySwiper1", swiper1);
   mouseMoveOnSliders(".mySwiper2", swiper2);
+  mouseMoveOnSliders(".mySwiper4", swiper4);
   mouseMoveOnSlidersBoxs(".mySwiper3", swiper3);
 }
 
