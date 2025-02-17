@@ -1,54 +1,58 @@
 import { searchParams , getSearchProduct} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
-import { initializeStatus } from "./funcs/store/bookMarks.js";
-import {clickButtonsProduct} from "./funcs/store/box.js";
+import { initializeStatusMarks , allBookmarks } from "./funcs/store/bookMarks.js";
+import {clickButtonsProduct , allProduct} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
 
 
 let boxSerchInput = document.querySelector(".box-serch input")
 
+// رویداد بارگذاری صفحه
 window.addEventListener("DOMContentLoaded" , () => {
   category()
   showSearchProducts()
-
 })
 
+
+//* تابعی برای دریافت دسته‌بندی و نمایش محصولات مرتبط
 let category = async () => {
-  let url = searchParams('cat')    
-  let res = await fetch(`http://localhost:4000/categories`)
-  let data = await res.json()
-  let findCategory = await data.find(item => item.urlSearch === url)  
+  let url = searchParams('cat');  // دریافت مقدار دسته‌بندی از URL    
+  let res = await fetch(`http://localhost:4000/categories`);
+  let data = await res.json();
   
-  let response = await fetch(`http://localhost:4000/products`)
-  let resultProducts = await response.json()  
+  // یافتن دسته مرتبط با مقدار URL
+  let findCategory = data.find(item => item.urlSearch === url);  
+
+  // دریافت اطلاعات تمام محصولات
+  let Products = await allProduct()
+
+  let Marks = await allBookmarks(); // دریافت لیست بوکمارک‌ها
   
-  let getProductCategory = await resultProducts.filter(item => item.category_id == findCategory.id);  
+  let getProductCategory = Products.filter(item => item.category_id == findCategory.id);  
 
   if (url !== 'bookmarks') {
-    showSearchProducts(getProductCategory)  
-    createBox(getProductCategory)
+    // اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده
+    showSearchProducts(getProductCategory);  
+    createBox(getProductCategory);
+  } else {          
+    // اگر دسته‌بندی بوکمارک بود، فقط محصولات بوکمارک‌شده را نمایش بده
+    let bookmarkedProducts = Products.filter(item => 
+      Marks.some(mark => mark.product_id == item.id)
+    );
 
-  } else {      
-    let resMark = await fetch(`http://localhost:4000/bookmarks`)
-    let result = await resMark.json()
-    
-     // فیلتر کردن محصولات بر اساس bookmarks
-     let bookmarkedProducts = resultProducts.filter(item => 
-       result.some(mark => mark.product_id == item.id)
-     );
-   
-     showSearchProducts(bookmarkedProducts)  
-     createBox(bookmarkedProducts)
+    showSearchProducts(bookmarkedProducts);  
+    createBox(bookmarkedProducts);
   }     
-  
-  clickButtonsProduct()
-  clickAddBookMark()
 
-  settingSliderGlide()
-  initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
-  initializeStatus('mark' , '.icon-bookmark' , 'is-mark' , 'not-mark');       // 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-}
+  // افزودن رویداد کلیک به دکمه‌ها و مدیریت بوکمارک‌ها
+  clickButtonsProduct();
+  clickAddBookMark();
+  settingSliderGlide();
+  initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');  
+};
+// initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 
+// تابعی برای جستجوی محصولات داخل دسته‌بندی
 let showSearchProducts = async (data) => {
   boxSerchInput.addEventListener('input', (e) => {
     if (Array.isArray(data)) {
@@ -59,11 +63,12 @@ let showSearchProducts = async (data) => {
 }
 
 
+// تابعی برای ایجاد باکس‌های محصولات داخل صفحه
 let createBox = (arrCategory) => {  
 
-  document.querySelector('.cantainer-category').innerHTML = ''
+  document.querySelector('.cantainer-category').innerHTML = '' // پاک کردن محتوای قبلی
 
-  if (arrCategory.length) {
+  if (arrCategory.length) { // اگر محصولی وجود داشت، نمایش بده
     arrCategory.forEach(product => {                         
       document.querySelector('.cantainer-category').insertAdjacentHTML('beforeend', `
                 <div class="swiper-slide glide">
@@ -254,7 +259,7 @@ let createBox = (arrCategory) => {
           
     });
 
-  } else {
+  } else { // اگر محصولی پیدا نشد، پیام خطا نمایش بده
     document.querySelector('.cantainer-category').insertAdjacentHTML('beforeend', `
       <div class='alert alert-danger w-100 text-center'>کالای مورد نضر شما یافت نشد لطفا نام کالا را دقیق تر وارد کنید</div>
     `)

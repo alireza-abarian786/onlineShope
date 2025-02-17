@@ -1,24 +1,78 @@
 import { addToCart } from "./cart.js";
 import { getLocalStorage , setLocalStorage } from "./storage.js";
 
+let allProduct = async () => {
+    let res = await fetch(`http://localhost:4000/products`)
+    let Products = await res.json()
+
+    return Products;
+}
+
 // گرفتن اطلاعات مورد نظر از محصول
-function getProductData(element) {
-    let card = element.closest(".swiper-slide"); 
+let getProductData = async (element) => {    
+    let card = element.closest(".swiper-slide");
+    let product = await getProductDataDB(card)    
+    
+    // دریافت اطلاعات کاربر از دیتابیس
+    let user = await getUserDataDB();    
+    if (!user || user.length === 0) {
+        console.error("No user found with the given name.");
+        return null;
+    }
+
     return {
         id: Date.now(),
         image: card.querySelector(".box-img img").src,
-        title: card.querySelector(".box-discription h6").textContent,
+        name: card.querySelector(".box-discription h6").textContent,
         description: card.querySelector(".box-discription p").textContent,
         price: parseInt(card.querySelector(".box-price .price span").textContent),
-        discount: card.querySelector(".box-price .discount span") ? parseInt(card.querySelector(".box-price .discount span").textContent) : 0,
-        score: parseInt(card.querySelector(".box-discription span").textContent),
+        discount: card.querySelector(".box-price .discount span")
+            ? parseInt(card.querySelector(".box-price .discount span").textContent)
+            : 0,
+        ratings: parseInt(card.querySelector(".box-discription span").textContent),
+        user_id: user[0].id, // ID کاربر از دیتابیس
+        product_id: product.id,
     };
+};
+
+// تابع دریافت اطلاعات کاربر از دیتابیس
+let getUserDataDB = async () => {
+    try {
+        let userName = getLocalStorage("login");
+        if (!userName) {
+            console.error("No user is logged in.");
+            return null;
+        }
+
+        let res = await fetch(`http://localhost:4000/users`);
+        if (!res.ok) {
+            throw new Error("Failed to fetch users data.");
+        }
+
+        let data = await res.json();
+        let getUser = data.find((user) => user.name === userName);
+
+        return getUser; // برگشت لیست کاربرانی که نام آنها با userName مطابقت دارد
+    } catch (error) {
+        console.error("Error fetching user data:", error.message);
+        return null;
+    }
+};
+
+let getProductDataDB = async (card) => {
+    // دریافت اطلاعات تمام محصولات
+    let Products = await allProduct()
+
+    let productNameTarget = card.querySelector(".box-discription h6").textContent
+    let findProductToDB = Products.find(product => product.name === productNameTarget)
+    
+    return findProductToDB;
 }
 
 // 🛒 تابع تغییر دکمه "افزودن به سبد خرید" با کلیک روی ان
 function toggleAddCart(event) {    
-    let product = getProductData(event.target);
     let addCart = getLocalStorage('cart');    
+    let product = getProductData(event.target , addCart);    
     
     // 🛒 بررسی وجود یا عدم وجود محصول در سبد خرید
     let index = addCart.findIndex(item => item.title === product.title);
@@ -43,11 +97,15 @@ function handleAddToCart(event) {
 }
 
 
-let getIDProductMarkedToJson = (element) => {
-    let card = element.closest(".swiper-slide");
+let getIDProductMarkedToJson = async (element) => {
+    let card = await element.closest(".swiper-slide");
+    let product = await getProductDataDB(card)
+    let user = await getUserDataDB();
     return {
-        id: Date.now(),
-        title: card.querySelector(".box-discription h6").textContent,
+        id: Date.now().toString(36),
+        name: card.querySelector(".box-discription h6").textContent,
+        user_id: user.id,
+        product_id: product.id,
     };
 }
 
@@ -87,4 +145,4 @@ let clickButtonsProduct = async () => {
     });
 }
 
-export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson , clickButtonsProduct}
+export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson , clickButtonsProduct , allProduct}

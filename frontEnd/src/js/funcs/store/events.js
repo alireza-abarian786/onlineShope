@@ -1,21 +1,26 @@
 import { initializeCart } from "./cart.js";
 import { handleAddToCart} from "./box.js";
-import { toggleBookmark, initializeStatus } from "./bookMarks.js";
+import { toggleBookmark, initializeStatusMarks } from "./bookMarks.js";
 import { initializeNavigation } from "./navigation.js";
 import { toggleCart, closeCart } from "./cart.js";
 import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide} from "../sliders.js";
 import { showModal } from "./ui.js";
+import { allBookmarks } from "./bookMarks.js";
 
-document.addEventListener('DOMContentLoaded', () => {    
+document.addEventListener('DOMContentLoaded', async () => {  
+    // دریافت اطلاعات تمام بوکمارک‌ها
+    let Marks = await allBookmarks()
+
     settingSliderGlide()
     initializeCart();             // 🛒 فراخوانی توابع محتوای سبد خرید
     initializeNavigation();     // ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
     toggleCart();              // 🛒 فراخوانی تابع باز کردن سبد خرید
     closeCart();              // ❌ فراخوانی تابع بستن سبد خرید
-    initializeStatus('mark' , '.icon-bookmark' , 'is-mark' , 'not-mark');       // 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-    initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+
+    initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');       // 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+    // initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 
     isLogin(getLocalStorage('login'))
 });

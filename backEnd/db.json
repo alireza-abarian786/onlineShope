@@ -1,1732 +1,2459 @@
 {
-    "categories": [
-      { "id": 1,  "urlSearch": "digital", "name": "کالای دیجیتال", "description": "محصولات دیجیتالی مدرن" },
-      { "id": 2,  "urlSearch": "clothing", "name": "مد و پوشاک", "description": "لباس‌های طراحی شده و مد" },
-      { "id": 3,  "urlSearch": "kitchen", "name": "خانه و آشپزخانه", "description": "ابزارهای ضروری برای خانه" },
-      { "id": 4,  "urlSearch": "electric", "name": "لوازم خانگی برقی", "description": "دستگاه های کاربردی با تکنولوژی روز" },
-      { "id": 5,  "urlSearch": "sanitary", "name": "آرایشی بهداشتی", "description": "محصولات مراقبت از پوست و مو" },
-      { "id": 6,  "urlSearch": "sports", "name": "ورزش و سفر", "description": "تجهیزات ورزشی و لوازم سفر" },
-      { "id": 7,  "urlSearch": "vehicles", "name": "خودرو و موتور سیکلت", "description": "وسایل نقلیه برقی و بنزینی" },
-      { "id": 8,  "urlSearch": "child", "name": "کودک و نوزاد", "description": "لوازم کودکان و نوزادان" },
-      { "id": 9,  "urlSearch": "tools", "name": "ابزار آلات و تجهیزات", "description": "ابزارهای صنعتی و منزلی" },
-      { "id": 10, "urlSearch": "phone",  "name": "موبایل و تبلت", "description": "آخرین مدل‌های موبایل و تبلت" },
-      { "id": 11, "urlSearch": "edible",  "name": "کالای خوراکی و اساسی", "description": "کالای های اساسی و پر مصرف" },
-      { "id": 12, "urlSearch": "native",  "name": "محصولات بومی و محلی", "description": "محصولات محلی و صنایع دستی" },
-      { "id": 13, "urlSearch": "bookmarks",  "name": "علاقه مندی ها", "description": "محصولات انتخابی مورد علاقه" },
-      { "id": 14, "urlSearch": "stationery",  "name": "کتاب و لوازم تحریر", "description": "قلم، کاغذ و لوازم دفتری" },
-      { "id": 15, "urlSearch": "medicine",  "name": "تجهیزات پزشکی و سلامت", "description": "دستگاه‌های سلامت و پزشکی" },
-      { "id": 16, "urlSearch": "jewellery",  "name": "طلا و نقره", "description": "جواهرات زیبا چشم نواز" }
-    ],
-    "products": [        
-        {
-            "id": 1,
-            "name": "بلندگو بلوتوثی",
-            "price": 1500000,
-            "category_id": 1,
-            "description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-            ],
-            "stock": 70,
-            "discount": 10,
-            "ratings": 4.5,
-            "reviews": [
-              { "user_id": 41, "comment": "صدای عالی.", "rating": 5 },
-              { "user_id": 42, "comment": "مناسب برای داخل خانه.", "rating": 4 }
-            ]
-        },
-
-        {
-                "id": 2,
-                "name": "گوشی موبایل سامسونگ Galaxy S21",
-                "price": 20000000,
-                "category_id": 10,
-                "description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
-                "images": [
-                  "./src/assets/images/phone/phone-6.jpg",
-                  "./src/assets/images/phone/phone-2.jpg",
-                  "./src/assets/images/phone/phone-4.jpg"
-                ],
-                "stock": 30,
-                "discount": 5,
-                "ratings": 4.8,
-                "reviews": [
-                { "user_id": 3, "comment": "کیفیت دوربین عالی!", "rating": 5 },
-                { "user_id": 4, "comment": "طراحی زیبا و سریع.", "rating": 4 }
-                ]
-        },
-
-        {
-                "id": 3,
-                "name": "تلویزیون سامسونگ 50 اینچ",
-                "price": 8000000,
-                "category_id": 3,
-                "description": "تلویزیون Full HD سامسونگ با کیفیت تصویر عالی و فناوری HDR.",
-                "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-                ],
-                "stock": 20,
-                "discount": 15,
-                "ratings": 4.5,
-                "reviews": [
-                { "user_id": 5, "comment": "تصویر واضح و روشن.", "rating": 5 },
-                { "user_id": 6, "comment": "بهترین گزینه برای خانه.", "rating": 4 }
-                ]
-        },
-        {
-                "id": 4,
-                "name": "دوربین دیجیتال کانن EOS 90D",
-                "price": 25000000,
-                "category_id": 1,
-                "description": "دوربین حرفه‌ای کانن با حسگر APS-C و قابلیت فیلمبرداری 4K.",
-                "images": [
-                  "./src/assets/images/digitals/digital-2.jpg",
-                  "./src/assets/images/digitals/digital-3.webp",
-                  "./src/assets/images/digitals/digital-4.jpg"
-                ],
-                "stock": 15,
-                "discount": 20,
-                "ratings": 4.9,
-                "reviews": [
-                { "user_id": 7, "comment": "کیفیت تصویر بی‌نظیر.", "rating": 5 },
-                { "user_id": 8, "comment": "فیلمبرداری عالی در 4K.", "rating": 5 }
-                ]
-        },
-        {
-                "id": 5,
-                "name": "ساعت هوشمند اپل Watch Series 6",
-                "price": 10000000,
-                "category_id": 1,
-                "description": "ساعت هوشمند اپل با صفحه نمایش Retina و سنسورهای سلامتی پیشرفته.",
-                "images": [
-                  "./src/assets/images/digitals/digital-2.jpg",
-                  "./src/assets/images/digitals/digital-3.webp",
-                  "./src/assets/images/digitals/digital-4.jpg"
-                ],
-                "stock": 40,
-                "discount": 8,
-                "ratings": 4.6,
-                "reviews": [
-                { "user_id": 9, "comment": "پرفکت برای سلامت.", "rating": 5 },
-                { "user_id": 10, "comment": "ویژگی‌های سلامتی فوق‌العاده.", "rating": 4 }
-                ]
-        },
-        {
-            "id": 6,
-            "name": "ساعت هوشمند سامسونگ Galaxy Watch 3",
-            "price": 8000000,
-            "category_id": 1,
-            "description": "ساعت هوشمند سامسونگ با قابلیت ECG و صفحه نمایش Super AMOLED.",
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-            ],
-            "stock": 25,
-            "discount": 12,
-            "ratings": 4.6,
-            "reviews": [
-              { "user_id": 11, "comment": "کیفیت عالی و طراحی زیبا.", "rating": 5 },
-              { "user_id": 12, "comment": "صفحه نمایش روشن و واضح.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 7,
-            "name": "دوربین ورزشی گارمین VIRB Ultra 30",
-            "price": 4000000,
-            "category_id": 1,
-            "description": "دوربین ورزشی 4K با قابلیت ضد آب و لرزشگیر پیشرفته.",
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-            ],
-            "stock": 35,
-            "discount": 18,
-            "ratings": 4.4,
-            "reviews": [
-              { "user_id": 13, "comment": "عالی برای سفر و ورزش.", "rating": 5 },
-              { "user_id": 14, "comment": "لرزشگیر بی‌نظیر.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 8,
-            "name": "خودرو پژو 206",
-            "price": 200000000,
-            "category_id": 6,
-            "description": "خودروی اقتصادی با موتور 1.6 لیتری و طراحی اسپرت.",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-            ],
-            "stock": 5,
-            "discount": 5,
-            "ratings": 4.5,
-            "reviews": [
-              { "user_id": 15, "comment": "خودرویی بسیار مناسب.", "rating": 5 },
-              { "user_id": 16, "comment": "ارزش خرید خوب.", "rating": 4 }
-            ]
-        },
-        {
-              "id": 9,
-              "name": "لپتاپ لنوو ThinkPad X1",
-              "price": 16000000,
-              "category_id": 1,
-              "description": "لپتاپ تجاری با پردازنده Intel Core i5، 8GB RAM و 256GB SSD.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 30,
-              "discount": 5,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 17, "comment": "عملکرد عالی برای کارهای اداری.", "rating": 5 },
-                { "user_id": 18, "comment": "کیفیت ساخت بسیار خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 10,
-              "name": "گوشی موبایل شیائومی Redmi Note 10",
-              "price": 4500000,
-              "category_id": 10,
-              "description": "گوشی شیائومی با صفحه نمایش 6.43 اینچ و دوربین 48 مگاپیکسلی.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 50,
-              "discount": 12,
-              "ratings": 4.3,
-              "reviews": [
-                { "user_id": 19, "comment": "گوشی خوب برای استفاده روزمره.", "rating": 4 },
-                { "user_id": 20, "comment": "قیمت مناسب با امکانات عالی.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 11,
-              "name": "تبلت اپل iPad Air 2020",
-              "price": 12000000,
-              "category_id": 10,
-              "description": "تبلت با پردازنده A14 Bionic و صفحه نمایش 10.9 اینچ.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 40,
-              "discount": 7,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 21, "comment": "عملکرد عالی برای طراحی و تماشای فیلم.", "rating": 5 },
-                { "user_id": 22, "comment": "مناسب برای کارهای گرافیکی.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 12,
-              "name": "پوشاک زنانه مانتو الیزه",
-              "price": 900000,
-              "category_id": 2,
-              "description": "مانتوی شیک و راحت با طراحی مدرن و مناسب فصل بهار.",
-              "images": [
-                "./src/assets/images/modes/mode-3.jpg",
-                "./src/assets/images/modes/mode-2.jpg",
-                "./src/assets/images/modes/mode-1.jpg"
-              ],
-              "stock": 80,
-              "discount": 10,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 23, "comment": "کیفیت پارچه عالی و راحت.", "rating": 5 },
-                { "user_id": 24, "comment": "مدل زیبای مانتو.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 13,
-              "name": "کفش مردانه نایک Air Max 270",
-              "price": 2500000,
-              "category_id": 9,
-              "description": "کفش ورزشی نایک با طراحی منحصر به فرد و راحتی فوق‌العاده.",
-              "images": [
-                "./src/assets/images/tools/tools-1.jpg",
-                "./src/assets/images/tools/tools-2.jpg",
-                "./src/assets/images/tools/tools-3.jpg"
-              ],
-              "stock": 60,
-              "discount": 15,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 25, "comment": "راحتی و دوام بالا.", "rating": 5 },
-                { "user_id": 26, "comment": "طراحی عالی و زیبا.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 14,
-              "name": "کفش زنانه آدیداس Ultraboost",
-              "price": 3000000,
-              "category_id": 9,
-              "description": "کفش آدیداس با تکنولوژی Boost برای راحتی بیشتر در حرکت.",
-              "images": [
-                "./src/assets/images/tools/tools-1.jpg",
-                "./src/assets/images/tools/tools-2.jpg",
-                "./src/assets/images/tools/tools-3.jpg"
-              ],
-              "stock": 50,
-              "discount": 20,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 27, "comment": "کفش راحت و سبک.", "rating": 5 },
-                { "user_id": 28, "comment": "عالی برای پیاده‌روی طولانی.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 15,
-              "name": "دوربین دیجیتال کانن EOS 1500D",
-              "price": 8000000,
-              "category_id": 1,
-              "description": "دوربین دیجیتال DSLR با سنسور 24.1 مگاپیکسل و قابلیت فیلمبرداری 1080p.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 20,
-              "discount": 12,
-              "ratings": 4.5,
-              "reviews": [
-                { "user_id": 29, "comment": "کیفیت عکس عالی!", "rating": 5 },
-                { "user_id": 30, "comment": "راحتی استفاده و عملکرد خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 16,
-              "name": "هدفون بی‌سیم سامسونگ Galaxy Buds Pro",
-              "price": 2000000,
-              "category_id": 1,
-              "description": "هدفون بی‌سیم با کیفیت صدا عالی و قابلیت حذف نویز.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 50,
-              "discount": 0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 31, "comment": "کیفیت صدا عالی و راحتی بیشتر.", "rating": 5 },
-                { "user_id": 32, "comment": "قیمت خوب برای کیفیت عالی.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 17,
-              "name": "دستگاه اسپرسوساز دلونگی EC685",
-              "price": 3500000,
-              "category_id": 1,
-              "description": "اسپرسوساز با قدرت 1350 وات و طراحی شیک.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 30,
-              "discount":0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 33, "comment": "دستگاه خوبی است، کیفیت قهوه عالی.", "rating": 5 },
-                { "user_id": 34, "comment": "عملکرد خوب و راحتی در استفاده.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 18,
-              "name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
-              "price": 12000000,
-              "category_id": 3,
-              "description": "ماشین ظرفشویی با 6 برنامه شستشو و ظرفیت 12 نفره.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 40,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 35, "comment": "شستشو سریع و کاملا تمیز.", "rating": 5 },
-                { "user_id": 36, "comment": "طراحی عالی و عملکرد خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 19,
-              "name": "یخچال فریزر ال‌جی مدل GRB300",
-              "price": 9000000,
-              "category_id": 3,
-              "description": "یخچال فریزر با سیستم خنک‌کننده سریع و ظرفیت 350 لیتر.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 25,
-              "discount": 0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 37, "comment": "عملکرد عالی و فضای زیاد.", "rating": 5 },
-                { "user_id": 38, "comment": "خنک‌کننده سریع و مصرف انرژی کم.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 20,
-              "name": "تلفن بی‌سیم پاناسونیک KX-TGC220",
-              "price": 1500000,
-              "category_id": 10,
-              "description": "تلفن بی‌سیم با قابلیت تماس واضح و طراحی زیبا.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 40,
-              "discount": 0,
-              "ratings": 4.3,
-              "reviews": [
-                { "user_id": 39, "comment": "صدای خوب و کیفیت عالی.", "rating": 4 },
-                { "user_id": 40, "comment": "استفاده آسان و عملکرد خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 21,
-              "name": "کیف لپ‌تاپ جنیوس مدل GX-20",
-              "price": 450000,
-              "category_id": 1,
-              "description": "کیف لپ‌تاپ با طراحی مدرن و جادار.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 60,
-              "discount":0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 41, "comment": "کیفیت خوب و فضای مناسب.", "rating": 5 },
-                { "user_id": 42, "comment": "خوب است ولی کمی گران.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 22,
-              "name": "ساعت هوشمند سامسونگ Galaxy Watch 4",
-              "price": 5000000,
-              "category_id": 1,
-              "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچ و سنسورهای متنوع.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 25,
-              "discount": 0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 43, "comment": "عالی برای ورزش و روزمره.", "rating": 5 },
-                { "user_id": 44, "comment": "عملکرد مناسب و کیفیت ساخت خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 23,
-              "name": "ماوس بی‌سیم ریزر مدل DeathAdder",
-              "price": 1500000,
-              "category_id": 1,
-              "description": "ماوس گیمینگ با حسگر اپتیکال 16,000 DPI و طراحی ارگونومیک.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 80,
-              "discount":0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 45, "comment": "کیفیت ساخت عالی و عملکرد بی‌نظیر.", "rating": 5 },
-                { "user_id": 46, "comment": "پاسخ‌دهی سریع و طراحی راحت.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 24,
-              "name": "کیبورد مکانیکی ای‌لاکس مدل ALC-700",
-              "price": 2500000,
-              "category_id": 1,
-              "description": "کیبورد مکانیکی با سوئیچ‌های Cherry MX و نور پس‌زمینه RGB.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 60,
-              "discount": 0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 47, "comment": "کیفیت عالی برای بازی.", "rating": 5 },
-                { "user_id": 48, "comment": "نور پس‌زمینه جذاب و عملکرد سریع.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 25,
-              "name": "پاوربانک انکر مدل PowerCore 10000",
-              "price": 800000,
-              "category_id": 1,
-              "description": "پاوربانک با ظرفیت 10000 میلی‌آمپر و قابلیت شارژ سریع.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 100,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 49, "comment": "خیلی مفید و کار راه انداز.", "rating": 5 },
-                { "user_id": 50, "comment": "ظرفیت بالا و شارژ سریع.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 26,
-              "name": "تلویزیون سامسونگ مدل 55TU8000",
-              "price": 12000000,
-              "category_id": 3,
-              "description": "تلویزیون 55 اینچی با کیفیت تصویر 4K و سیستم عامل تایزن.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 15,
-              "discount":0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 51, "comment": "تصویر عالی و کیفیت صدا خوب.", "rating": 5 },
-                { "user_id": 52, "comment": "سیستم عامل سریع و آسان.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 27,
-              "name": "آبمیوه‌گیری فیلیپس مدل HR1832",
-              "price": 2500000,
-              "category_id": 3,
-              "description": "آبمیوه‌گیری با قدرت 500 وات و طراحی شیک.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 30,
-              "discount":0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 53, "comment": "عملکرد عالی و صدای کم.", "rating": 5 },
-                { "user_id": 54, "comment": "راحتی استفاده و طراحی زیبا.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 28,
-              "name": "سشوار پاناسونیک مدل EH-ND12",
-              "price": 1500000,
-              "category_id": 1,
-              "description": "سشوار با سه درجه تنظیم حرارت و طراحی جمع‌وجور.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 40,
-              "discount": 0,
-              "ratings": 4.4,
-              "reviews": [
-                { "user_id": 55, "comment": "سرعت خشک کردن بالا.", "rating": 5 },
-                { "user_id": 56, "comment": "خیلی عالی، قیمت مناسب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 29,
-              "name": "گوشی موبایل شیائومی مدل Mi 11",
-              "price": 15000000,
-              "category_id": 10,
-              "description": "گوشی هوشمند با صفحه نمایش 6.81 اینچی و پردازنده Snapdragon 888.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 20,
-              "discount":0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 57, "comment": "عملکرد عالی و دوربین خوب.", "rating": 5 },
-                { "user_id": 58, "comment": "طراحی شیک و سریع.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 30,
-              "name": "کولر گازی سامسونگ مدل AR12",
-              "price": 10000000,
-              "category_id": 3,
-              "description": "کولر گازی با ظرفیت 12000 و سیستم رطوبت‌گیر.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 50,
-              "discount": 0,
-              "ratings": 4.5,
-              "reviews": [
-                { "user_id": 59, "comment": "سرمایش عالی و مصرف انرژی کم.", "rating": 5 },
-                { "user_id": 60, "comment": "عملکرد خوب و طراحی زیبا.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 31,
-              "name": "آیپد پرو 2021 اپل",
-              "price": 25000000,
-              "category_id": 1,
-              "description": "تبلت اپل با صفحه نمایش 12.9 اینچی و پردازنده M1.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 25,
-              "discount":0,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 61, "comment": "صفحه نمایش عالی و عملکرد سریع.", "rating": 5 },
-                { "user_id": 62, "comment": "کیفیت ساخت و باتری عالی.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 32,
-              "name": "دوربین فیلمبرداری سونی مدل FDR-AX53",
-              "price": 6000000,
-              "category_id": 1,
-              "description": "دوربین فیلمبرداری 4K با لنز ZEISS و تثبیت‌کننده تصویر.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 10,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 63, "comment": "کیفیت تصویربرداری عالی.", "rating": 5 },
-                { "user_id": 64, "comment": "راحتی در استفاده و کارکرد خوب.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 33,
-              "name": "ساعت هوشمند سامسونگ مدل Galaxy Watch 4",
-              "price": 4000000,
-              "category_id": 1,
-              "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچی و سیستم عامل Wear OS.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 20,
-              "discount":0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 65, "comment": "کیفیت ساخت عالی و باتری مناسب.", "rating": 5 },
-                { "user_id": 66, "comment": "طراحی زیبایی دارد.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 34,
-              "name": "گوشی موبایل سامسونگ مدل Galaxy S21",
-              "price": 22000000,
-              "category_id": 10,
-              "description": "گوشی هوشمند با صفحه نمایش 6.2 اینچی و پردازنده Exynos 2100.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 15,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 67, "comment": "عملکرد عالی و دوربین باکیفیت.", "rating": 5 },
-                { "user_id": 68, "comment": "پیشرفت عالی نسبت به مدل‌های قبلی.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 35,
-              "name": "کتابخوان Kindle Paperwhite",
-              "price": 3500000,
-              "category_id": 1,
-              "description": "کتابخوان الکترونیکی با صفحه نمایش 6 اینچی و نور پس‌زمینه قابل تنظیم.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 25,
-              "discount": 0,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 69, "comment": "برای مطالعه طولانی مدت عالی است.", "rating": 5 },
-                { "user_id": 70, "comment": "طراحی مناسب و صفحه خوانا.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 36,
-              "name": "کیف لپتاپ سامسونگ مدل Basic",
-              "price": 600000,
-              "category_id": 1,
-              "description": "کیف لپتاپ با طراحی ساده و فضای مناسب برای نگهداری وسایل.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 50,
-              "discount": 0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 71, "comment": "کیفیت خوب و مناسب برای روزمره.", "rating": 4 },
-                { "user_id": 72, "comment": "فضای کافی برای لپتاپ و لوازم جانبی.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 37,
-              "name": "خوشبوکننده هوا هوشمند شیائومی",
-              "price": 850000,
-              "category_id": 1,
-              "description": "خوشبوکننده هوا با قابلیت کنترل از طریق اپلیکیشن موبایل.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 35,
-              "discount":0,
-              "ratings": 4.5,
-              "reviews": [
-                { "user_id": 73, "comment": "بوی مطبوع و کارکرد آسان.", "rating": 5 },
-                { "user_id": 74, "comment": "کنترل راحت از طریق موبایل.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 38,
-              "name": "ماشین ظرفشویی ال جی مدل DFB512FP",
-              "price": 11000000,
-              "category_id": 3,
-              "description": "ماشین ظرفشویی با ظرفیت 14 نفره و 6 برنامه شستشو.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 20,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 75, "comment": "شستشوی عالی و صدا کم.", "rating": 5 },
-                { "user_id": 76, "comment": "مصرف انرژی بهینه.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 39,
-              "name": "هدست بی‌سیم بوز مدل QuietComfort 35 II",
-              "price": 5000000,
-              "category_id": 1,
-              "description": "هدست بی‌سیم با قابلیت حذف نویز و عمر باتری بالا.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 30,
-              "discount": 0,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 77, "comment": "کیفیت صدا و راحتی عالی.", "rating": 5 },
-                { "user_id": 78, "comment": "حذف نویز بسیار موثر.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 40,
-              "name": "میکروفن یقه‌ای بویو مدل BY-M1",
-              "price": 500000,
-              "category_id": 3,
-              "description": "میکروفن یقه‌ای با قابلیت اتصال به گوشی و دوربین.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 50,
-              "discount":0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 79, "comment": "کیفیت صدای عالی.", "rating": 5 },
-                { "user_id": 80, "comment": "طراحی مناسب برای ضبط صدا.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 41,
-              "name": "کولر گازی گری مدل Gree GWH09AK",
-              "price": 8500000,
-              "category_id": 3,
-              "description": "کولر گازی با ظرفیت 9000 BTU و سیستم سرمایشی و گرمایشی.",
-              "images": [
-                "./src/assets/images/kitchen/kitchen-1.jpg",
-                "./src/assets/images/kitchen/kitchen-2.jpg",
-                "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-              "stock": 12,
-              "discount":0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 81, "comment": "عملکرد عالی و طراحی شیک.", "rating": 5 },
-                { "user_id": 82, "comment": "مصرف انرژی پایین و عملکرد سریع.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 42,
-              "name": "پروژکتور ویدئویی اپسون مدل EH-TW7100",
-              "price": 24000000,
-              "category_id": 1,
-              "description": "پروژکتور Full HD با دقت تصویر 4K و فناوری HDR.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 10,
-              "discount":0,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 83, "comment": "کیفیت تصویر عالی و رنگ‌های طبیعی.", "rating": 5 },
-                { "user_id": 84, "comment": "پروژه عالی برای سینمای خانگی.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 43,
-              "name": "سشوار پاناسونیک مدل EH-ND11A",
-              "price": 950000,
-              "category_id": 1,
-              "description": "سشوار با موتور 1000 وات و تنظیمات سرعت و حرارت مختلف.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 40,
-              "discount": 0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 85, "comment": "عالی برای استفاده خانگی.", "rating": 5 },
-                { "user_id": 86, "comment": "قدرت مناسب و صدای کم.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 44,
-              "name": "کیف مسافرتی چمدان سامسونگ",
-              "price": 1500000,
-              "category_id": 8,
-              "description": "چمدان مسافرتی با ظرفیت بالا و چرخ‌های مقاوم.",
-              "images": [
-                "./src/assets/images/phone/phone-6.jpg",
-                "./src/assets/images/phone/phone-2.jpg",
-                "./src/assets/images/phone/phone-4.jpg"
-              ],
-              "stock": 30,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 87, "comment": "چرخ‌های نرم و فضای زیاد.", "rating": 5 },
-                { "user_id": 88, "comment": "کیفیت خوب و طراحی عالی.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 45,
-              "name": "پکیج لوازم آرایش دکتر راشل",
-              "price": 1200000,
-              "category_id": 9,
-              "description": "پکیج کامل لوازم آرایش شامل کرم پودر، رژلب و خط چشم.",
-              "images": [
-                "./src/assets/images/tools/tools-1.jpg",
-                "./src/assets/images/tools/tools-2.jpg",
-                "./src/assets/images/tools/tools-3.jpg"
-              ],
-              "stock": 50,
-              "discount": 0,
-              "ratings": 4.4,
-              "reviews": [
-                { "user_id": 89, "comment": "لوازم آرایش با کیفیت عالی.", "rating": 5 },
-                { "user_id": 90, "comment": "بسته‌بندی شیک و کاربردی.", "rating": 4 }
-              ]
-        },
-        {
-              "id": 46,
-              "name": "کنسول بازی پلی‌استیشن 5",
-              "price": 15000000,
-              "category_id": 1,
-              "description": "کنسول بازی نسل نهم با قابلیت اجرای بازی‌های 4K و سرعت بالا.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 10,
-              "discount":0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 91, "comment": "بازی‌ها با کیفیت عالی اجرا می‌شوند.", "rating": 5 },
-                { "user_id": 92, "comment": "گیم‌پلی روان و تجربه شگفت‌انگیز.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 47,
-              "name": "دوربین عکاسی کانن مدل EOS 80D",
-              "price": 17000000,
-              "category_id": 1,
-              "description": "دوربین دیجیتال با سنسور APS-C و قابلیت فیلم‌برداری 1080p.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 8,
-              "discount": 0,
-              "ratings": 4.9,
-              "reviews": [
-                { "user_id": 93, "comment": "عکاسی با جزئیات دقیق.", "rating": 5 },
-                { "user_id": 94, "comment": "فیلم‌برداری عالی با کیفیت 1080p.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 48,
-              "name": "سیستم صوتی سونی مدل HT-RT3",
-              "price": 7000000,
-              "category_id": 1,
-              "description": "سیستم صوتی با 5.1 کانال و توان خروجی 600 وات.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 10,
-              "discount":0,
-              "ratings": 4.8,
-              "reviews": [
-                { "user_id": 95, "comment": "صدای شفاف و قدرتمند.", "rating": 5 },
-                { "user_id": 96, "comment": "تجربه سینمایی عالی در خانه.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 49,
-              "name": "میکروفن یقه‌ای رود مدل Lavalier GO",
-              "price": 1200000,
-              "category_id": 1,
-              "description": "میکروفن یقه‌ای با کیفیت صدای عالی و اتصال سریع.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 35,
-              "discount": 0,
-              "ratings": 4.7,
-              "reviews": [
-                { "user_id": 97, "comment": "کیفیت صدای عالی و نصب آسان.", "rating": 5 },
-                { "user_id": 98, "comment": "کاملاً مناسب برای ضبط ویدیو.", "rating": 5 }
-              ]
-        },
-        {
-              "id": 50,
-              "name": "اسکوتر برقی شیائومی مدل M365",
-              "price": 5500000,
-              "category_id": 1,
-              "description": "اسکوتر برقی با سرعت 25 کیلومتر بر ساعت و برد 30 کیلومتر.",
-              "images": [
-                "./src/assets/images/digitals/digital-2.jpg",
-                "./src/assets/images/digitals/digital-3.webp",
-                "./src/assets/images/digitals/digital-4.jpg"
-              ],
-              "stock": 20,
-              "discount": 0,
-              "ratings": 4.6,
-              "reviews": [
-                { "user_id": 99, "comment": "عالی برای حمل و نقل شهری.", "rating": 5 },
-                { "user_id": 100, "comment": "طراحی سبک و عملکرد عالی.", "rating": 4 }
-              ]
-        },
-        {
-            "id": 51,
-            "name": "لپتاپ HP Pavilion",
-            "price": 2000,
-            "category_id": 1,
-            "description": "لپتاپ قدرتمند برای کار و بازی با پردازنده Intel Core i7",
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "stock": 50,
-            "discount": 0,
-            "ratings": 4.5,
-            "reviews": [
-              { "user_id": 1, "comment": "لپتاپ فوق‌العاده!", "rating": 5 },
-              { "user_id": 2, "comment": "عملکرد عالی دارد.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 52,
-            "name": "ژاکت پشمی مردانه",
-            "price": 150,
-            "category_id": 2,
-            "description": "ژاکت گرم و مودرن برای فصل سرما",
-            "images": [
-              "./src/assets/images/modes/mode-3.jpg",
-              "./src/assets/images/modes/mode-2.jpg",
-              "./src/assets/images/modes/mode-1.jpg"
-              ],
-            "stock": 100,
-            "discount":0,
-            "ratings": 4.3,
-            "reviews": [
-              { "user_id": 3, "comment": "کیفیت عالی دارد.", "rating": 4 },
-              { "user_id": 4, "comment": "بسیار گرم است.", "rating": 5 }
-            ]
-        },
-        {
-            "id": 53,
-            "name": "ماشین لباسشویی Samsung",
-            "price": 800,
-            "category_id": 3,
-            "description": "ماشین لباسشویی هوشمند با ظرفیت 8 کیلو",
-            "images": [
-              "./src/assets/images/kitchen/kitchen-1.jpg",
-              "./src/assets/images/kitchen/kitchen-2.jpg",
-              "./src/assets/images/kitchen/kitchen-3.jpg"
-            ],
-            "stock": 30,
-            "discount":0,
-            "ratings": 4.7,
-            "reviews": [
-              { "user_id": 5, "comment": "بسیار قدرتمند است.", "rating": 5 },
-              { "user_id": 6, "comment": "ساده و کاربردی.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 54,
-            "name": "کتاب برنامه‌نویسی پیشرفته",
-            "price": 30,
-            "category_id": 4,
-            "description": "آموزش برنامه‌نویسی پیشرفته با مثال‌های عملی",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "stock": 200,
-            "discount":0,
-            "ratings": 4.8,
-            "reviews": [
-              { "user_id": 7, "comment": "کتاب فوق‌العاده!", "rating": 5 },
-              { "user_id": 8, "comment": "مبنا برای یادگیری.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 55,
-            "name": "شامپو مرطوب‌کننده L'Oreal",
-            "price": 10,
-            "category_id": 5,
-            "description": "شامپو با عطر طبیعی برای مراقبت از مو",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "stock": 500,
-            "discount":0,
-            "ratings": 4.2,
-            "reviews": [
-              { "user_id": 9, "comment": "عطر فوق‌العاده!", "rating": 5 },
-              { "user_id": 10, "comment": "مرطوب‌کنندگی خوب.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 56,
-            "name": "دوچرخه شهری Merida",
-            "price": 250,
-            "category_id": 6,
-            "description": "دوچرخه سبک برای حرکت در شهر",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "stock": 40,
-            "discount": 0,
-            "ratings": 4.6,
-            "reviews": [
-              { "user_id": 1, "comment": "دوچرخه قوی و سبک.", "rating": 5 },
-              { "user_id": 2, "comment": "مناسب برای شهر.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 57,
-            "name": "کنسول بازی PlayStation 5",
-            "price": 300,
-            "category_id": 1,
-            "description": "کنسول بازی جدید با گیم‌های فوق‌العاده",
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "stock": 20,
-            "discount":0,
-            "ratings": 4.9,
-            "reviews": [
-              { "user_id": 3, "comment": "بازی بهترین کنسول!", "rating": 5 },
-              { "user_id": 4, "comment": "سرعت عالی.", "rating": 5 }
-            ]
-        },
-        {
-            "id": 58,
-            "name": "صندوچه کودک با نقاشی حیوانات",
-            "price": 20,
-            "category_id": 8,
-            "description": "صندوق غذایی قابل حمل برای کودکان",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "stock": 150,
-            "discount": 0,
-            "ratings": 4.4,
-            "reviews": [
-              { "user_id": 5, "comment": "نقاشی زیبا.", "rating": 5 },
-              { "user_id": 6, "comment": "قدرت گرم نگهداری خوب.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 59,
-            "name": "پیچکش چند منظوره Stanley",
-            "price": 15,
-            "category_id": 9,
-            "description": "ابزار کاربردی برای خانه و کار",
-            "images": [
-              "./src/assets/images/tools/tools-1.jpg",
-              "./src/assets/images/tools/tools-2.jpg",
-              "./src/assets/images/tools/tools-3.jpg"
-              ],
-            "stock": 80,
-            "discount":0,
-            "ratings": 4.5,
-            "reviews": [
-              { "user_id": 7, "comment": "ابزار قوی و کاربردی.", "rating": 5 },
-              { "user_id": 8, "comment": "مناسب برای کارهای خانگی.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 60,
-            "name": "موبایل سامسونگ Galaxy S23",
-            "price": 500,
-            "category_id": 10,
-            "description": "موبایل هوشمند با دوربین قدرتمند",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "stock": 60,
-            "discount":0,
-            "ratings": 4.8,
-            "reviews": [
-              { "user_id": 9, "comment": "دوربین فوق‌العاده!", "rating": 5 },
-              { "user_id": 10, "comment": "عملکرد عالی.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 61,
-            "name": "ماوس بی‌سیم",
-            "description": "ماوس ارگونومیک بی‌سیم با عمر باتری طولانی.",
-            "price": 599000,
-            "category_id": 1,
-            "stock": 150,
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "ratings": 4.5,
-            "discount": "100",
-            "release_date": "2024-10-01",
-            "price_range": "کمتر از 1 میلیون تومان"
-        },
-        {
-            "id": 62,
-            "name": "هدفون بلوتوثی",
-            "description": "هدفون‌های بلوتوثی با قابلیت حذف نویز و باتری ۳۰ ساعته.",
-            "price": 2390000,
-            "category_id": 1,
-            "stock": 50,
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "ratings": 4.7,
-            "discount": "150",
-            "release_date": "2025-01-20",
-            "price_range": "بین 2 تا 3 میلیون تومان"
-        },
-        {
-            "id": 63,
-            "name": "تلویزیون هوشمند 4K",
-            "description": "تلویزیون ۵۵ اینچ 4K هوشمند با کنترل صوتی.",
-            "price": 10990000,
-            "category_id": 3,
-            "stock": 30,
-            "images": [
-              "./src/assets/images/kitchen/kitchen-1.jpg",
-              "./src/assets/images/kitchen/kitchen-2.jpg",
-              "./src/assets/images/kitchen/kitchen-3.jpg"
-              ],
-            "ratings": 4.8,
-            "discount": "200",
-            "release_date": "2024-11-01",
-            "price_range": "بین 10 تا 12 میلیون تومان"
-        },
-        {
-            "id": 64,
-            "name": "کیف پول چرم",
-            "description": "کیف پول چرم طبیعی با قابلیت حفاظت RFID.",
-            "price": 890000,
-            "category_id": 2,
-            "stock": 200,
-            "images": [
-              "./src/assets/images/modes/mode-3.jpg",
-              "./src/assets/images/modes/mode-2.jpg",
-              "./src/assets/images/modes/mode-1.jpg"
-              ],
-            "ratings": 4.6,
-            "discount": "50",
-            "release_date": "2024-06-10",
-            "price_range": "کمتر از 1 میلیون تومان"
-        },
-        {
-            "id": 65,
-            "name": "کفش دویدن",
-            "description": "کفش‌های راحت و مقاوم برای دویدن با مواد تنفس‌پذیر.",
-            "price": 2490000,
-            "category_id": 2,
-            "stock": 100,
-            "images": [
-              "./src/assets/images/modes/mode-3.jpg",
-              "./src/assets/images/modes/mode-2.jpg",
-              "./src/assets/images/modes/mode-1.jpg"
-              ],
-            "ratings": 4.3,
-            "discount": "100",
-            "release_date": "2025-01-15",
-            "price_range": "بین 2 تا 3 میلیون تومان"
-        },
-        {
-            "id": 66,
-            "name": "گوشی موبایل سامسونگ",
-            "description": "گوشی موبایل سامسونگ مدل Galaxy S21 با دوربین ۱۰۸ مگاپیکسلی.",
-            "price": 28990000,
-            "category_id": 10,
-            "stock": 200,
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-              ],
-            "ratings": 4.7,
-            "discount": "50",
-            "release_date": "2025-02-01",
-            "price_range": "بین 28 تا 30 میلیون تومان"
-        },
-        {
-            "id": 67,
-            "name": "لپ‌تاپ ایسوس",
-            "description": "لپ‌تاپ ایسوس مدل ZenBook با پردازنده i7 و حافظه ۱ ترابایت.",
-            "price": 13990000,
-            "category_id": 1,
-            "stock": 100,
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "ratings": 4.6,
-            "discount": "150",
-            "release_date": "2025-03-01",
-            "price_range": "بین 13 تا 15 میلیون تومان"
-        },
-        {
-            "id": 68,
-            "name": "دوربین عکاسی کانن",
-            "description": "دوربین دیجیتال کانن مدل EOS 70-200 با کیفیت ۴K.",
-            "price": 45900000,
-            "category_id": 1,
-            "stock": 20,
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "ratings": 4.9,
-            "discount": "100",
-            "release_date": "2025-01-10",
-            "price_range": "بین 45 تا 50 میلیون تومان"
-        },
-        {
-            "id": 69,
-            "name": "کتاب دیجیتال Kindle",
-            "description": "کتاب‌خوان دیجیتال Kindle با صفحه نمایش ضد تابش.",
-            "price": 1990000,
-            "category_id": 1,
-            "stock": 80,
-            "images": [
-              "./src/assets/images/digitals/digital-2.jpg",
-              "./src/assets/images/digitals/digital-3.webp",
-              "./src/assets/images/digitals/digital-4.jpg"
-              ],
-            "ratings": 4.4,
-            "discount": "80",
-            "release_date": "2024-11-01",
-            "price_range": "بین 2 تا 3 میلیون تومان"
-        },
-        {
-            "id": 70,
-            "name": "ماشین لباسشویی LG",
-            "description": "ماشین لباسشویی هوشمند LG با ظرفیت 10 کیلو.",
-            "price": 9000000,
-            "category_id": 3,
-            "stock": 40,
-            "images": [
-              "./src/assets/images/kitchen/kitchen-1.jpg",
-              "./src/assets/images/kitchen/kitchen-2.jpg",
-              "./src/assets/images/kitchen/kitchen-3.jpg"
-            ],
-            "ratings": 4.6,
-            "discount": "100",
-            "release_date": "2025-02-15",
-            "price_range": "بین 8 تا 10 میلیون تومان"
-        },
-        {
-            "id": 71,
-            "name": "صندلی کامپیوتری",
-            "price": 3500000,
-            "category_id": 3,
-            "description": "صندلی کامپیوتری با پشتیبانی قهرمانی و قابلیت چرخش.",
-            "images": [
-              "./src/assets/images/kitchen/kitchen-1.jpg",
-              "./src/assets/images/kitchen/kitchen-2.jpg",
-              "./src/assets/images/kitchen/kitchen-3.jpg"
-            ],
-            "stock": 60,
-            "discount":0,
-            "ratings": 4.6,
-            "reviews": [
-              { "user_id": 47, "comment": "راحت و قابل تنظیم.", "rating": 5 },
-              { "user_id": 48, "comment": "مناسب برای کار بلندمدت.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 72,
-            "name": "کرم ضد خورشید SPF 50",
-            "price": 200000,
-            "category_id": 5,
-            "description": "کرم ضد خورشید با محافظت بالا و عطر طبیعی.",
-            "images": [
-              "./src/assets/images/phone/phone-6.jpg",
-              "./src/assets/images/phone/phone-2.jpg",
-              "./src/assets/images/phone/phone-4.jpg"
-            ],
-            "stock": 200,
-            "discount":0,
-            "ratings": 4.3,
-            "reviews": [
-              { "user_id": 45, "comment": "محافظت عالی.", "rating": 5 },
-              { "user_id": 46, "comment": "مناسب برای همه نوع پوست.", "rating": 4 }
-            ]
-        },
-        {
-            "id": 73,
-            "name": "لباس ورزشی زنانه",
-            "price": 1200000,
-            "category_id": 2,
-            "description": "لباس ورزشی تنفس‌پذیر و راحت برای زنان.",
-            "images": [
-              "./src/assets/images/modes/mode-3.jpg",
-              "./src/assets/images/modes/mode-2.jpg",
-              "./src/assets/images/modes/mode-1.jpg"
-            ],
-            "stock": 120,
-            "discount":0,
-            "ratings": 4.4,
-            "reviews": [
-              { "user_id": 43, "comment": "کیفیت عالی.", "rating": 5 },
-              { "user_id": 44, "comment": "مناسب برای ورزش.", "rating": 4 }
-            ]
-        }             
-    ],
-    "users": [
-            {
-              "id": 1,
-              "name": "علی محمدی",
-              "email": "ali@example.com",
-              "password": "hashed_password_1",
-              "address": "تهران، خیابان ولیعصر، پلاک ۵",
-              "phone": "09121234567",
-              "registration_date": "2024-11-01"
-            },
-            {
-              "id": 2,
-              "name": "مهدی حسینی",
-              "email": "mehdi@example.com",
-              "password": "hashed_password_2",
-              "address": "اصفهان، خیابان چهارباغ، پلاک ۱۵",
-              "phone": "09131567890",
-              "registration_date": "2024-12-15"
-            },
-            {
-              "id": 3,
-              "name": "زهره احمدی",
-              "email": "zahra@example.com",
-              "password": "hashed_password_3",
-              "address": "مشهد، خیابان فردوسی، پلاک ۲۰",
-              "phone": "09142345678",
-              "registration_date": "2024-01-10"
-            },
-            {
-              "id": 4,
-              "name": "سمیه رحمانی",
-              "email": "samieh@example.com",
-              "password": "hashed_password_4",
-              "address": " Shiraz، خیابان ذوالقدر، پلاک ۳۰",
-              "phone": "09153456789",
-              "registration_date": "2024-02-20"
-            },
-            {
-              "id": 5,
-              "name": "مصطفی احمدی",
-              "email": "mostafa@example.com",
-              "password": "hashed_password_5",
-              "address": "Tabriz، خیابان میثم، پلاک ۴۰",
-              "phone": "09164567890",
-              "registration_date": "2024-03-15"
-            },
-            {
-              "id": 6,
-              "name": "حسین رحمانی",
-              "email": "hosein@example.com",
-              "password": "hashed_password_6",
-              "address": "Kerman، خیابان کوهستان، پلاک ۵۰",
-              "phone": "09175678901",
-              "registration_date": "2024-04-10"
-            },
-            {
-              "id": 7,
-              "name": "نarges محمدی",
-              "email": "narges@example.com",
-              "password": "hashed_password_7",
-              "address": "Yazd، خیابان صوفیان، پلاک ۶۰",
-              "phone": "09186789012",
-              "registration_date": "2024-05-20"
-            },
-            {
-              "id": 8,
-              "name": "احمد رحمانی",
-              "email": "ahmad@example.com",
-              "password": "hashed_password_8",
-              "address": "Zanjan، خیابان شهید مجیدی، پلاک ۷۰",
-              "phone": "09197890123",
-              "registration_date": "2024-06-15"
-            },
-            {
-              "id": 9,
-              "name": "سارا محمدی",
-              "email": "sara@example.com",
-              "password": "hashed_password_9",
-              "address": "Hamedan، خیابان امام خمینی، پلاک ۸۰",
-              "phone": "09208901234",
-              "registration_date": "2024-07-10"
-            },
-            {
-              "id": 10,
-              "name": "پریسا رحمانی",
-              "email": "parisa@example.com",
-              "password": "hashed_password_10",
-              "address": "Gilan، خیابان انزلی، پلاک ۹۰",
-              "phone": "09219012345",
-              "registration_date": "2024-08-05"
-            }
-    ],
-    "bookmarks": [
-            { "id": 1, "user_id": 1, "product_id": 2 },
-            { "id": 2, "user_id": 1, "product_id": 5 },
-            { "id": 3, "user_id": 2, "product_id": 3 },
-            { "id": 4, "user_id": 3, "product_id": 7 },
-            { "id": 5, "user_id": 4, "product_id": 1 },
-            { "id": 6, "user_id": 5, "product_id": 8 },
-            { "id": 7, "user_id": 6, "product_id": 9 },
-            { "id": 8, "user_id": 7, "product_id": 10 },
-            { "id": 9, "user_id": 8, "product_id": 4 },
-            { "id": 10, "user_id": 9, "product_id": 6 }
-    ],
-    "blogs": [
-            {
-              "id": 1,
-              "title": "چگونه یک وبسایت فروشگاهی طراحی کنیم؟",
-              "content": "راهنمای کامل طراحی وبسایت فروشگاهی...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 1,
-              "created_at": "2023-01-15",
-              "comments": [
-                { "user_id": 2, "text": "مقاله فوق‌العاده بود!" },
-                { "user_id": 3, "text": "مطالب بسیار مفید." }
-              ]
-            },
-            {
-              "id": 2,
-              "title": "بهترین محصولات الکترونیکی 2023",
-              "content": "لیست محصولات الکترونیکی محبوب...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 2,
-              "created_at": "2023-02-20",
-              "comments": [
-                { "user_id": 1, "text": "محصولات عالی!" },
-                { "user_id": 4, "text": "مقاله جامع بود." }
-              ]
-            },
-            {
-              "id": 3,
-              "title": "5 نکته برای خرید لباس آنلاین",
-              "content": "راهنمای خرید لباس آنلاین...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 3,
-              "created_at": "2023-03-10",
-              "comments": [
-                { "user_id": 5, "text": "مطالب بسیار کاربردی." },
-                { "user_id": 6, "text": "ممنون از راهنمایی." }
-              ]
-            },
-            {
-              "id": 4,
-              "title": "چگونه یک سبد خرید آنلاین مدیریت کنیم؟",
-              "content": "راهنمای مدیریت سبد خرید...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 4,
-              "created_at": "2023-08-05",
-              "comments": [
-                { "user_id": 7, "text": "مقاله فوق‌العاده بود!" },
-                { "user_id": 8, "text": "مطالب بسیار مفید." }
-              ]
-            },
-            {
-              "id": 5,
-              "title": "بهترین کتاب‌های برنامه‌نویسی 2023",
-              "content": "لیست کتاب‌های برنامه‌نویسی محبوب...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 5,
-              "created_at": "2023-11-12",
-              "comments": [
-                { "user_id": 9, "text": "کتاب‌های عالی!" },
-                { "user_id": 10, "text": "مقاله جامع بود." }
-              ]
-            },
-            {
-              "id": 6,
-              "title": "5 نکته برای تعمیر دوچرخه خود",
-              "content": "راهنمای تعمیر دوچرخه...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 6,
-              "created_at": "2023-04-18",
-              "comments": [
-                { "user_id": 1, "text": "مطالب بسیار کاربردی." },
-                { "user_id": 2, "text": "ممنون از راهنمایی." }
-              ]
-            },
-            {
-              "id": 7,
-              "title": "چگونه یک کنسول بازی خریداری کنیم؟",
-              "content": "راهنمای خرید کنسول بازی...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 7,
-              "created_at": "2023-07-25",
-              "comments": [
-                { "user_id": 3, "text": "مقاله فوق‌العاده بود!" },
-                { "user_id": 4, "text": "مطالب بسیار مفید." }
-              ]
-            },
-            {
-              "id": 8,
-              "title": "بهترین ابزارهای خانه برای زندگی آسان",
-              "content": "لیست ابزارهای مفید...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 8,
-              "created_at": "2023-09-03",
-              "comments": [
-                { "user_id": 5, "text": "ابزارهای عالی!" },
-                { "user_id": 6, "text": "مقاله جامع بود." }
-              ]
-            },
-            {
-              "id": 9,
-              "title": "چگونه یک موبایل مناسب انتخاب کنیم؟",
-              "content": "راهنمای خرید موبایل...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 9,
-              "created_at": "2023-02-28",
-              "comments": [
-                { "user_id": 7, "text": "مطالب بسیار کاربردی." },
-                { "user_id": 8, "text": "ممنون از راهنمایی." }
-              ]
-            },
-            {
-              "id": 10,
-              "title": "5 نکته برای طراحی یک فضای کاری مناسب",
-              "content": "راهنمای طراحی فضای کاری...",
-              "image": "./src/assets/images/blog-2.jpg",
-              "author_id": 10,
-              "created_at": "2023-06-15",
-              "comments": [
-                { "user_id": 9, "text": "مقاله فوق‌العاده بود!" },
-                { "user_id": 10, "text": "مطالب بسیار مفید." }
-              ]
-            }
-    ],
-    "carts": [
-            { "id": 1, "user_id": 1, "product_id": 2, "quantity": 1 },
-            { "id": 2, "user_id": 1, "product_id": 5, "quantity": 2 },
-            { "id": 3, "user_id": 2, "product_id": 3, "quantity": 3 },
-            { "id": 4, "user_id": 3, "product_id": 7, "quantity": 1 },
-            { "id": 5, "user_id": 4, "product_id": 1, "quantity": 1 },
-            { "id": 6, "user_id": 5, "product_id": 8, "quantity": 2 },
-            { "id": 7, "user_id": 6, "product_id": 9, "quantity": 1 },
-            { "id": 8, "user_id": 7, "product_id": 10, "quantity": 3 },
-            { "id": 9, "user_id": 8, "product_id": 4, "quantity": 2 },
-            { "id": 10, "user_id": 9, "product_id": 6, "quantity": 1 }
-    ],
-    "orders": [
-            {
-              "id": 1,
-              "user_id": 1,
-              "products": [
-                { "product_id": 2, "quantity": 1 },
-                { "product_id": 5, "quantity": 2 }
-              ],
-              "total_price": 2040000,
-              "status": "ارسال شده",
-              "created_at": "2023-03-10"
-            },
-            {
-              "id": 2,
-              "user_id": 2,
-              "products": [
-                { "product_id": 3, "quantity": 3 }
-              ],
-              "total_price": 2400000,
-              "status": "در حال پردازش",
-              "created_at": "2023-04-20"
-            },
-            {
-              "id": 3,
-              "user_id": 3,
-              "products": [
-                { "product_id": 7, "quantity": 1 }
-              ],
-              "total_price": 3000000,
-              "status": "سفارش داده شده",
-              "created_at": "2023-05-15"
-            },
-            {
-              "id": 4,
-              "user_id": 4,
-              "products": [
-                { "product_id": 1, "quantity": 1 }
-              ],
-              "total_price": 2000000,
-              "status": "ارسال شده",
-              "created_at": "2023-06-10"
-            },
-            {
-              "id": 5,
-              "user_id": 5,
-              "products": [
-                { "product_id": 8, "quantity": 2 }
-              ],
-              "total_price": 400000,
-              "status": "در حال پردازش",
-              "created_at": "2023-07-05"
-            },
-            {
-              "id": 6,
-              "user_id": 6,
-              "products": [
-                { "product_id": 9, "quantity": 1 }
-              ],
-              "total_price": 150000,
-              "status": "سفارش داده شده",
-              "created_at": "2023-08-15"
-            },
-            {
-              "id": 7,
-              "user_id": 7,
-              "products": [
-                { "product_id": 10, "quantity": 1 }
-              ],
-              "total_price": 5000000,
-              "status": "ارسال شده",
-              "created_at": "2023-09-20"
-            },
-            {
-              "id": 8,
-              "user_id": 8,
-              "products": [
-                { "product_id": 4, "quantity": 1 }
-              ],
-              "total_price": 300000,
-              "status": "در حال پردازش",
-              "created_at": "2023-10-10"
-            },
-            {
-              "id": 9,
-              "user_id": 9,
-              "products": [
-                { "product_id": 6, "quantity": 1 }
-              ],
-              "total_price": 2500000,
-              "status": "سفارش داده شده",
-              "created_at": "2023-11-05"
-            },
-            {
-              "id": 10,
-              "user_id": 10,
-              "products": [
-                { "product_id": 11, "quantity": 1 }
-              ],
-              "total_price": 599000,
-              "status": "ارسال شده",
-              "created_at": "2023-12-15"
-            }
-    ]
+  "categories": [
+    {
+      "id": "1",
+      "urlSearch": "digital",
+      "name": "کالای دیجیتال",
+      "description": "محصولات دیجیتالی مدرن"
+    },
+    {
+      "id": "2",
+      "urlSearch": "clothing",
+      "name": "مد و پوشاک",
+      "description": "لباس‌های طراحی شده و مد"
+    },
+    {
+      "id": "3",
+      "urlSearch": "kitchen",
+      "name": "خانه و آشپزخانه",
+      "description": "ابزارهای ضروری برای خانه"
+    },
+    {
+      "id": "4",
+      "urlSearch": "electric",
+      "name": "لوازم خانگی برقی",
+      "description": "دستگاه های کاربردی با تکنولوژی روز"
+    },
+    {
+      "id": "5",
+      "urlSearch": "sanitary",
+      "name": "آرایشی بهداشتی",
+      "description": "محصولات مراقبت از پوست و مو"
+    },
+    {
+      "id": "6",
+      "urlSearch": "sports",
+      "name": "ورزش و سفر",
+      "description": "تجهیزات ورزشی و لوازم سفر"
+    },
+    {
+      "id": "7",
+      "urlSearch": "vehicles",
+      "name": "خودرو و موتور سیکلت",
+      "description": "وسایل نقلیه برقی و بنزینی"
+    },
+    {
+      "id": "8",
+      "urlSearch": "child",
+      "name": "کودک و نوزاد",
+      "description": "لوازم کودکان و نوزادان"
+    },
+    {
+      "id": "9",
+      "urlSearch": "tools",
+      "name": "ابزار آلات و تجهیزات",
+      "description": "ابزارهای صنعتی و منزلی"
+    },
+    {
+      "id": "10",
+      "urlSearch": "phone",
+      "name": "موبایل و تبلت",
+      "description": "آخرین مدل‌های موبایل و تبلت"
+    },
+    {
+      "id": "11",
+      "urlSearch": "edible",
+      "name": "کالای خوراکی و اساسی",
+      "description": "کالای های اساسی و پر مصرف"
+    },
+    {
+      "id": "12",
+      "urlSearch": "native",
+      "name": "محصولات بومی و محلی",
+      "description": "محصولات محلی و صنایع دستی"
+    },
+    {
+      "id": "13",
+      "urlSearch": "bookmarks",
+      "name": "علاقه مندی ها",
+      "description": "محصولات انتخابی مورد علاقه"
+    },
+    {
+      "id": "14",
+      "urlSearch": "stationery",
+      "name": "کتاب و لوازم تحریر",
+      "description": "قلم، کاغذ و لوازم دفتری"
+    },
+    {
+      "id": "15",
+      "urlSearch": "medicine",
+      "name": "تجهیزات پزشکی و سلامت",
+      "description": "دستگاه‌های سلامت و پزشکی"
+    },
+    {
+      "id": "16",
+      "urlSearch": "jewellery",
+      "name": "طلا و نقره",
+      "description": "جواهرات زیبا چشم نواز"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "بلندگو بلوتوثی",
+      "price": 1500000,
+      "category_id": 1,
+      "description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 70,
+      "discount": 10,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 41,
+          "comment": "صدای عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 42,
+          "comment": "مناسب برای داخل خانه.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "گوشی موبایل سامسونگ Galaxy S21",
+      "price": 20000000,
+      "category_id": 10,
+      "description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 30,
+      "discount": 5,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 3,
+          "comment": "کیفیت دوربین عالی!",
+          "rating": 5
+        },
+        {
+          "user_id": 4,
+          "comment": "طراحی زیبا و سریع.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "تلویزیون سامسونگ 50 اینچ",
+      "price": 8000000,
+      "category_id": 3,
+      "description": "تلویزیون Full HD سامسونگ با کیفیت تصویر عالی و فناوری HDR.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 20,
+      "discount": 15,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 5,
+          "comment": "تصویر واضح و روشن.",
+          "rating": 5
+        },
+        {
+          "user_id": 6,
+          "comment": "بهترین گزینه برای خانه.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "دوربین دیجیتال کانن EOS 90D",
+      "price": 25000000,
+      "category_id": 1,
+      "description": "دوربین حرفه‌ای کانن با حسگر APS-C و قابلیت فیلمبرداری 4K.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 15,
+      "discount": 20,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 7,
+          "comment": "کیفیت تصویر بی‌نظیر.",
+          "rating": 5
+        },
+        {
+          "user_id": 8,
+          "comment": "فیلمبرداری عالی در 4K.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "ساعت هوشمند اپل Watch Series 6",
+      "price": 10000000,
+      "category_id": 1,
+      "description": "ساعت هوشمند اپل با صفحه نمایش Retina و سنسورهای سلامتی پیشرفته.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 8,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 9,
+          "comment": "پرفکت برای سلامت.",
+          "rating": 5
+        },
+        {
+          "user_id": 10,
+          "comment": "ویژگی‌های سلامتی فوق‌العاده.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "ساعت هوشمند سامسونگ Galaxy Watch 3",
+      "price": 8000000,
+      "category_id": 1,
+      "description": "ساعت هوشمند سامسونگ با قابلیت ECG و صفحه نمایش Super AMOLED.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 25,
+      "discount": 12,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 11,
+          "comment": "کیفیت عالی و طراحی زیبا.",
+          "rating": 5
+        },
+        {
+          "user_id": 12,
+          "comment": "صفحه نمایش روشن و واضح.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "دوربین ورزشی گارمین VIRB Ultra 30",
+      "price": 4000000,
+      "category_id": 1,
+      "description": "دوربین ورزشی 4K با قابلیت ضد آب و لرزشگیر پیشرفته.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 35,
+      "discount": 18,
+      "ratings": 4.4,
+      "reviews": [
+        {
+          "user_id": 13,
+          "comment": "عالی برای سفر و ورزش.",
+          "rating": 5
+        },
+        {
+          "user_id": 14,
+          "comment": "لرزشگیر بی‌نظیر.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "خودرو پژو 206",
+      "price": 200000000,
+      "category_id": 6,
+      "description": "خودروی اقتصادی با موتور 1.6 لیتری و طراحی اسپرت.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 5,
+      "discount": 5,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 15,
+          "comment": "خودرویی بسیار مناسب.",
+          "rating": 5
+        },
+        {
+          "user_id": 16,
+          "comment": "ارزش خرید خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "لپتاپ لنوو ThinkPad X1",
+      "price": 16000000,
+      "category_id": 1,
+      "description": "لپتاپ تجاری با پردازنده Intel Core i5، 8GB RAM و 256GB SSD.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 30,
+      "discount": 5,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 17,
+          "comment": "عملکرد عالی برای کارهای اداری.",
+          "rating": 5
+        },
+        {
+          "user_id": 18,
+          "comment": "کیفیت ساخت بسیار خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "گوشی موبایل شیائومی Redmi Note 10",
+      "price": 4500000,
+      "category_id": 10,
+      "description": "گوشی شیائومی با صفحه نمایش 6.43 اینچ و دوربین 48 مگاپیکسلی.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 50,
+      "discount": 12,
+      "ratings": 4.3,
+      "reviews": [
+        {
+          "user_id": 19,
+          "comment": "گوشی خوب برای استفاده روزمره.",
+          "rating": 4
+        },
+        {
+          "user_id": 20,
+          "comment": "قیمت مناسب با امکانات عالی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "تبلت اپل iPad Air 2020",
+      "price": 12000000,
+      "category_id": 10,
+      "description": "تبلت با پردازنده A14 Bionic و صفحه نمایش 10.9 اینچ.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 7,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 21,
+          "comment": "عملکرد عالی برای طراحی و تماشای فیلم.",
+          "rating": 5
+        },
+        {
+          "user_id": 22,
+          "comment": "مناسب برای کارهای گرافیکی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "پوشاک زنانه مانتو الیزه",
+      "price": 900000,
+      "category_id": 2,
+      "description": "مانتوی شیک و راحت با طراحی مدرن و مناسب فصل بهار.",
+      "images": [
+        "./src/assets/images/modes/mode-3.jpg",
+        "./src/assets/images/modes/mode-2.jpg",
+        "./src/assets/images/modes/mode-1.jpg"
+      ],
+      "stock": 80,
+      "discount": 10,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 23,
+          "comment": "کیفیت پارچه عالی و راحت.",
+          "rating": 5
+        },
+        {
+          "user_id": 24,
+          "comment": "مدل زیبای مانتو.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "کفش مردانه نایک Air Max 270",
+      "price": 2500000,
+      "category_id": 9,
+      "description": "کفش ورزشی نایک با طراحی منحصر به فرد و راحتی فوق‌العاده.",
+      "images": [
+        "./src/assets/images/tools/tools-1.jpg",
+        "./src/assets/images/tools/tools-2.jpg",
+        "./src/assets/images/tools/tools-3.jpg"
+      ],
+      "stock": 60,
+      "discount": 15,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 25,
+          "comment": "راحتی و دوام بالا.",
+          "rating": 5
+        },
+        {
+          "user_id": 26,
+          "comment": "طراحی عالی و زیبا.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "کفش زنانه آدیداس Ultraboost",
+      "price": 3000000,
+      "category_id": 9,
+      "description": "کفش آدیداس با تکنولوژی Boost برای راحتی بیشتر در حرکت.",
+      "images": [
+        "./src/assets/images/tools/tools-1.jpg",
+        "./src/assets/images/tools/tools-2.jpg",
+        "./src/assets/images/tools/tools-3.jpg"
+      ],
+      "stock": 50,
+      "discount": 20,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 27,
+          "comment": "کفش راحت و سبک.",
+          "rating": 5
+        },
+        {
+          "user_id": 28,
+          "comment": "عالی برای پیاده‌روی طولانی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "دوربین دیجیتال کانن EOS 1500D",
+      "price": 8000000,
+      "category_id": 1,
+      "description": "دوربین دیجیتال DSLR با سنسور 24.1 مگاپیکسل و قابلیت فیلمبرداری 1080p.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 20,
+      "discount": 12,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 29,
+          "comment": "کیفیت عکس عالی!",
+          "rating": 5
+        },
+        {
+          "user_id": 30,
+          "comment": "راحتی استفاده و عملکرد خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "name": "هدفون بی‌سیم سامسونگ Galaxy Buds Pro",
+      "price": 2000000,
+      "category_id": 1,
+      "description": "هدفون بی‌سیم با کیفیت صدا عالی و قابلیت حذف نویز.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 31,
+          "comment": "کیفیت صدا عالی و راحتی بیشتر.",
+          "rating": 5
+        },
+        {
+          "user_id": 32,
+          "comment": "قیمت خوب برای کیفیت عالی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "دستگاه اسپرسوساز دلونگی EC685",
+      "price": 3500000,
+      "category_id": 1,
+      "description": "اسپرسوساز با قدرت 1350 وات و طراحی شیک.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 30,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 33,
+          "comment": "دستگاه خوبی است، کیفیت قهوه عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 34,
+          "comment": "عملکرد خوب و راحتی در استفاده.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
+      "price": 12000000,
+      "category_id": 3,
+      "description": "ماشین ظرفشویی با 6 برنامه شستشو و ظرفیت 12 نفره.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 40,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 35,
+          "comment": "شستشو سریع و کاملا تمیز.",
+          "rating": 5
+        },
+        {
+          "user_id": 36,
+          "comment": "طراحی عالی و عملکرد خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "یخچال فریزر ال‌جی مدل GRB300",
+      "price": 9000000,
+      "category_id": 3,
+      "description": "یخچال فریزر با سیستم خنک‌کننده سریع و ظرفیت 350 لیتر.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 25,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 37,
+          "comment": "عملکرد عالی و فضای زیاد.",
+          "rating": 5
+        },
+        {
+          "user_id": 38,
+          "comment": "خنک‌کننده سریع و مصرف انرژی کم.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "تلفن بی‌سیم پاناسونیک KX-TGC220",
+      "price": 1500000,
+      "category_id": 10,
+      "description": "تلفن بی‌سیم با قابلیت تماس واضح و طراحی زیبا.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 0,
+      "ratings": 4.3,
+      "reviews": [
+        {
+          "user_id": 39,
+          "comment": "صدای خوب و کیفیت عالی.",
+          "rating": 4
+        },
+        {
+          "user_id": 40,
+          "comment": "استفاده آسان و عملکرد خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "name": "کیف لپ‌تاپ جنیوس مدل GX-20",
+      "price": 450000,
+      "category_id": 1,
+      "description": "کیف لپ‌تاپ با طراحی مدرن و جادار.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 60,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 41,
+          "comment": "کیفیت خوب و فضای مناسب.",
+          "rating": 5
+        },
+        {
+          "user_id": 42,
+          "comment": "خوب است ولی کمی گران.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "name": "ساعت هوشمند سامسونگ Galaxy Watch 4",
+      "price": 5000000,
+      "category_id": 1,
+      "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچ و سنسورهای متنوع.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 25,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 43,
+          "comment": "عالی برای ورزش و روزمره.",
+          "rating": 5
+        },
+        {
+          "user_id": 44,
+          "comment": "عملکرد مناسب و کیفیت ساخت خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "name": "ماوس بی‌سیم ریزر مدل DeathAdder",
+      "price": 1500000,
+      "category_id": 1,
+      "description": "ماوس گیمینگ با حسگر اپتیکال 16,000 DPI و طراحی ارگونومیک.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 80,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 45,
+          "comment": "کیفیت ساخت عالی و عملکرد بی‌نظیر.",
+          "rating": 5
+        },
+        {
+          "user_id": 46,
+          "comment": "پاسخ‌دهی سریع و طراحی راحت.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "name": "کیبورد مکانیکی ای‌لاکس مدل ALC-700",
+      "price": 2500000,
+      "category_id": 1,
+      "description": "کیبورد مکانیکی با سوئیچ‌های Cherry MX و نور پس‌زمینه RGB.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 60,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 47,
+          "comment": "کیفیت عالی برای بازی.",
+          "rating": 5
+        },
+        {
+          "user_id": 48,
+          "comment": "نور پس‌زمینه جذاب و عملکرد سریع.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "25",
+      "name": "پاوربانک انکر مدل PowerCore 10000",
+      "price": 800000,
+      "category_id": 1,
+      "description": "پاوربانک با ظرفیت 10000 میلی‌آمپر و قابلیت شارژ سریع.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 100,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 49,
+          "comment": "خیلی مفید و کار راه انداز.",
+          "rating": 5
+        },
+        {
+          "user_id": 50,
+          "comment": "ظرفیت بالا و شارژ سریع.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "26",
+      "name": "تلویزیون سامسونگ مدل 55TU8000",
+      "price": 12000000,
+      "category_id": 3,
+      "description": "تلویزیون 55 اینچی با کیفیت تصویر 4K و سیستم عامل تایزن.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 15,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 51,
+          "comment": "تصویر عالی و کیفیت صدا خوب.",
+          "rating": 5
+        },
+        {
+          "user_id": 52,
+          "comment": "سیستم عامل سریع و آسان.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "27",
+      "name": "آبمیوه‌گیری فیلیپس مدل HR1832",
+      "price": 2500000,
+      "category_id": 3,
+      "description": "آبمیوه‌گیری با قدرت 500 وات و طراحی شیک.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 30,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 53,
+          "comment": "عملکرد عالی و صدای کم.",
+          "rating": 5
+        },
+        {
+          "user_id": 54,
+          "comment": "راحتی استفاده و طراحی زیبا.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "28",
+      "name": "سشوار پاناسونیک مدل EH-ND12",
+      "price": 1500000,
+      "category_id": 1,
+      "description": "سشوار با سه درجه تنظیم حرارت و طراحی جمع‌وجور.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 0,
+      "ratings": 4.4,
+      "reviews": [
+        {
+          "user_id": 55,
+          "comment": "سرعت خشک کردن بالا.",
+          "rating": 5
+        },
+        {
+          "user_id": 56,
+          "comment": "خیلی عالی، قیمت مناسب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "29",
+      "name": "گوشی موبایل شیائومی مدل Mi 11",
+      "price": 15000000,
+      "category_id": 10,
+      "description": "گوشی هوشمند با صفحه نمایش 6.81 اینچی و پردازنده Snapdragon 888.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 20,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 57,
+          "comment": "عملکرد عالی و دوربین خوب.",
+          "rating": 5
+        },
+        {
+          "user_id": 58,
+          "comment": "طراحی شیک و سریع.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "30",
+      "name": "کولر گازی سامسونگ مدل AR12",
+      "price": 10000000,
+      "category_id": 3,
+      "description": "کولر گازی با ظرفیت 12000 و سیستم رطوبت‌گیر.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 59,
+          "comment": "سرمایش عالی و مصرف انرژی کم.",
+          "rating": 5
+        },
+        {
+          "user_id": 60,
+          "comment": "عملکرد خوب و طراحی زیبا.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "31",
+      "name": "آیپد پرو 2021 اپل",
+      "price": 25000000,
+      "category_id": 1,
+      "description": "تبلت اپل با صفحه نمایش 12.9 اینچی و پردازنده M1.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 25,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 61,
+          "comment": "صفحه نمایش عالی و عملکرد سریع.",
+          "rating": 5
+        },
+        {
+          "user_id": 62,
+          "comment": "کیفیت ساخت و باتری عالی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "32",
+      "name": "دوربین فیلمبرداری سونی مدل FDR-AX53",
+      "price": 6000000,
+      "category_id": 1,
+      "description": "دوربین فیلمبرداری 4K با لنز ZEISS و تثبیت‌کننده تصویر.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 10,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 63,
+          "comment": "کیفیت تصویربرداری عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 64,
+          "comment": "راحتی در استفاده و کارکرد خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "33",
+      "name": "ساعت هوشمند سامسونگ مدل Galaxy Watch 4",
+      "price": 4000000,
+      "category_id": 1,
+      "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچی و سیستم عامل Wear OS.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 20,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 65,
+          "comment": "کیفیت ساخت عالی و باتری مناسب.",
+          "rating": 5
+        },
+        {
+          "user_id": 66,
+          "comment": "طراحی زیبایی دارد.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "34",
+      "name": "گوشی موبایل سامسونگ مدل Galaxy S21",
+      "price": 22000000,
+      "category_id": 10,
+      "description": "گوشی هوشمند با صفحه نمایش 6.2 اینچی و پردازنده Exynos 2100.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 15,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 67,
+          "comment": "عملکرد عالی و دوربین باکیفیت.",
+          "rating": 5
+        },
+        {
+          "user_id": 68,
+          "comment": "پیشرفت عالی نسبت به مدل‌های قبلی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "35",
+      "name": "کتابخوان Kindle Paperwhite",
+      "price": 3500000,
+      "category_id": 1,
+      "description": "کتابخوان الکترونیکی با صفحه نمایش 6 اینچی و نور پس‌زمینه قابل تنظیم.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 25,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 69,
+          "comment": "برای مطالعه طولانی مدت عالی است.",
+          "rating": 5
+        },
+        {
+          "user_id": 70,
+          "comment": "طراحی مناسب و صفحه خوانا.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "36",
+      "name": "کیف لپتاپ سامسونگ مدل Basic",
+      "price": 600000,
+      "category_id": 1,
+      "description": "کیف لپتاپ با طراحی ساده و فضای مناسب برای نگهداری وسایل.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 71,
+          "comment": "کیفیت خوب و مناسب برای روزمره.",
+          "rating": 4
+        },
+        {
+          "user_id": 72,
+          "comment": "فضای کافی برای لپتاپ و لوازم جانبی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "37",
+      "name": "خوشبوکننده هوا هوشمند شیائومی",
+      "price": 850000,
+      "category_id": 1,
+      "description": "خوشبوکننده هوا با قابلیت کنترل از طریق اپلیکیشن موبایل.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 35,
+      "discount": 0,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 73,
+          "comment": "بوی مطبوع و کارکرد آسان.",
+          "rating": 5
+        },
+        {
+          "user_id": 74,
+          "comment": "کنترل راحت از طریق موبایل.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "38",
+      "name": "ماشین ظرفشویی ال جی مدل DFB512FP",
+      "price": 11000000,
+      "category_id": 3,
+      "description": "ماشین ظرفشویی با ظرفیت 14 نفره و 6 برنامه شستشو.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 20,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 75,
+          "comment": "شستشوی عالی و صدا کم.",
+          "rating": 5
+        },
+        {
+          "user_id": 76,
+          "comment": "مصرف انرژی بهینه.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "39",
+      "name": "هدست بی‌سیم بوز مدل QuietComfort 35 II",
+      "price": 5000000,
+      "category_id": 1,
+      "description": "هدست بی‌سیم با قابلیت حذف نویز و عمر باتری بالا.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 30,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 77,
+          "comment": "کیفیت صدا و راحتی عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 78,
+          "comment": "حذف نویز بسیار موثر.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "40",
+      "name": "میکروفن یقه‌ای بویو مدل BY-M1",
+      "price": 500000,
+      "category_id": 3,
+      "description": "میکروفن یقه‌ای با قابلیت اتصال به گوشی و دوربین.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 79,
+          "comment": "کیفیت صدای عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 80,
+          "comment": "طراحی مناسب برای ضبط صدا.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "41",
+      "name": "کولر گازی گری مدل Gree GWH09AK",
+      "price": 8500000,
+      "category_id": 3,
+      "description": "کولر گازی با ظرفیت 9000 BTU و سیستم سرمایشی و گرمایشی.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 12,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 81,
+          "comment": "عملکرد عالی و طراحی شیک.",
+          "rating": 5
+        },
+        {
+          "user_id": 82,
+          "comment": "مصرف انرژی پایین و عملکرد سریع.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "42",
+      "name": "پروژکتور ویدئویی اپسون مدل EH-TW7100",
+      "price": 24000000,
+      "category_id": 1,
+      "description": "پروژکتور Full HD با دقت تصویر 4K و فناوری HDR.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 10,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 83,
+          "comment": "کیفیت تصویر عالی و رنگ‌های طبیعی.",
+          "rating": 5
+        },
+        {
+          "user_id": 84,
+          "comment": "پروژه عالی برای سینمای خانگی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "43",
+      "name": "سشوار پاناسونیک مدل EH-ND11A",
+      "price": 950000,
+      "category_id": 1,
+      "description": "سشوار با موتور 1000 وات و تنظیمات سرعت و حرارت مختلف.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 85,
+          "comment": "عالی برای استفاده خانگی.",
+          "rating": 5
+        },
+        {
+          "user_id": 86,
+          "comment": "قدرت مناسب و صدای کم.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "44",
+      "name": "کیف مسافرتی چمدان سامسونگ",
+      "price": 1500000,
+      "category_id": 8,
+      "description": "چمدان مسافرتی با ظرفیت بالا و چرخ‌های مقاوم.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 30,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 87,
+          "comment": "چرخ‌های نرم و فضای زیاد.",
+          "rating": 5
+        },
+        {
+          "user_id": 88,
+          "comment": "کیفیت خوب و طراحی عالی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "45",
+      "name": "پکیج لوازم آرایش دکتر راشل",
+      "price": 1200000,
+      "category_id": 9,
+      "description": "پکیج کامل لوازم آرایش شامل کرم پودر، رژلب و خط چشم.",
+      "images": [
+        "./src/assets/images/tools/tools-1.jpg",
+        "./src/assets/images/tools/tools-2.jpg",
+        "./src/assets/images/tools/tools-3.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.4,
+      "reviews": [
+        {
+          "user_id": 89,
+          "comment": "لوازم آرایش با کیفیت عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 90,
+          "comment": "بسته‌بندی شیک و کاربردی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "46",
+      "name": "کنسول بازی پلی‌استیشن 5",
+      "price": 15000000,
+      "category_id": 1,
+      "description": "کنسول بازی نسل نهم با قابلیت اجرای بازی‌های 4K و سرعت بالا.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 10,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 91,
+          "comment": "بازی‌ها با کیفیت عالی اجرا می‌شوند.",
+          "rating": 5
+        },
+        {
+          "user_id": 92,
+          "comment": "گیم‌پلی روان و تجربه شگفت‌انگیز.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "47",
+      "name": "دوربین عکاسی کانن مدل EOS 80D",
+      "price": 17000000,
+      "category_id": 1,
+      "description": "دوربین دیجیتال با سنسور APS-C و قابلیت فیلم‌برداری 1080p.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 8,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 93,
+          "comment": "عکاسی با جزئیات دقیق.",
+          "rating": 5
+        },
+        {
+          "user_id": 94,
+          "comment": "فیلم‌برداری عالی با کیفیت 1080p.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "48",
+      "name": "سیستم صوتی سونی مدل HT-RT3",
+      "price": 7000000,
+      "category_id": 1,
+      "description": "سیستم صوتی با 5.1 کانال و توان خروجی 600 وات.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 10,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 95,
+          "comment": "صدای شفاف و قدرتمند.",
+          "rating": 5
+        },
+        {
+          "user_id": 96,
+          "comment": "تجربه سینمایی عالی در خانه.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "49",
+      "name": "میکروفن یقه‌ای رود مدل Lavalier GO",
+      "price": 1200000,
+      "category_id": 1,
+      "description": "میکروفن یقه‌ای با کیفیت صدای عالی و اتصال سریع.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 35,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 97,
+          "comment": "کیفیت صدای عالی و نصب آسان.",
+          "rating": 5
+        },
+        {
+          "user_id": 98,
+          "comment": "کاملاً مناسب برای ضبط ویدیو.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "50",
+      "name": "اسکوتر برقی شیائومی مدل M365",
+      "price": 5500000,
+      "category_id": 1,
+      "description": "اسکوتر برقی با سرعت 25 کیلومتر بر ساعت و برد 30 کیلومتر.",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 20,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 99,
+          "comment": "عالی برای حمل و نقل شهری.",
+          "rating": 5
+        },
+        {
+          "user_id": 100,
+          "comment": "طراحی سبک و عملکرد عالی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "51",
+      "name": "لپتاپ HP Pavilion",
+      "price": 2000,
+      "category_id": 1,
+      "description": "لپتاپ قدرتمند برای کار و بازی با پردازنده Intel Core i7",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 50,
+      "discount": 0,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 1,
+          "comment": "لپتاپ فوق‌العاده!",
+          "rating": 5
+        },
+        {
+          "user_id": 2,
+          "comment": "عملکرد عالی دارد.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "52",
+      "name": "ژاکت پشمی مردانه",
+      "price": 150,
+      "category_id": 2,
+      "description": "ژاکت گرم و مودرن برای فصل سرما",
+      "images": [
+        "./src/assets/images/modes/mode-3.jpg",
+        "./src/assets/images/modes/mode-2.jpg",
+        "./src/assets/images/modes/mode-1.jpg"
+      ],
+      "stock": 100,
+      "discount": 0,
+      "ratings": 4.3,
+      "reviews": [
+        {
+          "user_id": 3,
+          "comment": "کیفیت عالی دارد.",
+          "rating": 4
+        },
+        {
+          "user_id": 4,
+          "comment": "بسیار گرم است.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "53",
+      "name": "ماشین لباسشویی Samsung",
+      "price": 800,
+      "category_id": 3,
+      "description": "ماشین لباسشویی هوشمند با ظرفیت 8 کیلو",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 30,
+      "discount": 0,
+      "ratings": 4.7,
+      "reviews": [
+        {
+          "user_id": 5,
+          "comment": "بسیار قدرتمند است.",
+          "rating": 5
+        },
+        {
+          "user_id": 6,
+          "comment": "ساده و کاربردی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "54",
+      "name": "کتاب برنامه‌نویسی پیشرفته",
+      "price": 30,
+      "category_id": 4,
+      "description": "آموزش برنامه‌نویسی پیشرفته با مثال‌های عملی",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 200,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 7,
+          "comment": "کتاب فوق‌العاده!",
+          "rating": 5
+        },
+        {
+          "user_id": 8,
+          "comment": "مبنا برای یادگیری.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "55",
+      "name": "شامپو مرطوب‌کننده L'Oreal",
+      "price": 10,
+      "category_id": 5,
+      "description": "شامپو با عطر طبیعی برای مراقبت از مو",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 500,
+      "discount": 0,
+      "ratings": 4.2,
+      "reviews": [
+        {
+          "user_id": 9,
+          "comment": "عطر فوق‌العاده!",
+          "rating": 5
+        },
+        {
+          "user_id": 10,
+          "comment": "مرطوب‌کنندگی خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "56",
+      "name": "دوچرخه شهری Merida",
+      "price": 250,
+      "category_id": 6,
+      "description": "دوچرخه سبک برای حرکت در شهر",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 40,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 1,
+          "comment": "دوچرخه قوی و سبک.",
+          "rating": 5
+        },
+        {
+          "user_id": 2,
+          "comment": "مناسب برای شهر.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "57",
+      "name": "کنسول بازی PlayStation 5",
+      "price": 300,
+      "category_id": 1,
+      "description": "کنسول بازی جدید با گیم‌های فوق‌العاده",
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "stock": 20,
+      "discount": 0,
+      "ratings": 4.9,
+      "reviews": [
+        {
+          "user_id": 3,
+          "comment": "بازی بهترین کنسول!",
+          "rating": 5
+        },
+        {
+          "user_id": 4,
+          "comment": "سرعت عالی.",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "58",
+      "name": "صندوچه کودک با نقاشی حیوانات",
+      "price": 20,
+      "category_id": 8,
+      "description": "صندوق غذایی قابل حمل برای کودکان",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 150,
+      "discount": 0,
+      "ratings": 4.4,
+      "reviews": [
+        {
+          "user_id": 5,
+          "comment": "نقاشی زیبا.",
+          "rating": 5
+        },
+        {
+          "user_id": 6,
+          "comment": "قدرت گرم نگهداری خوب.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "59",
+      "name": "پیچکش چند منظوره Stanley",
+      "price": 15,
+      "category_id": 9,
+      "description": "ابزار کاربردی برای خانه و کار",
+      "images": [
+        "./src/assets/images/tools/tools-1.jpg",
+        "./src/assets/images/tools/tools-2.jpg",
+        "./src/assets/images/tools/tools-3.jpg"
+      ],
+      "stock": 80,
+      "discount": 0,
+      "ratings": 4.5,
+      "reviews": [
+        {
+          "user_id": 7,
+          "comment": "ابزار قوی و کاربردی.",
+          "rating": 5
+        },
+        {
+          "user_id": 8,
+          "comment": "مناسب برای کارهای خانگی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "60",
+      "name": "موبایل سامسونگ Galaxy S23",
+      "price": 500,
+      "category_id": 10,
+      "description": "موبایل هوشمند با دوربین قدرتمند",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 60,
+      "discount": 0,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "user_id": 9,
+          "comment": "دوربین فوق‌العاده!",
+          "rating": 5
+        },
+        {
+          "user_id": 10,
+          "comment": "عملکرد عالی.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "61",
+      "name": "ماوس بی‌سیم",
+      "description": "ماوس ارگونومیک بی‌سیم با عمر باتری طولانی.",
+      "price": 599000,
+      "category_id": 1,
+      "stock": 150,
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "ratings": 4.5,
+      "discount": "100",
+      "release_date": "2024-10-01",
+      "price_range": "کمتر از 1 میلیون تومان"
+    },
+    {
+      "id": "62",
+      "name": "هدفون بلوتوثی",
+      "description": "هدفون‌های بلوتوثی با قابلیت حذف نویز و باتری ۳۰ ساعته.",
+      "price": 2390000,
+      "category_id": 1,
+      "stock": 50,
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "ratings": 4.7,
+      "discount": "150",
+      "release_date": "2025-01-20",
+      "price_range": "بین 2 تا 3 میلیون تومان"
+    },
+    {
+      "id": "63",
+      "name": "تلویزیون هوشمند 4K",
+      "description": "تلویزیون ۵۵ اینچ 4K هوشمند با کنترل صوتی.",
+      "price": 10990000,
+      "category_id": 3,
+      "stock": 30,
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "ratings": 4.8,
+      "discount": "200",
+      "release_date": "2024-11-01",
+      "price_range": "بین 10 تا 12 میلیون تومان"
+    },
+    {
+      "id": "64",
+      "name": "کیف پول چرم",
+      "description": "کیف پول چرم طبیعی با قابلیت حفاظت RFID.",
+      "price": 890000,
+      "category_id": 2,
+      "stock": 200,
+      "images": [
+        "./src/assets/images/modes/mode-3.jpg",
+        "./src/assets/images/modes/mode-2.jpg",
+        "./src/assets/images/modes/mode-1.jpg"
+      ],
+      "ratings": 4.6,
+      "discount": "50",
+      "release_date": "2024-06-10",
+      "price_range": "کمتر از 1 میلیون تومان"
+    },
+    {
+      "id": "65",
+      "name": "کفش دویدن",
+      "description": "کفش‌های راحت و مقاوم برای دویدن با مواد تنفس‌پذیر.",
+      "price": 2490000,
+      "category_id": 2,
+      "stock": 100,
+      "images": [
+        "./src/assets/images/modes/mode-3.jpg",
+        "./src/assets/images/modes/mode-2.jpg",
+        "./src/assets/images/modes/mode-1.jpg"
+      ],
+      "ratings": 4.3,
+      "discount": "100",
+      "release_date": "2025-01-15",
+      "price_range": "بین 2 تا 3 میلیون تومان"
+    },
+    {
+      "id": "66",
+      "name": "گوشی موبایل سامسونگ",
+      "description": "گوشی موبایل سامسونگ مدل Galaxy S21 با دوربین ۱۰۸ مگاپیکسلی.",
+      "price": 28990000,
+      "category_id": 10,
+      "stock": 200,
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "ratings": 4.7,
+      "discount": "50",
+      "release_date": "2025-02-01",
+      "price_range": "بین 28 تا 30 میلیون تومان"
+    },
+    {
+      "id": "67",
+      "name": "لپ‌تاپ ایسوس",
+      "description": "لپ‌تاپ ایسوس مدل ZenBook با پردازنده i7 و حافظه ۱ ترابایت.",
+      "price": 13990000,
+      "category_id": 1,
+      "stock": 100,
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "ratings": 4.6,
+      "discount": "150",
+      "release_date": "2025-03-01",
+      "price_range": "بین 13 تا 15 میلیون تومان"
+    },
+    {
+      "id": "68",
+      "name": "دوربین عکاسی کانن",
+      "description": "دوربین دیجیتال کانن مدل EOS 70-200 با کیفیت ۴K.",
+      "price": 45900000,
+      "category_id": 1,
+      "stock": 20,
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "ratings": 4.9,
+      "discount": "100",
+      "release_date": "2025-01-10",
+      "price_range": "بین 45 تا 50 میلیون تومان"
+    },
+    {
+      "id": "69",
+      "name": "کتاب دیجیتال Kindle",
+      "description": "کتاب‌خوان دیجیتال Kindle با صفحه نمایش ضد تابش.",
+      "price": 1990000,
+      "category_id": 1,
+      "stock": 80,
+      "images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "ratings": 4.4,
+      "discount": "80",
+      "release_date": "2024-11-01",
+      "price_range": "بین 2 تا 3 میلیون تومان"
+    },
+    {
+      "id": "70",
+      "name": "ماشین لباسشویی LG",
+      "description": "ماشین لباسشویی هوشمند LG با ظرفیت 10 کیلو.",
+      "price": 9000000,
+      "category_id": 3,
+      "stock": 40,
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "ratings": 4.6,
+      "discount": "100",
+      "release_date": "2025-02-15",
+      "price_range": "بین 8 تا 10 میلیون تومان"
+    },
+    {
+      "id": "71",
+      "name": "صندلی کامپیوتری",
+      "price": 3500000,
+      "category_id": 3,
+      "description": "صندلی کامپیوتری با پشتیبانی قهرمانی و قابلیت چرخش.",
+      "images": [
+        "./src/assets/images/kitchen/kitchen-1.jpg",
+        "./src/assets/images/kitchen/kitchen-2.jpg",
+        "./src/assets/images/kitchen/kitchen-3.jpg"
+      ],
+      "stock": 60,
+      "discount": 0,
+      "ratings": 4.6,
+      "reviews": [
+        {
+          "user_id": 47,
+          "comment": "راحت و قابل تنظیم.",
+          "rating": 5
+        },
+        {
+          "user_id": 48,
+          "comment": "مناسب برای کار بلندمدت.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "72",
+      "name": "کرم ضد خورشید SPF 50",
+      "price": 200000,
+      "category_id": 5,
+      "description": "کرم ضد خورشید با محافظت بالا و عطر طبیعی.",
+      "images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "stock": 200,
+      "discount": 0,
+      "ratings": 4.3,
+      "reviews": [
+        {
+          "user_id": 45,
+          "comment": "محافظت عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 46,
+          "comment": "مناسب برای همه نوع پوست.",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "id": "73",
+      "name": "لباس ورزشی زنانه",
+      "price": 1200000,
+      "category_id": 2,
+      "description": "لباس ورزشی تنفس‌پذیر و راحت برای زنان.",
+      "images": [
+        "./src/assets/images/modes/mode-3.jpg",
+        "./src/assets/images/modes/mode-2.jpg",
+        "./src/assets/images/modes/mode-1.jpg"
+      ],
+      "stock": 120,
+      "discount": 0,
+      "ratings": 4.4,
+      "reviews": [
+        {
+          "user_id": 43,
+          "comment": "کیفیت عالی.",
+          "rating": 5
+        },
+        {
+          "user_id": 44,
+          "comment": "مناسب برای ورزش.",
+          "rating": 4
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "علی محمدی",
+      "email": "ali@example.com",
+      "password": "hashed_password_1",
+      "address": "تهران، خیابان ولیعصر، پلاک ۵",
+      "phone": "09121234567",
+      "registration_date": "2024-11-01"
+    },
+    {
+      "id": "2",
+      "name": "مهدی حسینی",
+      "email": "mehdi@example.com",
+      "password": "hashed_password_2",
+      "address": "اصفهان، خیابان چهارباغ، پلاک ۱۵",
+      "phone": "09131567890",
+      "registration_date": "2024-12-15"
+    },
+    {
+      "id": "3",
+      "name": "زهره احمدی",
+      "email": "zahra@example.com",
+      "password": "hashed_password_3",
+      "address": "مشهد، خیابان فردوسی، پلاک ۲۰",
+      "phone": "09142345678",
+      "registration_date": "2024-01-10"
+    },
+    {
+      "id": "4",
+      "name": "سمیه رحمانی",
+      "email": "samieh@example.com",
+      "password": "hashed_password_4",
+      "address": " Shiraz، خیابان ذوالقدر، پلاک ۳۰",
+      "phone": "09153456789",
+      "registration_date": "2024-02-20"
+    },
+    {
+      "id": "5",
+      "name": "مصطفی احمدی",
+      "email": "mostafa@example.com",
+      "password": "hashed_password_5",
+      "address": "Tabriz، خیابان میثم، پلاک ۴۰",
+      "phone": "09164567890",
+      "registration_date": "2024-03-15"
+    },
+    {
+      "id": "6",
+      "name": "حسین رحمانی",
+      "email": "hosein@example.com",
+      "password": "hashed_password_6",
+      "address": "Kerman، خیابان کوهستان، پلاک ۵۰",
+      "phone": "09175678901",
+      "registration_date": "2024-04-10"
+    },
+    {
+      "id": "7",
+      "name": "نarges محمدی",
+      "email": "narges@example.com",
+      "password": "hashed_password_7",
+      "address": "Yazd، خیابان صوفیان، پلاک ۶۰",
+      "phone": "09186789012",
+      "registration_date": "2024-05-20"
+    },
+    {
+      "id": "8",
+      "name": "احمد رحمانی",
+      "email": "ahmad@example.com",
+      "password": "hashed_password_8",
+      "address": "Zanjan، خیابان شهید مجیدی، پلاک ۷۰",
+      "phone": "09197890123",
+      "registration_date": "2024-06-15"
+    },
+    {
+      "id": "9",
+      "name": "سارا محمدی",
+      "email": "sara@example.com",
+      "password": "hashed_password_9",
+      "address": "Hamedan، خیابان امام خمینی، پلاک ۸۰",
+      "phone": "09208901234",
+      "registration_date": "2024-07-10"
+    },
+    {
+      "id": "10",
+      "name": "پریسا رحمانی",
+      "email": "parisa@example.com",
+      "password": "hashed_password_10",
+      "address": "Gilan، خیابان انزلی، پلاک ۹۰",
+      "phone": "09219012345",
+      "registration_date": "2024-08-05"
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": "m79b32bz",
+      "name": "تلویزیون سامسونگ مدل 55TU8000",
+      "user_id": "1",
+      "product_id": "26"
+    },
+    {
+      "id": "m79d69d7",
+      "name": "دوربین ورزشی گارمین VIRB Ultra 30",
+      "user_id": "1",
+      "product_id": "7"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "1",
+      "title": "چگونه یک وبسایت فروشگاهی طراحی کنیم؟",
+      "content": "راهنمای کامل طراحی وبسایت فروشگاهی...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 1,
+      "created_at": "2023-01-15",
+      "comments": [
+        {
+          "user_id": 2,
+          "text": "مقاله فوق‌العاده بود!"
+        },
+        {
+          "user_id": 3,
+          "text": "مطالب بسیار مفید."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "بهترین محصولات الکترونیکی 2023",
+      "content": "لیست محصولات الکترونیکی محبوب...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 2,
+      "created_at": "2023-02-20",
+      "comments": [
+        {
+          "user_id": 1,
+          "text": "محصولات عالی!"
+        },
+        {
+          "user_id": 4,
+          "text": "مقاله جامع بود."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "5 نکته برای خرید لباس آنلاین",
+      "content": "راهنمای خرید لباس آنلاین...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 3,
+      "created_at": "2023-03-10",
+      "comments": [
+        {
+          "user_id": 5,
+          "text": "مطالب بسیار کاربردی."
+        },
+        {
+          "user_id": 6,
+          "text": "ممنون از راهنمایی."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "چگونه یک سبد خرید آنلاین مدیریت کنیم؟",
+      "content": "راهنمای مدیریت سبد خرید...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 4,
+      "created_at": "2023-08-05",
+      "comments": [
+        {
+          "user_id": 7,
+          "text": "مقاله فوق‌العاده بود!"
+        },
+        {
+          "user_id": 8,
+          "text": "مطالب بسیار مفید."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "بهترین کتاب‌های برنامه‌نویسی 2023",
+      "content": "لیست کتاب‌های برنامه‌نویسی محبوب...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 5,
+      "created_at": "2023-11-12",
+      "comments": [
+        {
+          "user_id": 9,
+          "text": "کتاب‌های عالی!"
+        },
+        {
+          "user_id": 10,
+          "text": "مقاله جامع بود."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "5 نکته برای تعمیر دوچرخه خود",
+      "content": "راهنمای تعمیر دوچرخه...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 6,
+      "created_at": "2023-04-18",
+      "comments": [
+        {
+          "user_id": 1,
+          "text": "مطالب بسیار کاربردی."
+        },
+        {
+          "user_id": 2,
+          "text": "ممنون از راهنمایی."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "چگونه یک کنسول بازی خریداری کنیم؟",
+      "content": "راهنمای خرید کنسول بازی...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 7,
+      "created_at": "2023-07-25",
+      "comments": [
+        {
+          "user_id": 3,
+          "text": "مقاله فوق‌العاده بود!"
+        },
+        {
+          "user_id": 4,
+          "text": "مطالب بسیار مفید."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "بهترین ابزارهای خانه برای زندگی آسان",
+      "content": "لیست ابزارهای مفید...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 8,
+      "created_at": "2023-09-03",
+      "comments": [
+        {
+          "user_id": 5,
+          "text": "ابزارهای عالی!"
+        },
+        {
+          "user_id": 6,
+          "text": "مقاله جامع بود."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "چگونه یک موبایل مناسب انتخاب کنیم؟",
+      "content": "راهنمای خرید موبایل...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 9,
+      "created_at": "2023-02-28",
+      "comments": [
+        {
+          "user_id": 7,
+          "text": "مطالب بسیار کاربردی."
+        },
+        {
+          "user_id": 8,
+          "text": "ممنون از راهنمایی."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "5 نکته برای طراحی یک فضای کاری مناسب",
+      "content": "راهنمای طراحی فضای کاری...",
+      "image": "./src/assets/images/blog-2.jpg",
+      "author_id": 10,
+      "created_at": "2023-06-15",
+      "comments": [
+        {
+          "user_id": 9,
+          "text": "مقاله فوق‌العاده بود!"
+        },
+        {
+          "user_id": 10,
+          "text": "مطالب بسیار مفید."
+        }
+      ]
+    }
+  ],
+  "carts": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "product_id": 2,
+      "quantity": 1
+    },
+    {
+      "id": "2",
+      "user_id": 1,
+      "product_id": 5,
+      "quantity": 2
+    },
+    {
+      "id": "3",
+      "user_id": 2,
+      "product_id": 3,
+      "quantity": 3
+    },
+    {
+      "id": "4",
+      "user_id": 3,
+      "product_id": 7,
+      "quantity": 1
+    },
+    {
+      "id": "5",
+      "user_id": 4,
+      "product_id": 1,
+      "quantity": 1
+    },
+    {
+      "id": "6",
+      "user_id": 5,
+      "product_id": 8,
+      "quantity": 2
+    },
+    {
+      "id": "7",
+      "user_id": 6,
+      "product_id": 9,
+      "quantity": 1
+    },
+    {
+      "id": "8",
+      "user_id": 7,
+      "product_id": 10,
+      "quantity": 3
+    },
+    {
+      "id": "9",
+      "user_id": 8,
+      "product_id": 4,
+      "quantity": 2
+    },
+    {
+      "id": "10",
+      "user_id": 9,
+      "product_id": 6,
+      "quantity": 1
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "products": [
+        {
+          "product_id": 2,
+          "quantity": 1
+        },
+        {
+          "product_id": 5,
+          "quantity": 2
+        }
+      ],
+      "total_price": 2040000,
+      "status": "ارسال شده",
+      "created_at": "2023-03-10"
+    },
+    {
+      "id": "2",
+      "user_id": 2,
+      "products": [
+        {
+          "product_id": 3,
+          "quantity": 3
+        }
+      ],
+      "total_price": 2400000,
+      "status": "در حال پردازش",
+      "created_at": "2023-04-20"
+    },
+    {
+      "id": "3",
+      "user_id": 3,
+      "products": [
+        {
+          "product_id": 7,
+          "quantity": 1
+        }
+      ],
+      "total_price": 3000000,
+      "status": "سفارش داده شده",
+      "created_at": "2023-05-15"
+    },
+    {
+      "id": "4",
+      "user_id": 4,
+      "products": [
+        {
+          "product_id": 1,
+          "quantity": 1
+        }
+      ],
+      "total_price": 2000000,
+      "status": "ارسال شده",
+      "created_at": "2023-06-10"
+    },
+    {
+      "id": "5",
+      "user_id": 5,
+      "products": [
+        {
+          "product_id": 8,
+          "quantity": 2
+        }
+      ],
+      "total_price": 400000,
+      "status": "در حال پردازش",
+      "created_at": "2023-07-05"
+    },
+    {
+      "id": "6",
+      "user_id": 6,
+      "products": [
+        {
+          "product_id": 9,
+          "quantity": 1
+        }
+      ],
+      "total_price": 150000,
+      "status": "سفارش داده شده",
+      "created_at": "2023-08-15"
+    },
+    {
+      "id": "7",
+      "user_id": 7,
+      "products": [
+        {
+          "product_id": 10,
+          "quantity": 1
+        }
+      ],
+      "total_price": 5000000,
+      "status": "ارسال شده",
+      "created_at": "2023-09-20"
+    },
+    {
+      "id": "8",
+      "user_id": 8,
+      "products": [
+        {
+          "product_id": 4,
+          "quantity": 1
+        }
+      ],
+      "total_price": 300000,
+      "status": "در حال پردازش",
+      "created_at": "2023-10-10"
+    },
+    {
+      "id": "9",
+      "user_id": 9,
+      "products": [
+        {
+          "product_id": 6,
+          "quantity": 1
+        }
+      ],
+      "total_price": 2500000,
+      "status": "سفارش داده شده",
+      "created_at": "2023-11-05"
+    },
+    {
+      "id": "10",
+      "user_id": 10,
+      "products": [
+        {
+          "product_id": 11,
+          "quantity": 1
+        }
+      ],
+      "total_price": 599000,
+      "status": "ارسال شده",
+      "created_at": "2023-12-15"
+    }
+  ]
 }

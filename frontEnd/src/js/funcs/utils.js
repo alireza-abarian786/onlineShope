@@ -11,15 +11,15 @@ let searchParams = (key) => {
 function isLogin(username) {    
     if (username.length !== 0) {
         loginBtnText.innerHTML = username
-        if (window.location.href === 'http://127.0.0.1:5500/index.html') {
+        if (window.location.href === './index.html') {
             
-            loginBtn.setAttribute('href' , './frontEnd/html/doshboard.html') 
+            loginBtn.setAttribute('href' , './doshboard.html') 
         } else {
             loginBtn.setAttribute('href' , './doshboard.html') 
         }       
     } else {
         loginBtnText.innerHTML = "ورود / عضویت"
-        loginBtn.setAttribute('href' , "./frontEnd/html/login.html")
+        loginBtn.setAttribute('href' , "./login.html")
     }
 }
 

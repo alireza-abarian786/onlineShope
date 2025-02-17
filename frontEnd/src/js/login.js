@@ -33,11 +33,11 @@ window.addEventListener("DOMContentLoaded" , () => {
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3000/users')
+    fetch('http://localhost:4000/users')
     .then(res => res.json())
     .then(data => {
 
-        let item = data.find(user => user.username === userName.value && user.password === password.value);        
+        let item = data.find(user => user.name === userName.value && user.password === password.value);        
         if (item && userName.value && password.value !== '') {
             loginCheked(getLocalStorage("login") , userName.value)
             
@@ -128,7 +128,7 @@ let statusLogin = async () => {
                 phone: phoneInput.value,
             }
 
-            let res = await fetch('http://localhost:3000/users' , {
+            let res = await fetch('http://localhost:4000/users' , {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -138,7 +138,7 @@ let statusLogin = async () => {
             let result = await res.json()
 
             console.log(result);
-            setLocalStorage('login' , result.username);
+            setLocalStorage('login' , result.name);
             let loginName = getLocalStorage('login');                
             isLogin(loginName);
             clearInputSignUp()
@@ -168,7 +168,7 @@ function clearInputSignUp() {
 
 let SignUpUser = () => {
 
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:4000/users")
     .then(res => res.json())
     .then(data => {
 
@@ -204,10 +204,10 @@ function isLengthFalse(data) {
 }
 
 function isUserName(data) {
-        let item = data.find(user => user.username === usernameSignUp.value);        
+        let item = data.find(user => user.name === usernameSignUp.value);        
 
         if (item !== undefined) {            
-            if (item.username === usernameSignUp.value) {
+            if (item.name === usernameSignUp.value) {
 
                 showText(usernameText , 'نام کاربری از قبل موجود میباشد')
                 usernameValid = false
@@ -218,7 +218,7 @@ function isUserName(data) {
                         usernameValid = false
                     } else {
 
-                        if (item.username === usernameSignUp.value) {
+                        if (item.name === usernameSignUp.value) {
                             showText(usernameText , 'نام کاربری از قبل موجود میباشد')
                             usernameValid = false
                         } else {
