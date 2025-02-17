@@ -1,25 +1,21 @@
 {
     "categories": [
-            { "id": 1, "name": "الکترونیک", "description": "محصولات الکترونیکی مدرن" },
-            { "id": 2, "name": "لباس", "description": "لباس‌های مردانه و زنانه" },
-            { "id": 3, "name": "خانه و آشپزخانه", "description": "ابزارهای لازم برای خانه" },
-            { "id": 4, "name": "کتاب", "description": "کتاب‌های علمی، داستانی و آموزشی" },
-            { "id": 5, "name": "زیبایی و بهداشت", "description": "محصولات مراقبت از پوست و مو" },
-            { "id": 6, "name": "ورزش و سفر", "description": "تجهیزات ورزشی و لوازم سفر" },
-            { "id": 7, "name": "بازی و سرگرمی", "description": "بازی‌های الکترونیکی و سرگرمی‌ها" },
-            { "id": 8, "name": "کودک و نوزاد", "description": "لوازم کودکان و نوزادان" },
-            { "id": 9, "name": "ابزار", "description": "ابزارهای صنعتی و منزلی" },
-            { "id": 10, "name": "موبایل و تبلت", "description": "آخرین مدل‌های موبایل و تبلت" },
-            { "id": 11, "name": "ساعت هوشمند", "description": "ساعت‌های هوشمند و قابل حمل" },
-            { "id": 12, "name": "صوتی و تصویری", "description": "دستگاه‌های صوتی و تصویری" },
-            { "id": 13, "name": "لوازم التزامی", "description": "لوازم ضروری برای روزمره" },
-            { "id": 14, "name": "هنر و طراحی", "description": "محصولات هنری و طراحی" },
-            { "id": 15, "name": "آشپزی", "description": "ابزارهای آشپزخانه و پخت و پز" },
-            { "id": 16, "name": "سرگرمی خانگی", "description": "تجهیزات سرگرمی داخل خانه" },
-            { "id": 17, "name": "لوازم تحریر", "description": "قلم، کاغذ و لوازم دفتری" },
-            { "id": 18, "name": "محیط زیست", "description": "محصولات پایدار و دوستانه با محیط زیست" },
-            { "id": 19, "name": "سلامت و تناسب اندام", "description": "دستگاه‌های سلامت و ورزش" },
-            { "id": 20, "name": "هنر پوشاک", "description": "لباس‌های طراحی شده و مد" }
+      { "id": 1,  "urlSearch": "digital", "name": "کالای دیجیتال", "description": "محصولات دیجیتالی مدرن" },
+      { "id": 2,  "urlSearch": "clothing", "name": "مد و پوشاک", "description": "لباس‌های طراحی شده و مد" },
+      { "id": 3,  "urlSearch": "kitchen", "name": "خانه و آشپزخانه", "description": "ابزارهای ضروری برای خانه" },
+      { "id": 4,  "urlSearch": "electric", "name": "لوازم خانگی برقی", "description": "دستگاه های کاربردی با تکنولوژی روز" },
+      { "id": 5,  "urlSearch": "sanitary", "name": "آرایشی بهداشتی", "description": "محصولات مراقبت از پوست و مو" },
+      { "id": 6,  "urlSearch": "sports", "name": "ورزش و سفر", "description": "تجهیزات ورزشی و لوازم سفر" },
+      { "id": 7,  "urlSearch": "vehicles", "name": "خودرو و موتور سیکلت", "description": "وسایل نقلیه برقی و بنزینی" },
+      { "id": 8,  "urlSearch": "child", "name": "کودک و نوزاد", "description": "لوازم کودکان و نوزادان" },
+      { "id": 9,  "urlSearch": "tools", "name": "ابزار آلات و تجهیزات", "description": "ابزارهای صنعتی و منزلی" },
+      { "id": 10, "urlSearch": "phone",  "name": "موبایل و تبلت", "description": "آخرین مدل‌های موبایل و تبلت" },
+      { "id": 11, "urlSearch": "edible",  "name": "کالای خوراکی و اساسی", "description": "کالای های اساسی و پر مصرف" },
+      { "id": 12, "urlSearch": "native",  "name": "محصولات بومی و محلی", "description": "محصولات محلی و صنایع دستی" },
+      { "id": 13, "urlSearch": "bookmarks",  "name": "علاقه مندی ها", "description": "محصولات انتخابی مورد علاقه" },
+      { "id": 14, "urlSearch": "stationery",  "name": "کتاب و لوازم تحریر", "description": "قلم، کاغذ و لوازم دفتری" },
+      { "id": 15, "urlSearch": "medicine",  "name": "تجهیزات پزشکی و سلامت", "description": "دستگاه‌های سلامت و پزشکی" },
+      { "id": 16, "urlSearch": "jewellery",  "name": "طلا و نقره", "description": "جواهرات زیبا چشم نواز" }
     ],
     "products": [        
         {
@@ -29,9 +25,9 @@
             "category_id": 1,
             "description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000257.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000257_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000257_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
             ],
             "stock": 70,
             "discount": 10,
@@ -41,16 +37,17 @@
               { "user_id": 42, "comment": "مناسب برای داخل خانه.", "rating": 4 }
             ]
         },
+
         {
                 "id": 2,
                 "name": "گوشی موبایل سامسونگ Galaxy S21",
                 "price": 20000000,
-                "category_id": 2,
+                "category_id": 10,
                 "description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
                 "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000005.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000005_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000005_2.jpg?x-oss-process=style/300"
+                  "./src/assets/images/phone/phone-6.jpg",
+                  "./src/assets/images/phone/phone-2.jpg",
+                  "./src/assets/images/phone/phone-4.jpg"
                 ],
                 "stock": 30,
                 "discount": 5,
@@ -60,6 +57,7 @@
                 { "user_id": 4, "comment": "طراحی زیبا و سریع.", "rating": 4 }
                 ]
         },
+
         {
                 "id": 3,
                 "name": "تلویزیون سامسونگ 50 اینچ",
@@ -67,9 +65,9 @@
                 "category_id": 3,
                 "description": "تلویزیون Full HD سامسونگ با کیفیت تصویر عالی و فناوری HDR.",
                 "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000006.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000006_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000006_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
                 ],
                 "stock": 20,
                 "discount": 15,
@@ -83,12 +81,12 @@
                 "id": 4,
                 "name": "دوربین دیجیتال کانن EOS 90D",
                 "price": 25000000,
-                "category_id": 4,
+                "category_id": 1,
                 "description": "دوربین حرفه‌ای کانن با حسگر APS-C و قابلیت فیلمبرداری 4K.",
                 "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000007.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000007_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000007_2.jpg?x-oss-process=style/300"
+                  "./src/assets/images/digitals/digital-2.jpg",
+                  "./src/assets/images/digitals/digital-3.webp",
+                  "./src/assets/images/digitals/digital-4.jpg"
                 ],
                 "stock": 15,
                 "discount": 20,
@@ -102,12 +100,12 @@
                 "id": 5,
                 "name": "ساعت هوشمند اپل Watch Series 6",
                 "price": 10000000,
-                "category_id": 5,
+                "category_id": 1,
                 "description": "ساعت هوشمند اپل با صفحه نمایش Retina و سنسورهای سلامتی پیشرفته.",
                 "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000008.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000008_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000008_2.jpg?x-oss-process=style/300"
+                  "./src/assets/images/digitals/digital-2.jpg",
+                  "./src/assets/images/digitals/digital-3.webp",
+                  "./src/assets/images/digitals/digital-4.jpg"
                 ],
                 "stock": 40,
                 "discount": 8,
@@ -121,12 +119,12 @@
             "id": 6,
             "name": "ساعت هوشمند سامسونگ Galaxy Watch 3",
             "price": 8000000,
-            "category_id": 5,
+            "category_id": 1,
             "description": "ساعت هوشمند سامسونگ با قابلیت ECG و صفحه نمایش Super AMOLED.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000009.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000009_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000009_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
             ],
             "stock": 25,
             "discount": 12,
@@ -140,12 +138,12 @@
             "id": 7,
             "name": "دوربین ورزشی گارمین VIRB Ultra 30",
             "price": 4000000,
-            "category_id": 4,
+            "category_id": 1,
             "description": "دوربین ورزشی 4K با قابلیت ضد آب و لرزشگیر پیشرفته.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000010.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000010_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000010_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
             ],
             "stock": 35,
             "discount": 18,
@@ -162,9 +160,9 @@
             "category_id": 6,
             "description": "خودروی اقتصادی با موتور 1.6 لیتری و طراحی اسپرت.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000011.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000011_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000011_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
             ],
             "stock": 5,
             "discount": 5,
@@ -181,9 +179,9 @@
               "category_id": 1,
               "description": "لپتاپ تجاری با پردازنده Intel Core i5، 8GB RAM و 256GB SSD.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000012.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000012_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000012_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 30,
               "discount": 5,
@@ -197,12 +195,12 @@
               "id": 10,
               "name": "گوشی موبایل شیائومی Redmi Note 10",
               "price": 4500000,
-              "category_id": 2,
+              "category_id": 10,
               "description": "گوشی شیائومی با صفحه نمایش 6.43 اینچ و دوربین 48 مگاپیکسلی.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000013.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000013_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000013_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 50,
               "discount": 12,
@@ -216,12 +214,12 @@
               "id": 11,
               "name": "تبلت اپل iPad Air 2020",
               "price": 12000000,
-              "category_id": 7,
+              "category_id": 10,
               "description": "تبلت با پردازنده A14 Bionic و صفحه نمایش 10.9 اینچ.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000014.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000014_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000014_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 40,
               "discount": 7,
@@ -235,12 +233,12 @@
               "id": 12,
               "name": "پوشاک زنانه مانتو الیزه",
               "price": 900000,
-              "category_id": 8,
+              "category_id": 2,
               "description": "مانتوی شیک و راحت با طراحی مدرن و مناسب فصل بهار.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000015.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000015_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000015_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/modes/mode-3.jpg",
+                "./src/assets/images/modes/mode-2.jpg",
+                "./src/assets/images/modes/mode-1.jpg"
               ],
               "stock": 80,
               "discount": 10,
@@ -257,9 +255,9 @@
               "category_id": 9,
               "description": "کفش ورزشی نایک با طراحی منحصر به فرد و راحتی فوق‌العاده.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000016.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000016_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000016_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/tools/tools-1.jpg",
+                "./src/assets/images/tools/tools-2.jpg",
+                "./src/assets/images/tools/tools-3.jpg"
               ],
               "stock": 60,
               "discount": 15,
@@ -276,9 +274,9 @@
               "category_id": 9,
               "description": "کفش آدیداس با تکنولوژی Boost برای راحتی بیشتر در حرکت.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000017.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000017_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000017_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/tools/tools-1.jpg",
+                "./src/assets/images/tools/tools-2.jpg",
+                "./src/assets/images/tools/tools-3.jpg"
               ],
               "stock": 50,
               "discount": 20,
@@ -292,12 +290,12 @@
               "id": 15,
               "name": "دوربین دیجیتال کانن EOS 1500D",
               "price": 8000000,
-              "category_id": 3,
+              "category_id": 1,
               "description": "دوربین دیجیتال DSLR با سنسور 24.1 مگاپیکسل و قابلیت فیلمبرداری 1080p.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000018.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000018_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000018_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 20,
               "discount": 12,
@@ -311,12 +309,12 @@
               "id": 16,
               "name": "هدفون بی‌سیم سامسونگ Galaxy Buds Pro",
               "price": 2000000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "هدفون بی‌سیم با کیفیت صدا عالی و قابلیت حذف نویز.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000019.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000019_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000019_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 50,
               "discount": 0,
@@ -330,12 +328,12 @@
               "id": 17,
               "name": "دستگاه اسپرسوساز دلونگی EC685",
               "price": 3500000,
-              "category_id": 4,
+              "category_id": 1,
               "description": "اسپرسوساز با قدرت 1350 وات و طراحی شیک.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000020.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000020_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000020_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 30,
               "discount":0,
@@ -349,12 +347,12 @@
               "id": 18,
               "name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
               "price": 12000000,
-              "category_id": 5,
+              "category_id": 3,
               "description": "ماشین ظرفشویی با 6 برنامه شستشو و ظرفیت 12 نفره.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000021.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000021_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000021_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 40,
               "discount": 0,
@@ -368,12 +366,12 @@
               "id": 19,
               "name": "یخچال فریزر ال‌جی مدل GRB300",
               "price": 9000000,
-              "category_id": 5,
+              "category_id": 3,
               "description": "یخچال فریزر با سیستم خنک‌کننده سریع و ظرفیت 350 لیتر.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000022.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000022_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000022_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 25,
               "discount": 0,
@@ -390,9 +388,9 @@
               "category_id": 10,
               "description": "تلفن بی‌سیم با قابلیت تماس واضح و طراحی زیبا.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000023.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000023_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000023_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 40,
               "discount": 0,
@@ -409,9 +407,9 @@
               "category_id": 1,
               "description": "کیف لپ‌تاپ با طراحی مدرن و جادار.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000024.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000024_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000024_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 60,
               "discount":0,
@@ -425,12 +423,12 @@
               "id": 22,
               "name": "ساعت هوشمند سامسونگ Galaxy Watch 4",
               "price": 5000000,
-              "category_id": 11,
+              "category_id": 1,
               "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچ و سنسورهای متنوع.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000025.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000025_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000025_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 25,
               "discount": 0,
@@ -444,12 +442,12 @@
               "id": 23,
               "name": "ماوس بی‌سیم ریزر مدل DeathAdder",
               "price": 1500000,
-              "category_id": 12,
+              "category_id": 1,
               "description": "ماوس گیمینگ با حسگر اپتیکال 16,000 DPI و طراحی ارگونومیک.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000026.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000026_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000026_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 80,
               "discount":0,
@@ -463,12 +461,12 @@
               "id": 24,
               "name": "کیبورد مکانیکی ای‌لاکس مدل ALC-700",
               "price": 2500000,
-              "category_id": 12,
+              "category_id": 1,
               "description": "کیبورد مکانیکی با سوئیچ‌های Cherry MX و نور پس‌زمینه RGB.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000027.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000027_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000027_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 60,
               "discount": 0,
@@ -482,12 +480,12 @@
               "id": 25,
               "name": "پاوربانک انکر مدل PowerCore 10000",
               "price": 800000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "پاوربانک با ظرفیت 10000 میلی‌آمپر و قابلیت شارژ سریع.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000028.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000028_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000028_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 100,
               "discount": 0,
@@ -501,12 +499,12 @@
               "id": 26,
               "name": "تلویزیون سامسونگ مدل 55TU8000",
               "price": 12000000,
-              "category_id": 7,
+              "category_id": 3,
               "description": "تلویزیون 55 اینچی با کیفیت تصویر 4K و سیستم عامل تایزن.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000029.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000029_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000029_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 15,
               "discount":0,
@@ -520,12 +518,12 @@
               "id": 27,
               "name": "آبمیوه‌گیری فیلیپس مدل HR1832",
               "price": 2500000,
-              "category_id": 4,
+              "category_id": 3,
               "description": "آبمیوه‌گیری با قدرت 500 وات و طراحی شیک.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000030.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000030_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000030_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 30,
               "discount":0,
@@ -539,12 +537,12 @@
               "id": 28,
               "name": "سشوار پاناسونیک مدل EH-ND12",
               "price": 1500000,
-              "category_id": 4,
+              "category_id": 1,
               "description": "سشوار با سه درجه تنظیم حرارت و طراحی جمع‌وجور.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000031.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000031_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000031_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 40,
               "discount": 0,
@@ -558,12 +556,12 @@
               "id": 29,
               "name": "گوشی موبایل شیائومی مدل Mi 11",
               "price": 15000000,
-              "category_id": 2,
+              "category_id": 10,
               "description": "گوشی هوشمند با صفحه نمایش 6.81 اینچی و پردازنده Snapdragon 888.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000032.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000032_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000032_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 20,
               "discount":0,
@@ -577,12 +575,12 @@
               "id": 30,
               "name": "کولر گازی سامسونگ مدل AR12",
               "price": 10000000,
-              "category_id": 5,
+              "category_id": 3,
               "description": "کولر گازی با ظرفیت 12000 و سیستم رطوبت‌گیر.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000033.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000033_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000033_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 50,
               "discount": 0,
@@ -596,12 +594,12 @@
               "id": 31,
               "name": "آیپد پرو 2021 اپل",
               "price": 25000000,
-              "category_id": 2,
+              "category_id": 1,
               "description": "تبلت اپل با صفحه نمایش 12.9 اینچی و پردازنده M1.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000034.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000034_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000034_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 25,
               "discount":0,
@@ -615,12 +613,12 @@
               "id": 32,
               "name": "دوربین فیلمبرداری سونی مدل FDR-AX53",
               "price": 6000000,
-              "category_id": 3,
+              "category_id": 1,
               "description": "دوربین فیلمبرداری 4K با لنز ZEISS و تثبیت‌کننده تصویر.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000035.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000035_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000035_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 10,
               "discount": 0,
@@ -634,12 +632,12 @@
               "id": 33,
               "name": "ساعت هوشمند سامسونگ مدل Galaxy Watch 4",
               "price": 4000000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "ساعت هوشمند با صفحه نمایش 1.4 اینچی و سیستم عامل Wear OS.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000036.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000036_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000036_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 20,
               "discount":0,
@@ -653,12 +651,12 @@
               "id": 34,
               "name": "گوشی موبایل سامسونگ مدل Galaxy S21",
               "price": 22000000,
-              "category_id": 2,
+              "category_id": 10,
               "description": "گوشی هوشمند با صفحه نمایش 6.2 اینچی و پردازنده Exynos 2100.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000037.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000037_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000037_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 15,
               "discount": 0,
@@ -672,12 +670,12 @@
               "id": 35,
               "name": "کتابخوان Kindle Paperwhite",
               "price": 3500000,
-              "category_id": 9,
+              "category_id": 1,
               "description": "کتابخوان الکترونیکی با صفحه نمایش 6 اینچی و نور پس‌زمینه قابل تنظیم.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000038.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000038_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000038_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 25,
               "discount": 0,
@@ -694,9 +692,9 @@
               "category_id": 1,
               "description": "کیف لپتاپ با طراحی ساده و فضای مناسب برای نگهداری وسایل.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000039.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000039_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000039_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 50,
               "discount": 0,
@@ -710,12 +708,12 @@
               "id": 37,
               "name": "خوشبوکننده هوا هوشمند شیائومی",
               "price": 850000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "خوشبوکننده هوا با قابلیت کنترل از طریق اپلیکیشن موبایل.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000040.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000040_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000040_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 35,
               "discount":0,
@@ -729,12 +727,12 @@
               "id": 38,
               "name": "ماشین ظرفشویی ال جی مدل DFB512FP",
               "price": 11000000,
-              "category_id": 5,
+              "category_id": 3,
               "description": "ماشین ظرفشویی با ظرفیت 14 نفره و 6 برنامه شستشو.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000041.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000041_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000041_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 20,
               "discount": 0,
@@ -748,12 +746,12 @@
               "id": 39,
               "name": "هدست بی‌سیم بوز مدل QuietComfort 35 II",
               "price": 5000000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "هدست بی‌سیم با قابلیت حذف نویز و عمر باتری بالا.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000042.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000042_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000042_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 30,
               "discount": 0,
@@ -770,9 +768,9 @@
               "category_id": 3,
               "description": "میکروفن یقه‌ای با قابلیت اتصال به گوشی و دوربین.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000043.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000043_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000043_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 50,
               "discount":0,
@@ -786,12 +784,12 @@
               "id": 41,
               "name": "کولر گازی گری مدل Gree GWH09AK",
               "price": 8500000,
-              "category_id": 5,
+              "category_id": 3,
               "description": "کولر گازی با ظرفیت 9000 BTU و سیستم سرمایشی و گرمایشی.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000044.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000044_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000044_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/kitchen/kitchen-1.jpg",
+                "./src/assets/images/kitchen/kitchen-2.jpg",
+                "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
               "stock": 12,
               "discount":0,
@@ -805,12 +803,12 @@
               "id": 42,
               "name": "پروژکتور ویدئویی اپسون مدل EH-TW7100",
               "price": 24000000,
-              "category_id": 7,
+              "category_id": 1,
               "description": "پروژکتور Full HD با دقت تصویر 4K و فناوری HDR.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000045.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000045_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000045_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 10,
               "discount":0,
@@ -824,12 +822,12 @@
               "id": 43,
               "name": "سشوار پاناسونیک مدل EH-ND11A",
               "price": 950000,
-              "category_id": 6,
+              "category_id": 1,
               "description": "سشوار با موتور 1000 وات و تنظیمات سرعت و حرارت مختلف.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000046.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000046_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000046_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 40,
               "discount": 0,
@@ -846,9 +844,9 @@
               "category_id": 8,
               "description": "چمدان مسافرتی با ظرفیت بالا و چرخ‌های مقاوم.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000047.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000047_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000047_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/phone/phone-6.jpg",
+                "./src/assets/images/phone/phone-2.jpg",
+                "./src/assets/images/phone/phone-4.jpg"
               ],
               "stock": 30,
               "discount": 0,
@@ -865,9 +863,9 @@
               "category_id": 9,
               "description": "پکیج کامل لوازم آرایش شامل کرم پودر، رژلب و خط چشم.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000048.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000048_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000048_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/tools/tools-1.jpg",
+                "./src/assets/images/tools/tools-2.jpg",
+                "./src/assets/images/tools/tools-3.jpg"
               ],
               "stock": 50,
               "discount": 0,
@@ -881,12 +879,12 @@
               "id": 46,
               "name": "کنسول بازی پلی‌استیشن 5",
               "price": 15000000,
-              "category_id": 4,
+              "category_id": 1,
               "description": "کنسول بازی نسل نهم با قابلیت اجرای بازی‌های 4K و سرعت بالا.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000049.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000049_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000049_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 10,
               "discount":0,
@@ -900,12 +898,12 @@
               "id": 47,
               "name": "دوربین عکاسی کانن مدل EOS 80D",
               "price": 17000000,
-              "category_id": 3,
+              "category_id": 1,
               "description": "دوربین دیجیتال با سنسور APS-C و قابلیت فیلم‌برداری 1080p.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000050.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000050_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000050_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 8,
               "discount": 0,
@@ -919,12 +917,12 @@
               "id": 48,
               "name": "سیستم صوتی سونی مدل HT-RT3",
               "price": 7000000,
-              "category_id": 5,
+              "category_id": 1,
               "description": "سیستم صوتی با 5.1 کانال و توان خروجی 600 وات.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000051.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000051_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000051_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 10,
               "discount":0,
@@ -938,12 +936,12 @@
               "id": 49,
               "name": "میکروفن یقه‌ای رود مدل Lavalier GO",
               "price": 1200000,
-              "category_id": 3,
+              "category_id": 1,
               "description": "میکروفن یقه‌ای با کیفیت صدای عالی و اتصال سریع.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000052.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000052_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000052_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 35,
               "discount": 0,
@@ -957,12 +955,12 @@
               "id": 50,
               "name": "اسکوتر برقی شیائومی مدل M365",
               "price": 5500000,
-              "category_id": 2,
+              "category_id": 1,
               "description": "اسکوتر برقی با سرعت 25 کیلومتر بر ساعت و برد 30 کیلومتر.",
               "images": [
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000053.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000053_1.jpg?x-oss-process=style/300",
-                "https://dkstatics-public.digikala.com/digikala-products/100000000000000053_2.jpg?x-oss-process=style/300"
+                "./src/assets/images/digitals/digital-2.jpg",
+                "./src/assets/images/digitals/digital-3.webp",
+                "./src/assets/images/digitals/digital-4.jpg"
               ],
               "stock": 20,
               "discount": 0,
@@ -979,9 +977,9 @@
             "category_id": 1,
             "description": "لپتاپ قدرتمند برای کار و بازی با پردازنده Intel Core i7",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "stock": 50,
             "discount": 0,
@@ -998,9 +996,9 @@
             "category_id": 2,
             "description": "ژاکت گرم و مودرن برای فصل سرما",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/modes/mode-3.jpg",
+              "./src/assets/images/modes/mode-2.jpg",
+              "./src/assets/images/modes/mode-1.jpg"
               ],
             "stock": 100,
             "discount":0,
@@ -1017,10 +1015,10 @@
             "category_id": 3,
             "description": "ماشین لباسشویی هوشمند با ظرفیت 8 کیلو",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
-              ],
+              "./src/assets/images/kitchen/kitchen-1.jpg",
+              "./src/assets/images/kitchen/kitchen-2.jpg",
+              "./src/assets/images/kitchen/kitchen-3.jpg"
+            ],
             "stock": 30,
             "discount":0,
             "ratings": 4.7,
@@ -1036,9 +1034,9 @@
             "category_id": 4,
             "description": "آموزش برنامه‌نویسی پیشرفته با مثال‌های عملی",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "stock": 200,
             "discount":0,
@@ -1055,9 +1053,9 @@
             "category_id": 5,
             "description": "شامپو با عطر طبیعی برای مراقبت از مو",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "stock": 500,
             "discount":0,
@@ -1074,9 +1072,9 @@
             "category_id": 6,
             "description": "دوچرخه سبک برای حرکت در شهر",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "stock": 40,
             "discount": 0,
@@ -1090,12 +1088,12 @@
             "id": 57,
             "name": "کنسول بازی PlayStation 5",
             "price": 300,
-            "category_id": 7,
+            "category_id": 1,
             "description": "کنسول بازی جدید با گیم‌های فوق‌العاده",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "stock": 20,
             "discount":0,
@@ -1112,9 +1110,9 @@
             "category_id": 8,
             "description": "صندوق غذایی قابل حمل برای کودکان",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "stock": 150,
             "discount": 0,
@@ -1131,9 +1129,9 @@
             "category_id": 9,
             "description": "ابزار کاربردی برای خانه و کار",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/tools/tools-1.jpg",
+              "./src/assets/images/tools/tools-2.jpg",
+              "./src/assets/images/tools/tools-3.jpg"
               ],
             "stock": 80,
             "discount":0,
@@ -1150,9 +1148,9 @@
             "category_id": 10,
             "description": "موبایل هوشمند با دوربین قدرتمند",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "stock": 60,
             "discount":0,
@@ -1170,9 +1168,9 @@
             "category_id": 1,
             "stock": 150,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "ratings": 4.5,
             "discount": "100",
@@ -1187,9 +1185,9 @@
             "category_id": 1,
             "stock": 50,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "ratings": 4.7,
             "discount": "150",
@@ -1201,12 +1199,12 @@
             "name": "تلویزیون هوشمند 4K",
             "description": "تلویزیون ۵۵ اینچ 4K هوشمند با کنترل صوتی.",
             "price": 10990000,
-            "category_id": 1,
+            "category_id": 3,
             "stock": 30,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/kitchen/kitchen-1.jpg",
+              "./src/assets/images/kitchen/kitchen-2.jpg",
+              "./src/assets/images/kitchen/kitchen-3.jpg"
               ],
             "ratings": 4.8,
             "discount": "200",
@@ -1221,9 +1219,9 @@
             "category_id": 2,
             "stock": 200,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/modes/mode-3.jpg",
+              "./src/assets/images/modes/mode-2.jpg",
+              "./src/assets/images/modes/mode-1.jpg"
               ],
             "ratings": 4.6,
             "discount": "50",
@@ -1238,9 +1236,9 @@
             "category_id": 2,
             "stock": 100,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/modes/mode-3.jpg",
+              "./src/assets/images/modes/mode-2.jpg",
+              "./src/assets/images/modes/mode-1.jpg"
               ],
             "ratings": 4.3,
             "discount": "100",
@@ -1255,9 +1253,9 @@
             "category_id": 10,
             "stock": 200,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
               ],
             "ratings": 4.7,
             "discount": "50",
@@ -1272,9 +1270,9 @@
             "category_id": 1,
             "stock": 100,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "ratings": 4.6,
             "discount": "150",
@@ -1289,9 +1287,9 @@
             "category_id": 1,
             "stock": 20,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "ratings": 4.9,
             "discount": "100",
@@ -1303,12 +1301,12 @@
             "name": "کتاب دیجیتال Kindle",
             "description": "کتاب‌خوان دیجیتال Kindle با صفحه نمایش ضد تابش.",
             "price": 1990000,
-            "category_id": 4,
+            "category_id": 1,
             "stock": 80,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/digitals/digital-2.jpg",
+              "./src/assets/images/digitals/digital-3.webp",
+              "./src/assets/images/digitals/digital-4.jpg"
               ],
             "ratings": 4.4,
             "discount": "80",
@@ -1323,10 +1321,10 @@
             "category_id": 3,
             "stock": 40,
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000004_2.jpg?x-oss-process=style/300"
-              ],
+              "./src/assets/images/kitchen/kitchen-1.jpg",
+              "./src/assets/images/kitchen/kitchen-2.jpg",
+              "./src/assets/images/kitchen/kitchen-3.jpg"
+            ],
             "ratings": 4.6,
             "discount": "100",
             "release_date": "2025-02-15",
@@ -1339,9 +1337,9 @@
             "category_id": 3,
             "description": "صندلی کامپیوتری با پشتیبانی قهرمانی و قابلیت چرخش.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000299.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000299_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000299_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/kitchen/kitchen-1.jpg",
+              "./src/assets/images/kitchen/kitchen-2.jpg",
+              "./src/assets/images/kitchen/kitchen-3.jpg"
             ],
             "stock": 60,
             "discount":0,
@@ -1358,9 +1356,9 @@
             "category_id": 5,
             "description": "کرم ضد خورشید با محافظت بالا و عطر طبیعی.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000285.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000285_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000285_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/phone/phone-6.jpg",
+              "./src/assets/images/phone/phone-2.jpg",
+              "./src/assets/images/phone/phone-4.jpg"
             ],
             "stock": 200,
             "discount":0,
@@ -1377,9 +1375,9 @@
             "category_id": 2,
             "description": "لباس ورزشی تنفس‌پذیر و راحت برای زنان.",
             "images": [
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000271.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000271_1.jpg?x-oss-process=style/300",
-              "https://dkstatics-public.digikala.com/digikala-products/100000000000000271_2.jpg?x-oss-process=style/300"
+              "./src/assets/images/modes/mode-3.jpg",
+              "./src/assets/images/modes/mode-2.jpg",
+              "./src/assets/images/modes/mode-1.jpg"
             ],
             "stock": 120,
             "discount":0,
@@ -1499,7 +1497,7 @@
               "id": 1,
               "title": "چگونه یک وبسایت فروشگاهی طراحی کنیم؟",
               "content": "راهنمای کامل طراحی وبسایت فروشگاهی...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 1,
               "created_at": "2023-01-15",
               "comments": [
@@ -1511,7 +1509,7 @@
               "id": 2,
               "title": "بهترین محصولات الکترونیکی 2023",
               "content": "لیست محصولات الکترونیکی محبوب...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 2,
               "created_at": "2023-02-20",
               "comments": [
@@ -1523,7 +1521,7 @@
               "id": 3,
               "title": "5 نکته برای خرید لباس آنلاین",
               "content": "راهنمای خرید لباس آنلاین...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 3,
               "created_at": "2023-03-10",
               "comments": [
@@ -1535,7 +1533,7 @@
               "id": 4,
               "title": "چگونه یک سبد خرید آنلاین مدیریت کنیم؟",
               "content": "راهنمای مدیریت سبد خرید...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 4,
               "created_at": "2023-08-05",
               "comments": [
@@ -1547,7 +1545,7 @@
               "id": 5,
               "title": "بهترین کتاب‌های برنامه‌نویسی 2023",
               "content": "لیست کتاب‌های برنامه‌نویسی محبوب...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 5,
               "created_at": "2023-11-12",
               "comments": [
@@ -1559,7 +1557,7 @@
               "id": 6,
               "title": "5 نکته برای تعمیر دوچرخه خود",
               "content": "راهنمای تعمیر دوچرخه...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 6,
               "created_at": "2023-04-18",
               "comments": [
@@ -1571,7 +1569,7 @@
               "id": 7,
               "title": "چگونه یک کنسول بازی خریداری کنیم؟",
               "content": "راهنمای خرید کنسول بازی...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 7,
               "created_at": "2023-07-25",
               "comments": [
@@ -1583,7 +1581,7 @@
               "id": 8,
               "title": "بهترین ابزارهای خانه برای زندگی آسان",
               "content": "لیست ابزارهای مفید...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 8,
               "created_at": "2023-09-03",
               "comments": [
@@ -1595,7 +1593,7 @@
               "id": 9,
               "title": "چگونه یک موبایل مناسب انتخاب کنیم؟",
               "content": "راهنمای خرید موبایل...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 9,
               "created_at": "2023-02-28",
               "comments": [
@@ -1607,7 +1605,7 @@
               "id": 10,
               "title": "5 نکته برای طراحی یک فضای کاری مناسب",
               "content": "راهنمای طراحی فضای کاری...",
-              "image": "./image",
+              "image": "./src/assets/images/blog-2.jpg",
               "author_id": 10,
               "created_at": "2023-06-15",
               "comments": [

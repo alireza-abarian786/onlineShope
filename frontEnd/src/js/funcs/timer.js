@@ -30,7 +30,7 @@ function updateTimer(targetDate, daysElement, hoursElement, minutesElement, seco
     hoursElement.textContent = "00";
     minutesElement.textContent = "00";
     secondsElement.textContent = "00";
-    clearInterval(intervalId); // متوقف کردن بروزرسانی
+    clearInterval(); // متوقف کردن بروزرسانی
     return;
   }
 
@@ -47,12 +47,15 @@ function updateTimer(targetDate, daysElement, hoursElement, minutesElement, seco
   secondsElement.textContent = String(seconds).padStart(2, "0");
 }
 
-// فراخوانی تابع updateTimer هر ثانیه یکبار
-setInterval(() => updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement) , 1000);
-setInterval(() => updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2) , 1000);
+let runTimer = () => {
+  // فراخوانی تابع updateTimer هر ثانیه یکبار
+  setInterval(() => updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement) , 1000);
+  setInterval(() => updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2) , 1000);
+  
+  // اجرای اولیه تابع برای نمایش زمان بدون انتظار یک ثانیه
+  updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement)
+  updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2)
 
-// اجرای اولیه تابع برای نمایش زمان بدون انتظار یک ثانیه
-updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement)
-updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2)
+}
 
-export { updateTimer };
+export { runTimer };

@@ -23,10 +23,10 @@ function isLogin(username) {
     }
 }
 
-let getSearchProduct = (arr , property , value) => {
+let getSearchProduct = async (arr , property , value) => {
     // value = value.replace(/\s/g, '').replace('', ' ')  // حذف اسپیس  
-    
-    let getProduct = arr.filter(product => product[property].includes(value))
+
+    let getProduct = await arr.filter(product => product[property].includes(value));    
     return getProduct
 }
 

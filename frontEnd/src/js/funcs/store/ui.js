@@ -22,7 +22,7 @@ export function renderCartItems(cartItems) {
                     <span class="minus-btn">-</span>
                 </div>
                 <div class=''>
-                    <div class='box-info-product d-flex flex-column align-items-center'>
+                    <div class='box-info-product h-100 d-flex flex-column align-items-center'>
                     
                         <div class='row w-100 h-100'>
                             <div class='col'>
@@ -43,7 +43,7 @@ export function renderCartItems(cartItems) {
                             </div>
                         </div>
                     </div>
-                    <div class='w-100 text-start text-white px-2 pt-2 pb-1 rounded d-flex justify-content-between'>
+                    <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
                             <span class='price ms-1'>${item.discount === 0 ? item.totalPrice ? item.totalPrice.toLocaleString() : item.price.toLocaleString() : item.totalPrice ? item.totalPrice.toLocaleString() : item.discount.toLocaleString()}</span>

@@ -134,7 +134,7 @@
   flex-direction: row-reverse;
   padding: 0 30px;
   gap: 50px;
-  background-image: url("../images/img.png");
+  background-image: url("../../images/img.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: color-burn;
@@ -220,7 +220,7 @@
   cursor: pointer;
 }
 
-.discounts-goods > div > div {
+.glide {
   width: 350px;
   height: 450px;
   background-color: #fff;
@@ -384,7 +384,7 @@
   border-top: 1.5px solid rgba(117, 117, 117, 0.2);
   border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);
   text-align: end;
-  padding: 7px 0;
+  padding: 10px 0;
   position: relative;
 }
 
@@ -401,7 +401,7 @@
 
 .box-price {
   border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);
-  padding: 5px 0;
+  padding: 7px 0;
   position: relative;
   font-size: 12px;
 }
@@ -474,9 +474,10 @@
 
 .mySwiper2 , .mySwiper3{
   width: 100%;
-  height: 30rem;
+  /* height: 100%; */
   align-self: flex-end;
   margin-bottom: 10px;
+  padding-top: 10px;
 }
 
 .mySwiper2 .swiper-slide {
@@ -491,9 +492,10 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .swiper-pagination {
   bottom: -6px !important;
+  position: relative !important;
 }

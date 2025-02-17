@@ -1,7 +1,7 @@
 import { settingSliderSwiper , settingSliderGlide} from "./funcs/sliders.js";
 import {clickButtonsProduct} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
-import { updateTimer } from "./funcs/timer.js";
+import { runTimer } from "./funcs/timer.js";
 
 let discountsGoodsSlider = document.querySelector('.discounts-goods-slider')    
 let cantainerCategoryAppliances = document.querySelector(".cantainer-category-appliances")
@@ -14,6 +14,7 @@ let cantainerArticles = document.querySelector(".box-articles")
 document.addEventListener("DOMContentLoaded" , () => {
     // getProductDiscount()   
     settingSliderSwiper()
+    runTimer()
 
     getAllProduct()
     createBlogs()
@@ -276,19 +277,19 @@ let createProductsAppliances = (element , arrAppliances) => {
                 <ul class="glide__slides h-100">
                   <li class="glide__slide">
                     <img
-                      src="./src/assets/images/kitchen/img-4.jpg"
+                      src="${box.images[0]}"
                       alt="Slide 1"
                     />
                   </li>
                   <li class="glide__slide">
                     <img
-                      src="./src/assets/images/kitchen/img-1.jpg"
+                      src="${box.images[1]}"
                       alt="Slide 2"
                     />
                   </li>
                   <li class="glide__slide">
                     <img
-                      src="./src/assets/images/kitchen/img-0.jpg"
+                      src="${box.images[2]}"
                       alt="Slide 3"
                     />
                   </li>
@@ -423,18 +424,18 @@ let createProductsAppliances = (element , arrAppliances) => {
                   ${box.discount ? 
                     `<span class="price price-before position-relative d-flex text-danger">
                       تومان
-                      <span class="ms-1">${box.price}</span>
+                      <span class="ms-1">${box.price.toLocaleString()}</span>
                     </span>
                     <span class="discount d-flex text-success">
                       تومان
-                      <span class="ms-1">${box.discount}</span>
+                      <span class="ms-1">${box.discount.toLocaleString()}</span>
                     </span>`
 
                     :
 
                     `<span class="price position-relative d-flex">
                       تومان
-                      <span class="ms-1">${box.price}</span>
+                      <span class="ms-1">${box.price.toLocaleString()}</span>
                     </span>`
                   }
                 </div>
@@ -477,7 +478,7 @@ let createBlogs = async () => {
               <div>
                 <h6>${blog.title}</h6>
                 <p>${blog.content}</p>
-                <a href="">
+                <a href="./blog.html">
                   <p class="mb-1">مطالعه مقاله</p>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                     <path
