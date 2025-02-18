@@ -1,36 +1,91 @@
 import { getLocalStorage, setLocalStorage, removeItemFromStorage } from "./storage.js";
 import {  updateCartNotification , renderCartItems} from "./ui.js";
 import { showModal } from "./ui.js";
+import { getProductDataDB , getUserDataDB , allProduct} from "./box.js";
+
+let allCart = async () => {
+    let res = await fetch('http://localhost:4000/carts')
+    let data = await res.json()
+
+    return data
+}
 
 //🛒 تابع بررسی وجود یا عدم وجود محصول در سبد خرید
-function addToCart(product) {
-    let cartItems = getLocalStorage('cart');
+async function addToCart(event) {
+    let card = await event.target.closest('.swiper-slide')    
+    let product = await getProductDataDB(card) 
+    
+    let user = await getUserDataDB();    
+
+    let res = await fetch('http://localhost:4000/carts')
+    let data = await res.json()
+
+    let newCart = {
+        id: Date.now().toString(36),
+        user_id: +user.id,
+        product_id: +product.id,
+        product_name: product.name,
+        product_image: product.images[0],
+        product_description: product.description,
+        discount: +product.discount,
+        product_price: +product.price,
+        quantity: 1,
+        totalPrice: product.discount ? +product.discount : +product.price,
+    }
 
     //🛒 بررسی آیا این محصول از قبل در سبد خرید هست یا نه
-    let exists = cartItems.some(item => item.title === product.title);
-    if (!exists) { 
-        cartItems.push(product);
-        setLocalStorage('cart', cartItems);
-        updateCartNotification(cartItems);
-        showModal(`✅🛒 ${product.title} به سبد خرید شما اضافه شد`);
+    let exists = data.some(item => item.product_id == product.id);
+    
+    if (!exists) {         
+        addCartToDB(newCart)
+        updateCartNotification(data);
+        showModal(`✅🛒 ${product.name} به سبد خرید شما اضافه شد`);
     } else {
         //💭 نمایش پیغام وجود محصول در سبد خرید
-        showModal(`✅🛒 ${product.title} از قبل در سبد خرید شما موجود است`);
+        showModal(`✅🛒 ${product.name} از قبل در سبد خرید شما موجود است`);
     }
 }
 
+let productToCart = async () => {
+    // دریافت اطلاعات تمام محصولات
+    let Products = await allProduct()
+
+    // دریافت اطلاعات تمام سبد خرید
+    let Carts = await allCart()
+
+    let shopingCartProduct = await Products.filter(product => 
+        Carts.some(cart => cart.product_id == product.id)
+    )
+
+    return shopingCartProduct;    
+}
+
+let addCartToDB = async (newCart) => {
+    let res = await fetch('http://localhost:4000/carts' , {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCart)
+    })
+    let data = await res.json()
+    console.log(data);
+    
+}
+
 //🛒 تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
-function toggleCart() {    
+async function toggleCart() {    
     const shopingCart = document.querySelector('.shoping-cart');
     const openCart = document.querySelector('.open-cart');
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     const notifCart = document.querySelector('.notif-cart');
     const alertCart = document.querySelector('.alert-cart');
 
-    shopingCart.addEventListener('click', () => {
-        let cartItems = getLocalStorage('cart');
-        renderCartItems(cartItems)
-
+    shopingCart.addEventListener('click', async () => {
+        let productDataCart = await allCart()
+        renderCartItems(productDataCart)
+        // initializeCart(shopingCart)
+        
         //🛒 نمایش دادن سبد خرید
         openCart.classList.add('is-content');
         cantainerOpenCart.style.visibility = 'visible';
@@ -40,11 +95,11 @@ function toggleCart() {
         notifCart.classList.remove('is-notif');
         
         //💭 بررسی وجود یا عدم وجود محصول در سبد خرید و نمایش محتوای داخل ان طبق بررسی انجام شده
-        if (cartItems.length > 0) {
+        if (productDataCart.length > 0) {
             alertCart.classList.add('d-none');
             alertCart.classList.remove('d-block');
-        } else {
 
+        } else {
             //💭 نمایش پیغام مناسب با عدم وجود محصول در سبد خرید
             alertCart.classList.remove('d-none');
             alertCart.classList.add('d-block');
@@ -53,31 +108,39 @@ function toggleCart() {
 }
 
 //🛒 فراخوان کننده ی توابع سبد خرید
-function initializeCart() {
-    let cartItems = getLocalStorage('cart');
+async function initializeCart(product) {    
+    // دریافت اطلاعات تمام سبد خرید
+    let Carts = await allCart()
 
     //🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
-    renderCartItems(cartItems);
+    renderCartItems(product);
 
     //🛒 فراخوانی تابع نمایش دادن نوتیف سبد خرید
-    updateCartNotification(cartItems);
+    updateCartNotification(Carts);
 }
 
 // ❌ تابع حذف محصول از سبد خرید
-function removeFromCart(event) {
+async function removeFromCart(event) {
     let itemElement = event.target.closest(".box-goods");
+    let titleCart = itemElement.querySelector('h6').textContent;
     let itemId = itemElement.dataset.id;
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     const openCart = document.querySelector('.open-cart');
     const notifCart = document.querySelector('.notif-cart');
 
-    //❌ حذف ایتم مورد نظر از لوکال استوریج
-    removeItemFromStorage('cart', Number(itemId));
-    initializeCart(); // بروز کردن دوباره لیست
+    // دریافت سبد خرید
+    let Carts = await allCart()
+
+    let productTarget = await Carts.find(cart => cart.product_name === titleCart)
+    console.log(productTarget);
+        
+
+    let res = await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})  // ارسال درخواست حذف به سرور
+
+    // initializeCart(); // بروز کردن دوباره لیست
 
     // 🛒 بررسی وضعیت سبد خرید
-    let cartItems = getLocalStorage('cart');
-    if (cartItems.length <= 0) { // در صورت خالی شدن سبد خرید، سبد را ببند
+    if (Carts.length <= 0) { // در صورت خالی شدن سبد خرید، سبد را ببند
         cantainerOpenCart.style.visibility = 'hidden';
         openCart.classList.remove('is-content');
         notifCart.classList.remove('is-notif');
@@ -86,7 +149,6 @@ function removeFromCart(event) {
     notifCart.classList.remove('is-notif');
     
     //❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
-    let titleCart = itemElement.querySelector("h6").textContent    
     document.querySelectorAll('.glide').forEach(box => {
         let titleBox = box.querySelector(".box-discription h6").textContent        
         if (titleCart === titleBox) {
@@ -100,15 +162,16 @@ function removeFromCart(event) {
 
 let price;
 //🛒 تابع زیاد کردن تعداد محصول در سبد خرید
-function increaseQuantity(event) {    
+async function increaseQuantity(event) {    
     let boxProduct = event.target.closest('.box-goods')
-    
     let titleProduct = boxProduct.querySelector('h6');
-    let priceElem = boxProduct.querySelector(".price");    
-    let getPriceLocal = getLocalStorage("cart")
-    let objProduct = getPriceLocal.find(item => item.title === titleProduct.textContent)
+    let priceElem = boxProduct.querySelector(".price");  
     let numberElement = boxProduct.querySelector('.number')
     numberElement.innerHTML = Number(numberElement.innerHTML) + 1;
+    
+    // دریافت سبد خرید
+    let getProductsDB = await allCart()
+    let objProduct = getProductsDB.find(item => item.product_name === titleProduct.textContent)
     
     if (objProduct.discount === 0) {
         price = objProduct.price * numberElement.innerHTML
@@ -116,23 +179,48 @@ function increaseQuantity(event) {
         price = objProduct.discount * numberElement.innerHTML        
     }
     
-    priceElem.textContent = price.toLocaleString()
+    editeDataProductToDB(numberElement , objProduct , price)
+    
+    numberElement.innerHTML = numberElement.innerHTML
+    priceElem.textContent = price.toLocaleString() 
+}
 
-    objProduct.quantity = numberElement.innerHTML;
-    objProduct.totalPrice = price;
+ let editeDataProductToDB = async (numberElement , objProduct , price) => {    
+    let user = await getUserDataDB();
 
-    setLocalStorage('cart' , getPriceLocal)
+    let editeCart = {
+        id: objProduct.id,
+        user_id: +user.id,
+        product_id: +objProduct.product_id,
+        product_name: objProduct.product_name,
+        product_image: objProduct.product_image,
+        product_description: objProduct.product_description,
+        discount: +objProduct.discount,
+        product_price: +objProduct.product_price,
+        quantity: +numberElement.innerHTML,
+        totalPrice: +price,
+    }
+
+    let res = await fetch(`http://localhost:4000/carts/${objProduct.id}` , {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editeCart)
+    })
 }
 
 //🛒 تابع کم کردن تعداد محصول در سبد خرید
-function decreaseQuantity(event) {
+async function decreaseQuantity(event) {
     let boxProduct = event.target.closest(".box-goods")
 
     let titleProduct = boxProduct.querySelector('h6');
-    let priceElem = boxProduct.querySelector(".price");    
-    let getPriceLocal = getLocalStorage("cart")
-    let objProduct = getPriceLocal.find(item => item.title === titleProduct.textContent)
+    let priceElem = boxProduct.querySelector(".price");  
     let numberElement = boxProduct.querySelector('.number');
+
+    // دریافت سبد خرید
+    let getProductsDB = await allCart()
+    let objProduct = getProductsDB.find(item => item.product_name === titleProduct.textContent)
     let currentValue = Number(numberElement.innerHTML);    
     
     if (currentValue > 1) {
@@ -144,12 +232,10 @@ function decreaseQuantity(event) {
         }
     }    
 
-    priceElem.textContent = price.toLocaleString()
+    editeDataProductToDB(numberElement , objProduct , price)
 
-    objProduct.quantity = numberElement.innerHTML;
-    objProduct.totalPrice = price;
-
-    setLocalStorage('cart' , getPriceLocal)
+    numberElement.innerHTML = numberElement.innerHTML
+    priceElem.textContent = price.toLocaleString() 
 }
 
 //🛒 تابع حذف همه موارد موجود از سبد خرید
@@ -204,14 +290,14 @@ function closeCart() {
     const notifCart = document.querySelector('.notif-cart');
 
     //🛒 کلیک روی کانتینر سبد خرید
-    cantainerOpenCart.addEventListener('click', (e) => {
+    cantainerOpenCart.addEventListener('click', async (e) => {
 
         //🛒 بررسی وضعیت کانتینر سبد خرید
         if (e.target.classList.contains('cantainer-open-cart')) {
             cantainerOpenCart.style.visibility = 'hidden';
             openCart.classList.remove('is-content');
 
-            let cartItems = getLocalStorage('cart');
+            let cartItems = await allCart()
             if (cartItems.length > 0) {
                 notifCart.classList.add('is-notif');
             }
@@ -219,4 +305,4 @@ function closeCart() {
     });
 }
 
-export {attachCartEventListeners ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart}
+export {attachCartEventListeners , increaseQuantity ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart , allCart , productToCart}

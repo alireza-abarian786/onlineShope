@@ -110,7 +110,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 70,
-      "discount": 10,
+      "discount": 10000,
       "ratings": 4.5,
       "reviews": [
         {
@@ -137,7 +137,7 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 30,
-      "discount": 5,
+      "discount": 500000,
       "ratings": 4.8,
       "reviews": [
         {
@@ -164,7 +164,7 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 20,
-      "discount": 15,
+      "discount": 150000,
       "ratings": 4.5,
       "reviews": [
         {
@@ -191,7 +191,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 15,
-      "discount": 20,
+      "discount": 200000,
       "ratings": 4.9,
       "reviews": [
         {
@@ -218,7 +218,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 40,
-      "discount": 8,
+      "discount": 800000,
       "ratings": 4.6,
       "reviews": [
         {
@@ -245,7 +245,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 25,
-      "discount": 12,
+      "discount": 120000,
       "ratings": 4.6,
       "reviews": [
         {
@@ -272,7 +272,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 35,
-      "discount": 18,
+      "discount": 180000,
       "ratings": 4.4,
       "reviews": [
         {
@@ -299,7 +299,7 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 5,
-      "discount": 5,
+      "discount": 500000,
       "ratings": 4.5,
       "reviews": [
         {
@@ -326,7 +326,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 30,
-      "discount": 5,
+      "discount": 500000,
       "ratings": 4.6,
       "reviews": [
         {
@@ -353,7 +353,7 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 50,
-      "discount": 12,
+      "discount": 120000,
       "ratings": 4.3,
       "reviews": [
         {
@@ -380,7 +380,7 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 40,
-      "discount": 7,
+      "discount": 700000,
       "ratings": 4.7,
       "reviews": [
         {
@@ -407,7 +407,6 @@
         "./src/assets/images/modes/mode-1.jpg"
       ],
       "stock": 80,
-      "discount": 10,
       "ratings": 4.6,
       "reviews": [
         {
@@ -434,7 +433,7 @@
         "./src/assets/images/tools/tools-3.jpg"
       ],
       "stock": 60,
-      "discount": 15,
+      "discount": 150000,
       "ratings": 4.8,
       "reviews": [
         {
@@ -461,7 +460,7 @@
         "./src/assets/images/tools/tools-3.jpg"
       ],
       "stock": 50,
-      "discount": 20,
+      "discount": 200000,
       "ratings": 4.9,
       "reviews": [
         {
@@ -488,7 +487,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 20,
-      "discount": 12,
+      "discount": 120000,
       "ratings": 4.5,
       "reviews": [
         {
@@ -515,7 +514,7 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 50,
-      "discount": 0,
+      "discount": 700000,
       "ratings": 4.8,
       "reviews": [
         {
@@ -542,7 +541,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 30,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -569,7 +567,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 40,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -596,7 +593,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 25,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -623,7 +619,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 40,
-      "discount": 0,
       "ratings": 4.3,
       "reviews": [
         {
@@ -650,7 +645,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 60,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -677,7 +671,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 25,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -704,7 +697,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 80,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -731,7 +723,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 60,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -758,7 +749,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 100,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -785,7 +775,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 15,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -812,7 +801,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 30,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -839,7 +827,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 40,
-      "discount": 0,
       "ratings": 4.4,
       "reviews": [
         {
@@ -866,7 +853,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 20,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -893,7 +879,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 50,
-      "discount": 0,
       "ratings": 4.5,
       "reviews": [
         {
@@ -920,7 +905,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 25,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -947,7 +931,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 10,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -974,7 +957,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 20,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1001,7 +983,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 15,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1028,7 +1009,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 25,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -1055,7 +1035,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 50,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -1082,7 +1061,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 35,
-      "discount": 0,
       "ratings": 4.5,
       "reviews": [
         {
@@ -1109,7 +1087,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 20,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1136,7 +1113,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 30,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -1163,7 +1139,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 50,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1190,7 +1165,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 12,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1217,7 +1191,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 10,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -1244,7 +1217,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 40,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -1271,7 +1243,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 30,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1298,7 +1269,6 @@
         "./src/assets/images/tools/tools-3.jpg"
       ],
       "stock": 50,
-      "discount": 0,
       "ratings": 4.4,
       "reviews": [
         {
@@ -1325,7 +1295,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 10,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1352,7 +1321,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 8,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -1379,7 +1347,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 10,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1406,7 +1373,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 35,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1433,7 +1399,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 20,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -1460,7 +1425,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 50,
-      "discount": 0,
       "ratings": 4.5,
       "reviews": [
         {
@@ -1487,7 +1451,6 @@
         "./src/assets/images/modes/mode-1.jpg"
       ],
       "stock": 100,
-      "discount": 0,
       "ratings": 4.3,
       "reviews": [
         {
@@ -1514,7 +1477,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 30,
-      "discount": 0,
       "ratings": 4.7,
       "reviews": [
         {
@@ -1541,7 +1503,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 200,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1568,7 +1529,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 500,
-      "discount": 0,
       "ratings": 4.2,
       "reviews": [
         {
@@ -1595,7 +1555,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 40,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -1622,7 +1581,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "stock": 20,
-      "discount": 0,
       "ratings": 4.9,
       "reviews": [
         {
@@ -1649,7 +1607,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 150,
-      "discount": 0,
       "ratings": 4.4,
       "reviews": [
         {
@@ -1676,7 +1633,6 @@
         "./src/assets/images/tools/tools-3.jpg"
       ],
       "stock": 80,
-      "discount": 0,
       "ratings": 4.5,
       "reviews": [
         {
@@ -1703,7 +1659,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 60,
-      "discount": 0,
       "ratings": 4.8,
       "reviews": [
         {
@@ -1731,7 +1686,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "ratings": 4.5,
-      "discount": "100",
       "release_date": "2024-10-01",
       "price_range": "کمتر از 1 میلیون تومان"
     },
@@ -1748,7 +1702,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "ratings": 4.7,
-      "discount": "150",
       "release_date": "2025-01-20",
       "price_range": "بین 2 تا 3 میلیون تومان"
     },
@@ -1765,7 +1718,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "ratings": 4.8,
-      "discount": "200",
       "release_date": "2024-11-01",
       "price_range": "بین 10 تا 12 میلیون تومان"
     },
@@ -1782,7 +1734,6 @@
         "./src/assets/images/modes/mode-1.jpg"
       ],
       "ratings": 4.6,
-      "discount": "50",
       "release_date": "2024-06-10",
       "price_range": "کمتر از 1 میلیون تومان"
     },
@@ -1799,7 +1750,6 @@
         "./src/assets/images/modes/mode-1.jpg"
       ],
       "ratings": 4.3,
-      "discount": "100",
       "release_date": "2025-01-15",
       "price_range": "بین 2 تا 3 میلیون تومان"
     },
@@ -1816,7 +1766,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "ratings": 4.7,
-      "discount": "50",
       "release_date": "2025-02-01",
       "price_range": "بین 28 تا 30 میلیون تومان"
     },
@@ -1833,7 +1782,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "ratings": 4.6,
-      "discount": "150",
       "release_date": "2025-03-01",
       "price_range": "بین 13 تا 15 میلیون تومان"
     },
@@ -1850,7 +1798,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "ratings": 4.9,
-      "discount": "100",
       "release_date": "2025-01-10",
       "price_range": "بین 45 تا 50 میلیون تومان"
     },
@@ -1867,7 +1814,6 @@
         "./src/assets/images/digitals/digital-4.jpg"
       ],
       "ratings": 4.4,
-      "discount": "80",
       "release_date": "2024-11-01",
       "price_range": "بین 2 تا 3 میلیون تومان"
     },
@@ -1884,7 +1830,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "ratings": 4.6,
-      "discount": "100",
       "release_date": "2025-02-15",
       "price_range": "بین 8 تا 10 میلیون تومان"
     },
@@ -1900,7 +1845,6 @@
         "./src/assets/images/kitchen/kitchen-3.jpg"
       ],
       "stock": 60,
-      "discount": 0,
       "ratings": 4.6,
       "reviews": [
         {
@@ -1927,7 +1871,6 @@
         "./src/assets/images/phone/phone-4.jpg"
       ],
       "stock": 200,
-      "discount": 0,
       "ratings": 4.3,
       "reviews": [
         {
@@ -1954,7 +1897,6 @@
         "./src/assets/images/modes/mode-1.jpg"
       ],
       "stock": 120,
-      "discount": 0,
       "ratings": 4.4,
       "reviews": [
         {
@@ -2074,6 +2016,30 @@
       "name": "دوربین ورزشی گارمین VIRB Ultra 30",
       "user_id": "1",
       "product_id": "7"
+    },
+    {
+      "id": "m7a424c5",
+      "name": "گوشی موبایل سامسونگ Galaxy S21",
+      "user_id": "1",
+      "product_id": "2"
+    },
+    {
+      "id": "m7a429b4",
+      "name": "تلویزیون سامسونگ 50 اینچ",
+      "user_id": "1",
+      "product_id": "3"
+    },
+    {
+      "id": "m7a42pls",
+      "name": "کیف پول چرم",
+      "user_id": "1",
+      "product_id": "64"
+    },
+    {
+      "id": "m7a43p50",
+      "name": "گوشی موبایل شیائومی مدل Mi 11",
+      "user_id": "1",
+      "product_id": "29"
     }
   ],
   "blogs": [
@@ -2260,64 +2226,16 @@
   ],
   "carts": [
     {
-      "id": "1",
+      "id": "m7ah44v9",
       "user_id": 1,
       "product_id": 2,
-      "quantity": 1
-    },
-    {
-      "id": "2",
-      "user_id": 1,
-      "product_id": 5,
-      "quantity": 2
-    },
-    {
-      "id": "3",
-      "user_id": 2,
-      "product_id": 3,
-      "quantity": 3
-    },
-    {
-      "id": "4",
-      "user_id": 3,
-      "product_id": 7,
-      "quantity": 1
-    },
-    {
-      "id": "5",
-      "user_id": 4,
-      "product_id": 1,
-      "quantity": 1
-    },
-    {
-      "id": "6",
-      "user_id": 5,
-      "product_id": 8,
-      "quantity": 2
-    },
-    {
-      "id": "7",
-      "user_id": 6,
-      "product_id": 9,
-      "quantity": 1
-    },
-    {
-      "id": "8",
-      "user_id": 7,
-      "product_id": 10,
-      "quantity": 3
-    },
-    {
-      "id": "9",
-      "user_id": 8,
-      "product_id": 4,
-      "quantity": 2
-    },
-    {
-      "id": "10",
-      "user_id": 9,
-      "product_id": 6,
-      "quantity": 1
+      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
+      "product_image": "./src/assets/images/phone/phone-6.jpg",
+      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
+      "discount": 500000,
+      "product_price": 20000000,
+      "quantity": 2,
+      "totalPrice": 1000000
     }
   ],
   "orders": [

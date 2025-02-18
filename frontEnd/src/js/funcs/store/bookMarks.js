@@ -67,24 +67,6 @@ let isBookMarkToDB = async (event) => {
     }
 };
 
-// ✅ تابع بررسی وضعیت بوکمارک یا سبد خرید بودن یا نبودن محصولات
-async function initializeStatusMarks(key , element , isLocal , notLocal) {    
-    // دریافت اطلاعات تمام بوکمارک‌ها
-    let Marks = await allBookmarks()
-
-    // 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید
-    document.querySelectorAll(element).forEach(btn => {
-        let card = btn.closest(".swiper-slide");  // پیدا کردن کارت محصول
-        let title = card.querySelector(".box-discription h6").textContent;  // دریافت عنوان محصول
-
-        // ⚡ محصولاتی که بوکمارک یا خرید شدن رو با اعمال تغییرات مشخص کن
-        if (key.some(item => item.name === title)) {  // اگر محصول در لیست بوکمارک‌ها یا سبد خرید باشد
-            btn.parentElement.classList.add(isLocal);  // اعمال کلاس برای نشان دادن وضعیت
-            btn.parentElement.classList.remove(notLocal);  // حذف کلاس دیگر
-        }
-    });
-}
-
 // تابع برای اضافه کردن بوکمارک به دیتابیس
 let addBookMarks = async (item) => {
     let res = await fetch('http://localhost:4000/bookmarks', {
@@ -110,4 +92,4 @@ let clickAddBookMark = () => {
 }
 
 // صادر کردن توابع برای استفاده در سایر بخش‌ها
-export {toggleBookmark , initializeStatusMarks , clickAddBookMark , allBookmarks}
+export {toggleBookmark , clickAddBookMark , allBookmarks}

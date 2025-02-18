@@ -1,8 +1,10 @@
 import { searchParams , getSearchProduct} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
-import { initializeStatusMarks , allBookmarks } from "./funcs/store/bookMarks.js";
+import { allBookmarks } from "./funcs/store/bookMarks.js";
 import {clickButtonsProduct , allProduct} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
+import { initializeStatusMarks , initializeStatusCarts} from "./funcs/store/ui.js";
+import { allCart } from "./funcs/store/cart.js";
 
 
 let boxSerchInput = document.querySelector(".box-serch input")
@@ -27,6 +29,8 @@ let category = async () => {
   let Products = await allProduct()
 
   let Marks = await allBookmarks(); // دریافت لیست بوکمارک‌ها
+
+  let Carts = await allCart()  // دریافت سبد خرید
   
   let getProductCategory = Products.filter(item => item.category_id == findCategory.id);  
 
@@ -48,9 +52,9 @@ let category = async () => {
   clickButtonsProduct();
   clickAddBookMark();
   settingSliderGlide();
-  initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');  
+  initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark'); 
+  initializeStatusCarts(Carts , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 };
-// initializeStatus('cart' , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 
 // تابعی برای جستجوی محصولات داخل دسته‌بندی
 let showSearchProducts = async (data) => {
@@ -222,22 +226,22 @@ let createBox = (arrCategory) => {
                   <div class="box-price d-flex justify-content-between w-100">
                     <div class="m-0 d-flex flex-column">
                     
-                      ${product.discount === "0" ? 
+                      ${product.discount ? 
+                        `<span class="price price-before position-relative d-flex text-danger">
+                        تومان
+                        <span class="ms-1">${product.price}</span>
+                        </span>
+                        <span class="discount d-flex text-success">
+                        تومان
+                        <span class="ms-1">${product.discount}</span>
+                        </span>`
+
+                        : 
+
                         `<span class="price position-relative d-flex">
                           تومان
                           <span class="ms-1">${product.price}</span>
                         </span> `
-  
-                      : 
-  
-                        `<span class="price price-before position-relative d-flex text-danger">
-                          تومان
-                          <span class="ms-1">${product.price}</span>
-                        </span>
-                        <span class="discount d-flex text-success">
-                          تومان
-                          <span class="ms-1">${product.discount}</span>
-                        </span>`
                       }
   
                     </div>

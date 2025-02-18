@@ -21,7 +21,7 @@ let getProductData = async (element) => {
     }
 
     return {
-        id: Date.now(),
+        id: Date.now().toString(36),
         image: card.querySelector(".box-img img").src,
         name: card.querySelector(".box-discription h6").textContent,
         description: card.querySelector(".box-discription p").textContent,
@@ -70,30 +70,33 @@ let getProductDataDB = async (card) => {
 }
 
 // 🛒 تابع تغییر دکمه "افزودن به سبد خرید" با کلیک روی ان
-function toggleAddCart(event) {    
-    let addCart = getLocalStorage('cart');    
-    let product = getProductData(event.target , addCart);    
+async function toggleAddCart(event) {    
+    // let addCart = getLocalStorage('cart');    
+    // let product = getProductData(event.target);
+    let card = event.target.closest('.swiper-slide')    
+    let product = await getProductDataDB(card)    
+
+    let res = await fetch('http://localhost:4000/carts')
+    let data = await res.json()
     
     // 🛒 بررسی وجود یا عدم وجود محصول در سبد خرید
-    let index = addCart.findIndex(item => item.title === product.title);
-    let card = event.target.closest('.swiper-slide')    
+    let index = data.findIndex(item => item.id == product.id);    
     
-    if (index === -1) {         
+    
+    if (index === -1) {
+                 
         // 🛒 افزودن محصول به سبد خرید
         card.querySelector('.add-cart').classList.add("text-bg-primary");
         card.querySelector('.add-cart p').textContent = "به سبد اضافه شد"
     } 
-
-    // افزودن به لوکال
-    setLocalStorage('cart', addCart);
 }
 
 // تابع افزودن محصول به سبد خرید
 function handleAddToCart(event) {    
-    let product = getProductData(event.target);
+    // let product = getProductData(event.target);
     
+    addToCart(event); // فراخوانی تابع ساخت و افزودن به سبد خرید
     toggleAddCart(event) // "فراخوانی تغییر دکمه "افزودن به سبد خرید
-    addToCart(product); // فراخوانی تابع ساخت و افزودن به سبد خرید
 }
 
 
@@ -145,4 +148,4 @@ let clickButtonsProduct = async () => {
     });
 }
 
-export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson , clickButtonsProduct , allProduct}
+export {getProductData , handleAddToCart , toggleAddCart , getIDProductMarkedToJson , clickButtonsProduct , allProduct , getProductDataDB , getUserDataDB}

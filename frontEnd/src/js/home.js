@@ -12,15 +12,11 @@ let cantainerArticles = document.querySelector(".box-articles")
 
 
 document.addEventListener("DOMContentLoaded" , () => {
-    // getProductDiscount()   
     settingSliderSwiper()
     runTimer()
 
     getAllProduct()
     createBlogs()
-
-
-
   }) 
   // getAllProduct().then(product => {
   //     let arrAppliances = product.filter(item => item.category_id === 3 )
@@ -254,11 +250,11 @@ let getAllProduct = async () => {
     let result = await res.json()
     
 
-    let arrDiscount = result.filter(product => product.discount !== 0) 
+    let arrDiscount = result.filter(product => product.discount) 
     let arrAppliances = result.filter(item => item.category_id === 3 )
     let arrPhones = result.filter(item => item.category_id === 10 )
     let arrTools = result.filter(item => item.category_id === 9 )
-    let arrModes = result.filter(item => item.category_id === 2 )
+    let arrModes = result.filter(item => item.category_id === 2 )    
 
     createProductsAppliances(discountsGoodsSlider , arrDiscount)
     createProductsAppliances(cantainerCategoryAppliances , arrAppliances)
