@@ -173,9 +173,11 @@ async function increaseQuantity(event) {
     let getProductsDB = await allCart()
     let objProduct = getProductsDB.find(item => item.product_name === titleProduct.textContent)
     
-    if (objProduct.discount === 0) {
-        price = objProduct.price * numberElement.innerHTML
+    if (!objProduct.discount) {
+        console.log(1111111)
+        price = objProduct.product_price * numberElement.innerHTML
     } else {
+        console.log(2222222)
         price = objProduct.discount * numberElement.innerHTML        
     }
     

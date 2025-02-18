@@ -230,7 +230,7 @@
   flex-direction: column;
   align-self: center;
 }
-.discounts-goods > div > div:hover {
+.swiper-slide:hover {
   transform: translateY(-10px);
   transition: all 0.4s ease 0.1ms;
   cursor: pointer;
@@ -252,8 +252,7 @@
   justify-content: space-between;
 }
 
-.cantainer-discounts-goods > div > div:first-child,
-.discounts-goods-slider > div > div:first-child {
+.box-img {
   background-color: #fff;
   width: 100%;
   /* height: 50%; */
@@ -282,8 +281,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
 }
 
-.cantainer-discounts-goods > div > div:first-child > div,
-.discounts-goods-slider > div > div:first-child > div {
+.not-mark , .is-mark {
   position: absolute;
   top: 5%;
   left: 4%;
@@ -298,16 +296,14 @@
   cursor: pointer;
 }
 
-.cantainer-discounts-goods > div > div:first-child > div > svg,
-.discounts-goods-slider > div > div:first-child > div > svg {
+.not-mark svg , .is-mark svg {
   transform: rotate(-45deg);
   width: 100%;
   height: 100%;
   padding: 5px;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(2),
-.discounts-goods-slider > div > div:nth-child(2) {
+.box-img + div {
   width: 100%;
   display: flex;
   align-items: center;
@@ -334,8 +330,7 @@
   color: #747373;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(2) > div:last-child,
-.discounts-goods-slider > div > div:nth-child(2) > div:last-child {
+.next-img-box{
   width: 35%;
   border: 1.5px solid rgba(117, 117, 117, 0.2);
   border-radius: 50px;
@@ -378,8 +373,7 @@
   cursor: pointer;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(3),
-.discounts-goods-slider > div > div:nth-child(3) {
+.box-discription {
   width: 100%;
   border-top: 1.5px solid rgba(117, 117, 117, 0.2);
   border-bottom: 1.5px solid rgba(117, 117, 117, 0.2);

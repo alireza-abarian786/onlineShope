@@ -7,7 +7,7 @@ import { initializeStatusMarks , initializeStatusCarts} from "./funcs/store/ui.j
 import { allCart } from "./funcs/store/cart.js";
 
 
-let boxSerchInput = document.querySelector(".box-serch input")
+let boxSerchInput = document.querySelector(".box-search-category")
 
 // رویداد بارگذاری صفحه
 window.addEventListener("DOMContentLoaded" , () => {
@@ -70,11 +70,11 @@ let showSearchProducts = async (data) => {
 // تابعی برای ایجاد باکس‌های محصولات داخل صفحه
 let createBox = (arrCategory) => {  
 
-  document.querySelector('.cantainer-category').innerHTML = '' // پاک کردن محتوای قبلی
+  document.querySelector('.cantainer-category__footer').innerHTML = '' // پاک کردن محتوای قبلی
 
   if (arrCategory.length) { // اگر محصولی وجود داشت، نمایش بده
     arrCategory.forEach(product => {                         
-      document.querySelector('.cantainer-category').insertAdjacentHTML('beforeend', `
+      document.querySelector('.cantainer-category__footer').insertAdjacentHTML('beforeend', `
                 <div class="swiper-slide glide">
                   <div class="box-img" class="glide__track" data-glide-el="track">
                     <ul class="glide__slides h-100">
@@ -264,7 +264,7 @@ let createBox = (arrCategory) => {
     });
 
   } else { // اگر محصولی پیدا نشد، پیام خطا نمایش بده
-    document.querySelector('.cantainer-category').insertAdjacentHTML('beforeend', `
+    document.querySelector('.cantainer-category__footer').insertAdjacentHTML('beforeend', `
       <div class='alert alert-danger w-100 text-center'>کالای مورد نضر شما یافت نشد لطفا نام کالا را دقیق تر وارد کنید</div>
     `)
   }

@@ -48,7 +48,7 @@ export function renderCartItems(cartItems) {
                     <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1'>${item.product_discount === 0 ? item.totalPrice ? item.totalPrice.toLocaleString() : item.product_price.toLocaleString() : item.totalPrice ? item.totalPrice.toLocaleString() : item.discount.toLocaleString()}</span>
+                            <span class='price ms-1'>${item.product_discount === 0 ? item.totalPrice ? item.totalPrice.toLocaleString() : item.product_price.toLocaleString() : item.totalPrice ? item.totalPrice.toLocaleString() : item.discount}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
