@@ -28,7 +28,7 @@ async function addToCart(event) {
         product_image: product.images[0],
         product_description: product.description,
         discount: +product.discount,
-        product_price: +product.price,
+        price: +product.price,
         quantity: 1,
         totalPrice: product.discount ? +product.discount : +product.price,
     }
@@ -84,7 +84,8 @@ async function toggleCart() {
     shopingCart.addEventListener('click', async () => {
         let productDataCart = await allCart()
         renderCartItems(productDataCart)
-        // initializeCart(shopingCart)
+        console.log(productDataCart);
+        
         
         //🛒 نمایش دادن سبد خرید
         openCart.classList.add('is-content');
@@ -108,12 +109,12 @@ async function toggleCart() {
 }
 
 //🛒 فراخوان کننده ی توابع سبد خرید
-async function initializeCart(product) {    
+async function initializeCart() {    
     // دریافت اطلاعات تمام سبد خرید
     let Carts = await allCart()
 
     //🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
-    renderCartItems(product);
+    renderCartItems(Carts);
 
     //🛒 فراخوانی تابع نمایش دادن نوتیف سبد خرید
     updateCartNotification(Carts);
@@ -136,8 +137,6 @@ async function removeFromCart(event) {
         
 
     let res = await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})  // ارسال درخواست حذف به سرور
-
-    // initializeCart(); // بروز کردن دوباره لیست
 
     // 🛒 بررسی وضعیت سبد خرید
     if (Carts.length <= 0) { // در صورت خالی شدن سبد خرید، سبد را ببند
@@ -173,18 +172,16 @@ async function increaseQuantity(event) {
     let getProductsDB = await allCart()
     let objProduct = getProductsDB.find(item => item.product_name === titleProduct.textContent)
     
-    if (!objProduct.discount) {
-        console.log(1111111)
-        price = objProduct.product_price * numberElement.innerHTML
+    if (!objProduct.discount) {        
+        price = objProduct.price * numberElement.innerHTML
     } else {
-        console.log(2222222)
         price = objProduct.discount * numberElement.innerHTML        
     }
     
     editeDataProductToDB(numberElement , objProduct , price)
     
     numberElement.innerHTML = numberElement.innerHTML
-    priceElem.textContent = price.toLocaleString() 
+    priceElem.textContent = price.toLocaleString()
 }
 
  let editeDataProductToDB = async (numberElement , objProduct , price) => {    
@@ -198,7 +195,7 @@ async function increaseQuantity(event) {
         product_image: objProduct.product_image,
         product_description: objProduct.product_description,
         discount: +objProduct.discount,
-        product_price: +objProduct.product_price,
+        price: +objProduct.price,
         quantity: +numberElement.innerHTML,
         totalPrice: +price,
     }
@@ -241,8 +238,7 @@ async function decreaseQuantity(event) {
 }
 
 //🛒 تابع حذف همه موارد موجود از سبد خرید
-function removeAllFromCart(event) {
-    
+async function removeAllFromCart(event) {
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     const openCart = document.querySelector('.open-cart');
     const notifCart = document.querySelector('.notif-cart');
@@ -250,9 +246,9 @@ function removeAllFromCart(event) {
     cantainerOpenCart.style.visibility = 'hidden';
     openCart.classList.remove('is-content');
     notifCart.classList.remove('is-notif');
-    
-    localStorage.removeItem("cart")
-    console.log(10);
+
+    clearCart();
+
     document.querySelectorAll('.glide').forEach(box => {    
         // ✅ تغییر محتوای دکمه
         box.querySelector('.add-cart').classList.remove("text-bg-primary");
@@ -260,6 +256,32 @@ function removeAllFromCart(event) {
     })
     showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
 }
+
+async function clearCart() {
+    try {
+        // دریافت تمام آیتم‌های سبد خرید
+        const response = await fetch("http://localhost:4000/carts");
+        const cartItems = await response.json();
+
+        // اگر سبد خرید خالی است، نیازی به حذف نیست
+        if (cartItems.length === 0) {
+            console.log("🛒 سبد خرید از قبل خالی است!");
+            return;
+        }
+
+        // حذف تک‌تک آیتم‌ها
+        await Promise.all(
+            cartItems.map(async (item) => 
+                await fetch(`http://localhost:4000/carts/${item.id}`, { method: "DELETE" })
+            )
+        );
+
+        console.log("✅ سبد خرید با موفقیت خالی شد!");
+    } catch (error) {
+        console.error("❌ خطا در پاک کردن سبد خرید:", error);
+    }
+}
+
 
 // 🛒 تابع ست کردن رویداد کلیک روی دکمه های موجود در سبد خرید
 function attachCartEventListeners() {

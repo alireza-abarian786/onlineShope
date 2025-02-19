@@ -2052,6 +2052,18 @@
       "name": "کرم ضد خورشید SPF 50",
       "user_id": "1",
       "product_id": "72"
+    },
+    {
+      "id": "m7bmi1n2",
+      "name": "پکیج لوازم آرایش دکتر راشل",
+      "user_id": "1",
+      "product_id": "45"
+    },
+    {
+      "id": "m7bpawsj",
+      "name": "تبلت اپل iPad Air 2020",
+      "user_id": "1",
+      "product_id": "11"
     }
   ],
   "blogs": [
@@ -2238,52 +2250,40 @@
   ],
   "carts": [
     {
-      "id": "m7ah44v9",
+      "id": "m7btftlv",
       "user_id": 1,
-      "product_id": 2,
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
+      "product_id": 20,
+      "product_name": "تلفن بی‌سیم پاناسونیک KX-TGC220",
       "product_image": "./src/assets/images/phone/phone-6.jpg",
-      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
-      "discount": 500000,
-      "product_price": 20000000,
-      "quantity": 5,
-      "totalPrice": 2500000
-    },
-    {
-      "id": "m7aqjxf5",
-      "user_id": 1,
-      "product_id": 12,
-      "product_name": "پوشاک زنانه مانتو الیزه",
-      "product_image": "./src/assets/images/modes/mode-3.jpg",
-      "product_description": "مانتوی شیک و راحت با طراحی مدرن و مناسب فصل بهار.",
+      "product_description": "تلفن بی‌سیم با قابلیت تماس واضح و طراحی زیبا.",
       "discount": 0,
-      "product_price": 900000,
-      "quantity": 8,
-      "totalPrice": 7200000
-    },
-    {
-      "id": "m7aqsw82",
-      "user_id": 1,
-      "product_id": 54,
-      "product_name": "کتاب برنامه‌نویسی پیشرفته",
-      "product_image": "./src/assets/images/phone/phone-6.jpg",
-      "product_description": "آموزش برنامه‌نویسی پیشرفته با مثال‌های عملی",
-      "discount": 0,
-      "product_price": 30,
+      "price": 1500000,
       "quantity": 2,
-      "totalPrice": 60
+      "totalPrice": 3000000
     },
     {
-      "id": "m7aqtj4b",
+      "id": "m7btkip6",
       "user_id": 1,
-      "product_id": 55,
-      "product_name": "شامپو مرطوب‌کننده L'Oreal",
-      "product_image": "./src/assets/images/phone/phone-6.jpg",
-      "product_description": "شامپو با عطر طبیعی برای مراقبت از مو",
-      "discount": 0,
-      "product_price": 10,
+      "product_id": 3,
+      "product_name": "تلویزیون سامسونگ 50 اینچ",
+      "product_image": "./src/assets/images/kitchen/kitchen-1.jpg",
+      "product_description": "تلویزیون Full HD سامسونگ با کیفیت تصویر عالی و فناوری HDR.",
+      "discount": 150000,
+      "price": 8000000,
       "quantity": 2,
-      "totalPrice": 20
+      "totalPrice": 300000
+    },
+    {
+      "id": "m7btkubz",
+      "user_id": 1,
+      "product_id": 45,
+      "product_name": "پکیج لوازم آرایش دکتر راشل",
+      "product_image": "./src/assets/images/tools/tools-1.jpg",
+      "product_description": "پکیج کامل لوازم آرایش شامل کرم پودر، رژلب و خط چشم.",
+      "discount": 0,
+      "price": 1200000,
+      "quantity": 2,
+      "totalPrice": 2400000
     }
   ],
   "orders": [

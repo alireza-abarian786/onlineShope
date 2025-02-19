@@ -3,7 +3,7 @@ function settingSliderGlide() {
   // گرفتن تمام باکس‌های اسلایدر و مشخص کردن ویژگی های آن
   document.querySelectorAll('.glide').forEach((slider, index) => {
     new Glide(slider, {
-        type: 'carousel',
+        type: 'slider',
         perView: 1,
         autoplay: 7000,
         animationDuration: 800,

@@ -9,14 +9,14 @@ import { allCart } from "./funcs/store/cart.js";
 
 let boxSerchInput = document.querySelector(".box-search-category")
 
-// رویداد بارگذاری صفحه
+//! رویداد بارگذاری صفحه
 window.addEventListener("DOMContentLoaded" , () => {
   category()
   showSearchProducts()
 })
 
 
-//* تابعی برای دریافت دسته‌بندی و نمایش محصولات مرتبط
+//! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => {
   let url = searchParams('cat');  // دریافت مقدار دسته‌بندی از URL    
   let res = await fetch(`http://localhost:4000/categories`);
@@ -56,7 +56,7 @@ let category = async () => {
   initializeStatusCarts(Carts , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 };
 
-// تابعی برای جستجوی محصولات داخل دسته‌بندی
+//! category تابعی برای جستجوی محصولات داخل 
 let showSearchProducts = async (data) => {
   boxSerchInput.addEventListener('input', (e) => {
     if (Array.isArray(data)) {
@@ -67,7 +67,7 @@ let showSearchProducts = async (data) => {
 }
 
 
-// تابعی برای ایجاد باکس‌های محصولات داخل صفحه
+//! category تابعی برای ایجاد باکس‌های محصولات داخل صفحه
 let createBox = (arrCategory) => {  
 
   document.querySelector('.cantainer-category__footer').innerHTML = '' // پاک کردن محتوای قبلی

@@ -14,17 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     let Marks = await allBookmarks()
 
     // دریافت سبد خرید
-    let Carts = await allCart()    
-    
-    // دریافت اطلاعات محصولات سبد خرید
-    let shopingCart = await productToCart()    
-    
+    let Carts = await allCart()       
 
     settingSliderGlide()
-    initializeCart(shopingCart)  // 🛒 فراخوانی توابع محتوای سبد خرید
-    initializeNavigation();     // ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
-    toggleCart();              // 🛒 فراخوانی تابع باز کردن سبد خرید
-    closeCart();              // ❌ فراخوانی تابع بستن سبد خرید
+    initializeCart()             //* 🛒 فراخوانی توابع محتوای سبد خرید
+    initializeNavigation();     //* ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
+    toggleCart();              //* 🛒 فراخوانی تابع باز کردن سبد خرید
+    closeCart();              //*❌ فراخوانی تابع بستن سبد خرید
 
     initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');       // 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
     initializeStatusCarts(Carts , '.add-cart > p' , 'text-bg-primary');       // 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
@@ -51,15 +47,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 //         .catch(error => console.error("خطا در حذف بوکمارک ها :", error));
 //     }
 // });
-
-//🛒 ست کردن رویداد کلیک روی دکمه افزودن محصول به سبد خرید
-
-document.querySelectorAll('.add-cart').forEach(button => {
-    button.addEventListener('click', handleAddToCart);
-});
-
-//🛒 ست کردن رویداد کلیک روی دکمه بوکمارک شدن محصول
-document.querySelectorAll('.icon-bookmark').forEach(icon => {    
-    icon.addEventListener('click', toggleBookmark);
-});
-
