@@ -106,7 +106,7 @@ let getIDProductMarkedToJson = async (element) => {
     let user = await getUserDataDB();
     return {
         id: Date.now().toString(36),
-        name: card.querySelector(".box-discription h6").textContent,
+        product_name: card.querySelector(".box-discription h6").textContent,
         user_id: user.id,
         product_id: product.id,
     };

@@ -229,6 +229,7 @@
   display: flex;
   flex-direction: column;
   align-self: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 .swiper-slide:hover {
   transform: translateY(-10px);
@@ -255,7 +256,7 @@
 .box-img {
   background-color: #fff;
   width: 100%;
-  /* height: 50%; */
+  height: 60%;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -311,26 +312,23 @@
   padding: 10px;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child,
-.discounts-goods-slider > div > div:nth-child(2) > div:first-child {
+.box-img + div > div:first-child {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
 }
-.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child > svg,
-.discounts-goods-slider > div > div:nth-child(2) > div:first-child > svg {
+.box-img + div > div:first-child > svg {
   width: 20px;
   margin-top: 5px;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(2) > div:first-child > a,
-.discounts-goods-slider > div > div:nth-child(2) > div:first-child > a {
+.box-img + div > div:first-child > a {
   font-size: 14px;
   color: #747373;
 }
 
-.next-img-box{
+.next-img-box {
   width: 35%;
   border: 1.5px solid rgba(117, 117, 117, 0.2);
   border-radius: 50px;
@@ -339,8 +337,7 @@
   height: 30px;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(2) > div:last-child > div,
-.discounts-goods-slider > div > div:nth-child(2) > div:last-child > div {
+.box-img + div > div:last-child > div {
   width: 50%;
   height: inherit;
   display: flex;
@@ -348,27 +345,12 @@
   justify-content: center;
   color: #2563eb;
 }
-.cantainer-discounts-goods
-  > div
-  > div:nth-child(2)
-  > div:last-child
-  > div:first-child,
-.discounts-goods-slider
-  > div
-  > div:nth-child(2)
-  > div:last-child
-  > div:first-child {
+.box-img + div > div:last-child > div:first-child {
   border-right: 1.5px solid rgba(117, 117, 117, 0.2);
   color: rgba(117, 117, 117, 0.2);
 }
 
-.cantainer-discounts-goods
-  > div
-  > div:nth-child(2)
-  > div:last-child
-  > div
-  > svg,
-.discounts-goods-slider > div > div:nth-child(2) > div:last-child > div > svg {
+.box-img + div > div:last-child > div > svg {
   width: 50%;
   cursor: pointer;
 }
@@ -382,13 +364,11 @@
   position: relative;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(3) > h6,
-.discounts-goods-slider > div > div:nth-child(3) > h6 {
+.box-discription > h6 {
   font-size: 14px;
 }
 
-.cantainer-discounts-goods > div > div:nth-child(3) > p,
-.discounts-goods-slider > div > div:nth-child(3) > p {
+.box-discription > p {
   font-size: 10px;
   color: #747373;
 }
@@ -420,7 +400,7 @@
   transition: all 0.3s ease 0.01ms;
   border-radius: 10px;
   width: 70%;
-  height: 10%;
+  height: 12%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   margin: 10px;
   margin-bottom: 5px;
@@ -430,22 +410,30 @@
   letter-spacing: 1px;
   cursor: pointer;
   align-self: baseline;
+  overflow: hidden;
 }
 
 .add-cart:hover {
   background-color: #2563eb;
-  color: #fff;
+}
 
+.add-cart:hover > p ,
+.add-cart:hover > svg {
+  color: #fff !important;
+}
+.add-cart-active {
+  color: #fff !important;
 }
 
 .add-cart > svg {
-  width: 40%;
+  width: 35%;
   height: 100%;
   padding: 7px;
+  color: #747373;
 }
 
 .add-cart > p {
-  /* color: #747373; */
+  color: #747373;
   width: 80%;
   height: 100%;
   display: flex;
@@ -468,10 +456,10 @@
 
 .mySwiper2 , .mySwiper3{
   width: 100%;
-  /* height: 100%; */
   align-self: flex-end;
   margin-bottom: 10px;
   padding-top: 10px;
+  padding: 20px 10px 0 10px;
 }
 
 .mySwiper2 .swiper-slide {

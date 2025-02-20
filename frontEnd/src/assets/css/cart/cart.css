@@ -96,7 +96,6 @@
     justify-content: space-between;
     text-align: end;
     padding: 10px;
-    /* gap: 20px; */
     flex-direction: column-reverse;
     position: relative;
 
@@ -126,8 +125,9 @@
 
 .box-goods h6 {
     font-size: 12px;
-    /* letter-spacing: 1px; */
     padding: 7px;
+    word-break: break-all;
+    white-space: nowrap;
 }
 .box-goods h6 + div{
     background-color: #5d95e7;
@@ -140,11 +140,6 @@
     text-align: justify;
     direction: rtl;
 }
-
-
-/* .box-info-product {
-    height: 100px;
-} */
 
 .box-info-product img {
     width: 35%;
