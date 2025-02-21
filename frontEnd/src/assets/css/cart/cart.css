@@ -127,7 +127,7 @@
     font-size: 12px;
     padding: 7px;
     word-break: break-all;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 .box-goods h6 + div{
     background-color: #5d95e7;

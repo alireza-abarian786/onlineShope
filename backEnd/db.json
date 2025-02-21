@@ -2006,60 +2006,6 @@
   ],
   "bookmarks": [
     {
-      "id": "m79b32bz",
-      "name": "تلویزیون سامسونگ مدل 55TU8000",
-      "user_id": "1",
-      "product_id": "26"
-    },
-    {
-      "id": "m79d69d7",
-      "name": "دوربین ورزشی گارمین VIRB Ultra 30",
-      "user_id": "1",
-      "product_id": "7"
-    },
-    {
-      "id": "m7a424c5",
-      "name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "1",
-      "product_id": "2"
-    },
-    {
-      "id": "m7a42pls",
-      "name": "کیف پول چرم",
-      "user_id": "1",
-      "product_id": "64"
-    },
-    {
-      "id": "m7a43p50",
-      "name": "گوشی موبایل شیائومی مدل Mi 11",
-      "user_id": "1",
-      "product_id": "29"
-    },
-    {
-      "id": "m7aqd2u6",
-      "name": "پوشاک زنانه مانتو الیزه",
-      "user_id": "1",
-      "product_id": "12"
-    },
-    {
-      "id": "m7aqtu5e",
-      "name": "کرم ضد خورشید SPF 50",
-      "user_id": "1",
-      "product_id": "72"
-    },
-    {
-      "id": "m7bmi1n2",
-      "name": "پکیج لوازم آرایش دکتر راشل",
-      "user_id": "1",
-      "product_id": "45"
-    },
-    {
-      "id": "m7bpawsj",
-      "name": "تبلت اپل iPad Air 2020",
-      "user_id": "1",
-      "product_id": "11"
-    },
-    {
       "id": "m7cx2ldx",
       "product_name": "بلندگو بلوتوثی",
       "user_id": "1",
@@ -2070,6 +2016,30 @@
       "product_name": "دوربین دیجیتال کانن EOS 90D",
       "user_id": "1",
       "product_id": "4"
+    },
+    {
+      "id": "m7direhv",
+      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
+      "user_id": "1",
+      "product_id": "2"
+    },
+    {
+      "id": "m7dirgsn",
+      "product_name": "تلویزیون سامسونگ 50 اینچ",
+      "user_id": "1",
+      "product_id": "3"
+    },
+    {
+      "id": "m7eg1dv2",
+      "product_name": "گوشی موبایل شیائومی Redmi Note 10",
+      "user_id": "1",
+      "product_id": "10"
+    },
+    {
+      "id": "m7erigxf",
+      "product_name": "تبلت اپل iPad Air 2020",
+      "user_id": "1",
+      "product_id": "11"
     }
   ],
   "blogs": [
@@ -2256,40 +2226,16 @@
   ],
   "carts": [
     {
-      "id": "m7cys9wv",
+      "id": "m7f1oisd",
       "user_id": 1,
-      "product_id": 1,
-      "product_name": "بلندگو بلوتوثی",
-      "product_image": "./src/assets/images/digitals/digital-2.jpg",
-      "product_description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
-      "discount": 10000,
-      "price": 1500000,
-      "quantity": 4,
-      "totalPrice": 40000
-    },
-    {
-      "id": "m7cyuetx",
-      "user_id": 1,
-      "product_id": 2,
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "product_image": "./src/assets/images/phone/phone-6.jpg",
-      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
-      "discount": 500000,
-      "price": 20000000,
-      "quantity": 3,
-      "totalPrice": 1500000
-    },
-    {
-      "id": "m7czk3hz",
-      "user_id": 1,
-      "product_id": 19,
-      "product_name": "یخچال فریزر ال‌جی مدل GRB300",
+      "product_id": 3,
+      "product_name": "تلویزیون سامسونگ 50 اینچ",
       "product_image": "./src/assets/images/kitchen/kitchen-1.jpg",
-      "product_description": "یخچال فریزر با سیستم خنک‌کننده سریع و ظرفیت 350 لیتر.",
-      "discount": 0,
-      "price": 9000000,
-      "quantity": 2,
-      "totalPrice": 18000000
+      "product_description": "تلویزیون Full HD سامسونگ با کیفیت تصویر عالی و فناوری HDR.",
+      "discount": 150000,
+      "price": 8000000,
+      "quantity": 1,
+      "totalPrice": 150000
     }
   ],
   "orders": [

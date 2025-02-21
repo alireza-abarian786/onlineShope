@@ -94,6 +94,24 @@ function settingSliderSwiper() {
     },
   });
 
+  let swiper5 = new Swiper('.mySwiper5', {
+    // slidesPerView: 1,
+    // spaceBetween: 50,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+    },
+    // pagination: {
+    //   el: ".swiper-pagination",
+    //   clickable: true,
+    // },
+    // loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+    }
+  });
+
   // تابع توقف و شروع autoplay هنگام حرکت موس روی اسلایدر
   function mouseMoveOnSliders(elem, variable) {
     let slider = document.querySelector(elem);
@@ -138,6 +156,7 @@ function settingSliderSwiper() {
   mouseMoveOnSliders(".mySwiper2", swiper2);
   mouseMoveOnSliders(".mySwiper4", swiper4);
   mouseMoveOnSlidersBoxs(".mySwiper3", swiper3);
+  mouseMoveOnSlidersBoxs(".mySwiper5", swiper5);
 }
 
 // خروجی توابع

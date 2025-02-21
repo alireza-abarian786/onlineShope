@@ -1,95 +1,78 @@
 // وارد کردن توابع از ماژول‌های دیگر
-import { getIDProductMarkedToJson , allProduct} from "./box.js";
+import { getIDProductMarkedToJson , allProduct , titleProduct} from "./box.js";
 import { showModal } from "./ui.js";
 
-// تابعی برای دریافت تمام بوکمارک‌ها از سرور
+//! تابعی برای دریافت تمام بوکمارک‌ها از سرور
 let allBookmarks = async () => {
     let resMark = await fetch('http://localhost:4000/bookmarks');
     let dataMark = await resMark.json();
     return dataMark
 }
 
-// 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
+//! 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
 async function toggleBookmark(event) {
-    let card = await event.target.closest('.swiper-slide')  // پیدا کردن کارت محصول از روی رویداد کلیک
-    let title = await card.querySelector(".box-discription h6").textContent;  // گرفتن عنوان محصول
+    let title = await titleProduct(event.target)                                                   //* دریافت عنوان محصول
+    let isBookMark = await isBookMarkToDB(event)                                                  //* 🔖 بررسی وجود یا عدم وجود محصول در بوکمارک‌ها
+    let newProdect = await getIDProductMarkedToJson(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
+    let idProduct = await getIDProduct(event)                                                   //* گرفتن اطلاعات محصول بر اساس رویداد
+    let getMark = await isBookMark[0].find(mark => mark.name === title)                        //* پیدا کردن بوکمارک بر اساس عنوان محصول
 
-    // 🔖 بررسی وجود یا عدم وجود محصول در بوکمارک‌ها
-    let isBookMark = await isBookMarkToDB(event) 
-    let newProdect = await getIDProductMarkedToJson(event.target)  // دریافت داده‌های محصولی که بوکمارک شده
+    if (isBookMark[1] === -1) {                                                                        //* اگر محصول در بوکمارک‌ها وجود ندارد
+        addBookMarks(newProdect)                                                                      //* اضافه کردن به لیست بوکمارک‌ها
+        card.querySelector('.box-img > div').classList.add("is-mark");                               //* تغییر استایل برای نمایش بوکمارک بودن
+        card.querySelector('.box-img > div').classList.remove("not-mark");                          //* حذف استایل بوکمارک نبودن
+        showModal(`✅ ${idProduct.title} به لیست علاقه مندی های شما اضافه شد`)                   //* نمایش پیام موفقیت
 
-    let idProduct = await getIDProduct(event)  // گرفتن اطلاعات محصول بر اساس رویداد
-    let getMark = await isBookMark[0].find(mark => mark.name === title)  // پیدا کردن بوکمارک بر اساس عنوان محصول
-
-    if (isBookMark[1] === -1) {  // اگر محصول در بوکمارک‌ها وجود ندارد
-        // 🔖 افزودن محصول به بوکمارک‌ها
-        addBookMarks(newProdect)  // اضافه کردن به لیست بوکمارک‌ها
-        card.querySelector('.box-img > div').classList.add("is-mark");  // تغییر استایل برای نمایش بوکمارک بودن
-        card.querySelector('.box-img > div').classList.remove("not-mark");  // حذف استایل بوکمارک نبودن
-        showModal(`✅ ${idProduct.title} به لیست علاقه مندی های شما اضافه شد`)  // نمایش پیام موفقیت
-    } else {  // اگر محصول قبلاً در بوکمارک‌ها باشد
-        // 🔖 حذف محصول از بوکمارک‌ها
-        removeBookMarkItem(getMark.id)  // حذف از سرور
-        card.querySelector('.box-img > div').classList.remove("is-mark");  // تغییر استایل
-        card.querySelector('.box-img > div').classList.add("not-mark");  // تغییر استایل
-        showModal(`❌ ${idProduct.title} از لیست علاقه مندی های شما حذف  شد`)  // نمایش پیام حذف
+    } else {                                                                                             //* اگر محصول قبلاً در بوکمارک‌ها باشد
+        removeBookMarkItem(getMark.id)                                                                  //* حذف از لیست بوکمارک‌ها
+        card.querySelector('.box-img > div').classList.remove("is-mark");                              //* تغییر استایل
+        card.querySelector('.box-img > div').classList.add("not-mark");                               //* تغییر استایل
+        showModal(`❌ ${idProduct.title} از لیست علاقه مندی های شما حذف  شد`)                      //* نمایش پیام حذف
     }
 }
 
-// تابع برای دریافت اطلاعات محصول از روی رویداد
+//! تابع برای دریافت اطلاعات محصول از روی رویداد
 let getIDProduct = async (event) => {
-    let card = await event.target.closest('.swiper-slide')  // پیدا کردن کارت محصول
-    let title = await card.querySelector(".box-discription h6").textContent;  // گرفتن عنوان محصول
-
-    // دریافت اطلاعات تمام محصولات
-    let Products = await allProduct()
-
-    let getProductTarget = await Products.find(product => product.name === title)  // پیدا کردن محصول بر اساس عنوان
-
+    let title = await titleProduct(event.target)                                                       //* دریافت عنوان محصول
+    let Products = await allProduct()                                                                 //* دریافت اطلاعات تمام محصولات
+    let getProductTarget = await Products.find(product => product.name === title)                    //* پیدا کردن محصول بر اساس عنوان
     return getProductTarget;
 }
 
-// تابع برای بررسی وضعیت بوکمارک بودن یا نبودن محصول در دیتابیس
+//! تابع برای بررسی وضعیت بوکمارک بودن یا نبودن محصول در دیتابیس
 let isBookMarkToDB = async (event) => {
     try {
-        let idProduct = await getIDProduct(event)  // دریافت اطلاعات محصول
+        let idProduct = await getIDProduct(event)                                                             //* دریافت اطلاعات محصول
+        let Marks = await allBookmarks()                                                                     //* دریافت اطلاعات تمام بوکمارک‌ها
+        let reviewStatusMakeProduct = Marks.findIndex(mark => mark.product_id == idProduct.id)              //* بررسی اینکه آیا محصولی در بوکمارک‌ها وجود دارد
+        return [Marks, reviewStatusMakeProduct]                                                             //* برگرداندن داده‌ها برای استفاده در بخش‌های دیگر
 
-        // دریافت اطلاعات تمام بوکمارک‌ها
-        let Marks = await allBookmarks()
-
-        // بررسی اینکه آیا محصولی در بوکمارک‌ها وجود دارد
-        let reviewStatusMakeProduct = Marks.findIndex(mark => mark.product_id == idProduct.id)
-
-        console.log("Is any product bookmarked?", reviewStatusMakeProduct);  // نمایش وضعیت بوکمارک بودن
-        return [Marks, reviewStatusMakeProduct]  // برگرداندن داده‌ها برای استفاده در بخش‌های دیگر
     } catch (error) {
-        console.error("Error fetching data:", error);  // در صورت بروز خطا، چاپ پیام خطا
+        console.error("Error fetching data:", error);                                                       //* در صورت بروز خطا، چاپ پیام خطا
     }
 };
 
-// تابع برای اضافه کردن بوکمارک به دیتابیس
+//! تابع برای اضافه کردن بوکمارک به دیتابیس
 let addBookMarks = async (item) => {
-    let res = await fetch('http://localhost:4000/bookmarks', {
-        method: 'POST',  // ارسال داده به صورت POST
+    await fetch('http://localhost:4000/bookmarks', {
+        method: 'POST',
         headers: {
-            'Content-type': 'application/json'  // مشخص کردن نوع داده به صورت JSON
+            'Content-type': 'application/json'
         },
-        body: JSON.stringify(item)  // ارسال داده به صورت رشته JSON
+        body: JSON.stringify(item)
     })
 }
 
-// تابع برای حذف بوکمارک از دیتابیس
+//! تابع برای حذف بوکمارک از دیتابیس
 let removeBookMarkItem = async (id) => {    
-    let res = await fetch(`http://localhost:4000/bookmarks/${id}`, {method: 'DELETE',})  // ارسال درخواست حذف به سرور
+    let res = await fetch(`http://localhost:4000/bookmarks/${id}`, {method: 'DELETE',})                     //* ارسال درخواست حذف به سرور
 }
 
-// تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
+//! تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
 let clickAddBookMark = () => {
-    // 🛒 ست کردن رویداد کلیک روی دکمه بوکمارک شدن محصول
-    document.querySelectorAll('.icon-bookmark').forEach(icon => {    
-        icon.addEventListener('click', toggleBookmark);  // افزودن رویداد کلیک
+    document.querySelectorAll('.icon-bookmark').forEach(icon => {                                           //* 🛒 ست کردن رویداد کلیک روی دکمه بوکمارک شدن محصول 
+        icon.addEventListener('click', toggleBookmark);
     });
 }
 
-// صادر کردن توابع برای استفاده در سایر بخش‌ها
-export {toggleBookmark , clickAddBookMark , allBookmarks}
+export {toggleBookmark , clickAddBookMark , allBookmarks , titleProduct}
