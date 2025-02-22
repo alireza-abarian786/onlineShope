@@ -95,8 +95,8 @@ function settingSliderSwiper() {
   });
 
   let swiper5 = new Swiper('.mySwiper5', {
-    // slidesPerView: 1,
-    // spaceBetween: 50,
+    slidesPerView: 1,
+    spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
@@ -107,7 +107,7 @@ function settingSliderSwiper() {
     // },
     // loop: true,
     autoplay: {
-        delay: 3000,
+        delay: 7000,
         disableOnInteraction: false
     }
   });

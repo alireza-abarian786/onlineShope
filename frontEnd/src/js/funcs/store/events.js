@@ -1,6 +1,6 @@
 import { initializeCart } from "./cart.js";
 import { initializeNavigation } from "./navigation.js";
-import { toggleCart, closeCart , allCart} from "./cart.js";
+import { toggleCart, closeCart , allCart , finalBuyCartFunc} from "./cart.js";
 import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide} from "../sliders.js";
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     initializeStatusMarks();                //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
     initializeStatusCarts();               //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+    // finalBuyCartFunc()
 });
 
 // document.addEventListener('DOMContentLoaded', () => {            

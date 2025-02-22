@@ -4,6 +4,7 @@ import { allBookmarks , clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
 import { clickButtonsProduct } from "./box.js";
 import { titleProduct } from "./bookMarks.js";
+import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification(cartItems) {    
@@ -17,7 +18,7 @@ export function renderCartItems(cartItems) {
     container.innerHTML = '';                                                                   //? پاک کردن آیتم‌های قبلی                                                                              
     cartItems.forEach((item) => {                                                              //?🛒 ساخت باکس محصول و افزودن به سبد خرید           
         const cartHTML = `
-            <div class="box-goods d-flex align-items-end" data-id="${item.id}">
+            <div class="box-goods d-flex align-items-end swiper-slide" data-id="${item.id}" style='transform: translateY(0);'>
                 <div>
                     <span class="plus-btn">+</span>
                     <span class="number">${item.quantity ? item.quantity : 1}</span>
@@ -41,7 +42,7 @@ export function renderCartItems(cartItems) {
                                 </div>
                             </div>
                             <div class='col-4 p-0'>
-                                <img src="${item.product_image}" alt="img" class='rounded w-100 h-100'>
+                                <img src="${item.product_images[0]}" alt="img" class='rounded w-100 h-100'>
                             </div>
                         </div>
                     </div>
@@ -61,6 +62,71 @@ export function renderCartItems(cartItems) {
 
     attachCartEventListeners();                                                                   //?🛒  فراخوانی تابع فعال کردن دکمه های سبد خرید 
     initTooltips()                                                                               //? فعال‌سازی تمام تولتیپ‌ها
+}
+
+// ! ساخت باکس های محصولات داخل صفحه ی سبد خرید
+let createBoxToPageCart = async (shopingCartProduct) => {  
+  if (shopingCartProduct.length) {
+    shopingCartProduct.forEach(box => {      
+      document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend' , `
+                <div class="cart-item swiper-slide">
+              <button class="delete-btn"><i class="fa fa-trash"></i> حذف</button>
+              <div class="product-image">
+                <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
+  
+                  <div class="swiper-wrapper">
+                      <div class="swiper-slide"><img src="${box.product_images[0]}" alt="محصول 1"></div>
+                      <div class="swiper-slide"><img src="${box.product_images[1]}" alt="محصول 2"></div>
+                      <div class="swiper-slide"><img src="${box.product_images[2]}" alt="محصول 3"></div>
+                  </div>
+                  <!-- کنترل‌های اسلایدر -->
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div> 
+              </div>
+              <div class="product-description">
+                  <div class="product-title">${box.product_name}</div>
+                  <div class="product-Specifications">
+                      <span>رنگ: سیاه</span>
+                      <span>وزن: ۱.۵ کیلوگرم</span>
+                  </div>
+                  <div class="score">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <span>(${box.product_ratings})</span>
+                  </div>
+                  <div class="description">${box.product_description}</div>
+                  <div class="price-cantain">
+                      <div class="product-price-cart">قیمت واحد: ${box.price.toLocaleString()} تومان</div>
+                      <div class="discount">${box.discount ? box.discount.toLocaleString() + ' :قیمت با تخفیف' : ''}</div>
+                  </div>
+                  <div class="cantainer-total">
+                    <img src="src/assets/images/home.png" alt="لوگوی برند" class="brand-logo">
+                    <div class="total-price">جمع: ${box.totalPrice.toLocaleString()} تومان</div>
+                    <div class="quantity-box">
+                        <button class="quantity-btn"><i class="fa fa-minus"></i></button>
+                        <span class="quantity-value number">${box.quantity}</span>
+                        <button class="quantity-btn"><i class="fa fa-plus"></i></button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      `)
+
+      settingSliderSwiper();
+      settingSliderGlide();
+      clickButtonsProduct();
+      clickAddBookMark();
+      buttonsShoppingCart()
+    })
+    
+  } else {
+    document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`)
+  }
+
 }
 
 //! modal تابع ساخت و نمایش
@@ -93,15 +159,15 @@ let showModal = (text) => {
 
 // ! اعمال تغییرات دکمه سبد خرید محصول
 let btnBuyProduct = async (element) => {
-    let card = element.closest('.swiper-slide')    
+    let card = element.closest('.swiper-slide') 
     if (card.querySelector('.add-cart p')) {
-        card.querySelector('.btn-cart-box').classList.add("text-bg-primary");                                 //* اعمال کلاس جدید کلید سبد خرید 
-        card.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"                                 //* عنوان کلید سبد خرید 
-        card.querySelector(".add-cart > p").classList.add('add-cart-active')                                //* اعمال کلاس جدید به عنوان کلید سبد خرید                                                     
-        card.querySelector(".add-cart > svg").classList.add('add-cart-active')                             //* اعمال کلاس جدید به ایکون کلید سبد خرید                                                       
+        card.querySelector('.btn-cart-box').classList.add("add-cart-active-btn");                                     //* اعمال کلاس جدید کلید سبد خرید 
+        card.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"                                         //* عنوان کلید سبد خرید 
+        card.querySelector(".add-cart > p").classList.add('add-cart-active-content')                                //* اعمال کلاس جدید به عنوان کلید سبد خرید                                                     
+        card.querySelector(".add-cart > svg").classList.add('add-cart-active-content')                             //* اعمال کلاس جدید به ایکون کلید سبد خرید                                                       
     } else {
-        card.querySelector('.btn-cart-box').classList.add("text-bg-success");
-        card.querySelector('.btn-cart-box').textContent = "به سبد اضافه شد"        
+        card.querySelector('.btn-cart-box').classList.add("buy-button-active");
+        card.querySelector('.btn-cart-box').textContent = "🧺 به سبد اضافه شد"        
     }
 }
 
@@ -109,9 +175,9 @@ let btnBuyProduct = async (element) => {
 async function initializeStatusCarts() {    
   let Carts = await allCart()                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
-    let title = await titleProduct(btn) 
-    if (Carts.some(item => item.product_name === title)) {                                        //? اگر محصول در لیست سبد خرید بود
-      btnBuyProduct(btn)
+    let title = await titleProduct(btn)                                                           //? دریافت عنوان محصول
+    if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
+      btnBuyProduct(btn)      
     }
   });
 }
@@ -282,25 +348,28 @@ let createProductsAppliances = (element, arrAppliances) => {
                     </div>
                 </div>
 
-                <div class="box-price d-flex justify-content-between align-items-center w-100">
-                    <div class="m-0 d-flex flex-column">
+                <div class="box-price d-flex align-items-center w-100">
+                    <div class="m-0 d-flex w-100 justify-content-center flex-column align-items-center">
                     ${
-                        box.discount
-                        ? `<span class="price price-before position-relative d-flex text-danger">
-                        تومان
-                        <span class="ms-1">${box.price.toLocaleString()}</span>
-                        </span>
-                        <span class="discount d-flex text-success">
-                        تومان
-                        <span class="ms-1">${box.discount.toLocaleString()}</span>
+                        !box.discount
+                        ? 
+                        `<span class="price text-bg-primary rounded fw-bold px-2 position-relative d-flex align-items-center">
+                          تومان
+                          <span class="ms-1 lead fs-6">${box.price.toLocaleString()}</span>
+                          &nbsp&nbsp:قیمت محصول
                         </span>`
-                        : `<span class="price position-relative d-flex">
-                        تومان
-                        <span class="ms-1">${box.price.toLocaleString()}</span>
+                        : 
+                        `<span class="price price-before position-relative d-flex align-items-center">
+                          تومان
+                          <span class="ms-1 lead fs-6">${box.price.toLocaleString()}</span>
+                          </span>
+                          <span class="discount d-flex text-white">
+                          تومان
+                          <span class="ms-1">${box.discount.toLocaleString()}</span>
+                          &nbsp&nbsp:قیمت با تخفیف
                         </span>`
                     }
                     </div>
-                    <p class="m-0 pb-1 lead text-secondary">:قیمت محصول</p>
                 </div>
 
                 <div class="add-cart btn-cart-box" type="button" id="liveToastBtn">
@@ -511,30 +580,29 @@ let createBox = (arrCategory) => {
                     </div>
                   </div>
   
-                  <div class="box-price d-flex justify-content-between w-100 align-items-center">
-                    <div class="m-0 d-flex flex-column">
-                    
-                      ${product.discount ? 
-                        `<span class="price price-before position-relative d-flex text-danger">
-                        تومان
-                        <span class="ms-1">${product.price.toLocaleString()}</span>
-                        </span>
-                        <span class="discount d-flex text-success">
-                        تومان
-                        <span class="ms-1">${product.discount.toLocaleString()}</span>
-                        </span>`
-
-                        : 
-
-                        `<span class="price position-relative d-flex">
+                <div class="box-price d-flex align-items-center w-100">
+                    <div class="m-0 d-flex w-100 justify-content-center flex-column align-items-center">
+                    ${
+                        !product.discount
+                        ? 
+                        `<span class="price text-bg-primary rounded fw-bold px-2 position-relative d-flex align-items-center">
                           تومان
-                          <span class="ms-1">${product.price.toLocaleString()}</span>
-                        </span> `
-                      }
-  
+                          <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
+                          &nbsp&nbsp:قیمت محصول
+                        </span>`
+                        : 
+                        `<span class="price price-before position-relative d-flex align-items-center">
+                          تومان
+                          <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
+                          </span>
+                          <span class="discount d-flex text-white">
+                          تومان
+                          <span class="ms-1">${product.discount.toLocaleString()}</span>
+                          &nbsp&nbsp:قیمت با تخفیف
+                        </span>`
+                    }
                     </div>
-                    <p class="m-0 lead">:قیمت محصول</p>
-                  </div>
+                </div>
   
                   <div class="add-cart btn-cart-box" type="button" id="liveToastBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -632,4 +700,4 @@ let createBoxRow = (arrCategory) => {
   }
 }
 
-export {showModal , updateCartNotification ,btnBuyProduct, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
+export {showModal , updateCartNotification ,btnBuyProduct, createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}

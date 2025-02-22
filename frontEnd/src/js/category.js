@@ -61,8 +61,8 @@ let category = async () => {
     setDropdownItem(bookmarkedProducts)                                                   //* category صفحه Dropdown تابع تنظیمات 
   }     
 
-  initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');             //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-  initializeStatusCarts(Carts , '.add-cart > p' , 'text-bg-primary');                  //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول  
+  initializeStatusMarks();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+  initializeStatusCarts();                                                             //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول  
 };
 
 //! category تابعی برای جستجوی محصولات داخل 
@@ -141,14 +141,17 @@ let changeShowBoxs = async (getProductCategory) => {
       } else {
         createBox(getProductCategory)
       }
-      let Marks = await allBookmarks();                                                             //* دریافت لیست بوکمارک‌ها
-      let Carts = await allCart()                                                                  //* دریافت سبد خرید
-      clickButtonsProduct();                                                                      //* دکمه سبد خرید محصول
-      clickAddBookMark();                                                                        //* دکمه بوکمارک محصول
-      settingSliderGlide();                                                                     //* اسلایدر عکس های محصول
-      initializeStatusMarks(Marks , '.icon-bookmark' , 'is-mark' , 'not-mark');                //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-      initializeStatusCarts(Carts , '.add-cart > p' , 'text-bg-primary');                     //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+      clickButtonsProduct();                                                                    //* دکمه سبد خرید محصول
+      clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
+      settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
+      initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+      initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
     })
+    clickButtonsProduct();                                                                    //* دکمه سبد خرید محصول
+    clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
+    settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
+    initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+    initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
   })
 
   

@@ -166,3 +166,191 @@
     align-items: center;
     justify-content: center;
 }
+
+/* --------------------------------------------------------------------------------- */
+
+.cart-box-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background: linear-gradient(135deg, #2563eb, #4c9aff);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.cart-item {
+    display: flex;
+    align-items: flex-start; 
+    padding: 20px;
+    background: white;
+    border-bottom: 3px solid #eaeaea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: row-reverse;
+}
+
+.cart-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    max-height: 270px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    max-height: 270px;
+    object-fit: contain;
+}
+
+.product-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: end;
+    justify-content: end;
+    gap: 6px;
+}
+
+.product-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    width: 400px;
+    align-self: end;
+}
+
+.product-Specifications {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: end;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #ffc107;
+    justify-content: end;
+}
+
+.description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.price-cantain {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: end;
+    gap: 55px;
+}
+
+.product-price-cart {
+    font-size: 18px;
+    color: #555;
+}
+
+.discount {
+    background: #ff5733;
+    color: white;
+    font-weight: bold;
+    padding: 2px 6px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.cantainer-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: end;
+}
+
+.quantity-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #1a43a8;
+}
+
+.quantity-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.total-price {
+    font-size: 18px;
+    font-weight: bold;
+
+    background: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3sease;
+    display: inline-block;
+    width: max-content;
+    align-self: end;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-left: 10px;
+}

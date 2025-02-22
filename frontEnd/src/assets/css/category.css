@@ -188,6 +188,11 @@
   padding: 0 10px;
 }
 
+.alert {
+  border-bottom: 20px solid #4c9aff;
+  border-radius: 20px;
+}
+
 .icon-view {
   border-radius: 4px;
   font-size: 32px;
@@ -282,7 +287,8 @@
 .product-price {
   font-size: 22px;
   font-weight: bold;
-  background: linear-gradient(45deg, #28a745, #4caf50);
+  background: linear-gradient(45deg, #0d6efd, #0d6efdb0);
+  /* linear-gradient(45deg, #28a745, #4caf50) */
   color: white;
   padding: 10px 15px;
   border-radius: 5px;
@@ -296,8 +302,8 @@
 }
 .discount-label {
   position: absolute;
-  top: -8px;
-  right: -10px;
+  top: -15px;
+  right: 0;
   background: #ff5733;
   color: white;
   font-weight: bold;
@@ -306,7 +312,7 @@
   border-radius: 5px;
 }
 .buy-button {
-  background: #28a745;
+  background: linear-gradient(45deg, #0d6efdb0 ,#0d6efd);
   color: white;
   padding: 12px;
   border-radius: 10px;
@@ -321,10 +327,11 @@
 .buy-button:hover {
   background: #218838;
 }
-.buy-button:active {
-  transform: scale(0.98);
+.buy-button-active {
+  /* transform: scale(0.98); */
+  background: #28a745;
 }
-/* آیکون‌ها */
+
 .product-features {
   display: flex;
   gap: 15px;
