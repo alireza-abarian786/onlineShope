@@ -13,8 +13,8 @@ let allProduct = async () => {
 let titleProduct = async (element) => {
     let title;        
     let card = await element.closest('.swiper-slide')                                                       //* پیدا کردن کارت محصول از روی رویداد کلیک    
-    if (card.querySelector(".box-discription h6")) {                                                       //* اگر ساختار ستونی بود 
-      title = await card.querySelector(".box-discription h6").textContent;                                //* عنوان محصول
+    if (card.querySelector("h6")) {                                                       //* اگر ساختار ستونی بود 
+      title = await card.querySelector("h6").textContent;                                //* عنوان محصول
     } else {                                                                                             //* اگر ساختار ستونی بود 
       title = await card.querySelector(".product-title").textContent;                                   //* عنوان محصول
     }

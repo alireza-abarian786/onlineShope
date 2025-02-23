@@ -2006,40 +2006,34 @@
   ],
   "bookmarks": [
     {
-      "id": "m7cx2ldx",
-      "product_name": "بلندگو بلوتوثی",
-      "user_id": "1",
-      "product_id": "1"
-    },
-    {
       "id": "m7czkyza",
       "product_name": "دوربین دیجیتال کانن EOS 90D",
       "user_id": "1",
       "product_id": "4"
     },
     {
-      "id": "m7direhv",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "1",
-      "product_id": "2"
-    },
-    {
-      "id": "m7dirgsn",
-      "product_name": "تلویزیون سامسونگ 50 اینچ",
-      "user_id": "1",
-      "product_id": "3"
-    },
-    {
-      "id": "m7eg1dv2",
-      "product_name": "گوشی موبایل شیائومی Redmi Note 10",
-      "user_id": "1",
-      "product_id": "10"
-    },
-    {
       "id": "m7erigxf",
       "product_name": "تبلت اپل iPad Air 2020",
       "user_id": "1",
       "product_id": "11"
+    },
+    {
+      "id": "m7hmw25u",
+      "product_name": "تلویزیون سامسونگ مدل 55TU8000",
+      "user_id": "2",
+      "product_id": "26"
+    },
+    {
+      "id": "m7hn06f2",
+      "product_name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
+      "user_id": "2",
+      "product_id": "18"
+    },
+    {
+      "id": "m7i2ryc4",
+      "product_name": "بلندگو بلوتوثی",
+      "user_id": "2",
+      "product_id": "1"
     }
   ],
   "blogs": [
@@ -2226,56 +2220,24 @@
   ],
   "carts": [
     {
-      "id": "m7gi8fdg",
+      "id": "m7hx8qh8",
       "user_id": 2,
-      "product_id": 2,
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
+      "product_id": 11,
+      "product_name": "تبلت اپل iPad Air 2020",
       "product_images": [
         "./src/assets/images/phone/phone-6.jpg",
         "./src/assets/images/phone/phone-2.jpg",
         "./src/assets/images/phone/phone-4.jpg"
       ],
-      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
-      "discount": 500000,
-      "price": 20000000,
-      "quantity": 2,
-      "totalPrice": 1000000
-    },
-    {
-      "id": "m7giomj1",
-      "user_id": 2,
-      "product_id": 10,
-      "product_name": "گوشی موبایل شیائومی Redmi Note 10",
-      "product_images": [
-        "./src/assets/images/phone/phone-6.jpg",
-        "./src/assets/images/phone/phone-2.jpg",
-        "./src/assets/images/phone/phone-4.jpg"
-      ],
-      "product_description": "گوشی شیائومی با صفحه نمایش 6.43 اینچ و دوربین 48 مگاپیکسلی.",
-      "product_ratings": 4.3,
-      "discount": 120000,
-      "price": 4500000,
+      "product_description": "تبلت با پردازنده A14 Bionic و صفحه نمایش 10.9 اینچ.",
+      "product_ratings": 4.7,
+      "discount": 700000,
+      "price": 12000000,
       "quantity": 1,
-      "totalPrice": 120000
+      "totalPrice": 700000
     },
     {
-      "id": "m7gixqpr",
-      "user_id": 2,
-      "product_id": 34,
-      "product_name": "گوشی موبایل سامسونگ مدل Galaxy S21",
-      "product_images": [
-        "./src/assets/images/phone/phone-6.jpg",
-        "./src/assets/images/phone/phone-2.jpg",
-        "./src/assets/images/phone/phone-4.jpg"
-      ],
-      "product_description": "گوشی هوشمند با صفحه نمایش 6.2 اینچی و پردازنده Exynos 2100.",
-      "discount": 0,
-      "price": 22000000,
-      "quantity": 2,
-      "totalPrice": 44000000
-    },
-    {
-      "id": "m7gjww2q",
+      "id": "m7i2rvys",
       "user_id": 2,
       "product_id": 1,
       "product_name": "بلندگو بلوتوثی",
@@ -2290,39 +2252,6 @@
       "price": 1500000,
       "quantity": 1,
       "totalPrice": 10000
-    },
-    {
-      "id": "m7gjwxn4",
-      "user_id": 2,
-      "product_id": 7,
-      "product_name": "دوربین ورزشی گارمین VIRB Ultra 30",
-      "product_images": [
-        "./src/assets/images/digitals/digital-2.jpg",
-        "./src/assets/images/digitals/digital-3.webp",
-        "./src/assets/images/digitals/digital-4.jpg"
-      ],
-      "product_description": "دوربین ورزشی 4K با قابلیت ضد آب و لرزشگیر پیشرفته.",
-      "product_ratings": 4.4,
-      "discount": 180000,
-      "price": 4000000,
-      "quantity": 1,
-      "totalPrice": 180000
-    },
-    {
-      "id": "m7gjx09l",
-      "user_id": 2,
-      "product_id": 22,
-      "product_name": "ساعت هوشمند سامسونگ Galaxy Watch 4",
-      "product_images": [
-        "./src/assets/images/digitals/digital-2.jpg",
-        "./src/assets/images/digitals/digital-3.webp",
-        "./src/assets/images/digitals/digital-4.jpg"
-      ],
-      "product_description": "ساعت هوشمند با صفحه نمایش 1.4 اینچ و سنسورهای متنوع.",
-      "discount": 0,
-      "price": 5000000,
-      "quantity": 1,
-      "totalPrice": 5000000
     }
   ],
   "orders": [
