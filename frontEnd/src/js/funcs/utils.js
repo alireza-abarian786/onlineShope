@@ -57,11 +57,25 @@ let showAlertLogin = async () => {
                 window.location.href = './login.html';                                              //* آدرس صفحه مقصد
             }
         }) 
-        return null;
-    }
+        return false;
 
-    return true;
+    } else {
+        return true;
+    }
 }
 
+const fetchDataFromApi = async (url) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error.message);
+        throw error;
+    }
+};
 
-export {searchParams , isLogin , getSearchProduct , initTooltips , showAlertLogin}
+
+export {searchParams , isLogin , getSearchProduct , initTooltips , showAlertLogin , fetchDataFromApi}

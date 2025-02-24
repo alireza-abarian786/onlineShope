@@ -1,7 +1,7 @@
 // وارد کردن توابع از ماژول‌های دیگر
-import { getIDProductMarkedToJson , allProduct , titleProduct} from "./box.js";
+import { createBookmarkProductObject , fetchAllProducts , extractProductTitle} from "./box.js";
 import { showModal } from "./ui.js";
-import { showAlertLogin } from "../utils.js";
+import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 
 //! تابعی برای دریافت تمام بوکمارک‌ها از سرور
 let allBookmarks = async () => {
@@ -12,14 +12,11 @@ let allBookmarks = async () => {
 
 //! 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
 async function toggleBookmark(event) {
-    let alertLogin = await showAlertLogin()
-    if (!alertLogin) {
-        return false;
-    }
+    if (! await showAlertLogin()) return false;     
     let card = event.target.closest('.swiper-slide')
-    let title = await titleProduct(event.target)                                                   //* دریافت عنوان محصول
+    let title = await extractProductTitle(event.target)                                                   //* دریافت عنوان محصول
     let isBookMark = await isBookMarkToDB(event)                                                  //* 🔖 بررسی وجود یا عدم وجود محصول در بوکمارک‌ها
-    let newProduct = await getIDProductMarkedToJson(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
+    let newProduct = await createBookmarkProductObject(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
     let getMark = await isBookMark[0].find(mark => mark.product_name === title)                        //* پیدا کردن بوکمارک بر اساس عنوان محصول
     // let idProduct = await getIDProduct(event)                                                   //* گرفتن اطلاعات محصول بر اساس رویداد
 
@@ -39,8 +36,8 @@ async function toggleBookmark(event) {
 
 //! تابع برای دریافت اطلاعات محصول از روی رویداد
 let getIDProduct = async (event) => {
-    let title = await titleProduct(event.target)                                                       //* دریافت عنوان محصول
-    let Products = await allProduct()                                                                 //* دریافت اطلاعات تمام محصولات
+    let title = await extractProductTitle(event.target)                                                       //* دریافت عنوان محصول
+    let Products = await fetchDataFromApi('http://localhost:4000/products');                                                                //* دریافت اطلاعات تمام محصولات
     let getProductTarget = await Products.find(product => product.name === title)                    //* پیدا کردن محصول بر اساس عنوان
     return getProductTarget;
 }
@@ -81,4 +78,4 @@ let clickAddBookMark = () => {
     });
 }
 
-export {toggleBookmark , clickAddBookMark , allBookmarks , titleProduct}
+export {toggleBookmark , clickAddBookMark , allBookmarks}

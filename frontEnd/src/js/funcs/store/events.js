@@ -1,6 +1,6 @@
 import { initializeCart } from "./cart.js";
 import { initializeNavigation } from "./navigation.js";
-import { toggleCart, closeCart , allCart , finalBuyCartFunc} from "./cart.js";
+import { toggleCart, closeCart , fetchAllCartItems , finalBuyCartFunc} from "./cart.js";
 import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide} from "../sliders.js";
@@ -8,7 +8,7 @@ import { showModal , updateCartNotification , initializeStatusCarts , initialize
 
 //! رویداد بارگذاری صفحه
 document.addEventListener('DOMContentLoaded', async () => {      
-    let Carts = await allCart()                      //* دریافت سبد خرید 
+    let Carts = await fetchAllCartItems()                      //* دریافت سبد خرید 
     settingSliderGlide()                            //* 🛒 فراخوانی اسلایدر عکس های محصولات
     initializeCart()                               //* 🛒 فراخوانی توابع محتوای سبد خرید
     initializeNavigation();                       //* ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول

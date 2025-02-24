@@ -1,9 +1,8 @@
 import { initTooltips } from "../utils.js";
-import { allCart , attachCartEventListeners} from "./cart.js";
+import { fetchAllCartItems , attachCartEventListeners} from "./cart.js";
 import { allBookmarks , clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
-import { clickButtonsProduct } from "./box.js";
-import { titleProduct } from "./bookMarks.js";
+import { attachProductEventListeners , extractProductTitle} from "./box.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
@@ -125,7 +124,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
   
         settingSliderSwiper();
         settingSliderGlide();
-        clickButtonsProduct();
+        attachProductEventListeners();
         clickAddBookMark();
         buttonsShoppingCart()
       })
@@ -194,9 +193,9 @@ let changeBtnAfterDelete = async (element) => {
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
-  let Carts = await allCart()                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
+  let Carts = await fetchAllCartItems()                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
-    let title = await titleProduct(btn)                                                           //? دریافت عنوان محصول
+    let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
     if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
       changeBtnAfterAdd(btn)      
     }
@@ -207,7 +206,7 @@ async function initializeStatusCarts() {
 async function initializeStatusMarks() {    
   let Marks = await allBookmarks()                                                         //? دریافت اطلاعات تمام بوکمارک‌ها 
   document.querySelectorAll('.icon-bookmark').forEach( async btn => {                     //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید   
-    let title = await titleProduct(btn)                                                  //? دریافت عنوان محصول
+    let title = await extractProductTitle(btn)                                                  //? دریافت عنوان محصول
     if (Marks.some(item => item.product_name === title)) {                              //? اگر محصول در لیست بوکمارک‌ ها بود
         btn.parentElement.classList.add('is-mark');                                    //? اعمال کلاس جدید برای نشان دادن وضعیت
         btn.parentElement.classList.remove('not-mark');                               //? حذف کلاس قبلی
@@ -410,7 +409,7 @@ let createProductsAppliances = (element, arrAppliances) => {
 
     settingSliderSwiper();
     settingSliderGlide();
-    clickButtonsProduct();
+    attachProductEventListeners();
     clickAddBookMark();
 };
 
@@ -640,7 +639,7 @@ let createBox = (arrCategory) => {
           
       settingSliderSwiper();
       settingSliderGlide();
-      clickButtonsProduct();
+      attachProductEventListeners();
       clickAddBookMark();
     });
 
@@ -712,7 +711,7 @@ let createBoxRow = (arrCategory) => {
 
     settingSliderSwiper();
     settingSliderGlide();
-    clickButtonsProduct();
+    attachProductEventListeners();
     clickAddBookMark();
 
   } else {                                                                                          //? اگر محصولی پیدا نشد، پیام خطا نمایش بده
@@ -720,5 +719,15 @@ let createBoxRow = (arrCategory) => {
   }
 }
 
+const updateArrowButtonColors = (btn, nextBtnColor, prevBtnColor) => {
+    btn.children[0].style.color = nextBtnColor;
+    if (btn.previousElementSibling) {
+        btn.previousElementSibling.children[0].style.color = prevBtnColor;
+    }
+    if (btn.nextElementSibling) {
+        btn.nextElementSibling.children[0].style.color = prevBtnColor;
+    }
+};
 
-export {showModal , updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
+
+export {showModal , updateArrowButtonColors, updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}

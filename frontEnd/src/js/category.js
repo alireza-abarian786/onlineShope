@@ -1,10 +1,10 @@
-import { searchParams , getSearchProduct} from "./funcs/utils.js";
+import { searchParams , getSearchProduct , fetchDataFromApi} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
 import { allBookmarks } from "./funcs/store/bookMarks.js";
-import {clickButtonsProduct , allProduct} from "./funcs/store/box.js";
+import {attachProductEventListeners , fetchAllProducts} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
 import { initializeStatusMarks , initializeStatusCarts} from "./funcs/store/ui.js";
-import { allCart } from "./funcs/store/cart.js";
+import { fetchAllCartItems } from "./funcs/store/cart.js";
 import { createBox , createBoxRow} from "./funcs/store/ui.js";
 // -------------------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ let getCatgoryFunc = async () => {
   let url = searchParams('cat');                                                                      //* URL دریافت مقدار دسته‌بندی از  
   let data = await getAllCategory()                                                                  //* دریافت لیست دسنه بندی ها از سرور
   let findCategory = await data.find(item => item.urlSearch === url);                               //* URL یافتن دسته مرتبط با مقدار
-  let Products = await allProduct()                                                                //* دریافت اطلاعات تمام محصولات
+  let Products = await fetchDataFromApi('http://localhost:4000/products');                                                               //* دریافت اطلاعات تمام محصولات
   let getProductCategory = Products.filter(item => item.category_id == findCategory.id);          //* فیلتر کردن محصولات مرتبط با دسته بندی
   return getProductCategory;
 }
@@ -43,8 +43,8 @@ let getCatgoryFunc = async () => {
 let category = async () => { 
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
   let Marks = await allBookmarks();                                                                  //* دریافت لیست بوکمارک‌ها
-  let Carts = await allCart()                                                                       //* دریافت سبد خرید
-  let Products = await allProduct()                                                                //* دریافت اطلاعات تمام محصولات
+  let Carts = await fetchAllCartItems()                                                                       //* دریافت سبد خرید
+  let Products = await fetchDataFromApi('http://localhost:4000/products');                                                                //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCatgoryFunc()                                                 //* محصولات فیلتر شده 
 
   if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده
@@ -141,13 +141,13 @@ let changeShowBoxs = async (getProductCategory) => {
       } else {
         createBox(getProductCategory)
       }
-      clickButtonsProduct();                                                                    //* دکمه سبد خرید محصول
+      attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
       clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
       settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
       initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
       initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
     })
-    clickButtonsProduct();                                                                    //* دکمه سبد خرید محصول
+    attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
     clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
     settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
     initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول

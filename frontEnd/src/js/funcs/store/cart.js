@@ -1,10 +1,10 @@
 import {  updateCartNotification , renderCartItems , changeBtnAfterDelete , showModal , createBoxToPageCart} from "./ui.js";
-import { getProductDataDB , getUserDataDB, titleProduct} from "./box.js";
+import { fetchProductFromDatabase , fetchUserFromDatabase, extractProductTitle} from "./box.js";
 import { showAlertLogin } from "../utils.js";
 // -------------------------------------------------------------------------------------
 
 //! دریافت لیست سبد خرید از سرور
-let allCart = async () => {
+let fetchAllCartItems = async () => {
     let res = await fetch('http://localhost:4000/carts')
     let data = await res.json()
     return data
@@ -12,9 +12,9 @@ let allCart = async () => {
 
 //!🛒 تابع بررسی وجود یا عدم وجود محصول در سبد خرید
 async function addToCart(event) {
-    let product = await getProductDataDB(event)                   //* دریافت اصلاعات محصول مورد نظر
-    let user = await getUserDataDB();                            //* دریافت اطلاعات کاربر انجام دهنده
-    let data = await allCart()                                   //* دریافت لیست سبد خرید    
+    let product = await fetchProductFromDatabase(event)                   //* دریافت اصلاعات محصول مورد نظر
+    let user = await fetchUserFromDatabase();                            //* دریافت اطلاعات کاربر انجام دهنده
+    let data = await fetchAllCartItems()                                   //* دریافت لیست سبد خرید    
     let newCart = {                                              //* ذخیره اطلاعات محصول جدید سبد خرید
         id: Date.now().toString(36),
         user_id: +user.id,
@@ -61,7 +61,7 @@ async function toggleCart() {
     const alertCart = document.querySelector('.alert-cart');
 
     shoppingCart.addEventListener('click', async () => {                                      //* رویداد کلیک روی ایکون سبد خرید
-        let productDataCart = await allCart()                                               //* دریافت اطلاعات تمام سبد خرید
+        let productDataCart = await fetchAllCartItems()                                               //* دریافت اطلاعات تمام سبد خرید
         renderCartItems(productDataCart)                                                   //*🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
         
         openCart.classList.add('is-content');                                                //*🛒 نمایش دادن سبد خرید
@@ -82,22 +82,19 @@ async function toggleCart() {
 
 //!🛒 فراخوان کننده ی توابع سبد خرید
 async function initializeCart() {    
-    let Carts = await allCart()                                                     //* دریافت اطلاعات سبد خرید
+    let Carts = await fetchAllCartItems()                                                     //* دریافت اطلاعات سبد خرید
     renderCartItems(Carts);                                                       //*🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
     updateCartNotification(Carts);                                               //*🛒 فراخوانی تابع نمایش دادن نوتیف سبد خرید
 }
 
 //! ❌ تابع حذف محصول از سبد خرید
 async function removeFromCart(event) {
-    let alertLogin = await showAlertLogin()
-    if (!alertLogin) {
-        return false;
-    }
-    let titleCart = await titleProduct(event.target)
+    if (! await showAlertLogin()) return false;     
+    let titleCart = await extractProductTitle(event.target)
     let cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     let openCart = document.querySelector('.open-cart');
     let notifCart = document.querySelector('.notif-cart');
-    let Carts = await allCart()                                                                          //* دریافت اطلاعات سبد خرید
+    let Carts = await fetchAllCartItems()                                                                          //* دریافت اطلاعات سبد خرید
     let productTarget = await Carts.find(cart => cart.product_name === titleCart)                       //* پیدا کردن محصول مورد نظر
     await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})                //* ارسال درخواست حذف به سرور
 
@@ -109,14 +106,14 @@ async function removeFromCart(event) {
     }
     // notifCart.classList.remove('is-notif');                                                                                                    
     document.querySelectorAll('.product-box').forEach(async box => {                                  //*❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
-        let titleBox = await titleProduct(box)                                                        //* دریافت عنوان محصول
+        let titleBox = await extractProductTitle(box)                                                        //* دریافت عنوان محصول
         if (titleCart === titleBox) {
             changeBtnAfterDelete(box)                                                                          //* ✅ تغییر محتوای دکمه افزودن به سبد خرید
         }
     })
     showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
     finalBuyCartFunc() 
-    let updateCart = await allCart()
+    let updateCart = await fetchAllCartItems()
     const alertCart = document.querySelector('.alert-cart');    
     if (updateCart.length <= 0) {        
         alertCart.classList.add('d-block');
@@ -128,16 +125,13 @@ async function removeFromCart(event) {
 let price;
 //!🛒 تابع زیاد کردن تعداد محصول در سبد خرید
 async function increaseQuantity(event) { 
-    let alertLogin = await showAlertLogin()
-    if (!alertLogin) {
-        return false;
-    }   
+    if (! await showAlertLogin()) return false;        
     let boxProduct = event.target.closest('.swiper-slide')
-    let title = await titleProduct(event.target)
+    let title = await extractProductTitle(event.target)
     let priceElem = boxProduct.querySelector(".total-price");  
     let numberElement = boxProduct.querySelector('.number')
     numberElement.innerHTML = Number(numberElement.innerHTML) + 1;                                          //* مشخص کردن تعداد محصول
-    let getProductsDB = await allCart()                                                                    //* دریافت اطلاعات سبد خرید
+    let getProductsDB = await fetchAllCartItems()                                                                    //* دریافت اطلاعات سبد خرید
     let objProduct = getProductsDB.find(item => item.product_name === title)           //* پیدا کردن محصول مورد نظر
     
     if (!objProduct.discount) {                                                      //* اگر محصول مورد نظر تخفیف نداشت قیمت اصلی را مبنای محاسبات قرار بده    
@@ -153,7 +147,7 @@ async function increaseQuantity(event) {
 
 // ! تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
 let editeDataProductToDB = async (numberElement , objProduct , price) => {    
-    let user = await getUserDataDB();
+    let user = await fetchUserFromDatabase();
     let editeCart = {
         id: objProduct.id,
         user_id: +user.id,
@@ -178,15 +172,12 @@ let editeDataProductToDB = async (numberElement , objProduct , price) => {
 
 //!🛒 تابع کم کردن تعداد محصول در سبد خرید
 async function decreaseQuantity(event) {
-    let alertLogin = await showAlertLogin()
-    if (!alertLogin) {
-        return false;
-    }
+    if (! await showAlertLogin()) return false;     
     let boxProduct = event.target.closest(".swiper-slide")
-    let title = await titleProduct(event.target)
+    let title = await extractProductTitle(event.target)
     let priceElem = boxProduct.querySelector(".total-price");  
     let numberElement = boxProduct.querySelector('.number');
-    let getProductsDB = await allCart()                                                                   //* دریافت اطلاعات سبد خرید
+    let getProductsDB = await fetchAllCartItems()                                                                   //* دریافت اطلاعات سبد خرید
     let objProduct = getProductsDB.find(item => item.product_name === title)          //* پیدا کردن محصول مورد نظر
     let currentValue = Number(numberElement.innerHTML);                                                  //* به نامبر quantity تبدیل
     
@@ -206,10 +197,7 @@ async function decreaseQuantity(event) {
 
 //!🛒 تابع حذف همه موارد موجود از سبد خرید
 async function removeAllFromCart(event) {
-    let alertLogin = await showAlertLogin()
-    if (!alertLogin) {
-        return false;
-    }
+    if (! await showAlertLogin()) return false;     
     const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     const openCart = document.querySelector('.open-cart');
     const notifCart = document.querySelector('.notif-cart');
@@ -227,7 +215,7 @@ async function removeAllFromCart(event) {
 //! تابع حذف تمام محصولات سبد خرید
 async function clearCart() {
     try {
-        const cartItems = await allCart()                                             //* دریافت تمام آیتم‌های سبد خرید
+        const cartItems = await fetchAllCartItems()                                             //* دریافت تمام آیتم‌های سبد خرید
         if (cartItems.length === 0) {                                                //* اگر سبد خرید خالی است، نیازی به حذف نیست
             showModal("🛒 سبد خرید از قبل خالی است!")
             return;
@@ -247,7 +235,7 @@ async function clearCart() {
 }
 
 let finalBuyCartFunc = async () => {
-    let shopingCartProduct = await allCart()    
+    let shopingCartProduct = await fetchAllCartItems()    
     createBoxToPageCart(shopingCartProduct)
 }
 
@@ -279,7 +267,7 @@ function closeCart() {
         if (e.target.classList.contains('cantainer-open-cart')) {                           //*🛒 بررسی وضعیت کانتینر سبد خرید
             cantainerOpenCart.style.visibility = 'hidden';
             openCart.classList.remove('is-content');
-            let cartItems = await allCart()
+            let cartItems = await fetchAllCartItems()
             if (cartItems.length > 0) {                                                    //* اگر سبد خرید خالی نبود نوتیف ان را ظاهر کن
                 notifCart.classList.add('is-notif');
             }
@@ -288,4 +276,4 @@ function closeCart() {
     });
 }
 
-export {attachCartEventListeners , increaseQuantity, decreaseQuantity, finalBuyCartFunc ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart , allCart}
+export {attachCartEventListeners , increaseQuantity, decreaseQuantity, finalBuyCartFunc ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart , fetchAllCartItems}
