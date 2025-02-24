@@ -1,5 +1,9 @@
+import { getLocalStorage } from "./store/storage.js"
+// ----------------------------------------------------------------
+
 let loginBtnText = document.querySelector('#login span')
 let loginBtn = document.querySelector('#login')
+// ----------------------------------------------------------------
 
 
 
@@ -38,6 +42,26 @@ function initTooltips() {
     });
 }
 
+let showAlertLogin = async () => {
+    let userName = await getLocalStorage("login");                                                            //* کاربری که لاگین کرده username        
+    if (!userName || !userName.length) {                                                              //* اگر کاربر لاگین نکرده بود
+        Swal.fire({                                                                                  //* نمایش پیغام مناسب
+            title: "شما در سایت ثبت نام نکرده اید",
+            text: "⁉️ آیا مایل به ثبت نام در سایت هستید",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: 'بله، مایلم!',
+            cancelButtonText: 'لغو'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = './login.html';                                              //* آدرس صفحه مقصد
+            }
+        }) 
+        return null;
+    }
+
+    return true;
+}
 
 
-export {searchParams , isLogin , getSearchProduct , initTooltips}
+export {searchParams , isLogin , getSearchProduct , initTooltips , showAlertLogin}

@@ -224,7 +224,7 @@
     gap: 6px;
 }
 
-.product-title {
+.product-title-cart {
     font-size: 20px;
     font-weight: bold;
     color: #333;
@@ -256,7 +256,7 @@
     margin-bottom: 10px;
 }
 
-.price-cantain {
+.price-contain {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -278,7 +278,7 @@
     border-radius: 5px;
 }
 
-.cantainer-total {
+.container-total {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -313,7 +313,7 @@
     font-weight: bold;
 }
 
-.total-price {
+.total-price-container {
     font-size: 18px;
     font-weight: bold;
 

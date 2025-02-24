@@ -1,6 +1,7 @@
-import { addToCart, allCart } from "./cart.js";
 import { getLocalStorage} from "./storage.js";
-import { btnBuyProduct } from "./ui.js";
+import { addToCart, allCart } from "./cart.js";
+import { changeBtnAfterAdd } from "./ui.js";
+import { showAlertLogin } from "../utils.js";
 
 // ! دریافت تمام محصولات از سرور
 let allProduct = async () => {
@@ -44,23 +45,11 @@ let getProductData = async (event) => {
 //! تابع دریافت اطلاعات کاربر از دیتابیس
 let getUserDataDB = async () => {
     try {
-        let userName = getLocalStorage("login");                                                            //* کاربری که لاگین کرده username        
-        if (!userName || !userName.length) {                                                              //* اگر کاربر لاگین نکرده بود
-            Swal.fire({                                                                                  //* نمایش پیغام مناسب
-                title: "شما در سایت ثبت نام نکرده اید",
-                text: "⁉️ آیا مایل به ثبت نام در سایت هستید",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: 'بله، مایلم!',
-                cancelButtonText: 'لغو'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = './login.html';                                              //* آدرس صفحه مقصد
-                }
-            }) 
-            return null;
+        let alertLogin = await showAlertLogin()
+        if (!alertLogin) {
+            return false;
         }
-
+        let userName = await getLocalStorage("login");                                                            //* کاربری که لاگین کرده username        
         let res = await fetch(`http://localhost:4000/users`);                                        //* دریافت لیست یوزر ها از سرور
         if (!res.ok) {                                                                              //* اگر دریافت موفقیت امیز نبود
             throw new Error("Failed to fetch users data.");
@@ -84,33 +73,25 @@ let getProductDataDB = async (event) => {
 }
 
 //! 🛒 تابع تغییر دکمه "افزودن به سبد خرید" با کلیک روی ان
-async function toggleAddCart(event) {        
+async function toggleAddCart(event) {
+    let alertLogin = await showAlertLogin()
+    if (!alertLogin) {
+        return false;
+    }        
     let product = await getProductDataDB(event)                                                    //* دریافت اطلاعات محصول از سرور
     let data = await allCart()                                                                    //* دریافت اطلاعات سبد خرید
     let index = data.findIndex(item => item.id == product.id);                                   //* 🛒 بررسی وجود یا عدم وجود محصول در سبد خرید
     if (index === -1) {                                                                         //* 🛒 اگر محصول در سبد خریدد نبود، افزودن محصول به سبد خرید
-        btnBuyProduct(event.target)                                                            //* فراخوانی تابع تغییرات کلید سبد خرید محصول
+        changeBtnAfterAdd(event.target)                                                            //* فراخوانی تابع تغییرات کلید سبد خرید محصول
     } 
 }
 
 //! تابع افزودن محصول به سبد خرید
-function handleAddToCart(event) { 
-    let userName = getLocalStorage("login");                                                            //* کاربری که لاگین کرده username        
-    if (!userName || !userName.length) {                                                              //* اگر کاربر لاگین نکرده بود
-        Swal.fire({                                                                                  //* نمایش پیغام مناسب
-            title: "شما در سایت ثبت نام نکرده اید",
-            text: "⁉️ آیا مایل به ثبت نام در سایت هستید",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: 'بله، مایلم!',
-            cancelButtonText: 'لغو'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = './login.html';                                              //* آدرس صفحه مقصد
-            }
-        })
-        return ;
-    }           
+async function handleAddToCart(event) { 
+    let alertLogin = await showAlertLogin()
+    if (!alertLogin) {
+        return false;
+    }          
     addToCart(event);                                                                          //* فراخوانی تابع ساخت و افزودن به سبد خرید
     toggleAddCart(event)                                                                      //* "فراخوانی تغییر دکمه "افزودن به سبد خرید
 }

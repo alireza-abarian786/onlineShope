@@ -49,7 +49,7 @@ export function renderCartItems(cartItems) {
                     <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1'>${item.totalPrice.toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${item.totalPrice.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
@@ -65,68 +65,75 @@ export function renderCartItems(cartItems) {
 }
 
 // ! ساخت باکس های محصولات داخل صفحه ی سبد خرید
-let createBoxToPageCart = async (shopingCartProduct) => {  
-  if (shopingCartProduct.length) {
-    shopingCartProduct.forEach(box => {      
-      document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend' , `
-                <div class="cart-item swiper-slide">
-              <button class="delete-btn"><i class="fa fa-trash"></i> حذف</button>
-              <div class="product-image">
-                <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
+let createBoxToPageCart = async (shoppingCartProduct) => {
   
-                  <div class="swiper-wrapper">
-                      <div class="swiper-slide"><img src="${box.product_images[0]}" alt="محصول 1"></div>
-                      <div class="swiper-slide"><img src="${box.product_images[1]}" alt="محصول 2"></div>
-                      <div class="swiper-slide"><img src="${box.product_images[2]}" alt="محصول 3"></div>
-                  </div>
-                  <!-- کنترل‌های اسلایدر -->
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div> 
-              </div>
-              <div class="product-description">
-                  <div class="product-title">${box.product_name}</div>
-                  <div class="product-Specifications">
-                      <span>رنگ: سیاه</span>
-                      <span>وزن: ۱.۵ کیلوگرم</span>
-                  </div>
-                  <div class="score">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <span>(${box.product_ratings})</span>
-                  </div>
-                  <div class="description">${box.product_description}</div>
-                  <div class="price-cantain">
-                      <div class="product-price-cart">قیمت واحد: ${box.price.toLocaleString()} تومان</div>
-                      <div class="discount">${box.discount ? box.discount.toLocaleString() + ' :قیمت با تخفیف' : ''}</div>
-                  </div>
-                  <div class="cantainer-total">
-                    <img src="src/assets/images/home.png" alt="لوگوی برند" class="brand-logo">
-                    <div class="total-price">جمع: ${box.totalPrice.toLocaleString()} تومان</div>
-                    <div class="quantity-box">
-                        <button class="quantity-btn"><i class="fa fa-minus"></i></button>
-                        <span class="quantity-value number">${box.quantity}</span>
-                        <button class="quantity-btn"><i class="fa fa-plus"></i></button>
-                    </div>
-                  </div>
-              </div>
-          </div>
-      `)
+  if (document.querySelector('.cart-box-container')) {
+    document.querySelector('.cart-box-container').textContent = ''; 
 
-      settingSliderSwiper();
-      settingSliderGlide();
-      clickButtonsProduct();
-      clickAddBookMark();
-      buttonsShoppingCart()
-    })
+    if (shoppingCartProduct.length) {
+      shoppingCartProduct.forEach(box => {      
+        document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend' , `
+                  <div class="cart-item swiper-slide">
+                <button class="delete-btn"><i class="fa fa-trash"></i> حذف</button>
+                <div class="product-image">
+                  <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
     
-  } else {
-    document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`)
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="${box.product_images[0]}" alt="محصول 1"></div>
+                        <div class="swiper-slide"><img src="${box.product_images[1]}" alt="محصول 2"></div>
+                        <div class="swiper-slide"><img src="${box.product_images[2]}" alt="محصول 3"></div>
+                    </div>
+                    <!-- کنترل‌های اسلایدر -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                  </div> 
+                </div>
+                <div class="product-description">
+                    <div class="product-title product-title-cart">${box.product_name}</div>
+                    <div class="product-Specifications">
+                        <span>رنگ: سیاه</span>
+                        <span>وزن: ۱.۵ کیلوگرم</span>
+                    </div>
+                    <div class="score">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>(${box.product_ratings})</span>
+                    </div>
+                    <div class="description">${box.product_description}</div>
+                    <div class="price-contain">
+                        <div class="product-price-cart">قیمت واحد: ${box.price.toLocaleString()} تومان</div>
+                        <div class="discount">${box.discount ? box.discount.toLocaleString() + ' :قیمت با تخفیف' : ''}</div>
+                    </div>
+                    <div class="container-total">
+                      <img src="src/assets/images/home.png" alt="لوگوی برند" class="brand-logo">
+                      <div class="total-price-container">جمع: 
+                        <span class="total-price">${box.totalPrice.toLocaleString()}</span>
+                       تومان
+                      </div>
+                      <div class="quantity-box">
+                          <button class="quantity-btn"><i class="fa fa-minus"></i></button>
+                          <span class="quantity-value number">${box.quantity}</span>
+                          <button class="quantity-btn"><i class="fa fa-plus"></i></button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        `)
+  
+        settingSliderSwiper();
+        settingSliderGlide();
+        clickButtonsProduct();
+        clickAddBookMark();
+        buttonsShoppingCart()
+      })
+      
+    } else {
+      document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`)
+    }
   }
-
 }
 
 //! modal تابع ساخت و نمایش
@@ -157,8 +164,8 @@ let showModal = (text) => {
     document.querySelector(".toast-body").innerHTML = text
 }
 
-// ! اعمال تغییرات دکمه سبد خرید محصول
-let btnBuyProduct = async (element) => {
+// ! اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
+let changeBtnAfterAdd = async (element) => {
     let card = element.closest('.swiper-slide') 
     if (card.querySelector('.add-cart p')) {
         card.querySelector('.btn-cart-box').classList.add("add-cart-active-btn");                                     //* اعمال کلاس جدید کلید سبد خرید 
@@ -171,13 +178,27 @@ let btnBuyProduct = async (element) => {
     }
 }
 
+// ! اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
+let changeBtnAfterDelete = async (element) => {
+    let card = element.closest('.swiper-slide') 
+    if (card.querySelector('.add-cart p')) {
+        card.querySelector('.btn-cart-box').classList.remove("add-cart-active-btn");                                     //* اعمال کلاس جدید کلید سبد خرید 
+        card.querySelector(".add-cart > p").textContent = "اضافه به سبد خرید"                                       //* عنوان کلید سبد خرید 
+        card.querySelector(".add-cart > p").classList.remove('add-cart-active-content')                                //* اعمال کلاس جدید به عنوان کلید سبد خرید                                                     
+        card.querySelector(".add-cart > svg").classList.remove('add-cart-active-content')                             //* اعمال کلاس جدید به ایکون کلید سبد خرید                                                       
+    } else {
+        card.querySelector('.btn-cart-box').classList.remove("buy-button-active");
+        card.querySelector('.btn-cart-box').textContent = "اضافه به سبد خرید"        
+    }
+}
+
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
   let Carts = await allCart()                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
     let title = await titleProduct(btn)                                                           //? دریافت عنوان محصول
     if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
-      btnBuyProduct(btn)      
+      changeBtnAfterAdd(btn)      
     }
   });
 }
@@ -223,7 +244,7 @@ let createProductsAppliances = (element, arrAppliances) => {
                         />
                     </li>
                     </ul>
-                    <div class="not-mark">
+                    <div class="not-mark mark-contain">
                     <svg
                         class="icon-bookmark"
                         xmlns="http://www.w3.org/2000/svg"
@@ -454,7 +475,7 @@ let createBox = (arrCategory) => {
                         />
                       </li>
                     </ul>
-                    <div class="not-mark">
+                    <div class="not-mark mark-contain">
                       <svg
                         class="icon-bookmark"
                         xmlns="http://www.w3.org/2000/svg"
@@ -640,7 +661,7 @@ let createBoxRow = (arrCategory) => {
                       <div class="product-image-container">
                         <div class="swiper-container mySwiper5 h-100">
 
-                          <div class="not-mark">
+                          <div class="not-mark mark-contain">
                             <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                               <path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"></path>
                             </svg>
@@ -658,7 +679,7 @@ let createBoxRow = (arrCategory) => {
                       </div>
 
                       <div class="product-info">
-                          <div class="product-title">${product.name}</div>
+                          <div class="product-title product-title-category">${product.name}</div>
                           <div class="product-rating">⭐⭐⭐⭐☆ (${product.ratings})</div>
                           <div class="product-description">${product.description}</div>
                           <div class="price-container">
@@ -687,7 +708,6 @@ let createBoxRow = (arrCategory) => {
                       </div>
                     </div>
       `);
-          
     });
 
     settingSliderSwiper();
@@ -700,4 +720,5 @@ let createBoxRow = (arrCategory) => {
   }
 }
 
-export {showModal , updateCartNotification ,btnBuyProduct, createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
+
+export {showModal , updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}

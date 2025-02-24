@@ -1,6 +1,7 @@
 // وارد کردن توابع از ماژول‌های دیگر
 import { getIDProductMarkedToJson , allProduct , titleProduct} from "./box.js";
 import { showModal } from "./ui.js";
+import { showAlertLogin } from "../utils.js";
 
 //! تابعی برای دریافت تمام بوکمارک‌ها از سرور
 let allBookmarks = async () => {
@@ -11,23 +12,28 @@ let allBookmarks = async () => {
 
 //! 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
 async function toggleBookmark(event) {
+    let alertLogin = await showAlertLogin()
+    if (!alertLogin) {
+        return false;
+    }
+    let card = event.target.closest('.swiper-slide')
     let title = await titleProduct(event.target)                                                   //* دریافت عنوان محصول
     let isBookMark = await isBookMarkToDB(event)                                                  //* 🔖 بررسی وجود یا عدم وجود محصول در بوکمارک‌ها
-    let newProdect = await getIDProductMarkedToJson(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
-    let idProduct = await getIDProduct(event)                                                   //* گرفتن اطلاعات محصول بر اساس رویداد
-    let getMark = await isBookMark[0].find(mark => mark.name === title)                        //* پیدا کردن بوکمارک بر اساس عنوان محصول
+    let newProduct = await getIDProductMarkedToJson(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
+    let getMark = await isBookMark[0].find(mark => mark.product_name === title)                        //* پیدا کردن بوکمارک بر اساس عنوان محصول
+    // let idProduct = await getIDProduct(event)                                                   //* گرفتن اطلاعات محصول بر اساس رویداد
 
     if (isBookMark[1] === -1) {                                                                        //* اگر محصول در بوکمارک‌ها وجود ندارد
-        addBookMarks(newProdect)                                                                      //* اضافه کردن به لیست بوکمارک‌ها
-        card.querySelector('.box-img > div').classList.add("is-mark");                               //* تغییر استایل برای نمایش بوکمارک بودن
-        card.querySelector('.box-img > div').classList.remove("not-mark");                          //* حذف استایل بوکمارک نبودن
-        showModal(`✅ ${idProduct.title} به لیست علاقه مندی های شما اضافه شد`)                   //* نمایش پیام موفقیت
+        addBookMarks(newProduct)                                                                      //* اضافه کردن به لیست بوکمارک‌ها
+        card.querySelector('.mark-contain').classList.add("is-mark");                               //* تغییر استایل برای نمایش بوکمارک بودن
+        card.querySelector('.mark-contain').classList.remove("not-mark");                          //* حذف استایل بوکمارک نبودن
+        showModal(`✅ ${title} به لیست علاقه مندی های شما اضافه شد`)                   //* نمایش پیام موفقیت
 
     } else {                                                                                             //* اگر محصول قبلاً در بوکمارک‌ها باشد
         removeBookMarkItem(getMark.id)                                                                  //* حذف از لیست بوکمارک‌ها
-        card.querySelector('.box-img > div').classList.remove("is-mark");                              //* تغییر استایل
-        card.querySelector('.box-img > div').classList.add("not-mark");                               //* تغییر استایل
-        showModal(`❌ ${idProduct.title} از لیست علاقه مندی های شما حذف  شد`)                      //* نمایش پیام حذف
+        card.querySelector('.mark-contain').classList.remove("is-mark");                              //* تغییر استایل
+        card.querySelector('.mark-contain').classList.add("not-mark");                               //* تغییر استایل
+        showModal(`❌ ${title} از لیست علاقه مندی های شما حذف  شد`)                      //* نمایش پیام حذف
     }
 }
 

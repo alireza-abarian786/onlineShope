@@ -2006,18 +2006,6 @@
   ],
   "bookmarks": [
     {
-      "id": "m7czkyza",
-      "product_name": "دوربین دیجیتال کانن EOS 90D",
-      "user_id": "1",
-      "product_id": "4"
-    },
-    {
-      "id": "m7erigxf",
-      "product_name": "تبلت اپل iPad Air 2020",
-      "user_id": "1",
-      "product_id": "11"
-    },
-    {
       "id": "m7hmw25u",
       "product_name": "تلویزیون سامسونگ مدل 55TU8000",
       "user_id": "2",
@@ -2028,12 +2016,6 @@
       "product_name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
       "user_id": "2",
       "product_id": "18"
-    },
-    {
-      "id": "m7i2ryc4",
-      "product_name": "بلندگو بلوتوثی",
-      "user_id": "2",
-      "product_id": "1"
     }
   ],
   "blogs": [
@@ -2218,42 +2200,7 @@
       ]
     }
   ],
-  "carts": [
-    {
-      "id": "m7hx8qh8",
-      "user_id": 2,
-      "product_id": 11,
-      "product_name": "تبلت اپل iPad Air 2020",
-      "product_images": [
-        "./src/assets/images/phone/phone-6.jpg",
-        "./src/assets/images/phone/phone-2.jpg",
-        "./src/assets/images/phone/phone-4.jpg"
-      ],
-      "product_description": "تبلت با پردازنده A14 Bionic و صفحه نمایش 10.9 اینچ.",
-      "product_ratings": 4.7,
-      "discount": 700000,
-      "price": 12000000,
-      "quantity": 1,
-      "totalPrice": 700000
-    },
-    {
-      "id": "m7i2rvys",
-      "user_id": 2,
-      "product_id": 1,
-      "product_name": "بلندگو بلوتوثی",
-      "product_images": [
-        "./src/assets/images/digitals/digital-2.jpg",
-        "./src/assets/images/digitals/digital-3.webp",
-        "./src/assets/images/digitals/digital-4.jpg"
-      ],
-      "product_description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
-      "product_ratings": 4.5,
-      "discount": 10000,
-      "price": 1500000,
-      "quantity": 1,
-      "totalPrice": 10000
-    }
-  ],
+  "carts": [],
   "orders": [
     {
       "id": "1",
