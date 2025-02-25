@@ -1,14 +1,14 @@
 import { initializeCart } from "./cart.js";
 import { initializeNavigation } from "./navigation.js";
-import { toggleCart, closeCart , fetchAllCartItems , finalBuyCartFunc} from "./cart.js";
-import { isLogin} from "../utils.js";
+import { toggleCart, closeCart , finalBuyCartFunc} from "./cart.js";
+import { isLogin , fetchDataFromApi} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide} from "../sliders.js";
 import { showModal , updateCartNotification , initializeStatusCarts , initializeStatusMarks} from "./ui.js";
 
 //! رویداد بارگذاری صفحه
 document.addEventListener('DOMContentLoaded', async () => {      
-    let Carts = await fetchAllCartItems()                      //* دریافت سبد خرید 
+    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                      //* دریافت سبد خرید 
     settingSliderGlide()                            //* 🛒 فراخوانی اسلایدر عکس های محصولات
     initializeCart()                               //* 🛒 فراخوانی توابع محتوای سبد خرید
     initializeNavigation();                       //* ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول

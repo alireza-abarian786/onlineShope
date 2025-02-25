@@ -42,8 +42,8 @@ let getCatgoryFunc = async () => {
 //! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => { 
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
-  let Marks = await allBookmarks();                                                                  //* دریافت لیست بوکمارک‌ها
-  let Carts = await fetchAllCartItems()                                                                       //* دریافت سبد خرید
+  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                                                  //* دریافت لیست بوکمارک‌ها
+  let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                      //* دریافت سبد خرید
   let Products = await fetchDataFromApi('http://localhost:4000/products');                                                                //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCatgoryFunc()                                                 //* محصولات فیلتر شده 
 

@@ -1,6 +1,6 @@
-import { initTooltips } from "../utils.js";
-import { fetchAllCartItems , attachCartEventListeners} from "./cart.js";
-import { allBookmarks , clickAddBookMark} from "./bookMarks.js";
+import { initTooltips , fetchDataFromApi} from "../utils.js";
+import { attachCartEventListeners} from "./cart.js";
+import { clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners , extractProductTitle} from "./box.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
@@ -193,7 +193,7 @@ let changeBtnAfterDelete = async (element) => {
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
-  let Carts = await fetchAllCartItems()                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
+  let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
     let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
     if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
@@ -204,7 +204,7 @@ async function initializeStatusCarts() {
 
 //! ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusMarks() {    
-  let Marks = await allBookmarks()                                                         //? دریافت اطلاعات تمام بوکمارک‌ها 
+  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                                          //? دریافت اطلاعات تمام بوکمارک‌ها 
   document.querySelectorAll('.icon-bookmark').forEach( async btn => {                     //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید   
     let title = await extractProductTitle(btn)                                                  //? دریافت عنوان محصول
     if (Marks.some(item => item.product_name === title)) {                              //? اگر محصول در لیست بوکمارک‌ ها بود
@@ -729,5 +729,15 @@ const updateArrowButtonColors = (btn, nextBtnColor, prevBtnColor) => {
     }
 };
 
+function updateBookmarkUI(card, isMarked) {
+  if (isMarked) {
+      card.querySelector('.mark-contain').classList.add("is-mark");                             //* تغییر استایل برای نمایش بوکمارک بودن
+      card.querySelector('.mark-contain').classList.remove("not-mark");                         //* حذف استایل بوکمارک نبودن
+  } else {
+      card.querySelector('.mark-contain').classList.remove("is-mark");
+      card.querySelector('.mark-contain').classList.add("not-mark");
+  }
+}
 
-export {showModal , updateArrowButtonColors, updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
+
+export {showModal , updateArrowButtonColors, updateBookmarkUI, updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
