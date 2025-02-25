@@ -3,13 +3,6 @@ import { fetchProductFromDatabase , fetchUserFromDatabase, extractProductTitle} 
 import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 // -------------------------------------------------------------------------------------
 
-//! دریافت لیست سبد خرید از سرور
-// let fetchAllCartItems = async () => {
-//     let res = await fetch('http://localhost:4000/carts')
-//     let data = await res.json()
-//     return data
-// }
-
 //!🛒 تابع بررسی وجود یا عدم وجود محصول در سبد خرید
 async function addToCart(event) {
     let product = await fetchProductFromDatabase(event)                   //* دریافت اصلاعات محصول مورد نظر
@@ -22,7 +15,7 @@ async function addToCart(event) {
         product_name: product.name,
         product_images: product.images,
         product_description: product.description,
-        product_ratings: product.ratings,
+        product_ratings: +product.ratings,
         discount: +product.discount,
         price: +product.price,
         quantity: 1,

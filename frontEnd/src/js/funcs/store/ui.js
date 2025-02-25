@@ -66,14 +66,14 @@ export function renderCartItems(cartItems) {
 // ! ساخت باکس های محصولات داخل صفحه ی سبد خرید
 let createBoxToPageCart = async (shoppingCartProduct) => {
   
-  if (document.querySelector('.cart-box-container')) {
-    document.querySelector('.cart-box-container').textContent = ''; 
+  if (document.querySelector('.container-Product-cards')) {
+    document.querySelector('.container-Product-cards').textContent = ''; 
 
     if (shoppingCartProduct.length) {
-      shoppingCartProduct.forEach(box => {      
-        document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend' , `
+      shoppingCartProduct.forEach(async box => {      
+        document.querySelector('.container-Product-cards').insertAdjacentHTML('beforeend' , `
                   <div class="cart-item swiper-slide">
-                <button class="delete-btn"><i class="fa fa-trash"></i> حذف</button>
+                <button class="delete-btn"><i class="fas fa-trash-alt"></i>&nbsp حذف</button>
                 <div class="product-image">
                   <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
     
@@ -94,11 +94,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                         <span>وزن: ۱.۵ کیلوگرم</span>
                     </div>
                     <div class="score">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        ${await createStars(box.product_ratings)}
                         <span>(${box.product_ratings})</span>
                     </div>
                     <div class="description">${box.product_description}</div>
@@ -113,9 +109,9 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                        تومان
                       </div>
                       <div class="quantity-box">
-                          <button class="quantity-btn"><i class="fa fa-minus"></i></button>
+                          <button class="quantity-btn"><i class="fas fa-minus"></i></button>
                           <span class="quantity-value number">${box.quantity}</span>
-                          <button class="quantity-btn"><i class="fa fa-plus"></i></button>
+                          <button class="quantity-btn"><i class="fas fa-plus"></i></button>
                       </div>
                     </div>
                 </div>
@@ -130,10 +126,26 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
       })
       
     } else {
-      document.querySelector('.cart-box-container').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`)
+      document.querySelector('.container-Product-cards').textContent = ''; 
+      document.querySelector('.container-Product-cards').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center border-0'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`)
     }
   }
 }
+
+let createStars = async (rating) => {  
+  return Array.from({length:5} , (_ , i) => {
+    if (i < Math.floor(rating)) {
+      return `<i class="fas fa-star"></i>`
+    } else if (i - 1 < rating && i >= Math.floor(rating)) {
+      let percentage = (rating % 1) * 100
+      return `<i class='fas fa-star' style="clip-path: inset(0 ${100 - percentage}% 0 0 );"></i>`
+    } else {
+      return `<i class="far fa-star"></i>`
+    }
+  }).join('')
+}
+
+
 
 //! modal تابع ساخت و نمایش
 let showModal = (text) => {                                                                                        
@@ -653,7 +665,7 @@ let createBoxRow = (arrCategory) => {
   document.querySelector('.cantainer-category__footer').innerHTML = ''                               //? پاک کردن محتوای قبلی
 
   if (arrCategory.length) {                                                                         //? اگر محصولی وجود داشت، نمایش بده
-    arrCategory.forEach(product => {                         
+    arrCategory.forEach(async product => {                         
       document.querySelector('.cantainer-category__footer').insertAdjacentHTML('beforeend', `
 
                     <div class="product-card swiper-slide h-100 product-box">
@@ -679,23 +691,32 @@ let createBoxRow = (arrCategory) => {
 
                       <div class="product-info">
                           <div class="product-title product-title-category">${product.name}</div>
-                          <div class="product-rating">⭐⭐⭐⭐☆ (${product.ratings})</div>
+                          <div class="product-rating">
+                            ${await createStars(product.ratings)}
+                            <span>(${product.ratings})</span>
+                          </div>
                           <div class="product-description">${product.description}</div>
                           <div class="price-container">
 
-                              ${product.discount ? 
-                                `<span class="product-old-price">${product.price.toLocaleString()} تومان
-                                  <span class="discount-label">50% تخفیف</span>
+                          ${
+                              !product.discount
+                              ? 
+                              `<span class="price text-bg-primary rounded fw-bold px-2 position-relative d-flex align-items-center">
+                                تومان
+                                <span class="ms-1 lead p-2 fs-6">${product.price.toLocaleString()}</span>
+                                &nbsp&nbsp:قیمت محصول
+                              </span>`
+                              : 
+                              `<span class="price price-before position-relative d-flex align-items-center">
+                                تومان
+                                <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
                                 </span>
-                                <span class="product-price">${product.discount.toLocaleString()} تومان</span>`
-
-                                : 
-
-                                `<span class="price position-relative d-flex">
-                                  تومان
-                                  <span class="ms-1">${product.price.toLocaleString()}</span>
-                                </span> `
-                              }
+                                <span class="discount d-flex text-white p-2 fs-6">
+                                تومان
+                                <span class="ms-1">${product.discount.toLocaleString()}</span>
+                                &nbsp&nbsp:قیمت با تخفیف
+                              </span>`
+                          }
 
                           </div>
                           <div class="btn-cart-box buy-button">اضافه به سبد خرید</div>

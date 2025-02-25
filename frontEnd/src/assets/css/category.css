@@ -287,7 +287,7 @@
 .product-price {
   font-size: 22px;
   font-weight: bold;
-  background: linear-gradient(45deg, #0d6efd, #0d6efdb0);
+  background: #ff5733;
   /* linear-gradient(45deg, #28a745, #4caf50) */
   color: white;
   padding: 10px 15px;

@@ -1,14 +1,12 @@
 import { searchParams , getSearchProduct , fetchDataFromApi} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
-import { allBookmarks } from "./funcs/store/bookMarks.js";
-import {attachProductEventListeners , fetchAllProducts} from "./funcs/store/box.js";
+import {attachProductEventListeners} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
 import { initializeStatusMarks , initializeStatusCarts} from "./funcs/store/ui.js";
-import { fetchAllCartItems } from "./funcs/store/cart.js";
 import { createBox , createBoxRow} from "./funcs/store/ui.js";
 // -------------------------------------------------------------------------------------------
 
-let boxSerchInput = document.querySelector(".box-search-category")
+let boxSearchInput = document.querySelector(".box-search-category")
 let dropdownCategory = document.querySelector(".dropdown-category")
 let dropdownItem  = document.querySelectorAll(".dropdown-item")
 let iconView  = document.querySelectorAll(".icon-view")
@@ -20,20 +18,12 @@ window.addEventListener("DOMContentLoaded" , () => {
   showSearchProducts()
 })
 
-//! گرفتن تمام دسته بندی ها از سرور
-let getAllCategory = async () => {
-  let res = await fetch(`http://localhost:4000/categories`);
-  let data = await res.json();
-
-  return data;
-}
-
 //! URL فیلتر کردن دسته بندی ها بر اساس
-let getCatgoryFunc = async () => {
+let getCategoryFunc = async () => {
   let url = searchParams('cat');                                                                      //* URL دریافت مقدار دسته‌بندی از  
-  let data = await getAllCategory()                                                                  //* دریافت لیست دسنه بندی ها از سرور
+  let data = await fetchDataFromApi(`http://localhost:4000/categories`);                                                                 //* دریافت لیست دسنه بندی ها از سرور
   let findCategory = await data.find(item => item.urlSearch === url);                               //* URL یافتن دسته مرتبط با مقدار
-  let Products = await fetchDataFromApi('http://localhost:4000/products');                                                               //* دریافت اطلاعات تمام محصولات
+  let Products = await fetchDataFromApi('http://localhost:4000/products');                         //* دریافت اطلاعات تمام محصولات
   let getProductCategory = Products.filter(item => item.category_id == findCategory.id);          //* فیلتر کردن محصولات مرتبط با دسته بندی
   return getProductCategory;
 }
@@ -41,15 +31,15 @@ let getCatgoryFunc = async () => {
 
 //! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => { 
+  // let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                      //* دریافت سبد خرید
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
   let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                                                  //* دریافت لیست بوکمارک‌ها
-  let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                      //* دریافت سبد خرید
   let Products = await fetchDataFromApi('http://localhost:4000/products');                                                                //* دریافت اطلاعات تمام محصولات
-  let getProductCategory = await getCatgoryFunc()                                                 //* محصولات فیلتر شده 
+  let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
 
   if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده
     showSearchProducts(getProductCategory);                                                      //* category تابع سرچ محصولات صفحه
-    changeShowBoxs(getProductCategory)                                                          //* category تابع نمایش محصولات صفحه
+    changeShowBoxes(getProductCategory)                                                          //* category تابع نمایش محصولات صفحه
     setDropdownItem(getProductCategory)                                                        //* category صفحه Dropdown تابع تنظیمات 
 
   } else {                                                                                    //* اگر دسته‌بندی بوکمارک بود، فقط محصولات بوکمارک‌شده را نمایش بده      
@@ -57,7 +47,7 @@ let category = async () => {
       Marks.some(mark => mark.product_id == item.id)
     );
     showSearchProducts(bookmarkedProducts);                                                 //* category تابع سرچ محصولات صفحه
-    changeShowBoxs(bookmarkedProducts)                                                     //* category تابع نمایش محصولات صفحه
+    changeShowBoxes(bookmarkedProducts)                                                     //* category تابع نمایش محصولات صفحه
     setDropdownItem(bookmarkedProducts)                                                   //* category صفحه Dropdown تابع تنظیمات 
   }     
 
@@ -67,10 +57,10 @@ let category = async () => {
 
 //! category تابعی برای جستجوی محصولات داخل 
 let showSearchProducts = async (data) => {
-  boxSerchInput.addEventListener('input', (e) => {
+  boxSearchInput.addEventListener('input', (e) => {
     if (Array.isArray(data)) {
       let showProduct = getSearchProduct(data , 'name' , e.target.value.trim())
-      showProduct.then(res => changeShowBoxs(res))  
+      showProduct.then(res => changeShowBoxes(res))  
     }
   })
 }
@@ -84,7 +74,7 @@ let setDropdownItem = async (getProductCategory) => {
       dropdownCategory.textContent = e.target.textContent  
        
       let sorting = await filteringProducts(e.target.dataset.sorting , getProductCategory)
-      changeShowBoxs(sorting) 
+      changeShowBoxes(sorting) 
     })
   })
 }
@@ -124,7 +114,7 @@ let filteringProducts = async (sortingName , sortingProducts) => {
 }
 
 // ! تغییر حالت باکس ها
-let changeShowBoxs = async (getProductCategory) => {  
+let changeShowBoxes = async (getProductCategory) => {  
   iconView.forEach((item) => {    
     if (item.className.includes('fa-th active-view')) {
       createBox(getProductCategory)

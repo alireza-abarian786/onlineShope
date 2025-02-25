@@ -11,11 +11,8 @@ async function toggleBookmark(event) {
     let title = await extractProductTitle(event.target)                                                   //* دریافت عنوان محصول
     const [marks, markIndex] = await isBookMarkToDB(event);                                             //* 🔖 بررسی وجود یا عدم وجود محصول در بوکمارک‌ها    
 
-    // let newProduct = await createBookmarkProductObject(event)                                       //* دریافت داده‌های محصولی که بوکمارک شده
-    // let getMark = await isBookMark[0].find(mark => mark.product_name === title)                        //* پیدا کردن بوکمارک بر اساس عنوان محصول
-
     if (markIndex === -1) {                                                                        //* اگر محصول در بوکمارک‌ها وجود ندارد
-        await addBookMarks(newProduct)                                                                      //* اضافه کردن به لیست بوکمارک‌ها
+        await addBookMarks(await createBookmarkProductObject(event))                              //* اضافه کردن به لیست بوکمارک‌ها
         updateBookmarkUI(card, true)
         showModal(`✅ ${title} به لیست علاقه مندی های شما اضافه شد`)                   //* نمایش پیام موفقیت
 
@@ -25,8 +22,6 @@ async function toggleBookmark(event) {
         showModal(`❌ ${title} از لیست علاقه مندی های شما حذف  شد`)                      //* نمایش پیام حذف
     }
 }
-
-
 
 //! تابع برای دریافت اطلاعات محصول از روی رویداد
 let getIDProduct = async (event) => {
@@ -79,10 +74,18 @@ let removeBookMarkItem = async (id) => {
     } 
 }
 
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
 //! تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
 let clickAddBookMark = () => {
     document.querySelectorAll('.icon-bookmark').forEach(icon => {                                           //* 🛒 ست کردن رویداد کلیک روی دکمه بوکمارک شدن محصول 
-        icon.addEventListener('click', toggleBookmark);
+        icon.addEventListener('click', debounce(toggleBookmark, 300));
     });
 }
 

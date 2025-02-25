@@ -6,23 +6,26 @@
     <title>Bakharz Store | Carts</title>
 
     <!--? CSS font-awesome-->
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="./public/vendor/font-awesome/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!--? CSS bootstrap-->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css" />
+
     <!--? CSS swiper-->
-    <link rel="stylesheet" href="node_modules/swiper/swiper-bundle.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="./public/vendor/swiper/swiper-bundle.min.css"
+    />
+
     <!--? CSS Glide-->
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
-    <!--? <link
-    
-    <!--? CSS ihover-->
-    <link rel="stylesheet" href="src/assets/css/library/ihover.css"/>
-    
+    <link rel="stylesheet" href="./public/vendor/glide/glide.core.min.css" />
+
     <!--? CSS aos-->
-    <link rel="stylesheet" href="node_modules/aos/dist/aos.css">
+    <link rel="stylesheet" href="./public/vendor/aos/aos.css" />
 
     <!--? custom css file link -->
     <link rel="stylesheet" href="src/assets/css/app.css" />
@@ -30,7 +33,6 @@
   </head>
 
   <body class="overflow-x-hidden">
-
     <!--?? start header -->
     <header class="mx-auto">
       <!--? start menu -->
@@ -258,9 +260,7 @@
 
             <!--? text mnue about -->
             <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
-              <a class="text-decoration-none" href="./about.html"
-                >درباره ما</a
-              >
+              <a class="text-decoration-none" href="./about.html">درباره ما</a>
             </li>
 
             <!--? text mnue guide -->
@@ -568,17 +568,64 @@
       <!--? end box blue bar -->
     </header>
     <!--? finish header -->
-     
 
     <!--? start main -->
     <main>
       <div class="cart-box-container">
-        <!--? Data Loaded From JS -->
+
+        <div class="row">
+
+          <div class="col-4 w-25 box-Payment" style="height: 450px">
+            <div class="cart-collaterals h-100">
+              <div class="cart_totals h-100">
+
+                <aside class="cart-three-sidebar shop_table" style="height: 350px">
+                  <div class="cart-three-sidebar-content bg-white position-relative h-100 rounded-5 d-flex align-items-center justify-content-around flex-column">
+                    <img src="./src/assets/images/total-price.png" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
+
+                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse">: قیمت کل
+                      <div class="d-flex align-items-center">
+                        <span>تومان</span>&nbsp;
+                        <strong class="Total-cart-price"></strong>
+                      </div>
+                    </div>
+
+                    <div class="divider position-relative"></div>
+
+                    <p>
+                      هزینه ارسال در ادامه بر اساس آدرس و نحوه‌ی ارسال محاسبه و
+                      اضافه خواهد شد
+                    </p>
+
+                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse text-danger">: مجموع
+                      <div class="d-flex align-items-center">
+                        <span>تومان</span>&nbsp;
+                        <strong class="Total-cart-price"></strong>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+
+                <div>
+                  <a href="#" class="p-3 btn btn-danger rounded-3 mt-4 d-flex align-items-center justify-content-center w-100">
+                    <i class="fa fa-caret-left"></i>&nbsp;&nbsp;
+                    <span>اقدام به پرداخت</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-8 w-75 p-0 container-Product-cards">
+            <!--? Data Loaded From JS -->
+
+          </div>
+        </div>
 
       </div>
     </main>
     <!--? finish main -->
-
 
     <!--? start header -->
     <footer>
@@ -968,22 +1015,21 @@
     </footer>
     <!--? finish header -->
 
-
     <!--? JavaScript bootstrap-->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 
     <!--? JavaScript swiper-->
-    <script src="node_modules/swiper/swiper-bundle.min.js"></script>
+    <script src="./public/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!--? JavaScript Glide-->
-    <script src="node_modules/@glidejs/glide/dist/glide.min.js"></script>
+    <script src="./public/vendor/glide/glide.min.js"></script>
 
     <!--? JavaScript sweetalert2-->
-    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="./public/vendor/alert/sweetalert2.all.min.js"></script>
 
     <!--? JavaScript aos-->
     <!--? Initialize AOS -->
-    <script src="node_modules/aos/dist/aos.js"></script>
+    <script src="./public/vendor/aos/aos.js"></script>
     <script>
       AOS.init();
     </script>
