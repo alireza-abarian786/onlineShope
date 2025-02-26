@@ -77,8 +77,8 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 async function updateCartButtonState(event) {
     if (! await showAlertLogin()) return false;     
     let product = await fetchProductFromDatabase(event)                                                    //* دریافت اطلاعات محصول از سرور
-    let cartItems = await fetchAllCartItems()                                                                    //* دریافت اطلاعات سبد خرید
-    if (!isProductInCart(product, cartItems)) {                                                                         //* 🛒 اگر محصول در سبد خریدد نبود، افزودن محصول به سبد خرید
+    let cartItems = await fetchDataFromApi('http://localhost:4000/carts')                                                                    //* دریافت اطلاعات سبد خرید
+    if (!isProductInCart(product, cartItems)) {                                                   //* 🛒 اگر محصول در سبد خریدد نبود، افزودن محصول به سبد خرید
         changeBtnAfterAdd(event.target)                                                            //* فراخوانی تابع تغییرات کلید سبد خرید محصول
     } 
 }
@@ -88,19 +88,6 @@ async function addToCartAndToggleButton(event) {
     if (! await showAlertLogin()) return false;     
     await addToCart(event);                                                                          //* فراخوانی تابع ساخت و افزودن به سبد خرید
     await updateCartButtonState(event)                                                                      //* "فراخوانی تغییر دکمه "افزودن به سبد خرید
-}
-
-// ! ذخیره اطلاعات محصول بوکمارک شده
-let createBookmarkProductObject = async (event) => {
-    let productName = await extractProductTitle(event.target)                                      //* دریافت عنوان محصول
-    let product = await fetchProductFromDatabase(event)                                                  //* دریافت اطلاعات محصول از سرور
-    let user = await fetchUserFromDatabase();                                                           //* دریافت اطلاعات یوزر
-    return {                                                                                   //* برگرداندن اطلاعات محصول بوکمارک شده
-        id: Date.now().toString(36),
-        product_name: productName,
-        user_id: user.id,
-        product_id: product.id,
-    };
 }
 
 //! تابع مریوط به دکمه های باکس محصول
@@ -120,4 +107,4 @@ let attachProductEventListeners = async () => {
     });
 }
 
-export {createProductObject , addToCartAndToggleButton , extractProductTitle, updateCartButtonState , createBookmarkProductObject , attachProductEventListeners , fetchAllProducts , fetchProductFromDatabase , fetchUserFromDatabase }
+export {createProductObject , addToCartAndToggleButton , extractProductTitle, updateCartButtonState , attachProductEventListeners , fetchAllProducts , fetchProductFromDatabase , fetchUserFromDatabase }

@@ -5,7 +5,7 @@ function setLocalStorage(key, value) {
 
 // تابع گرفتن مقادیر از لوکال استوریج
 function getLocalStorage(key) {
-    let data = localStorage.getItem(key);
+    let data = localStorage.getItem(key);    
     return data ? JSON.parse(data) : [];
 }
 

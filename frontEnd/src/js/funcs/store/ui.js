@@ -30,7 +30,7 @@ export function renderCartItems(cartItems) {
                             <div class='col'>
                                 <div class='row'>
                                     <div class='col-1 p-0'>
-                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class='fa fa-close'></i> </button>
+                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class='fas fa-circle-xmark'></i> </button>
                                     </div>
                                     <div class='col-11 pe-1'>
                                         <h6 class='bg-white rounded text-center'>${item.product_name}</h6>

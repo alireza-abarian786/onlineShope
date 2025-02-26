@@ -123,9 +123,13 @@ let statusLogin = async () => {
         if (usernameValid && passwordValid && phoneValid) {
 
             let newUser = {
-                username: usernameSignUp.value,
+                id: Date.now().toString(36),
+                name: usernameSignUp.value,
+                email: "sara@example.com",
                 password: passwordSignUp.value,
+                address: "iran",
                 phone: phoneInput.value,
+                registration_date: Date(),
             }
 
             let res = await fetch('http://localhost:4000/users' , {
@@ -137,11 +141,23 @@ let statusLogin = async () => {
             })
             let result = await res.json()
 
-            console.log(result);
             setLocalStorage('login' , result.name);
             let loginName = getLocalStorage('login');                
             isLogin(loginName);
             clearInputSignUp()
+
+            Swal.fire({
+                title: "ثبت نام شما با موفقیت انجام شد",
+                text: "⁉️میخواهید به پنل کاربری خود بروید",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonText: 'بله، برو!',
+                cancelButtonText: 'لغو'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+                }
+            })
         }
 
     } else {

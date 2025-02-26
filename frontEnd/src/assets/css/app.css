@@ -3,6 +3,7 @@
 @import './cart/cart.css';
 @import './footer/footer.css';
 @import './category.css';
+@import './login.css';
 
 /* --------------------------------------------------------------****** Style All ********-------------------------------------------------------------------- */
 
@@ -34,7 +35,6 @@ li {
 .header-image-box,
 .category-box {
   position: relative;
-  /* z-index: -1; */
 }
 
 /* ------------------------------------------------- */
@@ -52,7 +52,6 @@ li {
 
 .header-image-box > div {
   width: 100%;
-  /* background-color: #8497b7; */
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -82,7 +81,6 @@ li {
 }
 
 .ih-item img {
-  /* left: -20px; */
   position: relative;
   width: auto;
   width: 100%;
@@ -160,7 +158,6 @@ li {
   background-size: contain;
   background-repeat: no-repeat;
   background-position-y: center;
-
   display: flex;
   justify-content: end;
   overflow: hidden;
@@ -504,10 +501,8 @@ li {
   width: 20px;
 }
 
-
-
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
-/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
 .arrow-discounts-title {
     width: 10rem;
     color: #fff;

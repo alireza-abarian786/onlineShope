@@ -2002,56 +2002,29 @@
       "address": "Gilan، خیابان انزلی، پلاک ۹۰",
       "phone": "09219012345",
       "registration_date": "2024-08-05"
+    },
+    {
+      "id": "m7m53in0",
+      "name": "alireza",
+      "email": "sara@example.com",
+      "password": "000000000",
+      "address": "iran",
+      "phone": "09301231212",
+      "registration_date": "Wed Feb 26 2025 20:08:24 GMT+0330 (Iran Standard Time)"
     }
   ],
   "bookmarks": [
     {
-      "id": "m7hmw25u",
-      "product_name": "تلویزیون سامسونگ مدل 55TU8000",
-      "user_id": "2",
-      "product_id": "26"
+      "id": "m7m8n80s",
+      "product_name": "تلویزیون سامسونگ 50 اینچ",
+      "user_id": "m7m53in0",
+      "product_id": "3"
     },
     {
-      "id": "m7hn06f2",
-      "product_name": "ماشین ظرفشویی بوش مدل SMS46MI04E",
-      "user_id": "2",
-      "product_id": "18"
-    },
-    {
-      "id": "m7j7fm92",
-      "product_name": "بلندگو بلوتوثی",
-      "user_id": "2",
-      "product_id": "1"
-    },
-    {
-      "id": "m7kdz5t0",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "2",
-      "product_id": "2"
-    },
-    {
-      "id": "m7kdz5t1",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "2",
-      "product_id": "2"
-    },
-    {
-      "id": "m7kdz5t6",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "2",
-      "product_id": "2"
-    },
-    {
-      "id": "m7kdz5t6",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "2",
-      "product_id": "2"
-    },
-    {
-      "id": "m7kdz5td",
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "user_id": "2",
-      "product_id": "2"
+      "id": "m7m8pit0",
+      "product_name": "دوربین دیجیتال کانن EOS 90D",
+      "user_id": "m7m53in0",
+      "product_id": "4"
     }
   ],
   "blogs": [
@@ -2236,59 +2209,7 @@
       ]
     }
   ],
-  "carts": [
-    {
-      "id": "m7kzuuqg",
-      "user_id": 2,
-      "product_id": 1,
-      "product_name": "بلندگو بلوتوثی",
-      "product_images": [
-        "./src/assets/images/digitals/digital-2.jpg",
-        "./src/assets/images/digitals/digital-3.webp",
-        "./src/assets/images/digitals/digital-4.jpg"
-      ],
-      "product_description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
-      "product_ratings": 4.5,
-      "discount": 10000,
-      "price": 1500000,
-      "quantity": 1,
-      "totalPrice": 10000
-    },
-    {
-      "id": "m7l0rs50",
-      "user_id": 2,
-      "product_id": 20,
-      "product_name": "تلفن بی‌سیم پاناسونیک KX-TGC220",
-      "product_images": [
-        "./src/assets/images/phone/phone-6.jpg",
-        "./src/assets/images/phone/phone-2.jpg",
-        "./src/assets/images/phone/phone-4.jpg"
-      ],
-      "product_description": "تلفن بی‌سیم با قابلیت تماس واضح و طراحی زیبا.",
-      "product_ratings": 4.3,
-      "discount": null,
-      "price": 1500000,
-      "quantity": 1,
-      "totalPrice": 1500000
-    },
-    {
-      "id": "m7l0sbzl",
-      "user_id": 2,
-      "product_id": 14,
-      "product_name": "کفش زنانه آدیداس Ultraboost",
-      "product_images": [
-        "./src/assets/images/tools/tools-1.jpg",
-        "./src/assets/images/tools/tools-2.jpg",
-        "./src/assets/images/tools/tools-3.jpg"
-      ],
-      "product_description": "کفش آدیداس با تکنولوژی Boost برای راحتی بیشتر در حرکت.",
-      "product_ratings": 4.9,
-      "discount": 200000,
-      "price": 3000000,
-      "quantity": 1,
-      "totalPrice": 200000
-    }
-  ],
+  "carts": [],
   "orders": [
     {
       "id": "1",

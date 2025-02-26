@@ -15,7 +15,7 @@ let iconView  = document.querySelectorAll(".icon-view")
 //! رویداد بارگذاری صفحه
 window.addEventListener("DOMContentLoaded" , () => {
   category()
-  showSearchProducts()
+  // showSearchProducts()
 })
 
 //! URL فیلتر کردن دسته بندی ها بر اساس
@@ -118,7 +118,9 @@ let changeShowBoxes = async (getProductCategory) => {
   iconView.forEach((item) => {    
     if (item.className.includes('fa-th active-view')) {
       createBox(getProductCategory)
-    } else {
+    }
+
+    if (item.className.includes('fa-list active-view')) {
       createBoxRow(getProductCategory)
     }
 
@@ -137,11 +139,11 @@ let changeShowBoxes = async (getProductCategory) => {
       initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
       initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
     })
-    attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
-    clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
-    settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
-    initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-    initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+    // attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
+    // clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
+    // settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
+    // initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+    // initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
   })
 
   
