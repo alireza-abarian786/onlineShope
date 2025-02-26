@@ -124,28 +124,22 @@ let changeShowBoxes = async (getProductCategory) => {
       createBoxRow(getProductCategory)
     }
 
-    
     item.addEventListener('click', async (e) => {
       iconView.forEach((item) => item.classList.remove('active-view'));      
       e.target.classList.add('active-view')
+
       if (String(e.target.classList).includes('fa-list')) {
         createBoxRow(getProductCategory)
       } else {
         createBox(getProductCategory)
       }
-      attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
+
+      attachProductEventListeners();                                                            //* دکمه سبد خرید محصول
       clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
       settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
       initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
       initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
     })
-    // attachProductEventListeners();                                                                    //* دکمه سبد خرید محصول
-    // clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
-    // settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
-    // initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-    // initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
   })
-
-  
 }
 

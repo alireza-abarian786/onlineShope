@@ -3,7 +3,6 @@ import { showModal , updateBookmarkUI} from "./ui.js";
 import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 // -------------------------------------------------------------------------------------------------
 
-let isClickAddBookMarkSet = false
 // -------------------------------------------------------------------------------------------------
 
 //! 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
@@ -91,22 +90,10 @@ let removeBookMarkItem = async (id) => {
     } 
 }
 
-// ! برای جلوگیری از تکرار مکرر کاربر debounce تابع
-function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
-    };
-}
-
 //! تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
-let clickAddBookMark = () => {
-    if (isClickAddBookMarkSet) return;                                                            //* اگه قبلاً فراخوانی شده باشد، تابع را متوقف کن
-
-    isClickAddBookMarkSet = true;
+let clickAddBookMark = () => {        
     document.querySelectorAll('.icon-bookmark').forEach(icon => {
-        icon.addEventListener('click', debounce(toggleBookmark, 500));
+        icon.addEventListener('click', toggleBookmark);
     });
 }
 

@@ -2011,20 +2011,23 @@
       "address": "iran",
       "phone": "09301231212",
       "registration_date": "Wed Feb 26 2025 20:08:24 GMT+0330 (Iran Standard Time)"
+    },
+    {
+      "id": "m7max5s1",
+      "name": "علیرضا",
+      "email": "sara@example.com",
+      "password": "0000000000",
+      "address": "iran",
+      "phone": "09301231212",
+      "registration_date": "Wed Feb 26 2025 22:51:25 GMT+0330 (Iran Standard Time)"
     }
   ],
   "bookmarks": [
     {
-      "id": "m7m8n80s",
-      "product_name": "تلویزیون سامسونگ 50 اینچ",
+      "id": "m7md7nt2",
+      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
       "user_id": "m7m53in0",
-      "product_id": "3"
-    },
-    {
-      "id": "m7m8pit0",
-      "product_name": "دوربین دیجیتال کانن EOS 90D",
-      "user_id": "m7m53in0",
-      "product_id": "4"
+      "product_id": "2"
     }
   ],
   "blogs": [
@@ -2209,7 +2212,42 @@
       ]
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "m7mc88vv",
+      "user_id": null,
+      "product_id": 4,
+      "product_name": "دوربین دیجیتال کانن EOS 90D",
+      "product_images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "product_description": "دوربین حرفه‌ای کانن با حسگر APS-C و قابلیت فیلمبرداری 4K.",
+      "product_ratings": 4.9,
+      "discount": 200000,
+      "price": 25000000,
+      "quantity": 1,
+      "totalPrice": 200000
+    },
+    {
+      "id": "m7mctudz",
+      "user_id": null,
+      "product_id": 2,
+      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
+      "product_images": [
+        "./src/assets/images/phone/phone-6.jpg",
+        "./src/assets/images/phone/phone-2.jpg",
+        "./src/assets/images/phone/phone-4.jpg"
+      ],
+      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
+      "product_ratings": 4.8,
+      "discount": 500000,
+      "price": 20000000,
+      "quantity": 1,
+      "totalPrice": 500000
+    }
+  ],
   "orders": [
     {
       "id": "1",

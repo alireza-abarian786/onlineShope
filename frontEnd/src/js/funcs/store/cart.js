@@ -1,6 +1,10 @@
 import {  updateCartNotification , renderCartItems , changeBtnAfterDelete , showModal , createBoxToPageCart} from "./ui.js";
 import { fetchProductFromDatabase , fetchUserFromDatabase, extractProductTitle} from "./box.js";
 import { showAlertLogin , fetchDataFromApi} from "../utils.js";
+import { totalPaymentFunc } from "../../shoppingCart.js";
+// -------------------------------------------------------------------------------------
+
+let price;
 // -------------------------------------------------------------------------------------
 
 //!🛒 تابع بررسی وجود یا عدم وجود محصول در سبد خرید
@@ -82,40 +86,35 @@ async function initializeCart() {
 
 //! ❌ تابع حذف محصول از سبد خرید
 async function removeFromCart(event) {
+    // let openCart = document.querySelector('.open-cart');
+    // let cantainerOpenCart = document.querySelector('.cantainer-open-cart');
     if (! await showAlertLogin()) return false;     
     let titleCart = await extractProductTitle(event.target)
-    let cantainerOpenCart = document.querySelector('.cantainer-open-cart');
-    let openCart = document.querySelector('.open-cart');
     let notifCart = document.querySelector('.notif-cart');
-    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                          //* دریافت اطلاعات سبد خرید
+    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                   //* دریافت اطلاعات سبد خرید
     let productTarget = await Carts.find(cart => cart.product_name === titleCart)                       //* پیدا کردن محصول مورد نظر
     await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})                //* ارسال درخواست حذف به سرور
 
-    //* 🛒 بررسی وضعیت سبد خرید
-    if (Carts.length <= 0) {                                                                         //* در صورت خالی شدن سبد خرید، سبد را ببند
-        cantainerOpenCart.style.visibility = 'hidden';
-        openCart.classList.remove('is-content');
-        notifCart.classList.remove('is-notif');        
-    }
-    // notifCart.classList.remove('is-notif');                                                                                                    
-    document.querySelectorAll('.product-box').forEach(async box => {                                  //*❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
-        let titleBox = await extractProductTitle(box)                                                        //* دریافت عنوان محصول
+    document.querySelectorAll('.product-box').forEach(async box => {                                    //*❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
+        let titleBox = await extractProductTitle(box)                                                  //* دریافت عنوان محصول
         if (titleCart === titleBox) {
-            changeBtnAfterDelete(box)                                                                          //* ✅ تغییر محتوای دکمه افزودن به سبد خرید
+            changeBtnAfterDelete(box)                                                                 //* ✅ تغییر محتوای دکمه افزودن به سبد خرید
         }
     })
     showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
-    finalBuyCartFunc() 
-    let updateCart = await fetchDataFromApi('http://localhost:4000/carts');
-    const alertCart = document.querySelector('.alert-cart');    
-    if (updateCart.length <= 0) {        
+
+    let updateCart = await fetchDataFromApi('http://localhost:4000/carts');                            //* فراخوانی ایتم های وجود در سبد خرید
+    const alertCart = document.querySelector('.alert-cart');                                          //* تعریف و انتخاب المنت حاوی پیام خالی بودن سبد
+    if (updateCart.length <= 0) {                                                                    //* 🛒 بررسی وضعیت سبد خرید
         alertCart.classList.add('d-block');
         alertCart.classList.remove('d-none');
-    }      
+        notifCart.classList.remove('is-notif');        
+    }
     renderCartItems(updateCart) 
+    totalPaymentFunc()
+    finalBuyCartFunc() 
 }
 
-let price;
 //!🛒 تابع زیاد کردن تعداد محصول در سبد خرید
 async function increaseQuantity(event) { 
     if (! await showAlertLogin()) return false;        
@@ -161,6 +160,10 @@ let editeDataProductToDB = async (numberElement , objProduct , price) => {
         },
         body: JSON.stringify(editeCart)
     })
+
+    totalPaymentFunc()
+    finalBuyCartFunc()
+
 }
 
 //!🛒 تابع کم کردن تعداد محصول در سبد خرید
@@ -186,6 +189,7 @@ async function decreaseQuantity(event) {
     editeDataProductToDB(numberElement , objProduct , price)                                 //* اعمال تغییرات جدید در دیتابیس
     numberElement.innerHTML = numberElement.innerHTML                                       //* quantity دادن مقدار جدید به 
     priceElem.textContent = price.toLocaleString()                                         //* اعمال قیمت جدید
+    totalPaymentFunc()
 }
 
 //!🛒 تابع حذف همه موارد موجود از سبد خرید
@@ -203,6 +207,7 @@ async function removeAllFromCart(event) {
         changeBtnAfterDelete(box)                                                              //* ✅ تغییر محتوای دکمه
     })
     showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
+    totalPaymentFunc()
 }
 
 //! تابع حذف تمام محصولات سبد خرید
@@ -264,7 +269,6 @@ function closeCart() {
             if (cartItems.length > 0) {                                                    //* اگر سبد خرید خالی نبود نوتیف ان را ظاهر کن
                 notifCart.classList.add('is-notif');
             }
-            finalBuyCartFunc()
         }
     });
 }

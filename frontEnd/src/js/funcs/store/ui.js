@@ -649,7 +649,6 @@ let createBox = (arrCategory) => {
           
       `);
           
-      settingSliderSwiper();
       settingSliderGlide();
       attachProductEventListeners();
       clickAddBookMark();
@@ -728,12 +727,11 @@ let createBoxRow = (arrCategory) => {
                       </div>
                     </div>
       `);
-    });
 
-    settingSliderSwiper();
-    settingSliderGlide();
-    attachProductEventListeners();
-    clickAddBookMark();
+      settingSliderSwiper();
+      attachProductEventListeners();
+      clickAddBookMark();
+    });
 
   } else {                                                                                          //? اگر محصولی پیدا نشد، پیام خطا نمایش بده
     document.querySelector('.cantainer-category__footer').insertAdjacentHTML('beforeend', `<div class='alert alert-danger w-100 text-center'>:( کالای مورد نظر شما یافت نشد ):</div>`)
