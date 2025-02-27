@@ -13,7 +13,7 @@ async function updateCartNotification() {
 }
 
 //! 🛒 تابع ساخت باکس محصول در سبد خرید
-export function renderCartItems(cartItems) {
+export function renderCartItems(cartItems) {  
     const container = document.querySelector('.cantain-box-goods');
     container.innerHTML = '';                                                                   //? پاک کردن آیتم‌های قبلی                                                                              
     cartItems.forEach((item) => {                                                              //?🛒 ساخت باکس محصول و افزودن به سبد خرید           
@@ -193,10 +193,10 @@ let changeBtnAfterAdd = async (element) => {
 // ! اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
 let changeBtnAfterDelete = async (element) => {  
   document.querySelectorAll('.product-box').forEach(async box => {                                    
-    let titleCart = await extractProductTitle(box)                                                                    //* دریافت عنوان کارت
-    let titleBox = await extractProductTitle(box)                                                                        //* دریافت عنوان محصول
+    let titleBox = await extractProductTitle(element)                                                                     //* دریافت عنوان محصول
+    let titleCart = await extractProductTitle(box)                                                                       //* دریافت عنوان کارت
     let card = box.closest('.swiper-slide')                                                                             //* دریافت کارت محصول
-
+  
     if (titleCart === titleBox) {                                                                                     //* اگر عنوان محصول و عنوان کارت یکی بود
       if (card.querySelector('.add-cart p')) {                                                                       //* حالت ستونی
           card.querySelector('.btn-cart-box').classList.remove("add-cart-active-btn");                              //* اعمال کلاس جدید کلید سبد خرید 
@@ -208,7 +208,7 @@ let changeBtnAfterDelete = async (element) => {
           card.querySelector('.btn-cart-box').textContent = "اضافه به سبد خرید"        
       }
     }
-})
+  })
 }
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب

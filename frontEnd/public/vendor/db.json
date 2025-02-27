@@ -2205,7 +2205,24 @@
       ]
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "m7nolvrs",
+      "user_id": null,
+      "product_id": 1,
+      "product_name": "بلندگو بلوتوثی",
+      "product_images": [
+        "./src/assets/images/digitals/digital-2.jpg",
+        "./src/assets/images/digitals/digital-3.webp",
+        "./src/assets/images/digitals/digital-4.jpg"
+      ],
+      "product_description": "بلندگو بلوتوثی با صدای قدرتمند و باتری ۲۰ ساعته.",
+      "discount": 10000,
+      "price": 1500000,
+      "quantity": 3,
+      "totalPrice": 30000
+    }
+  ],
   "orders": [
     {
       "id": "1",

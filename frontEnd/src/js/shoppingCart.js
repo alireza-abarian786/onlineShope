@@ -1,4 +1,4 @@
-import { removeFromCart ,finalBuyCartFunc , increaseQuantity , decreaseQuantity} from "./funcs/store/cart.js"
+import { removeFromCart ,finalBuyCartFunc , updateQuantity} from "./funcs/store/cart.js"
 import { fetchDataFromApi } from "./funcs/utils.js"
 // -----------------------------------------------------------------------------------------------------------------------
 
@@ -16,10 +16,10 @@ function buttonsShoppingCart() {
         btn.addEventListener('click', removeFromCart)
     })
     document.querySelectorAll('.fa-plus').forEach(btn => {
-        btn.addEventListener('click', increaseQuantity)
+        btn.addEventListener('click', (event) => updateQuantity(event , 'increase'))
     })
     document.querySelectorAll('.fa-minus').forEach(btn => {
-        btn.addEventListener('click', decreaseQuantity)
+        btn.addEventListener('click', (event) => updateQuantity(event , 'decrease'))
     })
 }
 

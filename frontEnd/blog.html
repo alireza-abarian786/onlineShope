@@ -6,23 +6,23 @@
     <title>Bakharz Store | Blog</title>
 
     <!--? CSS font-awesome-->
-    <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./public/vendor/font-awesome/font-awesome.min.css">
     
     <!--? CSS bootstrap-->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css">
     
     <!--? CSS swiper-->
-    <link rel="stylesheet" href="./node_modules/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./public/vendor/swiper/swiper-bundle.min.css">
     
     <!--? CSS Glide-->
-    <link rel="stylesheet" href="./node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="./public/vendor/glide/glide.core.min.css">
     
     <!--? CSS aos-->
-    <link rel="stylesheet" href="./node_modules/aos/dist/aos.css">
+    <link rel="stylesheet" href="./public/vendor/aos/aos.css">
 
     <!--? custom css file link -->
-    <link rel="stylesheet" href="./src/assets/css/app.css" />
-    <link rel="stylesheet" href="./src/assets/css/mediaQuery.css" />
+    <link rel="stylesheet" href="src/assets/css/app.css" />
+    <link rel="stylesheet" href="src/assets/css/mediaQuery.css" />
 </head>
 <body>
 
@@ -362,7 +362,7 @@
 
           <!--? btn cart -->
           <div class="cantainer-open-cart">
-            <div class="open-cart">
+            <div class="open-cart swiper-slide">
               <div class="cantain-box-goods"></div>
               <div class="alert alert-danger alert-cart d-none">
                 🛒 هیچ محصولی در سبد موجود نمیباشد
@@ -802,23 +802,26 @@
 
 
     <!--? JavaScript bootstrap-->
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
 
     <!--? JavaScript swiper-->
-    <script src="./node_modules/swiper/swiper-bundle.min.js"></script>
+    <script src="./public/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!--? JavaScript Glide-->
-    <script src="./node_modules/@glidejs/glide/dist/glide.min.js"></script>
+    <script src="./public/vendor/glide/glide.min.js"></script>
+
+    <!--? JavaScript sweetalert2-->
+    <script src="./public/vendor/alert/sweetalert2.all.min.js"></script>
 
     <!--? JavaScript aos-->
     <!--? Initialize AOS -->
-    <script src="./node_modules/aos/dist/aos.js"></script>
+    <script src="./public/vendor/aos/aos.js"></script>
     <script>
       AOS.init();
     </script>
 
-    <!--? custom files -->
-    <script type="module" src="./src/js/main.js"></script>
+    <!-- custom files -->
+    <script type="module" src="src/js/main.js"></script>
     <script type="module" src="./src/js/blog.js"></script>
 </body>
 </html>

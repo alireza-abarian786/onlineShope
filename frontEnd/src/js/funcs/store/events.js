@@ -1,25 +1,18 @@
-import { initializeCart } from "./cart.js";
-import { initializeNavigation } from "./navigation.js";
-import { toggleCart, closeCart , finalBuyCartFunc} from "./cart.js";
-import { isLogin , fetchDataFromApi} from "../utils.js";
+import { toggleCart, closeCart , initializeCart} from "./cart.js";
+import { isLogin} from "../utils.js";
 import { getLocalStorage } from "./storage.js";
 import { settingSliderGlide} from "../sliders.js";
-import { showModal , updateCartNotification , initializeStatusCarts , initializeStatusMarks} from "./ui.js";
+import { showModal , initializeStatusCarts , initializeStatusMarks} from "./ui.js";
 
 //! رویداد بارگذاری صفحه
 document.addEventListener('DOMContentLoaded', async () => {      
-    // let Carts = await fetchDataFromApi('http://localhost:4000/carts');                      //* دریافت سبد خرید     
     settingSliderGlide()                            //* 🛒 فراخوانی اسلایدر عکس های محصولات
     initializeCart()                               //* 🛒 فراخوانی توابع محتوای سبد خرید
-    initializeNavigation();                       //* ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
     toggleCart();                                //* 🛒 فراخوانی تابع باز کردن سبد خرید
     closeCart();                                //*❌ فراخوانی تابع بستن سبد خرید
     isLogin(getLocalStorage('login'))          //* بررسی وضعیت لاگین کاربر
-    // updateCartNotification()             //* نمایش نوتیف سبد خرید
-
-    initializeStatusMarks();                //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-    initializeStatusCarts();               //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
-    // finalBuyCartFunc()
+    initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+    initializeStatusCarts();                 //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 });
 
 // document.addEventListener('DOMContentLoaded', () => {            

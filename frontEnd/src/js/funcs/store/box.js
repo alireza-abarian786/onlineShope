@@ -6,7 +6,7 @@ import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 
 // ! دریافت عنوان محصول
 let extractProductTitle = (element) => {
-    let card = element.closest('.swiper-slide')                                                                //* پیدا کردن کارت محصول از روی رویداد کلیک    
+    let card = element.closest('.swiper-slide')                                                                //* پیدا کردن کارت محصول از روی رویداد کلیک        
     if (card.querySelector("h6")) {                                                                              
       return card.querySelector("h6").textContent;                                                             //* ارسال عنوان محصول در صورتی که ساختار ستونی بود
     } else {                                                                                                   
