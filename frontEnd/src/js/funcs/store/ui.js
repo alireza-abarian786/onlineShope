@@ -6,9 +6,10 @@ import { attachProductEventListeners , extractProductTitle} from "./box.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
-async function updateCartNotification(cartItems) {    
-    const notifCart = document.querySelector('.notif-cart');
-    notifCart.classList.toggle('is-notif', cartItems.length > 0);
+async function updateCartNotification() {
+  let data = await fetchDataFromApi('http://localhost:4000/carts');                                               //* دریافت لیست کل سبد خرید  
+  let notifCart = document.querySelector('.notif-cart');
+  notifCart.classList.toggle('is-notif', data.length > 0);
 }
 
 //! 🛒 تابع ساخت باکس محصول در سبد خرید
@@ -190,17 +191,24 @@ let changeBtnAfterAdd = async (element) => {
 }
 
 // ! اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
-let changeBtnAfterDelete = async (element) => {
-    let card = element.closest('.swiper-slide') 
-    if (card.querySelector('.add-cart p')) {
-        card.querySelector('.btn-cart-box').classList.remove("add-cart-active-btn");                                     //* اعمال کلاس جدید کلید سبد خرید 
-        card.querySelector(".add-cart > p").textContent = "اضافه به سبد خرید"                                       //* عنوان کلید سبد خرید 
-        card.querySelector(".add-cart > p").classList.remove('add-cart-active-content')                                //* اعمال کلاس جدید به عنوان کلید سبد خرید                                                     
-        card.querySelector(".add-cart > svg").classList.remove('add-cart-active-content')                             //* اعمال کلاس جدید به ایکون کلید سبد خرید                                                       
-    } else {
-        card.querySelector('.btn-cart-box').classList.remove("buy-button-active");
-        card.querySelector('.btn-cart-box').textContent = "اضافه به سبد خرید"        
+let changeBtnAfterDelete = async (element) => {  
+  document.querySelectorAll('.product-box').forEach(async box => {                                    
+    let titleCart = await extractProductTitle(box)                                                                    //* دریافت عنوان کارت
+    let titleBox = await extractProductTitle(box)                                                                        //* دریافت عنوان محصول
+    let card = box.closest('.swiper-slide')                                                                             //* دریافت کارت محصول
+
+    if (titleCart === titleBox) {                                                                                     //* اگر عنوان محصول و عنوان کارت یکی بود
+      if (card.querySelector('.add-cart p')) {                                                                       //* حالت ستونی
+          card.querySelector('.btn-cart-box').classList.remove("add-cart-active-btn");                              //* اعمال کلاس جدید کلید سبد خرید 
+          card.querySelector(".add-cart > p").textContent = "اضافه به سبد خرید"                                   //* عنوان کلید سبد خرید 
+          card.querySelector(".add-cart > p").classList.remove('add-cart-active-content')                         //* اعمال کلاس جدید به عنوان کلید سبد خرید                                                     
+          card.querySelector(".add-cart > svg").classList.remove('add-cart-active-content')                      //* اعمال کلاس جدید به ایکون کلید سبد خرید                                                       
+      } else {                                                                                                  //* حالت ردیفی
+          card.querySelector('.btn-cart-box').classList.remove("buy-button-active");
+          card.querySelector('.btn-cart-box').textContent = "اضافه به سبد خرید"        
+      }
     }
+})
 }
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب

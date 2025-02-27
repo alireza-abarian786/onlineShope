@@ -9,10 +9,29 @@ let price;
 
 //!🛒 تابع بررسی وجود یا عدم وجود محصول در سبد خرید
 async function addToCart(event) {
-    let product = await fetchProductFromDatabase(event)                   //* دریافت اصلاعات محصول مورد نظر
-    let user = await fetchUserFromDatabase();                            //* دریافت اطلاعات کاربر انجام دهنده
-    let data = await fetchDataFromApi('http://localhost:4000/carts');                                   //* دریافت لیست سبد خرید    
-    let newCart = {                                              //* ذخیره اطلاعات محصول جدید سبد خرید
+    let product = await fetchProductFromDatabase(event)                                                              //* دریافت اصلاعات محصول مورد نظر
+    let data = await fetchDataFromApi('http://localhost:4000/carts');                                               //* دریافت لیست کل سبد خرید  
+    let newCart = await newProductData(product)                                                                    //* اطلاعات محصول جدید سبد خرید
+    let exists = data.some(item => item.product_id == product.id);                                                //*🛒 بررسی وجود محصول در سبد خرید
+
+    if (!exists) {                                                                                                //* اگر محصول در سبد نبود، افزودن محصول
+        await addCartToDB(newCart)                                                                               //* افزودن کارت جدید به دیتابیس
+        updateCartNotification();                                                                               //* اپدیت نوتیف سبد خرید    
+        showModal(`✅🛒 ${product.name} به سبد خرید شما اضافه شد`);                                         //* پیغام موفقیت
+        
+    } else {                                                                                                 //* اگر محصول در سبد بود، نمایش پیغام مناسب
+        showModal(`✅🛒 ${product.name} از قبل در سبد خرید شما موجود است`);                                 
+    }    
+}
+
+//! تنظیم اطلاعات محصول جدید سبد خرید
+let newProductData = async (product) => {
+    let user = await fetchUserFromDatabase();                                                              //* دریافت اطلاعات کاربر انجام دهنده
+    if (!user || !user.id || !product || !product.id) {                                                  //* صحت سنجی دریافت درست اطلاعات
+        console.error("اطلاعات کاربر یا محصول نامعتبر است.");
+        return;
+    }
+    return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
         id: Date.now().toString(36),
         user_id: +user.id,
         product_id: +product.id,
@@ -25,28 +44,17 @@ async function addToCart(event) {
         quantity: 1,
         totalPrice: product.discount ? +product.discount : +product.price,
     }
-    let exists = data.some(item => item.product_id == product.id);    //*🛒 بررسی وضعیت محصول در سبد خرید
-    const notifCart = document.querySelector('.notif-cart');
-    if (!exists) {   //* افزودن محصول به سبد خرید
-        addCartToDB(newCart)
-        updateCartNotification(data);
-        showModal(`✅🛒 ${product.name} به سبد خرید شما اضافه شد`);
-        notifCart.classList.add('is-notif');                                           //*🛒 حذف نوتیف سبد خرید
-
-    } else {  //*💭 نمایش پیغام وجود محصول در سبد خرید
-        showModal(`✅🛒 ${product.name} از قبل در سبد خرید شما موجود است`);
-    }
 }
 
+// ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
 let addCartToDB = async (newCart) => {
-    let res = await fetch('http://localhost:4000/carts' , {
+    await fetch('http://localhost:4000/carts' , {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newCart)
     })
-    await res.json()    
 }
 
 //!🛒 تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
@@ -55,64 +63,59 @@ async function toggleCart() {
     const openCart = document.querySelector('.open-cart');
     const containerOpenCart = document.querySelector('.cantainer-open-cart');
     const notifCart = document.querySelector('.notif-cart');
-    const alertCart = document.querySelector('.alert-cart');
 
-    shoppingCart.addEventListener('click', async () => {                                      //* رویداد کلیک روی ایکون سبد خرید
-        let productDataCart = await fetchDataFromApi('http://localhost:4000/carts');                                               //* دریافت اطلاعات تمام سبد خرید
-        renderCartItems(productDataCart)                                                   //*🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
-        
-        openCart.classList.add('is-content');                                                //*🛒 نمایش دادن سبد خرید
-        containerOpenCart.style.visibility = 'visible';                                     //* تاریک کردن پس زمینه
-        containerOpenCart.style.height = document.body.offsetHeight + 'px'                 //* مشخص کردن ارتفاع پس زمینه طبق ارتفاع صفحه        
-        notifCart.classList.remove('is-notif');                                           //*🛒 حذف نوتیف سبد خرید
-        
-        if (productDataCart.length > 0) {                                               //*💭 بررسی وجود یا عدم وجود محصول در سبد خرید و نمایش محتوای داخل ان طبق بررسی انجام شده
-            alertCart.classList.add('d-none');
-            alertCart.classList.remove('d-block');
-
-        } else {                                                                     //*💭 نمایش پیغام مناسب با عدم وجود محصول در سبد خرید
-            alertCart.classList.remove('d-none');
-            alertCart.classList.add('d-block');
-        }
+    shoppingCart.addEventListener('click', async () => {                                                            //* رویداد کلیک روی ایکون سبد خرید        
+        openCart.classList.add('is-content');                                                                      //*🛒 نمایش مودال دادن سبد خرید
+        containerOpenCart.style.visibility = 'visible';                                                           //* نمایش پس زمینه مودال
+        containerOpenCart.style.height = document.body.offsetHeight + 'px'                                       //* مشخص کردن ارتفاع پس زمینه طبق ارتفاع صفحه        
+        notifCart.classList.remove('is-notif');                                                                 //*🛒 حذف نوتیف سبد خرید
+        showAlertEmptyCart()                                                                                   //* نمایش پیغام خالی بودن سبد خرید
     });
 }
 
-//!🛒 فراخوان کننده ی توابع سبد خرید
+//!🛒 فراخوانی توابع سبد خرید
 async function initializeCart() {    
-    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                     //* دریافت اطلاعات سبد خرید
-    renderCartItems(Carts);                                                       //*🛒 فراخوانی تابع ایجاد کردن و نمایش اطلاعات محصول در سبد خرید
-    updateCartNotification(Carts);                                               //*🛒 فراخوانی تابع نمایش دادن نوتیف سبد خرید
+    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                             //* دریافت اطلاعات سبد خرید
+    renderCartItems(Carts);                                                                                       //* نمایش اطلاعات محصول در سبد خرید
+    updateCartNotification(Carts);                                                                               //* اپدیت نوتیف سبد خرید
 }
 
 //! ❌ تابع حذف محصول از سبد خرید
 async function removeFromCart(event) {
-    // let openCart = document.querySelector('.open-cart');
-    // let cantainerOpenCart = document.querySelector('.cantainer-open-cart');
-    if (! await showAlertLogin()) return false;     
-    let titleCart = await extractProductTitle(event.target)
-    let notifCart = document.querySelector('.notif-cart');
-    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                   //* دریافت اطلاعات سبد خرید
-    let productTarget = await Carts.find(cart => cart.product_name === titleCart)                       //* پیدا کردن محصول مورد نظر
-    await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})                //* ارسال درخواست حذف به سرور
+    if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
+    let titleCart = await extractProductTitle(event.target)                                                       //* دریافت عنوان محصول
+    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                          //* دریافت اطلاعات سبد خرید
+    let productTarget = await Carts.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر
+    await fetch(`http://localhost:4000/carts/${productTarget.id}`, {method: 'DELETE',})                       //* ارسال درخواست حذف به سرور
 
-    document.querySelectorAll('.product-box').forEach(async box => {                                    //*❌ "حذف تغییرات اعمال شده در دکمه "افزودن به سبد خرید
-        let titleBox = await extractProductTitle(box)                                                  //* دریافت عنوان محصول
-        if (titleCart === titleBox) {
-            changeBtnAfterDelete(box)                                                                 //* ✅ تغییر محتوای دکمه افزودن به سبد خرید
-        }
-    })
+    // document.querySelectorAll('.product-box').forEach(async box => {                                    
+    //     let titleBox = await extractProductTitle(box)                                                         //* دریافت عنوان محصول
+    //     if (titleCart === titleBox) {
+            changeBtnAfterDelete(event.target)                                                                       //* ✅ تغییر استایل کلید سبد خرید محصول
+    //     }
+    // })
+
     showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
+    showAlertEmptyCart()                                                                               //* نمایش پیغام خالی بودن سبد خرید
+    totalPaymentFunc()                                                                                //* اپدیت قیمت کل
+    finalBuyCartFunc()                                                                               //* اپدیت صفحه سبد خرید
+}
 
-    let updateCart = await fetchDataFromApi('http://localhost:4000/carts');                            //* فراخوانی ایتم های وجود در سبد خرید
-    const alertCart = document.querySelector('.alert-cart');                                          //* تعریف و انتخاب المنت حاوی پیام خالی بودن سبد
-    if (updateCart.length <= 0) {                                                                    //* 🛒 بررسی وضعیت سبد خرید
-        alertCart.classList.add('d-block');
+// ! نمایش پیغام خالی بودن سبد خرید
+let showAlertEmptyCart = async () => {
+    let updateCart = await fetchDataFromApi('http://localhost:4000/carts');                             //* دریافت کل ایتم های سبد خرید
+    let alertCart = document.querySelector('.alert-cart');                                             //* تعریف پیام خالی بودن سبد
+    let notifCart = document.querySelector('.notif-cart');                                            //* تعریف نوتیف سبد
+    if (updateCart.length <= 0) {                                                                      //*💭 اگر محصولی در سبد بود، حذف پیغام خطا
         alertCart.classList.remove('d-none');
-        notifCart.classList.remove('is-notif');        
+        alertCart.classList.add('d-block');
+        notifCart.classList.remove('is-notif')
+
+    } else {                                                                                            //*💭 اگر محصولی در سبد بود، نمایش پیغام خطا
+        alertCart.classList.add('d-none');
+        alertCart.classList.remove('d-block');
     }
-    renderCartItems(updateCart) 
-    totalPaymentFunc()
-    finalBuyCartFunc() 
+    renderCartItems(updateCart)                                                                        //* اپدیت مودال سبد خرید
 }
 
 //!🛒 تابع زیاد کردن تعداد محصول در سبد خرید
@@ -203,9 +206,9 @@ async function removeAllFromCart(event) {
     notifCart.classList.remove('is-notif');
 
     clearCart();                                                                        //* حذف تک تک ایتم های سبد خرید
-    document.querySelectorAll('.product-box').forEach(box => {                           //* انتخاب همه ی محصولات
-        changeBtnAfterDelete(box)                                                              //* ✅ تغییر محتوای دکمه
-    })
+    // document.querySelectorAll('.product-box').forEach(box => {                           //* انتخاب همه ی محصولات
+        changeBtnAfterDelete(event.target)                                                              //* ✅ تغییر محتوای دکمه
+    // })
     showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
     totalPaymentFunc()
 }

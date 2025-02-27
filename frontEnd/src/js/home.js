@@ -1,7 +1,6 @@
 import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
 import { createProductsAppliances , createBlogs} from "./funcs/store/ui.js";
-import { fetchAllProducts } from "./funcs/store/box.js";
 import { fetchDataFromApi } from "./funcs/utils.js";
 
 let discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");

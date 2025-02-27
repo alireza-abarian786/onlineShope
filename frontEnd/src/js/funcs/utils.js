@@ -5,8 +5,6 @@ let loginBtnText = document.querySelector('#login span')
 let loginBtn = document.querySelector('#login')
 // ----------------------------------------------------------------
 
-
-
 let searchParams = (key) => {
     let urlSearchParams = new URLSearchParams(window.location.search)
     return urlSearchParams.get(key)

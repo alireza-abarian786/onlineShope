@@ -8,14 +8,14 @@ import { showModal , updateCartNotification , initializeStatusCarts , initialize
 
 //! رویداد بارگذاری صفحه
 document.addEventListener('DOMContentLoaded', async () => {      
-    let Carts = await fetchDataFromApi('http://localhost:4000/carts');                      //* دریافت سبد خرید 
+    // let Carts = await fetchDataFromApi('http://localhost:4000/carts');                      //* دریافت سبد خرید     
     settingSliderGlide()                            //* 🛒 فراخوانی اسلایدر عکس های محصولات
     initializeCart()                               //* 🛒 فراخوانی توابع محتوای سبد خرید
     initializeNavigation();                       //* ⬅️➡️ فراخوانی تابع تنظیمات مریوط به دکمه های جابجایی بین تصاویر باکس محصول
     toggleCart();                                //* 🛒 فراخوانی تابع باز کردن سبد خرید
     closeCart();                                //*❌ فراخوانی تابع بستن سبد خرید
     isLogin(getLocalStorage('login'))          //* بررسی وضعیت لاگین کاربر
-    updateCartNotification(Carts)             //* نمایش نوتیف سبد خرید
+    // updateCartNotification()             //* نمایش نوتیف سبد خرید
 
     initializeStatusMarks();                //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
     initializeStatusCarts();               //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
