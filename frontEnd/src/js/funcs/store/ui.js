@@ -31,7 +31,7 @@ export function renderCartItems(cartItems) {
                             <div class='col'>
                                 <div class='row'>
                                     <div class='col-1 p-0'>
-                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class='fas fa-circle-xmark'></i> </button>
+                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class="bi bi-x-circle-fill"></i></button>
                                     </div>
                                     <div class='col-11 pe-1'>
                                         <h6 class='bg-white rounded text-center'>${item.product_name}</h6>
@@ -74,7 +74,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
       shoppingCartProduct.forEach(async box => {      
         document.querySelector('.container-Product-cards').insertAdjacentHTML('beforeend' , `
                   <div class="cart-item swiper-slide">
-                <button class="delete-btn"><i class="fas fa-trash-alt"></i>&nbsp حذف</button>
+                <button class="delete-btn"><i class="bi bi-trash3"></i>&nbsp حذف</button>
                 <div class="product-image">
                   <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
     
@@ -110,9 +110,9 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                        تومان
                       </div>
                       <div class="quantity-box">
-                          <button class="quantity-btn"><i class="fas fa-minus"></i></button>
+                          <button class="quantity-btn"><i class="bi bi-dash-lg"></i></button>
                           <span class="quantity-value number">${box.quantity}</span>
-                          <button class="quantity-btn"><i class="fas fa-plus"></i></button>
+                          <button class="quantity-btn"><i class="bi bi-plus-lg"></i></button>
                       </div>
                     </div>
                 </div>
@@ -136,12 +136,12 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
 let createStars = async (rating) => {  
   return Array.from({length:5} , (_ , i) => {
     if (i < Math.floor(rating)) {
-      return `<i class="fas fa-star"></i>`
+      return `<i class="bi bi-star-fill"></i>`
     } else if (i - 1 < rating && i >= Math.floor(rating)) {
       let percentage = (rating % 1) * 100
-      return `<i class='fas fa-star' style="clip-path: inset(0 ${100 - percentage}% 0 0 );"></i>`
+      return `<i class='bi bi-star-fill' style="clip-path: inset(0 ${100 - percentage}% 0 0 );"></i>`
     } else {
-      return `<i class="far fa-star"></i>`
+      return `<i class="bi bi-star"></i>`
     }
   }).join('')
 }

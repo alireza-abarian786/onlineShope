@@ -159,13 +159,20 @@
   font-size: 12px;
   letter-spacing: 1px;
   word-spacing: 2px;
-  background-color: #f1f1f1;
+  background-color: inherit;
   color: #333;
+  border: 1px solid #6c757d;
 }
-.dropdown-category:hover {
+.dropdown-category:hover,
+.btn.show {
   background-color: #2563eb;
   color: #fff;
 }
+
+.dropdown-toggle::after {
+  margin: 0 0.4rem;
+}
+
 .dropdown-item {
   font-size: 12px;
   letter-spacing: 1px;
@@ -203,7 +210,8 @@
   transform: rotate(180deg);
   transition: all 0.5s ease 0.01ms;
 }
-.icon-view:hover {
+
+.btn-outline-secondary:hover {
   color: #fff;
   background-color: #2563eb;
 }

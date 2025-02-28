@@ -15,10 +15,10 @@ function buttonsShoppingCart() {
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', removeFromCart)
     })
-    document.querySelectorAll('.fa-plus').forEach(btn => {
+    document.querySelectorAll('.bi-plus-lg').forEach(btn => {
         btn.addEventListener('click', (event) => updateQuantity(event , 'increase'))
     })
-    document.querySelectorAll('.fa-minus').forEach(btn => {
+    document.querySelectorAll('.bi-dash-lg').forEach(btn => {
         btn.addEventListener('click', (event) => updateQuantity(event , 'decrease'))
     })
 }

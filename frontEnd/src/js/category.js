@@ -9,13 +9,12 @@ import { createBox , createBoxRow} from "./funcs/store/ui.js";
 let boxSearchInput = document.querySelector(".box-search-category")
 let dropdownCategory = document.querySelector(".dropdown-category")
 let dropdownItem  = document.querySelectorAll(".dropdown-item")
-let iconView  = document.querySelectorAll(".icon-view")
+let iconView  = document.querySelectorAll(".btn-outline-secondary")
 // -------------------------------------------------------------------------------------------
 
 //! رویداد بارگذاری صفحه
 window.addEventListener("DOMContentLoaded" , () => {
   category()
-  // showSearchProducts()
 })
 
 //! URL فیلتر کردن دسته بندی ها بر اساس
@@ -31,10 +30,9 @@ let getCategoryFunc = async () => {
 
 //! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => { 
-  // let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                      //* دریافت سبد خرید
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
-  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                                                  //* دریافت لیست بوکمارک‌ها
-  let Products = await fetchDataFromApi('http://localhost:4000/products');                                                                //* دریافت اطلاعات تمام محصولات
+  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                             //* دریافت لیست بوکمارک‌ها
+  let Products = await fetchDataFromApi('http://localhost:4000/products');                          //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
 
   if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده
@@ -114,32 +112,45 @@ let filteringProducts = async (sortingName , sortingProducts) => {
 }
 
 // ! تغییر حالت باکس ها
-let changeShowBoxes = async (getProductCategory) => {  
+let changeShowBoxes = async (getProductCategory) => { 
   iconView.forEach((item) => {    
-    if (item.className.includes('fa-th active-view')) {
+    if (item.classList.contains('btn-col') && item.classList.contains('active-view')) {
       createBox(getProductCategory)
-    }
-
-    if (item.className.includes('fa-list active-view')) {
+    } else if (item.classList.contains('btn-row') && item.classList.contains('active-view')) {
       createBoxRow(getProductCategory)
     }
 
+    item.removeEventListener('click', handleItemClick);
     item.addEventListener('click', async (e) => {
-      iconView.forEach((item) => item.classList.remove('active-view'));      
-      e.target.classList.add('active-view')
-
-      if (String(e.target.classList).includes('fa-list')) {
-        createBoxRow(getProductCategory)
-      } else {
-        createBox(getProductCategory)
-      }
-
-      attachProductEventListeners();                                                            //* دکمه سبد خرید محصول
-      clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
-      settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
-      initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-      initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+      await handleItemClick(e , getProductCategory)
     })
   })
 }
 
+let removeActive = () => {document.querySelectorAll('.active-view').forEach((item) => item.classList.remove('active-view'));}
+
+let handleItemClick = async (e , getProductCategory ) => {
+  removeActive()  
+
+  if (e.target.classList.contains('btn-outline-secondary')) {
+    e.target.classList.add('active-view')
+    
+  } else if (e.target.classList.contains('bi')) {
+    e.target.classList.add('active-view')
+    e.target.parentElement.classList.add('active-view')
+
+  }
+
+  
+  if (e.target.classList.contains('btn-row') || e.target.parentElement.classList.contains('btn-row')) {
+    createBoxRow(getProductCategory)
+  } else {
+    createBox(getProductCategory)
+  }
+
+  attachProductEventListeners();                                                            //* دکمه سبد خرید محصول
+  clickAddBookMark();                                                                      //* دکمه بوکمارک محصول
+  settingSliderGlide();                                                                   //* اسلایدر عکس های محصول
+  initializeStatusMarks();                                                               //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+  initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
+}
