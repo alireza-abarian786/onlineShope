@@ -140,7 +140,6 @@ let handleItemClick = async (e , getProductCategory ) => {
     e.target.parentElement.classList.add('active-view')
 
   }
-
   
   if (e.target.classList.contains('btn-row') || e.target.parentElement.classList.contains('btn-row')) {
     createBoxRow(getProductCategory)

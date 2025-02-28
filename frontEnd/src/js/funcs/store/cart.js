@@ -1,4 +1,4 @@
-import {  updateCartNotification , renderCartItems , changeBtnAfterDelete , showModal , createBoxToPageCart} from "./ui.js";
+import { updateCartNotification , renderCartItems , changeBtnAfterDelete , showModal , createBoxToPageCart} from "./ui.js";
 import { fetchProductFromDatabase , fetchUserFromDatabase, extractProductTitle} from "./box.js";
 import { fetchDataFromApi} from "../utils.js";
 import { totalPaymentFunc } from "../../shoppingCart.js";
@@ -204,10 +204,9 @@ let updateQuantity = async (event , operation) => {
 
 // ! تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
 let editeDataProductToDB = async (quantity , id , totalPrice) => {    
-    let user = await fetchUserFromDatabase();                                                                      //* دریافت یوزر مورد نظر
     let product = await fetchDataFromApi(`http://localhost:4000/carts/${id}`)                                     //* دریافت کارت مورد نظر در سبد خرید
-    if (!product || !user) {                                                                                     //* اعتبار سنجی
-        console.error("اطلاعات محصول یا کاربر نامعتبر است.");
+    if (!product) {                                                                                     //* اعتبار سنجی
+        console.error("اطلاعات محصول نامعتبر است.");
         return;
     }
 

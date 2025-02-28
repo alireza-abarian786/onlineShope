@@ -2205,42 +2205,7 @@
       ]
     }
   ],
-  "carts": [
-    {
-      "id": "m7ojazln",
-      "user_id": null,
-      "product_id": 5,
-      "product_name": "ساعت هوشمند اپل Watch Series 6",
-      "product_images": [
-        "./src/assets/images/digitals/digital-2.jpg",
-        "./src/assets/images/digitals/digital-3.webp",
-        "./src/assets/images/digitals/digital-4.jpg"
-      ],
-      "product_description": "ساعت هوشمند اپل با صفحه نمایش Retina و سنسورهای سلامتی پیشرفته.",
-      "product_ratings": 4.6,
-      "discount": 800000,
-      "price": 10000000,
-      "quantity": 3,
-      "totalPrice": 2400000
-    },
-    {
-      "id": "m7or68nt",
-      "user_id": null,
-      "product_id": 2,
-      "product_name": "گوشی موبایل سامسونگ Galaxy S21",
-      "product_images": [
-        "./src/assets/images/phone/phone-6.jpg",
-        "./src/assets/images/phone/phone-2.jpg",
-        "./src/assets/images/phone/phone-4.jpg"
-      ],
-      "product_description": "گوشی پرچمدار سامسونگ با صفحه نمایش 6.2 اینچ، دوربین 64 مگاپیکسلی و باتری 4000 میلی‌آمپری.",
-      "product_ratings": 4.8,
-      "discount": 500000,
-      "price": 20000000,
-      "quantity": 1,
-      "totalPrice": 500000
-    }
-  ],
+  "carts": [],
   "orders": [
     {
       "id": "1",
