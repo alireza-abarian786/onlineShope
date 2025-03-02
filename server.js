@@ -1,12 +1,16 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors'); // Import cors
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 // مسیر فایل db.json
 const dbPath = path.join(__dirname, 'public' , 'vendor' , 'db.json');
+
+// فعال کردن CORS
+app.use(cors());
 
 // خواندن داده‌های JSON از فایل db.json
 let data;
