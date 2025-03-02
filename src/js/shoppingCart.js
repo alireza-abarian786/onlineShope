@@ -24,7 +24,7 @@ function buttonsShoppingCart() {
 }
 
 let totalPaymentFunc = async () => {
-    let arrayCart = await fetchDataFromApi('http://localhost:4000/carts')
+    let arrayCart = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts')
     let sum = arrayCart.map(item => item.totalPrice).reduce((acc , curr) => acc + curr , 0)
 
     total.forEach(item => {

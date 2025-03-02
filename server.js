@@ -39,6 +39,14 @@ app.get('/api/blogs', (req, res) => {
   res.json(data.blogs || []);
 });
 
+app.get('/api/users', (req, res) => {
+  res.json(data.users || []);
+});
+
+app.get('/api/categories', (req, res) => {
+  res.json(data.categories || []);
+});
+
 // شروع سرور
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
