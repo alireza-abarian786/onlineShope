@@ -1,9 +1,25 @@
 .bacground {
-    background-image: url('../images/sky-2.jpg');
-    background-size: 100%;
-    filter: opacity(10%);
     z-index: -1;
-    height: 135% !important;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+}
+
+.menu-box-login {
+    background: linear-gradient(rgba(0, 0, 0, 0.5) ,rgba(0, 0, 0, 0.5));
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.menu-box-login ul li a ,
+.menu-box-login ul li span{
+    color: #fff;
+}
+
+.open-slide-child-li a h6{
+    color: #000;
 }
 
 .contain {
@@ -11,17 +27,18 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    margin-top: 100px;
+    margin-top: 250px;
 }
 
 .box-form {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 400px;
+    width: 500px;
     border-radius: 10px;
     flex-direction: column;
     background-color: #5d95e7;
+    height: max-content;
 }
 
 .box-form > p {
