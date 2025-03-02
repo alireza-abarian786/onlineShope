@@ -23,8 +23,20 @@ try {
 }
 
 // Route برای دریافت همه داده‌های db.json
-app.get('/api/data', (req, res) => {
-  res.json(data); // ارسال همه داده‌ها
+app.get('/api/products', (req, res) => {
+  res.json(data.products || []);
+});
+
+app.get('/api/carts', (req, res) => {
+  res.json(data.carts || []);
+});
+
+app.get('/api/bookmarks', (req, res) => {
+  res.json(data.bookmarks || []);
+});
+
+app.get('/api/blogs', (req, res) => {
+  res.json(data.blogs || []);
 });
 
 // شروع سرور
