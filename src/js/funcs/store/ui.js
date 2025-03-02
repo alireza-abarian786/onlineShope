@@ -7,7 +7,7 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
-  let data = await fetchDataFromApi('http://localhost:4000/carts');                                               //* دریافت لیست کل سبد خرید  
+  let data = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts');                                               //* دریافت لیست کل سبد خرید  
   let notifCart = document.querySelector('.notif-cart');
   notifCart.classList.toggle('is-notif', data.length > 0);
 }
@@ -213,7 +213,7 @@ let changeBtnAfterDelete = async (element) => {
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
-  let Carts = await fetchDataFromApi('http://localhost:4000/carts');                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
+  let Carts = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts');                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
     let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
     if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
@@ -224,7 +224,7 @@ async function initializeStatusCarts() {
 
 //! ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusMarks() {    
-  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                                          //? دریافت اطلاعات تمام بوکمارک‌ها 
+  let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                                                          //? دریافت اطلاعات تمام بوکمارک‌ها 
   document.querySelectorAll('.icon-bookmark').forEach( async btn => {                     //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید   
     let title = await extractProductTitle(btn)                                                  //? دریافت عنوان محصول
     if (Marks.some(item => item.product_name === title)) {                              //? اگر محصول در لیست بوکمارک‌ ها بود
@@ -435,7 +435,7 @@ let createProductsAppliances = (element, arrAppliances) => {
 
 //! ساخت باکس مقالات صفحه اصلی 
 let createBlogs = async (element) => {    
-    let res = await fetch("http://localhost:4000/blogs");
+    let res = await fetch("https://onlineshope.onrender.com/api/blogs");
     let result = await res.json();
   
     result.forEach((blog) => {

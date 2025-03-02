@@ -46,7 +46,7 @@ let addBookMarks = async (item) => {
     }
     
     try {                                                                                                        //* ذخیره بوکمارک در دیتابیس
-        await fetch('http://localhost:4000/bookmarks', { 
+        await fetch('https://onlineshope.onrender.com/api/bookmarks', { 
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -62,7 +62,7 @@ let addBookMarks = async (item) => {
 //! تابع برای دریافت اطلاعات محصول از روی رویداد
 let getIDProduct = async (event) => {
     let title = await extractProductTitle(event.target)                                                         //* دریافت عنوان محصول
-    let Products = await fetchDataFromApi('http://localhost:4000/products');                                   //* دریافت اطلاعات کل محصولات
+    let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                                   //* دریافت اطلاعات کل محصولات
     let getProductTarget = await Products.find(product => product.name === title)                             //* پیدا کردن محصول بر اساس عنوان
     return getProductTarget;                                                                                 //* ارسال محصول مورد نظر
 }
@@ -71,7 +71,7 @@ let getIDProduct = async (event) => {
 let isBookMarkToDB = async (event) => {
     try {
         let idProduct = await getIDProduct(event)                                                               //* دریافت اطلاعات محصول مورد نظر
-        let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                                 //* دریافت اطلاعات تمام بوکمارک‌ها
+        let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                                 //* دریافت اطلاعات تمام بوکمارک‌ها
         let reviewStatusMakeProduct = Marks.findIndex(mark => mark.product_id == idProduct.id)                //* بررسی اینکه آیا محصول در بوکمارک‌ها وجود دارد
         return [Marks, reviewStatusMakeProduct]                                                              //* ارسال داده‌ها برای استفاده در بخش‌های دیگر
 
@@ -84,7 +84,7 @@ let isBookMarkToDB = async (event) => {
 //! تابع برای حذف بوکمارک از دیتابیس
 let removeBookMarkItem = async (id) => {   
     try {
-        await fetch(`http://localhost:4000/bookmarks/${id}`, {method: 'DELETE',})                             //* ارسال درخواست حذف به سرور
+        await fetch(`https://onlineshope.onrender.com/api/bookmarks/${id}`, {method: 'DELETE',})                             //* ارسال درخواست حذف به سرور
     } catch (error) {
         console.error("Error deleting bookmark:", error);                                                    //* در صورت بروز مشکل، چاپ پیام خطا
     } 

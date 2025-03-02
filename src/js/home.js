@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //! نمایش محصولات صفحه اصلی
 let getAllProduct = async () => {
-  let result = await fetchDataFromApi('http://localhost:4000/products');
+  let result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
 
   let arrDiscount = result.filter((product) => product.discount);
   let arrAppliances = result.filter((item) => item.category_id === 3);

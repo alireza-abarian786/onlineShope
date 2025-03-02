@@ -20,9 +20,9 @@ window.addEventListener("DOMContentLoaded" , () => {
 //! URL فیلتر کردن دسته بندی ها بر اساس
 let getCategoryFunc = async () => {
   let url = searchParams('cat');                                                                      //* URL دریافت مقدار دسته‌بندی از  
-  let data = await fetchDataFromApi(`http://localhost:4000/categories`);                                                                 //* دریافت لیست دسنه بندی ها از سرور
+  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/categories`);                                                                 //* دریافت لیست دسنه بندی ها از سرور
   let findCategory = await data.find(item => item.urlSearch === url);                               //* URL یافتن دسته مرتبط با مقدار
-  let Products = await fetchDataFromApi('http://localhost:4000/products');                         //* دریافت اطلاعات تمام محصولات
+  let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                         //* دریافت اطلاعات تمام محصولات
   let getProductCategory = Products.filter(item => item.category_id == findCategory.id);          //* فیلتر کردن محصولات مرتبط با دسته بندی
   return getProductCategory;
 }
@@ -31,8 +31,8 @@ let getCategoryFunc = async () => {
 //! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => { 
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
-  let Marks = await fetchDataFromApi('http://localhost:4000/bookmarks');                             //* دریافت لیست بوکمارک‌ها
-  let Products = await fetchDataFromApi('http://localhost:4000/products');                          //* دریافت اطلاعات تمام محصولات
+  let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                             //* دریافت لیست بوکمارک‌ها
+  let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                          //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
 
   if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده

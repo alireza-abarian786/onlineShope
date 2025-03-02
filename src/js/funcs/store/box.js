@@ -39,7 +39,7 @@ let fetchUserFromDatabase = async () => {
     try {
         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userName = await getLocalStorage("login");                                                                 //* کاربری که لاگین کرده username        
-        let users = await fetchDataFromApi('http://localhost:4000/users');                                            //* دریافت لیست یوزر ها از سرور
+        let users = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور
         return users.find((user) => user.name === userName);                                                         //* پیدا کردن و ارسال مشخصات یوزر مورد نظر
 
     } catch (error) {
@@ -50,7 +50,7 @@ let fetchUserFromDatabase = async () => {
 
 // ! پیدا کردن و گرفتن اطلاعات محصول مورد نظر از سرور
 let fetchProductFromDatabase = async (event) => {    
-    let Products = await fetchDataFromApi('http://localhost:4000/products');                                        //* دریافت اطلاعات کل محصولات
+    let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                                        //* دریافت اطلاعات کل محصولات
     let productName = await extractProductTitle(event.target)                                                      //* دریافت عنوان محصول
     return Products.find(product => product.name === productName)                                                 //* پیدا کردن و ارسال اطلاعات محصول مورد نظر 
 }
@@ -62,7 +62,7 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 async function updateCartButtonState(event) {
     if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
-    let cartItems = await fetchDataFromApi('http://localhost:4000/carts')                                        //* دریافت اطلاعات سبد خرید
+    let cartItems = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts')                                        //* دریافت اطلاعات سبد خرید
     if (!isProductInCart(product, cartItems)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
         changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
     } 

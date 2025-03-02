@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded" , () => {
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:4000/users')
+    fetch('https://onlineshope.onrender.com/api/users')
     .then(res => res.json())
     .then(data => {
 
@@ -132,7 +132,7 @@ let statusLogin = async () => {
                 registration_date: Date(),
             }
 
-            let res = await fetch('http://localhost:4000/users' , {
+            let res = await fetch('https://onlineshope.onrender.com/api/users' , {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -184,7 +184,7 @@ function clearInputSignUp() {
 
 let SignUpUser = () => {
 
-    fetch("http://localhost:4000/users")
+    fetch("https://onlineshope.onrender.com/api/users")
     .then(res => res.json())
     .then(data => {
 
