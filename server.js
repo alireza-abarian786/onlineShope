@@ -22,6 +22,17 @@ try {
   data = {}; // اگر خطایی رخ دهد، داده‌ها را خالی می‌کنیم
 }
 
+app.post('/api/carts', async (req, res) => {
+  try {
+    const newItem = new Cart(req.body); // ایجاد Item جدید
+    await newItem.save(); // ذخیره در دیتابیس
+    res.status(201).json({ message: 'Item added successfully', item: newItem });
+  } catch (error) {
+    console.error('Error saving item:', error);
+    res.status(500).json({ error: 'Failed to save item' });
+  }
+});
+
 // Route برای دریافت همه داده‌های db.json
 app.get('/api/products', (req, res) => {
   res.json(data.products || []);
