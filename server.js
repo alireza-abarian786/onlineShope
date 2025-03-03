@@ -33,6 +33,52 @@ app.get('/api/carts', (req, res) => {
   res.json(data.carts || []);
 });
 
+// GET all bookmarks
+app.get('/api/bookmarks', (req, res) => {
+  res.json(data.bookmarks || []);
+});
+
+// GET all blogs
+app.get('/api/blogs', (req, res) => {
+  res.json(data.blogs || []);
+});
+
+// POST a new blog
+app.post('/api/blogs', (req, res) => {
+  try {
+    const newItem = req.body;
+
+    if (!data.blogs) data.blogs = [];
+    data.blogs.push(newItem);
+
+    // Save changes to db.json
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
+    res.status(201).json({ message: 'Blog added successfully', blog: newItem });
+  } catch (error) {
+    console.error('Error saving blog:', error);
+    res.status(500).json({ error: 'Failed to save blog' });
+  }
+});
+
+// POST a new bookmark
+app.post('/api/bookmarks', (req, res) => {
+  try {
+    const newItem = req.body;
+
+    if (!data.bookmarks) data.bookmarks = [];
+    data.bookmarks.push(newItem);
+
+    // Save changes to db.json
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
+    res.status(201).json({ message: 'Bookmark added successfully', bookmark: newItem });
+  } catch (error) {
+    console.error('Error saving bookmark:', error);
+    res.status(500).json({ error: 'Failed to save bookmark' });
+  }
+});
+
 // POST a new cart item
 app.post('/api/carts', (req, res) => {
   try {
