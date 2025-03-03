@@ -193,6 +193,55 @@ app.post('/api/users', (req, res) => {
   }
 });
 
+app.put('/api/users/:id', (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
+    const updatedUser = req.body;
+
+    if (!data.users || data.users.length === 0) {
+      return res.status(404).json({ error: 'No users found' });
+    }
+
+    const index = data.users.findIndex(u => u.id === userId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    data.users[index] = { ...data.users[index], ...updatedUser };
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'User updated successfully', user: data.users[index] });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+});
+
+app.delete('/api/users/:id', (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
+
+    if (!data.users || data.users.length === 0) {
+      return res.status(404).json({ error: 'No users found' });
+    }
+
+    const index = data.users.findIndex(u => u.id === userId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const deletedUser = data.users.splice(index, 1);
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'User deleted successfully', user: deletedUser[0] });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Failed to delete user' });
+  }
+});
+
 // CRUD Operations for Blogs
 app.get('/api/blogs', (req, res) => {
   res.json(data.blogs || []);
@@ -214,6 +263,55 @@ app.post('/api/blogs', (req, res) => {
   }
 });
 
+app.put('/api/blogs/:id', (req, res) => {
+  try {
+    const blogId = parseInt(req.params.id, 10);
+    const updatedBlog = req.body;
+
+    if (!data.blogs || data.blogs.length === 0) {
+      return res.status(404).json({ error: 'No blogs found' });
+    }
+
+    const index = data.blogs.findIndex(b => b.id === blogId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    data.blogs[index] = { ...data.blogs[index], ...updatedBlog };
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Blog updated successfully', blog: data.blogs[index] });
+  } catch (error) {
+    console.error('Error updating blog:', error);
+    res.status(500).json({ error: 'Failed to update blog' });
+  }
+});
+
+app.delete('/api/blogs/:id', (req, res) => {
+  try {
+    const blogId = parseInt(req.params.id, 10);
+
+    if (!data.blogs || data.blogs.length === 0) {
+      return res.status(404).json({ error: 'No blogs found' });
+    }
+
+    const index = data.blogs.findIndex(b => b.id === blogId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    const deletedBlog = data.blogs.splice(index, 1);
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Blog deleted successfully', blog: deletedBlog[0] });
+  } catch (error) {
+    console.error('Error deleting blog:', error);
+    res.status(500).json({ error: 'Failed to delete blog' });
+  }
+});
+
 // CRUD Operations for Carts
 app.get('/api/carts', (req, res) => {
   res.json(data.carts || []);
@@ -221,17 +319,82 @@ app.get('/api/carts', (req, res) => {
 
 app.post('/api/carts', (req, res) => {
   try {
-    const newItem = req.body;
+    const newCart = req.body;
 
     if (!data.carts) data.carts = [];
-    data.carts.push(newItem);
+    data.carts.push(newCart);
 
     saveData(); // Save changes to db.json
 
-    res.status(201).json({ message: 'Cart item added successfully', cart: newItem });
+    res.status(201).json({ message: 'Cart added successfully', cart: newCart });
   } catch (error) {
-    console.error('Error adding cart item:', error);
-    res.status(500).json({ error: 'Failed to add cart item' });
+    console.error('Error adding cart:', error);
+    res.status(500).json({ error: 'Failed to add cart' });
+  }
+});
+
+app.put('/api/carts/:userId/items/:productId', (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const productId = parseInt(req.params.productId, 10);
+    const updatedItem = req.body;
+
+    if (!data.carts || data.carts.length === 0) {
+      return res.status(404).json({ error: 'No carts found' });
+    }
+
+    const cartIndex = data.carts.findIndex(c => c.userId === userId);
+    if (cartIndex === -1) {
+      return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    const cart = data.carts[cartIndex];
+
+    const itemIndex = cart.items.findIndex(i => i.productId === productId);
+    if (itemIndex === -1) {
+      return res.status(404).json({ error: 'Product not found in cart' });
+    }
+
+    cart.items[itemIndex] = { ...cart.items[itemIndex], ...updatedItem };
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Cart item updated successfully', cart: cart });
+  } catch (error) {
+    console.error('Error updating cart item:', error);
+    res.status(500).json({ error: 'Failed to update cart item' });
+  }
+});
+
+app.delete('/api/carts/:userId/items/:productId', (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const productId = parseInt(req.params.productId, 10);
+
+    if (!data.carts || data.carts.length === 0) {
+      return res.status(404).json({ error: 'No carts found' });
+    }
+
+    const cartIndex = data.carts.findIndex(c => c.userId === userId);
+    if (cartIndex === -1) {
+      return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    const cart = data.carts[cartIndex];
+
+    const itemIndex = cart.items.findIndex(i => i.productId === productId);
+    if (itemIndex === -1) {
+      return res.status(404).json({ error: 'Product not found in cart' });
+    }
+
+    const deletedItem = cart.items.splice(itemIndex, 1);
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Cart item deleted successfully', item: deletedItem[0], cart: cart });
+  } catch (error) {
+    console.error('Error deleting cart item:', error);
+    res.status(500).json({ error: 'Failed to delete cart item' });
   }
 });
 
@@ -253,6 +416,55 @@ app.post('/api/categories', (req, res) => {
   } catch (error) {
     console.error('Error adding category:', error);
     res.status(500).json({ error: 'Failed to add category' });
+  }
+});
+
+app.put('/api/categories/:id', (req, res) => {
+  try {
+    const categoryId = parseInt(req.params.id, 10);
+    const updatedCategory = req.body;
+
+    if (!data.categories || data.categories.length === 0) {
+      return res.status(404).json({ error: 'No categories found' });
+    }
+
+    const index = data.categories.findIndex(c => c.id === categoryId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    data.categories[index] = { ...data.categories[index], ...updatedCategory };
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Category updated successfully', category: data.categories[index] });
+  } catch (error) {
+    console.error('Error updating category:', error);
+    res.status(500).json({ error: 'Failed to update category' });
+  }
+});
+
+app.delete('/api/categories/:id', (req, res) => {
+  try {
+    const categoryId = parseInt(req.params.id, 10);
+
+    if (!data.categories || data.categories.length === 0) {
+      return res.status(404).json({ error: 'No categories found' });
+    }
+
+    const index = data.categories.findIndex(c => c.id === categoryId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    const deletedCategory = data.categories.splice(index, 1);
+
+    saveData(); // Save changes to db.json
+
+    res.json({ message: 'Category deleted successfully', category: deletedCategory[0] });
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    res.status(500).json({ error: 'Failed to delete category' });
   }
 });
 
