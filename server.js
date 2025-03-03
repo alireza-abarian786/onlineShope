@@ -1,16 +1,17 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors'); // Import cors
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-// مسیر فایل db.json
-const dbPath = path.join(__dirname, 'public' , 'vendor' , 'db.json');
-
-// فعال کردن CORS
+// Middleware
 app.use(cors());
+app.use(express.json());
+
+// مسیر فایل db.json
+const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
 
 // خواندن داده‌های JSON از فایل db.json
 let data;
@@ -22,10 +23,27 @@ try {
   data = {}; // اگر خطایی رخ دهد، داده‌ها را خالی می‌کنیم
 }
 
-app.post('/api/carts', async (req, res) => {
+// GET all products
+app.get('/api/products', (req, res) => {
+  res.json(data.products || []);
+});
+
+// GET all carts
+app.get('/api/carts', (req, res) => {
+  res.json(data.carts || []);
+});
+
+// POST a new cart item
+app.post('/api/carts', (req, res) => {
   try {
-    const newItem = new Cart(req.body); // ایجاد Item جدید
-    await newItem.save(); // ذخیره در دیتابیس
+    const newItem = req.body; // دریافت داده جدید از Body درخواست
+
+    if (!data.carts) data.carts = []; // اگر carts وجود ندارد، آن را ایجاد کنید
+    data.carts.push(newItem); // اضافه کردن داده جدید به لیست carts
+
+    // ذخیره تغییرات در db.json
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
     res.status(201).json({ message: 'Item added successfully', item: newItem });
   } catch (error) {
     console.error('Error saving item:', error);
@@ -33,31 +51,61 @@ app.post('/api/carts', async (req, res) => {
   }
 });
 
-fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+// PUT (Update) a cart item
+app.put('/api/carts/:id', (req, res) => {
+  try {
+    const itemId = parseInt(req.params.id, 10); // دریافت ID از URL
+    const updatedItem = req.body; // دریافت داده‌های به‌روزرسانی شده
 
-// Route برای دریافت همه داده‌های db.json
-app.get('/api/products', (req, res) => {
-  res.json(data.products || []);
+    if (!data.carts || data.carts.length === 0) {
+      return res.status(404).json({ error: 'No carts found' });
+    }
+
+    // یافتن Index Item مورد نظر
+    const index = data.carts.findIndex(item => item.id === itemId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+
+    // به‌روزرسانی Item
+    data.carts[index] = { ...data.carts[index], ...updatedItem };
+
+    // ذخیره تغییرات در db.json
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
+    res.json({ message: 'Item updated successfully', item: data.carts[index] });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    res.status(500).json({ error: 'Failed to update item' });
+  }
 });
 
-app.get('/api/carts', (req, res) => {
-  res.json(data.carts || []);
-});
+// DELETE a cart item
+app.delete('/api/carts/:id', (req, res) => {
+  try {
+    const itemId = parseInt(req.params.id, 10); // دریافت ID از URL
 
-app.get('/api/bookmarks', (req, res) => {
-  res.json(data.bookmarks || []);
-});
+    if (!data.carts || data.carts.length === 0) {
+      return res.status(404).json({ error: 'No carts found' });
+    }
 
-app.get('/api/blogs', (req, res) => {
-  res.json(data.blogs || []);
-});
+    // یافتن Index Item مورد نظر
+    const index = data.carts.findIndex(item => item.id === itemId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
 
-app.get('/api/users', (req, res) => {
-  res.json(data.users || []);
-});
+    // حذف Item
+    const deletedItem = data.carts.splice(index, 1);
 
-app.get('/api/categories', (req, res) => {
-  res.json(data.categories || []);
+    // ذخیره تغییرات در db.json
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
+    res.json({ message: 'Item deleted successfully', item: deletedItem[0] });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    res.status(500).json({ error: 'Failed to delete item' });
+  }
 });
 
 // شروع سرور
