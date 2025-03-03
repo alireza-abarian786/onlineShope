@@ -33,6 +33,8 @@ app.post('/api/carts', async (req, res) => {
   }
 });
 
+fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+
 // Route برای دریافت همه داده‌های db.json
 app.get('/api/products', (req, res) => {
   res.json(data.products || []);
