@@ -1,363 +1,170 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Middleware
+// فعال کردن CORS و JSON Parser
 app.use(cors());
 app.use(express.json());
 
-// Path to db.json
-const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
+// Connection String
+const connectionString = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-// Read data from db.json
-let data;
-try {
-  const rawData = fs.readFileSync(dbPath, 'utf-8');
-  data = JSON.parse(rawData);
-} catch (err) {
-  console.error('Error reading or parsing db.json:', err);
-  data = {}; // Initialize empty data if file is missing or invalid
-}
+// اتصال به دیتابیس MongoDB
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Connection error:', err));
 
-// Helper function to save data to db.json
-function saveData() {
+// تعریف Models برای تمام مجموعه‌داده‌ها:
+
+// 1. Model برای محصولات (Products)
+const productSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+  price: Number,
+});
+const Product = mongoose.model('Product', productSchema);
+
+// 2. Model برای سبد خرید (Carts)
+const cartSchema = new mongoose.Schema({
+  userId: String,
+  items: [
+    {
+      productId: Number,
+      quantity: Number,
+    },
+  ],
+});
+const Cart = mongoose.model('Cart', cartSchema);
+
+// 3. Model برای بوکمارک‌ها (Bookmarks)
+const bookmarkSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+});
+const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
+
+// 4. Model برای کاربران (Users)
+const userSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+  email: String,
+});
+const User = mongoose.model('User', userSchema);
+
+// 5. Model برای بلاگ‌ها (Blogs)
+const blogSchema = new mongoose.Schema({
+  id: Number,
+  title: String,
+  content: String,
+});
+const Blog = mongoose.model('Blog', blogSchema);
+
+// 6. Model برای دسته‌بندی‌ها (Categories)
+const categorySchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+});
+const Category = mongoose.model('Category', categorySchema);
+
+// CRUD Operations for Products:
+app.get('/api/products', async (req, res) => {
   try {
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+    const products = await Product.find();
+    res.json(products);
   } catch (error) {
-    console.error('Error saving data to db.json:', error);
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Failed to fetch products' });
   }
-}
-
-// CRUD Operations for Products
-app.get('/api/products', (req, res) => {
-  res.json(data.products || []);
 });
 
-app.post('/api/products', (req, res) => {
+app.post('/api/products', async (req, res) => {
   try {
-    const newItem = req.body;
-
-    if (!data.products) data.products = [];
-    data.products.push(newItem);
-
-    saveData(); // Save changes to db.json
-
-    res.status(201).json({ message: 'Product added successfully', product: newItem });
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.status(201).json({ message: 'Product added successfully', product: newProduct });
   } catch (error) {
     console.error('Error adding product:', error);
     res.status(500).json({ error: 'Failed to add product' });
   }
 });
 
-app.put('/api/products/:id', (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
-    const updatedProduct = req.body;
-
-    if (!data.products || data.products.length === 0) {
-      return res.status(404).json({ error: 'No products found' });
-    }
-
-    const index = data.products.findIndex(p => p.id === productId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    data.products[index] = { ...data.products[index], ...updatedProduct };
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Product updated successfully', product: data.products[index] });
+    const updatedProduct = await Product.findByIdAndUpdate(productId, req.body, { new: true });
+    if (!updatedProduct) return res.status(404).json({ error: 'Product not found' });
+    res.json(updatedProduct);
   } catch (error) {
     console.error('Error updating product:', error);
     res.status(500).json({ error: 'Failed to update product' });
   }
 });
 
-app.delete('/api/products/:id', (req, res) => {
+app.delete('/api/products/:id', async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
-
-    if (!data.products || data.products.length === 0) {
-      return res.status(404).json({ error: 'No products found' });
-    }
-
-    const index = data.products.findIndex(p => p.id === productId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    const deletedProduct = data.products.splice(index, 1);
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Product deleted successfully', product: deletedProduct[0] });
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    if (!deletedProduct) return res.status(404).json({ error: 'Product not found' });
+    res.json({ message: 'Product deleted successfully', product: deletedProduct });
   } catch (error) {
     console.error('Error deleting product:', error);
     res.status(500).json({ error: 'Failed to delete product' });
   }
 });
 
-// CRUD Operations for Bookmarks
-app.get('/api/bookmarks', (req, res) => {
-  res.json(data.bookmarks || []);
+// CRUD Operations for Carts:
+app.get('/api/carts/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ error: 'Cart not found' });
+    res.json(cart);
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+    res.status(500).json({ error: 'Failed to fetch cart' });
+  }
 });
 
-app.post('/api/bookmarks', (req, res) => {
+app.post('/api/carts/:userId/items', async (req, res) => {
   try {
+    const userId = req.params.userId;
     const newItem = req.body;
 
-    if (!data.bookmarks) data.bookmarks = [];
-    data.bookmarks.push(newItem);
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      cart = new Cart({ userId, items: [] });
+    }
 
-    saveData(); // Save changes to db.json
+    cart.items.push(newItem);
+    await cart.save();
 
-    res.status(201).json({ message: 'Bookmark added successfully', bookmark: newItem });
+    res.status(201).json({ message: 'Item added to cart successfully', cart: cart });
   } catch (error) {
-    console.error('Error adding bookmark:', error);
-    res.status(500).json({ error: 'Failed to add bookmark' });
+    console.error('Error adding item to cart:', error);
+    res.status(500).json({ error: 'Failed to add item to cart' });
   }
 });
 
-app.put('/api/bookmarks/:id', (req, res) => {
-  try {
-    const bookmarkId = parseInt(req.params.id, 10);
-    const updatedBookmark = req.body;
-
-    if (!data.bookmarks || data.bookmarks.length === 0) {
-      return res.status(404).json({ error: 'No bookmarks found' });
-    }
-
-    const index = data.bookmarks.findIndex(b => b.id === bookmarkId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Bookmark not found' });
-    }
-
-    data.bookmarks[index] = { ...data.bookmarks[index], ...updatedBookmark };
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Bookmark updated successfully', bookmark: data.bookmarks[index] });
-  } catch (error) {
-    console.error('Error updating bookmark:', error);
-    res.status(500).json({ error: 'Failed to update bookmark' });
-  }
-});
-
-app.delete('/api/bookmarks/:id', (req, res) => {
-  try {
-    const bookmarkId = parseInt(req.params.id, 10);
-
-    if (!data.bookmarks || data.bookmarks.length === 0) {
-      return res.status(404).json({ error: 'No bookmarks found' });
-    }
-
-    const index = data.bookmarks.findIndex(b => b.id === bookmarkId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Bookmark not found' });
-    }
-
-    const deletedBookmark = data.bookmarks.splice(index, 1);
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Bookmark deleted successfully', bookmark: deletedBookmark[0] });
-  } catch (error) {
-    console.error('Error deleting bookmark:', error);
-    res.status(500).json({ error: 'Failed to delete bookmark' });
-  }
-});
-
-// CRUD Operations for Users
-app.get('/api/users', (req, res) => {
-  res.json(data.users || []);
-});
-
-app.post('/api/users', (req, res) => {
-  try {
-    const newUser = req.body;
-
-    if (!data.users) data.users = [];
-    data.users.push(newUser);
-
-    saveData(); // Save changes to db.json
-
-    res.status(201).json({ message: 'User added successfully', user: newUser });
-  } catch (error) {
-    console.error('Error adding user:', error);
-    res.status(500).json({ error: 'Failed to add user' });
-  }
-});
-
-app.put('/api/users/:id', (req, res) => {
-  try {
-    const userId = parseInt(req.params.id, 10);
-    const updatedUser = req.body;
-
-    if (!data.users || data.users.length === 0) {
-      return res.status(404).json({ error: 'No users found' });
-    }
-
-    const index = data.users.findIndex(u => u.id === userId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    data.users[index] = { ...data.users[index], ...updatedUser };
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'User updated successfully', user: data.users[index] });
-  } catch (error) {
-    console.error('Error updating user:', error);
-    res.status(500).json({ error: 'Failed to update user' });
-  }
-});
-
-app.delete('/api/users/:id', (req, res) => {
-  try {
-    const userId = parseInt(req.params.id, 10);
-
-    if (!data.users || data.users.length === 0) {
-      return res.status(404).json({ error: 'No users found' });
-    }
-
-    const index = data.users.findIndex(u => u.id === userId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    const deletedUser = data.users.splice(index, 1);
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'User deleted successfully', user: deletedUser[0] });
-  } catch (error) {
-    console.error('Error deleting user:', error);
-    res.status(500).json({ error: 'Failed to delete user' });
-  }
-});
-
-// CRUD Operations for Blogs
-app.get('/api/blogs', (req, res) => {
-  res.json(data.blogs || []);
-});
-
-app.post('/api/blogs', (req, res) => {
-  try {
-    const newBlog = req.body;
-
-    if (!data.blogs) data.blogs = [];
-    data.blogs.push(newBlog);
-
-    saveData(); // Save changes to db.json
-
-    res.status(201).json({ message: 'Blog added successfully', blog: newBlog });
-  } catch (error) {
-    console.error('Error adding blog:', error);
-    res.status(500).json({ error: 'Failed to add blog' });
-  }
-});
-
-app.put('/api/blogs/:id', (req, res) => {
-  try {
-    const blogId = parseInt(req.params.id, 10);
-    const updatedBlog = req.body;
-
-    if (!data.blogs || data.blogs.length === 0) {
-      return res.status(404).json({ error: 'No blogs found' });
-    }
-
-    const index = data.blogs.findIndex(b => b.id === blogId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Blog not found' });
-    }
-
-    data.blogs[index] = { ...data.blogs[index], ...updatedBlog };
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Blog updated successfully', blog: data.blogs[index] });
-  } catch (error) {
-    console.error('Error updating blog:', error);
-    res.status(500).json({ error: 'Failed to update blog' });
-  }
-});
-
-app.delete('/api/blogs/:id', (req, res) => {
-  try {
-    const blogId = parseInt(req.params.id, 10);
-
-    if (!data.blogs || data.blogs.length === 0) {
-      return res.status(404).json({ error: 'No blogs found' });
-    }
-
-    const index = data.blogs.findIndex(b => b.id === blogId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Blog not found' });
-    }
-
-    const deletedBlog = data.blogs.splice(index, 1);
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Blog deleted successfully', blog: deletedBlog[0] });
-  } catch (error) {
-    console.error('Error deleting blog:', error);
-    res.status(500).json({ error: 'Failed to delete blog' });
-  }
-});
-
-// CRUD Operations for Carts
-app.get('/api/carts', (req, res) => {
-  res.json(data.carts || []);
-});
-
-app.post('/api/carts', (req, res) => {
-  try {
-    const newCart = req.body;
-
-    if (!data.carts) data.carts = [];
-    data.carts.push(newCart);
-
-    saveData(); // Save changes to db.json
-
-    res.status(201).json({ message: 'Cart added successfully', cart: newCart });
-  } catch (error) {
-    console.error('Error adding cart:', error);
-    res.status(500).json({ error: 'Failed to add cart' });
-  }
-});
-
-app.put('/api/carts/:userId/items/:productId', (req, res) => {
+app.put('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const productId = parseInt(req.params.productId, 10);
     const updatedItem = req.body;
 
-    if (!data.carts || data.carts.length === 0) {
-      return res.status(404).json({ error: 'No carts found' });
-    }
-
-    const cartIndex = data.carts.findIndex(c => c.userId === userId);
-    if (cartIndex === -1) {
-      return res.status(404).json({ error: 'Cart not found' });
-    }
-
-    const cart = data.carts[cartIndex];
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ error: 'Cart not found' });
 
     const itemIndex = cart.items.findIndex(i => i.productId === productId);
-    if (itemIndex === -1) {
-      return res.status(404).json({ error: 'Product not found in cart' });
-    }
+    if (itemIndex === -1) return res.status(404).json({ error: 'Product not found in cart' });
 
     cart.items[itemIndex] = { ...cart.items[itemIndex], ...updatedItem };
-
-    saveData(); // Save changes to db.json
+    await cart.save();
 
     res.json({ message: 'Cart item updated successfully', cart: cart });
   } catch (error) {
@@ -366,52 +173,180 @@ app.put('/api/carts/:userId/items/:productId', (req, res) => {
   }
 });
 
-app.delete('/api/carts/:userId/items/:productId', (req, res) => {
+app.delete('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const productId = parseInt(req.params.productId, 10);
 
-    if (!data.carts || data.carts.length === 0) {
-      return res.status(404).json({ error: 'No carts found' });
-    }
-
-    const cartIndex = data.carts.findIndex(c => c.userId === userId);
-    if (cartIndex === -1) {
-      return res.status(404).json({ error: 'Cart not found' });
-    }
-
-    const cart = data.carts[cartIndex];
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ error: 'Cart not found' });
 
     const itemIndex = cart.items.findIndex(i => i.productId === productId);
-    if (itemIndex === -1) {
-      return res.status(404).json({ error: 'Product not found in cart' });
-    }
+    if (itemIndex === -1) return res.status(404).json({ error: 'Product not found in cart' });
 
-    const deletedItem = cart.items.splice(itemIndex, 1);
+    cart.items.splice(itemIndex, 1);
+    await cart.save();
 
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Cart item deleted successfully', item: deletedItem[0], cart: cart });
+    res.json({ message: 'Cart item deleted successfully', cart: cart });
   } catch (error) {
     console.error('Error deleting cart item:', error);
     res.status(500).json({ error: 'Failed to delete cart item' });
   }
 });
 
-// CRUD Operations for Categories
-app.get('/api/categories', (req, res) => {
-  res.json(data.categories || []);
+// CRUD Operations for Bookmarks:
+app.get('/api/bookmarks', async (req, res) => {
+  try {
+    const bookmarks = await Bookmark.find();
+    res.json(bookmarks);
+  } catch (error) {
+    console.error('Error fetching bookmarks:', error);
+    res.status(500).json({ error: 'Failed to fetch bookmarks' });
+  }
 });
 
-app.post('/api/categories', (req, res) => {
+app.post('/api/bookmarks', async (req, res) => {
   try {
-    const newCategory = req.body;
+    const newBookmark = new Bookmark(req.body);
+    await newBookmark.save();
+    res.status(201).json({ message: 'Bookmark added successfully', bookmark: newBookmark });
+  } catch (error) {
+    console.error('Error adding bookmark:', error);
+    res.status(500).json({ error: 'Failed to add bookmark' });
+  }
+});
 
-    if (!data.categories) data.categories = [];
-    data.categories.push(newCategory);
+app.put('/api/bookmarks/:id', async (req, res) => {
+  try {
+    const bookmarkId = parseInt(req.params.id, 10);
+    const updatedBookmark = await Bookmark.findByIdAndUpdate(bookmarkId, req.body, { new: true });
+    if (!updatedBookmark) return res.status(404).json({ error: 'Bookmark not found' });
+    res.json(updatedBookmark);
+  } catch (error) {
+    console.error('Error updating bookmark:', error);
+    res.status(500).json({ error: 'Failed to update bookmark' });
+  }
+});
 
-    saveData(); // Save changes to db.json
+app.delete('/api/bookmarks/:id', async (req, res) => {
+  try {
+    const bookmarkId = parseInt(req.params.id, 10);
+    const deletedBookmark = await Bookmark.findByIdAndDelete(bookmarkId);
+    if (!deletedBookmark) return res.status(404).json({ error: 'Bookmark not found' });
+    res.json({ message: 'Bookmark deleted successfully', bookmark: deletedBookmark });
+  } catch (error) {
+    console.error('Error deleting bookmark:', error);
+    res.status(500).json({ error: 'Failed to delete bookmark' });
+  }
+});
 
+// CRUD Operations for Users:
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
+app.post('/api/users', async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(201).json({ message: 'User added successfully', user: newUser });
+  } catch (error) {
+    console.error('Error adding user:', error);
+    res.status(500).json({ error: 'Failed to add user' });
+  }
+});
+
+app.put('/api/users/:id', async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
+    const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true });
+    if (!updatedUser) return res.status(404).json({ error: 'User not found' });
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+});
+
+app.delete('/api/users/:id', async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) return res.status(404).json({ error: 'User not found' });
+    res.json({ message: 'User deleted successfully', user: deletedUser });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Failed to delete user' });
+  }
+});
+
+// CRUD Operations for Blogs:
+app.get('/api/blogs', async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.json(blogs);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).json({ error: 'Failed to fetch blogs' });
+  }
+});
+
+app.post('/api/blogs', async (req, res) => {
+  try {
+    const newBlog = new Blog(req.body);
+    await newBlog.save();
+    res.status(201).json({ message: 'Blog added successfully', blog: newBlog });
+  } catch (error) {
+    console.error('Error adding blog:', error);
+    res.status(500).json({ error: 'Failed to add blog' });
+  }
+});
+
+app.put('/api/blogs/:id', async (req, res) => {
+  try {
+    const blogId = parseInt(req.params.id, 10);
+    const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, { new: true });
+    if (!updatedBlog) return res.status(404).json({ error: 'Blog not found' });
+    res.json(updatedBlog);
+  } catch (error) {
+    console.error('Error updating blog:', error);
+    res.status(500).json({ error: 'Failed to update blog' });
+  }
+});
+
+app.delete('/api/blogs/:id', async (req, res) => {
+  try {
+    const blogId = parseInt(req.params.id, 10);
+    const deletedBlog = await Blog.findByIdAndDelete(blogId);
+    if (!deletedBlog) return res.status(404).json({ error: 'Blog not found' });
+    res.json({ message: 'Blog deleted successfully', blog: deletedBlog });
+  } catch (error) {
+    console.error('Error deleting blog:', error);
+    res.status(500).json({ error: 'Failed to delete blog' });
+  }
+});
+
+// CRUD Operations for Categories:
+app.get('/api/categories', async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Failed to fetch categories' });
+  }
+});
+
+app.post('/api/categories', async (req, res) => {
+  try {
+    const newCategory = new Category(req.body);
+    await newCategory.save();
     res.status(201).json({ message: 'Category added successfully', category: newCategory });
   } catch (error) {
     console.error('Error adding category:', error);
@@ -419,49 +354,24 @@ app.post('/api/categories', (req, res) => {
   }
 });
 
-app.put('/api/categories/:id', (req, res) => {
+app.put('/api/categories/:id', async (req, res) => {
   try {
     const categoryId = parseInt(req.params.id, 10);
-    const updatedCategory = req.body;
-
-    if (!data.categories || data.categories.length === 0) {
-      return res.status(404).json({ error: 'No categories found' });
-    }
-
-    const index = data.categories.findIndex(c => c.id === categoryId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Category not found' });
-    }
-
-    data.categories[index] = { ...data.categories[index], ...updatedCategory };
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Category updated successfully', category: data.categories[index] });
+    const updatedCategory = await Category.findByIdAndUpdate(categoryId, req.body, { new: true });
+    if (!updatedCategory) return res.status(404).json({ error: 'Category not found' });
+    res.json(updatedCategory);
   } catch (error) {
     console.error('Error updating category:', error);
     res.status(500).json({ error: 'Failed to update category' });
   }
 });
 
-app.delete('/api/categories/:id', (req, res) => {
+app.delete('/api/categories/:id', async (req, res) => {
   try {
     const categoryId = parseInt(req.params.id, 10);
-
-    if (!data.categories || data.categories.length === 0) {
-      return res.status(404).json({ error: 'No categories found' });
-    }
-
-    const index = data.categories.findIndex(c => c.id === categoryId);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Category not found' });
-    }
-
-    const deletedCategory = data.categories.splice(index, 1);
-
-    saveData(); // Save changes to db.json
-
-    res.json({ message: 'Category deleted successfully', category: deletedCategory[0] });
+    const deletedCategory = await Category.findByIdAndDelete(categoryId);
+    if (!deletedCategory) return res.status(404).json({ error: 'Category not found' });
+    res.json({ message: 'Category deleted successfully', category: deletedCategory });
   } catch (error) {
     console.error('Error deleting category:', error);
     res.status(500).json({ error: 'Failed to delete category' });
@@ -471,4 +381,69 @@ app.delete('/api/categories/:id', (req, res) => {
 // Start Server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function برای مهاجرت داده‌ها از db.json به MongoDB
+async function migrateData() {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    
+    // خواندن داده‌های db.json
+    const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
+    const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+
+    // انتقال Products
+    if (data.products) {
+      await Product.insertMany(data.products);
+    }
+
+    // انتقال Carts
+    if (data.carts) {
+      await Cart.insertMany(data.carts);
+    }
+
+    // انتقال Bookmarks
+    if (data.bookmarks) {
+      await Bookmark.insertMany(data.bookmarks);
+    }
+
+    // انتقال Users
+    if (data.users) {
+      await User.insertMany(data.users);
+    }
+
+    // انتقال Blogs
+    if (data.blogs) {
+      await Blog.insertMany(data.blogs);
+    }
+
+    // انتقال Categories
+    if (data.categories) {
+      await Category.insertMany(data.categories);
+    }
+
+    console.log('Data migration completed successfully!');
+  } catch (error) {
+    console.error('Error migrating data:', error);
+  }
+}
+
+// اجرای مهاجرت پس از اتصال به دیتابیس
+mongoose.connection.once('open', () => {
+  migrateData();
 });
