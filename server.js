@@ -1,3 +1,57 @@
+// Function برای مهاجرت داده‌ها از db.json به MongoDB
+async function migrateData() {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    
+    // خواندن داده‌های db.json
+    const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
+    const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+
+    // انتقال Products
+    if (data.products) {
+      await Product.insertMany(data.products);
+    }
+
+    // انتقال Carts
+    if (data.carts) {
+      await Cart.insertMany(data.carts);
+    }
+
+    // انتقال Bookmarks
+    if (data.bookmarks) {
+      await Bookmark.insertMany(data.bookmarks);
+    }
+
+    // انتقال Users
+    if (data.users) {
+      await User.insertMany(data.users);
+    }
+
+    // انتقال Blogs
+    if (data.blogs) {
+      await Blog.insertMany(data.blogs);
+    }
+
+    // انتقال Categories
+    if (data.categories) {
+      await Category.insertMany(data.categories);
+    }
+
+    console.log('Data migration completed successfully!');
+  } catch (error) {
+    console.error('Error migrating data:', error);
+  }
+}
+
+// اجرای مهاجرت پس از اتصال به دیتابیس
+mongoose.connection.once('open', () => {
+  migrateData();
+});
+
+//! ----------------------------------------------------------------------------------------------------------
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,7 +64,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connection String
-const connectionString = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const connectionString = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/onlineShopDB?retryWrites=true&w=majority&appName=Cluster0';
 
 // اتصال به دیتابیس MongoDB
 mongoose.connect(connectionString, {
@@ -381,69 +435,4 @@ app.delete('/api/categories/:id', async (req, res) => {
 // Start Server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Function برای مهاجرت داده‌ها از db.json به MongoDB
-async function migrateData() {
-  try {
-    const fs = require('fs');
-    const path = require('path');
-    
-    // خواندن داده‌های db.json
-    const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
-    const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-
-    // انتقال Products
-    if (data.products) {
-      await Product.insertMany(data.products);
-    }
-
-    // انتقال Carts
-    if (data.carts) {
-      await Cart.insertMany(data.carts);
-    }
-
-    // انتقال Bookmarks
-    if (data.bookmarks) {
-      await Bookmark.insertMany(data.bookmarks);
-    }
-
-    // انتقال Users
-    if (data.users) {
-      await User.insertMany(data.users);
-    }
-
-    // انتقال Blogs
-    if (data.blogs) {
-      await Blog.insertMany(data.blogs);
-    }
-
-    // انتقال Categories
-    if (data.categories) {
-      await Category.insertMany(data.categories);
-    }
-
-    console.log('Data migration completed successfully!');
-  } catch (error) {
-    console.error('Error migrating data:', error);
-  }
-}
-
-// اجرای مهاجرت پس از اتصال به دیتابیس
-mongoose.connection.once('open', () => {
-  migrateData();
 });
