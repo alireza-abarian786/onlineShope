@@ -700,7 +700,7 @@ let createBoxRow = (arrCategory) => {
                           <div class="product-title product-title-category">${product.name}</div>
                           <div class="product-rating">
                             ${await createStars(product.ratings)}
-                            <span>(${product.ratings})</span>
+                            <span class='text-body'>(${product.ratings})</span>
                           </div>
                           <div class="product-description">${product.description}</div>
                           <div class="price-container">

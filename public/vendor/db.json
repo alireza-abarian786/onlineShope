@@ -73,12 +73,6 @@
       "description": "محصولات محلی و صنایع دستی"
     },
     {
-      "id": "13",
-      "urlSearch": "bookmarks",
-      "name": "علاقه مندی ها",
-      "description": "محصولات انتخابی مورد علاقه"
-    },
-    {
       "id": "14",
       "urlSearch": "stationery",
       "name": "کتاب و لوازم تحریر",
@@ -95,6 +89,12 @@
       "urlSearch": "jewellery",
       "name": "طلا و نقره",
       "description": "جواهرات زیبا چشم نواز"
+    },
+    {
+      "id": "13",
+      "urlSearch": "bookmarks",
+      "name": "علاقه مندی ها",
+      "description": "محصولات انتخابی مورد علاقه"
     }
   ],
   "products": [

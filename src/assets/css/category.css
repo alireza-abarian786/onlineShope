@@ -204,8 +204,8 @@
   width: 100%;
   flex-wrap: wrap;
   justify-content: end;
-  column-gap: 105px;
-  padding: 0 10px;
+  column-gap: 75px;
+  padding: 40px;
 }
 
 .alert {
@@ -245,13 +245,13 @@
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 90%;
+  width: 100%;
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
   gap: 20px;
   flex-wrap: wrap;
   flex-direction: row-reverse;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .product-card:hover {
   transform: translateY(-10px);
@@ -371,4 +371,11 @@
 }
 .feature-item i {
   color: #28a745;
+}
+
+/* ------------------------------------------- */
+
+.page-link {
+  width: 40px;
+  height: 40px;
 }

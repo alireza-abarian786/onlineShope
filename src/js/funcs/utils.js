@@ -5,11 +5,13 @@ let loginBtnText = document.querySelector('#login span')
 let loginBtn = document.querySelector('#login')
 // ----------------------------------------------------------------
 
+// ! دریافت قسمت سرچ لینک
 let searchParams = (key) => {
     let urlSearchParams = new URLSearchParams(window.location.search)
     return urlSearchParams.get(key)
 }
 
+// ! وضعیت لاگین و تغییر لینک ها
 function isLogin(username) {    
     if (username.length !== 0) {
         loginBtnText.innerHTML = username
@@ -25,14 +27,15 @@ function isLogin(username) {
     }
 }
 
+// ! سرچ محصولات قسمت دسته بندی
 let getSearchProduct = async (arr , property , value) => {
     // value = value.replace(/\s/g, '').replace('', ' ')  // حذف اسپیس  
 
-    let getProduct = await arr.filter(product => product[property].includes(value));    
+    let getProduct = await arr.filter(product => product[property].includes(value.trim()));    
     return getProduct
 }
 
-// فعال‌سازی تمام تولتیپ‌ها
+//! فعال‌سازی تمام تولتیپ‌ها
 function initTooltips() {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     tooltipTriggerList.forEach((tooltipEl) => {
@@ -40,6 +43,7 @@ function initTooltips() {
     });
 }
 
+// ! نمایش الرت وضعیت لاگین کاربر
 let showAlertLogin = async () => {
     let userName = await getLocalStorage("login");                                                            //* کاربری که لاگین کرده username        
     if (!userName || !userName.length) {                                                              //* اگر کاربر لاگین نکرده بود
@@ -62,6 +66,7 @@ let showAlertLogin = async () => {
     }
 }
 
+// ! api دریافت اطلاعات از
 const fetchDataFromApi = async (url) => {
     try {
         const response = await fetch(url);
@@ -75,5 +80,18 @@ const fetchDataFromApi = async (url) => {
     }
 };
 
+// ! و نمایش در قسمت منو category دریافت 
+const fetchCategoriesForShowToMenu = async () => {
+    const categories = await fetchDataFromApi('https://onlineshope.onrender.com/api/categories')
+    const categoryWrapper = document.querySelector("#category-wrapper")
 
-export {searchParams , isLogin , getSearchProduct , initTooltips , showAlertLogin , fetchDataFromApi}
+    categories.forEach(item => {        
+        categoryWrapper.insertAdjacentHTML("beforeend" , `
+            <a href="./category.html?cat=${item.urlSearch}&page=1">
+                <h6 class="shadow-sm">${item.name}</h6>
+            </a>
+        `)
+    })
+}
+
+export {searchParams , isLogin , getSearchProduct , initTooltips , showAlertLogin , fetchDataFromApi , fetchCategoriesForShowToMenu}
