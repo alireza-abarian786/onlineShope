@@ -241,6 +241,15 @@ async function initializeStatusMarks() {
 
 //! ساخت باکس محصولات صفحه اصلی 
 let createProductsAppliances = (element, arrAppliances) => {
+  if (!element) {
+    console.error("❌ Container is not defined:", container);
+    return;
+  }
+
+  if (!Array.isArray(arrAppliances) || arrAppliances.length === 0) {
+    console.warn("⚠️ No products to display for this category.");
+    return;
+  }
     arrAppliances.forEach((box) => {
         element.insertAdjacentHTML(
         "beforeend",

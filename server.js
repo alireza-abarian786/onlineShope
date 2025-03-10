@@ -44,13 +44,13 @@ const cartSchema = new mongoose.Schema({
   user_id: { type: String, required: true },
   items: [{
     product_id: String,
-    quantity: Number,
-    price: Number,
     product_name: String,
-    discount: { type: Number },
-    product_ratings: { type: Number },
     product_images: [String],
-    product_description: String
+    product_description: String,
+    product_ratings: { type: Number },
+    discount: { type: Number },
+    price: Number,
+    quantity: Number
   }],
   totalPrice: { type: Number, required: true }
 });
@@ -208,6 +208,9 @@ app.post('/api/carts/:userId/items', async (req, res) => {
   try {
     const userId = req.params.userId;
     const newItem = req.body;
+
+    console.log("🔍 User ID received:", userId); // لاگ برای userId
+    console.log("🔍 New item received:", newItem); // لاگ برای داده‌های ارسالی
     
     // ساخت سبد خرید جدید اگر وجود نداشت
     let cart = await Cart.findOne({ user_id: userId });
@@ -218,12 +221,13 @@ app.post('/api/carts/:userId/items', async (req, res) => {
         items: []
       });
     }
-
+    
     // افزودن محصول به items
     cart.items.push(newItem);
     await cart.save();
     res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
   } catch (error) {
+    console.error("🚨 Error in /api/carts/:userId/items:", error); // لاگ برای خطاهای سرور
     res.status(500).json({ error: 'مشکل در افزودن به سبد' });
   }
 });

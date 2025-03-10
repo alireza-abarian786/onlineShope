@@ -30,20 +30,23 @@ document.addEventListener("DOMContentLoaded", () => {
   createBlogs(containerArticles);
 });
 
-//! نمایش محصولات صفحه اصلی
+// //! نمایش محصولات صفحه اصلی
 let getAllProduct = async () => {
-  let result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
+  try {
+    let result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
+    let arrDiscount = result.filter((product) => product.discount);
+    let arrAppliances = result.filter((item) => item.category_id === "3");
+    let arrPhones = result.filter((item) => item.category_id === "10");
+    let arrTools = result.filter((item) => item.category_id === "9");
+    let arrModes = result.filter((item) => item.category_id === "2");
 
-  let arrDiscount = result.filter((product) => product.discount);
-  let arrAppliances = result.filter((item) => item.category_id === 3);
-  let arrPhones = result.filter((item) => item.category_id === 10);
-  let arrTools = result.filter((item) => item.category_id === 9);
-  let arrModes = result.filter((item) => item.category_id === 2);
+    createProductsAppliances(discountsGoodsSlider, arrDiscount);
+    createProductsAppliances(containerCategoryAppliances, arrAppliances);
+    createProductsAppliances(containerCategoryPhones, arrPhones);
+    createProductsAppliances(containerCategoryTools, arrTools);
+    createProductsAppliances(containerCategoryModes, arrModes);
 
-  createProductsAppliances(discountsGoodsSlider, arrDiscount);
-  createProductsAppliances(containerCategoryAppliances, arrAppliances);
-  createProductsAppliances(containerCategoryPhones, arrPhones);
-  createProductsAppliances(containerCategoryTools, arrTools);
-  createProductsAppliances(containerCategoryModes, arrModes);
+  } catch (error) {
+    console.error("🚨 Error in getAllProduct:", error);
+  }
 };
-
