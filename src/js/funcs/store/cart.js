@@ -296,12 +296,12 @@ async function clearCart() {
 let finalBuyCartFunc = async () => {
     try {
         let userLogged = await fetchUserLogged()
-        let shopingCartProduct = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+        let shopingCartProduct = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
         if (!shopingCartProduct) {
             throw new Error('Error fetching data to from carts in the finalBuyCartFunc function')
-        }    
-        await createBoxToPageCart(shopingCartProduct)
-        await updateCartNotification()
+        }            
+        createBoxToPageCart(await shopingCartProduct.items)
+        updateCartNotification()
         
     } catch (error) {
         console.error('Error in Function finalBuyCartFunc =>' , error);  
