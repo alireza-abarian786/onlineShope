@@ -75,7 +75,7 @@ let addCartToDB = async (newCart) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newCart.items)
+        body: JSON.stringify(newCart.items[0])
     })
 }
 

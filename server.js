@@ -40,9 +40,10 @@ const Product = mongoose.model('Product', productSchema);
 
 // 2. Model Carts:
 const cartSchema = new mongoose.Schema({  
-  id: { type: String, required: true }, // تبدیل به String
+  id: String,
   user_id: { type: String, required: true },
   items: [{
+    _id: false, // غیرفعال کردن _id برای زیرمستندها
     product_id: String,
     product_name: String,
     product_images: [String],
@@ -218,12 +219,17 @@ app.post('/api/carts/:userId/items', async (req, res) => {
       cart = new Cart({
         id: userId + '-cart',
         user_id: userId,
-        items: []
+        items: [],
+        totalPrice: 0, // مقدار اولیه
       });
     }
     
     // افزودن محصول به items
     cart.items.push(newItem);
+
+    // محاسبه totalPrice
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
     await cart.save();
     res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
   } catch (error) {
