@@ -3,32 +3,22 @@ import { runTimer } from "./funcs/timer.js";
 import { createProductsAppliances , createBlogs} from "./funcs/store/ui.js";
 import { fetchDataFromApi } from "./funcs/utils.js";
 
-import { getLocalStorage } from "./funcs/store/storage.js";
 // -------------------------------------------------------------------------------------
-
-// -------------------------------------------------------------------------------------
-let fetchUserLogged = async () => {
-    let userName = await getLocalStorage("login");                                                             //* کاربری که لاگین کرده username        
-    let getUsers = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                    //* دریافت لیست کل یوزر ها  
-    let user = getUsers.find(user => user.name === userName)
-    
-    return user;
-}
 
 let discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
-let cantainerCategoryAppliances = document.querySelector(
+let containerCategoryAppliances = document.querySelector(
   ".cantainer-category-appliances"
 );
-let cantainerCategoryPhones = document.querySelector(
+let containerCategoryPhones = document.querySelector(
   ".cantainer-category-phones"
 );
-let cantainerCategoryTools = document.querySelector(
+let containerCategoryTools = document.querySelector(
   ".cantainer-category-tools"
 );
-let cantainerCategoryModes = document.querySelector(
+let containerCategoryModes = document.querySelector(
   ".cantainer-category-modes"
 );
-let cantainerArticles = document.querySelector(".box-articles");
+let containerArticles = document.querySelector(".box-articles");
 // --------------------------------------------------------------------------------------------------
 
 //! رویداد بارگذاری صفحه
@@ -37,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   runTimer();
 
   getAllProduct();
-  createBlogs(cantainerArticles);
+  createBlogs(containerArticles);
 });
 
 //! نمایش محصولات صفحه اصلی
@@ -51,14 +41,9 @@ let getAllProduct = async () => {
   let arrModes = result.filter((item) => item.category_id === 2);
 
   createProductsAppliances(discountsGoodsSlider, arrDiscount);
-  createProductsAppliances(cantainerCategoryAppliances, arrAppliances);
-  createProductsAppliances(cantainerCategoryPhones, arrPhones);
-  createProductsAppliances(cantainerCategoryTools, arrTools);
-  createProductsAppliances(cantainerCategoryModes, arrModes);
+  createProductsAppliances(containerCategoryAppliances, arrAppliances);
+  createProductsAppliances(containerCategoryPhones, arrPhones);
+  createProductsAppliances(containerCategoryTools, arrTools);
+  createProductsAppliances(containerCategoryModes, arrModes);
 };
 
-
-
-let userLogged = await fetchUserLogged()
-let data = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
-console.log(data);

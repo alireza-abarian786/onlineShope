@@ -1,5 +1,5 @@
 import { getLocalStorage} from "./storage.js";
-import { addToCart } from "./cart.js";
+import { addToCart , fetchUserLogged} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
 import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 // ----------------------------------------------------------------------------------
@@ -62,8 +62,9 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 async function updateCartButtonState(event) {
     if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
-    let cartItems = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts')                                        //* دریافت اطلاعات سبد خرید
-    if (!isProductInCart(product, cartItems)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
+    let userLogged = await fetchUserLogged()
+    let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+    if (!isProductInCart(product, cartItems.items)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
         changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
     } 
 }

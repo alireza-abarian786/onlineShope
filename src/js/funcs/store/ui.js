@@ -8,13 +8,15 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
   let userLogged = await fetchUserLogged()
-  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts`);               //* دریافت لیست کل سبد خرید  
+  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+  console.log(await data.items.length);
+  
   let notifCart = document.querySelector('.notif-cart');
-  notifCart.classList.toggle('is-notif', data.length > 0);
+  notifCart.classList.toggle('is-notif', data.items.length > 0);
 }
 
 //! 🛒 تابع ساخت باکس محصول در سبد خرید
-export function renderCartItems(cartItems) {  
+async function renderCartItems(cartItems) {    
     const container = document.querySelector('.cantain-box-goods');
     container.innerHTML = '';                                                                   //? پاک کردن آیتم‌های قبلی                                                                              
     cartItems.forEach((item) => {                                                              //?🛒 ساخت باکس محصول و افزودن به سبد خرید           
@@ -218,7 +220,7 @@ async function initializeStatusCarts() {
   let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
     let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
-    if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
+    if (Carts.items.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود
       changeBtnAfterAdd(btn)      
     }
   });
@@ -769,4 +771,4 @@ function updateBookmarkUI(card, isMarked) {
 }
 
 
-export {showModal , updateArrowButtonColors, updateBookmarkUI, updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}
+export {showModal , updateArrowButtonColors, updateBookmarkUI, renderCartItems, updateCartNotification ,changeBtnAfterAdd ,changeBtnAfterDelete , createBoxToPageCart, createBox , initializeStatusCarts , initializeStatusMarks , createProductsAppliances , createBlogs , createBoxRow}

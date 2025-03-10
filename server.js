@@ -195,11 +195,9 @@ app.delete('/api/products/:id', async (req, res) => {
 // Carts
 app.get('/api/carts/:userId', async (req, res) => {
   try {
-    const userId = req.params.userId;
-    console.log("🔍 User ID received:", userId);  // مقدار userId را ببینیم
-    
+    const userId = req.params.userId;    
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' , cart , userId});
+    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد'});
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });

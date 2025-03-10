@@ -12,7 +12,7 @@ let searchParams = (key) => {
 }
 
 // ! وضعیت لاگین و تغییر لینک ها
-function isLogin(username) {    
+function isLogin(username) {     
     if (username.length !== 0) {
         loginBtnText.innerHTML = username
         if (window.location.href === './index.html') {
@@ -69,9 +69,7 @@ let showAlertLogin = async () => {
 // ! api دریافت اطلاعات از
 const fetchDataFromApi = async (url) => {
     try {        
-        const response = await fetch(url);
-        console.log(response);
-        
+        const response = await fetch(url);        
         if (!response.ok) {
             throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
         }
