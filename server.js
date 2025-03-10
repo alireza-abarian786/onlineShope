@@ -46,9 +46,9 @@ const cartSchema = new mongoose.Schema({
     product_id: String,
     quantity: Number,
     price: Number,
+    product_name: String,
     discount: { type: Number },
     product_ratings: { type: Number },
-    product_name: String,
     product_images: [String],
     product_description: String
   }],
@@ -144,9 +144,9 @@ const Category = mongoose.model('Category', categorySchema);
 // }
 
 // اجرای مهاجرت بعد از اتصال به دیتابیس
-mongoose.connection.once('open', () => {
-  migrateData();
-});
+// mongoose.connection.once('open', () => {
+//   migrateData();
+// });
 
 // Rout‌های CRUD برای تمام مجموعه‌داده‌ها:
 
@@ -196,8 +196,10 @@ app.delete('/api/products/:id', async (req, res) => {
 app.get('/api/carts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
+    console.log("🔍 User ID received:", userId);  // مقدار userId را ببینیم
+    
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت ن'});
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });

@@ -1,5 +1,5 @@
 import { initTooltips , fetchDataFromApi} from "../utils.js";
-import { attachCartEventListeners} from "./cart.js";
+import { attachCartEventListeners , fetchUserLogged} from "./cart.js";
 import { clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners , extractProductTitle} from "./box.js";
@@ -7,7 +7,8 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
-  let data = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts');                                               //* دریافت لیست کل سبد خرید  
+  let userLogged = await fetchUserLogged()
+  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts`);               //* دریافت لیست کل سبد خرید  
   let notifCart = document.querySelector('.notif-cart');
   notifCart.classList.toggle('is-notif', data.length > 0);
 }
@@ -213,7 +214,8 @@ let changeBtnAfterDelete = async (element) => {
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
-  let Carts = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts');                                                                       //? دریافت اطلاعات تمام بوکمارک‌ها
+  let userLogged = await fetchUserLogged()
+  let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
     let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
     if (Carts.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود

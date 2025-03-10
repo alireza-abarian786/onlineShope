@@ -1,4 +1,4 @@
-import { removeFromCart ,finalBuyCartFunc , updateQuantity} from "./funcs/store/cart.js"
+import { removeFromCart ,finalBuyCartFunc , updateQuantity , fetchUserLogged} from "./funcs/store/cart.js"
 import { fetchDataFromApi } from "./funcs/utils.js"
 // -----------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +24,8 @@ function buttonsShoppingCart() {
 }
 
 let totalPaymentFunc = async () => {
-    let arrayCart = await fetchDataFromApi('https://onlineshope.onrender.com/api/carts')
+    let userLogged = await fetchUserLogged()
+    let arrayCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
     let sum = arrayCart.map(item => item.totalPrice).reduce((acc , curr) => acc + curr , 0)
 
     total.forEach(item => {

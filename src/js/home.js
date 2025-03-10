@@ -3,6 +3,18 @@ import { runTimer } from "./funcs/timer.js";
 import { createProductsAppliances , createBlogs} from "./funcs/store/ui.js";
 import { fetchDataFromApi } from "./funcs/utils.js";
 
+import { getLocalStorage } from "./funcs/store/storage.js";
+// -------------------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------------------
+let fetchUserLogged = async () => {
+    let userName = await getLocalStorage("login");                                                             //* کاربری که لاگین کرده username        
+    let getUsers = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                    //* دریافت لیست کل یوزر ها  
+    let user = getUsers.find(user => user.name === userName)
+    
+    return user;
+}
+
 let discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
 let cantainerCategoryAppliances = document.querySelector(
   ".cantainer-category-appliances"
@@ -47,4 +59,6 @@ let getAllProduct = async () => {
 
 
 
-
+let userLogged = await fetchUserLogged()
+let data = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+console.log(data);

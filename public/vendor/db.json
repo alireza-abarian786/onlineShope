@@ -2340,7 +2340,13 @@
       "created_at": "2023-12-15"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "d5jh85d",
+      "user_id": "m7max5s1",
+      "items": []
+    }
+  ],
   "bookmarks": []
 
 }

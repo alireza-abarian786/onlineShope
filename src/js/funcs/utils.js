@@ -68,8 +68,10 @@ let showAlertLogin = async () => {
 
 // ! api دریافت اطلاعات از
 const fetchDataFromApi = async (url) => {
-    try {
+    try {        
         const response = await fetch(url);
+        console.log(response);
+        
         if (!response.ok) {
             throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
         }
