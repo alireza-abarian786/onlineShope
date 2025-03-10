@@ -199,7 +199,7 @@ app.get('/api/carts/:userId', async (req, res) => {
     console.log("🔍 User ID received:", userId);  // مقدار userId را ببینیم
     
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت ن'});
+    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' , cart , userId});
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });
