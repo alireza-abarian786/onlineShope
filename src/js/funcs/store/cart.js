@@ -121,6 +121,7 @@ async function initializeCart() {
         //     // let cart = await Carts.json();
         //     // console.log("✅ سبد خرید یافت شد:", cart);
         // }
+        console.log(Carts);
         
         await renderCartItems(Carts.items);                                                                                       //* نمایش اطلاعات محصول در سبد خرید
         await updateCartNotification();                                                                               //* اپدیت نوتیف سبد خرید
@@ -196,9 +197,7 @@ let updateQuantity = async (event , operation) => {
         if (!getProductsDB) {
             throw new Error(`Error fetching data to from carts`)
         }
-        
-        console.log(getProductsDB);
-        
+                
         let objProduct = getProductsDB.items.find(item => item.product_name === title)                               //* پیدا کردن محصول مورد نظر
         let quantity = Number(quantityElem.innerHTML);                                                        //* تبدیل شمارنده به نامبر
         let updatePrice;
@@ -210,18 +209,16 @@ let updateQuantity = async (event , operation) => {
     
         if (operation === 'increase') {                                                                     //* اگر عملیات مورد نظر افزایش تعداد محصول بود
             quantity += 1;
-            updatePrice = objProduct.totalPrice + (objProduct.discount || objProduct.price)
+            updatePrice = (objProduct.discount || objProduct.price) + (objProduct.discount || objProduct.price)
         } else if (operation === 'decrease' && quantity > 1){                                               //* اگر عملیات مورد نظر کاهش تعداد محصول بود
-            quantity -= 1;
-            updatePrice = objProduct.totalPrice - (objProduct.discount || objProduct.price)
+            quantity -= 1;            
+            updatePrice = objProduct.totalPriceProductCart - (objProduct.discount || objProduct.price)
         } else {
             showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
             return;
         }
-        
-        console.log(objProduct.cart_id);
-        
-        await editeDataProductToDB(quantity , objProduct.cart_id , updatePrice)                                         //* اعمال تغییرات جدید در دیتابیس
+                
+        await editeDataProductToDB(quantity , objProduct.cart_id , updatePrice)                                    //* اعمال تغییرات جدید در دیتابیس
         await totalPaymentFunc()                                                                                  //* اپدیت قیمت کل صفحه سبد خرید
         await finalBuyCartFunc()                                                                                 //* اپدیت صفحه سبد خرید
         quantityElem.textContent = quantity                                                                     //* quantity دادن مقدار جدید به 
@@ -234,16 +231,19 @@ let updateQuantity = async (event , operation) => {
 }
 
 // ! تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
-let editeDataProductToDB = async (quantity , cartID , totalPrice) => {    
+let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => {    
     let userLogged = await fetchUserLogged()
-    let product = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید 
-    if (!product) {                                                                                     //* اعتبار سنجی
+    let product = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);             //* دریافت لیست کل سبد خرید 
+    if (!product) {                                                                                                                 //* اعتبار سنجی
         console.error("اطلاعات محصول نامعتبر است.");
         return;
     }
 
-    let updateCart = {...product , quantity , totalPrice}                                                         //* اطلاعات جدید
-    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}/items/${cartID}` , {                                                          //* انجام عملیات ویرایش کردن
+    let productCart = product.items.find(item => item.cart_id === cartID)    
+    let updateCart = {...productCart , quantity , totalPriceProductCart}                                                                  //* اطلاعات جدید
+    console.log(updateCart);
+    
+    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}/items/${cartID}` , {                         //* انجام عملیات ویرایش کردن
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

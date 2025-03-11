@@ -211,8 +211,8 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     const userId = req.params.userId;
     const newItem = req.body;
 
-    console.log("🔍 User ID received:", userId); // لاگ برای userId
-    console.log("🔍 New item received:", newItem); // لاگ برای داده‌های ارسالی
+    // console.log("🔍 User ID received:", userId); // لاگ برای userId
+    // console.log("🔍 New item received:", newItem); // لاگ برای داده‌های ارسالی
     
     // ساخت سبد خرید جدید اگر وجود نداشت
     let cart = await Cart.findOne({ user_id: userId });
@@ -244,6 +244,10 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
     const userId = req.params.userId;
     const productId = req.params.productId;
     const updatedItem = req.body;
+
+    console.log(userId);
+    console.log(productId);
+    
     
     const cart = await Cart.findOne({ user_id: userId });
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });

@@ -8,9 +8,7 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
   let userLogged = await fetchUserLogged()
-  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
-  console.log(await data.items.length);
-  
+  let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید    
   let notifCart = document.querySelector('.notif-cart');
   notifCart.classList.toggle('is-notif', data.items.length > 0);
 }
@@ -19,8 +17,8 @@ async function updateCartNotification() {
 async function renderCartItems(cartItems) {    
     const container = document.querySelector('.cantain-box-goods');
     container.innerHTML = '';                                                                   //? پاک کردن آیتم‌های قبلی                                                                              
-    cartItems.forEach((item) => {                                                                   //?🛒 ساخت باکس محصول و افزودن به سبد خرید           
-        const cartHTML = `
+    cartItems.forEach((item) => {                                                                   //?🛒 ساخت باکس محصول و افزودن به سبد خرید                   
+      const cartHTML = `
             <div class="box-goods d-flex align-items-end swiper-slide" data-id="${item.id}" style='transform: translateY(0);'>
                 <div>
                     <span class="plus-btn">+</span>
@@ -52,7 +50,7 @@ async function renderCartItems(cartItems) {
                     <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1 total-price'>${item.price.toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${item.discount ? item.discount.toLocaleString() : item.price.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
