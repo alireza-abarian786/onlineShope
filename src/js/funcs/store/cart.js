@@ -54,6 +54,7 @@ let newProductData = async (product , user) => {
         id: Date.now().toString(36),
         user_id: user.id,
         items: [{
+            cart_id: Date.now().toString(16),
             product_id: product.id,
             product_name: product.name,
             product_images: product.images,
@@ -191,12 +192,14 @@ let updateQuantity = async (event , operation) => {
         let priceElem = boxProduct.querySelector(".total-price");                                                 //* المنت قیمت محصول
         let quantityElem = boxProduct.querySelector('.number')                                                   //* المنت شمارنده محصول
         let userLogged = await fetchUserLogged()
-        let getProductsDB = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید 
+        let getProductsDB = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید 
         if (!getProductsDB) {
             throw new Error(`Error fetching data to from carts`)
         }
         
-        let objProduct = getProductsDB.find(item => item.product_name === title)                               //* پیدا کردن محصول مورد نظر
+        console.log(getProductsDB);
+        
+        let objProduct = getProductsDB.items.find(item => item.product_name === title)                               //* پیدا کردن محصول مورد نظر
         let quantity = Number(quantityElem.innerHTML);                                                        //* تبدیل شمارنده به نامبر
         let updatePrice;
         
@@ -216,7 +219,9 @@ let updateQuantity = async (event , operation) => {
             return;
         }
         
-        await editeDataProductToDB(quantity , objProduct.id , updatePrice)                                         //* اعمال تغییرات جدید در دیتابیس
+        console.log(objProduct.cart_id);
+        
+        await editeDataProductToDB(quantity , objProduct.cart_id , updatePrice)                                         //* اعمال تغییرات جدید در دیتابیس
         await totalPaymentFunc()                                                                                  //* اپدیت قیمت کل صفحه سبد خرید
         await finalBuyCartFunc()                                                                                 //* اپدیت صفحه سبد خرید
         quantityElem.textContent = quantity                                                                     //* quantity دادن مقدار جدید به 
@@ -229,16 +234,16 @@ let updateQuantity = async (event , operation) => {
 }
 
 // ! تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
-let editeDataProductToDB = async (quantity , id , totalPrice) => {    
+let editeDataProductToDB = async (quantity , cartID , totalPrice) => {    
     let userLogged = await fetchUserLogged()
-    let product = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید 
+    let product = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید 
     if (!product) {                                                                                     //* اعتبار سنجی
         console.error("اطلاعات محصول نامعتبر است.");
         return;
     }
 
     let updateCart = {...product , quantity , totalPrice}                                                         //* اطلاعات جدید
-    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}/${id}` , {                                                          //* انجام عملیات ویرایش کردن
+    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}/items/${cartID}` , {                                                          //* انجام عملیات ویرایش کردن
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

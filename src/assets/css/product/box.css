@@ -229,11 +229,11 @@
   display: flex;
   flex-direction: column;
   align-self: center;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 .swiper-slide:hover {
   transform: translateY(-10px);
-  transition: all 0.4s ease 0.1ms;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
@@ -394,7 +394,6 @@
 .box-price p {
   font-size: 1rem;
   letter-spacing: 1px;
-  /* color: #747385; */
 }
 
 .add-cart {
@@ -461,10 +460,8 @@
 
 .mySwiper2 , .mySwiper3{
   width: 100%;
+  padding: 20px;
   align-self: flex-end;
-  margin-bottom: 10px;
-  padding-top: 10px;
-  padding: 20px 10px 0 10px;
 }
 
 .mySwiper2 .swiper-slide {
@@ -483,6 +480,6 @@
 }
 
 .swiper-pagination {
-  bottom: -6px !important;
+  bottom: -15px !important;
   position: relative !important;
 }

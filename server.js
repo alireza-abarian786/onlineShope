@@ -44,6 +44,7 @@ const cartSchema = new mongoose.Schema({
   user_id: { type: String, required: true },
   items: [{
     _id: false, // غیرفعال کردن _id برای زیرمستندها
+    cart_id: String,
     product_id: String,
     product_name: String,
     product_images: [String],
