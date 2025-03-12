@@ -229,7 +229,7 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     cart.items.push(newItem);
 
     // محاسبه totalPrice
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount || item.price) * item.quantity), 0);
 
     await cart.save();
     res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
@@ -247,12 +247,17 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
 
     console.log(userId);
     console.log(productId);
+    console.log(updatedItem);
     
     
     const cart = await Cart.findOne({ user_id: userId });
+    console.log(cart);
+    
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
 
     const itemIndex = cart.items.findIndex(i => i.product_id === productId);
+    console.log(itemIndex);
+    
     if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
 
     cart.items[itemIndex] = updatedItem;
