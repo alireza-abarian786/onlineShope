@@ -229,7 +229,12 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     cart.items.push(newItem);
 
     // محاسبه totalPrice
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount || item.price) * item.quantity), 0);
+    // cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount || item.price) * item.quantity), 0);
+
+    cart.totalPrice = cart.items.reduce((sum, item) => {
+      const finalPrice = item.discount !== undefined ? item.discount : item.price; // اولویت به discount
+      return sum + (finalPrice * item.quantity);
+    }, 0);
 
     await cart.save();
     res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
@@ -242,11 +247,11 @@ app.post('/api/carts/:userId/items', async (req, res) => {
 app.put('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
-    const productId = req.params.productId;
+    const cartId = req.params.productId;
     const updatedItem = req.body;
 
     console.log(userId);
-    console.log(productId);
+    console.log(cartId);
     console.log(updatedItem);
     
     
@@ -255,7 +260,7 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
     
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
 
-    const itemIndex = cart.items.findIndex(i => i.product_id === productId);
+    const itemIndex = cart.items.findIndex(i => i.cart_id === cartId);
     console.log(itemIndex);
     
     if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
@@ -264,6 +269,7 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
     await cart.save();
     res.json({ message: 'محصول به‌روزرسانی شد', cart });
   } catch (error) {
+    console.error("🚨 Error in /api/carts/:userId/items/:productId", error); // لاگ برای خطاهای سرور
     res.status(500).json({ error: 'مشکل در به‌روزرسانی سبد' });
   }
 });
