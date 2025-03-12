@@ -110,6 +110,7 @@ async function initializeCart() {
     try {
         let userLogged = await fetchUserLogged()
         let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید          
+        console.log(Carts);
         if (!Carts) {
             throw new Error("Error fetching data to from carts in the initializeCart function");
         }
@@ -122,7 +123,6 @@ async function initializeCart() {
         //     // let cart = await Carts.json();
         //     // console.log("✅ سبد خرید یافت شد:", cart);
         // }
-        console.log(Carts);
         
         await renderCartItems(Carts.items);                                                                                       //* نمایش اطلاعات محصول در سبد خرید
         await updateCartNotification();                                                                               //* اپدیت نوتیف سبد خرید

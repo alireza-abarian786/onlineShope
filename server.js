@@ -200,7 +200,10 @@ app.get('/api/carts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;    
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد'});
+    if (!cart) res.status(404).json({ error: 'سبد خرید یافت نشد'});
+    console.log(cart);
+    console.log(res);
+    
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });
