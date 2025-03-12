@@ -63,6 +63,7 @@ let newProductData = async (product , user) => {
             discount: +product.discount,
             price: +product.price,
             quantity: 1,
+            totalPriceProductCart: 0
         }],
         totalPrice: product.discount ? +product.discount : +product.price,
     }

@@ -52,7 +52,8 @@ const cartSchema = new mongoose.Schema({
     product_ratings: { type: Number },
     discount: { type: Number },
     price: Number,
-    quantity: Number
+    quantity: Number,
+    totalPriceProductCart: Number
   }],
   totalPrice: { type: Number, required: true }
 });
@@ -266,6 +267,13 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
     if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
 
     cart.items[itemIndex] = updatedItem;
+
+     // محاسبه totalPrice
+    cart.totalPrice = cart.items.reduce((sum, item) => {
+      const finalPrice = item.discount !== undefined ? item.discount : item.price; // اولویت به discount
+      return sum + (finalPrice * item.quantity);
+    }, 0);
+
     await cart.save();
     res.json({ message: 'محصول به‌روزرسانی شد', cart });
   } catch (error) {
