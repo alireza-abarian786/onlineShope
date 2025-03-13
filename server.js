@@ -58,6 +58,16 @@ const cartSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true }
 });
 const Cart = mongoose.model('Cart', cartSchema);
+//! -------------------------------------------------------------------------------------------------------------------------------
+const cartUserSchema = new mongoose.Schema({  
+  id: String,
+  user_id: { type: String, required: true },
+  items: [{type: Object, required: true}],
+  totalPrice: { type: Number, required: true }
+});
+const userCart = mongoose.model('Cart', cartUserSchema);
+//! -------------------------------------------------------------------------------------------------------------------------------
+
 
 // 3. Model Bookmarks:
 const bookmarkSchema = new mongoose.Schema({
@@ -200,10 +210,9 @@ app.get('/api/carts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;    
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) res.status(404).json({ error: 'سبد خرید یافت نشد'});
-    console.log(cart);
-    console.log(res);
-    
+    if (!cart) {
+      return res.status(404).json({ error: 'سبد خرید یافت نشد' }); // استفاده از return
+    }
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });
@@ -215,9 +224,6 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     const userId = req.params.userId;
     const newItem = req.body;
 
-    // console.log("🔍 User ID received:", userId); // لاگ برای userId
-    // console.log("🔍 New item received:", newItem); // لاگ برای داده‌های ارسالی
-    
     // ساخت سبد خرید جدید اگر وجود نداشت
     let cart = await Cart.findOne({ user_id: userId });
     if (!cart) {
@@ -228,25 +234,50 @@ app.post('/api/carts/:userId/items', async (req, res) => {
         totalPrice: 0, // مقدار اولیه
       });
     }
-    
+
     // افزودن محصول به items
     cart.items.push(newItem);
 
     // محاسبه totalPrice
-    // cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount || item.price) * item.quantity), 0);
-
     cart.totalPrice = cart.items.reduce((sum, item) => {
-      const finalPrice = item.discount !== undefined ? item.discount : item.price; // اولویت به discount
+      const finalPrice = item.discount ? item.discount : item.price; // اولویت به discount
       return sum + (finalPrice * item.quantity);
     }, 0);
 
     await cart.save();
-    res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
+    return res.status(201).json({ message: 'محصول به سبد اضافه شد', cart }); // استفاده از return
   } catch (error) {
     console.error("🚨 Error in /api/carts/:userId/items:", error); // لاگ برای خطاهای سرور
-    res.status(500).json({ error: 'مشکل در افزودن به سبد' });
+    return res.status(500).json({ error: 'مشکل در افزودن به سبد' }); // استفاده از return
   }
 });
+//! -------------------------------------------------------------------------------------------------------------------------------
+app.post('/api/carts/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const newItem = req.body;
+
+    // ساخت سبد خرید جدید اگر وجود نداشت
+    let cart = await userCart.findOne({ user_id: userId });
+    if (!cart) {
+      cart = new Cart({
+        id: userId + '-cart',
+        user_id: userId,
+        items: [],
+        totalPrice: 0, // مقدار اولیه
+      });
+    }
+
+    // افزودن محصول به items
+    cart.items.push(newItem);
+    await cart.save();
+    return res.status(201).json({ message: 'محصول به سبد اضافه شد', cart }); // استفاده از return
+  } catch (error) {
+    console.error("🚨 Error in /api/carts/:userId/items:", error); // لاگ برای خطاهای سرور
+    return res.status(500).json({ error: 'مشکل در افزودن به سبد' }); // استفاده از return
+  }
+});
+//! -------------------------------------------------------------------------------------------------------------------------------
 
 app.put('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
@@ -254,34 +285,29 @@ app.put('/api/carts/:userId/items/:productId', async (req, res) => {
     const cartId = req.params.productId;
     const updatedItem = req.body;
 
-    console.log(userId);
-    console.log(cartId);
-    console.log(updatedItem);
-    
-    
     const cart = await Cart.findOne({ user_id: userId });
-    console.log(cart);
-    
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    if (!cart) {
+      return res.status(404).json({ error: 'سبد خرید یافت نشد' }); // استفاده از return
+    }
 
     const itemIndex = cart.items.findIndex(i => i.cart_id === cartId);
-    console.log(itemIndex);
-    
-    if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
+    if (itemIndex === -1) {
+      return res.status(404).json({ error: 'محصول در سبد وجود ندارد' }); // استفاده از return
+    }
 
     cart.items[itemIndex] = updatedItem;
 
-     // محاسبه totalPrice
+    // محاسبه totalPrice
     cart.totalPrice = cart.items.reduce((sum, item) => {
-      const finalPrice = item.discount !== undefined ? item.discount : item.price; // اولویت به discount
+      const finalPrice = item.discount ? item.discount : item.price; // اولویت به discount
       return sum + (finalPrice * item.quantity);
     }, 0);
 
     await cart.save();
-    res.json({ message: 'محصول به‌روزرسانی شد', cart });
+    return res.json({ message: 'محصول به‌روزرسانی شد', cart }); // استفاده از return
   } catch (error) {
     console.error("🚨 Error in /api/carts/:userId/items/:productId", error); // لاگ برای خطاهای سرور
-    res.status(500).json({ error: 'مشکل در به‌روزرسانی سبد' });
+    return res.status(500).json({ error: 'مشکل در به‌روزرسانی سبد' }); // استفاده از return
   }
 });
 
@@ -289,16 +315,19 @@ app.delete('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const productId = req.params.productId;
-    
+
     const cart = await Cart.findOne({ user_id: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    if (!cart) {
+      return res.status(404).json({ error: 'سبد خرید یافت نشد' }); // استفاده از return
+    }
 
     // حذف آیتم موردنظر
     cart.items = cart.items.filter(item => item.product_id !== productId);
     await cart.save();
-    res.json({ message: 'محصول از سبد حذف شد', cart });
+
+    return res.json({ message: 'محصول از سبد حذف شد', cart }); // استفاده از return
   } catch (error) {
-    res.status(500).json({ error: 'مشکل در حذف از سبد' });
+    return res.status(500).json({ error: 'مشکل در حذف از سبد' }); // استفاده از return
   }
 });
 

@@ -16,22 +16,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     fetchCategoriesForShowToMenu()
 });
-
-// document.addEventListener('DOMContentLoaded', () => {            
-//     if (getLocalStorage('mark').length === 0) {
-//         fetch('http://localhost:3000/bookmarks')
-//         .then(response => response.json())
-//         .then(products => {
-//             products.forEach(product => {
-//                 fetch(`http://localhost:3000/bookmarks/${product.id}`, {
-//                     method: 'DELETE'
-//                 });
-//             });
-//         })
-//         .then(() => {
-//             showModal("❌ همه بوکمارک ها حذف شدند")
-//             localStorage.removeItem('id')
-//         })
-//         .catch(error => console.error("خطا در حذف بوکمارک ها :", error));
-//     }
-// });

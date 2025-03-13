@@ -1,4 +1,6 @@
 import { getLocalStorage } from "./store/storage.js"
+import { createCartForUser } from "./store/cart.js"
+import { fetchUserFromDatabase } from "./store/box.js"
 // ----------------------------------------------------------------
 
 let loginBtnText = document.querySelector('#login span')
@@ -12,15 +14,19 @@ let searchParams = (key) => {
 }
 
 // ! وضعیت لاگین و تغییر لینک ها
-function isLogin(username) {     
+async function isLogin(username) {     
     if (username.length !== 0) {
         loginBtnText.innerHTML = username
-        if (window.location.href === './index.html') {
-            
-            loginBtn.setAttribute('href' , './doshboard.html') 
-        } else {
-            loginBtn.setAttribute('href' , './doshboard.html') 
-        }       
+        loginBtn.setAttribute('href' , './doshboard.html') 
+
+        let user = await fetchUserFromDatabase();                                                //* دریافت اطلاعات کاربر انجام دهنده    
+        if (!user) {                                                                            //* صحت سنجی دریافت درست اطلاعات
+            console.error("اطلاعات کاربر یا محصول نامعتبر است.");
+            return;
+        }
+        let newCart = await createCartForUser(user)                                            //* اطلاعات محصول جدید سبد خرید
+        await addCartUserToDB(newCart)                                                        //* اطلاعات محصول جدید سبد خرید
+    
     } else {
         loginBtnText.innerHTML = "ورود / عضویت"
         loginBtn.setAttribute('href' , "./login.html")
