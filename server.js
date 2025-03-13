@@ -40,7 +40,7 @@ const Product = mongoose.model('Product', productSchema);
 
 // 2. Model Carts:
 const cartSchema = new mongoose.Schema({  
-  id: String,
+  // id: String,
   user_id: { type: String, required: true },
   items: [{
     _id: false, // غیرفعال کردن _id برای زیرمستندها
@@ -59,13 +59,6 @@ const cartSchema = new mongoose.Schema({
 });
 const Cart = mongoose.model('Cart', cartSchema);
 //! -------------------------------------------------------------------------------------------------------------------------------
-const cartUserSchema = new mongoose.Schema({  
-  id: String,
-  user_id: { type: String, required: true },
-  items: [{type: Object, required: true}],
-  totalPrice: { type: Number, required: true }
-});
-const userCart = mongoose.model('Cart', cartUserSchema);
 //! -------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -114,56 +107,73 @@ const categorySchema = new mongoose.Schema({
 });
 const Category = mongoose.model('Category', categorySchema);
 
-// Function پاک کردن تمام داده‌ها:
-// async function deleteAllData() {
-//   try {
-//     await Product.deleteMany({});
-//     await Cart.deleteMany({});
-//     await Bookmark.deleteMany({});
-//     await User.deleteMany({});
-//     await Blog.deleteMany({});
-//     await Category.deleteMany({});
-//     console.log('تمام داده‌ها پاک شدند!');
-//   } catch (error) {
-//     console.error('خطا در پاک کردن:', error);
-//   }
-// }
-
-// // Function مهاجرت داده‌ها از db.json به MongoDB:
-// async function migrateData() {
-//   try {
-//     const fs = require('fs');
-//     const path = require('path');
-    
-//     // مسیر فایل db.json
-//     const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
-//     const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-
-//     // پاک کردن داده‌های موجود
-//     await deleteAllData();
-
-//     // انتقال داده‌ها به MongoDB با اطمینان از ساختار صحیح
-//     if (data.products) await Product.insertMany(data.products);
-//     if (data.carts) await Cart.insertMany(data.carts);
-//     if (data.bookmarks) await Bookmark.insertMany(data.bookmarks);
-//     if (data.users) await User.insertMany(data.users);
-//     if (data.blogs) await Blog.insertMany(data.blogs);
-//     if (data.categories) await Category.insertMany(data.categories);
-
-//     console.log('مهاجرت با موفقیت انجام شد!');
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// }
-
-// اجرای مهاجرت بعد از اتصال به دیتابیس
-// mongoose.connection.once('open', () => {
-//   migrateData();
-// });
+// به پایین انتقال داده شد <= Function پاک کردن تمام داده‌ها
 
 // Rout‌های CRUD برای تمام مجموعه‌داده‌ها:
+// User
+
+app.post('/api/users', async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+
+    // ایجاد یک سبد خرید خالی برای کاربر جدید
+    const newCart = new Cart({
+      id: newUser.id + '-cart',
+      user_id: newUser.id,
+      items: [], // سبد خرید خالی
+      totalPrice: 0, // قیمت کل صفر
+    });
+    await newCart.save();
+
+    res.status(201).json({ message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', user: newUser });
+  } catch (error) {
+    res.status(500).json({ error: 'مشکل در ذخیره کاربر' });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  try {
+    const { name, password } = req.body;
+
+    // بررسی وجود کاربر با ایمیل و رمز عبور
+    const user = await User.findOne({ name });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: 'ایمیل یا رمز عبور اشتباه است' });
+    }
+
+    // بررسی وجود سبد خرید برای کاربر
+    let cart = await Cart.findOne({ user_id: user.id });
+    if (!cart) {
+      // ایجاد سبد خرید خالی اگر وجود نداشت
+      cart = new Cart({
+        id: user.id + '-cart',
+        user_id: user.id,
+        items: [],
+        totalPrice: 0,
+      });
+      await cart.save();
+    }
+
+    // بازگرداندن اطلاعات کاربر و سبد خرید
+    return res.status(200).json({
+      message: 'کاربر با موفقیت لاگین کرد',
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      cart: cart,
+    });
+  } catch (error) {
+    console.error("🚨 Error in /api/login:", error);
+    return res.status(500).json({ error: 'مشکل در لاگین کاربر' });
+  }
+});
+
 
 // Products
+
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find();
@@ -224,6 +234,12 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     const userId = req.params.userId;
     const newItem = req.body;
 
+    // بررسی وجود کاربر
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'کاربر یافت نشد' });
+    }
+
     // ساخت سبد خرید جدید اگر وجود نداشت
     let cart = await Cart.findOne({ user_id: userId });
     if (!cart) {
@@ -252,31 +268,6 @@ app.post('/api/carts/:userId/items', async (req, res) => {
   }
 });
 //! -------------------------------------------------------------------------------------------------------------------------------
-app.post('/api/carts/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const newItem = req.body;
-
-    // ساخت سبد خرید جدید اگر وجود نداشت
-    let cart = await userCart.findOne({ user_id: userId });
-    if (!cart) {
-      cart = new Cart({
-        id: userId + '-cart',
-        user_id: userId,
-        items: [],
-        totalPrice: 0, // مقدار اولیه
-      });
-    }
-
-    // افزودن محصول به items
-    cart.items.push(newItem);
-    await cart.save();
-    return res.status(201).json({ message: 'محصول به سبد اضافه شد', cart }); // استفاده از return
-  } catch (error) {
-    console.error("🚨 Error in /api/carts/:userId/items:", error); // لاگ برای خطاهای سرور
-    return res.status(500).json({ error: 'مشکل در افزودن به سبد' }); // استفاده از return
-  }
-});
 //! -------------------------------------------------------------------------------------------------------------------------------
 
 app.put('/api/carts/:userId/items/:productId', async (req, res) => {
@@ -519,3 +510,57 @@ app.delete('/api/categories/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+// Function پاک کردن تمام داده‌ها:
+// async function deleteAllData() {
+//   try {
+//     await Product.deleteMany({});
+//     await Cart.deleteMany({});
+//     await Bookmark.deleteMany({});
+//     await User.deleteMany({});
+//     await Blog.deleteMany({});
+//     await Category.deleteMany({});
+//     console.log('تمام داده‌ها پاک شدند!');
+//   } catch (error) {
+//     console.error('خطا در پاک کردن:', error);
+//   }
+// }
+
+// // Function مهاجرت داده‌ها از db.json به MongoDB:
+// async function migrateData() {
+//   try {
+//     const fs = require('fs');
+//     const path = require('path');
+    
+//     // مسیر فایل db.json
+//     const dbPath = path.join(__dirname, 'public', 'vendor', 'db.json');
+//     const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+
+//     // پاک کردن داده‌های موجود
+//     await deleteAllData();
+
+//     // انتقال داده‌ها به MongoDB با اطمینان از ساختار صحیح
+//     if (data.products) await Product.insertMany(data.products);
+//     if (data.carts) await Cart.insertMany(data.carts);
+//     if (data.bookmarks) await Bookmark.insertMany(data.bookmarks);
+//     if (data.users) await User.insertMany(data.users);
+//     if (data.blogs) await Blog.insertMany(data.blogs);
+//     if (data.categories) await Category.insertMany(data.categories);
+
+//     console.log('مهاجرت با موفقیت انجام شد!');
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// اجرای مهاجرت بعد از اتصال به دیتابیس
+// mongoose.connection.once('open', () => {
+//   migrateData();
+// });

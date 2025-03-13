@@ -1,5 +1,4 @@
 import { getLocalStorage } from "./store/storage.js"
-import { createCartForUser , addCartUserToDB} from "./store/cart.js"
 import { fetchUserFromDatabase } from "./store/box.js"
 // ----------------------------------------------------------------
 
@@ -19,14 +18,15 @@ async function isLogin(username) {
         loginBtnText.innerHTML = username
         loginBtn.setAttribute('href' , './doshboard.html') 
 
-        if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let user = await fetchUserFromDatabase();                                                //* دریافت اطلاعات کاربر انجام دهنده    
         if (!user) {                                                                            //* صحت سنجی دریافت درست اطلاعات
             console.error("اطلاعات کاربر یا محصول نامعتبر است.");
             return;
         }
-        let newCart = await createCartForUser(user)                                            //* اطلاعات محصول جدید سبد خرید
-        await addCartUserToDB(newCart)                                                        //* اطلاعات محصول جدید سبد خرید
+
+        let a = await fetchDataFromApi("https://onlineshope.onrender.com/api/login")
+        console.log(a);
+        
     
     } else {
         loginBtnText.innerHTML = "ورود / عضویت"

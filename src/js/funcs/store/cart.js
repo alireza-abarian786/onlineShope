@@ -52,17 +52,20 @@ async function addToCart(event) {
 //! تنظیم اطلاعات محصول جدید سبد خرید
 let newProductData = async (product , user) => {
     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
-        cart_id: Date.now().toString(36),
-        product_id: product.id,
-        product_name: product.name,
-        product_images: product.images,
-        product_description: product.description,
-        product_ratings: +product.ratings,
-        discount: +product.discount,
-        price: +product.price,
-        quantity: 1,
-        totalPriceProductCart: 0
-        // totalPrice: product.discount ? +product.discount : +product.price,
+        user_id: user.id,
+        items: [{
+            cart_id: Date.now().toString(36),
+            product_id: product.id,
+            product_name: product.name,
+            product_images: product.images,
+            product_description: product.description,
+            product_ratings: +product.ratings,
+            discount: +product.discount,
+            price: +product.price,
+            quantity: 1,
+            totalPriceProductCart: 0
+        }],
+        totalPrice: product.discount ? +product.discount : +product.price,
     }
 }
 
@@ -78,27 +81,27 @@ let addCartToDB = async (newCart) => {
     })
 }
 //todo -------------------------------------------------------------------------------------------------------------------------------
-//! تنظیم اولیه ی سبد خرید کاربر
-let createCartForUser = async (user) => {
-    return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
-        id: Date.now().toString(36),
-        user_id: user.id,
-        items: [],
-        totalPrice: 0,
-    }
-}
+// //! تنظیم اولیه ی سبد خرید کاربر
+// let createCartForUser = async (user) => {
+//     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
+//         id: Date.now().toString(36),
+//         user_id: user.id,
+//         items: [],
+//         totalPrice: 0,
+//     }
+// }
 
-// ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
-let addCartUserToDB = async (newCart) => {
-    let userLogged = await fetchUserLogged()
-    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}` , {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newCart)
-    })
-}
+// // ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
+// let addCartUserToDB = async (newCart) => {
+//     let userLogged = await fetchUserLogged()
+//     await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}` , {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(newCart)
+//     })
+// }
 //todo -------------------------------------------------------------------------------------------------------------------------------
 //!🛒 تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
 async function toggleCart() {    
@@ -388,9 +391,4 @@ function closeCart() {
     });
 }
 
-
-// let userLogged = await fetchUserLogged()
-// let data = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
-// console.log(data);
-
-export {attachCartEventListeners , fetchUserLogged, updateQuantity, createCartForUser, addCartUserToDB, finalBuyCartFunc ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart}
+export {attachCartEventListeners , fetchUserLogged, updateQuantity, finalBuyCartFunc ,addToCart ,toggleCart ,initializeCart ,closeCart , removeAllFromCart  , removeFromCart}

@@ -1,4 +1,4 @@
-import { initTooltips , fetchDataFromApi} from "../utils.js";
+import { initTooltips , fetchDataFromApi , showAlertLogin} from "../utils.js";
 import { attachCartEventListeners , fetchUserLogged} from "./cart.js";
 import { clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
@@ -7,6 +7,7 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
+  if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
   let userLogged = await fetchUserLogged()
   let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید    
   let notifCart = document.querySelector('.notif-cart');
@@ -213,6 +214,7 @@ let changeBtnAfterDelete = async (element) => {
 
 //! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {    
+  if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
   let userLogged = await fetchUserLogged()
   let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
   document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
