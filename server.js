@@ -155,16 +155,6 @@ app.post('/api/login', async (req, res) => {
       await cart.save();
     }
 
-    // بازگرداندن اطلاعات کاربر و سبد خرید
-    return res.status(200).json({
-      message: 'کاربر با موفقیت لاگین کرد',
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-      },
-      cart: cart,
-    });
   } catch (error) {
     console.error("🚨 Error in /api/login:", error);
     return res.status(500).json({ error: 'مشکل در لاگین کاربر' });

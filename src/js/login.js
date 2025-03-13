@@ -29,6 +29,15 @@ window.addEventListener("DOMContentLoaded" , () => {
     initializeCart()
 })
 
+// document.querySelector('.btn-login').addEventListener('click', async (event) => {
+//     event.preventDefault(); // جلوگیری از رفرش صفحه
+  
+//     const username = document.querySelector('.Username-input').value;
+//     const password = document.querySelector('.Password-input').value;
+  
+//     await isLogin(username, password); // فراخوانی تابع لاگین
+//   });
+
 // ------------------------------------------------------------------------------------------- login
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
@@ -39,7 +48,7 @@ btnLogin.addEventListener('click', (e) => {
 
         let item = data.find(user => user.name === userName.value && user.password === password.value);        
         if (item && userName.value && password.value !== '') {
-            loginCheked(getLocalStorage("login") , userName.value)
+            loginCheked(getLocalStorage("login") , userName.value , password.value)
             
         } else {
             Swal.fire({
@@ -58,7 +67,7 @@ function clearInput() {
     password.value = '';
 }
 
-function loginCheked(loginName , username) {
+function loginCheked(loginName , username , password) {
     if (loginName === username) {
         Swal.fire({
             title: "شما در سایت ثبت نام کرده اید",
@@ -87,7 +96,7 @@ function loginCheked(loginName , username) {
         }).then((result) => {
             setLocalStorage('login' , username);
             loginName = getLocalStorage('login');                
-            clearInput();
+            clearInput();            
             isLogin(loginName);
             if (result.isConfirmed) {
                 window.location.href = './doshboard.html'; // آدرس صفحه مقصد
@@ -142,7 +151,7 @@ let statusLogin = async () => {
             let result = await res.json()
 
             setLocalStorage('login' , result.name);
-            let loginName = getLocalStorage('login');                
+            let loginName = getLocalStorage('login');                            
             isLogin(loginName);
             clearInputSignUp()
 
@@ -182,9 +191,9 @@ function clearInputSignUp() {
     phoneInput.value = ''
 }
 
-let SignUpUser = () => {
+let SignUpUser = async () => {
 
-    fetch("https://onlineshope.onrender.com/api/users")
+    await fetch("https://onlineshope.onrender.com/api/users")
     .then(res => res.json())
     .then(data => {
 

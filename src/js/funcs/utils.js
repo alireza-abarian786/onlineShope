@@ -13,26 +13,45 @@ let searchParams = (key) => {
 }
 
 // ! وضعیت لاگین و تغییر لینک ها
-async function isLogin(username) {     
+async function isLogin(username) {
+    let userData = await fetchUserFromDatabase()
     if (username.length !== 0) {
-        loginBtnText.innerHTML = username
-        loginBtn.setAttribute('href' , './doshboard.html') 
-
-        let user = await fetchUserFromDatabase();                                                //* دریافت اطلاعات کاربر انجام دهنده    
-        if (!user) {                                                                            //* صحت سنجی دریافت درست اطلاعات
-            console.error("اطلاعات کاربر یا محصول نامعتبر است.");
-            return;
+      try {
+        // ارسال اطلاعات لاگین به سرور
+        const response = await fetch("https://onlineshope.onrender.com/api/login", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: userData.name, // نام کاربر
+            password: userData.password, // رمز عبور کاربر
+          }),
+        });
+  
+        // بررسی وضعیت پاسخ
+        if (!response.ok) {
+          throw new Error('مشکل در لاگین');
         }
-
-        let a = await fetchDataFromApi("https://onlineshope.onrender.com/api/login")
-        console.log(a);
+  
+        // دریافت داده‌های کاربر و سبد خرید
+        const data = await response.json();
+        console.log(data);
         
-    
+        // به‌روزرسانی UI
+        loginBtnText.innerHTML = userData.name; // نمایش نام کاربر
+        loginBtn.setAttribute('href', './doshboard.html'); // لینک به داشبورد
+  
+      } catch (error) {
+        console.error('خطا در لاگین:', error);
+        alert('ایمیل یا رمز عبور اشتباه است');
+      }
     } else {
-        loginBtnText.innerHTML = "ورود / عضویت"
-        loginBtn.setAttribute('href' , "./login.html")
+      // اگر اطلاعات لاگین وارد نشده باشد
+      loginBtnText.innerHTML = "ورود / عضویت";
+      loginBtn.setAttribute('href', "./login.html");
     }
-}
+  }
 
 // ! سرچ محصولات قسمت دسته بندی
 let getSearchProduct = async (arr , property , value) => {
