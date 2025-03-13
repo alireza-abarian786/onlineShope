@@ -19,8 +19,8 @@ let usernameValid , passwordValid , phoneValid;
 
 // ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
-    let loginName = getLocalStorage('login');                
-    isLogin(loginName);
+    // let loginName = getLocalStorage('login');                
+    // isLogin(loginName);
     SignUpUser()
     statusLogin()
 
@@ -97,7 +97,7 @@ function loginCheked(loginName , username , password) {
             setLocalStorage('login' , username);
             loginName = getLocalStorage('login');                
             clearInput();            
-            isLogin(loginName);
+            isLogin();
             if (result.isConfirmed) {
                 window.location.href = './doshboard.html'; // آدرس صفحه مقصد
             }
@@ -152,7 +152,7 @@ let statusLogin = async () => {
 
             setLocalStorage('login' , result.name);
             let loginName = getLocalStorage('login');                            
-            isLogin(loginName);
+            isLogin();
             clearInputSignUp()
 
             Swal.fire({

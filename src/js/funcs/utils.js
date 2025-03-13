@@ -1,5 +1,6 @@
 import { getLocalStorage } from "./store/storage.js"
 import { fetchUserFromDatabase } from "./store/box.js"
+import { fetchUserLogged } from "./store/cart.js"
 // ----------------------------------------------------------------
 
 let loginBtnText = document.querySelector('#login span')
@@ -13,41 +14,61 @@ let searchParams = (key) => {
 }
 
 // ! وضعیت لاگین و تغییر لینک ها
-async function isLogin(username) {
+async function isLogin() {
     let userData = await fetchUserFromDatabase()
-    if (username.length !== 0) {
+    if (userData) {
       try {
-        // ارسال اطلاعات لاگین به سرور
-        const response = await fetch("https://onlineshope.onrender.com/api/login", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: userData.name, // نام کاربر
-            password: userData.password, // رمز عبور کاربر
-          }),
-        });
-  
-        // بررسی وضعیت پاسخ
-        if (!response.ok) {
-          throw new Error('مشکل در لاگین');
-        }
-  
-        // دریافت داده‌های کاربر و سبد خرید
-        const data = await response.json();
-        console.log(data);
+        if (!getLocalStorage('user')) {                                                                      //* ارسال اطلاعات لاگین به سرور
+            const response = await fetch("https://onlineshope.onrender.com/api/login", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: userData.name,              //* نام کاربر
+                password: userData.password,     //* رمز عبور کاربر
+              }),
+            });
+            
+            if (!response.ok) {                                                                              //* بررسی وضعیت پاسخ
+              throw new Error('مشکل در لاگین');
+            }
+
+            const data = await response.json();                                                             //* دریافت داده‌های کاربر و سبد خرید
+            localStorage.setItem('login', data.user.name);                                                  //* ذخیره اطلاعات کاربر و سبد خرید در localStorage
+        } 
+        else {
+            let userLogged = await fetchUserLogged()
+            try {
+                const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`, {
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+            
+                if (!response.ok) {
+                  throw new Error('مشکل در حذف سبد خرید');
+                }
+            
+                const data = await response.json();
+                console.log(data.message); //* نمایش پیام موفقیت
+                alert('سبد خرید شما با موفقیت حذف شد');
+              } catch (error) {
+                console.error('خطا:', error);
+                alert('مشکلی در حذف سبد خرید رخ داد');
+              }
+        }                                                                                              
         
-        // به‌روزرسانی UI
-        loginBtnText.innerHTML = userData.name; // نمایش نام کاربر
-        loginBtn.setAttribute('href', './doshboard.html'); // لینک به داشبورد
+        //* به‌روزرسانی UI
+        loginBtnText.innerHTML = userData.name;                  //* نمایش نام کاربر
+        loginBtn.setAttribute('href', './doshboard.html');      //* لینک به داشبورد
   
       } catch (error) {
         console.error('خطا در لاگین:', error);
         alert('ایمیل یا رمز عبور اشتباه است');
       }
-    } else {
-      // اگر اطلاعات لاگین وارد نشده باشد
+    } else {                                                                                         //* اگر اطلاعات لاگین وارد نشده باشد
       loginBtnText.innerHTML = "ورود / عضویت";
       loginBtn.setAttribute('href', "./login.html");
     }

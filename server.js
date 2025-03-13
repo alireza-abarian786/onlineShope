@@ -109,61 +109,8 @@ const Category = mongoose.model('Category', categorySchema);
 
 // به پایین انتقال داده شد <= Function پاک کردن تمام داده‌ها
 
-// Rout‌های CRUD برای تمام مجموعه‌داده‌ها:
-// User
-
-app.post('/api/users', async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    await newUser.save();
-
-    // ایجاد یک سبد خرید خالی برای کاربر جدید
-    const newCart = new Cart({
-      id: newUser.id + '-cart',
-      user_id: newUser.id,
-      items: [], // سبد خرید خالی
-      totalPrice: 0, // قیمت کل صفر
-    });
-    await newCart.save();
-
-    res.status(201).json({ message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', user: newUser });
-  } catch (error) {
-    res.status(500).json({ error: 'مشکل در ذخیره کاربر' });
-  }
-});
-
-app.post('/api/login', async (req, res) => {
-  try {
-    const { name, password } = req.body;
-
-    // بررسی وجود کاربر با ایمیل و رمز عبور
-    const user = await User.findOne({ name });
-    if (!user || user.password !== password) {
-      return res.status(401).json({ error: 'ایمیل یا رمز عبور اشتباه است' });
-    }
-
-    // بررسی وجود سبد خرید برای کاربر
-    let cart = await Cart.findOne({ user_id: user.id });
-    if (!cart) {
-      // ایجاد سبد خرید خالی اگر وجود نداشت
-      cart = new Cart({
-        id: user.id + '-cart',
-        user_id: user.id,
-        items: [],
-        totalPrice: 0,
-      });
-      await cart.save();
-    }
-
-  } catch (error) {
-    console.error("🚨 Error in /api/login:", error);
-    return res.status(500).json({ error: 'مشکل در لاگین کاربر' });
-  }
-});
-
-
-// Products
-
+//! Rout‌های CRUD برای تمام مجموعه‌داده‌ها:
+//! Products
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find();
@@ -205,7 +152,7 @@ app.delete('/api/products/:id', async (req, res) => {
   }
 });
 
-// Carts
+//! Carts
 app.get('/api/carts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;    
@@ -257,8 +204,6 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     return res.status(500).json({ error: 'مشکل در افزودن به سبد' }); // استفاده از return
   }
 });
-//! -------------------------------------------------------------------------------------------------------------------------------
-//! -------------------------------------------------------------------------------------------------------------------------------
 
 app.put('/api/carts/:userId/items/:productId', async (req, res) => {
   try {
@@ -312,7 +257,27 @@ app.delete('/api/carts/:userId/items/:productId', async (req, res) => {
   }
 });
 
-// Bookmarks
+app.delete('/api/carts/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // بررسی وجود سبد خرید برای کاربر
+    const cart = await Cart.findOne({ user_id: userId });
+    if (!cart) {
+      return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    }
+
+    // حذف سبد خرید
+    await Cart.deleteOne({ user_id: userId });
+
+    return res.status(200).json({ message: 'سبد خرید کاربر با موفقیت حذف شد' });
+  } catch (error) {
+    console.error("🚨 Error in /api/carts/:userId DELETE:", error);
+    return res.status(500).json({ error: 'مشکل در حذف سبد خرید' });
+  }
+});
+
+//! Bookmarks
 app.get('/api/bookmarks', async (req, res) => {
   try {
     const bookmarks = await Bookmark.find();
@@ -358,7 +323,56 @@ app.delete('/api/bookmarks/:id', async (req, res) => {
   }
 });
 
-// Users
+//! Users
+app.post('/api/users', async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+
+    // ایجاد یک سبد خرید خالی برای کاربر جدید
+    const newCart = new Cart({
+      id: newUser.id + '-cart',
+      user_id: newUser.id,
+      items: [], // سبد خرید خالی
+      totalPrice: 0, // قیمت کل صفر
+    });
+    await newCart.save();
+
+    res.status(201).json({ message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', user: newUser });
+  } catch (error) {
+    res.status(500).json({ error: 'مشکل در ذخیره کاربر' });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  try {
+    const { name, password } = req.body;
+
+    // بررسی وجود کاربر با ایمیل و رمز عبور
+    const user = await User.findOne({ name });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: 'ایمیل یا رمز عبور اشتباه است' });
+    }
+
+    // بررسی وجود سبد خرید برای کاربر
+    let cart = await Cart.findOne({ user_id: user.id });
+    if (!cart) {
+      // ایجاد سبد خرید خالی اگر وجود نداشت
+      cart = new Cart({
+        id: user.id + '-cart',
+        user_id: user.id,
+        items: [],
+        totalPrice: 0,
+      });
+      await cart.save();
+    }
+
+  } catch (error) {
+    console.error("🚨 Error in /api/login:", error);
+    return res.status(500).json({ error: 'مشکل در لاگین کاربر' });
+  }
+});
+
 app.get('/api/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -404,7 +418,7 @@ app.delete('/api/users/:id', async (req, res) => {
   }
 });
 
-// Blogs
+//! Blogs
 app.get('/api/blogs', async (req, res) => {
   try {
     const blogs = await Blog.find();
@@ -450,7 +464,7 @@ app.delete('/api/blogs/:id', async (req, res) => {
   }
 });
 
-// Categories
+//! Categories
 app.get('/api/categories', async (req, res) => {
   try {
     const categories = await Category.find();
@@ -496,7 +510,7 @@ app.delete('/api/categories/:id', async (req, res) => {
   }
 });
 
-// Start Server
+//! Start Server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
