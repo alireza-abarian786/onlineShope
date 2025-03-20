@@ -24,14 +24,17 @@ function buttonsShoppingCart() {
 }
 
 let totalPaymentFunc = async () => {
-  if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
+//   if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
     let userLogged = await fetchUserLogged()
-    let arrayCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
-    let sum = arrayCart.items.map(item => item.totalPrice).reduce((acc , curr) => acc + curr , 0)
+    if (userLogged) {
+        
+        let arrayCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+        let sum = arrayCart.items.map(item => item.totalPrice).reduce((acc , curr) => acc + curr , 0)
+        total.forEach(item => {
+            item.textContent = sum.toLocaleString()
+        })
+    }
 
-    total.forEach(item => {
-        item.textContent = sum.toLocaleString()
-    })
 }
 
 

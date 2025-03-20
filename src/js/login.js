@@ -29,15 +29,6 @@ window.addEventListener("DOMContentLoaded" , () => {
     initializeCart()
 })
 
-// document.querySelector('.btn-login').addEventListener('click', async (event) => {
-//     event.preventDefault(); // جلوگیری از رفرش صفحه
-  
-//     const username = document.querySelector('.Username-input').value;
-//     const password = document.querySelector('.Password-input').value;
-  
-//     await isLogin(username, password); // فراخوانی تابع لاگین
-//   });
-
 // ------------------------------------------------------------------------------------------- login
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();

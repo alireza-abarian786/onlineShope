@@ -12,13 +12,17 @@ let searchParams = (key) => {
     let urlSearchParams = new URLSearchParams(window.location.search)
     return urlSearchParams.get(key)
 }
-
+let isLoginFlag = false
 // ! وضعیت لاگین و تغییر لینک ها
 async function isLogin() {
     let userData = await fetchUserFromDatabase()
     if (userData) {
       try {
-        if (!getLocalStorage('user')) {                                                                      //* ارسال اطلاعات لاگین به سرور
+        console.log(getLocalStorage('user').length === 0);
+        
+        if (getLocalStorage('user').length === 0) {                                                                      //* ارسال اطلاعات لاگین به سرور
+            console.log(1);
+            
             const response = await fetch("https://onlineshope.onrender.com/api/login", {
               method: 'POST',
               headers: {
@@ -30,35 +34,18 @@ async function isLogin() {
               }),
             });
             
-            if (!response.ok) {                                                                              //* بررسی وضعیت پاسخ
-              throw new Error('مشکل در لاگین');
-            }
+            // if (!response.ok) {                                                                              //* بررسی وضعیت پاسخ
+            //   throw new Error('مشکل در لاگین');
+            // }
 
+            console.log(2);
+            
             const data = await response.json();                                                             //* دریافت داده‌های کاربر و سبد خرید
-            localStorage.setItem('login', data.user.name);                                                  //* ذخیره اطلاعات کاربر و سبد خرید در localStorage
-        } 
-        else {
-            let userLogged = await fetchUserLogged()
-            try {
-                const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`, {
-                  method: 'DELETE',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                });
+            localStorage.setItem('user', 'data.user.name');                                                  //* ذخیره اطلاعات کاربر و سبد خرید در localStorage
+            console.log(data);
+            isLoginFlag = true
             
-                if (!response.ok) {
-                  throw new Error('مشکل در حذف سبد خرید');
-                }
-            
-                const data = await response.json();
-                console.log(data.message); //* نمایش پیام موفقیت
-                alert('سبد خرید شما با موفقیت حذف شد');
-              } catch (error) {
-                console.error('خطا:', error);
-                alert('مشکلی در حذف سبد خرید رخ داد');
-              }
-        }                                                                                              
+        }                                                                                            
         
         //* به‌روزرسانی UI
         loginBtnText.innerHTML = userData.name;                  //* نمایش نام کاربر
@@ -73,6 +60,33 @@ async function isLogin() {
       loginBtn.setAttribute('href', "./login.html");
     }
   }
+
+async function deleteCart() {
+    try {
+        let userLogged = await fetchUserLogged()
+        const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
+
+        if (!response.ok) {
+        throw new Error('مشکل در حذف سبد خرید');
+        }
+
+        const data = await response.json();
+        alert('سبد خرید شما با موفقیت حذف شد');
+
+    } catch (error) {
+        console.error('خطا:', error);
+        alert('مشکلی در حذف سبد خرید رخ داد');
+    }
+}
+
+// deleteCart();
+// if (!getLocalStorage('login')) {
+// }
 
 // ! سرچ محصولات قسمت دسته بندی
 let getSearchProduct = async (arr , property , value) => {

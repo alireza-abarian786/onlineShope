@@ -37,7 +37,7 @@ let createProductObject = async (event) => {
 //! تابع دریافت اطلاعات کاربر از دیتابیس
 let fetchUserFromDatabase = async () => {
     try {
-        if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
+        // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userName = await getLocalStorage("login");                                                                 //* کاربری که لاگین کرده username        
         let users = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور
         return users.find((user) => user.name === userName);                                                         //* پیدا کردن و ارسال مشخصات یوزر مورد نظر
@@ -60,18 +60,20 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 
 //! 🛒 تغییر استایل دکمه سبد خرید محصول 
 async function updateCartButtonState(event) {
-    if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
+    // if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
     let userLogged = await fetchUserLogged()
-    let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
-    if (!isProductInCart(product, cartItems.items)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
-        changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
-    } 
+    if (userLogged) {
+        let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+        if (!isProductInCart(product, cartItems.items)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
+            changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
+        } 
+    }
 }
 
 //! تابع افزودن محصول به سبد خرید
 async function addToCartAndToggleButton(event) {     
-    if (! await showAlertLogin()) return false;                                                                //* بررسی لاگین کاربر 
+    // if (! await showAlertLogin()) return false;                                                                //* بررسی لاگین کاربر 
     await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
     await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
 }
