@@ -331,7 +331,7 @@ app.post('/api/users', async (req, res) => {
 
     // ایجاد یک سبد خرید خالی برای کاربر جدید
     const newCart = new Cart({
-      id: newUser.id + '-cart',
+      // id: newUser.id + '-cart',
       user_id: newUser.id,
       items: [], // سبد خرید خالی
       totalPrice: 0, // قیمت کل صفر
