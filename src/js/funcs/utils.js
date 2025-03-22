@@ -15,10 +15,6 @@ let searchParams = (key) => {
 let isLoginFlag = false;
 // ! وضعیت لاگین و تغییر لینک ها
 async function isLogin() {
-  //   if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-
-  console.log(getLocalStorage("login").length === 0);
-
   if (getLocalStorage("login").length !== 0) {
     console.log(1);
     //* به‌روزرسانی UI
@@ -26,6 +22,8 @@ async function isLogin() {
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
 
     if (!isLoginFlag) {
+      console.log(3);
+      
         try {
           let userData = await fetchUserFromDatabase();
           await fetch("https://onlineshope.onrender.com/api/login", {

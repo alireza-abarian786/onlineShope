@@ -73,7 +73,7 @@ const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
 
 // 4. Model Users:
 const userSchema = new mongoose.Schema({
-  id: { type: String, required: true }, // تبدیل به String
+  id: { type: String, required: true , unique: true }, // تبدیل به String
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
