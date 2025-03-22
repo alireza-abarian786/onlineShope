@@ -359,7 +359,7 @@ app.post('/api/login', async (req, res) => {
     if (!cart) {
       // ایجاد سبد خرید خالی اگر وجود نداشت
       cart = new Cart({
-        id: user.id + '-cart',
+        // id: user.id + '-cart',
         user_id: user.id,
         items: [],
         totalPrice: 0,
