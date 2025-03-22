@@ -41,7 +41,7 @@ const Product = mongoose.model('Product', productSchema);
 // 2. Model Carts:
 const cartSchema = new mongoose.Schema({  
   // id: String,
-  user_id: { type: String, required: true },
+  user_id: String,
   items: [{
     _id: false, // غیرفعال کردن _id برای زیرمستندها
     cart_id: String,
@@ -73,7 +73,7 @@ const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
 
 // 4. Model Users:
 const userSchema = new mongoose.Schema({
-  id: { type: String, required: true , unique: true }, // تبدیل به String
+  id: String, // تبدیل به String
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
