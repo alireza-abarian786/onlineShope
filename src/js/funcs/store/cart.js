@@ -71,6 +71,8 @@ let newProductData = async (product , user) => {
 
 // ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
 let addCartToDB = async (newCart) => {
+    console.log(newCart.items[0]);
+    
     let userLogged = await fetchUserLogged()
     await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged.id}/items` , {
         method: 'POST',
