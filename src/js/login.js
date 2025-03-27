@@ -58,42 +58,59 @@ function clearInput() {
     password.value = '';
 }
 
-function loginCheked(loginName , username , password) {
-    if (loginName === username) {
-        Swal.fire({
-            title: "شما در سایت ثبت نام کرده اید",
-            text: "⁉️میخواهید به پنل کاربری خود بروید",
-            icon: "success",
-            showCancelButton: true,
-            confirmButtonText: 'بله، برو!',
-            cancelButtonText: 'لغو'
-        }).then((result) => {
-            clearInput();
-            if (result.isConfirmed) {
-                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-            }
-        })
+async function loginCheked(loginName , username , password) {
+    // if (loginName === username) {
+    //     Swal.fire({
+    //         title: "شما در سایت ثبت نام کرده اید",
+    //         text: "⁉️میخواهید به پنل کاربری خود بروید",
+    //         icon: "success",
+    //         showCancelButton: true,
+    //         confirmButtonText: 'بله، برو!',
+    //         cancelButtonText: 'لغو'
+    //     }).then((result) => {
+    //         clearInput();
+    //         if (result.isConfirmed) {
+    //             window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+    //         }
+    //     })
         
-    } else {
+    // } else {
 
-
-        Swal.fire({
-            title: "شما در سایت ثبت نام کرده اید",
-            text: "⁉️میخواهید به پنل کاربری خود بروید",
-            icon: "success",
-            showCancelButton: true,
-            confirmButtonText: 'بله، برو!',
-            cancelButtonText: 'لغو'
-        }).then((result) => {
-            setLocalStorage('login' , username);
-            loginName = getLocalStorage('login');                
-            clearInput();            
+    
+    
+    Swal.fire({
+        title: "شما در سایت ثبت نام کرده اید",
+        text: "⁉️میخواهید به پنل کاربری خود بروید",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: 'بله، برو!',
+        cancelButtonText: 'لغو'
+    }).then((result) => {
+        setLocalStorage('login' , username);
+        loginName = getLocalStorage('login');                
+        clearInput();            
             isLogin();
             if (result.isConfirmed) {
                 window.location.href = './doshboard.html'; // آدرس صفحه مقصد
             }
-        })             
-    }
+        })
+                     
+        try {
+            let userData = await fetchUserFromDatabase();
+            await fetch("https://onlineshope.onrender.com/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: userData.name, //* نام کاربر
+                password: userData.password, //* رمز عبور کاربر
+            }),
+            });
+        } catch (error) {
+            console.error("خطا در لاگین:", error);
+        }
+    // }
 }
 
 // ------------------------------------------------------------------------------------------- sign up
@@ -141,23 +158,41 @@ let statusLogin = async () => {
             })
             let result = await res.json()
 
-            setLocalStorage('login' , result.name);
-            let loginName = getLocalStorage('login');                            
-            isLogin();
-            clearInputSignUp()
-
-            Swal.fire({
-                title: "ثبت نام شما با موفقیت انجام شد",
-                text: "⁉️میخواهید به پنل کاربری خود بروید",
-                icon: "success",
-                showCancelButton: true,
-                confirmButtonText: 'بله، برو!',
-                cancelButtonText: 'لغو'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+            if (res.ok) {
+                try {
+                    let userData = await fetchUserFromDatabase();
+                    await fetch("https://onlineshope.onrender.com/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: userData.name, //* نام کاربر
+                        password: userData.password, //* رمز عبور کاربر
+                    }),
+                    });
+                } catch (error) {
+                    console.error("خطا در لاگین:", error);
                 }
-            })
+
+                Swal.fire({
+                    title: "ثبت نام شما با موفقیت انجام شد",
+                    text: "⁉️میخواهید به پنل کاربری خود بروید",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonText: 'بله، برو!',
+                    cancelButtonText: 'لغو'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+                    }
+                })
+                
+                setLocalStorage('login' , result.name);
+                let loginName = getLocalStorage('login');                            
+                isLogin();
+                clearInputSignUp()
+            }
         }
 
     } else {

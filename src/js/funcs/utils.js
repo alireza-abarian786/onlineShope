@@ -21,26 +21,26 @@ async function isLogin() {
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
 
-    if (!isLoginFlag) {
-      console.log(3);
+    // if (!isLoginFlag) {
+    //   console.log(3);
       
-        try {
-          let userData = await fetchUserFromDatabase();
-          await fetch("https://onlineshope.onrender.com/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: userData.name, //* نام کاربر
-              password: userData.password, //* رمز عبور کاربر
-            }),
-          });
-        } catch (error) {
-          console.error("خطا در لاگین:", error);
-        }
-        isLoginFlag = true
-    }
+    //     try {
+    //       let userData = await fetchUserFromDatabase();
+    //       await fetch("https://onlineshope.onrender.com/api/login", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           name: userData.name, //* نام کاربر
+    //           password: userData.password, //* رمز عبور کاربر
+    //         }),
+    //       });
+    //     } catch (error) {
+    //       console.error("خطا در لاگین:", error);
+    //     }
+    //     isLoginFlag = true
+    // }
 
   } else {
     console.log(2);
