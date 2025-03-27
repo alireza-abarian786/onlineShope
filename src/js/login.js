@@ -2,6 +2,7 @@ import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
 import { isLogin } from './funcs/utils.js';
 import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { initializeCart } from './funcs/store/cart.js';
+import { fetchUserFromDatabase } from './funcs/store/box.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -39,7 +40,7 @@ btnLogin.addEventListener('click', (e) => {
 
         let item = data.find(user => user.name === userName.value && user.password === password.value);        
         if (item && userName.value && password.value !== '') {
-            loginCheked(getLocalStorage("login") , userName.value , password.value)
+            loginCheked(getLocalStorage("login") , userName.value)
             
         } else {
             Swal.fire({
@@ -58,26 +59,7 @@ function clearInput() {
     password.value = '';
 }
 
-async function loginCheked(loginName , username , password) {
-    // if (loginName === username) {
-    //     Swal.fire({
-    //         title: "شما در سایت ثبت نام کرده اید",
-    //         text: "⁉️میخواهید به پنل کاربری خود بروید",
-    //         icon: "success",
-    //         showCancelButton: true,
-    //         confirmButtonText: 'بله، برو!',
-    //         cancelButtonText: 'لغو'
-    //     }).then((result) => {
-    //         clearInput();
-    //         if (result.isConfirmed) {
-    //             window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-    //         }
-    //     })
-        
-    // } else {
-
-    
-    
+async function loginCheked(loginName , username) {
     Swal.fire({
         title: "شما در سایت ثبت نام کرده اید",
         text: "⁉️میخواهید به پنل کاربری خود بروید",
@@ -85,19 +67,17 @@ async function loginCheked(loginName , username , password) {
         showCancelButton: true,
         confirmButtonText: 'بله، برو!',
         cancelButtonText: 'لغو'
-    }).then((result) => {
+    }).then(async (result) => {
         setLocalStorage('login' , username);
         loginName = getLocalStorage('login');                
         clearInput();            
-            isLogin();
-            if (result.isConfirmed) {
-                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-            }
-        })
-                     
-        try {
-            let userData = await fetchUserFromDatabase();
-            await fetch("https://onlineshope.onrender.com/api/login", {
+        isLogin();
+        if (result.isConfirmed) {
+            window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+        }
+
+        let userData = await fetchUserFromDatabase();            
+        await fetch("https://onlineshope.onrender.com/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -106,11 +86,8 @@ async function loginCheked(loginName , username , password) {
                 name: userData.name, //* نام کاربر
                 password: userData.password, //* رمز عبور کاربر
             }),
-            });
-        } catch (error) {
-            console.error("خطا در لاگین:", error);
-        }
-    // }
+        });
+    })
 }
 
 // ------------------------------------------------------------------------------------------- sign up
@@ -159,21 +136,6 @@ let statusLogin = async () => {
             let result = await res.json()
 
             if (res.ok) {
-                try {
-                    let userData = await fetchUserFromDatabase();
-                    await fetch("https://onlineshope.onrender.com/api/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name: userData.name, //* نام کاربر
-                        password: userData.password, //* رمز عبور کاربر
-                    }),
-                    });
-                } catch (error) {
-                    console.error("خطا در لاگین:", error);
-                }
 
                 Swal.fire({
                     title: "ثبت نام شما با موفقیت انجام شد",
@@ -192,6 +154,18 @@ let statusLogin = async () => {
                 let loginName = getLocalStorage('login');                            
                 isLogin();
                 clearInputSignUp()
+
+                let userData = await fetchUserFromDatabase();
+                await fetch("https://onlineshope.onrender.com/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: userData.name, //* نام کاربر
+                        password: userData.password, //* رمز عبور کاربر
+                    }),
+                });
             }
         }
 

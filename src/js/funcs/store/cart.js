@@ -109,9 +109,7 @@ async function toggleCart() {
 async function initializeCart() {   
     try {
         // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-        let userLogged = await fetchUserLogged()
-        console.log(userLogged);
-        
+        let userLogged = await fetchUserLogged()        
         if (userLogged) {
             let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید          
             if (!Carts) {

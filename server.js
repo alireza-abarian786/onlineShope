@@ -181,7 +181,7 @@ app.post('/api/carts/:userId/items', async (req, res) => {
     let cart = await Cart.findOne({ user_id: userId });
     if (!cart) {
       cart = new Cart({
-        id: userId + '-cart',
+        id: cart.id + '-cart',
         user_id: userId,
         items: [],
         totalPrice: 0, // مقدار اولیه
