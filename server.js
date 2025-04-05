@@ -323,21 +323,31 @@ app.delete('/api/bookmarks/:id', async (req, res) => {
 //! Users
 app.post('/api/users', async (req, res) => {
   try {
-    const newUser = new User(req.body);
+    // const newUser = new User(req.body);
+    // تبدیل تاریخ به فرمت Date
+    const userData = {
+      ...req.body,
+      registration_date: new Date(req.body.registration_date)
+    };
+    
+    const newUser = new User(userData);
     await newUser.save();
 
     // ایجاد یک سبد خرید خالی برای کاربر جدید
     const newCart = new Cart({
-      // id: newUser.id + '-cart',
-      // user_id: newUser.id,
-      _id: newUser.id,
-      items: [], // سبد خرید خالی
-      totalPrice: 0, // قیمت کل صفر
+      _id: newUser._id, // استفاده از _id به جای id
+      items: [],
+      totalPrice: 0
     });
     await newCart.save();
 
-    res.status(201).json({ message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', user: newUser });
+    res.status(201).json({ 
+      message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', 
+      user: newUser,
+      cart: newCart 
+    });
   } catch (error) {
+    console.error("🚨 Error in /api/users POST:", error);
     res.status(500).json({ error: 'مشکل در ذخیره کاربر' });
   }
 });
@@ -359,7 +369,7 @@ app.post('/api/login', async (req, res) => {
       cart = new Cart({
         // id: user.id + '-cart',
         // user_id: user.id,
-        _id: user.id,
+        _id: user.ـid,
         items: [],
         totalPrice: 0,
       });
