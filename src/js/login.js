@@ -117,7 +117,7 @@ let statusLogin = async () => {
         if (usernameValid && passwordValid && phoneValid) {
 
             let newUser = {
-                id: Date.now().toString(36),
+                _id: Date.now().toString(36),
                 name: usernameSignUp.value,
                 email: "sara@example.com",
                 password: passwordSignUp.value,

@@ -19,7 +19,7 @@ mongoose.connect(connectionString)
 
 // تعریف Models:
 
-// 1. Model Products:
+//! 1. Model Products:
 const productSchema = new mongoose.Schema({
   id: { type: String, required: true }, // تبدیل به String
   name: { type: String, required: true },
@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
 });
 const Product = mongoose.model('Product', productSchema);
 
-// 2. Model Carts:
+//! 2. Model Carts:
 const cartSchema = new mongoose.Schema({  
   _id: String,
   // user_id: String,
@@ -58,11 +58,8 @@ const cartSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true }
 });
 const Cart = mongoose.model('Cart', cartSchema);
-//! -------------------------------------------------------------------------------------------------------------------------------
-//! -------------------------------------------------------------------------------------------------------------------------------
 
-
-// 3. Model Bookmarks:
+//! 3. Model Bookmarks:
 const bookmarkSchema = new mongoose.Schema({
   id: { type: String, required: true },
   product_name: String,
@@ -71,9 +68,9 @@ const bookmarkSchema = new mongoose.Schema({
 });
 const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
 
-// 4. Model Users:
+//! 4. Model Users:
 const userSchema = new mongoose.Schema({
-  id: String, // تبدیل به String
+  _id: String, // تبدیل به String
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -83,7 +80,7 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
-// 5. Model Blogs:
+//! 5. Model Blogs:
 const blogSchema = new mongoose.Schema({
   id: { type: String, required: true },
   title: { type: String, required: true },
@@ -98,7 +95,7 @@ const blogSchema = new mongoose.Schema({
 });
 const Blog = mongoose.model('Blog', blogSchema);
 
-// 6. Model Categories:
+//! 6. Model Categories:
 const categorySchema = new mongoose.Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
@@ -332,7 +329,8 @@ app.post('/api/users', async (req, res) => {
     // ایجاد یک سبد خرید خالی برای کاربر جدید
     const newCart = new Cart({
       // id: newUser.id + '-cart',
-      user_id: newUser.id,
+      // user_id: newUser.id,
+      _id: newUser.id,
       items: [], // سبد خرید خالی
       totalPrice: 0, // قیمت کل صفر
     });
@@ -355,12 +353,13 @@ app.post('/api/login', async (req, res) => {
     }
 
     // بررسی وجود سبد خرید برای کاربر
-    let cart = await Cart.findOne({ user_id: user.id });
+    let cart = await Cart.findOne({ _id: user.id });
     if (!cart) {
       // ایجاد سبد خرید خالی اگر وجود نداشت
       cart = new Cart({
-        id: user.id + '-cart',
-        user_id: user.id,
+        // id: user.id + '-cart',
+        // user_id: user.id,
+        _id: user.id,
         items: [],
         totalPrice: 0,
       });

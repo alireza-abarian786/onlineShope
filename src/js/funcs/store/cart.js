@@ -53,7 +53,7 @@ async function addToCart(event) {
 //! تنظیم اطلاعات محصول جدید سبد خرید
 let newProductData = async (product , user) => {
     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
-        user_id: user.id,
+        _id: user.id,
         items: [{
             cart_id: Date.now().toString(36),
             product_id: product.id,
