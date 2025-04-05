@@ -40,8 +40,8 @@ const Product = mongoose.model('Product', productSchema);
 
 // 2. Model Carts:
 const cartSchema = new mongoose.Schema({  
-  // id: String,
-  user_id: String,
+  _id: String,
+  // user_id: String,
   items: [{
     _id: false, // غیرفعال کردن _id برای زیرمستندها
     cart_id: String,
@@ -156,7 +156,7 @@ app.delete('/api/products/:id', async (req, res) => {
 app.get('/api/carts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;    
-    const cart = await Cart.findOne({ user_id: userId });
+    const cart = await Cart.findOne({ _id: userId });
     if (!cart) {
       return res.status(404).json({ error: 'سبد خرید یافت نشد' }); // استفاده از return
     }
