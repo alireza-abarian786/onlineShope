@@ -62,34 +62,63 @@ function clearInput() {
 }
 
 async function loginCheked(loginName , username) {
-    Swal.fire({
-        title: "شما در سایت ثبت نام کرده اید",
-        text: "⁉️میخواهید به پنل کاربری خود بروید",
-        icon: "success",
-        showCancelButton: true,
-        confirmButtonText: 'بله، برو!',
-        cancelButtonText: 'لغو'
-    }).then(async (result) => {
-        setLocalStorage('login' , username);
-        loginName = getLocalStorage('login');                
-        clearInput();            
-        isLogin();
-        if (result.isConfirmed) {
-            window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-        }
 
-        let userData = await fetchUserFromDatabase();            
-        await fetch("https://onlineshope.onrender.com/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: userData.name, //* نام کاربر
-                password: userData.password, //* رمز عبور کاربر
-            }),
-        });
+    setLocalStorage('login' , username);
+
+    let userData = await fetchUserFromDatabase();
+    console.log(userData);
+
+
+    const cartUser = {
+        name: userData.name,
+        password: userData.password
+    }
+    console.log(cartUser);
+    
+    
+    let res = await fetch("https://onlineshope.onrender.com/api/login" , {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(cartUser)
     })
+    let data = await res.json()
+    console.log(res);
+    console.log(data);
+    
+
+
+
+
+    // Swal.fire({
+    //     title: "شما در سایت ثبت نام کرده اید",
+    //     text: "⁉️میخواهید به پنل کاربری خود بروید",
+    //     icon: "success",
+    //     showCancelButton: true,
+    //     confirmButtonText: 'بله، برو!',
+    //     cancelButtonText: 'لغو'
+    // }).then(async (result) => {
+    //     setLocalStorage('login' , username);
+    //     loginName = getLocalStorage('login');                
+    //     clearInput();            
+    //     isLogin();
+    //     if (result.isConfirmed) {
+    //         window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+    //     }
+
+    //     let userData = await fetchUserFromDatabase();            
+    //     await fetch("https://onlineshope.onrender.com/api/users", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             name: userData.name, //* نام کاربر
+    //             password: userData.password, //* رمز عبور کاربر
+    //         }),
+    //     });
+    // })
 }
 
 // ------------------------------------------------------------------------------------------- sign up

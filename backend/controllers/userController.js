@@ -11,13 +11,13 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// Create a new user
+// ثبت‌نام کاربر
 exports.createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
     await newUser.save();
 
-    // Create an empty cart for the new user
+    // ایجاد یک سبد خرید خالی برای کاربر جدید
     const newCart = new Cart({
       _id: newUser._id,
       items: [],
@@ -25,9 +25,53 @@ exports.createUser = async (req, res) => {
     });
     await newCart.save();
 
-    res.status(201).json({ message: 'کاربر اضافه شد', user: newUser, cart: newCart });
+    res.status(201).json({ 
+      message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', 
+      user: newUser,
+      cart: newCart 
+    });
   } catch (error) {
+    console.error("🚨 Error in createUser:", error);
     res.status(500).json({ error: 'مشکل در ذخیره کاربر' });
+  }
+};
+
+// لاگین کاربر
+exports.loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1. بررسی وجود کاربر با ایمیل و رمز عبور
+    const user = await User.findOne({ email });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: 'ایمیل یا رمز عبور اشتباه است' });
+    }
+
+    // 2. بررسی وجود سبد خرید برای کاربر
+    let cart = await Cart.findOne({ _id: user._id });
+    if (!cart) {
+      // ایجاد سبد خرید خالی اگر وجود نداشت
+      cart = new Cart({
+        _id: user._id,
+        items: [],
+        totalPrice: 0,
+      });
+      await cart.save();
+    }
+
+    // 3. ارسال پاسخ موفقیت‌آمیز
+    res.status(200).json({
+      message: 'کاربر با موفقیت لاگین کرد',
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+      cart: cart,
+    });
+  } catch (error) {
+    console.error("🚨 Error in loginUser:", error);
+    return res.status(500).json({ error: 'مشکل در لاگین کاربر' });
   }
 };
 

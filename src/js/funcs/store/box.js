@@ -38,8 +38,8 @@ let createProductObject = async (event) => {
 let fetchUserFromDatabase = async () => {
     try {
         // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-        let userName = await getLocalStorage("login");                                                                 //* کاربری که لاگین کرده username        
-        let users = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور        
+        let userName = await getLocalStorage("login");                                                                 //* کاربری که لاگین کرده username                
+        let users = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور                
         return users.find((user) => user.name === userName);                                                         //* پیدا کردن و ارسال مشخصات یوزر مورد نظر
 
     } catch (error) {
