@@ -22,11 +22,11 @@ let usernameValid , passwordValid , phoneValid;
 window.addEventListener("DOMContentLoaded" , () => {
     let loginName = getLocalStorage('login');         
     console.log(loginName);
-           
-    // isLogin(loginName);
-    SignUpUser()
     // statusLogin(loginName)
+    // isLogin(loginName);
+           
 
+    SignUpUser()
     toggleCart()
     closeCart()
     initializeCart()
