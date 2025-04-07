@@ -46,7 +46,7 @@ exports.updateCartItem = async (req, res) => {
     if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
 
     cart.items[itemIndex] = updatedItem;
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount ? item.discount : item.price) * item.quantity), 0);
     await cart.save();
     res.json({ message: 'محصول به‌روزرسانی شد', cart });
   } catch (error) {
