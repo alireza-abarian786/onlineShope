@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 // Import Routes
 const productRoutes = require('./routes/productRoutes');
