@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const cartSchema = new mongoose.Schema({
   _id: String,
   items: [{
-    // _id: false,
     // cart_id: String,
+    _id: String,
     product_id: String,
     product_name: String,
     product_images: [String],

@@ -55,7 +55,7 @@ let newProductData = async (product , user) => {
     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
         _id: user.id,
         items: [{
-            // cart_id: Date.now().toString(36),
+            _id: Date.now().toString(36),
             product_id: product.id,
             product_name: product.name,
             product_images: product.images,
@@ -145,19 +145,30 @@ async function removeFromCart(event) {
         let titleCart = await extractProductTitle(event.target)                                                      //* دریافت عنوان محصول
         let userLogged = await fetchUserLogged()
         console.log(userLogged);
-        let Carts = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
+        let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (!Carts) {
             throw new Error("Error fetching data to from carts in the removeFromCart function");
         }
 
-        let productTarget = await Carts.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر
-        await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/${productTarget.id}`, {method: 'DELETE',})                       //* ارسال درخواست حذف به سرور
+        console.log(Carts);
+        
+        let productTarget = await Carts.items.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر
+        console.log(productTarget);
+        
+        let res = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${productTarget._id}`, {                //* ارسال درخواست حذف به سرور
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })                       
     
-        changeBtnAfterDelete(event.target)                                                                         //* ✅ تغییر استایل کلید سبد خرید محصول)
-        showAlertEmptyCart()                                                                                      //* نمایش پیغام خالی بودن سبد خرید
-        totalPaymentFunc()                                                                                       //* اپدیت قیمت کل
-        finalBuyCartFunc()                                                                                      //* اپدیت صفحه سبد خرید
-        showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
+        if (res.ok) {
+            changeBtnAfterDelete(event.target)                                                                         //* ✅ تغییر استایل کلید سبد خرید محصول)
+            showAlertEmptyCart()                                                                                      //* نمایش پیغام خالی بودن سبد خرید
+            totalPaymentFunc()                                                                                       //* اپدیت قیمت کل
+            finalBuyCartFunc()                                                                                      //* اپدیت صفحه سبد خرید
+            showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
+        }
         
     } catch (error) {
         console.error('Error in Function removeFromCart =>' , error);  

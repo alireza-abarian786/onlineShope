@@ -63,7 +63,8 @@ exports.deleteCartItem = async (req, res) => {
     const cart = await Cart.findOne({ _id: userId });
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
 
-    cart.items = cart.items.filter(item => item.product_id !== productId);
+    cart.items = cart.items.filter(item => item._id !== productId);
+    // cart.items = cart.items.filter(item => item.product_id !== productId);
     cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     await cart.save();
     res.json({ message: 'محصول از سبد حذف شد', cart });
