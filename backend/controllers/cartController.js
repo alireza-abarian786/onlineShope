@@ -24,7 +24,7 @@ exports.addItemToCart = async (req, res) => {
     }
 
     cart.items.push(newItem);
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount ? item.discount : item.price) * item.quantity), 0);
     await cart.save();
     res.status(201).json({ message: 'محصول به سبد اضافه شد', cart });
   } catch (error) {
@@ -65,7 +65,7 @@ exports.deleteCartItem = async (req, res) => {
 
     cart.items = cart.items.filter(item => item._id !== productId);
     // cart.items = cart.items.filter(item => item.product_id !== productId);
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + ((item.discount ? item.discount : item.price) * item.quantity), 0);
     await cart.save();
     res.json({ message: 'محصول از سبد حذف شد', cart });
   } catch (error) {
