@@ -55,7 +55,7 @@ let newProductData = async (product , user) => {
     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
         _id: user.id,
         items: [{
-            cart_id: Date.now().toString(36),
+            // cart_id: Date.now().toString(36),
             product_id: product.id,
             product_name: product.name,
             product_images: product.images,
@@ -230,7 +230,7 @@ let updateQuantity = async (event , operation) => {
             return;
         }
                 
-        await editeDataProductToDB(quantity , objProduct.cart_id , updatePrice)                                    //* اعمال تغییرات جدید در دیتابیس
+        await editeDataProductToDB(quantity , objProduct._id , updatePrice)                                    //* اعمال تغییرات جدید در دیتابیس
         await totalPaymentFunc()                                                                                  //* اپدیت قیمت کل صفحه سبد خرید
         await finalBuyCartFunc()                                                                                 //* اپدیت صفحه سبد خرید
         quantityElem.textContent = quantity                                                                     //* quantity دادن مقدار جدید به 
@@ -253,7 +253,7 @@ let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => 
         return;
     }
 
-    let productCart = product.items.find(item => item.cart_id === cartID)    
+    let productCart = product.items.find(item => item._id === cartID)    
     let updateCart = {...productCart , quantity , totalPriceProductCart}                                                                  //* اطلاعات جدید
     console.log(updateCart);
     

@@ -16,7 +16,6 @@ let isLoginFlag = false;
 // ! وضعیت لاگین و تغییر لینک ها
 async function isLogin() {
   if (getLocalStorage("login").length !== 0) {
-    console.log(1);
     //* به‌روزرسانی UI
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
@@ -43,8 +42,6 @@ async function isLogin() {
     // }
 
   } else {
-    console.log(2);
-
     loginBtnText.innerHTML = "ورود / عضویت";
     loginBtn.setAttribute("href", "./login.html");
   }
@@ -158,6 +155,23 @@ const fetchCategoriesForShowToMenu = async () => {
   });
 };
 
+const showSwal = async (title , text , icon, showButtons , buttons1, buttons2 , callback) => {
+      Swal.fire({
+        title,
+        text,
+        icon,
+        showCancelButton: showButtons, // نمایش دکمه لغو
+        confirmButtonText: buttons1, // متن دکمه تأیید
+        cancelButtonText: buttons2,   // متن دکمه لغو
+    }).then((result) => {
+      if (result.isConfirmed) {
+          callback(true); // اگر کاربر روی «بله» کلیک کرد
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+          callback(false); // اگر کاربر روی «خیر» کلیک کرد
+      }
+  });
+}
+
 export {
   searchParams,
   isLogin,
@@ -166,4 +180,5 @@ export {
   showAlertLogin,
   fetchDataFromApi,
   fetchCategoriesForShowToMenu,
+  showSwal,
 };

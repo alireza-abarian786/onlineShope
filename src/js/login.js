@@ -1,5 +1,5 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
-import { isLogin } from './funcs/utils.js';
+import { isLogin , fetchDataFromApi , showSwal} from './funcs/utils.js';
 import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { initializeCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
@@ -24,7 +24,6 @@ window.addEventListener("DOMContentLoaded" , () => {
     console.log(loginName);
     // statusLogin(loginName)
     // isLogin(loginName);
-           
 
     SignUpUser()
     toggleCart()
@@ -40,9 +39,10 @@ btnLogin.addEventListener('click', (e) => {
     .then(res => res.json())
     .then(data => {
 
-        let item = data.find(user => user.name === userName.value && user.password === password.value);        
+        let item = data.find(user => user.email === userName.value && user.password === password.value);
+
         if (item && userName.value && password.value !== '') {
-            loginCheked(getLocalStorage("login") , userName.value)
+            loginCheked(item.name)
             
         } else {
             Swal.fire({
@@ -61,67 +61,41 @@ function clearInput() {
     password.value = '';
 }
 
-async function loginCheked(loginName , username) {
-
+async function loginCheked(username) {
     setLocalStorage('login' , username);
 
-    let userData = await fetchUserFromDatabase();
-    console.log(userData);
-
-
+    let userData = await fetchUserFromDatabase();    
     const cartUser = {
-        name: userData.name,
+        email: userData.email,
         password: userData.password
-    }
-    console.log(cartUser);
-    
-    
-    let res = await fetch("https://onlineshope.onrender.com/api/login" , {
+    }    
+    let res = await fetch("https://onlineshope.onrender.com/api/users/login" , {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
         body: JSON.stringify(cartUser)
     })
-    let data = await res.json()
-    console.log(res);
-    console.log(data);
-    
-
-
-
-
-    // Swal.fire({
-    //     title: "شما در سایت ثبت نام کرده اید",
-    //     text: "⁉️میخواهید به پنل کاربری خود بروید",
-    //     icon: "success",
-    //     showCancelButton: true,
-    //     confirmButtonText: 'بله، برو!',
-    //     cancelButtonText: 'لغو'
-    // }).then(async (result) => {
-    //     setLocalStorage('login' , username);
-    //     loginName = getLocalStorage('login');                
-    //     clearInput();            
-    //     isLogin();
-    //     if (result.isConfirmed) {
-    //         window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-    //     }
-
-    //     let userData = await fetchUserFromDatabase();            
-    //     await fetch("https://onlineshope.onrender.com/api/users", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //             name: userData.name, //* نام کاربر
-    //             password: userData.password, //* رمز عبور کاربر
-    //         }),
-    //     });
-    // })
+    if (res.ok) {
+        showSwal(
+            'خوش آمدید' ,
+            "⁉️میخواهید به پنل کاربری خود بروید",
+            "success",
+            true,
+            'بله',
+            'خیر',
+            (result) => {
+                if (result) {
+                    window.location.href = './doshboard.html';
+                    clearInput();          
+                }
+                isLogin();
+            }
+        )
+    }
 }
 
-// ------------------------------------------------------------------------------------------- sign up
+//! ------------------------------------------------------------------------------------------- sign up
 btnSignUp.addEventListener("click", (event) => {
     event.preventDefault()
 
@@ -141,12 +115,8 @@ btnSignUp.addEventListener("click", (event) => {
 })
 
 let statusLogin = async (username) => {
-    console.log(username);
     
-    let loginName = getLocalStorage('login');
-    console.log(loginName.length === 0);
-    
-
+    let loginName = getLocalStorage('login');    
     if (loginName.length === 0) {
 
         if (usernameValid && passwordValid && phoneValid) {
@@ -172,13 +142,10 @@ let statusLogin = async (username) => {
                 })
                 
                 if (!res.ok) {
-                    const errorData = await res.json();
-                    console.error('Server error details:', errorData);
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
                 
                 let result = await res.json();
-                console.log('User created successfully:', result);
 
                 // ایجاد سبد خرید خالی برای کاربر جدید
                 const newCart = {

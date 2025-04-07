@@ -10,7 +10,7 @@ async function updateCartNotification() {
   // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
   let userLogged = await fetchUserLogged()
   if (userLogged) {
-    let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید    
+    let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید    
     let notifCart = document.querySelector('.notif-cart');
     notifCart.classList.toggle('is-notif', data.items.length > 0);
   }
@@ -219,7 +219,7 @@ async function initializeStatusCarts() {
   // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
   let userLogged = await fetchUserLogged()
   if (userLogged) {    
-    let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
+    let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
     document.querySelectorAll('.btn-cart-box').forEach(async btn => {                                //?🧺🔖 دسترسی به باکس تمام محصولات             
       let title = await extractProductTitle(btn)                                                           //? دریافت عنوان محصول
       if (Carts.items.some(item => item.product_name === title)) {                                       //? اگر محصول در لیست سبد خرید بود

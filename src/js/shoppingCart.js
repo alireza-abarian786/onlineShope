@@ -28,7 +28,7 @@ let totalPaymentFunc = async () => {
     let userLogged = await fetchUserLogged()
     if (userLogged) {
         
-        let arrayCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.id}`);               //* دریافت لیست کل سبد خرید  
+        let arrayCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  
         let sum = arrayCart.items.map(item => item.totalPrice).reduce((acc , curr) => acc + curr , 0)
         total.forEach(item => {
             item.textContent = sum.toLocaleString()
