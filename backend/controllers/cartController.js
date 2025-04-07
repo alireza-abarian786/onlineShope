@@ -42,7 +42,7 @@ exports.updateCartItem = async (req, res) => {
     const cart = await Cart.findOne({ _id: userId });
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
 
-    const itemIndex = cart.items.findIndex(item => item.product_id === productId);
+    const itemIndex = cart.items.findIndex(item => item._id === productId);
     if (itemIndex === -1) return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
 
     cart.items[itemIndex] = updatedItem;

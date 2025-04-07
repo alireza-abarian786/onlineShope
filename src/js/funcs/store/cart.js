@@ -267,6 +267,7 @@ let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => 
     let productCart = product.items.find(item => item._id === cartID)    
     let updateCart = {...productCart , quantity , totalPriceProductCart}                                                                  //* اطلاعات جدید
     console.log(updateCart);
+    console.log(cartID);
     
     await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${cartID}` , {                         //* انجام عملیات ویرایش کردن
         method: 'PUT',
