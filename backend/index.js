@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
+require('dotenv').config({ path: './backend/.env' });
+
+// const connectionString = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/onlineShopDB?retryWrites=true&w=majority';
+console.log('MONGODB_URI:', process.env.MONGODB_URI); // برای تست
 
 // Import Routes
 const productRoutes = require('./routes/productRoutes');
@@ -33,9 +35,17 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
 // Connect to MongoDB
+if (!process.env.MONGODB_URI) {
+  console.error('MONGODB_URI is not defined in the environment variables.');
+  process.exit(1); // خروج از برنامه در صورت عدم وجود MONGODB_URI
+}
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Connection error:', err));
+  .catch(err => {
+    console.error('Connection error:', err.message);
+    process.exit(1); // خروج از برنامه در صورت بروز خطا
+  });
 
 // Start Server
 app.listen(PORT, () => {
