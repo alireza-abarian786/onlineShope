@@ -72,3 +72,23 @@ exports.deleteCartItem = async (req, res) => {
     res.status(500).json({ error: 'مشکل در حذف از سبد' });
   }
 };
+
+exports.deleteCart = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // بررسی وجود سبد خرید برای کاربر
+    const cart = await Cart.findOne({ _id: userId });
+    if (!cart) {
+      return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    }
+
+    // حذف سبد خرید
+    await Cart.deleteOne({ _id: userId });
+
+    return res.status(200).json({ message: 'سبد خرید کاربر با موفقیت حذف شد' });
+  } catch (error) {
+    console.error("🚨 Error in deleteCart:", error);
+    return res.status(500).json({ error: 'مشکل در حذف سبد خرید' });
+  }
+};

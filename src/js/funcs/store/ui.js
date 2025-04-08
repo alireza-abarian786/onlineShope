@@ -20,7 +20,7 @@ async function updateCartNotification() {
 async function renderCartItems(cartItems) {    
     const container = document.querySelector('.cantain-box-goods');
     container.innerHTML = '';                                                                   //? پاک کردن آیتم‌های قبلی                                                                              
-    cartItems.forEach((item) => {                                                                   //?🛒 ساخت باکس محصول و افزودن به سبد خرید                   
+    cartItems.forEach((item) => {                                                                   //?🛒 ساخت باکس محصول و افزودن به سبد خرید                         
       const cartHTML = `
             <div class="box-goods d-flex align-items-end swiper-slide" data-id="${item.id}" style='transform: translateY(0);'>
                 <div>
@@ -53,7 +53,7 @@ async function renderCartItems(cartItems) {
                     <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1 total-price'>${item.discount ? item.discount.toLocaleString() : item.price.toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${item.totalPriceProductCart.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
@@ -76,20 +76,12 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
     if (shoppingCartProduct.length) {
       shoppingCartProduct.forEach(async box => {      
         document.querySelector('.container-Product-cards').insertAdjacentHTML('beforeend' , `
-                  <div class="cart-item swiper-slide">
+            <div class="cart-item ">
                 <button class="delete-btn"><i class="bi bi-trash3"></i>&nbsp حذف</button>
-                <div class="product-image">
-                  <div class="swiper-container mySwiper5 h-100 w-100 position-relative overflow-hidden">
-    
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="${box.product_images[0]}" alt="محصول 1"></div>
-                        <div class="swiper-slide"><img src="${box.product_images[1]}" alt="محصول 2"></div>
-                        <div class="swiper-slide"><img src="${box.product_images[2]}" alt="محصول 3"></div>
+                <div class="product-image">    
+                    <div>
+                        <div><img src="${box.product_images[0]}" alt="محصول 1"></div>
                     </div>
-                    <!-- کنترل‌های اسلایدر -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                  </div> 
                 </div>
                 <div class="product-description">
                     <div class="product-title product-title-cart">${box.product_name}</div>

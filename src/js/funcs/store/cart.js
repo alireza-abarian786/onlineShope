@@ -19,7 +19,6 @@ async function addToCart(event) {
     try {
         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
         let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  
         if (!data) {
             throw new Error("Error fetching data to from carts in the addToCart function");            
@@ -64,28 +63,22 @@ let newProductData = async (product , user) => {
             discount: +product.discount,
             price: +product.price,
             quantity: 1,
-            totalPriceProductCart: 0
+            totalPriceProductCart: +product.discount ? +product.discount : +product.price,
         }],
         totalPrice: product.discount ? +product.discount : +product.price,
     }
 }
 
 // ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
-let addCartToDB = async (newCart) => { 
-    console.log(10);
-    
+let addCartToDB = async (newCart) => {     
     let userLogged = await fetchUserLogged()
-    console.log(userLogged);
-    const res = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items` , {
+    await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items` , {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newCart.items[0])
-    })
-
-    console.log(res);
-    
+    })    
 }
 
 //!🛒 تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
@@ -116,13 +109,9 @@ async function toggleCart() {
 async function initializeCart() {   
     try {
         // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-        let userLogged = await fetchUserLogged() 
-        console.log(userLogged);
-               
+        let userLogged = await fetchUserLogged()                
         if (userLogged) {
-            let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید          
-            console.log(Carts);
-            
+            let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید                      
             if (!Carts) {
                 throw new Error("Error fetching data to from carts in the initializeCart function");
             }
@@ -144,17 +133,12 @@ async function removeFromCart(event) {
         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let titleCart = await extractProductTitle(event.target)                                                      //* دریافت عنوان محصول
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
         let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (!Carts) {
             throw new Error("Error fetching data to from carts in the removeFromCart function");
         }
-
-        console.log(Carts);
         
-        let productTarget = await Carts.items.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر
-        console.log(productTarget);
-        
+        let productTarget = await Carts.items.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر        
         let res = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${productTarget._id}`, {                //* ارسال درخواست حذف به سرور
             method: 'DELETE',
             headers: {
@@ -180,7 +164,6 @@ let showAlertEmptyCart = async () => {
     try {
         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
         let updateCart = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (!updateCart) {
             throw new Error("Error fetching data to from carts in the showAlertEmptyCart function");
@@ -215,7 +198,6 @@ let updateQuantity = async (event , operation) => {
         let priceElem = boxProduct.querySelector(".total-price");                                                 //* المنت قیمت محصول
         let quantityElem = boxProduct.querySelector('.number')                                                   //* المنت شمارنده محصول
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
         let getProductsDB = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (!getProductsDB) {
             throw new Error(`Error fetching data to from carts`)
@@ -232,7 +214,7 @@ let updateQuantity = async (event , operation) => {
     
         if (operation === 'increase') {                                                                     //* اگر عملیات مورد نظر افزایش تعداد محصول بود
             quantity += 1;
-            updatePrice = (objProduct.discount || objProduct.price) + (objProduct.discount || objProduct.price)
+            updatePrice = objProduct.totalPriceProductCart + (objProduct.discount || objProduct.price)
         } else if (operation === 'decrease' && quantity > 1){                                               //* اگر عملیات مورد نظر کاهش تعداد محصول بود
             quantity -= 1;            
             updatePrice = objProduct.totalPriceProductCart - (objProduct.discount || objProduct.price)
@@ -294,7 +276,7 @@ async function removeAllFromCart(event) {
         document.querySelectorAll('.product-box').forEach(box => {                                  //* انتخاب همه ی کارت ها
             changeBtnAfterDelete(box)                                                              //* ✅ تغییر محتوای دکمه
         })
-        showModal('❌🧺 همه ی ایتم های سبد خرید شما حذف شدند')
+        showModal("✅ سبد خرید با موفقیت خالی شد!")
         
     } catch (error) {
         console.error('Error in Function removeAllFromCart =>' , error);  
@@ -306,21 +288,20 @@ async function clearCart() {
     try {
         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
-        let cartItems = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
+        let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (cartItems.length === 0) {                                                                    //* اگر سبد خرید خالی است، نیازی به حذف نیست
             showModal("🛒 سبد خرید از قبل خالی است!")
             return;
         }
 
+        await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}` , {method: 'DELETE'})
         
-        await Promise.all(                                                                               //* حذف تک‌تک آیتم‌ها
-            cartItems.map(async (item) => 
-                await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/${item.id}`, { method: "DELETE" })
-            )
-        );
+        // await Promise.all(                                                                               //* حذف تک‌تک آیتم‌ها
+        //     cartItems.items.map(async (item) => 
+        //         await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${item._id}`, { method: "DELETE" })
+        //     )
+        // );
 
-        showModal("✅ سبد خرید با موفقیت خالی شد!")
     } catch (error) {
         console.error("❌ خطا در پاک کردن سبد خرید =>", error);
     }
@@ -330,7 +311,6 @@ let finalBuyCartFunc = async () => {
     try {
         // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userLogged = await fetchUserLogged()
-        console.log(userLogged);
         if (userLogged) {
             let shopingCartProduct = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  
             if (!shopingCartProduct) {
