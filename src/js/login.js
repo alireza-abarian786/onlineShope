@@ -128,7 +128,7 @@ let statusLogin = async (username) => {
         if (usernameValid && passwordValid && phoneValid) {
 
             let newUser = {
-                // _id: Date.now().toString(36),
+                _id: Date.now().toString(36),
                 name: usernameSignUp.value,
                 email: `${usernameSignUp.value}@example.com`,
                 password: passwordSignUp.value,
@@ -136,7 +136,6 @@ let statusLogin = async (username) => {
                 address: "iran",
                 registration_date: new Date().toISOString()
             }
-            console.log('Sending user data:', JSON.stringify(newUser, null, 2));
 
             try {
                 let res = await fetch('https://onlineshope.onrender.com/api/users' , {

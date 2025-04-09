@@ -240,7 +240,6 @@ let updateQuantity = async (event , operation) => {
 let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => {   
     if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
     let userLogged = await fetchUserLogged()
-    console.log(userLogged);
     let product = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);             //* دریافت لیست کل سبد خرید 
     if (!product) {                                                                                                                 //* اعتبار سنجی
         console.error("اطلاعات محصول نامعتبر است.");
@@ -248,10 +247,7 @@ let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => 
     }
 
     let productCart = product.items.find(item => item._id === cartID)    
-    let updateCart = {...productCart , quantity , totalPriceProductCart}                                                                  //* اطلاعات جدید
-    console.log(updateCart);
-    console.log(cartID);
-    
+    let updateCart = {...productCart , quantity , totalPriceProductCart}                                                                  //* اطلاعات جدید    
     await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${cartID}` , {                         //* انجام عملیات ویرایش کردن
         method: 'PUT',
         headers: {
@@ -276,6 +272,7 @@ async function removeAllFromCart(event) {
         document.querySelectorAll('.product-box').forEach(box => {                                  //* انتخاب همه ی کارت ها
             changeBtnAfterDelete(box)                                                              //* ✅ تغییر محتوای دکمه
         })
+        showAlertEmptyCart()                                                                                      //* نمایش پیغام خالی بودن سبد خرید
         hideLoader()
         showModal("✅ سبد خرید با موفقیت خالی شد!")
         
@@ -333,7 +330,6 @@ function closeCart() {
                 openCart.classList.remove('is-content');
 
                 let userLogged = await fetchUserLogged()
-                console.log(userLogged);
                 if (! await userLogged) return false;
                 let cartItems = fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
                 if (!cartItems) {                                                                                 //* اگر دریافت دیتا به درستی انجام نشد
