@@ -5,6 +5,7 @@ import { fetchUserLogged } from "./store/cart.js";
 
 let loginBtnText = document.querySelector("#login span");
 let loginBtn = document.querySelector("#login");
+const loaderElem = document.querySelector(".loader-container");
 // ----------------------------------------------------------------
 
 // ! دریافت قسمت سرچ لینک
@@ -12,34 +13,13 @@ let searchParams = (key) => {
   let urlSearchParams = new URLSearchParams(window.location.search);
   return urlSearchParams.get(key);
 };
-let isLoginFlag = false;
+
 // ! وضعیت لاگین و تغییر لینک ها
 async function isLogin() {
+  //* به‌روزرسانی UI
   if (getLocalStorage("login").length !== 0) {
-    //* به‌روزرسانی UI
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
-
-    // if (!isLoginFlag) {
-    //   console.log(3);
-      
-    //     try {
-    //       let userData = await fetchUserFromDatabase();
-    //       await fetch("https://onlineshope.onrender.com/api/login", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //           name: userData.name, //* نام کاربر
-    //           password: userData.password, //* رمز عبور کاربر
-    //         }),
-    //       });
-    //     } catch (error) {
-    //       console.error("خطا در لاگین:", error);
-    //     }
-    //     isLoginFlag = true
-    // }
 
   } else {
     loginBtnText.innerHTML = "ورود / عضویت";
@@ -50,31 +30,18 @@ async function isLogin() {
 async function deleteCart() {
   try {
     let userLogged = await fetchUserLogged();
-    const response = await fetch(
-      `https://onlineshope.onrender.com/api/carts/${userLogged.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`, {method: "DELETE"});
 
     if (!response.ok) {
       throw new Error("مشکل در حذف سبد خرید");
     }
 
-    const data = await response.json();
     alert("سبد خرید شما با موفقیت حذف شد");
   } catch (error) {
     console.error("خطا:", error);
     alert("مشکلی در حذف سبد خرید رخ داد");
   }
 }
-
-// deleteCart();
-// if (!getLocalStorage('login')) {
-// }
 
 // ! سرچ محصولات قسمت دسته بندی
 let getSearchProduct = async (arr, property, value) => {
@@ -172,6 +139,16 @@ const showSwal = async (title , text , icon, showButtons , buttons1, buttons2 , 
   });
 }
 
+//! تابع نمایش لودر
+function showLoader() {
+  loaderElem.classList.remove("hidden");
+}
+
+//! تابع مخفی کردن لودر
+function hideLoader() {
+  loaderElem.classList.add("hidden");
+}
+
 export {
   searchParams,
   isLogin,
@@ -181,4 +158,7 @@ export {
   fetchDataFromApi,
   fetchCategoriesForShowToMenu,
   showSwal,
+  showLoader,
+  hideLoader,
+  deleteCart
 };

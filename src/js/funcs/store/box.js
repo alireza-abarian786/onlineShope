@@ -1,7 +1,7 @@
 import { getLocalStorage} from "./storage.js";
 import { addToCart , fetchUserLogged} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
-import { showAlertLogin , fetchDataFromApi} from "../utils.js";
+import { showAlertLogin , fetchDataFromApi , showLoader , hideLoader} from "../utils.js";
 // ----------------------------------------------------------------------------------
 
 // ! دریافت عنوان محصول
@@ -72,10 +72,10 @@ async function updateCartButtonState(event) {
 }
 
 //! تابع افزودن محصول به سبد خرید
-async function addToCartAndToggleButton(event) {     
-    // if (! await showAlertLogin()) return false;                                                                //* بررسی لاگین کاربر 
+async function addToCartAndToggleButton(event) {  
     await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
     await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
+    hideLoader()
 }
 
 //! تابع مریوط به دکمه های باکس محصول

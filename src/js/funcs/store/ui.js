@@ -1,4 +1,4 @@
-import { initTooltips , fetchDataFromApi , showAlertLogin} from "../utils.js";
+import { initTooltips , fetchDataFromApi , showLoader , hideLoader} from "../utils.js";
 import { attachCartEventListeners , fetchUserLogged} from "./cart.js";
 import { clickAddBookMark} from "./bookMarks.js";
 import { settingSliderGlide , settingSliderSwiper } from "../sliders.js";
@@ -7,13 +7,13 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
-  // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
   let userLogged = await fetchUserLogged()
   if (userLogged) {
     let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید    
     let notifCart = document.querySelector('.notif-cart');
     notifCart.classList.toggle('is-notif', data.items.length > 0);
   }
+  hideLoader()
 }
 
 //! 🛒 تابع ساخت باکس محصول در سبد خرید

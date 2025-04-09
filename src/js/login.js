@@ -1,5 +1,5 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
-import { isLogin , fetchDataFromApi , showSwal} from './funcs/utils.js';
+import { isLogin , fetchDataFromApi , showSwal, showLoader , hideLoader} from "./funcs/utils.js";
 import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { initializeCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
@@ -35,6 +35,7 @@ window.addEventListener("DOMContentLoaded" , () => {
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
+    showLoader()
     fetch('https://onlineshope.onrender.com/api/users')
     .then(res => res.json())
     .then(data => {
@@ -45,6 +46,7 @@ btnLogin.addEventListener('click', (e) => {
             loginCheked(item.name)
             
         } else {
+            hideLoader()
             Swal.fire({
                 title: "ورود ناموفق",
                 text: "لطفا نام کاربری یا رمز عبور را به درستی وارد کنید",
@@ -76,6 +78,9 @@ async function loginCheked(username) {
         },
         body: JSON.stringify(cartUser)
     })
+
+    hideLoader()
+    clearInput();          
     if (res.ok) {
         showSwal(
             'خوش آمدید' ,
@@ -85,11 +90,10 @@ async function loginCheked(username) {
             'بله',
             'خیر',
             (result) => {
+                isLogin();
                 if (result) {
                     window.location.href = './doshboard.html';
-                    clearInput();          
                 }
-                isLogin();
             }
         )
     }
@@ -99,7 +103,9 @@ async function loginCheked(username) {
 btnSignUp.addEventListener("click", (event) => {
     event.preventDefault()
 
+    showLoader()
     if (!usernameSignUp.value || !passwordSignUp.value || !phoneInput.value) {
+        hideLoader()
         Swal.fire({
             title: "لطفا بیشتر دقت کنید (:",
             text: "❗ ورودی‌ها خالی هستند، ارسال انجام نمی‌شود ❗",
@@ -167,19 +173,6 @@ let statusLogin = async (username) => {
                 }
 
                 if (res.ok) {
-                    Swal.fire({
-                        title: "ثبت نام شما با موفقیت انجام شد",
-                        text: "⁉️میخواهید به پنل کاربری خود بروید",
-                        icon: "success",
-                        showCancelButton: true,
-                        confirmButtonText: 'بله، برو!',
-                        cancelButtonText: 'لغو'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-                        }
-                    })
-                    
                     setLocalStorage('login' , username);
                     isLogin();
                     clearInputSignUp()
@@ -195,6 +188,21 @@ let statusLogin = async (username) => {
                             password: userData.password, //* رمز عبور کاربر
                         }),
                     });
+
+                    hideLoader()
+                    Swal.fire({
+                        title: "ثبت نام شما با موفقیت انجام شد",
+                        text: "⁉️میخواهید به پنل کاربری خود بروید",
+                        icon: "success",
+                        showCancelButton: true,
+                        confirmButtonText: 'بله، برو!',
+                        cancelButtonText: 'لغو'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+                        }
+                    })
+                    
                 }
             } catch (error) {
                 console.error("خطا در ارسال درخواست به سرور:", error);
@@ -202,8 +210,9 @@ let statusLogin = async (username) => {
         }
 
     } else {
+        hideLoader()
         Swal.fire({
-            title: "شما در سایت ثبت نام کرده اید",
+            title: "شما قبلا ثبت نام کرده اید",
             text: "⁉️میخواهید به پنل کاربری خود بروید",
             icon: "success",
             showCancelButton: true,
