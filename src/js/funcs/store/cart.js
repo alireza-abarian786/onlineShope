@@ -265,16 +265,13 @@ let editeDataProductToDB = async (quantity , cartID , totalPriceProductCart) => 
 async function removeAllFromCart(event) {   
     try {
         showLoader()
-        // const cantainerOpenCart = document.querySelector('.cantainer-open-cart');
-        // const openCart = document.querySelector('.open-cart');
-        // const notifCart = document.querySelector('.notif-cart');
-
-        // cantainerOpenCart.style.visibility = 'hidden';
-        // openCart.classList.remove('is-content');
-        // notifCart.classList.remove('is-notif');
+        let userLogged = await fetchUserLogged();
+        const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items`, {method: "DELETE"});
     
-        deleteCart()
-        // await clearCart();                                                                            //* حذف تک تک ایتم های سبد خرید
+        if (!response.ok) {
+            throw new Error("مشکل در حذف سبد خرید");
+        }
+        
         await totalPaymentFunc()                                                                     //* اپدیت صفحه سبد خرید
         document.querySelectorAll('.product-box').forEach(box => {                                  //* انتخاب همه ی کارت ها
             changeBtnAfterDelete(box)                                                              //* ✅ تغییر محتوای دکمه
@@ -287,35 +284,8 @@ async function removeAllFromCart(event) {
     }
 }
 
-//! تابع حذف تمام محصولات سبد خرید
-// async function clearCart() {
-//     try {
-//         if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-//         let userLogged = await fetchUserLogged()
-//         let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
-//         if (cartItems.length === 0) {                                                                    //* اگر سبد خرید خالی است، نیازی به حذف نیست
-//             showModal("🛒 سبد خرید از قبل خالی است!")
-//             return;
-//         }
-
-//         const res = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}` , {method: 'DELETE'})
-//         console.log(res);
-        
-        
-//         // await Promise.all(                                                                               //* حذف تک‌تک آیتم‌ها
-//         //     cartItems.items.map(async (item) => 
-//         //         await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${item._id}`, { method: "DELETE" })
-//         //     )
-//         // );
-
-//     } catch (error) {
-//         console.error("❌ خطا در پاک کردن سبد خرید =>", error);
-//     }
-// }
-
 let finalBuyCartFunc = async () => {
     try {
-        // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userLogged = await fetchUserLogged()
         if (userLogged) {
             let shopingCartProduct = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  

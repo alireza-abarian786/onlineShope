@@ -30,7 +30,7 @@ async function isLogin() {
 async function deleteCart() {
   try {
     let userLogged = await fetchUserLogged();
-    const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`, {method: "DELETE"});
+    const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items`, {method: "DELETE"});
 
     if (!response.ok) {
       throw new Error("مشکل در حذف سبد خرید");
