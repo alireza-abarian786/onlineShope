@@ -1,6 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./store/storage.js";
-import { fetchUserFromDatabase } from "./store/box.js";
-import { fetchUserLogged } from "./store/cart.js";
+import { getLocalStorage } from "./store/storage.js";
 // ----------------------------------------------------------------
 
 let loginBtnText = document.querySelector("#login span");
@@ -24,22 +22,6 @@ async function isLogin() {
   } else {
     loginBtnText.innerHTML = "ورود / عضویت";
     loginBtn.setAttribute("href", "./login.html");
-  }
-}
-
-async function deleteCart() {
-  try {
-    let userLogged = await fetchUserLogged();
-    const response = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items`, {method: "DELETE"});
-
-    if (!response.ok) {
-      throw new Error("مشکل در حذف سبد خرید");
-    }
-
-    alert("سبد خرید شما با موفقیت حذف شد");
-  } catch (error) {
-    console.error("خطا:", error);
-    alert("مشکلی در حذف سبد خرید رخ داد");
   }
 }
 
@@ -159,6 +141,5 @@ export {
   fetchCategoriesForShowToMenu,
   showSwal,
   showLoader,
-  hideLoader,
-  deleteCart
+  hideLoader
 };

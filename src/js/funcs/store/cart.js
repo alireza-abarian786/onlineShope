@@ -1,6 +1,6 @@
 import { updateCartNotification , renderCartItems , changeBtnAfterDelete , showModal , createBoxToPageCart} from "./ui.js";
 import { fetchProductFromDatabase , fetchUserFromDatabase, extractProductTitle} from "./box.js";
-import { fetchDataFromApi , hideLoader, showAlertLogin, showLoader , deleteCart} from "../utils.js";
+import { fetchDataFromApi , hideLoader, showAlertLogin, showLoader} from "../utils.js";
 import { totalPaymentFunc } from "../../shoppingCart.js";
 import { getLocalStorage } from "./storage.js";
 // -------------------------------------------------------------------------------------
