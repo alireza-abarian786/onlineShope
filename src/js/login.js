@@ -150,28 +150,8 @@ let statusLogin = async (username) => {
                     throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
                 }
                 
-                let result = await res.json();
-
-                // ایجاد سبد خرید خالی برای کاربر جدید
-                const newCart = {
-                    _id: result.user._id,
-                    items: [],
-                    totalPrice: 0
-                };
-
-                const cartRes = await fetch('https://onlineshope.onrender.com/api/carts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify(newCart)
-                });
-
-                if (!cartRes.ok) {
-                    throw new Error('Failed to create cart');
-                }
-
-                setLocalStorage('login' , username);
+                loginCheked(username)
+                // setLocalStorage('login' , username);
                 isLogin();
                 clearInputSignUp()
 
