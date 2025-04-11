@@ -150,10 +150,10 @@ let statusLogin = async (username) => {
                     throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
                 }
                 
-                loginCheked(username)
-                // setLocalStorage('login' , username);
-                isLogin();
-                clearInputSignUp()
+                // loginCheked(username)
+                // // setLocalStorage('login' , username);
+                // isLogin();
+                // clearInputSignUp()
 
                 hideLoader()
                 Swal.fire({
