@@ -26,8 +26,8 @@ async function addToCart(event) {
         }
         
         let product = await fetchProductFromDatabase(event)                                                             //* دریافت اصلاعات محصول مورد نظر
-        let user = await fetchUserFromDatabase();                                                                     //* دریافت اطلاعات کاربر انجام دهنده    
-        if (!user || !user.id || !product || !product.id) {                                                          //* صحت سنجی دریافت درست اطلاعات
+        let user = await fetchUserFromDatabase();                                                                      //* دریافت اطلاعات کاربر انجام دهنده            
+        if (!user || !product) {                                                                                      //* صحت سنجی دریافت درست اطلاعات
             console.error("اطلاعات کاربر یا محصول نامعتبر است.");
             return;
         }
@@ -41,6 +41,7 @@ async function addToCart(event) {
             showModal(`✅🛒 ${product.name} به سبد خرید شما اضافه شد`);                                         //* پیغام موفقیت
             
         } else {                                                                                                 //* اگر محصول در سبد بود، نمایش پیغام مناسب
+            hideLoader()
             showModal(`✅🛒 ${product.name} از قبل در سبد خرید شما موجود است`);                                 
         }    
         
@@ -51,7 +52,11 @@ async function addToCart(event) {
 }
 
 //! تنظیم اطلاعات محصول جدید سبد خرید
-let newProductData = async (product , user) => {
+let newProductData = async (product , user) => {    
+    const priceAfterDiscount = product.discount ? 
+        +(product.price - (product.price * (Math.floor(product.discount / 10000) / 100))) : 
+        +product.price;        
+
     return {                                                                                            //* ارسال اطلاعات محصول جدید سبد خرید
         _id: user.id,
         items: [{
@@ -64,14 +69,16 @@ let newProductData = async (product , user) => {
             discount: +product.discount,
             price: +product.price,
             quantity: 1,
-            totalPriceProductCart: +product.discount ? +product.discount : +product.price,
+            totalPriceProductCart: priceAfterDiscount,
         }],
-        totalPrice: product.discount ? +product.discount : +product.price,
+        totalPrice: priceAfterDiscount
     }
 }
 
 // ! انجام عملیات افزودن کارت محصول جدید به دیتابیس
-let addCartToDB = async (newCart) => {     
+let addCartToDB = async (newCart) => { 
+    console.log(newCart);
+        
     let userLogged = await fetchUserLogged()
     await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items` , {
         method: 'POST',
@@ -135,9 +142,13 @@ async function removeFromCart(event) {
         let Carts = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید 
         if (!Carts) {
             throw new Error("Error fetching data to from carts in the removeFromCart function");
-        }
+        }        
         
         let productTarget = await Carts.items.find(cart => cart.product_name === titleCart)                              //* پیدا کردن محصول مورد نظر        
+        if (!productTarget) {
+            throw new Error("Product not found in cart");
+        }
+
         let res = await fetch(`https://onlineshope.onrender.com/api/carts/${userLogged._id}/items/${productTarget._id}`, {                //* ارسال درخواست حذف به سرور
             method: 'DELETE',
             headers: {
@@ -145,17 +156,21 @@ async function removeFromCart(event) {
             },
         })                       
     
-        if (res.ok) {
-            changeBtnAfterDelete(event.target)                                                                         //* ✅ تغییر استایل کلید سبد خرید محصول)
-            showAlertEmptyCart()                                                                                      //* نمایش پیغام خالی بودن سبد خرید
-            totalPaymentFunc()                                                                                       //* اپدیت قیمت کل
-            finalBuyCartFunc()                                                                                      //* اپدیت صفحه سبد خرید
-            hideLoader()
-            showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
+        if (!res.ok) {
+            throw new Error("Failed to delete item from cart");
         }
+
+        changeBtnAfterDelete(event.target)                                                                         //* ✅ تغییر استایل کلید سبد خرید محصول)
+        await showAlertEmptyCart()                                                                                      //* نمایش پیغام خالی بودن سبد خرید
+        await totalPaymentFunc()                                                                                       //* اپدیت قیمت کل
+        await finalBuyCartFunc()                                                                                      //* اپدیت صفحه سبد خرید
+        hideLoader()
+        showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`)
         
     } catch (error) {
-        console.error('Error in Function removeFromCart =>' , error);  
+        console.error('Error in Function removeFromCart =>' , error);
+        hideLoader()
+        showModal('خطا در حذف محصول از سبد خرید')  
     }
 }
 
@@ -209,26 +224,30 @@ let updateQuantity = async (event , operation) => {
         let updatePrice;
         
         if (!objProduct) {                                                                                   //* اگر محصول مورد نظر پیدا نشد متوقف شو
+            hideLoader()
             showModal("❌ محصول مورد نظر یافت نشد!");
             return;
         }
+
+        let discount = +(objProduct.price - (objProduct.price * (Math.floor(objProduct.discount / 10000) / 100)))
     
         if (operation === 'increase') {                                                                     //* اگر عملیات مورد نظر افزایش تعداد محصول بود
             quantity += 1;
-            updatePrice = objProduct.totalPriceProductCart + (objProduct.discount || objProduct.price)
+            updatePrice = objProduct.totalPriceProductCart + (discount || objProduct.price)
         } else if (operation === 'decrease' && quantity > 1){                                               //* اگر عملیات مورد نظر کاهش تعداد محصول بود
             quantity -= 1;            
-            updatePrice = objProduct.totalPriceProductCart - (objProduct.discount || objProduct.price)
+            updatePrice = objProduct.totalPriceProductCart - (discount || objProduct.price)
         } else {
+            hideLoader()
             showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
             return;
         }
                 
-        await editeDataProductToDB(quantity , objProduct._id , updatePrice)                                    //* اعمال تغییرات جدید در دیتابیس
+        quantityElem.textContent = quantity                                                                          //* quantity دادن مقدار جدید به 
+        priceElem.textContent = updatePrice.toLocaleString()                                                        //* اعمال قیمت جدید
+        await editeDataProductToDB(quantity , objProduct._id , updatePrice)                                        //* اعمال تغییرات جدید در دیتابیس
         await totalPaymentFunc()                                                                                  //* اپدیت قیمت کل صفحه سبد خرید
         await finalBuyCartFunc()                                                                                 //* اپدیت صفحه سبد خرید
-        quantityElem.textContent = quantity                                                                     //* quantity دادن مقدار جدید به 
-        priceElem.textContent = updatePrice.toLocaleString()                                                   //* اعمال قیمت جدید
         hideLoader()
     
     } catch (error) {

@@ -5,13 +5,28 @@ import { showAlertLogin , fetchDataFromApi , showLoader , hideLoader} from "../u
 // ----------------------------------------------------------------------------------
 
 // ! دریافت عنوان محصول
-let extractProductTitle = (element) => {
-    let card = element.closest('.swiper-slide')                                                                //* پیدا کردن کارت محصول از روی رویداد کلیک        
-    if (card.querySelector("h6")) {                                                                              
-      return card.querySelector("h6").textContent;                                                             //* ارسال عنوان محصول در صورتی که ساختار ستونی بود
-    } else {                                                                                                   
-      return card.querySelector(".product-title").textContent;                                                 //* ارسال عنوان محصول در صورتی که ساختار ردیفی بود
-    }   
+let extractProductTitle = (element) => {    
+    let card = element.closest('.swiper-slide');                                                              //* پیدا کردن کارت محصول از روی رویداد کلیک
+    try {
+        const columnTitle = card.querySelector("h6");
+        const rowTitle = card.querySelector(".product-title");
+        
+        if (!card) {
+            throw new Error("کارت محصول پیدا نشد");
+        }        
+        
+        if (columnTitle) {
+            return columnTitle.textContent;                                                                    //* ارسال عنوان محصول در صورتی که ساختار ستونی بود
+        } else if (rowTitle) {
+            return rowTitle.textContent;                                                                      //* ارسال عنوان محصول در صورتی که ساختار ردیفی بود
+        } else {
+            throw new Error("عنوان محصول پیدا نشد"); 
+        }
+        
+    } catch (error) {
+        console.error("خطا در استخراج عنوان محصول:", error.message);
+        return null;
+    }
 }
 
 //! گرفتن اطلاعات مورد نظر از محصول
@@ -60,13 +75,12 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 
 //! 🛒 تغییر استایل دکمه سبد خرید محصول 
 async function updateCartButtonState(event) {
-    // if (! await showAlertLogin()) return false;                                                                    //* بررسی لاگین کاربر
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
     let userLogged = await fetchUserLogged()
     if (userLogged) {
         let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  
         if (!isProductInCart(product, cartItems.items)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
-            changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
+            await changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
         } 
     }
 }
@@ -75,7 +89,6 @@ async function updateCartButtonState(event) {
 async function addToCartAndToggleButton(event) {  
     await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
     await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
-    hideLoader()
 }
 
 //! تابع مریوط به دکمه های باکس محصول

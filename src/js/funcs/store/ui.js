@@ -96,7 +96,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
         document.querySelector(".container-Product-cards").insertAdjacentHTML(
           "beforeend",
           `
-            <div class="cart-item ">
+            <div class="cart-item swiper-slide">
                 <button class="delete-btn"><i class="bi bi-trash3"></i>&nbsp حذف</button>
                 <div class="product-image">    
                     <div>
@@ -122,15 +122,15 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                         <div class="product-price-cart">قیمت واحد: ${box.price.toLocaleString()} تومان</div>
                         <div class="discount">${
                           box.discount
-                            ? box.discount.toLocaleString() + " :قیمت با تخفیف"
+                            ? (box.price - (box.price * (Math.floor(box.discount / 10000) / 100))).toLocaleString() + " :قیمت با تخفیف"
                             : ""
                         }</div>
                     </div>
                     <div class="container-total">
                       <img src="src/assets/images/home.png" alt="لوگوی برند" class="brand-logo">
                       <div class="total-price-container">جمع: 
-                        <span class="total-price">${box.price.toLocaleString()}</span>
-                       تومان
+                        <span class="total-price">${box.totalPriceProductCart.toLocaleString()}</span>
+                        تومان
                       </div>
                       <div class="quantity-box">
                           <button class="quantity-btn"><i class="bi bi-dash-lg"></i></button>
@@ -222,9 +222,12 @@ let changeBtnAfterAdd = async (element) => {
     card
       .querySelector(".add-cart > svg")
       .classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
-  } else {
-    card.querySelector(".btn-cart-box").classList.add("buy-button-active");
-    card.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
+
+      hideLoader()
+    } else {
+      card.querySelector(".btn-cart-box").classList.add("buy-button-active");
+      card.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
+      hideLoader()
   }
 };
 
@@ -249,14 +252,17 @@ let changeBtnAfterDelete = async (element) => {
         card
           .querySelector(".add-cart > svg")
           .classList.remove("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
-      } else {
-        //* حالت ردیفی
-        card
+
+          hideLoader()
+        } else {
+          //* حالت ردیفی
+          card
           .querySelector(".btn-cart-box")
           .classList.remove("buy-button-active");
-        card.querySelector(".btn-cart-box").textContent = "اضافه به سبد خرید";
+          card.querySelector(".btn-cart-box").textContent = "اضافه به سبد خرید";
+          hideLoader()
+        }
       }
-    }
   });
 };
 
