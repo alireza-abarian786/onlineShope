@@ -1,4 +1,4 @@
-/* -------------------------****** Start Box Product ********-------------------------------------------------------------------- */
+/** -------------------------****** Start Box Product ********-------------------------------------------------------------------- */
 
 .cantain-box-slider,
 .cantain-box-articles {
@@ -115,7 +115,7 @@
   width: 20px;
 }
 
-/* --------------------------------------------------------------****** Box Slider Discounts ********-------------------------------------------------------------------- */
+/** --------------------------------------------------------------****** Box Slider Discounts ********-------------------------------------------------------------------- */
 
 .discounts-box {
   width: 95%;
@@ -218,30 +218,6 @@
 
 .discounts-arrow > svg {
   cursor: pointer;
-}
-
-.glide {
-  width: 350px;
-  height: 450px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-.swiper-slide:hover {
-  transform: translateY(-10px);
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.swiper-pagination-discounts span {
-  background-color: #fff;
-}
-.swiper-pagination-discounts span .swiper-pagination-bullet-active {
-  background-color: #fff !important;
 }
 
 .cantainer-discounts-goods {
@@ -450,18 +426,23 @@
   overflow: hidden;
 }
 
+
+/** --------------------------------------------------------------- slider --------------------------------------------------------------- */
+
 .glide__slide img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* --------------------------------------------------------------- */
-
 .mySwiper2 , .mySwiper3{
   width: 100%;
+  height: 100%;
   padding: 20px;
   align-self: flex-end;
+}
+.mySwiper3{
+  height: 520px;
 }
 
 .mySwiper2 .swiper-slide {
@@ -480,6 +461,54 @@
 }
 
 .swiper-pagination {
-  bottom: -15px !important;
+  /* bottom: -15px !important; */
   position: relative !important;
+}
+
+.glide {
+  width: 350px;
+  height: 450px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-slide:hover {
+  transform: translateY(-10px);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.swiper-slide:hover .box-discount {
+  transform: rotate(0);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.swiper-pagination-discounts span {
+  background-color: #fff;
+}
+.swiper-pagination-discounts span .swiper-pagination-bullet-active {
+  background-color: #fff !important;
+}
+
+
+/** ------------------------------------------------------------------------------------------------------ */
+
+.box-discount {
+  width: 50px;
+  height: 30px;
+  background-color: #ff5733;
+  border-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: absolute;
+  top: -14px;
+  right: -11px;
+  z-index: 9999;
+  transform: rotate(30deg);
 }

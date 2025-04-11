@@ -1,4 +1,4 @@
-import { searchParams , getSearchProduct , fetchDataFromApi, isLogin} from "./funcs/utils.js";
+import { searchParams , getSearchProduct , fetchDataFromApi} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
 import {attachProductEventListeners} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
@@ -38,16 +38,15 @@ let category = async () => {
   let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
  
   if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده    
-    let showProductsAnyPage = await handlePagination([...getProductCategory] , pagination , 6 , urlPage)
+    let showProductsAnyPage = await handlePagination([...getProductCategory] , pagination , 9 , urlPage)
     showSearchProducts(showProductsAnyPage);                                                      //* category تابع سرچ محصولات صفحه
     changeShowBoxes(showProductsAnyPage)                                                          //* category تابع نمایش محصولات صفحه
     setDropdownItem(showProductsAnyPage)                                                        //* category صفحه Dropdown تابع تنظیمات 
-
   } else {                                                                                    //* اگر دسته‌بندی بوکمارک بود، فقط محصولات بوکمارک‌شده را نمایش بده      
     let bookmarkedProducts = Products.filter(item =>                                         //* فیلتر کردن بوکمارک ها
       Marks.some(mark => mark.product_id == item.id)
     );
-    let showProductsAnyPage = await handlePagination([...bookmarkedProducts] , pagination , 6 , urlPage)
+    let showProductsAnyPage = await handlePagination([...bookmarkedProducts] , pagination , 9 , urlPage)
     showSearchProducts(showProductsAnyPage);                                                 //* category تابع سرچ محصولات صفحه
     changeShowBoxes(showProductsAnyPage)                                                     //* category تابع نمایش محصولات صفحه
     setDropdownItem(showProductsAnyPage)                                                   //* category صفحه Dropdown تابع تنظیمات 
@@ -99,7 +98,7 @@ let filteringProducts = async (sortingName , sortingProducts) => {
       break;
     }
     case 'discount': {
-      arrSorting = sortingProducts.slice().sort((a , b) => a.discount - b.discount)      
+      arrSorting = sortingProducts.slice().sort((a , b) => b.discount - a.discount)      
       break;
     }
     case 'score': {
@@ -169,7 +168,7 @@ const handlePagination = (array , element , showItemCountToPage , currentPage) =
 
   for (let i = 1; i < itemsCount + 1; i++) {
     element.insertAdjacentHTML('beforeend', `
-      <li class="page-item">
+      <li class="page-item" style="cursor: pointer;">
       ${i === Number(currentPage) ? 
         `<a onclick="clickOnPaginatoin('page' , ${i})" class="page-link rounded text-center active">${i}</a>`
         : 
@@ -191,62 +190,3 @@ const clickOnPaginatoin = (param , value) => {
 }
 
 window.clickOnPaginatoin = clickOnPaginatoin
-
-
-
-
-
-// <!--? start box drop-down -->
-// <div class="open-slide text-start collapse p-lg-3 p-1" id="collapseExample">
-//   <!--? start content drop-down -->
-//   <a href="./category.html?cat=phone">
-//     <h6 class="shadow-sm">موبایل</h6>
-//   </a>
-//   <a href="./category.html?cat=sports">
-//     <h6 class="shadow-sm">ورزش و سفر</h6>
-//   </a>
-//   <a href="./category.html?cat=clothing">
-//     <h6 class="shadow-sm">مد و پوشاک</h6>
-//   </a>
-//   <a href="./category.html?cat=jewellery">
-//     <h6 class="shadow-sm">طلا و نقره</h6>
-//   </a>
-//   <a href="./category.html?cat=digital">
-//     <h6 class="shadow-sm">کالای دیجیتال</h6>
-//   </a>
-//   <a href="./category.html?cat=stationery">
-//     <h6 class="shadow-sm">کتاب و لوازم تحریر</h6>
-//   </a>
-//   <a href="./category.html?cat=kitchen">
-//     <h6 class="shadow-sm">خانه و آشپزخانه</h6>
-//   </a>
-//   <a href="./category.html?cat=electric">
-//     <h6 class="shadow-sm">لوازم خانگی برقی</h6>
-//   </a>
-//   <a href="./category.html?cat=sanitary">
-//     <h6 class="shadow-sm">آرایشی بهداشتی</h6>
-//   </a>
-//   <a href="./category.html?cat=vehicles">
-//     <h6 class="shadow-sm">خودرو و موتور سیکلت</h6>
-//   </a>
-//   <a href="./category.html?cat=tools">
-//     <h6 class="shadow-sm">ابزار آلات و تجهیزات</h6>
-//   </a>
-//   <a href="./category.html?cat=edible">
-//     <h6 class="shadow-sm">کالای خوراکی و اساسی</h6>
-//   </a>
-//   <a href="./category.html?cat=child">
-//     <h6 class="shadow-sm">اسباب بازی، کودک و نوزاد</h6>
-//   </a>
-//   <a href="./category.html?cat=native">
-//     <h6 class="shadow-sm">محصولات بومی و محلی</h6>
-//   </a>
-//   <a href="./category.html?cat=medicine">
-//     <h6 class="shadow-sm">تجهیزات پزشکی و سلامت</h6>
-//   </a>
-//   <a href="./category.html?cat=bookmarks">
-//     <h6 class="shadow-sm">علاقه مندی ها</h6>
-//   </a>
-//   <!--? end content drop-down -->
-// </div>
-// <!--? end box drop-down -->
