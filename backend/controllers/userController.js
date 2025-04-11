@@ -19,7 +19,7 @@ exports.createUser = async (req, res) => {
 
     // ایجاد یک سبد خرید خالی برای کاربر جدید
     const newCart = new Cart({
-      // _id: newUser._id,
+      _id: newUser._id,
       items: [],
       totalPrice: 0
     });
