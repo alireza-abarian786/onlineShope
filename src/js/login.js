@@ -128,9 +128,8 @@ let statusLogin = async (username) => {
         if (usernameValid && passwordValid && phoneValid) {
 
             let newUser = {
-                // _id: Date.now().toString(36),
                 name: usernameSignUp.value,
-                email: `${usernameSignUp.value}@example.com`,
+                email: `${usernameSignUp.value}${Date.now()}@example.com`,
                 password: passwordSignUp.value,
                 phone: phoneInput.value,
                 address: "iran",
@@ -147,14 +146,15 @@ let statusLogin = async (username) => {
                 })
                 
                 if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                    const errorData = await res.json();
+                    throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
                 }
                 
                 let result = await res.json();
 
                 // ایجاد سبد خرید خالی برای کاربر جدید
                 const newCart = {
-                    _id: result.user._id, // استفاده از _id برگشتی از سرور
+                    _id: result.user._id,
                     items: [],
                     totalPrice: 0
                 };
@@ -171,40 +171,33 @@ let statusLogin = async (username) => {
                     throw new Error('Failed to create cart');
                 }
 
-                if (res.ok) {
-                    setLocalStorage('login' , username);
-                    isLogin();
-                    clearInputSignUp()
+                setLocalStorage('login' , username);
+                isLogin();
+                clearInputSignUp()
 
-                    let userData = await fetchUserFromDatabase();
-                    await fetch("https://onlineshope.onrender.com/api/login", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            name: userData.name, //* نام کاربر
-                            password: userData.password, //* رمز عبور کاربر
-                        }),
-                    });
-
-                    hideLoader()
-                    Swal.fire({
-                        title: "ثبت نام شما با موفقیت انجام شد",
-                        text: "⁉️میخواهید به پنل کاربری خود بروید",
-                        icon: "success",
-                        showCancelButton: true,
-                        confirmButtonText: 'بله، برو!',
-                        cancelButtonText: 'لغو'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = './doshboard.html'; // آدرس صفحه مقصد
-                        }
-                    })
-                    
-                }
+                hideLoader()
+                Swal.fire({
+                    title: "ثبت نام شما با موفقیت انجام شد",
+                    text: "⁉️میخواهید به پنل کاربری خود بروید",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonText: 'بله، برو!',
+                    cancelButtonText: 'لغو'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = './doshboard.html';
+                    }
+                })
+                
             } catch (error) {
+                hideLoader()
                 console.error("خطا در ارسال درخواست به سرور:", error);
+                Swal.fire({
+                    title: "خطا در ثبت نام",
+                    text: error.message || "مشکلی در ثبت نام رخ داده است",
+                    icon: "error",
+                    button: "تایید"
+                })
             }
         }
 
@@ -219,7 +212,7 @@ let statusLogin = async (username) => {
             cancelButtonText: 'لغو'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = './doshboard.html'; // آدرس صفحه مقصد
+                window.location.href = './doshboard.html';
             }
         })
     }
