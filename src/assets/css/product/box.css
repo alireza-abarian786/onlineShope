@@ -461,7 +461,7 @@
 }
 
 .swiper-pagination {
-  /* bottom: -15px !important; */
+  bottom: 0;
   position: relative !important;
 }
 
@@ -474,6 +474,9 @@
   display: flex;
   flex-direction: column;
   align-self: center;
+}
+
+.mySwiper3 .glide {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -498,7 +501,7 @@
 /** ------------------------------------------------------------------------------------------------------ */
 
 .box-discount {
-  width: 50px;
+  width: 60px;
   height: 30px;
   background-color: #ff5733;
   border-radius: 15%;
@@ -508,7 +511,7 @@
   color: #fff;
   position: absolute;
   top: -14px;
-  right: -11px;
+  right: -5px;
   z-index: 9999;
-  transform: rotate(30deg);
+  transform: rotate(10deg);
 }

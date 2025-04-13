@@ -1,7 +1,7 @@
 // تاریخ هدف (مثال: اوایل سال 2024)
-const targetDate = new Date("2025-02-17T00:00:00");
+const targetDate = new Date("2025-06-17T00:00:00");
 
-const targetDate2 = new Date("2025-03-17T00:00:00");
+const targetDate2 = new Date("2025-06-17T00:00:00");
 
 // ارجاع به عناصر HTML
 const daysElement = document.getElementById("days");
