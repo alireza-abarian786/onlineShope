@@ -90,10 +90,22 @@ const fetchCategoriesForShowToMenu = async () => {
   const categories = await fetchDataFromApi(
     "https://onlineshope.onrender.com/api/categories"
   );
-  const categoryWrapper = document.querySelector("#category-wrapper");
+  const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
+  const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
 
   categories.forEach((item) => {
-    categoryWrapper.insertAdjacentHTML(
+    categoryWrapperXl.insertAdjacentHTML(
+      "beforeend",
+      `
+            <a href="./category.html?cat=${item.urlSearch}&page=1">
+                <h6 class="shadow-sm">${item.name}</h6>
+            </a>
+        `
+    );
+  });
+
+  categories.forEach((item) => {
+    categoryWrapperLg.insertAdjacentHTML(
       "beforeend",
       `
             <a href="./category.html?cat=${item.urlSearch}&page=1">

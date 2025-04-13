@@ -452,8 +452,43 @@
   }
 
   .image-slider {
-    height: 10rem;
+    height: 5rem;
   }
+
+  .mySwiper1 {
+    height: auto;
+  }
+
+  .category-box > div:nth-child(2) {
+    height: max-content;
+  }
+
+  .carousel-indicators , .carousel-control-prev , .carousel-control-next {
+    display: none;
+  }
+
+  .category-box {
+    margin: 40px auto;
+  }
+
+  .category-box > h3 {
+    font-size: medium;
+    margin-bottom: 30px;
+  }
+
+  .category-box > div:nth-child(2) > div > div {
+    width: 100px;
+    height: 100px;
+  }
+
+  .category-box > div:nth-child(2) > div > h6 {
+    font-size: xx-small;
+  }
+
+  .discounts-box {
+    margin: 0;
+  }
+
 
   .container-boxs-small {
     padding: 0;

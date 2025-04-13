@@ -24,7 +24,7 @@ function settingSliderSwiper() {
       clickable: true,
     },
     breakpoints: {
-      0: { slidesPerView: 1 },
+      0: { slidesPerView: 4 },
       576: { slidesPerView: 2 },
       640: { slidesPerView: 3 },
       1024: { slidesPerView: 4 },
@@ -43,7 +43,6 @@ function settingSliderSwiper() {
       clickable: true,
     },
     breakpoints: {
-      // 0: { slidesPerView: 1, direction: "vertical", spaceBetween: 50 },
       0: { slidesPerView: 1, spaceBetween: 120 },
       600: { slidesPerView: 1, spaceBetween: 120 },
       640: { slidesPerView: 2, spaceBetween: 10 },

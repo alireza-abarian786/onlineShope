@@ -58,6 +58,7 @@
   </head>
 
   <body class="overflow-x-hidden">
+
     <!--? start loader -->
     <div class="loader-container" role="status" aria-label="در حال بارگذاری">
       <div class="loader">
@@ -72,17 +73,9 @@
     <!--?? start header -->
     <header class="mx-auto" role="banner">
       <!--? start menu -->
-      <div
-        class="menu-box d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center"
-      >
+      <div class="menu-box d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
         <!--? icon bar -->
-        <button
-          class="icon-bar d-lg-none d-block mb-1 border-0 bg-transparent"
-          data-bs-target="#offcanvasResponsive"
-          aria-controls="offcanvasResponsive"
-          data-bs-toggle="offcanvas"
-          aria-label="باز کردن منو"
-        >
+        <button class="icon-bar d-lg-none d-block mb-1 border-0 bg-transparent" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" data-bs-toggle="offcanvas" aria-label="باز کردن منو">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -157,17 +150,11 @@
             <!--? end container header sidebar -->
 
             <!--? start menu drop-down -->
-            <li
-              class="category-menu position-relative text-start offcanvas-body flex-grow-0 overflow-visible"
-              role="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
+            <li class="category-menu position-relative text-start offcanvas-body flex-grow-0 overflow-visible" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <!-- <li class="category-menu position-relative text-start offcanvas-body flex-grow-0 overflow-visible" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"> -->
+              
               <!--? arrow menu drop-down -->
-              <svg
-                class="icon-category-menu icon-xl-window"
+              <svg class="icon-category-menu icon-xl-window d-none d-lg-block"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
@@ -181,15 +168,17 @@
               <!--? text menu drop-down -->
               <span>دسته بندی محصولات</span>
 
-              <div
-                class="open-slide-child-li text-end p-lg-3 p-1 d-none d-lg-grid"
-                id="category-wrapper"
-                role="menu"
-              >
+              <div class="open-slide-child-li text-end p-lg-3 p-1 d-none d-lg-grid category-wrapper-xl" role="menu">
                 <!--? data menu category loaded from js -->
               </div>
+
             </li>
             <!--? end menu drop-down -->
+
+
+            <div class="d-lg-none collapse category-wrapper-lg" id="collapseExample">
+                <!--? data menu category loaded from js -->
+            </div>
 
             <!--? text menu contact -->
             <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
