@@ -99,7 +99,7 @@ async function toggleCart() {
     shoppingCart.addEventListener('click', async () => {                                                            //* رویداد کلیک روی ایکون سبد خرید        
         try {
             if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-            showLoader()
+            // showLoader()
             openCart.classList.add('is-content');                                                                      //*🛒 نمایش مودال دادن سبد خرید
             containerOpenCart.style.visibility = 'visible';                                                           //* نمایش پس زمینه مودال
             containerOpenCart.style.height = document.body.offsetHeight + 'px'                                       //* مشخص کردن ارتفاع پس زمینه طبق ارتفاع صفحه        

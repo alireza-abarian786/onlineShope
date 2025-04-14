@@ -18,10 +18,19 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 1400px) {
-  .box-serch,
+  /* .box-serch, */
   .shoping-cart {
     width: var(--icon-size-1400);
     height: var(--icon-size-1400);
+  }
+
+  .box-serch {
+    position: absolute;
+    z-index: 99;
+    top: 350%;
+    left: 0;
+    width: 30rem;
+    height: 3rem;
   }
 
   .header-image-box {
@@ -95,16 +104,15 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 1200px) {
-  .box-serch,
+  /* .box-serch, */
   .shoping-cart {
     width: var(--icon-size-1200);
     height: var(--icon-size-1200);
   }
 
-  .box-top,
-  .box-bottom {
-    width: 100%;
-  }
+  /* .box-serch {
+    right: -50rem;
+  } */
 
   .ih-item img {
     left: 0;
@@ -195,13 +203,13 @@
     overflow: scroll;
   }
 
-  .box-serch,
+  /* .box-serch, */
   .shoping-cart,
   .page {
     transform: scale(0.8);
   }
 
-  .box-serch:hover,
+  /* .box-serch:hover, */
   .shoping-cart:hover,
   .page:hover {
     transform: scale(1);
@@ -306,6 +314,12 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 768px) {
+  .box-serch {
+    top: 290%;
+    width: 25rem;
+    height: 2.5rem;
+  }
+
   .text-navbar-blue > h6 {
     font-size: 0.6rem;
   }
@@ -411,26 +425,11 @@
     padding: 0 15px;
   }
 
-  /* .mySwiper2,
-  .mySwiper3 {
-    padding-top: var(--spacing-small);
-  }
-  .mySwiper2 .swiper-slide {
-    align-self: center;
-    padding-top: var(--spacing-small);
-  } */
-
   .mySwiper2,
   .mySwiper3 {
     position: unset;
   }
-  /* .swiper-pagination {
-    rotate: 90deg;
-    transform: translate3d(0, 0, 0);
-    right: 50%;
-    left: 50%;
-    translate: -120px 178px;
-  } */
+
   .mySwiper3 > .swiper-pagination {
     translate: 0 160px;
     display: grid;
@@ -440,9 +439,10 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 576px) {
-  .box-apps {
-    background-color: var(--primary-color);
-    padding: var(--spacing-small);
+  .box-serch {
+    top: 400%;
+    width: 20rem;
+    left: 120%;
   }
 
   .box-top,
@@ -468,7 +468,7 @@
   }
 
   .category-box {
-    margin: 40px auto;
+    margin: 8rem auto 40px auto;
   }
 
   .category-box > h3 {
