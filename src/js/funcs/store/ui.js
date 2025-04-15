@@ -68,7 +68,7 @@ async function renderCartItems(cartItems) {
                             </div>
                         </div>
                     </div>
-                    <div class='w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
+                    <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
                             <span class='price ms-1 total-price'>${item.totalPriceProductCart.toLocaleString()}</span>

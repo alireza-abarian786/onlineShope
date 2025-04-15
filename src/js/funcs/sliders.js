@@ -24,7 +24,9 @@ function settingSliderSwiper() {
       clickable: true,
     },
     breakpoints: {
-      0: { slidesPerView: 4 },
+      0: { slidesPerView: 3 },
+      // 300: { slidesPerView: 2 },
+      // 420: { slidesPerView: 4 },
       576: { slidesPerView: 2 },
       640: { slidesPerView: 3 },
       1024: { slidesPerView: 4 },
