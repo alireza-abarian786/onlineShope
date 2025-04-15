@@ -36,6 +36,7 @@ li {
 .header-image-box,
 .category-box {
   position: relative;
+  width: 100vw;
 }
 
 /* ------------------------------------------------- */
@@ -271,12 +272,12 @@ li {
 /* --------------------------------------------------------------****** Baner 3 ********-------------------------------------------------------------------- */
 
 .box-baner {
-  width: 95%;
+  width: 95vw;
   height: 450px;
-  margin: 100px auto 100px auto;
+  /* margin: 100px 0; */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -296,9 +297,9 @@ li {
   border-radius: 15px 0 0 15px;
   background-image: url(),
     linear-gradient(to left, #2563eb 10%, #5b89f0 60%, #b40190b3);
-  width: 100%;
+  width: 100vw;
   padding-bottom: 30px;
-  padding-right: 100px;
+  /* padding-right: 50px; */
 
   display: flex;
   flex-direction: column;
@@ -339,7 +340,7 @@ li {
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 80px;
+  /* padding-left: 80px; */
   padding-bottom: 100px;
   border-radius: 0 15px 15px 0;
 }
@@ -349,7 +350,7 @@ li {
   font-size: 46px;
   font-weight: 500;
   letter-spacing: 2px;
-  width: 380px;
+  width: 28vw;
   text-align: end;
   word-spacing: 10px;
 }
@@ -462,10 +463,8 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
-  gap: 20px;
-  padding-top: 30px;
-  align-items: center;
+  gap: 5px;
+  padding: 20px 5px;
 }
 
 .box-articles > div {
@@ -499,7 +498,7 @@ li {
 }
 
 .box-articles > div > div:last-child > a > svg {
-  width: 20px;
+  width: 12px;
 }
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */

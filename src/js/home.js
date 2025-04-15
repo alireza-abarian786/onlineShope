@@ -50,3 +50,9 @@ let getAllProduct = async () => {
     console.error("🚨 Error in getAllProduct:", error);
   }
 };
+
+
+
+
+
+

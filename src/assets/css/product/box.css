@@ -2,13 +2,13 @@
 
 .cantain-box-slider,
 .cantain-box-articles {
-  width: 95%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  /* gap: 25px; */
   position: relative;
-  margin: 100px auto 100px auto;
+  margin: 100px 0;
+  width: 95vw;
 }
 
 .cantain-box-slider > div:first-child,
@@ -17,8 +17,8 @@
   align-items: center;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding: 0 1rem;
-  margin-bottom: 50px;
+  /* padding: 0 1rem; */
+  /* margin-bottom: 50px; */
 }
 
 .cantain-box-slider > div:first-child > div:first-child,
@@ -435,11 +435,11 @@
   object-fit: contain;
 }
 
-.mySwiper2 , .mySwiper3{
+.mySwiper2 , .mySwiper3 {
   width: 100%;
   height: 100%;
-  padding: 20px;
-  align-self: flex-end;
+  padding: 0 1rem;
+  /* align-self: flex-end; */
 }
 .mySwiper3{
   height: 520px;
