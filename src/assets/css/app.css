@@ -361,7 +361,7 @@ li {
   width: 95%;
   margin: 0 auto;
   color: #fff;
-  margin: 100px auto 100px auto;
+  /* margin: 100px auto 100px auto; */
 }
 .box-baner-last > div {
   height: 350px;
@@ -465,27 +465,21 @@ li {
   justify-content: center;
   gap: 5px;
   padding: 20px 5px;
+  width: 100%;
+  text-align: end;
 }
-
 .box-articles > div {
   width: 500px;
 }
-
-.box-articles > div > div:last-child > h6 {
-  font-size: 18px;
-  letter-spacing: 1px;
-}
-
 .box-articles > div > div:last-child > p {
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 1px;
   color: gray;
 }
-
 .box-articles > div > div:last-child > a {
   color: #2563eb;
   font-weight: 500;
+  font-size: small;
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
@@ -496,7 +490,6 @@ li {
 .box-articles > div > div:last-child > a:hover {
   transform: scale(1.1);
 }
-
 .box-articles > div > div:last-child > a > svg {
   width: 12px;
 }

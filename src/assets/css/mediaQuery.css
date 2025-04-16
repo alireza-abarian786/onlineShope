@@ -17,6 +17,12 @@
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
+@media screen and (max-width: 1450px) {
+  .mySwiper2 {
+    margin: 0 5rem;
+    padding: 0 0.5rem;
+  }
+}
 @media screen and (max-width: 1400px) {
   .shoping-cart {
     width: var(--icon-size-1400);
@@ -84,13 +90,13 @@
     width: var(--navbar-width-1400);
   }
 
-  .box-articles > div > div:last-child {
+  /* .box-articles > div > div:last-child {
     text-align: center;
   }
 
   .box-articles > div > div:last-child > a {
     justify-content: center;
-  }
+  } */
 
   .cantain-box-slider {
     margin: 100px 0 0 0;
@@ -117,9 +123,9 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 1200px) {
-  .box-apps {
+  /* .box-apps {
     gap: 0 !important;
-  }
+  } */
   .menu-box > div:last-child > div:nth-child(2) {
     height: 45px;
     width: 45px;
@@ -132,7 +138,28 @@
     width: 100%;
   }
   .cantain-box-slider {
-    margin: 100px 0;
+    margin: 70px 0;
+  }
+
+
+  .mySwiper2 {
+    margin: 0 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .category-box {
+    margin: 40px 0;
+  }
+  .category-box > h3 {
+    font-size: xx-large;
+    margin-bottom: 40px;
+  }
+  .category-box > div:nth-child(2) > div > div {
+    width: 100px;
+    height: 100px;
+  }
+  .category-box > div:nth-child(2) > div > h6 {
+    font-size: xx-small;
   }
 
 
@@ -202,6 +229,12 @@
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
+@media screen and (max-width: 1080px) {
+  .mySwiper2 {
+    margin: 0 8rem;
+    padding: 0 0.5rem;
+  }
+}
 @media screen and (max-width: 992px) {
   .menu-home {
     position: absolute;
@@ -233,23 +266,20 @@
     overflow: scroll;
   }
 
-  .shoping-cart,
-  .page {
-    transform: scale(0.8);
-  }
-
   .shoping-cart:hover,
   .page:hover {
     transform: scale(1);
   }
 
   .discounts-box {
-    margin: 100px auto;
+    margin: 0;
   }
 
-  /* .mySwiper2 {
-    padding: 25px 50px;
-  } */
+
+  .mySwiper2 {
+    margin: 0 5rem;
+    padding: 0 0.5rem;
+  }
 
   footer > div > div:last-child {
     grid-template-columns: repeat(2, 1fr);
@@ -262,9 +292,9 @@
     grid-row: 3 / 4;
   }
 
-  .box-articles > div {
+  /* .box-articles > div {
     width: 100%;
-  }
+  } */
 
   .navbar-syna > div {
     width: var(--navbar-width-992);
@@ -287,21 +317,17 @@
     justify-content: space-evenly;
   }
 
-  .discounts-box {
+  /* .discounts-box {
     height: 45rem;
   }
-
   .discounts-box > div {
     flex-direction: column;
     gap: 50px;
     height: inherit;
   }
-
   .swiper-pagination {
     bottom: 25px !important;
-
-}
-
+  }
   .discounts-title {
     padding-top: 15px;
     gap: 30px;
@@ -312,7 +338,7 @@
   }
   .discounts-title div {
     justify-content: center;
-  }
+  } */
 
 
   .baner-right > div > h4 {
@@ -335,14 +361,27 @@
   .box-baner-last > div > div > a {
     align-self: center;
   }
+
+
+  .cantain-box-slider > div:first-child > div:first-child > h5,
+  .cantain-box-articles > div:first-child > div:first-child > h5 {
+    font-size: medium;
+    margin: 3px;
+  }
+  .cantain-box-slider > div:first-child > a:last-child, .cantain-box-articles > div:first-child > a:last-child {
+    font-size: small;
+    padding: 5px 15px;
+    font-weight: 500;
+  }
 }
 
-/* @media screen and (max-width: 830px) {
+@media screen and (max-width: 880px) {
   .mySwiper2 {
-    padding: 25px 10px;
+    margin: 0 2rem;
+    padding: 0 0.5rem;
   }
 
-} */
+}
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
@@ -379,8 +418,6 @@
     padding: 0;
   }
   .mySwiper2 , .mySwiper3 {
-    /* padding-right: 0.5rem; */
-    /* width: 95vw; */
     height: 32rem;
   }
   .discounts-title h2 {
@@ -405,18 +442,34 @@
     font-size: x-small;
   }
 
-
-  .cantain-box-slider > div:first-child {
-    width: 95vw;
-    margin: 0 auto;
+  .discounts-box {
+    height: 45rem;
   }
+  .discounts-box > div {
+    flex-direction: column;
+    gap: 50px;
+    height: inherit;
+  }
+  .discounts-title {
+    padding-top: 15px;
+    gap: 30px;
+  }
+  .discounts-title h2 {
+    width: auto;
+    text-align: center;
+  }
+  .discounts-title div {
+    justify-content: center;
+  }
+
+
   .cantain-box-slider > div:first-child > div:first-child > h5,
   .cantain-box-articles > div:first-child > div:first-child > h5 {
-    font-size: medium;
+    font-size: small;
     margin: 3px;
   }
   .cantain-box-slider > div:first-child > a:last-child, .cantain-box-articles > div:first-child > a:last-child {
-    font-size: small;
+    font-size: x-small;
     padding: 5px 15px;
     font-weight: 500;
   }
@@ -432,36 +485,45 @@
     border-left: 0;
     padding: 0 5px;
   }
-  .cantain-box-slider , .cantain-box-articles {
-    gap: 0;
-  }
-  .cantain-box-slider, .cantain-box-articles {
-    margin: 70px 0;
-    align-items: center;
-  }
-  .box-articles > div > div:last-child {
+  .cantain-box-articles {
+    padding: 0 3.5rem;
     width: 100%;
   }
-  .box-articles > div > div:last-child > a {
+  /* .cantain-box-slider , .cantain-box-articles {
+    gap: 0;
+  } */
+  /* .cantain-box-slider, .cantain-box-articles {
+    margin: 70px 0;
+    align-items: center;
+  } */
+  /* .box-articles > div > div:last-child {
+    width: 100%;
+  } */
+  /* .box-articles > div > div:last-child > a {
     justify-content: flex-end;
     font-size: x-small;
-  }
-  .box-articles > div > div:last-child {
+  } */
+  /* .box-articles > div > div:last-child {
     text-align: end;
-  }
-  .box-articles > div > div:last-child > h6 {
+  } */
+  /* .box-articles > div > div:last-child > h6 {
     font-size: 14px;
     letter-spacing: 0;
   }
   .box-articles > div > div:last-child > p {
     font-size: 12px;
     letter-spacing: 0;
+  } */
+
+
+
+
+
+
+
+  .mySwiper2, .mySwiper3, .cantain-box-slider > div {
+    padding: 0 10rem;
   }
-
-
-
-
-
 
 
 
@@ -552,10 +614,19 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 650px) {
-  .mySwiper2 , .mySwiper3 , .cantain-box-slider > div:first-child {
-    width: 25rem;
-    margin: 0;
+  .text-navbar-blue > h6 {
+    font-size: 0.5rem;
+  }
+
+
+  .mySwiper2 , .mySwiper3 , .cantain-box-slider > div {
+    padding: 0 8rem;
+  }
+
+
+  .cantain-box-articles {
     padding: 0 1rem;
+    width: 100%;
   }
 
   .cantain-box-slider > div:first-child > div:first-child > h5,
@@ -583,9 +654,9 @@
   .cantain-box-slider , .cantain-box-articles {
     gap: 0;
   }
-  .cantain-box-slider, .cantain-box-articles {
+  /* .cantain-box-slider, .cantain-box-articles {
     margin: 70px 0;
-  }
+  } */
   .box-articles > div > div:last-child {
     width: 100%;
   }
@@ -638,23 +709,16 @@
 
 @media screen and (max-width: 576px) {
 
-  /* .mySwiper2 , .mySwiper3 , .cantain-box-slider > div:first-child {
-    width: 70vw;
-  } */
+  .mySwiper2 , .mySwiper3 , .cantain-box-slider > div {
+    padding: 0 5rem;
+  }
 
 
   .box-brand h1 {
     font-size: medium !important;
   }
-  .menu-box > div:last-child {
-    gap: 0 !important;
-  }
-  .menu-box > div:last-child > div:nth-child(2) {
-    height: 45px;
-    width: 45px;
-  }
   .box-serch {
-    top: 360%;
+    top: 14rem;
     width: 70vw;
     left: 13vw;
     height: 2.5rem;
@@ -699,6 +763,13 @@
   .btn-modol-cart-box > button {
     font-size: xx-small;
   }
+  .shoping-cart,
+  .page {
+    transform: scale(0.8);
+  }
+  /* .box-apps {
+    gap: 0 !important;
+  } */
 
 
   
@@ -742,7 +813,7 @@
   } */
   .category-box {
     margin: 6rem auto 40px auto;
-    width: 75%;
+    width: 90%;
   }
   .category-box > h3 {
     font-size: x-small;
@@ -787,8 +858,8 @@
 
 
   .cantain-box-slider {
-    width: 95%;
-    gap: 25px;
+    /* width: 95%; */
+    /* gap: 25px; */
   }
 
 
@@ -905,10 +976,15 @@
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
-@media screen and (max-width: 450px) {
-  .mySwiper2, .mySwiper3 , .cantain-box-slider > div:first-child {
-    /* padding: 0 3rem; */
-    width: 95vw;
+@media screen and (max-width: 500px) {
+  .text-navbar-blue > h6 {
+    font-size: 0.4rem;
+  }
+
+
+
+  .mySwiper2, .mySwiper3 , .cantain-box-slider > div {
+    padding: 0 3rem;
   }
 
   /* .cantain-box-slider > div:first-child {
@@ -919,9 +995,9 @@
   .discounts-goods-slider > div > div:nth-child(3) > p {
     font-size: 0.625rem;
   }
-  .discounts-box > div {
+  /* .discounts-box > div {
     gap: 15px;
-  }
+  } */
   
   
   
@@ -990,10 +1066,13 @@
 
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
-@media screen and (max-width: 420px) {
-  /* .mySwiper2, .mySwiper3, .cantain-box-slider > div:first-child {
+@media screen and (max-width: 450px) {
+  .blue-bar {
+    display: none !important;
+  }
+  .mySwiper2, .mySwiper3, .cantain-box-slider > div {
     padding: 0 1rem;
-  } */
+  }
 
   .category-box-text {
     font-size: var(--font-size-medium);
@@ -1039,8 +1118,9 @@
 /* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 @media screen and (max-width: 380px) {
-  .mySwiper2, .mySwiper3 , .cantain-box-slider > div:first-child {
-    width: 100vw;
+  .mySwiper2, .mySwiper3 , .cantain-box-slider > div {
+    /* width: 100vw; */
+    padding: 0 0.5rem;
   }
 
   /* .box-discount {
