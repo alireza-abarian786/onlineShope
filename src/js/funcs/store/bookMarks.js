@@ -1,6 +1,6 @@
 import { extractProductTitle , fetchProductFromDatabase , fetchUserFromDatabase} from "./box.js";
 import { showModal , updateBookmarkUI} from "./ui.js";
-import { showAlertLogin , fetchDataFromApi} from "../utils.js";
+import { showAlertLogin , fetchDataFromApi , showLoader , hideLoader} from "../utils.js";
 // -------------------------------------------------------------------------------------------------
 
 // -------------------------------------------------------------------------------------------------
@@ -9,38 +9,37 @@ import { showAlertLogin , fetchDataFromApi} from "../utils.js";
 async function toggleBookmark(event) {
     if (! await showAlertLogin()) return false;                                                          //* بررسی لاگین کاربر
 
+    showLoader()
     let card = event.target.closest('.swiper-slide')                                                   //* دریافت کارت محصول
     let title = await extractProductTitle(event.target)                                               //* دریافت عنوان محصول
     const [marks, markIndex] = await isBookMarkToDB(event);                                          //* دریافت لیست کل بوکمارک ها && دریافت محصول بوکمارک شده   
 
     if (markIndex === -1) {                                                                                               //* اگر محصول در بوکمارک‌ها وجود نداشت        
         await addBookMarks(await createBookmarkProductObject(event))                                                     //* اضافه کردن به لیست بوکمارک‌ها
-        showModal(`✅ ${title} به لیست علاقه مندی های شما اضافه شد`)                                                  //* نمایش پیام موفقیت
         updateBookmarkUI(card, true)                                                                                   //* تغییر استایل بوکمارک
+        hideLoader()
+        showModal(`✅ ${title} به لیست علاقه مندی های شما اضافه شد`)                                                  //* نمایش پیام موفقیت
 
     } else {                                                                                                          //* اگر محصول قبلاً در بوکمارک‌ها باشد
         await removeBookMarkItem(marks[markIndex].id)                                                                //* حذف از لیست بوکمارک‌ها
-        showModal(`❌ ${title} از لیست علاقه مندی های شما حذف  شد`)                                               //* نمایش پیام حذف
         updateBookmarkUI(card, false)                                                                              //* تغییر استایل بوکمارک
+        hideLoader()
+        showModal(`❌ ${title} از لیست علاقه مندی های شما حذف  شد`)                                               //* نمایش پیام حذف
     }
 }
 
 // ! ذخیره اطلاعات محصول بوکمارک شده
 let createBookmarkProductObject = async (event) => {
-    let productName = await extractProductTitle(event.target)                                                       //* دریافت عنوان محصول
     let product = await fetchProductFromDatabase(event)                                                            //* دریافت اطلاعات محصول از سرور
-    let user = await fetchUserFromDatabase();                                                                     //* دریافت اطلاعات یوزر
     return {                                                                                                     //* برگرداندن اطلاعات محصول بوکمارک شده
-        id: Date.now().toString(36),
-        product_name: productName,
-        user_id: user.id,
+        product_name: product.name,
         product_id: product.id,
     };
 
 }
 //! تابع برای اضافه کردن بوکمارک به دیتابیس
 let addBookMarks = async (item) => {    
-    if (!item || !item.product_id || !item.user_id) {                                                             //* اطمینان از صحیح بودن بوکمارک
+    if (!item || !item.product_id) {                                                             //* اطمینان از صحیح بودن بوکمارک
         console.error("Invalid item data:", item);
         return;
     }
