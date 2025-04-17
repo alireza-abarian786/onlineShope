@@ -21,7 +21,7 @@ async function toggleBookmark(event) {
         showModal(`✅ ${title} به لیست علاقه مندی های شما اضافه شد`)                                                  //* نمایش پیام موفقیت
 
     } else {                                                                                                          //* اگر محصول قبلاً در بوکمارک‌ها باشد
-        await removeBookMarkItem(marks[markIndex].id)                                                                //* حذف از لیست بوکمارک‌ها
+        await removeBookMarkItem(marks[markIndex]._id)                                                                //* حذف از لیست بوکمارک‌ها
         updateBookmarkUI(card, false)                                                                              //* تغییر استایل بوکمارک
         hideLoader()
         showModal(`❌ ${title} از لیست علاقه مندی های شما حذف  شد`)                                               //* نمایش پیام حذف

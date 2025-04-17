@@ -2,6 +2,7 @@ import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
 import { createProductsAppliances , createBlogs} from "./funcs/store/ui.js";
 import { fetchDataFromApi } from "./funcs/utils.js";
+import { initializeStatusMarks } from "./funcs/store/ui.js";
 
 // -------------------------------------------------------------------------------------
 
@@ -22,12 +23,13 @@ let containerArticles = document.querySelector(".box-articles");
 // --------------------------------------------------------------------------------------------------
 
 //! رویداد بارگذاری صفحه
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   settingSliderSwiper();
   runTimer();
 
-  getAllProduct();
+  await getAllProduct();
   createBlogs(containerArticles);
+  initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
 });
 
 // //! نمایش محصولات صفحه اصلی

@@ -97,7 +97,7 @@ header {
 }
 
 .open-slide , .open-slide-child-li {
-  width: 620px;
+  width: max-content;
   height: 170px;
   background-color: #fff;
   position: absolute;

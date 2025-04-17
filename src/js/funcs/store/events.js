@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         toggleCart();                                //* 🛒 فراخوانی تابع باز کردن سبد خرید
         closeCart();                                //*❌ فراخوانی تابع بستن سبد خرید
         isLogin()                                  //* بررسی وضعیت لاگین کاربر
-        initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+        // initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
         initializeStatusCarts();                 //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
         fetchCategoriesForShowToMenu()
         updateCartNotification()

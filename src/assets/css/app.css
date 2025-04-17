@@ -18,7 +18,8 @@
 
 body {
   background-color: #f7f9fa;
-  font-family: picoopic !important;
+  /* font-family: picoopic !important; */
+  font-family: Vazirmatn, sans-serif;
 }
 
 a,
@@ -225,7 +226,6 @@ li {
 
 .navbar-syna > div > div > div:last-child > a > span {
   font-weight: 500;
-  padding-bottom: 5px;
 }
 
 .navbar-syna > div > div:last-child {
@@ -350,7 +350,7 @@ li {
   font-size: 46px;
   font-weight: 500;
   letter-spacing: 2px;
-  width: 28vw;
+  width: 26vw;
   text-align: end;
   word-spacing: 10px;
 }

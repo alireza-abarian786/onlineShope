@@ -2,6 +2,7 @@ import { getLocalStorage } from "./store/storage.js";
 // ----------------------------------------------------------------
 
 let loginBtnText = document.querySelector("#login span");
+let loginBtnIcon = document.querySelector("#login svg");
 let loginBtn = document.querySelector("#login");
 const loaderElem = document.querySelector(".loader-container");
 // ----------------------------------------------------------------
@@ -17,10 +18,12 @@ async function isLogin() {
   //* به‌روزرسانی UI
   if (getLocalStorage("login").length !== 0) {
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
+    loginBtnIcon.classList.add("text-bg-success")
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
-
+    
   } else {
     loginBtnText.innerHTML = "ورود / عضویت";
+    loginBtnIcon.classList.add("text-bg-white")
     loginBtn.setAttribute("href", "./login.html");
   }
 }

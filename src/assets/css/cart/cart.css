@@ -114,8 +114,7 @@
 }
 
 .box-goods > div:first-child > span {
-    font-size: 32px;
-    margin-bottom: 5px;
+    font-size: 20px;
     cursor: pointer;
 }
 

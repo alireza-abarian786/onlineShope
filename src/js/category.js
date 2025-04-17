@@ -1,4 +1,4 @@
-import { searchParams , getSearchProduct , fetchDataFromApi} from "./funcs/utils.js";
+import { searchParams , getSearchProduct , fetchDataFromApi ,showLoader , hideLoader} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
 import {attachProductEventListeners} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
@@ -32,48 +32,44 @@ let getCategoryFunc = async () => {
 //! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
 let category = async () => { 
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
-  let urlPage = searchParams('page');                                                                      //* دریافت مقدار دسته‌بندی از URL    
   let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                             //* دریافت لیست بوکمارک‌ها
   let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                          //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
- 
-  // if (url !== 'bookmarks') {                                                                      //* اگر دسته‌بندی بوکمارک نبود، محصولات دسته موردنظر را نمایش بده    
-  //   let showProductsAnyPage = await handlePagination([...getProductCategory] , pagination , 9 , urlPage)
-  //   showSearchProducts(showProductsAnyPage);                                                      //* category تابع سرچ محصولات صفحه
-  //   changeShowBoxes(showProductsAnyPage)                                                          //* category تابع نمایش محصولات صفحه
-  //   setDropdownItem(showProductsAnyPage)                                                        //* category صفحه Dropdown تابع تنظیمات 
-  // } else {                                                                                    //* اگر دسته‌بندی بوکمارک بود، فقط محصولات بوکمارک‌شده را نمایش بده      
-  //   let bookmarkedProducts = Products.filter(item =>                                         //* فیلتر کردن بوکمارک ها
-  //     Marks.some(mark => mark.product_id == item.id)
-  //   );
-  //   let showProductsAnyPage = await handlePagination([...bookmarkedProducts] , pagination , 9 , urlPage)
-  //   showSearchProducts(showProductsAnyPage);                                                 //* category تابع سرچ محصولات صفحه
-  //   changeShowBoxes(showProductsAnyPage)                                                     //* category تابع نمایش محصولات صفحه
-  //   setDropdownItem(showProductsAnyPage)                                                   //* category صفحه Dropdown تابع تنظیمات 
-  // }     
 
   switch (url) {
     case 'bookmarks':{
       let bookmarkedProducts = Products.filter(item =>                                         //* فیلتر کردن بوکمارک ها
         Marks.some(mark => mark.product_id == item.id)
       );
-      let showProductsAnyPage = await handlePagination([...bookmarkedProducts] , pagination , 9 , urlPage)
-      showSearchProducts(showProductsAnyPage);                                                 //* category تابع سرچ محصولات صفحه
-      changeShowBoxes(showProductsAnyPage)                                                     //* category تابع نمایش محصولات صفحه
-      setDropdownItem(showProductsAnyPage)                                                   //* category صفحه Dropdown تابع تنظیمات 
+      handlingCategoryPageFunctions([...bookmarkedProducts])
+      break;
+    }
+    case 'discounts':{
+      const discountedProducts = Products.filter(item => item.discount)
+      handlingCategoryPageFunctions([...discountedProducts])      
+      break;
+    }
+    case 'allProducts':{
+      handlingCategoryPageFunctions([...Products])  
       break;
     }
     default:
-      let showProductsAnyPage = await handlePagination([...getProductCategory] , pagination , 9 , urlPage)
-      showSearchProducts(showProductsAnyPage);                                                      //* category تابع سرچ محصولات صفحه
-      changeShowBoxes(showProductsAnyPage)                                                          //* category تابع نمایش محصولات صفحه
-      setDropdownItem(showProductsAnyPage)                                                        //* category صفحه Dropdown تابع تنظیمات 
+      handlingCategoryPageFunctions([...getProductCategory])
       break;
   }
 
   initializeStatusMarks();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
   initializeStatusCarts();                                                             //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول  
 };
+
+const handlingCategoryPageFunctions = async (arrayProducts) => {
+  let urlPage = searchParams('page');                                                                      //* دریافت مقدار دسته‌بندی از URL    
+  let showProductsAnyPage = await handlePagination(arrayProducts , pagination , 9 , urlPage)
+  showSearchProducts(showProductsAnyPage);                                                      //* category تابع سرچ محصولات صفحه
+  changeShowBoxes(showProductsAnyPage)                                                          //* category تابع نمایش محصولات صفحه
+  setDropdownItem(showProductsAnyPage)                                                        //* category صفحه Dropdown تابع تنظیمات 
+  hideLoader()
+}
 
 //! category تابعی برای جستجوی محصولات داخل 
 let showSearchProducts = async (data) => {
@@ -203,6 +199,7 @@ const handlePagination = (array , element , showItemCountToPage , currentPage) =
 
 // ! تابع جابجایی بین صفحات
 const clickOnPaginatoin = (param , value) => {  
+  showLoader()
   let urlPage = new URL (location.href)
   urlPage.searchParams.set(param , value)
   window.history.replaceState(null , "" , urlPage.toString())
