@@ -6,20 +6,12 @@ import { initializeStatusMarks } from "./funcs/store/ui.js";
 
 // -------------------------------------------------------------------------------------
 
-let discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
-let containerCategoryAppliances = document.querySelector(
-  ".cantainer-category-appliances"
-);
-let containerCategoryPhones = document.querySelector(
-  ".cantainer-category-phones"
-);
-let containerCategoryTools = document.querySelector(
-  ".cantainer-category-tools"
-);
-let containerCategoryModes = document.querySelector(
-  ".cantainer-category-modes"
-);
-let containerArticles = document.querySelector(".box-articles");
+const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
+const containerCategoryAppliances = document.querySelector(".cantainer-category-appliances");
+const containerCategoryPhones = document.querySelector(".cantainer-category-phones");
+const containerCategoryTools = document.querySelector(".cantainer-category-tools");
+const containerCategoryModes = document.querySelector(".cantainer-category-modes");
+const containerArticles = document.querySelector(".box-articles");
 // --------------------------------------------------------------------------------------------------
 
 //! رویداد بارگذاری صفحه
@@ -35,12 +27,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 // //! نمایش محصولات صفحه اصلی
 let getAllProduct = async () => {
   try {
-    let result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
-    let arrDiscount = result.filter((product) => product.discount);
-    let arrAppliances = result.filter((item) => item.category_id === "3");
-    let arrPhones = result.filter((item) => item.category_id === "10");
-    let arrTools = result.filter((item) => item.category_id === "9");
-    let arrModes = result.filter((item) => item.category_id === "2");
+    const result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
+    const arrDiscount = result.filter((product) => product.discount);
+    const arrAppliances = result.filter((item) => item.category_id === "3");
+    const arrPhones = result.filter((item) => item.category_id === "10");
+    const arrTools = result.filter((item) => item.category_id === "9");
+    const arrModes = result.filter((item) => item.category_id === "2");
 
     createProductsAppliances(discountsGoodsSlider, arrDiscount);
     createProductsAppliances(containerCategoryAppliances, arrAppliances);

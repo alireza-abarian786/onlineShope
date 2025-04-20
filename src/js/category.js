@@ -23,9 +23,9 @@ window.addEventListener("DOMContentLoaded" , () => {
 let getCategoryFunc = async () => {
   let url = searchParams('cat');                                                                      //* URL دریافت مقدار دسته‌بندی از  
   let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/categories`);                                                                 //* دریافت لیست دسنه بندی ها از سرور
-  let findCategory = await data.find(item => item.urlSearch === url);                               //* URL یافتن دسته مرتبط با مقدار
+  let findCategory = await data.find(item => item.urlSearch === url);                               //* URL یافتن دسته مرتبط با مقدار  
   let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                         //* دریافت اطلاعات تمام محصولات
-  let getProductCategory = Products.filter(item => item.category_id == findCategory.id);          //* فیلتر کردن محصولات مرتبط با دسته بندی
+  let getProductCategory = Products.filter(item => item.category_id == findCategory.id);          //* فیلتر کردن محصولات مرتبط با دسته بندی  
   return getProductCategory;
 }
 
@@ -35,7 +35,8 @@ let category = async () => {
   let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                             //* دریافت لیست بوکمارک‌ها
   let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                          //* دریافت اطلاعات تمام محصولات
   let getProductCategory = await getCategoryFunc()                                                 //* محصولات فیلتر شده 
-
+  console.log(getProductCategory);
+  
   switch (url) {
     case 'bookmarks':{
       let bookmarkedProducts = Products.filter(item =>                                         //* فیلتر کردن بوکمارک ها

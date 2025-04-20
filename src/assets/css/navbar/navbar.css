@@ -136,10 +136,6 @@ header {
 .category-menu + div > a:hover > h6 ,
 .category-menu > div > a:hover > h6 {
   background-color: #4579eb;
-}
-
-.category-menu + div > a:hover > h6 ,
-.category-menu > div > a:hover > h6 {
   color: #fff;
 }
 
@@ -185,4 +181,36 @@ header {
 
 .Social-networks > a:hover {
   transform: scale(1.2);
+}
+
+/* ----------------------------------------------------------------- */
+
+.box-serch__ul-list {
+  position: absolute;
+  top: 50px;
+  display: none;
+}
+.box-serch__ul-list.show {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: justify;
+  z-index: 999;
+  max-height: 20rem;
+  direction: rtl;
+  padding: 0;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  display: inline-block;
+}
+.box-serch__ul-list > li {
+  cursor: pointer;
+  font-size: small;
+}
+.box-serch__ul-list > li:hover {
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+.box-serch__ul-list li:last-child {
+  border-bottom: none !important;
 }

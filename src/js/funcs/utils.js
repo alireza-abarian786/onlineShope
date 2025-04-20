@@ -146,6 +146,28 @@ function hideLoader() {
   loaderElem.classList.add("hidden");
 }
 
+// ! سرچ سراسری محصولات
+const searchGlobalHandler = async (event) => {
+  const ulElemListSearch = document.querySelector(".box-serch__ul-list")
+  if (event.target.value.trim()) {
+    const getAllProduct = await fetchDataFromApi('https://onlineshope.onrender.com/api/products')
+    const filterProducts = getAllProduct.filter(product => product.name.startsWith(event.target.value))
+
+    ulElemListSearch.classList.add('show')
+    ulElemListSearch.innerHTML = ''
+    filterProducts.forEach(item => {
+      ulElemListSearch.insertAdjacentHTML('beforeend' , 
+        `
+          <li class="w-100 p-3 border-bottom">${item.name}</li>
+        `
+      )
+    })
+    return true;
+  }
+  
+  ulElemListSearch.classList.remove('show') 
+}
+
 export {
   searchParams,
   isLogin,
@@ -156,5 +178,6 @@ export {
   fetchCategoriesForShowToMenu,
   showSwal,
   showLoader,
-  hideLoader
+  hideLoader,
+  searchGlobalHandler
 };

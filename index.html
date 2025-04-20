@@ -3,66 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="باخرز استور - فروشگاه اینترنتی محصولات با کیفیت و قیمت مناسب"
-    />
-    <meta
-      name="keywords"
-      content="باخرز استور, فروشگاه اینترنتی, خرید آنلاین, محصولات با کیفیت"
-    />
+    <meta name="description" content="باخرز استور - فروشگاه اینترنتی محصولات با کیفیت و قیمت مناسب"/>
+    <meta name="keywords" content="باخرز استور, فروشگاه اینترنتی, خرید آنلاین, محصولات با کیفیت"/>
     <meta name="author" content="Bakharz Store" />
     <meta name="theme-color" content="#2563eb" />
     <title>باخرز استور | فروشگاه اینترنتی</title>
 
-    <!--? Preload critical assets -->
-    <link
-      rel="preload"
-      href="./public/vendor/font-icon/bootstrap-icons.min.css"
-      as="style"
-    />
-    <link
-      rel="preload"
-      href="./public/vendor/bootstrap/bootstrap.min.css"
-      as="style"
-    />
-    <link rel="preload" href="src/assets/css/app.css" as="style" />
 
-
-
+    <!--?----------------------------------------------------------------------------------- CSS font-vazirmatn-->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    <!--? CSS font-awesome-->
-    <link
-      rel="stylesheet"
-      href="./public/vendor/font-icon/bootstrap-icons.min.css"
-    />
-
-    <!--? CSS bootstrap-->
+    <!--?----------------------------------------------------------------------------------- CSS font-awesome-->
+    <link rel="stylesheet" href="./public/vendor/font-icon/bootstrap-icons.min.css"/>
+    <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
     <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css" />
-
-    <!--? CSS swiper-->
-    <link
-      rel="stylesheet"
-      href="./public/vendor/swiper/swiper-bundle.min.css"
-    />
-
-    <!--? CSS Glide-->
+    <!--?----------------------------------------------------------------------------------- CSS swiper-->
+    <link rel="stylesheet" href="./public/vendor/swiper/swiper-bundle.min.css"/>
+    <!--?----------------------------------------------------------------------------------- CSS Glide-->
     <link rel="stylesheet" href="./public/vendor/glide/glide.core.min.css" />
-
-    <!--? CSS ihover-->
+    <!--?----------------------------------------------------------------------------------- CSS ihover-->
     <link rel="stylesheet" href="./public/vendor/ihover/ihover.css" />
-
-    <!--? CSS aos-->
+    <!--?----------------------------------------------------------------------------------- CSS aos-->
     <link rel="stylesheet" href="./public/vendor/aos/aos.css" />
-
-    <!--? custom css file link -->
+    <!--?----------------------------------------------------------------------------------- custom css file link -->
     <link rel="stylesheet" href="src/assets/css/app.css" />
     <link rel="stylesheet" href="src/assets/css/mediaQuery.css" />
   </head>
 
   <body class="overflow-x-hidden">
 
-    <!--? start loader -->
+    <!--!----------------------------------------------------------------------- start loader  ---------------------------------------------------------->
     <div class="loader-container" role="status" aria-label="در حال بارگذاری">
       <div class="loader">
         <span></span>
@@ -71,9 +40,9 @@
         <span></span>
       </div>
     </div>
-    <!--? finish loader -->
+    <!--?----------------------------------------------------------------------- finish loader  ---------------------------------------------------------->
 
-    <!--?? start header -->
+    <!--!----------------------------------------------------------------------- start header  ---------------------------------------------------------->
     <header class="mx-auto" role="banner">
       <!--? start menu -->
       <div class="menu-box position-relative d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
@@ -218,9 +187,12 @@
         <div class="box-apps d-flex align-items-center justify-content-center gap-0 gap-sm-3 flex-sm-row-reverse border-0" role="menu">
 
           <!--? start box search  -->
-          <div class="box-serch align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2" role="search">
-            <input class="form-control border-0 text-end p-1 pb-2 d-flex" type="search" placeholder="جستجو در باخرز استور" aria-label="جستجو در باخرز استور" />
+          <div class="box-serch align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2 position-relative" role="search">
+            <input class="form-control border-0 text-end p-1 pb-2 d-flex" id="search-global" type="search" placeholder="جستجو در باخرز استور" aria-label="جستجو در باخرز استور" />
             <svg style="width: 50px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.893 16.92l3.08 3.08m-.889-8.419c0 4.187-3.383 7.581-7.555 7.581c-4.173 0-7.556-3.394-7.556-7.58C3.973 7.393 7.356 4 11.528 4c4.173 0 7.556 3.394 7.556 7.581" /></svg>
+            <ul class="box-serch__ul-list show">
+              <!-- data loaded from js -->
+            </ul>
           </div>
           <!--? end box search  -->
 
@@ -635,9 +607,9 @@
         </div>
       </div>
     </header>
-    <!--? finish header -->
+    <!--?----------------------------------------------------------------------- finish header  ---------------------------------------------------------->
 
-    <!--? start main -->
+    <!--!----------------------------------------------------------------------- start main  ---------------------------------------------------------->
     <main class="d-flex align-items-center justify-center flex-column">
       <!--? start category -->
       <div class="category-box swiper mySwiper1">
@@ -1048,9 +1020,9 @@
       </div>
       <!--? finish category blog -->
     </main>
-    <!--? finish main -->
+    <!--?----------------------------------------------------------------------- finish main  ---------------------------------------------------------->
 
-    <!--? start header -->
+    <!--!----------------------------------------------------------------------- start header  ---------------------------------------------------------->
     <footer>
       <div data-aos="fade">
         <div>
@@ -1436,29 +1408,25 @@
         </div>
       </div>
     </footer>
-    <!--? finish header -->
+    <!--?----------------------------------------------------------------------- finish header  ---------------------------------------------------------->
 
-    <!--? JavaScript bootstrap-->
+
+
+
+    <!--?----------------------------------------------------------------------- JavaScript bootstrap ---------------------------------------------------------->
     <script src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
-
-    <!--? JavaScript swiper-->
+    <!--?----------------------------------------------------------------------- JavaScript swiper ---------------------------------------------------------->
     <script src="./public/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!--? JavaScript Glide-->
+    <!--?----------------------------------------------------------------------- JavaScript Glide ---------------------------------------------------------->
     <script src="./public/vendor/glide/glide.min.js"></script>
-
-    <!--? JavaScript sweetalert2-->
+    <!--?----------------------------------------------------------------------- JavaScript sweetalert2 ---------------------------------------------------------->
     <script src="./public/vendor/alert/sweetalert2.all.min.js"></script>
-
-    <!--? JavaScript aos-->
-    <!--? Initialize AOS -->
+    <!--?----------------------------------------------------------------------- JavaScript aos ---------------------------------------------------------->
     <script src="./public/vendor/aos/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-
-    <!--? custom files -->
+    <script>AOS.init();</script>
+    <!--?----------------------------------------------------------------------- custom files  ---------------------------------------------------------->
     <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="./src/js/header.js"></script>
     <script type="module" src="src/js/home.js"></script>
   </body>
 </html>

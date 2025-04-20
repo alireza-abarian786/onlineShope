@@ -47,7 +47,7 @@ async function renderCartItems(cartItems) {
                             <div class='col'>
                                 <div class='row'>
                                     <div class='col-1 p-0'>
-                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class="bi bi-x-circle-fill"></i></button>
+                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i></button>
                                     </div>
                                     <div class='col-11 pe-1'>
                                         <h6 class='bg-white rounded text-center'>${
@@ -722,20 +722,30 @@ let createBoxRow = (arrCategory) => {
                             </svg>
                           </div>
 
-                          <div class="swiper-wrapper">
-                              <div class="swiper-slide"><img src="${
-                                product.images[0]
-                              }" alt="محصول 1"></div>
-                              <div class="swiper-slide"><img src="${
-                                product.images[1]
-                              }" alt="محصول 2"></div>
-                              <div class="swiper-slide"><img src="${
-                                product.images[2]
-                              }" alt="محصول 3"></div>
+                          <div class='glide h-100'>
+                            <div class="glide__track" data-glide-el="track">
+                              <ul class="glide__slides h-100">
+                                <li class="glide__slide"><img src="${product.images[0]}" alt="Slide 1" /></li>
+                                <li class="glide__slide"><img src="${product.images[1]}" alt="Slide 2" /></li>
+                                <li class="glide__slide"><img src="${product.images[2]}" alt="Slide 3" /></li>
+                              </ul>
+                              <div class="not-mark mark-contain">
+                                <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"/></svg>
+                              </div>
+                            </div>
+
+                            <div class="next-img-box glide__arrows box-row-arrow" data-glide-el="controls">
+                              <div class="glide__arrow--left" data-glide-dir="<">
+                                <svg class="pretive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="M497.333 239.999H80.092l95.995-95.995l-22.627-22.627L18.837 256L153.46 390.623l22.627-22.627l-95.997-95.997h417.243z"/></svg>
+                              </div>
+          
+                              <div class="glide__arrow--right" data-glide-dir=">">
+                                <svg class="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="m359.873 121.377l-22.627 22.627l95.997 95.997H16v32.001h417.24l-95.994 95.994l22.627 22.627L494.498 256z" /></svg>
+                              </div>
+                            </div>
                           </div>
-                          <!-- کنترل‌های اسلایدر -->
-                          <div class="swiper-button-prev"></div>
-                          <div class="swiper-button-next"></div>
+
+
                         </div>    
                       </div>
 
@@ -783,6 +793,7 @@ let createBoxRow = (arrCategory) => {
       );
 
       settingSliderSwiper();
+      settingSliderGlide()
       attachProductEventListeners();
       clickAddBookMark();
     });

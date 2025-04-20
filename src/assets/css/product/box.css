@@ -63,6 +63,7 @@
 .cantain-box-slider > div:first-child > a:last-child p,
 .cantain-box-articles > div:first-child > a:last-child p {
   margin-bottom: 0 !important;
+  font-weight: 500;
 }
 
 .arrow-left-box-slider {
@@ -112,6 +113,7 @@
 .box-star span {
   color: #000;
   font-size: 14px;
+  padding-top: 1.5px;
 }
 
 .box-star svg {
@@ -517,7 +519,17 @@
   top: -14px;
   right: -5px;
   z-index: 9999;
-  transform: rotate(10deg);
+  transform: rotate(7deg);
   font-size: small;
   padding-top: 2px;
+}
+
+
+
+
+/* ------------------------------------------------------------------ */
+
+.box-row-arrow {
+  justify-content: space-around;
+  transform: translateX(100%);
 }

@@ -6,7 +6,19 @@
 @import './login.css';
 @import './loader/loader.css';
 
-/* --------------------------------------------------------------****** Style All ********-------------------------------------------------------------------- */
+/*! CSS Custom Properties */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #5b89f0;
+  --accent-color: #b40190b3;
+  --text-color: #333;
+  --light-gray: #f7f9fa;
+  --border-radius: 15px;
+  --transition: all 0.4s ease 0.1ms;
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*! --------------------------------------------------------------****** Style All ********-------------------------------------------------------------------- */
 
 * {
   margin: 0;
@@ -17,8 +29,7 @@
 }
 
 body {
-  background-color: #f7f9fa;
-  /* font-family: picoopic !important; */
+  background-color: var(--light-gray);
   font-family: Vazirmatn, sans-serif;
 }
 
@@ -28,29 +39,22 @@ li {
   text-decoration: none !important;
 }
 
-.cantain {
-  width: 100%;
-  height: 100vh;
-}
-
-.blue-bar,
 .header-image-box,
 .category-box {
   position: relative;
   width: 100vw;
 }
 
-/* ------------------------------------------------- */
+/*! ------------------------------------------------- */
 
 .header-image-box {
   width: 95%;
   height: 450px;
-  margin: 0 auto;
+  margin: 150px auto 0;
   display: grid;
   grid-template-columns: 250px repeat(1, 1fr) 250px;
   grid-template-rows: repeat(2, 1fr);
   gap: 65px 30px;
-  margin-top: 150px;
 }
 
 .header-image-box > div {
@@ -60,19 +64,18 @@ li {
   align-items: center;
   justify-content: center;
   color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
 .header-image-box > div > h6 {
   font-size: 2.5rem;
   letter-spacing: 2px;
-}
-
-.header-image-box > div > h6 {
   text-shadow: 2px 6px 10px #702ae7;
   z-index: 1;
 }
 
-/* --------------------------------------------------------------------ihover style */
+/*! --------------------------------------------------------------------ihover style */
 
 .info > h3 {
   letter-spacing: 1px;
@@ -85,26 +88,19 @@ li {
 
 .ih-item img {
   position: relative;
-  width: auto;
   width: 100%;
   height: 100%;
 }
 
-/* -------------------------------------------------------------------- */
+/*! -------------------------------------------------------------------- */
 
 .header-image-box > .image-big {
   overflow: auto;
   grid-column: 2 / 3;
   grid-row: 1 / 3;
   position: relative;
-  justify-content: end;
-  direction: rtl;
   justify-content: flex-start;
-}
-
-.header-image-box > div {
-  position: relative;
-  overflow: hidden;
+  direction: rtl;
 }
 
 .boxs-left {
@@ -113,20 +109,6 @@ li {
 
 .boxs-right {
   box-shadow: 8px -9px 1px #c3c9d2;
-}
-
-.circles-box > div {
-  width: 10px;
-  height: 10px;
-  border: 1.5px solid #fff;
-  border-radius: 50%;
-}
-
-.circle-move {
-  position: absolute;
-  right: 456px;
-  background-color: #fff;
-  transition: 0.3s ease-in-out 0.1s;
 }
 
 .image {
@@ -151,16 +133,14 @@ li {
   padding: 30px;
 }
 
-/* --------------------------------------------------------------****** Baner 1 ********-------------------------------------------------------------------- */
-
+/*!! --------------------------------------------------------------****** Baner 1 ********-------------------------------------------------------------------- */
 .navbar-syna {
   width: 100%;
   height: 180px;
-  border-radius: 20px;
-  background-image: url("../images/gamer.jpg");
+  border-radius: var(--border-radius);
+  background: url("../images/gamer.jpg");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position-y: center;
   display: flex;
   justify-content: end;
   overflow: hidden;
@@ -168,7 +148,7 @@ li {
 
 .navbar-syna > div {
   width: 95%;
-  background-image: linear-gradient(to right, rgba(124, 198, 221, 0), rgba(115, 188, 210, 1) 11%, rgba(78, 170, 199, 1) 25%);
+  background: linear-gradient(to right, rgba(124, 198, 221, 0), rgba(115, 188, 210, 1) 11%, rgba(78, 170, 199, 1) 25%);
   display: flex;
   align-items: center;
   justify-content: end;
@@ -209,15 +189,15 @@ li {
   gap: 35px;
   background-color: #3791ad8a;
   padding: 10px 20px;
-  border-radius: 15px;
+  border-radius: var(--border-radius);
   color: #fff;
   font-size: 18px;
+  transition: var(--transition);
 }
 .navbar-syna > div > div > div:last-child > a:hover {
   gap: 15px;
   background-color: #fff;
   color: #3791ad8a;
-  transition: all 0.4s ease 0.1ms;
 }
 
 .navbar-syna > div > div > div:last-child > a > svg {
@@ -233,8 +213,7 @@ li {
   height: 100%;
 }
 
-.navbar-syna > div > div:last-child > div:first-child,
-.navbar-syna > div > div:last-child > div:last-child {
+.navbar-syna > div > div:last-child > div {
   width: 100px;
   height: 100px;
   background-color: #70b5cb;
@@ -242,39 +221,31 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.navbar-syna > div > div:last-child > div:first-child {
   position: absolute;
+}
+
+.navbar-syna > div > div:last-child > div:first-child {
   right: -25px;
   top: -40px;
 }
 
 .navbar-syna > div > div:last-child > div:last-child {
-  position: absolute;
   right: -25px;
   bottom: -40px;
 }
 
-.navbar-syna > div > div:last-child > div:first-child > div {
+.navbar-syna > div > div:last-child > div > div {
   width: 75px;
   height: 75px;
   background-color: #9ac4d1;
   border-radius: 100%;
 }
 
-.navbar-syna > div > div:last-child > div:last-child > div {
-  width: 75px;
-  height: 75px;
-  background-color: #9ac4d1;
-  border-radius: 100%;
-}
-
-/* --------------------------------------------------------------****** Baner 3 ********-------------------------------------------------------------------- */
+/*! --------------------------------------------------------------****** Baner 3 ********-------------------------------------------------------------------- */
 
 .box-baner {
   width: 95vw;
   height: 450px;
-  /* margin: 100px 0; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,23 +255,17 @@ li {
 .baner-left {
   width: 50%;
   height: 100%;
-  background-image: url("../images/box-left.webp");
-  background-size: cover;
-  background-position-x: -393px;
+  background: url("../images/box-left.webp") -330px center/cover no-repeat;
   display: flex;
   flex-direction: row-reverse;
-  background-repeat: no-repeat;
-  border-radius: 15px 0 0 15px;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
 .baner-left > div {
-  border-radius: 15px 0 0 15px;
-  background-image: url(),
-    linear-gradient(to left, #2563eb 10%, #5b89f0 60%, #b40190b3);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  background: linear-gradient(to left, var(--primary-color) 10%, var(--secondary-color) 60%, var(--accent-color));
   width: 100vw;
   padding-bottom: 30px;
-  /* padding-right: 50px; */
-
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -314,35 +279,25 @@ li {
   font-weight: 500;
   letter-spacing: 2px;
   width: 100%;
-  text-align: end;
-  word-spacing: 10px;
   text-align: center;
+  word-spacing: 10px;
 }
 
 .baner-right {
   width: 50%;
   height: 100%;
-  background-image: url("../images/box-right.jpg");
-  background-size: cover;
-  background-position-x: 90px;
+  background: url("../images/box-right.jpg") 90px center/cover no-repeat;
   display: flex;
-  background-repeat: no-repeat;
-  border-radius: 0 15px 15px 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .baner-right > div {
-  background-image: linear-gradient(
-    to right,
-    #2563eb 10%,
-    #5b89f0 60%,
-    #b40190b3
-  );
+  background: linear-gradient(to right, var(--primary-color) 10%, var(--secondary-color) 60%, var(--accent-color));
   width: 100%;
   display: flex;
   align-items: center;
-  /* padding-left: 80px; */
   padding-bottom: 100px;
-  border-radius: 0 15px 15px 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .baner-right > div > h4 {
@@ -355,23 +310,19 @@ li {
   word-spacing: 10px;
 }
 
-/* --------------------------------------------------------------****** baner 4 ********-------------------------------------------------------------------- */
+/*! --------------------------------------------------------------****** baner 4 ********-------------------------------------------------------------------- */
 
 .box-baner-last {
   width: 95%;
   margin: 0 auto;
   color: #fff;
-  /* margin: 100px auto 100px auto; */
 }
 .box-baner-last > div {
   height: 350px;
   width: 100%;
-  background-color: #333;
-  border-radius: 20px;
-  background-image: url("../images/image-44.jpg");
-  background-size: cover;
-  background-repeat: round;
+  background: url("../images/image-44.jpg") center/cover round, #333;
   background-blend-mode: soft-light;
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -403,6 +354,7 @@ li {
   color: #fff;
   font-size: 16px;
   font-weight: 400;
+  transition: var(--transition);
 }
 .box-baner-last > div > div > a:hover {
   transform: scale(1.2);
@@ -427,7 +379,7 @@ li {
   font-weight: 400;
 }
 
-/* --------------------------------------------------------------****** Articles ********-------------------------------------------------------------------- */
+/*! --------------------------------------------------------------****** Articles ********-------------------------------------------------------------------- */
 .box-articles {
   display: flex;
   align-items: center;
@@ -456,7 +408,7 @@ li {
 .box-articles > div > div:first-child > img {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
 }
 
 .box-articles > div > div:last-child {
@@ -477,7 +429,7 @@ li {
   color: gray;
 }
 .box-articles > div > div:last-child > a {
-  color: #2563eb;
+  color: var(--primary-color);
   font-weight: 500;
   font-size: small;
   display: flex;
@@ -486,6 +438,7 @@ li {
   gap: 5px;
   justify-content: center;
   width: fit-content;
+  transition: var(--transition);
 }
 .box-articles > div > div:last-child > a:hover {
   transform: scale(1.1);
@@ -493,8 +446,6 @@ li {
 .box-articles > div > div:last-child > a > svg {
   width: 12px;
 }
-
-/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
 
 .arrow-discounts-title {
     width: 10rem;
@@ -507,5 +458,3 @@ li {
   align-items: center;
   justify-content: space-between;
 }
-/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
-
