@@ -1,25 +1,20 @@
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { searchParams , getSearchProduct , fetchDataFromApi ,showLoader , hideLoader} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
 import {attachProductEventListeners} from "./funcs/store/box.js";
 import { clickAddBookMark } from "./funcs/store/bookMarks.js";
 import { initializeStatusMarks , initializeStatusCarts} from "./funcs/store/ui.js";
 import { createBox , createBoxRow} from "./funcs/store/ui.js";
-// -------------------------------------------------------------------------------------------
-
+//!---------------------------------------------------------------------- Variables -------------------------------------------------------
 let boxSearchInput = document.querySelector(".box-search-category")
 let dropdownCategory = document.querySelector(".dropdown-category")
 let dropdownItem = document.querySelectorAll(".dropdown-item")
 let iconView = document.querySelectorAll(".btn-outline-secondary")
 let pagination = document.querySelector(".pagination")
 
-// -------------------------------------------------------------------------------------------
+//!---------------------------------------------------------------------- functions -------------------------------------------------------
 
-//! رویداد بارگذاری صفحه
-window.addEventListener("DOMContentLoaded" , () => {
-  category()
-})
-
-//! URL فیلتر کردن دسته بندی ها بر اساس
+//todo======================================================== URL فیلتر کردن دسته بندی ها بر اساس
 let getCategoryFunc = async () => {
   let url = searchParams('cat');                                                                      //* URL دریافت مقدار دسته‌بندی از  
   let data = await fetchDataFromApi(`https://onlineshope.onrender.com/api/categories`);                                                                 //* دریافت لیست دسنه بندی ها از سرور
@@ -29,7 +24,7 @@ let getCategoryFunc = async () => {
   return getProductCategory;
 }
 
-//! تابعی برای دریافت دسته‌ بندی و نمایش محصولات مرتبط
+//todo======================================================== تابعی برای دریافت دسته‌ بندی و نمایش باکس محصولات مرتبط
 let category = async () => { 
   let url = searchParams('cat');                                                                      //* دریافت مقدار دسته‌بندی از URL    
   let Marks = await fetchDataFromApi('https://onlineshope.onrender.com/api/bookmarks');                             //* دریافت لیست بوکمارک‌ها
@@ -63,6 +58,7 @@ let category = async () => {
   initializeStatusCarts();                                                             //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول  
 };
 
+//todo======================================================== category تابعی برای جستجوی محصولات داخل 
 const handlingCategoryPageFunctions = async (arrayProducts) => {
   let urlPage = searchParams('page');                                                                      //* دریافت مقدار دسته‌بندی از URL    
   let showProductsAnyPage = await handlePagination(arrayProducts , pagination , 9 , urlPage)
@@ -72,7 +68,7 @@ const handlingCategoryPageFunctions = async (arrayProducts) => {
   hideLoader()
 }
 
-//! category تابعی برای جستجوی محصولات داخل 
+//todo======================================================== category تابعی برای جستجوی محصولات داخل 
 let showSearchProducts = async (data) => {
   boxSearchInput.addEventListener('input', (e) => {
     if (Array.isArray(data)) {
@@ -82,7 +78,7 @@ let showSearchProducts = async (data) => {
   })
 }
 
-// ! و مرتب سازی باکس ها dropdown منو های active تغییر وضعیت
+//todo======================================================= و مرتب سازی باکس ها dropdown منو های active تغییر وضعیت
 let setDropdownItem = async (getProductCategory) => {  
   dropdownItem.forEach((item) => {
     item.addEventListener('click', async (e) => {
@@ -96,7 +92,7 @@ let setDropdownItem = async (getProductCategory) => {
   })
 }
 
-// ! تابع مرتب سازی باکس ها بر اساس فیلتر های مشخص شده
+//todo======================================================= تابع مرتب سازی باکس ها بر اساس فیلتر های مشخص شده
 let filteringProducts = async (sortingName , sortingProducts) => {
   let arrSorting = []  
 
@@ -130,7 +126,7 @@ let filteringProducts = async (sortingName , sortingProducts) => {
   return arrSorting; 
 }
 
-// ! تغییر حالت باکس ها
+//todo======================================================= تغییر حالت باکس ها
 let changeShowBoxes = async (getProductCategory) => { 
   iconView.forEach((item) => {    
     if (item.classList.contains('btn-col') && item.classList.contains('active-view')) {
@@ -146,10 +142,10 @@ let changeShowBoxes = async (getProductCategory) => {
   })
 }
 
-// ! حذف کلاس اکتیو از ایکون های ویوی باکس ها
+//todo======================================================= حذف کلاس اکتیو از ایکون های ویوی باکس ها
 let removeActive = () => {document.querySelectorAll('.active-view').forEach((item) => item.classList.remove('active-view'));}
 
-// ! هندل کردن تغییرات لازم بعد از کلیک روی ایکون های ویو
+//todo======================================================= هندل کردن تغییرات لازم بعد از کلیک روی ایکون های ویو
 let handleItemClick = async (e , getProductCategory ) => {
   removeActive()  
 
@@ -175,7 +171,7 @@ let handleItemClick = async (e , getProductCategory ) => {
   initializeStatusCarts();                                                              //* 🔖 فراخوانی تابع بررسی وضعیت خرید محصول
 }
 
-// ! تابع تنظیم استایل کلید های جابجایی بین صفحات
+//todo======================================================= تابع تنظیم استایل کلید های جابجایی بین صفحات
 const handlePagination = (array , element , showItemCountToPage , currentPage) => {    
   element.textContent = ''
   let endIndex = showItemCountToPage * currentPage
@@ -198,9 +194,9 @@ const handlePagination = (array , element , showItemCountToPage , currentPage) =
   return itemsShow;
 }
 
-// ! تابع جابجایی بین صفحات
+//todo======================================================= تابع جابجایی بین صفحات
 const clickOnPaginatoin = (param , value) => {  
-  showLoader()
+  // showLoader()
   let urlPage = new URL (location.href)
   urlPage.searchParams.set(param , value)
   window.history.replaceState(null , "" , urlPage.toString())
@@ -208,3 +204,9 @@ const clickOnPaginatoin = (param , value) => {
 }
 
 window.clickOnPaginatoin = clickOnPaginatoin
+
+//!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
+//todo======================================================== رویداد بارگذاری صفحه
+window.addEventListener("DOMContentLoaded" , () => {
+  category()
+})

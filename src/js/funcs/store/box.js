@@ -1,10 +1,11 @@
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage} from "./storage.js";
 import { addToCart , fetchUserLogged} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
-import { showAlertLogin , fetchDataFromApi , showLoader , hideLoader} from "../utils.js";
-// ----------------------------------------------------------------------------------
+import { fetchDataFromApi} from "../utils.js";
+//!---------------------------------------------------------------------- functions -------------------------------------------------------
 
-// ! دریافت عنوان محصول
+//todo============================================================= دریافت عنوان محصول
 let extractProductTitle = (element) => {    
     let card = element.closest('.swiper-slide');                                                              //* پیدا کردن کارت محصول از روی رویداد کلیک
     try {
@@ -29,7 +30,7 @@ let extractProductTitle = (element) => {
     }
 }
 
-//! گرفتن اطلاعات مورد نظر از محصول
+//todo============================================================= گرفتن اطلاعات مورد نظر از محصول
 let createProductObject = async (event) => {    
     let card = event.target.closest(".swiper-slide");                                                           //* پیدا کردن کارت محصول
     let product = await fetchProductFromDatabase(event)                                                        //* دریافت اطلاعات محصول از دیتابیس 
@@ -49,10 +50,9 @@ let createProductObject = async (event) => {
     };
 };
 
-//! تابع دریافت اطلاعات کاربر از دیتابیس
+//todo============================================================= تابع دریافت اطلاعات کاربر از دیتابیس
 let fetchUserFromDatabase = async () => {
     try {
-        // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
         let userName = await getLocalStorage("login");                                                                 //* کاربری که لاگین کرده username                
         let users = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور                
         return users.find((user) => user.name === userName);                                                         //* پیدا کردن و ارسال مشخصات یوزر مورد نظر
@@ -63,17 +63,17 @@ let fetchUserFromDatabase = async () => {
     }
 };
 
-// ! پیدا کردن و گرفتن اطلاعات محصول مورد نظر از سرور
+//todo============================================================= پیدا کردن و گرفتن اطلاعات محصول مورد نظر از سرور
 let fetchProductFromDatabase = async (event) => {    
     let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                                        //* دریافت اطلاعات کل محصولات
     let productName = await extractProductTitle(event.target)                                                      //* دریافت عنوان محصول
     return Products.find(product => product.name === productName)                                                 //* پیدا کردن و ارسال اطلاعات محصول مورد نظر 
 }
 
-//! بررسی وجود محصول در سبد خرید
+//todo============================================================= بررسی وجود محصول در سبد خرید
 const isProductInCart = (product, cartItems) => cartItems.some(item => item.id === product.id);
 
-//! 🛒 تغییر استایل دکمه سبد خرید محصول 
+//todo============================================================= 🛒 تغییر استایل دکمه سبد خرید محصول 
 async function updateCartButtonState(event) {
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
     let userLogged = await fetchUserLogged()
@@ -85,13 +85,13 @@ async function updateCartButtonState(event) {
     }
 }
 
-//! تابع افزودن محصول به سبد خرید
+//todo============================================================= تابع افزودن محصول به سبد خرید
 async function addToCartAndToggleButton(event) {  
     await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
     await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
 }
 
-//! تابع مریوط به دکمه های باکس محصول
+//todo============================================================= تابع مریوط به دکمه های باکس محصول
 let attachProductEventListeners = async () => {                                                                                         
     document.querySelectorAll('.btn-cart-box').forEach(button => {                                           //*🧺 کلید سبد خرید محصول 
         button.addEventListener('click', addToCartAndToggleButton);
@@ -107,5 +107,5 @@ let attachProductEventListeners = async () => {
         });
     });
 }
-
+//!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {createProductObject , addToCartAndToggleButton , extractProductTitle, updateCartButtonState , attachProductEventListeners , fetchProductFromDatabase , fetchUserFromDatabase }

@@ -1,31 +1,24 @@
+//!---------------------------------------------------------------------- import -------------------------------------------------------
 import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
-import { createProductsAppliances , createBlogs} from "./funcs/store/ui.js";
-import { fetchDataFromApi } from "./funcs/utils.js";
+import { createProductsAppliances , createBlogs, updateCartNotification} from "./funcs/store/ui.js";
+import { fetchDataFromApi, hideLoader } from "./funcs/utils.js";
 import { initializeStatusMarks } from "./funcs/store/ui.js";
+import { searchGlobalHandler } from "./header.js";
+import { fetchUserCart, fetchUserLogged } from "./funcs/store/cart.js";
 
-// -------------------------------------------------------------------------------------
-
+//!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
 const containerCategoryAppliances = document.querySelector(".cantainer-category-appliances");
 const containerCategoryPhones = document.querySelector(".cantainer-category-phones");
 const containerCategoryTools = document.querySelector(".cantainer-category-tools");
 const containerCategoryModes = document.querySelector(".cantainer-category-modes");
 const containerArticles = document.querySelector(".box-articles");
-// --------------------------------------------------------------------------------------------------
+const searchGlobalInputElem = document.querySelector("#search-global");
+//!---------------------------------------------------------------------- function -------------------------------------------------------
 
-//! رویداد بارگذاری صفحه
-document.addEventListener("DOMContentLoaded", async () => {
-  settingSliderSwiper();
-  runTimer();
-
-  await getAllProduct();
-  createBlogs(containerArticles);
-  initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-});
-
-// //! نمایش محصولات صفحه اصلی
-let getAllProduct = async () => {
+//todo===================================== نمایش محصولات صفحه اصلی
+const getAllProduct = async () => {
   try {
     const result = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
     const arrDiscount = result.filter((product) => product.discount);
@@ -45,8 +38,22 @@ let getAllProduct = async () => {
   }
 };
 
+//!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 
+//todo======================================== رویداد وارد کردن مقدار در سرچ
+searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 
+//todo======================================== رویداد بارگذاری صفحه
+window.addEventListener("load", async () => {
+  // updateCartNotification(userLogged)
+  fetchUserLogged();
+  settingSliderSwiper();
+  runTimer();
+  await getAllProduct();
+  createBlogs(containerArticles);
+  initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+  hideLoader()
+});
 
 
 

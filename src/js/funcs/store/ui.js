@@ -1,29 +1,20 @@
-import {
-  initTooltips,
-  fetchDataFromApi,
-  showLoader,
-  hideLoader,
-} from "../utils.js";
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
+import {initTooltips,fetchDataFromApi,hideLoader,} from "../utils.js";
 import { attachCartEventListeners, fetchUserLogged } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners, extractProductTitle } from "./box.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
+//!---------------------------------------------------------------------- functions -------------------------------------------------------
 
-//! 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
-async function updateCartNotification() {
-  let userLogged = await fetchUserLogged();
-  if (userLogged) {
-    let data = await fetchDataFromApi(
-      `https://onlineshope.onrender.com/api/carts/${userLogged._id}`
-    ); //* دریافت لیست کل سبد خرید
-    let notifCart = document.querySelector(".notif-cart");
-    notifCart.classList.toggle("is-notif", data.items.length > 0);
-  }
+//todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
+async function updateCartNotification(userCart) {
+  const notifCart = document.querySelector(".notif-cart");
+  notifCart.classList.toggle("is-notif", userCart.items.length > 0);
   hideLoader();
 }
 
-//! 🛒 تابع ساخت باکس محصول در سبد خرید
+//todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
 async function renderCartItems(cartItems) {
   const container = document.querySelector(".cantain-box-goods");
   container.innerHTML = ""; //? پاک کردن آیتم‌های قبلی
@@ -86,7 +77,7 @@ async function renderCartItems(cartItems) {
   initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
 }
 
-// ! ساخت باکس های محصولات داخل صفحه ی سبد خرید
+//todo========================================================== ساخت باکس های محصولات داخل صفحه ی سبد خرید
 let createBoxToPageCart = async (shoppingCartProduct) => {
   if (document.querySelector(".container-Product-cards")) {
     document.querySelector(".container-Product-cards").textContent = "";
@@ -163,7 +154,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
   }
 };
 
-// ! ساخت ستاره ها بر اساس امتیاز محصول
+//todo========================================================== ساخت ستاره ها بر اساس امتیاز محصول
 let createStars = async (rating) => {
   return Array.from({ length: 5 }, (_, i) => {
     if (i < Math.floor(rating)) {
@@ -179,7 +170,7 @@ let createStars = async (rating) => {
   }).join("");
 };
 
-//! modal تابع ساخت و نمایش
+//todo========================================================== modal تابع ساخت و نمایش
 let showModal = (text) => {
   let toastContainer = document.querySelector(".toast-container");
   if (!toastContainer) {
@@ -210,7 +201,7 @@ let showModal = (text) => {
   document.querySelector(".toast-body").innerHTML = text;
 };
 
-// ! اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
+//todo========================================================== اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
 let changeBtnAfterAdd = async (element) => {
   let card = element.closest(".swiper-slide");
   if (card.querySelector(".add-cart p")) {
@@ -231,7 +222,7 @@ let changeBtnAfterAdd = async (element) => {
   }
 };
 
-// ! اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
+//todo========================================================== اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
 let changeBtnAfterDelete = async (element) => {
   document.querySelectorAll(".product-box").forEach(async (box) => {
     let titleBox = await extractProductTitle(element); //* دریافت عنوان محصول
@@ -266,26 +257,18 @@ let changeBtnAfterDelete = async (element) => {
   });
 };
 
-//! ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
-async function initializeStatusCarts() {
-  // if (! await showAlertLogin()) return false;                                                                     //* بررسی لاگین کاربر
-  let userLogged = await fetchUserLogged();
-  if (userLogged) {
-    let Carts = await fetchDataFromApi(
-      `https://onlineshope.onrender.com/api/carts/${userLogged._id}`
-    ); //* دریافت لیست کل سبد خرید                                                                         //? دریافت اطلاعات تمام بوکمارک‌ها
-    document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {
-      //?🧺🔖 دسترسی به باکس تمام محصولات
-      let title = await extractProductTitle(btn); //? دریافت عنوان محصول
-      if (Carts.items.some((item) => item.product_name === title)) {
-        //? اگر محصول در لیست سبد خرید بود
+//todo========================================================== ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
+async function initializeStatusCarts(userCart) {
+    document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
+      let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
+      if (userCart.items.some((item) => item.product_name === title)) {                                         //? اگر محصول در لیست سبد خرید بود
         changeBtnAfterAdd(btn);
       }
     });
-  }
+  // }
 }
 
-//! ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
+//todo========================================================== ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusMarks() {
   let Marks = await fetchDataFromApi(
     "https://onlineshope.onrender.com/api/bookmarks"
@@ -301,7 +284,7 @@ async function initializeStatusMarks() {
   });
 }
 
-//! ساخت باکس محصولات صفحه اصلی
+//todo========================================================== ساخت باکس محصولات صفحه اصلی
 let createProductsAppliances = (element, arrAppliances) => {
   if (!element) {
     console.error("❌ element is not defined:", container);
@@ -461,7 +444,7 @@ let createProductsAppliances = (element, arrAppliances) => {
   clickAddBookMark();
 };
 
-//! ساخت باکس مقالات صفحه اصلی
+//todo========================================================== ساخت باکس مقالات صفحه اصلی
 let createBlogs = async (element) => {
   let res = await fetch("https://onlineshope.onrender.com/api/blogs");
   let result = await res.json();
@@ -490,7 +473,7 @@ let createBlogs = async (element) => {
   });
 };
 
-//! category ایجاد باکس‌ های محصولات به صورت ستونی داخل صفحه
+//todo========================================================== category ایجاد باکس‌ های محصولات به صورت ستونی داخل صفحه
 let createBox = (arrCategory) => {
   document.querySelector(".cantainer-category__footer").innerHTML = ""; //? پاک کردن محتوای قبلی
 
@@ -700,7 +683,7 @@ let createBox = (arrCategory) => {
   }
 };
 
-//! category ایجاد باکس‌ های محصولات به صورت ردیفی داخل صفحه
+//todo========================================================== category ایجاد باکس‌ های محصولات به صورت ردیفی داخل صفحه
 let createBoxRow = (arrCategory) => {
   document.querySelector(".cantainer-category__footer").innerHTML = ""; //? پاک کردن محتوای قبلی
 
@@ -808,7 +791,7 @@ let createBoxRow = (arrCategory) => {
   }
 };
 
-// ! تابع تغییر استایل جهت نمای تصاویر محصول
+//todo========================================================== تابع تغییر استایل جهت نمای تصاویر محصول
 const updateArrowButtonColors = (btn, nextBtnColor, prevBtnColor) => {
   btn.children[0].style.color = nextBtnColor;
   if (btn.previousElementSibling) {
@@ -819,7 +802,7 @@ const updateArrowButtonColors = (btn, nextBtnColor, prevBtnColor) => {
   }
 };
 
-// ! تابع تغییر استایل علامت بوکمارک محصول
+//todo========================================================== تابع تغییر استایل علامت بوکمارک محصول
 function updateBookmarkUI(card, isMarked) {  
   if (isMarked) {
     card.querySelector(".mark-contain").classList.add("is-mark"); //* تغییر استایل برای نمایش بوکمارک بودن
@@ -829,6 +812,7 @@ function updateBookmarkUI(card, isMarked) {
     card.querySelector(".mark-contain").classList.add("not-mark");
   }
 }
+//!---------------------------------------------------------------------- exports -------------------------------------------------------
 
 export {
   showModal,

@@ -1,11 +1,10 @@
-import { extractProductTitle , fetchProductFromDatabase , fetchUserFromDatabase} from "./box.js";
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
+import { extractProductTitle , fetchProductFromDatabase } from "./box.js";
 import { showModal , updateBookmarkUI} from "./ui.js";
-import { showAlertLogin , fetchDataFromApi , showLoader , hideLoader} from "../utils.js";
-// -------------------------------------------------------------------------------------------------
+import { showAlertLogin , fetchDataFromApi  , hideLoader} from "../utils.js";
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
 
-// -------------------------------------------------------------------------------------------------
-
-//! 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
+//todo================================================= 🔖 toggle تابع عمل کردن بوکمارک ها به صورت
 async function toggleBookmark(event) {
     if (! await showAlertLogin()) return false;                                                          //* بررسی لاگین کاربر
 
@@ -28,7 +27,7 @@ async function toggleBookmark(event) {
     }
 }
 
-// ! ذخیره اطلاعات محصول بوکمارک شده
+//todo================================================= ذخیره اطلاعات محصول بوکمارک شده
 let createBookmarkProductObject = async (event) => {
     let product = await fetchProductFromDatabase(event)                                                            //* دریافت اطلاعات محصول از سرور
     return {                                                                                                     //* برگرداندن اطلاعات محصول بوکمارک شده
@@ -37,7 +36,7 @@ let createBookmarkProductObject = async (event) => {
     };
 
 }
-//! تابع برای اضافه کردن بوکمارک به دیتابیس
+//todo================================================= تابع برای اضافه کردن بوکمارک به دیتابیس
 let addBookMarks = async (item) => {    
     if (!item || !item.product_id) {                                                             //* اطمینان از صحیح بودن بوکمارک
         console.error("Invalid item data:", item);
@@ -58,7 +57,7 @@ let addBookMarks = async (item) => {
     }
 }
 
-//! تابع برای دریافت اطلاعات محصول از روی رویداد
+//todo================================================= تابع برای دریافت اطلاعات محصول از روی رویداد
 let getIDProduct = async (event) => {
     let title = await extractProductTitle(event.target)                                                         //* دریافت عنوان محصول
     let Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                                   //* دریافت اطلاعات کل محصولات
@@ -66,7 +65,7 @@ let getIDProduct = async (event) => {
     return getProductTarget;                                                                                 //* ارسال محصول مورد نظر
 }
 
-//! تابع برای بررسی وضعیت بوکمارک بودن یا نبودن محصول در دیتابیس
+//todo================================================= تابع برای بررسی وضعیت بوکمارک بودن یا نبودن محصول در دیتابیس
 let isBookMarkToDB = async (event) => {
     try {
         let idProduct = await getIDProduct(event)                                                               //* دریافت اطلاعات محصول مورد نظر
@@ -80,7 +79,7 @@ let isBookMarkToDB = async (event) => {
 };
 
 
-//! تابع برای حذف بوکمارک از دیتابیس
+//todo================================================= تابع برای حذف بوکمارک از دیتابیس
 let removeBookMarkItem = async (id) => {   
     try {
         await fetch(`https://onlineshope.onrender.com/api/bookmarks/${id}`, {method: 'DELETE',})                             //* ارسال درخواست حذف به سرور
@@ -89,11 +88,12 @@ let removeBookMarkItem = async (id) => {
     } 
 }
 
-//! تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
+//todo================================================= تابع برای تنظیم رویداد کلیک روی دکمه‌های بوکمارک
 let clickAddBookMark = () => {        
     document.querySelectorAll('.icon-bookmark').forEach(icon => {
         icon.addEventListener('click', toggleBookmark);                                                      //* رویداد کلیک روی ایکون بوکمارک محصول
     });
 }
 
+//!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {toggleBookmark , clickAddBookMark}

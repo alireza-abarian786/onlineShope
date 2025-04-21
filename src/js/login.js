@@ -1,5 +1,5 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
-import { isLogin , fetchDataFromApi , showSwal, showLoader , hideLoader} from "./funcs/utils.js";
+import { isLogin , fetchDataFromApi , showLoader , hideLoader} from "./funcs/utils.js";
 import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { initializeCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
@@ -82,20 +82,19 @@ async function loginCheked(username) {
     hideLoader()
     clearInput();          
     if (res.ok) {
-        showSwal(
-            'خوش آمدید' ,
-            "⁉️میخواهید به پنل کاربری خود بروید",
-            "success",
-            true,
-            'بله',
-            'خیر',
-            (result) => {
-                isLogin();
-                if (result) {
-                    window.location.href = './doshboard.html';
-                }
+        Swal.fire({
+            title: 'خوش آمدید',
+            text: "⁉️میخواهید به پنل کاربری خود بروید",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonText: 'بله، برو!',
+            cancelButtonText: 'لغو'
+        }).then((result) => {
+            isLogin();
+            if (result.isConfirmed) {
+                window.location.href = './doshboard.html';
             }
-        )
+        })
     }
 }
 

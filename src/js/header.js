@@ -1,14 +1,16 @@
-import { searchGlobalHandler } from "./funcs/utils.js";
-
-
-
-//! ---------------------------------------------------------------------------------------------------
+//!---------------------------------------------------------------------- imports -------------------------------------------------------
+import { getLocalStorage } from "./funcs/store/storage.js";
+import { fetchDataFromApi } from "./funcs/utils.js";
+//!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const boxDropDown = document.querySelector(".category-menu + div");
 const categoryMenu = document.querySelector(".category-menu");
 const iconCategoryMenu = document.querySelector(".icon-category-menu");
-const searchGlobalInputElem = document.querySelector("#search-global");
-//! ---------------------------------------------------------------------------------------------------
+let loginBtnText = document.querySelector("#login span");
+let loginBtnIcon = document.querySelector("#login svg");
+let loginBtn = document.querySelector("#login");
+//!---------------------------------------------------------------------- function -------------------------------------------------------
 
+//todo============================================== تنظیمات منو در سایز 992
 function settingsMenuDropDown() {
   if (window.innerWidth < 992) {
     boxDropDown.classList.remove("open-slide");
@@ -21,16 +23,70 @@ function settingsMenuDropDown() {
   }
 }
 
-searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
+// todo============================================== سرچ سراسری محصولات
+const searchGlobalHandler = async (event) => {
+  const ulElemListSearch = document.querySelector(".box-serch__ul-list")
+  if (event.target.value.trim()) {
+    const getAllProduct = await fetchDataFromApi('https://onlineshope.onrender.com/api/products')
+    const filterProducts = getAllProduct.filter(product => product.name.startsWith(event.target.value))
 
-
-window.addEventListener('load' , () => {
-  // console.log('window');
+    ulElemListSearch.classList.add('show')
+    ulElemListSearch.innerHTML = ''
+    filterProducts.forEach(item => { ulElemListSearch.insertAdjacentHTML('beforeend' , `<li class="w-100 p-3 border-bottom">${item.name}</li>`) })
+    return true;
+  }
   
-})
+  ulElemListSearch.classList.remove('show') 
+}
 
+// todo============================================== و نمایش در قسمت منو category دریافت
+const fetchCategoriesForShowToMenu = async () => {
+  const categories = await fetchDataFromApi(
+    "https://onlineshope.onrender.com/api/categories"
+  );
+  const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
+  const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
 
-export {settingsMenuDropDown}
+  categories.forEach((item) => {
+    categoryWrapperXl.insertAdjacentHTML(
+      "beforeend",
+      `
+            <a href="./category.html?cat=${item.urlSearch}&page=1">
+                <h6 class="shadow-sm">${item.name}</h6>
+            </a>
+        `
+    );
+  });
+
+  categories.forEach((item) => {
+    categoryWrapperLg.insertAdjacentHTML(
+      "beforeend",
+      `
+            <a href="./category.html?cat=${item.urlSearch}&page=1">
+                <h6 class="shadow-sm">${item.name}</h6>
+            </a>
+        `
+    );
+  });
+};
+
+// todo============================================== وضعیت لاگین و تغییر لینک ها
+async function isLogin() {
+  //* به‌روزرسانی UI
+  if (getLocalStorage("login").length !== 0) {
+    loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
+    loginBtnIcon.classList.add("text-bg-success")
+    loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
+    
+  } else {
+    loginBtnText.innerHTML = "ورود / عضویت";
+    loginBtnIcon.classList.add("text-bg-white")
+    loginBtn.setAttribute("href", "./login.html");
+  }
+}
+
+//!---------------------------------------------------------------------- exports -------------------------------------------------------
+export {settingsMenuDropDown , searchGlobalHandler , fetchCategoriesForShowToMenu , isLogin}
 
 
 
