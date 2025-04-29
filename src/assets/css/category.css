@@ -233,6 +233,9 @@
   transition: var(--transition);
 }
 
+.btn-outline-secondary i::before {
+  line-height: inherit;
+}
 .btn-outline-secondary:hover {
   color: #fff;
   background-color: var(--primary-color);

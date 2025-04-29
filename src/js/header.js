@@ -80,7 +80,7 @@ async function isLogin() {
     
   } else {
     loginBtnText.innerHTML = "ورود / عضویت";
-    loginBtnIcon.classList.add("text-bg-white")
+    loginBtnIcon.classList.add("bg-white")
     loginBtn.setAttribute("href", "./login.html");
   }
 }
