@@ -76,6 +76,7 @@ async function isLogin() {
   if (getLocalStorage("login").length !== 0) {
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
     loginBtnIcon.classList.add("text-bg-success")
+    loginBtnIcon.classList.remove("bg-white")
     loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
     
   } else {

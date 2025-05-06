@@ -4,7 +4,7 @@ const Cart = require('../models/Cart');
 exports.getCart = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const cart = await Cart.findOne({ _id: userId });
+    const cart = await Cart.findOne({ _id: userId }); // تغییر از userId به _id
     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
     res.json(cart);
   } catch (error) {

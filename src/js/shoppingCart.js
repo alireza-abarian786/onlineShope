@@ -1,11 +1,11 @@
-import { removeFromCart , updateQuantity , fetchUserLogged} from "./funcs/store/cart.js"
+import { removeFromCart , updateQuantity } from "./funcs/store/cart.js"
 // -----------------------------------------------------------------------------------------------------------------------
 
 let total = document.querySelectorAll(".Total-cart-price")
 // -----------------------------------------------------------------------------------------------------------------------
 
 window.addEventListener('DOMContentLoaded' , async () => {
-    fetchUserLogged();
+    // fetchUserLogged();
 })
 
 function buttonsShoppingCart() {
@@ -20,7 +20,10 @@ function buttonsShoppingCart() {
     })
 }
 
-let totalPaymentFunc = async (userCart) => {
+let totalPaymentFunc = async () => {
+    let userCart = await fetchUserCart()
+    console.log(userCart);
+    
     let sum = userCart.items.map(item => item.totalPriceProductCart).reduce((acc , curr) => acc + curr , 0) 
     total.forEach(item => {
         item.textContent = sum.toLocaleString()

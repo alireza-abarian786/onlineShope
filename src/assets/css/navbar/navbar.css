@@ -52,7 +52,10 @@ header {
 }
 
 #login {
-  max-width: 150px;
+  /* max-width: 150px; */
+}
+#login > span {
+  white-space: nowrap;
 }
 
 /* -------------------------------------------- */

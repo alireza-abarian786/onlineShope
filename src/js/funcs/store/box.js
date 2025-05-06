@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage} from "./storage.js";
-import { addToCart , fetchUserLogged} from "./cart.js";
+import { addToCart} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
 import { fetchDataFromApi} from "../utils.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------

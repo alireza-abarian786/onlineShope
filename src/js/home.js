@@ -5,7 +5,6 @@ import { createProductsAppliances , createBlogs, updateCartNotification} from ".
 import { fetchDataFromApi, hideLoader } from "./funcs/utils.js";
 import { initializeStatusMarks } from "./funcs/store/ui.js";
 import { searchGlobalHandler } from "./header.js";
-import { fetchUserCart, fetchUserLogged } from "./funcs/store/cart.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
@@ -46,13 +45,13 @@ searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(
 //todo======================================== رویداد بارگذاری صفحه
 window.addEventListener("load", async () => {
   // updateCartNotification(userLogged)
+  hideLoader()
   fetchUserLogged();
   settingSliderSwiper();
   runTimer();
   await getAllProduct();
   createBlogs(containerArticles);
   initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
-  hideLoader()
 });
 
 

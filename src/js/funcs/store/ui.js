@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import {initTooltips,fetchDataFromApi,hideLoader,} from "../utils.js";
-import { attachCartEventListeners, fetchUserLogged } from "./cart.js";
+import { attachCartEventListeners } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners, extractProductTitle } from "./box.js";
@@ -8,7 +8,8 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
-async function updateCartNotification(userCart) {
+async function updateCartNotification() {
+  let userCart = await fetchUserCart()
   const notifCart = document.querySelector(".notif-cart");
   notifCart.classList.toggle("is-notif", userCart.items.length > 0);
   hideLoader();
@@ -258,7 +259,8 @@ let changeBtnAfterDelete = async (element) => {
 };
 
 //todo========================================================== ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
-async function initializeStatusCarts(userCart) {
+async function initializeStatusCarts() {
+  let userCart = await fetchUserCart()
     document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
       let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
       if (userCart.items.some((item) => item.product_name === title)) {                                         //? اگر محصول در لیست سبد خرید بود
