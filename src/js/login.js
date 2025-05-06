@@ -122,40 +122,43 @@ let statusLogin = async (username) => {
     let loginName = getLocalStorage('login');    
     if (loginName.length === 0) {
 
-        if (usernameValid && passwordValid && phoneValid , emailSignUp) {
+        // Fix syntax error in condition check
+        if (usernameValid && passwordValid && phoneValid) {
 
             let newUser = {
                 name: usernameSignUp.value.trim(),
-                email: emailSignUp.value.trim(),
+                email: emailSignUp.value.trim(), 
                 password: passwordSignUp.value.trim(),
                 phone: phoneInput.value.trim(),
-                address: "iran",
-                registration_date: new Date().toISOString()
+                address: "iran"
+                // Remove registration_date since it's handled by default in schema
             }
 
             try {
-                let res = await fetch('https://onlineshope.onrender.com/api/users' , {
+                let res = await fetch('https://onlineshope.onrender.com/api/users', {
                     method: 'POST',
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-Type': 'application/json' // Fix header name
                     },
                     body: JSON.stringify(newUser)
-                })
+                });
                 
                 if (!res.ok) {
                     const errorData = await res.json();
                     throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
                 }
-                
-                setLocalStorage('login' , username);
-                isLogin();
-                clearInputSignUp()
 
-                hideLoader()
+                const data = await res.json();
+                
+                setLocalStorage('login', username);
+                isLogin();
+                clearInputSignUp();
+
+                hideLoader();
                 Swal.fire({
                     title: "ثبت نام شما با موفقیت انجام شد",
                     text: "⁉️میخواهید به پنل کاربری خود بروید",
-                    icon: "success",
+                    icon: "success", 
                     showCancelButton: true,
                     confirmButtonText: 'بله، برو!',
                     cancelButtonText: 'لغو'
@@ -163,22 +166,30 @@ let statusLogin = async (username) => {
                     if (result.isConfirmed) {
                         window.location.href = './doshboard.html';
                     }
-                })
+                });
                 
             } catch (error) {
-                hideLoader()
+                hideLoader();
                 console.error("خطا در ارسال درخواست به سرور:", error);
                 Swal.fire({
                     title: "خطا در ثبت نام",
                     text: error.message || "مشکلی در ثبت نام رخ داده است",
                     icon: "error",
                     button: "تایید"
-                })
+                });
             }
+        } else {
+            hideLoader();
+            Swal.fire({
+                title: "خطا در اعتبارسنجی",
+                text: "لطفاً تمام فیلدها را به درستی پر کنید",
+                icon: "error",
+                button: "تایید"
+            });
         }
 
     } else {
-        hideLoader()
+        hideLoader();
         Swal.fire({
             title: "شما قبلا ثبت نام کرده اید",
             text: "⁉️میخواهید به پنل کاربری خود بروید",
@@ -190,7 +201,7 @@ let statusLogin = async (username) => {
             if (result.isConfirmed) {
                 window.location.href = './doshboard.html';
             }
-        })
+        });
     }
 }
 

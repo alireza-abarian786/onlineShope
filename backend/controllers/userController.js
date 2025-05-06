@@ -14,20 +14,29 @@ exports.getUsers = async (req, res) => {
 // ثبت‌نام کاربر
 exports.createUser = async (req, res) => {
   try {
-    // بررسی وجود ایمیل تکراری
-    const existingUser = await User.findOne({ email: req.body.email });
-    if (existingUser) {
-      return res.status(400).json({ error: 'این ایمیل قبلاً ثبت شده است' });
-    }
-
     // بررسی اطلاعات ورودی
     if (!req.body.name || !req.body.email || !req.body.password) {
       return res.status(400).json({ error: 'لطفاً تمام فیلدهای ضروری را پر کنید' });
     }
 
+    // بررسی وجود ایمیل تکراری
+    const existingUser = await User.findOne({ 
+      $or: [
+        { email: req.body.email },
+        { name: req.body.name }
+      ]
+    });
+
+    if (existingUser) {
+      if (existingUser.email === req.body.email) {
+        return res.status(400).json({ error: 'این ایمیل قبلاً ثبت شده است' });
+      }
+      if (existingUser.name === req.body.name) {
+        return res.status(400).json({ error: 'این نام کاربری قبلاً ثبت شده است' });
+      }
+    }
+
     const newUser = new User(req.body);
-    console.log(newUser);
-    
     await newUser.save();
 
     // ایجاد یک سبد خرید خالی برای کاربر جدید
@@ -39,20 +48,19 @@ exports.createUser = async (req, res) => {
     await newCart.save();
 
     res.status(201).json({ 
-      message: 'کاربر اضافه شد و سبد خرید خالی ایجاد شد', 
+      message: 'کاربر با موفقیت ثبت شد',
       user: newUser,
       cart: newCart 
     });
+
   } catch (error) {
     console.error("🚨 Error in createUser:", error);
-    // ارسال پیام خطای دقیق‌تر
+    
     if (error.name === 'ValidationError') {
       return res.status(400).json({ error: 'داده‌های ورودی نامعتبر هستند' });
     }
-    if (error.code === 11000) {
-      return res.status(400).json({ error: 'این ایمیل قبلاً ثبت شده است' });
-    }
-    res.status(500).json({ error: 'مشکل در ذخیره کاربر: ' + error.message });
+    
+    res.status(500).json({ error: 'خطا در ثبت کاربر جدید' });
   }
 };
 
