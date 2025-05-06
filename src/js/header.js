@@ -71,7 +71,7 @@ const fetchCategoriesForShowToMenu = async () => {
 };
 
 // todo============================================== وضعیت لاگین و تغییر لینک ها
-async function isLogin() {
+async function isLogin() {  
   //* به‌روزرسانی UI
   if (getLocalStorage("login").length !== 0) {
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر

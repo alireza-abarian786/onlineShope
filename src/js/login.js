@@ -1,8 +1,8 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
-import { isLogin , fetchDataFromApi , showLoader , hideLoader} from "./funcs/utils.js";
-import { toggleCart , closeCart } from './funcs/store/cart.js';
-import { initializeCart } from './funcs/store/cart.js';
+import { showLoader , hideLoader} from "./funcs/utils.js";
+import { toggleCart , closeCart, fetchUserCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
+import { isLogin } from './header.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -10,6 +10,7 @@ let btnLogin = document.querySelector('.btn-login');
 let btnSignUp = document.querySelector('.btn-sign-up');
 let usernameSignUp = document.querySelector(".username-sign-up")
 let passwordSignUp = document.querySelector(".password-sign-up")
+let emailSignUp = document.querySelector(".email-sign-up")
 let phoneInput = document.querySelector(".phone-input")
 
 let usernameText = document.querySelector('.username-text')
@@ -20,15 +21,12 @@ let usernameValid , passwordValid , phoneValid;
 
 // ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
-    let loginName = getLocalStorage('login');         
-    console.log(loginName);
-    // statusLogin(loginName)
-    // isLogin(loginName);
-
+    // let loginName = getLocalStorage('login');         
     SignUpUser()
     toggleCart()
     closeCart()
-    initializeCart()
+    fetchUserCart()
+    hideLoader()
 })
 
 // ------------------------------------------------------------------------------------------- login
@@ -124,13 +122,13 @@ let statusLogin = async (username) => {
     let loginName = getLocalStorage('login');    
     if (loginName.length === 0) {
 
-        if (usernameValid && passwordValid && phoneValid) {
+        if (usernameValid && passwordValid && phoneValid , emailSignUp) {
 
             let newUser = {
-                name: usernameSignUp.value,
-                email: `${usernameSignUp.value}${Date.now()}@example.com`,
-                password: passwordSignUp.value,
-                phone: phoneInput.value,
+                name: usernameSignUp.value.trim(),
+                email: emailSignUp.value.trim(),
+                password: passwordSignUp.value.trim(),
+                phone: phoneInput.value.trim(),
                 address: "iran",
                 registration_date: new Date().toISOString()
             }

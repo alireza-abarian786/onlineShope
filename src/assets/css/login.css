@@ -27,18 +27,18 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    margin-top: 250px;
+    margin-top: 5rem;
 }
 
 .box-form {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 500px;
+    justify-content: center;
+    width: 50%;
+    height: 500px;
     border-radius: 10px;
     flex-direction: column;
     background-color: #5d95e7;
-    height: max-content;
 }
 
 .box-form > p {
@@ -49,7 +49,7 @@
 }
 
 form > div > p {
-    text-align: end;
+    text-align: center;
     transition: all 0.4s ease 0.01ms;
     font-weight: 200;
     font-size: 10px;
@@ -67,15 +67,16 @@ form > div > p {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 1rem;
     width: 100%;
     height: max-content;
     justify-content: center;
     padding: 20px;
+    direction: rtl;
 }
 
 .box-form > form > div{
-    width: 100%;
+    width: 70%;
 }
 
 .box-form > form > input,
@@ -85,13 +86,13 @@ form > div > p {
     outline: 0;
     height: 40px;
     border-radius: 5px;
-    padding-left: 10px;
+    padding-right: 10px;
     font-weight: 300;
     font-size: smaller;
 }
 
 .box-form > form > button {
-    width: 100%;
+    width: 70%;
     height: 40px;
     margin-top: 30px;
 }
