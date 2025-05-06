@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config({ path: './backend/.env' });
+require('dotenv').config();
 
 // const connectionString = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/onlineShopDB?retryWrites=true&w=majority';
 console.log('MONGODB_URI:', process.env.MONGODB_URI); // برای تست
@@ -15,8 +15,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const bookmarkRoutes = require('./routes/bookmarkRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
-
+const PORT = process.env.PORT || 4001;
 
 // Middleware
 app.use(cors({
@@ -24,6 +23,14 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// اضافه کردن middleware برای لاگ کردن درخواست‌ها
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log('Request Body:', req.body);
+  next();
+});
+
 app.use(express.json());
 
 // Routes
@@ -34,20 +41,41 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
-// Connect to MongoDB
-if (!process.env.MONGODB_URI) {
-  console.error('MONGODB_URI is not defined in the environment variables.');
-  process.exit(1); // خروج از برنامه در صورت عدم وجود MONGODB_URI
-}
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  console.error('Error stack:', err.stack);
+  res.status(500).json({
+    error: 'خطای سرور',
+    details: err.message,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
+// Connect to MongoDB
+const MONGODB_URI = 'mongodb+srv://alireza-user:PcCjLKlPX2QdvKMc@cluster0.ay7lp.mongodb.net/onlineShopDB?retryWrites=true&w=majority';
+
+mongoose.connect(MONGODB_URI)
+  .then(async () => {
+    console.log('Connected to MongoDB');
+    console.log('MongoDB URI:', MONGODB_URI);
+
+    try {
+      // حذف ایندکس‌های قبلی
+      const db = mongoose.connection.db;
+      await db.collection('users').dropIndexes();
+      console.log('Indexes dropped successfully');
+    } catch (error) {
+      console.error('Error dropping indexes:', error);
+    }
+  })
   .catch(err => {
-    console.error('Connection error:', err.message);
-    process.exit(1); // خروج از برنامه در صورت بروز خطا
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
   });
 
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log('Environment:', process.env.NODE_ENV || 'development');
 });

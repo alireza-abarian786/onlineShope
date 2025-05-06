@@ -34,7 +34,9 @@ const userSchema = new mongoose.Schema({
     default: Date.now 
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  id: false, // غیرفعال کردن فیلد id مجازی
+  _id: true  // فعال کردن _id
 });
 
 // اضافه کردن middleware برای لاگ کردن خطاها
