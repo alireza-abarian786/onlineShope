@@ -14,21 +14,42 @@ exports.getUsers = async (req, res) => {
 // ثبت‌نام کاربر
 exports.createUser = async (req, res) => {
   try {
+    console.log('Received request body:', req.body);
+
     // بررسی اطلاعات ورودی
     if (!req.body.name || !req.body.email || !req.body.password) {
+      console.log('Missing required fields');
       return res.status(400).json({ error: 'لطفاً تمام فیلدهای ضروری را پر کنید' });
     }
 
+    // اعتبارسنجی ایمیل
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(req.body.email)) {
+      console.log('Invalid email format');
+      return res.status(400).json({ error: 'فرمت ایمیل نامعتبر است' });
+    }
+
+    // اعتبارسنجی شماره تلفن
+    if (req.body.phone) {
+      const phoneRegex = /^09[0-9]{9}$/;
+      if (!phoneRegex.test(req.body.phone)) {
+        console.log('Invalid phone format');
+        return res.status(400).json({ error: 'شماره تلفن باید با 09 شروع شود و 11 رقم باشد' });
+      }
+    }
+
     // بررسی وجود ایمیل تکراری
+    console.log('Checking for existing user...');
     const existingUser = await User.findOne({ 
       $or: [
-        { email: req.body.email },
+        { email: req.body.email.toLowerCase() },
         { name: req.body.name }
       ]
     });
 
     if (existingUser) {
-      if (existingUser.email === req.body.email) {
+      console.log('Found existing user:', existingUser);
+      if (existingUser.email === req.body.email.toLowerCase()) {
         return res.status(400).json({ error: 'این ایمیل قبلاً ثبت شده است' });
       }
       if (existingUser.name === req.body.name) {
@@ -36,31 +57,57 @@ exports.createUser = async (req, res) => {
       }
     }
 
-    const newUser = new User(req.body);
-    await newUser.save();
+    console.log('Creating new user...');
+    const newUser = new User({
+      name: req.body.name.trim(),
+      email: req.body.email.toLowerCase().trim(),
+      password: req.body.password.trim(),
+      phone: req.body.phone ? req.body.phone.trim() : undefined,
+      address: req.body.address ? req.body.address.trim() : undefined
+    });
+
+    const savedUser = await newUser.save();
+    console.log('User saved successfully:', savedUser);
 
     // ایجاد یک سبد خرید خالی برای کاربر جدید
+    console.log('Creating new cart...');
     const newCart = new Cart({
-      _id: newUser._id,
+      _id: savedUser._id,
       items: [],
       totalPrice: 0
     });
-    await newCart.save();
+    
+    const savedCart = await newCart.save();
+    console.log('Cart created successfully:', savedCart);
 
     res.status(201).json({ 
       message: 'کاربر با موفقیت ثبت شد',
-      user: newUser,
-      cart: newCart 
+      user: savedUser,
+      cart: savedCart 
     });
 
   } catch (error) {
     console.error("🚨 Error in createUser:", error);
+    console.error("Error stack:", error.stack);
     
     if (error.name === 'ValidationError') {
-      return res.status(400).json({ error: 'داده‌های ورودی نامعتبر هستند' });
+      const errors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({ 
+        error: 'داده‌های ورودی نامعتبر هستند',
+        details: errors
+      });
+    }
+
+    if (error.name === 'MongoError' && error.code === 11000) {
+      return res.status(400).json({ 
+        error: 'این ایمیل یا نام کاربری قبلاً ثبت شده است'
+      });
     }
     
-    res.status(500).json({ error: 'خطا در ثبت کاربر جدید' });
+    res.status(500).json({ 
+      error: 'خطا در ثبت کاربر جدید',
+      details: error.message 
+    });
   }
 };
 

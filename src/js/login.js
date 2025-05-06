@@ -16,8 +16,12 @@ let phoneInput = document.querySelector(".phone-input")
 let usernameText = document.querySelector('.username-text')
 let passwordText = document.querySelector('.password-text')
 let phoneText = document.querySelector('.phone-text')
+let emailText = document.querySelector('.email-text')
 
-let usernameValid , passwordValid , phoneValid;
+let usernameValid = false;
+let passwordValid = false;
+let phoneValid = false;
+let emailValid = false;
 
 // ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
@@ -121,35 +125,32 @@ let statusLogin = async (username) => {
     
     let loginName = getLocalStorage('login');    
     if (loginName.length === 0) {
-
-        // Fix syntax error in condition check
-        if (usernameValid && passwordValid && phoneValid) {
-
+        if (usernameValid && passwordValid && phoneValid && emailValid) {
             let newUser = {
                 name: usernameSignUp.value.trim(),
                 email: emailSignUp.value.trim(), 
                 password: passwordSignUp.value.trim(),
                 phone: phoneInput.value.trim(),
                 address: "iran"
-                // Remove registration_date since it's handled by default in schema
             }
+
+            console.log('Sending user data:', newUser);
 
             try {
                 let res = await fetch('https://onlineshope.onrender.com/api/users', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json' // Fix header name
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(newUser)
                 });
                 
-                if (!res.ok) {
-                    const errorData = await res.json();
-                    throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
-                }
-
                 const data = await res.json();
                 
+                if (!res.ok) {
+                    throw new Error(data.error || data.details || `HTTP error! status: ${res.status}`);
+                }
+
                 setLocalStorage('login', username);
                 isLogin();
                 clearInputSignUp();
@@ -337,3 +338,53 @@ let showText = (element , text) => {
     element.style.display = 'block';
     element.innerHTML = text
 }
+
+// اعتبارسنجی نام کاربری
+usernameSignUp.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    usernameValid = value.length >= 3;
+    if (!usernameValid) {
+        fadeAnimated(usernameText, 'نام کاربری باید حداقل 3 کاراکتر باشد');
+    } else {
+        showText(usernameText, 'نام کاربری معتبر است');
+    }
+});
+
+// اعتبارسنجی رمز عبور
+passwordSignUp.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    passwordValid = value.length >= 6;
+    if (!passwordValid) {
+        fadeAnimated(passwordText, 'رمز عبور باید حداقل 6 کاراکتر باشد');
+    } else {
+        showText(passwordText, 'رمز عبور معتبر است');
+    }
+});
+
+// اعتبارسنجی شماره تلفن
+phoneInput.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    const phoneRegex = /^09[0-9]{9}$/;
+    phoneValid = phoneRegex.test(value);
+    if (!phoneValid) {
+        fadeAnimated(phoneText, 'شماره تلفن باید با 09 شروع شود و 11 رقم باشد');
+    } else {
+        showText(phoneText, 'شماره تلفن معتبر است');
+    }
+});
+
+// اعتبارسنجی ایمیل
+emailSignUp.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailValid = emailRegex.test(value);
+    if (!emailValid) {
+        if (emailText) {
+            fadeAnimated(emailText, 'لطفاً یک ایمیل معتبر وارد کنید');
+        }
+    } else {
+        if (emailText) {
+            showText(emailText, 'ایمیل معتبر است');
+        }
+    }
+});
