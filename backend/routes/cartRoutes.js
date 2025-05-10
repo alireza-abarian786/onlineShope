@@ -10,8 +10,8 @@ const {
 
 router.get('/:userId', getCart);
 router.post('/:userId/items', addItemToCart);
-router.put('/:userId/items/:productId', updateCartItem);
-router.delete('/:userId/items/:productId', deleteCartItem);
+router.put('/:userId/items/:itemId', updateCartItem);
+router.delete('/:userId/items/:itemId', deleteCartItem);
 router.delete('/:userId/items', deleteCart);
 
 module.exports = router;

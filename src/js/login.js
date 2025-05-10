@@ -1,6 +1,6 @@
 import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
 import { showLoader , hideLoader} from "./funcs/utils.js";
-import { toggleCart , closeCart, fetchUserCart } from './funcs/store/cart.js';
+import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
 import { isLogin } from './header.js';
 
@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded" , () => {
     SignUpUser()
     toggleCart()
     closeCart()
-    fetchUserCart()
+    // fetchUserCart()
     hideLoader()
 })
 
@@ -84,6 +84,26 @@ async function loginCheked(username) {
     hideLoader()
     clearInput();          
     if (res.ok) {
+        // // ایجاد سبد خرید برای کاربر جدید
+        // try {
+        //     const cartResponse = await fetch(`https://onlineshope.onrender.com/api/carts/${userData._id}/items`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             items: [],
+        //             totalPrice: 0
+        //         })
+        //     });
+            
+        //     if (!cartResponse.ok) {
+        //         console.error('خطا در ایجاد سبد خرید');
+        //     }
+        // } catch (error) {
+        //     console.error('خطا در ایجاد سبد خرید:', error);
+        // }
+
         Swal.fire({
             title: 'خوش آمدید',
             text: "⁉️میخواهید به پنل کاربری خود بروید",

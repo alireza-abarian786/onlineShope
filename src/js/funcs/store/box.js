@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage} from "./storage.js";
-import { addToCart} from "./cart.js";
+import { addToCart, functionGetLoggedInUserInformation} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
 import { fetchDataFromApi} from "../utils.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
@@ -76,9 +76,9 @@ const isProductInCart = (product, cartItems) => cartItems.some(item => item.id =
 //todo============================================================= 🛒 تغییر استایل دکمه سبد خرید محصول 
 async function updateCartButtonState(event) {
     let product = await fetchProductFromDatabase(event)                                                           //* دریافت اطلاعات محصول از سرور
-    let userLogged = await fetchUserLogged()
+    let userLogged = await functionGetLoggedInUserInformation()
     if (userLogged) {
-        let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged._id}`);               //* دریافت لیست کل سبد خرید  
+        let cartItems = await fetchDataFromApi(`https://onlineshope.onrender.com/api/carts/${userLogged.userId}`);               //* دریافت لیست کل سبد خرید  
         if (!isProductInCart(product, cartItems.items)) {                                                                 //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
             await changeBtnAfterAdd(event.target)                                                                        //* تغییر استایل کلید سبد خرید محصول
         } 

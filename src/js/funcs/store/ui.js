@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import {initTooltips,fetchDataFromApi,hideLoader,} from "../utils.js";
-import { attachCartEventListeners } from "./cart.js";
+import { attachCartEventListeners, functionGetLoggedInUserInformation, functionGetUserCartInformation } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners, extractProductTitle } from "./box.js";
@@ -9,7 +9,7 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
-  let userCart = await fetchUserCart()
+  let userCart = await functionGetUserCartInformation()
   const notifCart = document.querySelector(".notif-cart");
   notifCart.classList.toggle("is-notif", userCart.items.length > 0);
   hideLoader();
@@ -20,6 +20,9 @@ async function renderCartItems(cartItems) {
   const container = document.querySelector(".cantain-box-goods");
   container.innerHTML = ""; //? پاک کردن آیتم‌های قبلی
   cartItems.forEach((item) => {
+    // محاسبه قیمت کل اگر وجود نداشت
+    const totalPrice = item.totalPriceProductCart || (item.price * item.quantity);
+    
     //?🛒 ساخت باکس محصول و افزودن به سبد خرید
     const cartHTML = `
             <div class="box-goods d-flex align-items-end swiper-slide" data-id="${
@@ -63,7 +66,7 @@ async function renderCartItems(cartItems) {
                     <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1 total-price'>${item.totalPriceProductCart.toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${totalPrice.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
@@ -260,14 +263,13 @@ let changeBtnAfterDelete = async (element) => {
 
 //todo========================================================== ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {
-  let userCart = await fetchUserCart()
-    document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
-      let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
-      if (userCart.items.some((item) => item.product_name === title)) {                                         //? اگر محصول در لیست سبد خرید بود
-        changeBtnAfterAdd(btn);
-      }
-    });
-  // }
+  let userCart = await functionGetUserCartInformation();
+  document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
+    let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
+    if (userCart.items.some((item) => item.product_name === title)) {                                         //? اگر محصول در لیست سبد خرید بود
+      changeBtnAfterAdd(btn);
+    }
+  });
 }
 
 //todo========================================================== ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب

@@ -1,4 +1,4 @@
-import { removeFromCart , updateQuantity } from "./funcs/store/cart.js"
+import { functionGetUserCartInformation, removeFromCart , updateQuantity } from "./funcs/store/cart.js"
 // -----------------------------------------------------------------------------------------------------------------------
 
 let total = document.querySelectorAll(".Total-cart-price")
@@ -21,7 +21,7 @@ function buttonsShoppingCart() {
 }
 
 let totalPaymentFunc = async () => {
-    let userCart = await fetchUserCart()
+    let userCart = await functionGetUserCartInformation()
     console.log(userCart);
     
     let sum = userCart.items.map(item => item.totalPriceProductCart).reduce((acc , curr) => acc + curr , 0) 

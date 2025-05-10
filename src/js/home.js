@@ -1,10 +1,11 @@
 //!---------------------------------------------------------------------- import -------------------------------------------------------
 import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
-import { createProductsAppliances , createBlogs, updateCartNotification} from "./funcs/store/ui.js";
+import { createProductsAppliances , createBlogs, updateCartNotification, initializeStatusCarts} from "./funcs/store/ui.js";
 import { fetchDataFromApi, hideLoader } from "./funcs/utils.js";
 import { initializeStatusMarks } from "./funcs/store/ui.js";
-import { searchGlobalHandler } from "./header.js";
+import { fetchCategoriesForShowToMenu, isLogin, searchGlobalHandler } from "./header.js";
+import { closeCart, toggleCart } from "./funcs/store/cart.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
@@ -42,16 +43,20 @@ const getAllProduct = async () => {
 //todo======================================== رویداد وارد کردن مقدار در سرچ
 searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 
-//todo======================================== رویداد بارگذاری صفحه
+//todo======================================== رویداد بارگذاری محتویات صفحه اصلی
 window.addEventListener("load", async () => {
-  // updateCartNotification(userLogged)
-  hideLoader()
-  fetchUserLogged();
+  fetchCategoriesForShowToMenu()
+  toggleCart()
+  closeCart()
+  isLogin()
   settingSliderSwiper();
   runTimer();
-  await getAllProduct();
+  getAllProduct();
   createBlogs(containerArticles);
-  initializeStatusMarks();                  //* 🔖 فراخوانی تابع بررسی وضعیت بوکمارک محصول
+  initializeStatusMarks();                  
+  initializeStatusCarts()
+  hideLoader()
+  updateCartNotification()
 });
 
 

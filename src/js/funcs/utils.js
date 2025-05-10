@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage } from "./store/storage.js";
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
-// const loaderElem = document.querySelector(".loader-container");
+const loaderElem = document.querySelector(".loader-container");
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo===================================== دریافت قسمت سرچ لینک
@@ -78,6 +78,53 @@ function hideLoader() {
   loaderElem.classList.add("hidden");
 }
 
+// سیستم مدیریت خطای مرکزی
+const ErrorHandler = {
+  errors: [],
+  
+  logError(error, context = '') {
+    const errorInfo = {
+      message: error.message || 'خطای ناشناخته',
+      context,
+      timestamp: new Date().toISOString(),
+      stack: error.stack
+    };
+    
+    this.errors.push(errorInfo);
+    
+    // در محیط توسعه، خطا را در کنسول نمایش می‌دهیم
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[${context}]`, error);
+    }
+    
+    return errorInfo;
+  },
+  
+  showErrorToUser(error, customMessage = '') {
+    const message = customMessage || error.message || 'خطایی رخ داده است';
+    showModal(`❌ ${message}`);
+  },
+  
+  clearErrors() {
+    this.errors = [];
+  },
+  
+  getErrors() {
+    return this.errors;
+  }
+};
+
+// تابع کمکی برای مدیریت خطاهای API
+const handleApiError = async (response, context = '') => {
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const error = new Error(errorData.error || `خطای HTTP: ${response.status}`);
+    ErrorHandler.logError(error, context);
+    throw error;
+  }
+  return response;
+};
+
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {
   searchParams,
@@ -87,4 +134,6 @@ export {
   fetchDataFromApi,
   showLoader,
   hideLoader,
+  ErrorHandler,
+  handleApiError,
 };

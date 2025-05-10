@@ -5,9 +5,9 @@ import { fetchDataFromApi } from "./funcs/utils.js";
 const boxDropDown = document.querySelector(".category-menu + div");
 const categoryMenu = document.querySelector(".category-menu");
 const iconCategoryMenu = document.querySelector(".icon-category-menu");
+const loginBtnIcon = document.querySelector("#login svg");
+const loginBtn = document.querySelector("#login");
 let loginBtnText = document.querySelector("#login span");
-let loginBtnIcon = document.querySelector("#login svg");
-let loginBtn = document.querySelector("#login");
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 
 //todo============================================== تنظیمات منو در سایز 992
@@ -71,7 +71,7 @@ const fetchCategoriesForShowToMenu = async () => {
 };
 
 // todo============================================== وضعیت لاگین و تغییر لینک ها
-async function isLogin() {  
+async function isLogin() {    
   //* به‌روزرسانی UI
   if (getLocalStorage("login").length !== 0) {
     loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
