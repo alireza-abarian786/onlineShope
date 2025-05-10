@@ -56,10 +56,13 @@ let functionGetLoggedInUserInformation = async () => {
 const functionGetUserCartInformation = async () => {
   try {
     const user = await functionGetLoggedInUserInformation();
+    
     if (!user || !user.userId) {
       console.error("اطلاعات کاربر نامعتبر است:", user);
       return { items: [] };
     }
+    
+    console.log("تلاش برای دریافت سبد خرید برای کاربر:", user.userId);
     
     const getUserCartFromDB = await fetchDataFromApi(
       `https://onlineshope.onrender.com/api/carts/${user.userId}`
@@ -70,10 +73,11 @@ const functionGetUserCartInformation = async () => {
       return { items: [] };
     }
     
-    console.log('Fetched cart:', getUserCartFromDB);
+    console.log('سبد خرید دریافت شد:', getUserCartFromDB);
     return getUserCartFromDB;
   } catch (error) {
     console.error("خطا در دریافت اطلاعات سبد خرید:", error);
+    // برگرداندن یک سبد خالی در صورت بروز خطا
     return { items: [] };
   }
 };

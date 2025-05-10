@@ -53,17 +53,57 @@ let showAlertLogin = async () => {
 };
 
 //todo======================================== api دریافت اطلاعات از
-const fetchDataFromApi = async (url) => {
+// const fetchDataFromApi = async (url) => {
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(
+//         `Failed to fetch data from ${url}. Status: ${response.status}`
+//       );
+//     }
+//     return await response.json();
+//   } catch (error) {
+//     console.error("Error fetching data:", error.message);
+//     throw error;
+//   }
+// };
+
+const fetchDataFromApi = async (url, options = {}) => {
   try {
-    const response = await fetch(url);
+    console.log('Fetching data from:', url);
+    
+    const response = await fetch(url, {
+      method: options.method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+      },
+      body: options.body ? JSON.stringify(options.body) : undefined,
+      ...options
+    });
+    
+    console.log('Response status:', response.status);
+    
+    // برای خطاهای 4xx و 5xx
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch data from ${url}. Status: ${response.status}`
-      );
+      if (response.status === 404) {
+        console.error(`URL یافت نشد: ${url}`);
+        // سعی کنید یک مسیر دیگر را امتحان کنید
+        if (url.includes('/api/carts/')) {
+          const testUrl = url.replace(/\/api\/carts\/.*$/, '/api/carts/test');
+          console.log(`آزمایش مسیر جایگزین: ${testUrl}`);
+          const testResponse = await fetch(testUrl);
+          console.log('پاسخ مسیر تست:', testResponse.status);
+        }
+      }
+      throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
     }
-    return await response.json();
+    
+    const data = await response.json();
+    console.log('Received data:', data);
+    return data;
   } catch (error) {
-    console.error("Error fetching data:", error.message);
+    console.error('Error fetching data:', error);
     throw error;
   }
 };

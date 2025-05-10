@@ -2,17 +2,69 @@ const Cart = require('../models/Cart');
 const mongoose = require('mongoose');
 
 // Get cart by user ID
+// exports.getCart = async (req, res) => {
+//   try {
+//     const userId = req.params.userId;
+//     const cart = await Cart.findOne({ userId: userId });
+//     if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+//     res.json(cart);
+//   } catch (error) {
+//     console.error('Error in getCart:', error);
+//     res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });
+//   }
+// };
+
+
 exports.getCart = async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const cart = await Cart.findOne({ userId: userId });
-    if (!cart) return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+    const { userId } = req.params;
+    console.log(`GET /api/carts/${userId}`);
+    
+    // بررسی وجود userId
+    if (!userId) {
+      return res.status(400).json({ error: 'شناسه کاربر ارائه نشده است' });
+    }
+    
+    let userIdToSearch = userId;
+    
+    // اگر ObjectId معتبر است، آن را تبدیل کنید
+    if (mongoose.Types.ObjectId.isValid(userId)) {
+      userIdToSearch = new mongoose.Types.ObjectId(userId);
+    }
+    
+    console.log('جستجوی سبد خرید برای userId:', userIdToSearch);
+    
+    // ابتدا بر اساس ObjectId جستجو کنید
+    let cart = await Cart.findOne({ userId: userIdToSearch });
+    
+    // اگر پیدا نشد، به عنوان رشته امتحان کنید
+    if (!cart && typeof userIdToSearch !== 'string') {
+      cart = await Cart.findOne({ userId: userId });
+    }
+    
+    console.log('نتیجه جستجوی سبد خرید:', cart);
+    
+    if (!cart) {
+      // اگر سبد خرید وجود نداشت، یک مورد جدید ایجاد کنید
+      const newCart = {
+        userId: userIdToSearch,
+        items: [],
+        totalPrice: 0
+      };
+      
+      cart = new Cart(newCart);
+      await cart.save();
+      console.log('سبد خرید جدید ایجاد شد:', cart);
+    }
+    
     res.json(cart);
   } catch (error) {
-    console.error('Error in getCart:', error);
-    res.status(500).json({ error: 'مشکل در دریافت سبد خرید' });
+    console.error('خطا در دریافت سبد خرید:', error);
+    res.status(500).json({ error: 'خطا در دریافت اطلاعات سبد خرید', details: error.message });
   }
 };
+
+
 
 // Add item to cart
 exports.addItemToCart = async (req, res) => {
@@ -96,99 +148,143 @@ exports.addItemToCart = async (req, res) => {
 };
 
 // Update item in cart
+// exports.updateCartItem = async (req, res) => {
+//   try {
+//     const userId = req.params.userId;
+//     const itemId = req.params.itemId;
+//     const updatedItem = req.body;
+
+//     console.log('=== Server Debug Update Cart Item ===');
+//     console.log('1. User ID:', userId);
+//     console.log('2. Item ID:', itemId);
+//     console.log('2.1 Item ID type:', typeof itemId);
+//     console.log('3. Updated Item:', updatedItem);
+
+//     // بررسی فرمت itemId
+//     if (!mongoose.Types.ObjectId.isValid(itemId)) {
+//       console.log('Invalid itemId format:', itemId);
+//       return res.status(400).json({ error: 'شناسه آیتم نامعتبر است' });
+//     }
+
+//     // تبدیل userId به ObjectId
+//     const userObjectId = new mongoose.Types.ObjectId(userId);
+//     // تبدیل itemId به ObjectId
+//     const itemObjectId = new mongoose.Types.ObjectId(itemId);
+
+//     const cart = await Cart.findOne({ userId: userObjectId });
+//     if (!cart) {
+//       console.log('4. Cart not found for user:', userId);
+//       return res.status(404).json({ error: 'سبد خرید یافت نشد' });
+//     }
+
+//     console.log('5. Cart items IDs:', cart.items.map(item => item._id.toString()));
+//     console.log('6. Cart items:', cart.items.map(item => ({ 
+//       _id: item._id.toString(), 
+//       product_id: item.product_id, 
+//       product_name: item.product_name 
+//     })));
+
+//     // پیدا کردن آیتم با شناسه مورد نظر
+//     const itemIndex = cart.items.findIndex(item => {
+//       const itemIdStr = item._id.toString();
+//       console.log('7. Comparing:', itemIdStr, 'with', itemId);
+//       return itemIdStr === itemId;
+//     });
+    
+//     if (itemIndex === -1) {
+//       console.log('8. Item not found in cart for itemId:', itemId);
+//       return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
+//     }
+
+//     console.log('9. Found item at index:', itemIndex);
+
+//     // به‌روزرسانی آیتم با حفظ شناسه اصلی
+//     const originalItem = cart.items[itemIndex];
+    
+//     // مطمئن شویم که فیلدهای ضروری از درخواست حفظ می‌شوند
+//     cart.items[itemIndex] = {
+//       ...originalItem,
+//       ...updatedItem,
+//       _id: originalItem._id,          // حفظ شناسه اصلی
+//       product_id: originalItem.product_id  // حفظ شناسه محصول
+//     };
+
+//     // اگر quantity و totalPriceProductCart در updatedItem وجود دارند، آنها را به‌روزرسانی کنیم
+//     if (updatedItem.quantity !== undefined) {
+//       cart.items[itemIndex].quantity = updatedItem.quantity;
+//     }
+    
+//     if (updatedItem.totalPriceProductCart !== undefined) {
+//       cart.items[itemIndex].totalPriceProductCart = updatedItem.totalPriceProductCart;
+//     }
+
+//     // محاسبه قیمت کل
+//     cart.totalPrice = cart.items.reduce((sum, item) => 
+//       sum + (item.totalPriceProductCart || 0), 0
+//     );
+
+//     console.log('10. Before saving updated cart:', cart);
+//     await cart.save();
+    
+//     const updatedCart = await Cart.findOne({ userId: userObjectId });
+//     console.log('11. After saving updated cart:', updatedCart);
+    
+//     res.json({ 
+//       message: 'محصول به‌روزرسانی شد', 
+//       cart: updatedCart 
+//     });
+//   } catch (error) {
+//     console.error('خطا در به‌روزرسانی سبد:', error);
+//     res.status(500).json({ 
+//       error: 'مشکل در به‌روزرسانی سبد',
+//       details: error.message 
+//     });
+//   }
+// };
+
+
+
+// به‌روزرسانی آیتم در سبد خرید
 exports.updateCartItem = async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const itemId = req.params.itemId;
+    const { userId, itemId } = req.params;
     const updatedItem = req.body;
-
-    console.log('=== Server Debug Update Cart Item ===');
-    console.log('1. User ID:', userId);
-    console.log('2. Item ID:', itemId);
-    console.log('2.1 Item ID type:', typeof itemId);
-    console.log('3. Updated Item:', updatedItem);
-
-    // بررسی فرمت itemId
-    if (!mongoose.Types.ObjectId.isValid(itemId)) {
-      console.log('Invalid itemId format:', itemId);
-      return res.status(400).json({ error: 'شناسه آیتم نامعتبر است' });
+    
+    console.log(`PUT /api/carts/${userId}/items/${itemId}`);
+    console.log('Request Body:', updatedItem);
+    
+    if (!updatedItem.quantity || updatedItem.quantity < 1) {
+      return res.status(400).json({ error: 'تعداد محصول باید حداقل 1 باشد' });
     }
-
-    // تبدیل userId به ObjectId
-    const userObjectId = new mongoose.Types.ObjectId(userId);
-    // تبدیل itemId به ObjectId
-    const itemObjectId = new mongoose.Types.ObjectId(itemId);
-
-    const cart = await Cart.findOne({ userId: userObjectId });
+    
+    const cart = await Cart.findOne({ userId });
+    
     if (!cart) {
-      console.log('4. Cart not found for user:', userId);
       return res.status(404).json({ error: 'سبد خرید یافت نشد' });
     }
-
-    console.log('5. Cart items IDs:', cart.items.map(item => item._id.toString()));
-    console.log('6. Cart items:', cart.items.map(item => ({ 
-      _id: item._id.toString(), 
-      product_id: item.product_id, 
-      product_name: item.product_name 
-    })));
-
-    // پیدا کردن آیتم با شناسه مورد نظر
-    const itemIndex = cart.items.findIndex(item => {
-      const itemIdStr = item._id.toString();
-      console.log('7. Comparing:', itemIdStr, 'with', itemId);
-      return itemIdStr === itemId;
-    });
+    
+    const itemIndex = cart.items.findIndex(item => 
+      item._id.toString() === itemId
+    );
     
     if (itemIndex === -1) {
-      console.log('8. Item not found in cart for itemId:', itemId);
-      return res.status(404).json({ error: 'محصول در سبد وجود ندارد' });
-    }
-
-    console.log('9. Found item at index:', itemIndex);
-
-    // به‌روزرسانی آیتم با حفظ شناسه اصلی
-    const originalItem = cart.items[itemIndex];
-    
-    // مطمئن شویم که فیلدهای ضروری از درخواست حفظ می‌شوند
-    cart.items[itemIndex] = {
-      ...originalItem,
-      ...updatedItem,
-      _id: originalItem._id,          // حفظ شناسه اصلی
-      product_id: originalItem.product_id  // حفظ شناسه محصول
-    };
-
-    // اگر quantity و totalPriceProductCart در updatedItem وجود دارند، آنها را به‌روزرسانی کنیم
-    if (updatedItem.quantity !== undefined) {
-      cart.items[itemIndex].quantity = updatedItem.quantity;
+      return res.status(404).json({ error: 'محصول در سبد خرید یافت نشد' });
     }
     
-    if (updatedItem.totalPriceProductCart !== undefined) {
-      cart.items[itemIndex].totalPriceProductCart = updatedItem.totalPriceProductCart;
-    }
-
-    // محاسبه قیمت کل
-    cart.totalPrice = cart.items.reduce((sum, item) => 
-      sum + (item.totalPriceProductCart || 0), 0
-    );
-
-    console.log('10. Before saving updated cart:', cart);
+    cart.items[itemIndex].quantity = updatedItem.quantity;
+    cart.items[itemIndex].totalPriceProductCart = updatedItem.totalPriceProductCart;
+    cart.updatedAt = Date.now();
+    
     await cart.save();
-    
-    const updatedCart = await Cart.findOne({ userId: userObjectId });
-    console.log('11. After saving updated cart:', updatedCart);
-    
-    res.json({ 
-      message: 'محصول به‌روزرسانی شد', 
-      cart: updatedCart 
-    });
+    res.json(cart);
   } catch (error) {
-    console.error('خطا در به‌روزرسانی سبد:', error);
-    res.status(500).json({ 
-      error: 'مشکل در به‌روزرسانی سبد',
-      details: error.message 
-    });
+    console.error('خطا در به‌روزرسانی سبد خرید:', error);
+    res.status(500).json({ error: 'خطا در به‌روزرسانی محصول در سبد خرید' });
   }
 };
+
+
+
 
 // Delete item from cart
 exports.deleteCartItem = async (req, res) => {

@@ -10,6 +10,8 @@ import { buttonsShoppingCart } from "../../shoppingCart.js";
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
   let userCart = await functionGetUserCartInformation()
+  console.log(userCart);
+  
   const notifCart = document.querySelector(".notif-cart");
   notifCart.classList.toggle("is-notif", userCart.items.length > 0);
   hideLoader();
@@ -264,6 +266,8 @@ let changeBtnAfterDelete = async (element) => {
 //todo========================================================== ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {
   let userCart = await functionGetUserCartInformation();
+  console.log(userCart);
+  
   document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
     let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
     if (userCart.items.some((item) => item.product_name === title)) {                                         //? اگر محصول در لیست سبد خرید بود
