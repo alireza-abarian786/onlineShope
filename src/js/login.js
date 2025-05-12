@@ -26,7 +26,7 @@ let emailValid = false;
 // ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
     // let loginName = getLocalStorage('login');         
-    SignUpUser()
+    // SignUpUser()
     toggleCart()
     closeCart()
     // fetchUserCart()
@@ -73,7 +73,7 @@ async function loginCheked(username) {
         email: userData.email,
         password: userData.password
     }    
-    let res = await fetch("https://onlineshope.onrender.com/api/users/login" , {
+    let res = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
@@ -232,25 +232,25 @@ function clearInputSignUp() {
     phoneInput.value = ''
 }
 
-let SignUpUser = async () => {
+// let SignUpUser = async () => {
 
-    await fetch("https://onlineshope.onrender.com/api/users")
-    .then(res => res.json())
-    .then(data => {
+//     await fetch("https://onlineshope.onrender.com/api/users")
+//     .then(res => res.json())
+//     .then(data => {
 
-        if (usernameSignUp.value.length < 5 || passwordSignUp.value.length < 8 || phoneInput.value.length < 11 || phoneInput.value.length >= 12) {
+//         if (usernameSignUp.value.length < 5 || passwordSignUp.value.length < 8 || phoneInput.value.length < 11 || phoneInput.value.length >= 12) {
             
-            isLengthFalse(data)
-        } else {
+//             isLengthFalse(data)
+//         } else {
             
-            isUserName(data)
-            passwordKey()
-            phoneKey()
-        }
+//             isUserName(data)
+//             passwordKey()
+//             phoneKey()
+//         }
 
-    })
+//     })
 
-}
+// }
 
 function isLengthFalse(data) {
     if (usernameSignUp.value.length < 5) {
