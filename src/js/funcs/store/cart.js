@@ -14,83 +14,81 @@ import {
   hideLoader,
   showAlertLogin,
   showLoader,
-  ErrorHandler,
-  handleApiError,
 } from "../utils.js";
 import { totalPaymentFunc } from "../../shoppingCart.js";
-import { getLocalStorage } from "./storage.js";
+import { getLocalStorage, getToken } from "./storage.js";
 //! --------------------------------------------------------------------------------------------------------------------------------------------
 
 //todo=================================================================== تابع دریافت اطلاعات کاربر لاگین‌شده
-let functionGetLoggedInUserInformation = async () => {
-  try {
-    const userName = await getLocalStorage("login");
-    if (!userName) {
-      throw new Error("کاربر لاگین نکرده است");
-    }
+// let functionGetLoggedInUserInformation = async () => {
+//   try {
+//     const userName = await getLocalStorage("login");
+//     if (!userName) {
+//       throw new Error("کاربر لاگین نکرده است");
+//     }
     
-    const fetchAllUsersFromDB = await fetchDataFromApi(
-      "https://onlineshope.onrender.com/api/users"
-    );
+//     const fetchAllUsersFromDB = await fetchDataFromApi(
+//       "https://onlineshope.onrender.com/api/users"
+//     );
     
-    const findInformationUserLogged = fetchAllUsersFromDB.find(
-      (user) => user.name === userName
-    );
+//     const findInformationUserLogged = fetchAllUsersFromDB.find(
+//       (user) => user.name === userName
+//     );
     
-    if (!findInformationUserLogged) {
-      throw new Error("اطلاعات کاربر یافت نشد");
-    }
+//     if (!findInformationUserLogged) {
+//       throw new Error("اطلاعات کاربر یافت نشد");
+//     }
 
-    return {
-      userId: findInformationUserLogged._id,
-      name: findInformationUserLogged.name,
-      email: findInformationUserLogged.email
-    };
-  } catch (error) {
-    console.error("خطا در دریافت اطلاعات کاربر:", error);
-    throw error;
-  }
-};
+//     return {
+//       userId: findInformationUserLogged._id,
+//       name: findInformationUserLogged.name,
+//       email: findInformationUserLogged.email
+//     };
+//   } catch (error) {
+//     console.error("خطا در دریافت اطلاعات کاربر:", error);
+//     throw error;
+//   }
+// };
 
 //todo=================================================================== تابع دریافت اطلاعات سبد خرید کاربر
-const functionGetUserCartInformation = async () => {
-  try {
-    const user = await functionGetLoggedInUserInformation();
+// const functionGetUserCartInformation = async () => {
+//   try {
+//     const user = await functionGetLoggedInUserInformation();
     
-    if (!user || !user.userId) {
-      console.error("اطلاعات کاربر نامعتبر است:", user);
-      return { items: [] };
-    }
+//     if (!user || !user.userId) {
+//       console.error("اطلاعات کاربر نامعتبر است:", user);
+//       return { items: [] };
+//     }
     
-    console.log("تلاش برای دریافت سبد خرید برای کاربر:", user.userId);
+//     console.log("تلاش برای دریافت سبد خرید برای کاربر:", user.userId);
     
-    const getUserCartFromDB = await fetchDataFromApi(
-      `https://onlineshope.onrender.com/api/carts/${user.userId}`
-    );
+//     const getUserCartFromDB = await fetchDataFromApi(
+//       `https://onlineshope.onrender.com/api/carts/${user.userId}`
+//     );
     
-    if (!getUserCartFromDB) {
-      console.error("اطلاعات سبد خرید دریافت نشد");
-      return { items: [] };
-    }
+//     if (!getUserCartFromDB) {
+//       console.error("اطلاعات سبد خرید دریافت نشد");
+//       return { items: [] };
+//     }
     
-    console.log('سبد خرید دریافت شد:', getUserCartFromDB);
-    return getUserCartFromDB;
-  } catch (error) {
-    console.error("خطا در دریافت اطلاعات سبد خرید:", error);
-    // برگرداندن یک سبد خالی در صورت بروز خطا
-    return { items: [] };
-  }
-};
+//     console.log('سبد خرید دریافت شد:', getUserCartFromDB);
+//     return getUserCartFromDB;
+//   } catch (error) {
+//     console.error("خطا در دریافت اطلاعات سبد خرید:", error);
+//     // برگرداندن یک سبد خالی در صورت بروز خطا
+//     return { items: [] };
+//   }
+// };
 
 //todo=================================================================== تابع رفرش سبد خرید
 const refreshCart = async () => {
   try {
-    const cart = await functionGetUserCartInformation();
+    // const cart = await functionGetUserCartInformation();
     console.log('Refreshed cart:', cart);
-    console.log('Refreshed cart items:', cart.items.map(item => ({ _id: item._id, product_id: item.product_id, product_name: item.product_name })));
-    await renderCartItems(cart.items);
+    // console.log('Refreshed cart items:', cart.items.map(item => ({ _id: item._id, product_id: item.product_id, product_name: item.product_name })));
+    // await renderCartItems(cart.items);
     await totalPaymentFunc();
-    return cart;
+    // return cart;
   } catch (error) {
     console.error('Error refreshing cart:', error);
     return { items: [] };
@@ -103,22 +101,22 @@ async function addToCart(event) {
     if (!(await showAlertLogin())) return false;
     
     const product = await fetchProductFromDatabase(event);
-    const user = await functionGetLoggedInUserInformation();
+    // const user = await functionGetLoggedInUserInformation();
     
     if (!user || !product) {
       throw new Error("اطلاعات کاربر یا محصول نامعتبر است");
     }
 
-    const cart = await functionGetUserCartInformation();
-    if (!cart) {
-      throw new Error("خطا در دریافت اطلاعات سبد خرید");
-    }
+    // const cart = await functionGetUserCartInformation();
+    // if (!cart) {
+    //   throw new Error("خطا در دریافت اطلاعات سبد خرید");
+    // }
 
     const newCart = await newProductData(product, user);
-    const exists = cart.items.some((item) => item.product_id == product.id);
+    // const exists = cart.items.some((item) => item.product_id == product.id);
     
     if (!exists) {
-      const result = await addCartToDB(newCart, user);
+      const result = await addCartToDB(product);
       await Promise.all([
         refreshCart(),
         updateCartNotification(),
@@ -159,25 +157,32 @@ let newProductData = async (product, user) => {
 };
 
 //todo=================================================================== انجام عملیات افزودن کارت محصول جدید به دیتابیس
-let addCartToDB = async (newCart, user) => {
+let addCartToDB = async (product) => {
   try {
     if (!user || !user.userId) {
       throw new Error("اطلاعات کاربر نامعتبر است");
     }
 
     const response = await fetch(
-      `https://onlineshope.onrender.com/api/carts/${user.userId}/items`,
+      `https://onlineshope.onrender.com/api/cart/add`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`
         },
-        body: JSON.stringify(newCart)
+        body: JSON.stringify({
+          product_id: product.id,
+          quantity: 1,
+        })
       }
     );
 
     await handleApiError(response, 'addCartToDB');
     const result = await response.json();
+    console.log(response);
+    console.log(result);
+    
     
     // به‌روزرسانی کش
     await updateCartCache(user.userId);
@@ -217,8 +222,8 @@ async function toggleCart() {
 //todo=================================================================== فراخوانی توابع سبد خرید
 async function initializeCart() {
   try {
-    let userCart = await functionGetUserCartInformation();
-    await renderCartItems(userCart.items);
+    // let userCart = await functionGetUserCartInformation();
+    // await renderCartItems(userCart.items);
   } catch (error) {
     console.error("Error in Function initializeCart =>", error);
   }
@@ -229,7 +234,7 @@ async function removeFromCart(event) {
   try {
     if (!(await showAlertLogin())) return false;
     let titleCart = await extractProductTitle(event.target);
-    let userLogged = await functionGetLoggedInUserInformation();
+    // let userLogged = await functionGetLoggedInUserInformation();
     let Carts = await fetchDataFromApi(
       `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
     );
@@ -277,20 +282,20 @@ async function removeFromCart(event) {
 //todo=================================================================== نمایش پیغام خالی بودن سبد خرید
 let showAlertEmptyCart = async () => {
   try {
-    const updateCart = await functionGetUserCartInformation();
+    // const updateCart = await functionGetUserCartInformation();
     const alertCart = document.querySelector(".alert-cart");
     const notifCart = document.querySelector(".notif-cart"); 
 
-    if (updateCart.items.length <= 0) {
-      alertCart.classList.remove("d-none");
-      alertCart.classList.add("d-block");
-      notifCart.classList.remove("is-notif");
-    } else {
-      alertCart.classList.add("d-none");
-      alertCart.classList.remove("d-block");
-    }
+    // if (updateCart.items.length <= 0) {
+    //   alertCart.classList.remove("d-none");
+    //   alertCart.classList.add("d-block");
+    //   notifCart.classList.remove("is-notif");
+    // } else {
+    //   alertCart.classList.add("d-none");
+    //   alertCart.classList.remove("d-block");
+    // }
 
-    await renderCartItems(updateCart.items);
+    // await renderCartItems(updateCart.items);
     hideLoader();
   } catch (error) {
     console.error("Error in Function showAlertEmptyCart =>", error);
@@ -307,7 +312,7 @@ let updateQuantity = async (event, operation) => {
     const title = await extractProductTitle(event.target);
     const priceElem = boxProduct.querySelector(".total-price");
     const quantityElem = boxProduct.querySelector(".number");
-    const userLogged = await functionGetLoggedInUserInformation();
+    // const userLogged = await functionGetLoggedInUserInformation();
     
     // دریافت اطلاعات سبد خرید با کش
     const cartCache = await getCartCache(userLogged.userId);
@@ -370,7 +375,7 @@ let updateQuantity = async (event, operation) => {
 let editeDataProductToDB = async (quantity, cartID, totalPriceProductCart) => {
   try {
     if (!(await showAlertLogin())) return false;
-    const userLogged = await functionGetLoggedInUserInformation();
+    // const userLogged = await functionGetLoggedInUserInformation();
         
     // const cartCache = await getCartCache(userLogged.userId);
     const product = cartCache || await fetchDataFromApi(
@@ -468,7 +473,7 @@ const updateCartCache = async (userId) => {
 //todo=================================================================== تابع حذف همه موارد موجود از سبد خرید
 async function removeAllFromCart(event) {
   try {
-    let userLogged = await functionGetLoggedInUserInformation();
+    // let userLogged = await functionGetLoggedInUserInformation();
     const response = await fetch(
       `https://onlineshope.onrender.com/api/carts/${userLogged.userId}/items`,
       { method: "DELETE" }
@@ -495,8 +500,8 @@ async function removeAllFromCart(event) {
 
 let finalBuyCartFunc = async () => {
   try {
-    let shopingCartProduct = await functionGetUserCartInformation();
-    await createBoxToPageCart(shopingCartProduct.items);
+    // let shopingCartProduct = await functionGetUserCartInformation();
+    // await createBoxToPageCart(shopingCartProduct.items);
   } catch (error) {
     console.error("Error in Function finalBuyCartFunc =>", error);
   }
@@ -560,6 +565,6 @@ export {
   closeCart,
   removeAllFromCart,
   removeFromCart,
-  functionGetLoggedInUserInformation,
-  functionGetUserCartInformation,
+  // functionGetLoggedInUserInformation,
+  // functionGetUserCartInformation,
 };

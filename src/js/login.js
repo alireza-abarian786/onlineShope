@@ -37,15 +37,16 @@ window.addEventListener("DOMContentLoaded" , () => {
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
+
     showLoader()
-    fetch('https://onlineshope.onrender.com/api/users')
-    .then(res => res.json())
-    .then(data => {
+    // fetch('https://onlineshope.onrender.com/api/users')
+    // .then(res => res.json())
+    // .then(data => {
 
-        let item = data.find(user => user.email === userName.value && user.password === password.value);
+        // let item = data.find(user => user.email === userName.value && user.password === password.value);
 
-        if (item && userName.value && password.value !== '') {
-            loginCheked(item.name)
+        if (userName.value && password.value !== '') {
+            loginCheked()
             
         } else {
             hideLoader()
@@ -56,8 +57,8 @@ btnLogin.addEventListener('click', (e) => {
                 button: "تایید",
             })
         }
-    })
-    .catch(error => console.error("خطا در دریافت اطلاعات از سرور:", error));
+    // })
+    // .catch(error => console.error("خطا در دریافت اطلاعات از سرور:", error));
 });
 
 function clearInput() {
@@ -65,45 +66,20 @@ function clearInput() {
     password.value = '';
 }
 
-async function loginCheked(username) {
-    setLocalStorage('login' , username);
-
-    let userData = await fetchUserFromDatabase();    
+async function loginCheked() {
     const cartUser = {
-        email: userData.email,
-        password: userData.password
+        email: userName.value.trim(),
+        password: password.value.trim()
     }    
-    let res = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
+    const res = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
         body: JSON.stringify(cartUser)
     })
-
-    hideLoader()
-    clearInput();          
+         
     if (res.ok) {
-        // // ایجاد سبد خرید برای کاربر جدید
-        // try {
-        //     const cartResponse = await fetch(`https://onlineshope.onrender.com/api/carts/${userData._id}/items`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             items: [],
-        //             totalPrice: 0
-        //         })
-        //     });
-            
-        //     if (!cartResponse.ok) {
-        //         console.error('خطا در ایجاد سبد خرید');
-        //     }
-        // } catch (error) {
-        //     console.error('خطا در ایجاد سبد خرید:', error);
-        // }
-
         Swal.fire({
             title: 'خوش آمدید',
             text: "⁉️میخواهید به پنل کاربری خود بروید",
@@ -118,6 +94,13 @@ async function loginCheked(username) {
             }
         })
     }
+    const data = await res.json()
+    console.log(data);
+    
+    // setLocalStorage('login' , username);
+    setLocalStorage('token' , data.token);
+    clearInput(); 
+    hideLoader()
 }
 
 //! ------------------------------------------------------------------------------------------- sign up
@@ -166,12 +149,15 @@ let statusLogin = async (username) => {
                 });
                 
                 const data = await res.json();
+                console.log(data);
+                
                 
                 if (!res.ok) {
                     throw new Error(data.error || data.details || `HTTP error! status: ${res.status}`);
                 }
 
                 setLocalStorage('login', username);
+                setLocalStorage('token', data.token);
                 isLogin();
                 clearInputSignUp();
 

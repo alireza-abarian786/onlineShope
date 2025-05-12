@@ -1,19 +1,20 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import {initTooltips,fetchDataFromApi,hideLoader,} from "../utils.js";
-import { attachCartEventListeners, functionGetLoggedInUserInformation, functionGetUserCartInformation } from "./cart.js";
+import { attachCartEventListeners } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { attachProductEventListeners, extractProductTitle } from "./box.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
+import { getToken } from "./storage.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
-  let userCart = await functionGetUserCartInformation()
-  console.log(userCart);
+  // let userCart = await functionGetUserCartInformation()
+  // console.log(userCart);
   
   const notifCart = document.querySelector(".notif-cart");
-  notifCart.classList.toggle("is-notif", userCart.items.length > 0);
+  // notifCart.classList.toggle("is-notif", userCart.items.length > 0);
   hideLoader();
 }
 
@@ -208,24 +209,31 @@ let showModal = (text) => {
 };
 
 //todo========================================================== اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
-let changeBtnAfterAdd = async (element) => {
-  let card = element.closest(".swiper-slide");
-  if (card.querySelector(".add-cart p")) {
-    card.querySelector(".btn-cart-box").classList.add("add-cart-active-btn"); //* اعمال کلاس جدید کلید سبد خرید
-    card.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"; //* عنوان کلید سبد خرید
-    card
-      .querySelector(".add-cart > p")
-      .classList.add("add-cart-active-content"); //* اعمال کلاس جدید به عنوان کلید سبد خرید
-    card
-      .querySelector(".add-cart > svg")
-      .classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
-
-      hideLoader()
-    } else {
-      card.querySelector(".btn-cart-box").classList.add("buy-button-active");
-      card.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
-      hideLoader()
-  }
+let changeBtnAfterAdd = async () => {
+  const card = document.querySelectorAll(".glide")
+  const productToCart = await fetch('https://onlineshope.onrender.com/api/cart' , {
+    headers: {
+      Authorization: `Bearer ${await getToken()}`
+    }
+  }) 
+  console.log(productToCart);
+  
+  card.forEach(item => {
+    // console.log(item.dataset.id);
+    
+  })
+    // let card = event.target.closest(".swiper-slide");
+    // if (card.querySelector(".add-cart p")) {
+    //   card.querySelector(".btn-cart-box").classList.add("add-cart-active-btn"); //* اعمال کلاس جدید کلید سبد خرید
+    //   card.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"; //* عنوان کلید سبد خرید
+    //   card.querySelector(".add-cart > p").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به عنوان کلید سبد خرید
+    //   card.querySelector(".add-cart > svg").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
+    //   hideLoader()
+    // } else {
+    //   card.querySelector(".btn-cart-box").classList.add("buy-button-active");
+    //   card.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
+    //   hideLoader()
+    // }  
 };
 
 //todo========================================================== اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
@@ -265,8 +273,8 @@ let changeBtnAfterDelete = async (element) => {
 
 //todo========================================================== ✅ تابع بررسی وضعیت در سبد خرید بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusCarts() {
-  let userCart = await functionGetUserCartInformation();
-  console.log(userCart);
+  // let userCart = await functionGetUserCartInformation();
+  // console.log(userCart);
   
   document.querySelectorAll(".btn-cart-box").forEach(async (btn) => {                                        //?🧺🔖 دسترسی به باکس تمام محصولات
     let title = await extractProductTitle(btn);                                                             //? دریافت عنوان محصول
@@ -278,18 +286,18 @@ async function initializeStatusCarts() {
 
 //todo========================================================== ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
 async function initializeStatusMarks() {
-  let Marks = await fetchDataFromApi(
-    "https://onlineshope.onrender.com/api/bookmarks"
-  ); //? دریافت اطلاعات تمام بوکمارک‌ها
-  document.querySelectorAll(".icon-bookmark").forEach(async (btn) => {
-    //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید
-    let title = await extractProductTitle(btn); //? دریافت عنوان محصول
-    if (Marks.some((item) => item.product_name === title)) {
-      //? اگر محصول در لیست بوکمارک‌ ها بود
-      btn.parentElement.classList.add("is-mark"); //? اعمال کلاس جدید برای نشان دادن وضعیت
-      btn.parentElement.classList.remove("not-mark"); //? حذف کلاس قبلی
-    }
-  });
+  // let Marks = await fetchDataFromApi(
+  //   "https://onlineshope.onrender.com/api/bookmarks"
+  // ); //? دریافت اطلاعات تمام بوکمارک‌ها
+  // document.querySelectorAll(".icon-bookmark").forEach(async (btn) => {
+  //   //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید
+  //   let title = await extractProductTitle(btn); //? دریافت عنوان محصول
+  //   if (Marks.some((item) => item.product_name === title)) {
+  //     //? اگر محصول در لیست بوکمارک‌ ها بود
+  //     btn.parentElement.classList.add("is-mark"); //? اعمال کلاس جدید برای نشان دادن وضعیت
+  //     btn.parentElement.classList.remove("not-mark"); //? حذف کلاس قبلی
+  //   }
+  // });
 }
 
 //todo========================================================== ساخت باکس محصولات صفحه اصلی
@@ -304,11 +312,11 @@ let createProductsAppliances = (element, arrAppliances) => {
     return;
   }
 
-  arrAppliances.forEach((box) => {
+  arrAppliances.forEach((box) => {    
     element.insertAdjacentHTML(
       "beforeend", 
       
-      `<div class="swiper-slide glide product-box">
+      `<div class="swiper-slide glide product-box" data-id=${box._id}>
           ${box.discount ? `<div class='box-discount'>${Math.floor(box.discount / 10000)}%</div>` : ""}
           <div class="box-img" class="glide__track" data-glide-el="track">
             <ul class="glide__slides h-100">

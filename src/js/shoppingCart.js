@@ -1,4 +1,4 @@
-import { functionGetUserCartInformation, removeFromCart , updateQuantity } from "./funcs/store/cart.js"
+import { removeFromCart , updateQuantity } from "./funcs/store/cart.js"
 // -----------------------------------------------------------------------------------------------------------------------
 
 let total = document.querySelectorAll(".Total-cart-price")

@@ -16,4 +16,8 @@ function removeItemFromStorage(key, id) {
     setLocalStorage(key, updatedData);
 }
 
-export { setLocalStorage, getLocalStorage, removeItemFromStorage, }
+const getToken = () => {
+    return getLocalStorage('token') ? getLocalStorage('token') : [];
+}
+
+export { setLocalStorage, getLocalStorage, removeItemFromStorage, getToken}

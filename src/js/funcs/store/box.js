@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getLocalStorage} from "./storage.js";
-import { addToCart, functionGetLoggedInUserInformation} from "./cart.js";
+import { getLocalStorage , getToken} from "./storage.js";
+import { addToCart} from "./cart.js";
 import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
 import { fetchDataFromApi} from "../utils.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
@@ -87,8 +87,35 @@ async function updateCartButtonState(event) {
 
 //todo============================================================= تابع افزودن محصول به سبد خرید
 async function addToCartAndToggleButton(event) {  
-    await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
-    await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
+    try {        
+        const Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');           
+        const productName = await extractProductTitle(event.target)                                                      
+        const product = Products.find(product => product.name === productName) 
+        const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${await getToken()}`
+                },
+                body: JSON.stringify({
+                    productId: product._id,
+                    quantity: 1,
+                })
+            }
+        );
+        console.log("توکن:", await getToken());
+
+
+        const result = await response.json();
+        console.log(response);
+        console.log(result);
+        changeBtnAfterAdd()
+
+  } catch (error) {
+        throw error;
+  }
+    // await addToCart(event);                                                                                   //* تابع افزودن به سبد خرید
+    // await updateCartButtonState(event)                                                                       //* تغییر استایل دکمه سبد خرید محصول 
 }
 
 //todo============================================================= تابع مریوط به دکمه های باکس محصول

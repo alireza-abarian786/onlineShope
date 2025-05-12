@@ -31,8 +31,8 @@ function initTooltips() {
 
 //todo===================================== نمایش الرت وضعیت لاگین کاربر
 let showAlertLogin = async () => {
-  let userName = await getLocalStorage("login");       //* کاربری که لاگین کرده username
-  if (!userName || !userName.length) {                //* اگر کاربر لاگین نکرده بود
+  const token = await getLocalStorage("token");       //* کاربری که لاگین کرده username
+  if (!token || !token.length) {                //* اگر کاربر لاگین نکرده بود
     Swal.fire({
       //* نمایش پیغام مناسب
       title: "شما در سایت ثبت نام نکرده اید",
@@ -53,60 +53,59 @@ let showAlertLogin = async () => {
 };
 
 //todo======================================== api دریافت اطلاعات از
-// const fetchDataFromApi = async (url) => {
-//   try {
-//     const response = await fetch(url);
-//     if (!response.ok) {
-//       throw new Error(
-//         `Failed to fetch data from ${url}. Status: ${response.status}`
-//       );
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error("Error fetching data:", error.message);
-//     throw error;
-//   }
-// };
-
-const fetchDataFromApi = async (url, options = {}) => {
+const fetchDataFromApi = async (url) => {
   try {
-    console.log('Fetching data from:', url);
-    
-    const response = await fetch(url, {
-      method: options.method || 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-      },
-      body: options.body ? JSON.stringify(options.body) : undefined,
-      ...options
-    });
-    
-    console.log('Response status:', response.status);
-    
-    // برای خطاهای 4xx و 5xx
+    const response = await fetch(url);
     if (!response.ok) {
-      if (response.status === 404) {
-        console.error(`URL یافت نشد: ${url}`);
-        // سعی کنید یک مسیر دیگر را امتحان کنید
-        if (url.includes('/api/carts/')) {
-          const testUrl = url.replace(/\/api\/carts\/.*$/, '/api/carts/test');
-          console.log(`آزمایش مسیر جایگزین: ${testUrl}`);
-          const testResponse = await fetch(testUrl);
-          console.log('پاسخ مسیر تست:', testResponse.status);
-        }
-      }
-      throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
+      throw new Error(
+        `Failed to fetch data from ${url}. Status: ${response.status}`
+      );
     }
-    
-    const data = await response.json();
-    console.log('Received data:', data);
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error.message);
     throw error;
   }
 };
+
+// const fetchDataFromApi = async (url, options = {}) => {
+//   try {
+//     console.log('Fetching data from:', url);
+    
+//     const response = await fetch(url, {
+//       method: options.method || 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         ...options.headers
+//       },
+//       body: options.body ? JSON.stringify(options.body) : undefined,
+//       ...options
+//     });
+    
+//     console.log('Response status:', response.status);
+    
+//     // برای خطاهای 4xx و 5xx
+//     if (!response.ok) {
+//       if (response.status === 404) {
+//         console.error(`URL یافت نشد: ${url}`);
+//         // سعی کنید یک مسیر دیگر را امتحان کنید
+//         if (url.includes('/api/carts/')) {
+//           const testUrl = url.replace(/\/api\/carts\/.*$/, '/api/carts/test');
+//           console.log(`آزمایش مسیر جایگزین: ${testUrl}`);
+//           const testResponse = await fetch(testUrl);
+//           console.log('پاسخ مسیر تست:', testResponse.status);
+//         }
+//       }
+//       throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
+//     }
+    
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//     throw error;
+//   }
+// };
 
 //todo============================================ تابع نمایش لودر
 function showLoader() {
@@ -118,52 +117,13 @@ function hideLoader() {
   loaderElem.classList.add("hidden");
 }
 
-// سیستم مدیریت خطای مرکزی
-const ErrorHandler = {
-  errors: [],
-  
-  logError(error, context = '') {
-    const errorInfo = {
-      message: error.message || 'خطای ناشناخته',
-      context,
-      timestamp: new Date().toISOString(),
-      stack: error.stack
-    };
-    
-    this.errors.push(errorInfo);
-    
-    // در محیط توسعه، خطا را در کنسول نمایش می‌دهیم
-    if (process.env.NODE_ENV === 'development') {
-      console.error(`[${context}]`, error);
-    }
-    
-    return errorInfo;
-  },
-  
-  showErrorToUser(error, customMessage = '') {
-    const message = customMessage || error.message || 'خطایی رخ داده است';
-    showModal(`❌ ${message}`);
-  },
-  
-  clearErrors() {
-    this.errors = [];
-  },
-  
-  getErrors() {
-    return this.errors;
-  }
-};
+//todo============================================ تابع مخفی کردن لودر
 
-// تابع کمکی برای مدیریت خطاهای API
-const handleApiError = async (response, context = '') => {
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const error = new Error(errorData.error || `خطای HTTP: ${response.status}`);
-    ErrorHandler.logError(error, context);
-    throw error;
-  }
-  return response;
-};
+
+
+
+
+
 
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {
@@ -174,6 +134,4 @@ export {
   fetchDataFromApi,
   showLoader,
   hideLoader,
-  ErrorHandler,
-  handleApiError,
 };
