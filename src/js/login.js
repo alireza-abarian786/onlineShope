@@ -151,13 +151,13 @@ let statusLogin = async (username) => {
                 email: emailSignUp.value.trim(), 
                 password: passwordSignUp.value.trim(),
                 phone: phoneInput.value.trim(),
-                address: "iran"
             }
-
+            
+            // address: "iran"
             console.log('Sending user data:', newUser);
 
             try {
-                let res = await fetch('https://onlineshope.onrender.com/api/users', {
+                let res = await fetch('https://onlineshope.onrender.com/api/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
