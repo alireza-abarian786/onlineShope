@@ -216,24 +216,44 @@ let changeBtnAfterAdd = async () => {
       Authorization: `Bearer ${await getToken()}`
     }
   }) 
-  console.log(productToCart);
+
+  if (productToCart.status === 401) {
+    const result = await productToCart.json();            
+    if (result.message === 'Not authorized') {
+        Swal.fire({
+            title: 'نشست شما منقضی شده',
+            text: "💫 لطفاً دوباره وارد شوید",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "باشه",
+            cancelButtonText: "لغو",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "./login.html"; //* آدرس صفحه مقصد
+                }
+        });
+    }
+}
+
   
-  card.forEach(item => {
-    // console.log(item.dataset.id);
-    
-  })
-    // let card = event.target.closest(".swiper-slide");
-    // if (card.querySelector(".add-cart p")) {
-    //   card.querySelector(".btn-cart-box").classList.add("add-cart-active-btn"); //* اعمال کلاس جدید کلید سبد خرید
-    //   card.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"; //* عنوان کلید سبد خرید
-    //   card.querySelector(".add-cart > p").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به عنوان کلید سبد خرید
-    //   card.querySelector(".add-cart > svg").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
-    //   hideLoader()
-    // } else {
-    //   card.querySelector(".btn-cart-box").classList.add("buy-button-active");
-    //   card.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
-    //   hideLoader()
-    // }  
+  const result = await productToCart.json()
+  result.products.forEach(itemCart => {
+    card.forEach(item => {
+      if (item.dataset.id === itemCart.product._id) {
+        if (item.querySelector(".add-cart p")) {
+          item.querySelector(".btn-cart-box").classList.add("add-cart-active-btn"); //* اعمال کلاس جدید کلید سبد خرید
+          item.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"; //* عنوان کلید سبد خرید
+          item.querySelector(".add-cart > p").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به عنوان کلید سبد خرید
+          item.querySelector(".add-cart > svg").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
+          hideLoader()
+        } else {
+          item.querySelector(".btn-cart-box").classList.add("buy-button-active");
+          item.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
+          hideLoader()
+        }  
+      }
+    })
+  })  
 };
 
 //todo========================================================== اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید

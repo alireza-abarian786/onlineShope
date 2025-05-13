@@ -1,9 +1,8 @@
 //!---------------------------------------------------------------------- import -------------------------------------------------------
 import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
-import { createProductsAppliances , createBlogs, updateCartNotification, initializeStatusCarts} from "./funcs/store/ui.js";
+import { createProductsAppliances , createBlogs, initializeStatusMarks, updateCartNotification, initializeStatusCarts, changeBtnAfterAdd} from "./funcs/store/ui.js";
 import { fetchDataFromApi, hideLoader } from "./funcs/utils.js";
-import { initializeStatusMarks } from "./funcs/store/ui.js";
 import { fetchCategoriesForShowToMenu, isLogin, searchGlobalHandler } from "./header.js";
 import { closeCart, toggleCart } from "./funcs/store/cart.js";
 
@@ -57,6 +56,7 @@ window.addEventListener("load", async () => {
   initializeStatusCarts()
   hideLoader()
   updateCartNotification()
+  changeBtnAfterAdd()
 });
 
 

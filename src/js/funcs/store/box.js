@@ -103,12 +103,30 @@ async function addToCartAndToggleButton(event) {
                 })
             }
         );
-        console.log("توکن:", await getToken());
+
+        if (response.status === 401) {
+            const result = await response.json();            
+            if (result.message === 'Not authorized') {
+                Swal.fire({
+                    title: 'نشست شما منقضی شده',
+                    text: "💫 لطفاً دوباره وارد شوید",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "باشه",
+                    cancelButtonText: "لغو",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "./login.html"; //* آدرس صفحه مقصد
+                        }
+                });
+            }
+        }
 
 
-        const result = await response.json();
+
+        // const result = await response.json();
         console.log(response);
-        console.log(result);
+        // console.log(result);
         changeBtnAfterAdd()
 
   } catch (error) {

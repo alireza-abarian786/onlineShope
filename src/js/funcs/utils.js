@@ -34,7 +34,6 @@ let showAlertLogin = async () => {
   const token = await getLocalStorage("token");       //* کاربری که لاگین کرده username
   if (!token || !token.length) {                //* اگر کاربر لاگین نکرده بود
     Swal.fire({
-      //* نمایش پیغام مناسب
       title: "شما در سایت ثبت نام نکرده اید",
       text: "⁉️ آیا مایل به ثبت نام در سایت هستید",
       icon: "warning",
