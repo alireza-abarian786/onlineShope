@@ -229,7 +229,8 @@ let changeBtnAfterAdd = async () => {
             cancelButtonText: "لغو",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "./login.html"; //* آدرس صفحه مقصد
+                    window.location.href = "./login.html";
+                    return false;
                 }
         });
     }

@@ -1,4 +1,4 @@
-import {setLocalStorage, getLocalStorage} from './funcs/store/storage.js';
+import {setLocalStorage, getLocalStorage, getToken} from './funcs/store/storage.js';
 import { showLoader , hideLoader} from "./funcs/utils.js";
 import { toggleCart , closeCart } from './funcs/store/cart.js';
 import { fetchUserFromDatabase } from './funcs/store/box.js';
@@ -96,6 +96,15 @@ async function loginCheked() {
     }
     const data = await res.json()
     console.log(data);
+
+    const a = await fetch("https://onlineshope.onrender.com/api/user/me" , {
+        headers: {
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
+    const b = await a.json()
+    console.log(b);
+    
     
     // setLocalStorage('login' , username);
     setLocalStorage('token' , data.token);
