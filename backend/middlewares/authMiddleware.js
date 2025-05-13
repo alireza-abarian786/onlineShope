@@ -11,6 +11,8 @@ const protect = async (req, res, next) => {
     ) {
       token = req.headers.authorization.split(' ')[1];
 
+      console.log('protect middleware activated');
+
       console.log('TOKEN:', token);
       console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
