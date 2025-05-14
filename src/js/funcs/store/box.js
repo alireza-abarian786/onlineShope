@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage , getToken} from "./storage.js";
 import { addToCart} from "./cart.js";
-import { changeBtnAfterAdd , updateArrowButtonColors} from "./ui.js";
+import { changeBtnAfterAdd , updateArrowButtonColors , showModal} from "./ui.js";
 import { fetchDataFromApi} from "../utils.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
@@ -91,42 +91,86 @@ async function addToCartAndToggleButton(event) {
         const Products = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');           
         const productName = await extractProductTitle(event.target)                                                      
         const product = Products.find(product => product.name === productName) 
-        const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${await getToken()}`
-                },
-                body: JSON.stringify({
-                    productId: product._id,
-                    quantity: 1,
-                })
+        const a = await fetch('https://onlineshope.onrender.com/api/cart' , {
+            headers: {
+               Authorization: `Bearer ${await getToken()}` 
             }
-        );
+        })
+        const b = await a.json()
+        
+        console.log(!b.products.length);
+        
+        b.products.forEach(async (item) => {
+            console.log(item.product._id !== product._id);
+            if (item.product._id !== product._id) {
+                const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${await getToken()}`
+                        },
+                        body: JSON.stringify({
+                            productId: product._id,
+                            quantity: 1,
+                        })
+                    }
+                );
+        
+                if (response.status === 401) {
+                    const result = await response.json();            
+                    if (result.message === 'Not authorized') {
+                        Swal.fire({
+                            title: 'نشست شما منقضی شده',
+                            text: "💫 لطفاً دوباره وارد شوید",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "باشه",
+                            cancelButtonText: "لغو",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "./login.html"; //* آدرس صفحه مقصد
+                                }
+                        });
+                    }
+                }
 
-        if (response.status === 401) {
-            const result = await response.json();            
-            if (result.message === 'Not authorized') {
-                Swal.fire({
-                    title: 'نشست شما منقضی شده',
-                    text: "💫 لطفاً دوباره وارد شوید",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "باشه",
-                    cancelButtonText: "لغو",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "./login.html"; //* آدرس صفحه مقصد
-                        }
-                });
+            } else {
+                showModal(`✅🛒 ${product.name} از قبل در سبد خرید شما موجود است`);
+
             }
-        }
+        })
 
-
-
-        // const result = await response.json();
-        console.log(response);
-        // console.log(result);
+                //         const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
+                //         method: "POST",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             Authorization: `Bearer ${await getToken()}`
+                //         },
+                //         body: JSON.stringify({
+                //             productId: product._id,
+                //             quantity: 1,
+                //         })
+                //     }
+                // );
+        
+                // if (response.status === 401) {
+                //     const result = await response.json();            
+                //     if (result.message === 'Not authorized') {
+                //         Swal.fire({
+                //             title: 'نشست شما منقضی شده',
+                //             text: "💫 لطفاً دوباره وارد شوید",
+                //             icon: "warning",
+                //             showCancelButton: true,
+                //             confirmButtonText: "باشه",
+                //             cancelButtonText: "لغو",
+                //             }).then((result) => {
+                //                 if (result.isConfirmed) {
+                //                     window.location.href = "./login.html"; //* آدرس صفحه مقصد
+                //                 }
+                //         });
+                //     }
+                // }
+        
         changeBtnAfterAdd()
 
   } catch (error) {

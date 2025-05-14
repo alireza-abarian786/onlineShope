@@ -2,9 +2,10 @@
 import { settingSliderSwiper } from "./funcs/sliders.js";
 import { runTimer } from "./funcs/timer.js";
 import { createProductsAppliances , createBlogs, initializeStatusMarks, updateCartNotification, initializeStatusCarts, changeBtnAfterAdd} from "./funcs/store/ui.js";
-import { fetchDataFromApi, hideLoader } from "./funcs/utils.js";
+import { fetchDataFromApi, hideLoader , showAlertLogin} from "./funcs/utils.js";
 import { fetchCategoriesForShowToMenu, isLogin, searchGlobalHandler } from "./header.js";
 import { closeCart, toggleCart } from "./funcs/store/cart.js";
+import { getToken } from "./funcs/store/storage.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
@@ -36,6 +37,21 @@ const getAllProduct = async () => {
     console.error("🚨 Error in getAllProduct:", error);
   }
 };
+
+// const checkedLogin = async () => {
+//     const res = await fetch("https://onlineshope.onrender.com/api/user/me" , {
+//       headers: {
+//         Authorization: `Bearer ${getToken()}`
+//       }
+//     })
+//     const data = await res.json()
+    
+//     console.log(data.name);
+//     if (data.message !== 'Not authorized') {
+      
+//     }
+    
+// }
 
 //!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 

@@ -1,6 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage } from "./funcs/store/storage.js";
-import { fetchDataFromApi } from "./funcs/utils.js";
+import { fetchDataFromApi , showAlertLogin} from "./funcs/utils.js";
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const boxDropDown = document.querySelector(".category-menu + div");
 const categoryMenu = document.querySelector(".category-menu");
@@ -83,6 +83,8 @@ async function isLogin() {
     loginBtnText.innerHTML = "ورود / عضویت";
     loginBtnIcon.classList.add("bg-white")
     loginBtn.setAttribute("href", "./login.html");
+    if (!(await showAlertLogin())) return false;
+
   }
 }
 

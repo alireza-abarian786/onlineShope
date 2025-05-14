@@ -1,5 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import {initTooltips,fetchDataFromApi,hideLoader,} from "../utils.js";
+import {initTooltips,fetchDataFromApi,hideLoader, showAlertLogin, UserInformationGetFunction} from "../utils.js";
 import { attachCartEventListeners } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
@@ -210,51 +210,34 @@ let showModal = (text) => {
 
 //todo========================================================== اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
 let changeBtnAfterAdd = async () => {
-  const card = document.querySelectorAll(".glide")
-  const productToCart = await fetch('https://onlineshope.onrender.com/api/cart' , {
+  const productCard = document.querySelectorAll(".product-box")
+  const cartProductsFetchOperation = await fetch('https://onlineshope.onrender.com/api/cart' , {
     headers: {
       Authorization: `Bearer ${await getToken()}`
     }
-  }) 
-
-  if (productToCart.status === 401) {
-    const result = await productToCart.json();            
-    if (result.message === 'Not authorized') {
-        Swal.fire({
-            title: 'نشست شما منقضی شده',
-            text: "💫 لطفاً دوباره وارد شوید",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "باشه",
-            cancelButtonText: "لغو",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "./login.html";
-                    return false;
-                }
-        });
-    }
-}
-
+  })   
   
-  const result = await productToCart.json()
-  result.products.forEach(itemCart => {
-    card.forEach(item => {
-      if (item.dataset.id === itemCart.product._id) {
-        if (item.querySelector(".add-cart p")) {
-          item.querySelector(".btn-cart-box").classList.add("add-cart-active-btn"); //* اعمال کلاس جدید کلید سبد خرید
-          item.querySelector(".add-cart > p").textContent = "به سبد اضافه شد"; //* عنوان کلید سبد خرید
-          item.querySelector(".add-cart > p").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به عنوان کلید سبد خرید
-          item.querySelector(".add-cart > svg").classList.add("add-cart-active-content"); //* اعمال کلاس جدید به ایکون کلید سبد خرید
-          hideLoader()
-        } else {
-          item.querySelector(".btn-cart-box").classList.add("buy-button-active");
-          item.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
-          hideLoader()
-        }  
-      }
-    })
-  })  
+  if (cartProductsFetchOperation.ok) {
+    const resultCartProductsFetchOperation = await cartProductsFetchOperation.json()    
+    productCard.forEach(item => {      
+      resultCartProductsFetchOperation.products.forEach(itemCart => {
+        if (item.dataset.id === itemCart.product._id) {
+          if (item.querySelector(".add-cart p")) {
+            item.querySelector(".btn-cart-box").classList.add("add-cart-active-btn");
+            item.querySelector(".add-cart > p").textContent = "به سبد اضافه شد";
+            item.querySelector(".add-cart > p").classList.add("add-cart-active-content");
+            item.querySelector(".add-cart > svg").classList.add("add-cart-active-content");
+            hideLoader()
+          } else {
+            item.querySelector(".btn-cart-box").classList.add("buy-button-active");
+            item.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
+            hideLoader()
+          }  
+        }
+      })
+    })  
+  }
+
 };
 
 //todo========================================================== اعمال تغییرات دکمه بعد از حذف محصول از سبد خرید
@@ -479,6 +462,7 @@ let createProductsAppliances = (element, arrAppliances) => {
   settingSliderGlide();
   attachProductEventListeners();
   clickAddBookMark();
+  changeBtnAfterAdd()
 };
 
 //todo========================================================== ساخت باکس مقالات صفحه اصلی

@@ -1,5 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getLocalStorage } from "./store/storage.js";
+import { getLocalStorage , getToken , setLocalStorage} from "./store/storage.js";
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const loaderElem = document.querySelector(".loader-container");
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
@@ -31,11 +31,11 @@ function initTooltips() {
 
 //todo===================================== نمایش الرت وضعیت لاگین کاربر
 let showAlertLogin = async () => {
-  const token = await getLocalStorage("token");       //* کاربری که لاگین کرده username
+  const token = await getLocalStorage("login");       //* کاربری که لاگین کرده username
   if (!token || !token.length) {                //* اگر کاربر لاگین نکرده بود
     Swal.fire({
       title: "شما در سایت ثبت نام نکرده اید",
-      text: "⁉️ آیا مایل به ثبت نام در سایت هستید",
+      text: "⁉️ آیا مایل به ورود در سایت هستید",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "بله، مایلم!",
@@ -49,6 +49,43 @@ let showAlertLogin = async () => {
   } else {
     return true;
   }
+    // const fetchLoggedInUserInformation = await fetch("https://onlineshope.onrender.com/api/user/me" , {
+    //   headers: {
+    //       Authorization: `Bearer ${getToken()}`
+    //   }
+    // })
+    // const resultFetchLoggedInUserInformation = await fetchLoggedInUserInformation.json() 
+    // console.log(resultFetchLoggedInUserInformation);
+    // console.log(fetchLoggedInUserInformation);
+       
+    // if (resultFetchLoggedInUserInformation.message === 'Not authorized') {
+    //     Swal.fire({
+    //         title: 'نشست شما منقضی شده',
+    //         text: "💫 لطفاً دوباره وارد شوید",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonText: "باشه",
+    //         cancelButtonText: "لغو",
+    //         }).then((result) => {
+    //             if (result.isConfirmed) {
+    //                 window.location.href = "./login.html";
+    //             }
+    //     });
+        
+    // } else {
+    //   Swal.fire({
+    //     title: "شما در سایت ثبت نام نکرده اید",
+    //     text: "⁉️ آیا مایل به ورود در سایت هستید",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonText: "بله، مایلم!",
+    //     cancelButtonText: "لغو",
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       window.location.href = "./login.html";
+    //     }
+    //   });
+    // }
 };
 
 //todo======================================== api دریافت اطلاعات از
@@ -116,8 +153,47 @@ function hideLoader() {
   loaderElem.classList.add("hidden");
 }
 
-//todo============================================ تابع مخفی کردن لودر
+//todo============================================ دریافت اطلاعات و بررسی وضعیت لاگین کاربر
+async function UserInformationGetFunction() {
+    const fetchLoggedInUserInformation = await fetch("https://onlineshope.onrender.com/api/user/me" , {
+        headers: {
+            Authorization: `Bearer ${getToken()}`
+        }
+    })
+    const resultFetchLoggedInUserInformation = await fetchLoggedInUserInformation.json()    
 
+    if (fetchLoggedInUserInformation.ok) {
+        setLocalStorage('login' , resultFetchLoggedInUserInformation.name);
+
+    } else if (resultFetchLoggedInUserInformation.message === 'Not authorized') {
+        Swal.fire({
+            title: 'نشست شما منقضی شده',
+            text: "💫 لطفاً دوباره وارد شوید",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "باشه",
+            cancelButtonText: "لغو",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "./login.html";
+                }
+        });
+        
+    } else {
+      Swal.fire({
+        title: "شما در سایت ثبت نام نکرده اید",
+        text: "⁉️ آیا مایل به ورود در سایت هستید",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "بله، مایلم!",
+        cancelButtonText: "لغو",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "./login.html";
+        }
+      });
+    }
+}
 
 
 
@@ -133,4 +209,5 @@ export {
   fetchDataFromApi,
   showLoader,
   hideLoader,
+  UserInformationGetFunction,
 };

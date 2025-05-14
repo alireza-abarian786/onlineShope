@@ -1,7 +1,6 @@
 import {setLocalStorage, getLocalStorage, getToken} from './funcs/store/storage.js';
-import { showLoader , hideLoader} from "./funcs/utils.js";
+import { showLoader , hideLoader , UserInformationGetFunction} from "./funcs/utils.js";
 import { toggleCart , closeCart } from './funcs/store/cart.js';
-import { fetchUserFromDatabase } from './funcs/store/box.js';
 import { isLogin } from './header.js';
 
 let userName = document.querySelector('.Username-input');
@@ -23,42 +22,33 @@ let passwordValid = false;
 let phoneValid = false;
 let emailValid = false;
 
-// ------------------------------------------------------------------------------------------- all
+//! ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
-    // let loginName = getLocalStorage('login');         
-    // SignUpUser()
     toggleCart()
     closeCart()
-    // fetchUserCart()
     hideLoader()
 })
 
-// ------------------------------------------------------------------------------------------- login
+//! ------------------------------------------------------------------------------------------- login
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
-
-
     showLoader()
-    // fetch('https://onlineshope.onrender.com/api/users')
-    // .then(res => res.json())
-    // .then(data => {
 
-        // let item = data.find(user => user.email === userName.value && user.password === password.value);
-
-        if (userName.value && password.value !== '') {
-            loginCheked()
-            
-        } else {
-            hideLoader()
-            Swal.fire({
-                title: "ورود ناموفق",
-                text: "لطفا نام کاربری یا رمز عبور را به درستی وارد کنید",
-                icon: "error",
-                button: "تایید",
-            })
-        }
-    // })
-    // .catch(error => console.error("خطا در دریافت اطلاعات از سرور:", error));
+    if (userName.value && password.value !== '') {
+        loginOperationManagementFunction()
+        UserInformationGetFunction()
+        clearInput(); 
+        hideLoader()
+        
+    } else {
+        hideLoader()
+        Swal.fire({
+            title: "ورود ناموفق",
+            text: "لطفا نام کاربری یا رمز عبور را به درستی وارد کنید",
+            icon: "error",
+            button: "تایید",
+        })
+    }
 });
 
 function clearInput() {
@@ -66,20 +56,21 @@ function clearInput() {
     password.value = '';
 }
 
-async function loginCheked() {
-    const cartUser = {
+const loginOperationManagementFunction = async () => {
+    const userLoginInformation = {
         email: userName.value.trim(),
         password: password.value.trim()
     }    
-    const res = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
+
+    const loginOperation = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(cartUser)
+        body: JSON.stringify(userLoginInformation)
     })
          
-    if (res.ok) {
+    if (loginOperation.ok) {
         Swal.fire({
             title: 'خوش آمدید',
             text: "⁉️میخواهید به پنل کاربری خود بروید",
@@ -93,23 +84,10 @@ async function loginCheked() {
                 window.location.href = './doshboard.html';
             }
         })
-    }
-    const data = await res.json()
-    console.log(data);
 
-    const a = await fetch("https://onlineshope.onrender.com/api/user/me" , {
-        headers: {
-            Authorization: `Bearer ${getToken()}`
-        }
-    })
-    const b = await a.json()
-    console.log(b);
-    
-    
-    // setLocalStorage('login' , username);
-    setLocalStorage('token' , data.token);
-    clearInput(); 
-    hideLoader()
+        const resultLoginOperation = await loginOperation.json()
+        setLocalStorage('token' , resultLoginOperation.token);
+    }
 }
 
 //! ------------------------------------------------------------------------------------------- sign up
@@ -145,9 +123,6 @@ let statusLogin = async (username) => {
                 phone: phoneInput.value.trim(),
             }
             
-            // address: "iran"
-            console.log('Sending user data:', newUser);
-
             try {
                 let res = await fetch('https://onlineshope.onrender.com/api/auth/register', {
                     method: 'POST',
