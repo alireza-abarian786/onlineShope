@@ -27,15 +27,23 @@ const getCart = async (req, res) => {
         continue;
       }
 
-      const price = product.price || 0;
-      // گرفتن دو رقم اول از مقدار discount به‌عنوان درصد
-      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
+      const price = product.price;
+      const discountPercent = product.discount
+        ? parseInt(product.discount.toString().slice(0, 2))
+        : 0;
 
       const productTotal = price * quantity;
-      const discountAmount = (price * quantity * discountPercent) / 100; // محاسبه تخفیف درصدی
+      const discountAmount = (productTotal * discountPercent) / 100;
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
+
+      // اضافه کردن قیمت نهایی برای هر محصول
+      item.product = item.product.toObject();
+      item.product.finalPrice = productTotal - discountAmount;
+      item.product.totalPrice = productTotal;
+      item.product.discountPercent = discountPercent;
+      item.product.discountAmount = discountAmount;
     }
 
     const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
@@ -47,24 +55,17 @@ const getCart = async (req, res) => {
       totalWithDiscount,
     });
 
-    // لاگ برای دیباگ
     if (process.env.NODE_ENV !== 'production') {
       console.log('cart.products:', cart.products);
       console.log('totalWithoutDiscount:', totalWithoutDiscount);
       console.log('totalDiscountAmount:', totalDiscountAmount);
       console.log('totalWithDiscount:', totalWithDiscount);
     }
-
   } catch (error) {
     console.error('🔥 خطا در getCart:', error);
     res.status(500).json({ message: 'خطا در دریافت سبد خرید' });
   }
 };
-
-
-
-
-
 
 
 

@@ -119,11 +119,11 @@ async function renderCartItems(cartItems) {
               item._id
             }" style='transform: translateY(0);'>
                 <div>
-                    <span class="plus-btn">+</span>
+                    <span class="plus-btn" onclick="updateQuantity(event , '${item._id}')">+</span>
                     <span class="number">${
                       item.quantity
                     }</span>
-                    <span class="minus-btn">-</span>
+                    <span class="minus-btn" onclick="updateQuantity(event , '${item._id}')">-</span>
                 </div>
                 <div class=''>
                     <div class='box-info-product h-100 d-flex flex-column align-items-center'>
@@ -156,7 +156,7 @@ async function renderCartItems(cartItems) {
                     <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1 total-price'>${(item.product.price - (item.product.price * (Math.floor(item.product.discount / 10000) / 100))).toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${item.totalWithDiscount.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
@@ -416,67 +416,49 @@ let showAlertEmptyCart = async () => {
 };
 
 //todo=================================================================== عملیات افزایش یا کاهش تعداد محصول در سبد خرید
-let updateQuantity = async (event, operation) => {
+let updateQuantity = async (event, id) => {
   try {
     // showLoader();
     if (!(await showAlertLogin())) return false;
-    
-    const boxProduct = event.target.closest(".swiper-slide");
-    const title = await extractProductTitle(event.target);
-    const priceElem = boxProduct.querySelector(".total-price");
-    const quantityElem = boxProduct.querySelector(".number");
-    // const userLogged = await functionGetLoggedInUserInformation();
-    
-    // دریافت اطلاعات سبد خرید با کش
-    const cartCache = await getCartCache(userLogged.userId);
-    const getProductsDB = cartCache || await fetchDataFromApi(
-      `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
+    const cartFetchOperation = await fetch(
+      "https://onlineshope.onrender.com/api/cart",
+      {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      }
     );
+    const resultCartFetchOperation = await cartFetchOperation.json(); 
+    console.log(resultCartFetchOperation.products);
 
-    const objProduct = getProductsDB.items.find(
-      (item) => item.product_name === title
-    );
-
-    if (!objProduct) {
-      hideLoader();
-      showModal("❌ محصول مورد نظر یافت نشد!");
-      return;
-    }
-
-    let quantity = Number(quantityElem.innerHTML);
-    const itemPrice = calculateDiscountedPrice(objProduct.price, objProduct.discount);
-    let updatePrice;
-
-    if (operation === "increase") {
-      quantity += 1;
-    } else if (operation === "decrease" && quantity > 1) {
-      quantity -= 1;
-    } else {
-      hideLoader();
-      showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
-      return;
-    }
-
-    updatePrice = itemPrice * quantity;
-
-    // به‌روزرسانی UI
-    quantityElem.textContent = quantity;
-    priceElem.textContent = updatePrice.toLocaleString();
+    const cartProduct = resultCartFetchOperation.products.find(product => product._id === id)
+    console.log(cartProduct);
     
-    // ارسال درخواست به سرور
-    await editeDataProductToDB(quantity, objProduct._id, updatePrice);    
+    console.log(resultCartFetchOperation.products);
     
-    // به‌روزرسانی کش
-    await updateCartCache(userLogged.userId);
+    console.log(event , id);
+
+    console.log('Sending PUT to /api/cart/update with', {
+      productId: id,
+      quantity: cartProduct.quantity + 1,
+    });
+
+
+    const res = await fetch("https://onlineshope.onrender.com/api/cart/update" , {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${await getToken()}`,
+      },
+      body: JSON.stringify({
+        productId: cartProduct.product._id,
+        quantity: cartProduct.quantity + 1,
+      })
+    })
+    console.log(res);
     
-    // به‌روزرسانی سبد خرید
-    await Promise.all([
-      refreshCart(),
-      totalPaymentFunc(),
-      finalBuyCartFunc()
-    ]);
     
-    hideLoader();
+    
   } catch (error) {
     console.error("Error in Function updateQuantity =>", error);
     hideLoader();
@@ -484,6 +466,62 @@ let updateQuantity = async (event, operation) => {
   }
 };
 
+//   const boxProduct = event.target.closest(".swiper-slide");
+//   const title = await extractProductTitle(event.target);
+//   const priceElem = boxProduct.querySelector(".total-price");
+//   const quantityElem = boxProduct.querySelector(".number");
+//   // const userLogged = await functionGetLoggedInUserInformation();
+  
+//   // دریافت اطلاعات سبد خرید با کش
+//   const cartCache = await getCartCache(userLogged.userId);
+//   const getProductsDB = cartCache || await fetchDataFromApi(
+//     `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
+//   );
+
+//   const objProduct = getProductsDB.items.find(
+//     (item) => item.product_name === title
+//   );
+
+//   if (!objProduct) {
+//     hideLoader();
+//     showModal("❌ محصول مورد نظر یافت نشد!");
+//     return;
+//   }
+
+//   let quantity = Number(quantityElem.innerHTML);
+//   const itemPrice = calculateDiscountedPrice(objProduct.price, objProduct.discount);
+//   let updatePrice;
+
+//   if (operation === "increase") {
+//     quantity += 1;
+//   } else if (operation === "decrease" && quantity > 1) {
+//     quantity -= 1;
+//   } else {
+//     hideLoader();
+//     showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
+//     return;
+//   }
+
+//   updatePrice = itemPrice * quantity;
+
+//   // به‌روزرسانی UI
+//   quantityElem.textContent = quantity;
+//   priceElem.textContent = updatePrice.toLocaleString();
+  
+//   // ارسال درخواست به سرور
+//   await editeDataProductToDB(quantity, objProduct._id, updatePrice);    
+  
+//   // به‌روزرسانی کش
+//   await updateCartCache(userLogged.userId);
+  
+//   // به‌روزرسانی سبد خرید
+//   await Promise.all([
+//     refreshCart(),
+//     totalPaymentFunc(),
+//     finalBuyCartFunc()
+//   ]);
+  
+//   hideLoader();
 //todo=================================================================== تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
 let editeDataProductToDB = async (quantity, cartID, totalPriceProductCart) => {
   try {
@@ -625,12 +663,12 @@ function attachCartEventListeners() {
   document.querySelectorAll(".remove-btn").forEach((btn) => {
     btn.addEventListener("click", removeFromCart);
   });
-  document.querySelectorAll(".plus-btn").forEach((btn) => {
-    btn.addEventListener("click", (event) => updateQuantity(event, "increase"));
-  });
-  document.querySelectorAll(".minus-btn").forEach((btn) => {
-    btn.addEventListener("click", (event) => updateQuantity(event, "decrease"));
-  });
+  // document.querySelectorAll(".plus-btn").forEach((btn) => {
+  //   btn.addEventListener("click", (event) => updateQuantity(event, "increase"));
+  // });
+  // document.querySelectorAll(".minus-btn").forEach((btn) => {
+  //   btn.addEventListener("click", (event) => updateQuantity(event, "decrease"));
+  // });
   document.querySelectorAll(".clear-cart-all").forEach((btn) => {
     btn.addEventListener("click", removeAllFromCart);
   });
@@ -656,6 +694,8 @@ function closeCart() {
     }
   });
 }
+
+window.updateQuantity = updateQuantity
 
 export {
   attachCartEventListeners,

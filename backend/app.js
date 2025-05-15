@@ -17,12 +17,15 @@ const userPanelRoutes = require('./routes/userPanelRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 
+
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+
+console.log("Mounting cart routes...");
 
 // Routes
 app.use('/api/auth', authRoutes);
