@@ -1,7 +1,9 @@
+import './header.js'
+
 import {setLocalStorage, getLocalStorage, getToken} from './funcs/store/storage.js';
 import { showLoader , hideLoader , UserInformationGetFunction} from "./funcs/utils.js";
 import { toggleCart , closeCart } from './funcs/store/cart.js';
-import { isLogin } from './header.js';
+// import { isLogin } from './header.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -32,7 +34,7 @@ window.addEventListener("DOMContentLoaded" , () => {
 //! ------------------------------------------------------------------------------------------- login
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
-    showLoader()
+    // showLoader()
 
     if (userName.value && password.value !== '') {
         loginOperationManagementFunction()
@@ -94,7 +96,7 @@ const loginOperationManagementFunction = async () => {
 btnSignUp.addEventListener("click", (event) => {
     event.preventDefault()
 
-    showLoader()
+    // showLoader()
     if (!usernameSignUp.value || !passwordSignUp.value || !phoneInput.value) {
         hideLoader()
         Swal.fire({

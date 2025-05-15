@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-.notif-cart  {
+.cart-notification  {
     width: 10px;
     height: 10px;
     background-color: #ff6d64;
@@ -51,12 +51,12 @@
     display: none;
 }
 
-.is-notif {
+.is-notification {
     display: block;
 }
 
 /* --------------------------------------------------------------****** Shoping Cart Click ********-------------------------------------------------------------------- */
-.cantainer-open-cart {
+.container-shopping-cart {
     width: 102vw;
     position: absolute;
     top: -50px;

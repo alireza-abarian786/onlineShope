@@ -1,5 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { extractProductTitle , fetchProductFromDatabase } from "./box.js";
+// import { extractProductTitle , fetchProductFromDatabase } from "./box.js";
 import { showModal , updateBookmarkUI} from "./ui.js";
 import { showAlertLogin , fetchDataFromApi  , hideLoader} from "../utils.js";
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
@@ -8,7 +8,7 @@ import { showAlertLogin , fetchDataFromApi  , hideLoader} from "../utils.js";
 async function toggleBookmark(event) {
     if (! await showAlertLogin()) return false;                                                          //* بررسی لاگین کاربر
 
-    showLoader()
+    // showLoader()
     let card = event.target.closest('.swiper-slide')                                                   //* دریافت کارت محصول
     let title = await extractProductTitle(event.target)                                               //* دریافت عنوان محصول
     const [marks, markIndex] = await isBookMarkToDB(event);                                          //* دریافت لیست کل بوکمارک ها && دریافت محصول بوکمارک شده   

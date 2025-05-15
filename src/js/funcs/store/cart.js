@@ -1,23 +1,29 @@
 import {
-  updateCartNotification,
-  renderCartItems,
+  // updateCartNotification,
+  // renderCartItems,
   changeBtnAfterDelete,
   showModal,
   createBoxToPageCart,
 } from "./ui.js";
-import {
-  fetchProductFromDatabase,
-  extractProductTitle,
-} from "./box.js";
+// import {
+//   fetchProductFromDatabase,
+//   extractProductTitle,
+// } from "./box.js";
 import {
   fetchDataFromApi,
   hideLoader,
   showAlertLogin,
-  showLoader,
+  // showLoader,
 } from "../utils.js";
 import { totalPaymentFunc } from "../../shoppingCart.js";
 import { getLocalStorage, getToken } from "./storage.js";
 //! --------------------------------------------------------------------------------------------------------------------------------------------
+
+window.addEventListener("DOMContentLoaded" , () => {
+  updateCartNotification()
+  toggleCart()
+  closeCart()
+})
 
 //todo=================================================================== تابع دریافت اطلاعات کاربر لاگین‌شده
 // let functionGetLoggedInUserInformation = async () => {
@@ -95,6 +101,76 @@ const refreshCart = async () => {
   }
 };
 
+//todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
+async function renderCartItems(cartItems) {
+  console.log(cartItems);
+  
+  const container = document.querySelector(".cantain-box-goods");
+  container.innerHTML = ""; //? پاک کردن آیتم‌های قبلی
+  cartItems.forEach((item) => {
+    console.log(item);
+    
+    // محاسبه قیمت کل اگر وجود نداشت
+    // const totalPrice = item.totalPriceProductCart || (item.price * item.quantity);
+    
+    //?🛒 ساخت باکس محصول و افزودن به سبد خرید
+    const cartHTML = `
+            <div class="box-goods d-flex align-items-end swiper-slide" data-id="${
+              item._id
+            }" style='transform: translateY(0);'>
+                <div>
+                    <span class="plus-btn">+</span>
+                    <span class="number">${
+                      item.quantity
+                    }</span>
+                    <span class="minus-btn">-</span>
+                </div>
+                <div class=''>
+                    <div class='box-info-product h-100 d-flex flex-column align-items-center'>
+                    
+                        <div class='row w-100 h-100'>
+                            <div class='col'>
+                                <div class='row'>
+                                    <div class='col-1 p-0'>
+                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i></button>
+                                    </div>
+                                    <div class='col-11 pe-1'>
+                                        <h6 class='bg-white rounded text-center'>${
+                                          item.product.name
+                                        }</h6>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <p class='text-white fw-light px-2 m-0 rounded'>${
+                                      item.product.description
+                                    }</p>
+                                </div>
+                            </div>
+                            <div class='col-4 p-0'>
+                                <img src="${
+                                  item.product.images[0]
+                                }" alt="img" class='rounded w-100 h-100'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
+                        <span class='d-flex'>
+                            تومان
+                            <span class='price ms-1 total-price'>${(item.product.price - (item.product.price * (Math.floor(item.product.discount / 10000) / 100))).toLocaleString()}</span>
+                        </span>
+                        <span>:قیمت محصول</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+    container.insertAdjacentHTML("afterbegin", cartHTML);
+  });
+
+  attachCartEventListeners(); //?🛒  فراخوانی تابع فعال کردن دکمه های سبد خرید
+  // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
+}
+
 //todo=================================================================== تابع بررسی وجود یا عدم وجود محصول در سبد خرید
 async function addToCart(event) {
   try {
@@ -119,7 +195,7 @@ async function addToCart(event) {
       const result = await addCartToDB(product);
       await Promise.all([
         refreshCart(),
-        updateCartNotification(),
+        // updateCartNotification(),
         showAlertEmptyCart()
       ]);
       showModal(`✅🛒 ${product.name} به سبد خرید شما اضافه شد`);
@@ -196,12 +272,21 @@ let addCartToDB = async (product) => {
 
 //todo=================================================================== تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
 async function toggleCart() {
-  const shoppingCart = document.querySelector(".shoping-cart");
+  const cartFetchOperation = await fetch(
+    "https://onlineshope.onrender.com/api/cart",
+    {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    }
+  );
+  const resultCartFetchOperation = await cartFetchOperation.json(); 
+  const shoppingCartIcon = document.querySelector(".shopping-cart-icon");
   const openCart = document.querySelector(".open-cart");
-  const containerOpenCart = document.querySelector(".cantainer-open-cart");
-  const notifCart = document.querySelector(".notif-cart");
+  const containerOpenCart = document.querySelector(".container-shopping-cart");
+  const cartNotification = document.querySelector(".cart-notification");
 
-  shoppingCart.addEventListener("click", async () => {
+  shoppingCartIcon.addEventListener("click", async () => {
     console.log('Opening cart');
     
     try {
@@ -209,14 +294,34 @@ async function toggleCart() {
       openCart.classList.add("is-content");
       containerOpenCart.style.visibility = "visible";
       containerOpenCart.style.height = document.body.offsetHeight + "px";
-      notifCart.classList.remove("is-notif");
-      await refreshCart();
+      cartNotification.classList.remove("is-notification");
+      // await refreshCart();
+      renderCartItems(resultCartFetchOperation.products)
+      // console.log();
+      
       showAlertEmptyCart();
-      hideLoader();
+      // hideLoader();
     } catch (error) {
       console.error("Error in Function toggleCart =>", error);
     }
   });
+}
+
+//todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
+async function updateCartNotification() {
+  const cartFetchOperation = await fetch(
+    "https://onlineshope.onrender.com/api/cart",
+    {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    }
+  );
+  const resultCartFetchOperation = await cartFetchOperation.json();    
+  
+  const cartNotification = document.querySelector(".cart-notification");
+  cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
+  // hideLoader();
 }
 
 //todo=================================================================== فراخوانی توابع سبد خرید
@@ -282,21 +387,29 @@ async function removeFromCart(event) {
 //todo=================================================================== نمایش پیغام خالی بودن سبد خرید
 let showAlertEmptyCart = async () => {
   try {
-    // const updateCart = await functionGetUserCartInformation();
+    const cartFetchOperation = await fetch(
+      "https://onlineshope.onrender.com/api/cart",
+      {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      }
+    );
+    const resultCartFetchOperation = await cartFetchOperation.json(); 
     const alertCart = document.querySelector(".alert-cart");
-    const notifCart = document.querySelector(".notif-cart"); 
+    const cartNotification = document.querySelector(".cart-notification");
 
-    // if (updateCart.items.length <= 0) {
-    //   alertCart.classList.remove("d-none");
-    //   alertCart.classList.add("d-block");
-    //   notifCart.classList.remove("is-notif");
-    // } else {
-    //   alertCart.classList.add("d-none");
-    //   alertCart.classList.remove("d-block");
-    // }
+    if (resultCartFetchOperation.products.length <= 0) {
+      alertCart.classList.remove("d-none");
+      alertCart.classList.add("d-block");
+      cartNotification.classList.remove("is-notification");
+    } else {
+      alertCart.classList.add("d-none");
+      alertCart.classList.remove("d-block");
+    }
 
     // await renderCartItems(updateCart.items);
-    hideLoader();
+    // hideLoader();
   } catch (error) {
     console.error("Error in Function showAlertEmptyCart =>", error);
   }
@@ -305,7 +418,7 @@ let showAlertEmptyCart = async () => {
 //todo=================================================================== عملیات افزایش یا کاهش تعداد محصول در سبد خرید
 let updateQuantity = async (event, operation) => {
   try {
-    showLoader();
+    // showLoader();
     if (!(await showAlertLogin())) return false;
     
     const boxProduct = event.target.closest(".swiper-slide");
@@ -527,28 +640,17 @@ function attachCartEventListeners() {
 }
 
 //todo=================================================================== تابع بستن سبد خرید
-function closeCart(userCart, userLogged) {
-  const cantainerOpenCart = document.querySelector(".cantainer-open-cart");
+function closeCart() {
+  const cantainerShoppingCart = document.querySelector(".container-shopping-cart");
   const openCart = document.querySelector(".open-cart");
-  const notifCart = document.querySelector(".notif-cart");
 
-  cantainerOpenCart.addEventListener("click", async (e) => {
+  cantainerShoppingCart.addEventListener("click", async (e) => {
     try {
-      if (e.target.classList.contains("cantainer-open-cart")) {
-        cantainerOpenCart.style.visibility = "hidden";
+      if (e.target.classList.contains("container-shopping-cart")) {
+        cantainerShoppingCart.style.visibility = "hidden";
         openCart.classList.remove("is-content");
-
-        const loggedInUser = await userLogged();
-        if (!loggedInUser) return false;
-        if (!userCart) {
-          throw new Error("Error fetching cart data in closeCart");
-        }
-
-        if (userCart.length > 0) {
-          notifCart.classList.add("is-notif");
-        }
+        updateCartNotification()
       }
-      updateCartNotification(userCart);
     } catch (error) {
       console.error("Error in Function closeCart =>", error);
     }
