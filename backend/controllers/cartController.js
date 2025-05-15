@@ -18,9 +18,12 @@ const getCart = async (req, res) => {
 
     totalWithoutDiscount += price * quantity;
 
-    // استخراج درصد تخفیف از دو رقم اول discount
-    const discountStr = product.discount?.toString() || "0";
-    const discountPercent = parseInt(discountStr.substring(0, 2)) || 0;
+    // تخفیف به‌صورت درصد از روی دو رقم اول discount
+    let discountPercent = 0;
+    if (product.discount) {
+      const discountStr = product.discount.toString();
+      discountPercent = parseInt(discountStr.slice(0, 2)) || 0;
+    }
 
     const discountedPrice = price - (price * discountPercent / 100);
     totalWithDiscount += discountedPrice * quantity;
@@ -33,6 +36,7 @@ const getCart = async (req, res) => {
     totalDiscountAmount: Math.round(totalWithoutDiscount - totalWithDiscount)
   });
 };
+
 
 
 
