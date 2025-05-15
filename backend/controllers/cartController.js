@@ -1,14 +1,22 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 
-// Get user's cart
+// Get user's cart with total price
 const getCart = async (req, res) => {
   const cart = await Cart.findOne({ user: req.user.id }).populate('products.product');
+
   if (!cart) {
     return res.status(404).json({ message: 'Cart not found' });
   }
-  res.json(cart);
+
+  // محاسبه مجموع قیمت
+  const total = cart.products.reduce((sum, item) => {
+    return sum + item.product.price * item.quantity;
+  }, 0);
+
+  res.json({ ...cart.toObject(), total });
 };
+
 
 // Add product to cart
 const addToCart = async (req, res) => {
@@ -48,4 +56,28 @@ const removeFromCart = async (req, res) => {
   res.json(cart);
 };
 
-module.exports = { getCart, addToCart, removeFromCart };
+// Update product quantity in cart
+const updateCartItem = async (req, res) => {
+  const { productId, quantity } = req.body;
+
+  if (!productId || quantity == null) {
+    return res.status(400).json({ message: 'Product ID and quantity are required' });
+  }
+
+  const cart = await Cart.findOne({ user: req.user.id });
+  if (!cart) {
+    return res.status(404).json({ message: 'Cart not found' });
+  }
+
+  const itemIndex = cart.products.findIndex(item => item.product.toString() === productId);
+  if (itemIndex === -1) {
+    return res.status(404).json({ message: 'Product not found in cart' });
+  }
+
+  cart.products[itemIndex].quantity = quantity;
+  await cart.save();
+
+  res.json({ message: 'Cart updated', cart });
+};
+
+module.exports = { getCart, addToCart, removeFromCart, updateCartItem };
