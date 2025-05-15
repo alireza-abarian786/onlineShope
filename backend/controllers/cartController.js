@@ -4,18 +4,37 @@ const Product = require('../models/Product');
 // Get user's cart with total price
 const getCart = async (req, res) => {
   const cart = await Cart.findOne({ user: req.user.id }).populate('products.product');
-
   if (!cart) {
     return res.status(404).json({ message: 'Cart not found' });
   }
 
-  // محاسبه مجموع قیمت
-  const total = cart.products.reduce((sum, item) => {
-    return sum + item.product.price * item.quantity;
-  }, 0);
+  let totalWithoutDiscount = 0;
+  let totalWithDiscount = 0;
 
-  res.json({ ...cart.toObject(), total });
+  cart.products.forEach(item => {
+    const product = item.product;
+    const quantity = item.quantity;
+    const price = product.price;
+
+    totalWithoutDiscount += price * quantity;
+
+    // استخراج درصد تخفیف از دو رقم اول discount
+    const discountStr = product.discount?.toString() || "0";
+    const discountPercent = parseInt(discountStr.substring(0, 2)) || 0;
+
+    const discountedPrice = price - (price * discountPercent / 100);
+    totalWithDiscount += discountedPrice * quantity;
+  });
+
+  res.json({
+    products: cart.products,
+    totalWithoutDiscount: Math.round(totalWithoutDiscount),
+    totalWithDiscount: Math.round(totalWithDiscount),
+    totalDiscountAmount: Math.round(totalWithoutDiscount - totalWithDiscount)
+  });
 };
+
+
 
 
 // Add product to cart
