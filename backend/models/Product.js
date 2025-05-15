@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema({
   image: {
     type: String,
   },
+  discount: {         // <-- اضافه کن این خط
+    type: Number,
+    default: 0,       // اگر مقدار نداشت صفر فرض می‌کنیم
+  }
 }, {
   timestamps: true,
 });

@@ -3,45 +3,62 @@ const Product = require('../models/Product');
 
 // Get user's cart with total price
 const getCart = async (req, res) => {
-  const cart = await Cart.findOne({ user: req.user.id }).populate('products.product');
-  if (!cart) {
-    return res.status(404).json({ message: 'Cart not found' });
-  }
+  try {
+    const cart = await Cart.findOne({ user: req.user.id }).populate('products.product');
 
-  let totalWithoutDiscount = 0;
-  let totalWithDiscount = 0;
-
-  cart.products.forEach(item => {
-    const product = item.product;
-    const quantity = item.quantity;
-    const price = product.price;
-
-    totalWithoutDiscount += price * quantity;
-
-    // استخراج درصد از discount
-    let discountPercent = 0;
-    if (product.discount && typeof product.discount === 'number') {
-      const discountStr = product.discount.toString();
-      if (discountStr.length >= 2) {
-        discountPercent = parseInt(discountStr.slice(0, 2));
-      } else if (discountStr.length === 1) {
-        discountPercent = parseInt(discountStr);
-      }
+    if (!cart || !cart.products || cart.products.length === 0) {
+      return res.status(200).json({
+        products: [],
+        totalWithoutDiscount: 0,
+        totalDiscountAmount: 0,
+        totalWithDiscount: 0,
+      });
     }
 
-    console.log('price:', price, 'discount:', product.discount, 'percent:', discountPercent);
+    let totalWithoutDiscount = 0;
+    let totalDiscountAmount = 0;
 
-    const discountedPrice = price - (price * discountPercent / 100);
-    totalWithDiscount += discountedPrice * quantity;
-  });
+    for (const item of cart.products) {
+      const product = item.product;
+      const quantity = item.quantity;
 
-  res.json({
-    products: cart.products,
-    totalWithoutDiscount: Math.round(totalWithoutDiscount),
-    totalWithDiscount: Math.round(totalWithDiscount),
-    totalDiscountAmount: Math.round(totalWithoutDiscount - totalWithDiscount)
-  });
+      // بررسی وجود محصول و مقادیر معتبر
+      if (!product || !product.price) {
+        console.warn(`Product not found or invalid price for item: ${item.product}`);
+        continue;
+      }
+
+      const price = product.price || 0;
+      const discount = product.discount !== undefined ? product.discount : 0; // اطمینان از مقداردهی تخفیف
+
+      const productTotal = price * quantity;
+      const discountAmount = discount * quantity;
+
+      totalWithoutDiscount += productTotal;
+      totalDiscountAmount += discountAmount;
+    }
+
+    const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
+
+    res.status(200).json({
+      products: cart.products,
+      totalWithoutDiscount,
+      totalDiscountAmount,
+      totalWithDiscount,
+    });
+
+    // لاگ برای دیباگ
+    console.log('cart.products:', cart.products);
+    console.log('totalWithoutDiscount:', totalWithoutDiscount);
+    console.log('totalDiscountAmount:', totalDiscountAmount);
+    console.log('totalWithDiscount:', totalWithDiscount);
+
+  } catch (error) {
+    console.error('🔥 خطا در getCart:', error);
+    res.status(500).json({ message: 'خطا در دریافت سبد خرید' });
+  }
 };
+
 
 
 
