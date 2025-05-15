@@ -22,17 +22,17 @@ const getCart = async (req, res) => {
       const product = item.product;
       const quantity = item.quantity;
 
-      // بررسی وجود محصول و مقادیر معتبر
       if (!product || !product.price) {
         console.warn(`Product not found or invalid price for item: ${item.product}`);
         continue;
       }
 
       const price = product.price || 0;
-      const discount = product.discount !== undefined ? product.discount : 0; // اطمینان از مقداردهی تخفیف
+      // گرفتن دو رقم اول از مقدار discount به‌عنوان درصد
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
 
       const productTotal = price * quantity;
-      const discountAmount = discount * quantity;
+      const discountAmount = (price * quantity * discountPercent) / 100; // محاسبه تخفیف درصدی
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
@@ -48,10 +48,12 @@ const getCart = async (req, res) => {
     });
 
     // لاگ برای دیباگ
-    console.log('cart.products:', cart.products);
-    console.log('totalWithoutDiscount:', totalWithoutDiscount);
-    console.log('totalDiscountAmount:', totalDiscountAmount);
-    console.log('totalWithDiscount:', totalWithDiscount);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('cart.products:', cart.products);
+      console.log('totalWithoutDiscount:', totalWithoutDiscount);
+      console.log('totalDiscountAmount:', totalDiscountAmount);
+      console.log('totalWithDiscount:', totalWithDiscount);
+    }
 
   } catch (error) {
     console.error('🔥 خطا در getCart:', error);
