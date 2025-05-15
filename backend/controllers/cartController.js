@@ -18,12 +18,18 @@ const getCart = async (req, res) => {
 
     totalWithoutDiscount += price * quantity;
 
-    // تخفیف به‌صورت درصد از روی دو رقم اول discount
+    // استخراج درصد از discount
     let discountPercent = 0;
-    if (product.discount) {
+    if (product.discount && typeof product.discount === 'number') {
       const discountStr = product.discount.toString();
-      discountPercent = parseInt(discountStr.slice(0, 2)) || 0;
+      if (discountStr.length >= 2) {
+        discountPercent = parseInt(discountStr.slice(0, 2));
+      } else if (discountStr.length === 1) {
+        discountPercent = parseInt(discountStr);
+      }
     }
+
+    console.log('price:', price, 'discount:', product.discount, 'percent:', discountPercent);
 
     const discountedPrice = price - (price * discountPercent / 100);
     totalWithDiscount += discountedPrice * quantity;
@@ -36,6 +42,8 @@ const getCart = async (req, res) => {
     totalDiscountAmount: Math.round(totalWithoutDiscount - totalWithDiscount)
   });
 };
+
+
 
 
 
