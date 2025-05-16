@@ -97,40 +97,87 @@ const removeFromCart = async (req, res) => {
 };
 
 // Update product quantity in cart
-const updateCartItem = async (req, res) => {
+const updateCart = async (req, res) => {
   try {
+    const userId = req.user.id;
     const { productId, quantity } = req.body;
 
-    const cart = await Cart.findOne({ user: req.user.id });
+    if (!productId || quantity == null) {
+      return res.status(400).json({ message: 'productId و quantity الزامی است.' });
+    }
+
+    let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
+      cart = new Cart({ user: userId, products: [] });
     }
 
-    const itemIndex = cart.products.findIndex(
-      item => item.product.toString() === productId
-    );
+    const productIndex = cart.products.findIndex(p => p.product.toString() === productId);
 
-    if (itemIndex === -1) {
-      return res.status(404).json({ message: 'Product not found in cart' });
+    if (productIndex > -1) {
+      if (quantity <= 0) {
+        cart.products.splice(productIndex, 1);
+      } else {
+        cart.products[productIndex].quantity = quantity;
+      }
+    } else {
+      if (quantity > 0) {
+        cart.products.push({ product: productId, quantity });
+      } else {
+        return res.status(400).json({ message: 'quantity باید بزرگتر از صفر باشد.' });
+      }
     }
 
-    cart.products[itemIndex].quantity = quantity;
     await cart.save();
+    await cart.populate('products.product');
 
-    // برگردوندن cart با اطلاعات کامل محصول
-    const updatedCart = await Cart.findOne({ user: req.user.id }).populate('products.product');
+    let totalWithoutDiscount = 0;
+    let totalDiscountAmount = 0;
+
+    cart.products = cart.products.map(item => {
+      const product = item.product;
+      const qty = item.quantity;
+
+      const price = product.price || 0;
+
+      // تخفیف واقعی محصول (عدد نقدی)
+      const discountAmount = product.discount ? product.discount * qty : 0;
+
+      // درصد تخفیف واقعی نسبت به قیمت (برای نمایش)
+      const discountPercent = price ? Math.round((product.discount / price) * 100) : 0;
+
+      const productTotal = price * qty;
+      const finalPrice = productTotal - discountAmount;
+
+      totalWithoutDiscount += productTotal;
+      totalDiscountAmount += discountAmount;
+
+      return {
+        ...item.toObject(),
+        discountAmount,
+        discountPercent,
+        finalPrice,
+      };
+    });
+
+    const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
 
     res.status(200).json({
       message: 'Cart updated',
-      cart: updatedCart,
+      cart: {
+        ...cart.toObject(),
+        totalWithoutDiscount,
+        totalDiscountAmount,
+        totalWithDiscount,
+      }
     });
 
   } catch (error) {
-    console.error('🔥 خطا در updateCartItem:', error);
+    console.error('🔥 خطا در updateCart:', error);
     res.status(500).json({ message: 'خطا در به‌روزرسانی سبد خرید' });
   }
 };
 
 
-module.exports = { getCart, addToCart, removeFromCart, updateCartItem };
+
+module.exports = { getCart, addToCart, removeFromCart, updateCart };
