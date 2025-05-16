@@ -156,7 +156,7 @@ async function renderCartItems(cartItems) {
                     <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
                         <span class='d-flex'>
                             تومان
-                            <span class='price ms-1 total-price'>${item.totalWithDiscount.toLocaleString()}</span>
+                            <span class='price ms-1 total-price'>${item.finalPrice.toLocaleString()}</span>
                         </span>
                         <span>:قیمت محصول</span>
                     </div>
@@ -455,9 +455,10 @@ let updateQuantity = async (event, id) => {
         quantity: cartProduct.quantity + 1,
       })
     })
-    console.log(res);
+    const resultRes = await res.json(); 
+    console.log(resultRes);
     
-    
+    renderCartItems(resultRes.cart.products)
     
   } catch (error) {
     console.error("Error in Function updateQuantity =>", error);

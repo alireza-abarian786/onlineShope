@@ -98,26 +98,39 @@ const removeFromCart = async (req, res) => {
 
 // Update product quantity in cart
 const updateCartItem = async (req, res) => {
-  const { productId, quantity } = req.body;
+  try {
+    const { productId, quantity } = req.body;
 
-  if (!productId || quantity == null) {
-    return res.status(400).json({ message: 'Product ID and quantity are required' });
+    const cart = await Cart.findOne({ user: req.user.id });
+
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found' });
+    }
+
+    const itemIndex = cart.products.findIndex(
+      item => item.product.toString() === productId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Product not found in cart' });
+    }
+
+    cart.products[itemIndex].quantity = quantity;
+    await cart.save();
+
+    // برگردوندن cart با اطلاعات کامل محصول
+    const updatedCart = await Cart.findOne({ user: req.user.id }).populate('products.product');
+
+    res.status(200).json({
+      message: 'Cart updated',
+      cart: updatedCart,
+    });
+
+  } catch (error) {
+    console.error('🔥 خطا در updateCartItem:', error);
+    res.status(500).json({ message: 'خطا در به‌روزرسانی سبد خرید' });
   }
-
-  const cart = await Cart.findOne({ user: req.user.id });
-  if (!cart) {
-    return res.status(404).json({ message: 'Cart not found' });
-  }
-
-  const itemIndex = cart.products.findIndex(item => item.product.toString() === productId);
-  if (itemIndex === -1) {
-    return res.status(404).json({ message: 'Product not found in cart' });
-  }
-
-  cart.products[itemIndex].quantity = quantity;
-  await cart.save();
-
-  res.json({ message: 'Cart updated', cart });
 };
+
 
 module.exports = { getCart, addToCart, removeFromCart, updateCartItem };
