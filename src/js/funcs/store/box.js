@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getLocalStorage, getToken } from "./storage.js";
-import { updateArrowButtonColors, showModal } from "./ui.js";
-import { fetchDataFromApi, hideLoader, showAlertLogin } from "../utils.js";
+import { getToken } from "./storage.js";
+import { showModal } from "./ui.js";
+import { updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 const productsFetchOperation = await fetch(
@@ -9,203 +9,20 @@ const productsFetchOperation = await fetch(
 );
 export const resultProductsFetchOperation = await productsFetchOperation.json();
 
-window.addEventListener("DOMContentLoaded", async () => {
-  hideLoader();
-  if (!(await showAlertLogin())) return false;
-
-  // const usersFetchOperation = await fetch('https://onlineshope.onrender.com/api/admin/users' , {
-  //     headers: {
-  //         Authorization: `Bearer ${await getToken()}`
-  //     }
-  // });
-  const cartFetchOperation = await fetch(
-    "https://onlineshope.onrender.com/api/cart",
-    {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`,
-      },
-    }
-  );
-  console.log(cartFetchOperation);
-
-  //todo============================================================= تابع مریوط به دکمه های باکس محصول
-  let attachProductEventListeners = async () => {
-    document.querySelectorAll(".btn-cart-box").forEach((button) => {
-      //*🧺 کلید سبد خرید محصول
-      button.addEventListener("click", addToCartAndToggleButton);
-    });
-    document.querySelectorAll(".glide__arrow--right").forEach((btn) => {
-      //*➡️ کلید حرکت سمت راست تصویر محصول
-      btn.addEventListener("click", () => {
-        updateArrowButtonColors(btn, "#2563eb", "#75757533"); //* تغییر استایل کلید جهت
-      });
-    });
-    document.querySelectorAll(".glide__arrow--left").forEach((btn) => {
-      //*⬅️ کلید حرکت سمت چپ تصویر محصول
-      btn.addEventListener("click", () => {
-        updateArrowButtonColors(btn, "#2563eb", "#75757533"); //* تغییر استایل کلید جهت
-      });
-    });
-  };
-  attachProductEventListeners();
-
-  //todo============================================================= دریافت عنوان محصول
-  let extractProductTitle = (element) => {
-    let card = element.closest(".swiper-slide"); //* پیدا کردن کارت محصول از روی رویداد کلیک
-    try {
-      const columnTitle = card.querySelector("h6");
-      const rowTitle = card.querySelector(".product-title");
-
-      if (!card) {
-        throw new Error("کارت محصول پیدا نشد");
-      }
-
-      if (columnTitle) {
-        return columnTitle.textContent; //* ارسال عنوان محصول در صورتی که ساختار ستونی بود
-      } else if (rowTitle) {
-        return rowTitle.textContent; //* ارسال عنوان محصول در صورتی که ساختار ردیفی بود
-      } else {
-        throw new Error("عنوان محصول پیدا نشد");
-      }
-    } catch (error) {
-      console.error("خطا در استخراج عنوان محصول:", error.message);
-      return null;
-    }
-  };
-
-  //todo============================================================= گرفتن اطلاعات مورد نظر از محصول
-  let createProductObject = async (event) => {
-    let card = event.target.closest(".swiper-slide"); //* پیدا کردن کارت محصول
-    let product = await fetchProductFromDatabase(event); //* دریافت اطلاعات محصول از دیتابیس
-    let user = await fetchUserFromDatabase(); //* دریافت اطلاعات کاربر از دیتابیس
-    return {
-      //* ارسال اطلاعات مورد نظر از محصول
-      id: Date.now().toString(36),
-      image: card.querySelector(".box-img img").src,
-      name: card.querySelector(".box-discription h6").textContent,
-      description: card.querySelector(".box-discription p").textContent,
-      price: parseInt(card.querySelector(".box-price .price span").textContent),
-      discount: card.querySelector(".box-price .discount span")
-        ? parseInt(card.querySelector(".box-price .discount span").textContent)
-        : 0,
-      ratings: parseInt(
-        card.querySelector(".box-discription span").textContent
-      ),
-      user_id: user[0].id,
-      product_id: product.id,
-    };
-  };
-
-  //todo============================================================= تابع دریافت اطلاعات کاربر از دیتابیس
-  let fetchUserFromDatabase = async () => {
-    try {
-      let userName = await getLocalStorage("login"); //* کاربری که لاگین کرده username
-      // let usersFetchOperation = await fetchDataFromApi('https://onlineshope.onrender.com/api/users');                                            //* دریافت لیست یوزر ها از سرور
-      return usersFetchOperation.find((user) => user.name === userName); //* پیدا کردن و ارسال مشخصات یوزر مورد نظر
-    } catch (error) {
-      console.error("Error fetching user data:", error.message);
-      return null;
-    }
-  };
-
-  //todo============================================================= پیدا کردن و گرفتن اطلاعات محصول مورد نظر از سرور
-  let fetchProductFromDatabase = async (event) => {
-    // let productsFetchOperation = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');                                        //* دریافت اطلاعات کل محصولات
-    let productName = await extractProductTitle(event.target); //* دریافت عنوان محصول
-    return productsFetchOperation.find(
-      (product) => product.name === productName
-    ); //* پیدا کردن و ارسال اطلاعات محصول مورد نظر
-  };
-
-  //todo============================================================= بررسی وجود محصول در سبد خرید
-  const isProductInCart = (product, cartItems) =>
-    cartItems.some((item) => item.id === product.id);
-
-  //todo============================================================= 🛒 تغییر استایل دکمه سبد خرید محصول
-  async function updateCartButtonState(event) {
-    let product = await fetchProductFromDatabase(event); //* دریافت اطلاعات محصول از سرور
-    let userLogged = await functionGetLoggedInUserInformation();
-    if (userLogged) {
-      let cartItems = await fetchDataFromApi(
-        `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
-      ); //* دریافت لیست کل سبد خرید
-      if (!isProductInCart(product, cartItems.items)) {
-        //*🛒 اگر محصول در سبد خرید نبود، افزودن محصول
-        await changeBtnAfterAdd(event.target); //* تغییر استایل کلید سبد خرید محصول
-      }
-    }
+//todo========================================================== تابع تغییر استایل جهت نمای تصاویر محصول
+const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
+  const btn = event.target.closest('div')
+  btn.children[0].style.color = nextBtnColor;
+  if (btn.previousElementSibling) {
+    btn.previousElementSibling.children[0].style.color = prevBtnColor;
   }
-
-  //     //todo========================================================== اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
-  //     const changeBtnAfterAdd = async (id) => {
-  //         console.log(id);
-
-  //     //   const productCard = document.querySelectorAll(".product-box")
-  //     // //   const cartFetchOperation = await fetch('https://onlineshope.onrender.com/api/cart' , {
-  //     //     //     headers: {
-  //     //         //       Authorization: `Bearer ${await getToken()}`
-  //     //         //     }
-  //     //         //   })
-
-  //     //         //   if (cartFetchOperation.ok) {
-  //     //     const resultCartProductsFetchOperation = await cartFetchOperation.json()
-  //     //     productCard.forEach(item => {
-  //     //       resultCartProductsFetchOperation.products.forEach(itemCart => {
-  //     //           if (item.dataset.id === itemCart.product._id) {
-  //     //           if (item.querySelector(".add-cart p")) {
-  //     //               item.querySelector(".btn-cart-box").classList.add("add-cart-active-btn");
-  //     //             item.querySelector(".add-cart > p").textContent = "به سبد اضافه شد";
-  //     //             item.querySelector(".add-cart > p").classList.add("add-cart-active-content");
-  //     //             item.querySelector(".add-cart > svg").classList.add("add-cart-active-content");
-  //     //             hideLoader()
-  //     //         } else {
-  //     //             item.querySelector(".btn-cart-box").classList.add("buy-button-active");
-  //     //             item.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
-  //     //             hideLoader()
-  //     //         }
-  //     //     }
-  //     //       })
-  //     //     })
-  //     //   }
-  // };
-});
-
-//!---------------------------------------------------------------------- exports -------------------------------------------------------
-// export {createProductObject , changeBtnAfterAdd, extractProductTitle, updateCartButtonState , attachProductEventListeners , fetchProductFromDatabase , fetchUserFromDatabase }
-
-//todo========================================================== اعمال تغییرات دکمه بعد از افزودن محصول سبد خرید
-const changeBtnAfterAdd = async (id) => {
-  console.log(id);
-
-  //   const productCard = document.querySelectorAll(".product-box")
-    // const cartFetchOperation = await fetch('https://onlineshope.onrender.com/api/cart' , {
-    //     headers: {
-    //     Authorization: `Bearer ${await getToken()}`
-    //     }
-    // })
-
-    // if (cartFetchOperation.ok) {
-    //     const resultCartProductsFetchOperation = await cartFetchOperation.json()
-    //     resultCartProductsFetchOperation.products.forEach(itemCart => {
-    //         if (id === itemCart.product._id) {
-    //             if (item.querySelector(".add-cart p")) {
-    //                 item.querySelector(".btn-cart-box").classList.add("add-cart-active-btn");
-    //                 item.querySelector(".add-cart > p").textContent = "به سبد اضافه شد";
-    //                 item.querySelector(".add-cart > p").classList.add("add-cart-active-content");
-    //                 item.querySelector(".add-cart > svg").classList.add("add-cart-active-content");
-    //                 hideLoader()
-    //             } else {
-    //                 item.querySelector(".btn-cart-box").classList.add("buy-button-active");
-    //                 item.querySelector(".btn-cart-box").textContent = "🧺 به سبد اضافه شد";
-    //                 hideLoader()
-    //             }
-    //         }
-    //     })
-    // }
+  if (btn.nextElementSibling) {
+    btn.nextElementSibling.children[0].style.color = prevBtnColor;
+  }
 };
 
 //todo============================================================= تابع افزودن محصول به سبد خرید
-async function addToCartAndToggleButton(event, id) {
+async function addToCartAndToggleButton(id) {
   try {
     const cartFetchOperation = await fetch(
       "https://onlineshope.onrender.com/api/cart",
@@ -216,6 +33,7 @@ async function addToCartAndToggleButton(event, id) {
       }
     );
     const resultCartFetchOperation = await cartFetchOperation.json();
+
     const chekedCart = resultCartFetchOperation.products.some((productCart) => {
       return productCart.product._id === id;
     });
@@ -238,6 +56,7 @@ async function addToCartAndToggleButton(event, id) {
 
       if (response.ok) {
         showModal(`✅🛒 محصول به سبد خرید شما اضافه شد`);
+
       } else if (response.status === 401) {
         const result = await response.json();
         if (result.message === "Not authorized") {
@@ -255,11 +74,13 @@ async function addToCartAndToggleButton(event, id) {
           });
         }
       }
+
+      updateCartNotification()
+
     } else {
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
     }
 
-    // changeBtnAfterAdd()
   } catch (error) {
     throw error;
   }
@@ -372,11 +193,11 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
             </div>
 
             <div class="next-img-box glide__arrows" data-glide-el="controls">
-              <div class="glide__arrow--left" data-glide-dir="<">
+              <div class="glide__arrow--left" data-glide-dir="<" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
                 <svg class="pretive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.333 239.999H80.092l95.995-95.995l-22.627-22.627L18.837 256L153.46 390.623l22.627-22.627l-95.997-95.997h417.243z"/>
                 </svg>
               </div>
-              <div class="glide__arrow--right" data-glide-dir=">">
+              <div class="glide__arrow--right" data-glide-dir=">" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
                 <svg class="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="m359.873 121.377l-22.627 22.627l95.997 95.997H16v32.001h417.24l-95.994 95.994l22.627 22.627L494.498 256z"/>
                 </svg>
               </div>
@@ -417,7 +238,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
           </div>
           <div class="add-cart btn-cart-box" type="button" id="liveToastBtn-${
             box._id
-          }" onclick="addToCartAndToggleButton(event , '${box._id}')">
+          }" onclick="addToCartAndToggleButton('${box._id}')">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
               <path
                   fill="currentColor"
@@ -436,4 +257,6 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
   // clickAddBookMark();
 };
 
+//!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.addToCartAndToggleButton = addToCartAndToggleButton;
+window.updateArrowButtonColors = updateArrowButtonColors;

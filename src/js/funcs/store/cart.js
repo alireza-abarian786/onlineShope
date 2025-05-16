@@ -119,11 +119,11 @@ async function renderCartItems(cartItems) {
               item._id
             }" style='transform: translateY(0);'>
                 <div>
-                    <span class="plus-btn" onclick="updateQuantity(event , '${item._id}')">+</span>
+                    <span class="plus-btn" onclick="updateQuantity('increase' , '${item.product._id}' , '${item.quantity}')">+</span>
                     <span class="number">${
                       item.quantity
                     }</span>
-                    <span class="minus-btn" onclick="updateQuantity(event , '${item._id}')">-</span>
+                    <span class="minus-btn" onclick="updateQuantity('decrease' , '${item.product._id}' , '${item.quantity}')">-</span>
                 </div>
                 <div class=''>
                     <div class='box-info-product h-100 d-flex flex-column align-items-center'>
@@ -132,7 +132,9 @@ async function renderCartItems(cartItems) {
                             <div class='col'>
                                 <div class='row'>
                                     <div class='col-1 p-0'>
-                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn"><i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i></button>
+                                        <button type="button" class="btn btn-danger mb-1 rounded remove-btn" onclick="removeFromCart('${item.product._id}')">
+                                          <i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i>
+                                        </button>
                                     </div>
                                     <div class='col-11 pe-1'>
                                         <h6 class='bg-white rounded text-center'>${
@@ -257,11 +259,10 @@ let addCartToDB = async (product) => {
     await handleApiError(response, 'addCartToDB');
     const result = await response.json();
     console.log(response);
-    console.log(result);
-    
+    console.log(result);    
     
     // به‌روزرسانی کش
-    await updateCartCache(user.userId);
+    // await updateCartCache(user.userId);
     
     return result;
   } catch (error) {
@@ -295,10 +296,7 @@ async function toggleCart() {
       containerOpenCart.style.visibility = "visible";
       containerOpenCart.style.height = document.body.offsetHeight + "px";
       cartNotification.classList.remove("is-notification");
-      // await refreshCart();
       renderCartItems(resultCartFetchOperation.products)
-      // console.log();
-      
       showAlertEmptyCart();
       // hideLoader();
     } catch (error) {
@@ -309,6 +307,8 @@ async function toggleCart() {
 
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {
+  console.log(1111111);
+  
   const cartFetchOperation = await fetch(
     "https://onlineshope.onrender.com/api/cart",
     {
@@ -324,7 +324,7 @@ async function updateCartNotification() {
   // hideLoader();
 }
 
-//todo=================================================================== فراخوانی توابع سبد خرید
+//!=================================================================== فراخوانی توابع سبد خرید
 async function initializeCart() {
   try {
     // let userCart = await functionGetUserCartInformation();
@@ -335,48 +335,27 @@ async function initializeCart() {
 }
 
 //todo=================================================================== تابع حذف محصول از سبد خرید
-async function removeFromCart(event) {
+async function removeFromCart(id) {
   try {
-    if (!(await showAlertLogin())) return false;
-    let titleCart = await extractProductTitle(event.target);
-    // let userLogged = await functionGetLoggedInUserInformation();
-    let Carts = await fetchDataFromApi(
-      `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
-    );
-    if (!Carts) {
-      throw new Error("Error fetching cart data in removeFromCart");
+    if (!(await showAlertLogin())) return false;    
+    const removeFromCartOperation = await fetch("https://onlineshope.onrender.com/api/cart/remove" , {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${await getToken()}`,
+      },
+      body: JSON.stringify({
+        productId: id,
+      })
+    })
+
+    if (!removeFromCartOperation.ok) {
+      const resultRemoveFromCartOperation = await removeFromCartOperation.json()
+      throw new Error(resultRemoveFromCartOperation.error || "Failed to delete item from cart");
     }
 
-    let productTarget = Carts.items.find(
-      (cart) => cart.product_name === titleCart
-    );
-    if (!productTarget) {
-      throw new Error("Product not found in cart");
-    }
-    console.log('Removing product:', productTarget);
-    
+    showModal(`❌🧺  محصول از سبد خرید شما حذف شد`);
 
-    let res = await fetch(
-      `https://onlineshope.onrender.com/api/carts/${userLogged.userId}/items/${productTarget._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.error || "Failed to delete item from cart");
-    }
-
-    changeBtnAfterDelete(event.target);
-    await refreshCart();
-    await totalPaymentFunc();
-    await finalBuyCartFunc();
-    hideLoader();
-    showModal(`❌🧺 ${titleCart} از سبد خرید شما حذف شد`);
   } catch (error) {
     console.error("Error in Function removeFromCart =>", error);
     hideLoader();
@@ -408,7 +387,6 @@ let showAlertEmptyCart = async () => {
       alertCart.classList.remove("d-block");
     }
 
-    // await renderCartItems(updateCart.items);
     // hideLoader();
   } catch (error) {
     console.error("Error in Function showAlertEmptyCart =>", error);
@@ -416,26 +394,21 @@ let showAlertEmptyCart = async () => {
 };
 
 //todo=================================================================== عملیات افزایش یا کاهش تعداد محصول در سبد خرید
-let updateQuantity = async (event, id) => {
+let updateQuantity = async (operation, id , quantity) => {
   try {
-    // showLoader();
-    if (!(await showAlertLogin())) return false;
-    const cartFetchOperation = await fetch(
-      "https://onlineshope.onrender.com/api/cart",
-      {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      }
-    );
-    const resultCartFetchOperation = await cartFetchOperation.json(); 
-    const cartProduct = resultCartFetchOperation.products.find(product => product._id === id)    
+    // showLoader();    
+    if (!(await showAlertLogin())) return false;   
 
-    console.log('Sending PUT to /api/cart/update with', {
-      productId: id,
-      quantity: cartProduct.quantity + 1,
-    });
-
+    quantity = Number(quantity)
+    if (operation === "increase") {
+      quantity += 1;
+    } else if (operation === "decrease" && quantity > 1) {
+      quantity -= 1;
+    } else {
+      hideLoader();
+      showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
+      return;
+    }
 
     const res = await fetch("https://onlineshope.onrender.com/api/cart/update" , {
       method: 'PUT',
@@ -444,8 +417,8 @@ let updateQuantity = async (event, id) => {
         Authorization: `Bearer ${await getToken()}`,
       },
       body: JSON.stringify({
-        productId: cartProduct.product._id,
-        quantity: cartProduct.quantity + 1,
+        productId: id,
+        quantity: +quantity,
       })
     })
     const resultRes = await res.json(); 
@@ -459,64 +432,7 @@ let updateQuantity = async (event, id) => {
     showModal("❌ مشکل در به‌روزرسانی تعداد محصول");
   }
 };
-
-//   const boxProduct = event.target.closest(".swiper-slide");
-//   const title = await extractProductTitle(event.target);
-//   const priceElem = boxProduct.querySelector(".total-price");
-//   const quantityElem = boxProduct.querySelector(".number");
-//   // const userLogged = await functionGetLoggedInUserInformation();
-  
-//   // دریافت اطلاعات سبد خرید با کش
-//   const cartCache = await getCartCache(userLogged.userId);
-//   const getProductsDB = cartCache || await fetchDataFromApi(
-//     `https://onlineshope.onrender.com/api/carts/${userLogged.userId}`
-//   );
-
-//   const objProduct = getProductsDB.items.find(
-//     (item) => item.product_name === title
-//   );
-
-//   if (!objProduct) {
-//     hideLoader();
-//     showModal("❌ محصول مورد نظر یافت نشد!");
-//     return;
-//   }
-
-//   let quantity = Number(quantityElem.innerHTML);
-//   const itemPrice = calculateDiscountedPrice(objProduct.price, objProduct.discount);
-//   let updatePrice;
-
-//   if (operation === "increase") {
-//     quantity += 1;
-//   } else if (operation === "decrease" && quantity > 1) {
-//     quantity -= 1;
-//   } else {
-//     hideLoader();
-//     showModal("⚠️ حداقل تعداد محصول 1 می‌باشد.");
-//     return;
-//   }
-
-//   updatePrice = itemPrice * quantity;
-
-//   // به‌روزرسانی UI
-//   quantityElem.textContent = quantity;
-//   priceElem.textContent = updatePrice.toLocaleString();
-  
-//   // ارسال درخواست به سرور
-//   await editeDataProductToDB(quantity, objProduct._id, updatePrice);    
-  
-//   // به‌روزرسانی کش
-//   await updateCartCache(userLogged.userId);
-  
-//   // به‌روزرسانی سبد خرید
-//   await Promise.all([
-//     refreshCart(),
-//     totalPaymentFunc(),
-//     finalBuyCartFunc()
-//   ]);
-  
-//   hideLoader();
-//todo=================================================================== تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
+//!=================================================================== تابع گرفتن دیتای جدید و انجام عملیات ویرایش اطلاعات
 let editeDataProductToDB = async (quantity, cartID, totalPriceProductCart) => {
   try {
     if (!(await showAlertLogin())) return false;
@@ -570,13 +486,13 @@ let editeDataProductToDB = async (quantity, cartID, totalPriceProductCart) => {
   }
 };
 
-//todo=================================================================== تابع محاسبه قیمت با تخفیف
+//!=================================================================== تابع محاسبه قیمت با تخفیف
 const calculateDiscountedPrice = (price, discount) => {
   if (!discount) return price;
   return price - (price * (Math.floor(discount / 10000) / 100));
 };
 
-//todo=================================================================== تابع مدیریت کش سبد خرید
+//!=================================================================== تابع مدیریت کش سبد خرید
 const cartCache = new Map();
 
 const getCartCache = async (userId) => {
@@ -598,22 +514,6 @@ const updateCartCache = async (userId) => {
     timestamp: Date.now()
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //todo=================================================================== تابع حذف همه موارد موجود از سبد خرید
 async function removeAllFromCart(event) {
@@ -652,11 +552,11 @@ let finalBuyCartFunc = async () => {
   }
 };
 
-//todo=================================================================== تابع ست کردن رویداد کلیک روی دکمه‌های موجود در سبد خرید
+//!=================================================================== تابع ست کردن رویداد کلیک روی دکمه‌های موجود در سبد خرید
 function attachCartEventListeners() {
-  document.querySelectorAll(".remove-btn").forEach((btn) => {
-    btn.addEventListener("click", removeFromCart);
-  });
+  // document.querySelectorAll(".remove-btn").forEach((btn) => {
+  //   btn.addEventListener("click", removeFromCart);
+  // });
   // document.querySelectorAll(".plus-btn").forEach((btn) => {
   //   btn.addEventListener("click", (event) => updateQuantity(event, "increase"));
   // });
@@ -690,9 +590,11 @@ function closeCart() {
 }
 
 window.updateQuantity = updateQuantity
+window.removeFromCart = removeFromCart
 
 export {
   attachCartEventListeners,
+  updateCartNotification,
   updateQuantity,
   finalBuyCartFunc,
   addToCart,
