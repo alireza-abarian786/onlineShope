@@ -1,12 +1,11 @@
-import {
-  showModal,
-} from "./ui.js";
-import {
-  hideLoader,
-  showAlertLogin,
-} from "../utils.js";
+//! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
+import {showModal} from "./ui.js";
+import { hideLoader, showAlertLogin} from "../utils.js";
 import { getToken } from "./storage.js";
-//! --------------------------------------------------------------------------------------------------------------------------------------------
+
+//! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
+const clearCartAll = document.querySelector('.clear-cart-all')
+//! ---------------------------------------------------------------------addEventListeners-----------------------------------------------------------------------
 
 window.addEventListener("DOMContentLoaded" , () => {
   updateCartNotification()
@@ -14,6 +13,9 @@ window.addEventListener("DOMContentLoaded" , () => {
   closeCart()
 })
 
+clearCartAll.addEventListener("click" , removeAllFromCart)
+
+//! -------------------------------------------------------------------functions-------------------------------------------------------------------------
 //todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
 async function renderCartItems(cartItems) {
   const container = document.querySelector(".cantain-box-goods");
@@ -61,8 +63,8 @@ async function renderCartItems(cartItems) {
     `;
     container.insertAdjacentHTML("afterbegin", cartHTML);
   });
+  // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
 }
- // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
 
 //todo=================================================================== تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
 async function toggleCart() {
@@ -261,14 +263,11 @@ function closeCart() {
   });
 }
 
+//! -------------------------------------------------------------------bindings-------------------------------------------------------------------------
 window.updateQuantity = updateQuantity
 window.removeFromCart = removeFromCart
 
+//! -------------------------------------------------------------------export-------------------------------------------------------------------------
 export {
   updateCartNotification,
-  updateQuantity,
-  toggleCart,
-  closeCart,
-  removeAllFromCart,
-  removeFromCart,
 };

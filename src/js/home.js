@@ -2,13 +2,13 @@ import './header.js'
 import './funcs/store/box.js'
 //!---------------------------------------------------------------------- import -------------------------------------------------------
 // import { settingSliderSwiper } from "./funcs/sliders.js";
-// import { runTimer } from "./funcs/timer.js";
 // import { createProductsAppliances , createBlogs, initializeStatusMarks, updateCartNotification, initializeStatusCarts} from "./funcs/store/ui.js";
 // import { fetchDataFromApi, hideLoader , showAlertLogin} from "./funcs/utils.js";
 // import { fetchCategoriesForShowToMenu, isLogin, searchGlobalHandler } from "./header.js";
 // import { closeCart, toggleCart } from "./funcs/store/cart.js";
 // import { getToken } from "./funcs/store/storage.js";
 
+import { runTimer } from "./funcs/timer.js";
 import { resultProductsFetchOperation } from './funcs/store/box.js';
 import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
@@ -38,6 +38,7 @@ createProductsTemplateHtml(containerCategoryModes, arrModes);
 
 //!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 
+runTimer();
 //todo======================================== رویداد بارگذاری محتویات صفحه اصلی
 window.addEventListener("load", async () => {
   // hideLoader()
@@ -47,7 +48,6 @@ window.addEventListener("load", async () => {
   // closeCart()
   // isLogin()
   // settingSliderSwiper();
-  // runTimer();
   // getAllProduct();
   // createBlogs(containerArticles);
   // initializeStatusMarks();                  

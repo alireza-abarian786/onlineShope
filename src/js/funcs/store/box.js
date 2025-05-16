@@ -3,11 +3,11 @@ import { getToken } from "./storage.js";
 import { showModal } from "./ui.js";
 import { updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
-//!---------------------------------------------------------------------- functions -------------------------------------------------------
-const productsFetchOperation = await fetch(
-  "https://onlineshope.onrender.com/api/products"
-);
+//!---------------------------------------------------------------------- variables -------------------------------------------------------
+const productsFetchOperation = await fetch("https://onlineshope.onrender.com/api/products");
 export const resultProductsFetchOperation = await productsFetchOperation.json();
+
+//!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo========================================================== تابع تغییر استایل جهت نمای تصاویر محصول
 const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
@@ -131,7 +131,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
                   />
               </li>
             </ul>
-            <div class="not-mark mark-contain">
+            <div class="not-mark mark-contain" onclick="addToFavorites('${box._id}')">
               <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"/>
               </svg>
@@ -257,6 +257,53 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
   // clickAddBookMark();
 };
 
+//todo========================================================== افزودن محصول به علاقه مندی ها
+const addToFavorites = async (id) => {
+  try {
+    if (!(await showAlertLogin())) return false;
+
+    const response = await fetch('https://onlineshope.onrender.com/api/user/favorites/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${await getToken()}`,
+      },
+      body: JSON.stringify({ productId }),
+    });
+
+    if (!response.ok) throw new Error('خطا در افزودن به علاقه‌مندی‌ها');
+
+    showModal('✅ محصول به علاقه‌مندی‌ها اضافه شد');
+    updateFavoritesUI();
+  } catch (error) {
+    console.error('Error in addToFavorites:', error);
+    showModal('❌ خطا در افزودن به علاقه‌مندی‌ها');
+  }
+}
+
+//todo========================================================== دریافت لیست علاقه مندی های کاربر
+async function getFavorites() {
+  try {
+    const response = await fetch('https://onlineshope.onrender.com/api/users/favorites', {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
+
+    if (!response.ok) throw new Error('خطا در دریافت علاقه‌مندی‌ها');
+
+    const data = await response.json();
+    return data.favorites;
+  } catch (error) {
+    console.error('Error in getFavorites:', error);
+    showModal('❌ خطا در دریافت علاقه‌مندی‌ها');
+    return [];
+  }
+}
+
+getFavorites()
+
 //!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.addToCartAndToggleButton = addToCartAndToggleButton;
 window.updateArrowButtonColors = updateArrowButtonColors;
+window.addToFavorites = addToFavorites;
