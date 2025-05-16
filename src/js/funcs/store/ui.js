@@ -1,6 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import {initTooltips,fetchDataFromApi,hideLoader, showAlertLogin, UserInformationGetFunction} from "../utils.js";
-import { attachCartEventListeners } from "./cart.js";
 import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 // import { attachProductEventListeners, changeBtnAfterAdd, extractProductTitle } from "./box.js";
@@ -814,17 +813,6 @@ let createBoxRow = (arrCategory) => {
   }
 };
 
-//todo========================================================== تابع تغییر استایل جهت نمای تصاویر محصول
-const updateArrowButtonColors = (btn, nextBtnColor, prevBtnColor) => {
-  btn.children[0].style.color = nextBtnColor;
-  if (btn.previousElementSibling) {
-    btn.previousElementSibling.children[0].style.color = prevBtnColor;
-  }
-  if (btn.nextElementSibling) {
-    btn.nextElementSibling.children[0].style.color = prevBtnColor;
-  }
-};
-
 //todo========================================================== تابع تغییر استایل علامت بوکمارک محصول
 function updateBookmarkUI(card, isMarked) {  
   if (isMarked) {
@@ -839,7 +827,6 @@ function updateBookmarkUI(card, isMarked) {
 
 export {
   showModal,
-  updateArrowButtonColors,
   updateBookmarkUI,
   // renderCartItems,
   updateCartNotification,
