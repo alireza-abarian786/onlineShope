@@ -134,26 +134,25 @@ const updateCart = async (req, res) => {
     let totalWithoutDiscount = 0;
     let totalDiscountAmount = 0;
 
-    cart.products = cart.products.map(item => {
+    // به جای map مستقیم، ابتدا محصولات را پردازش کنید
+    const processedProducts = cart.products.map(item => {
       const product = item.product;
       const qty = item.quantity;
 
       const price = product.price || 0;
-
-      // تخفیف به صورت عدد نقدی (مقدار ثابت)
       const discountAmount = product.discount ? product.discount * qty : 0;
-
-      // درصد تخفیف واقعی نسبت به قیمت (برای نمایش)
       const discountPercent = price ? Math.round((product.discount / price) * 100) : 0;
-
       const productTotal = price * qty;
       const finalPrice = productTotal - discountAmount;
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
 
+      // اطمینان از اینکه تمام فیلدها به خروجی اضافه می‌شوند
       return {
-        ...item.toObject(),
+        product: item.product.toObject(), // اطلاعات کامل محصول
+        quantity: item.quantity,
+        _id: item._id,
         discountAmount,
         discountPercent,
         finalPrice,
@@ -166,14 +165,17 @@ const updateCart = async (req, res) => {
     res.status(200).json({
       message: 'Cart updated',
       cart: {
-        ...cart.toObject(),
+        _id: cart._id,
+        user: cart.user,
+        products: processedProducts,
         totalWithoutDiscount,
         totalDiscountAmount,
         totalWithDiscount,
-        products: cart.products,
-      }
+        createdAt: cart.createdAt,
+        updatedAt: cart.updatedAt,
+        __v: cart.__v,
+      },
     });
-
   } catch (error) {
     console.error('🔥 خطا در updateCart:', error);
     res.status(500).json({ message: 'خطا در به‌روزرسانی سبد خرید' });
