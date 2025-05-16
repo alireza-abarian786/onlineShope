@@ -9,7 +9,7 @@ import './funcs/store/box.js'
 // import { getToken } from "./funcs/store/storage.js";
 
 import { runTimer } from "./funcs/timer.js";
-import { resultProductsFetchOperation } from './funcs/store/box.js';
+import { resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
 import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
 
@@ -39,8 +39,9 @@ createProductsTemplateHtml(containerCategoryModes, arrModes);
 //!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 
 runTimer();
+updateFavoritesUI()
 //todo======================================== رویداد بارگذاری محتویات صفحه اصلی
-window.addEventListener("load", async () => {
+window.addEventListener("load", async () => {  
   // hideLoader()
   // changeBtnAfterAdd()
   // fetchCategoriesForShowToMenu()

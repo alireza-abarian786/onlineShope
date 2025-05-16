@@ -3,6 +3,7 @@ import { getToken } from "./storage.js";
 import { showModal } from "./ui.js";
 import { updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
+import { showAlertLogin } from "../utils.js";
 //!---------------------------------------------------------------------- variables -------------------------------------------------------
 const productsFetchOperation = await fetch("https://onlineshope.onrender.com/api/products");
 export const resultProductsFetchOperation = await productsFetchOperation.json();
@@ -258,12 +259,47 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
 };
 
 //todo========================================================== افزودن محصول به علاقه مندی ها
-const addToFavorites = async (id) => {
+const addToFavorites = async (productId) => {
+  try {
+    if (!(await showAlertLogin())) return false;
+    const markList = await getFavorites()
+
+    const checkedMark = markList.some(mark => {
+      return mark._id === productId
+    })
+    
+    if (!checkedMark) {
+      const response = await fetch('https://onlineshope.onrender.com/api/users/favorites/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${await getToken()}`,
+        },
+        body: JSON.stringify({ productId }),
+      });
+  
+      if (!response.ok) throw new Error('خطا در افزودن به علاقه‌مندی‌ها');
+      showModal('✅ محصول به علاقه‌مندی‌ها اضافه شد');
+      updateFavoritesUI();
+      
+    } else {
+      // showModal("🔖 محصول از قبل در لیست علاقه مندی ها وجود دارد");
+      removeFromFavorites(productId)
+    }
+
+  } catch (error) {
+    console.error('Error in addToFavorites:', error);
+    showModal('❌ خطا در افزودن به علاقه‌مندی‌ها');
+  }
+}
+
+//todo========================================================== حذف محصول از علاقه مندی ها
+async function removeFromFavorites(productId) {
   try {
     if (!(await showAlertLogin())) return false;
 
-    const response = await fetch('https://onlineshope.onrender.com/api/user/favorites/add', {
-      method: 'POST',
+    const response = await fetch('https://onlineshope.onrender.com/api/users/favorites/remove', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${await getToken()}`,
@@ -271,13 +307,13 @@ const addToFavorites = async (id) => {
       body: JSON.stringify({ productId }),
     });
 
-    if (!response.ok) throw new Error('خطا در افزودن به علاقه‌مندی‌ها');
+    if (!response.ok) throw new Error('خطا در حذف از علاقه‌ مندی‌ ها');
 
-    showModal('✅ محصول به علاقه‌مندی‌ها اضافه شد');
+    showModal('✅ محصول از علاقه‌ مندی‌ ها حذف شد');
     updateFavoritesUI();
   } catch (error) {
-    console.error('Error in addToFavorites:', error);
-    showModal('❌ خطا در افزودن به علاقه‌مندی‌ها');
+    console.error('Error in removeFromFavorites:', error);
+    showModal('❌ خطا در حذف از علاقه‌مندی‌ها');
   }
 }
 
@@ -301,7 +337,32 @@ async function getFavorites() {
   }
 }
 
-getFavorites()
+//todo========================================================== دریافت لیست علاقه مندی های کاربر
+export async function updateFavoritesUI() {
+  try {
+    const cardProductElem = document.querySelectorAll('.glide');
+    const markList = await getFavorites();
+
+    cardProductElem.forEach(card => {
+      const cardId = card.dataset.id;
+      const markContain = card.querySelector('.mark-contain');
+
+      const isMarked = markList.some(mark => mark._id === cardId);
+
+      if (isMarked) {
+        markContain.classList.add('is-mark');
+        markContain.classList.remove('not-mark');
+      } else {
+        markContain.classList.remove('is-mark');
+        markContain.classList.add('not-mark');
+      }
+    });
+
+  } catch (error) {
+    console.error('Error in updateFavoritesUI:', error);
+    showModal('❌ خطا در به‌روزرسانی لیست علاقه‌مندی‌ها');
+  }
+}
 
 //!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.addToCartAndToggleButton = addToCartAndToggleButton;
