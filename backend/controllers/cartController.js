@@ -180,7 +180,24 @@ const updateCart = async (req, res) => {
   }
 };
 
+// Clear all products from cart
+const clearCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user.id });
 
+    if (!cart) {
+      return res.status(404).json({ message: 'سبد خرید یافت نشد' });
+    }
 
+    cart.products = []; // خالی کردن محصولات
+    await cart.save();
 
-module.exports = { getCart, addToCart, removeFromCart, updateCart };
+    res.status(200).json({ message: 'سبد خرید با موفقیت خالی شد', cart });
+  } catch (error) {
+    console.error('🔥 خطا در clearCart:', error);
+    res.status(500).json({ message: 'خطا در خالی کردن سبد خرید' });
+  }
+};
+
+// اضافه کردن به exports
+module.exports = { getCart, addToCart, removeFromCart, updateCart, clearCart };

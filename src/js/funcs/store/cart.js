@@ -215,30 +215,31 @@ let updateQuantity = async (operation, id , quantity) => {
 };
 
 //todo=================================================================== تابع حذف همه موارد موجود از سبد خرید
-async function removeAllFromCart(event) {
+async function removeAllFromCart() {
   try {
-    // let userLogged = await functionGetLoggedInUserInformation();
-    const response = await fetch(
-      `https://onlineshope.onrender.com/api/carts/${userLogged.userId}/items`,
-      { method: "DELETE" }
-    );
+    if (!(await showAlertLogin())) return false;
+
+    const response = await fetch('https://onlineshope.onrender.com/api/cart/clear', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || "مشکل در حذف سبد خرید");
+      throw new Error(errorData.message || 'مشکل در خالی کردن سبد خرید');
     }
 
-    await refreshCart();
-    document.querySelectorAll(".product-box").forEach((box) => {
-      changeBtnAfterDelete(box);
-    });
+    const container = document.querySelector(".cantain-box-goods");
+    container.innerHTML = '';
     showAlertEmptyCart();
-    hideLoader();
-    showModal("✅ سبد خرید با موفقیت خالی شد!");
+    updateCartNotification();
+    showModal('✅ سبد خرید با موفقیت خالی شد!');
   } catch (error) {
-    console.error("Error in Function removeAllFromCart =>", error);
-    showModal("خطا در حذف سبد خرید");
-    hideLoader();
+    console.error('Error in Function removeAllFromCart =>', error);
+    showModal('خطا در خالی کردن سبد خرید');
   }
 }
 
