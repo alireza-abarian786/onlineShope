@@ -429,14 +429,7 @@ let updateQuantity = async (event, id) => {
       }
     );
     const resultCartFetchOperation = await cartFetchOperation.json(); 
-    console.log(resultCartFetchOperation.products);
-
-    const cartProduct = resultCartFetchOperation.products.find(product => product._id === id)
-    console.log(cartProduct);
-    
-    console.log(resultCartFetchOperation.products);
-    
-    console.log(event , id);
+    const cartProduct = resultCartFetchOperation.products.find(product => product._id === id)    
 
     console.log('Sending PUT to /api/cart/update with', {
       productId: id,

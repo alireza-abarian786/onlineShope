@@ -140,7 +140,7 @@ const updateCart = async (req, res) => {
 
       const price = product.price || 0;
 
-      // تخفیف واقعی محصول (عدد نقدی)
+      // تخفیف به صورت عدد نقدی (مقدار ثابت)
       const discountAmount = product.discount ? product.discount * qty : 0;
 
       // درصد تخفیف واقعی نسبت به قیمت (برای نمایش)
@@ -157,6 +157,7 @@ const updateCart = async (req, res) => {
         discountAmount,
         discountPercent,
         finalPrice,
+        productTotal,
       };
     });
 
@@ -169,6 +170,7 @@ const updateCart = async (req, res) => {
         totalWithoutDiscount,
         totalDiscountAmount,
         totalWithDiscount,
+        products: cart.products,
       }
     });
 
@@ -177,6 +179,7 @@ const updateCart = async (req, res) => {
     res.status(500).json({ message: 'خطا در به‌روزرسانی سبد خرید' });
   }
 };
+
 
 
 
