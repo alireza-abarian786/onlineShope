@@ -16,8 +16,9 @@ window.addEventListener("DOMContentLoaded" , () => {
 clearCartAll.addEventListener("click" , removeAllFromCart)
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
+
 //todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
-async function renderCartItems(cartItems) {
+export async function renderCartItems(cartItems) {
   const container = document.querySelector(".cantain-box-goods");
   container.innerHTML = "";
   cartItems.forEach((item) => {
@@ -132,10 +133,13 @@ async function removeFromCart(id) {
       })
     })
 
+    const resultRemoveFromCartOperation = await removeFromCartOperation.json()
     if (!removeFromCartOperation.ok) {
-      const resultRemoveFromCartOperation = await removeFromCartOperation.json()
       throw new Error(resultRemoveFromCartOperation.error || "Failed to delete item from cart");
     }
+    console.log(resultRemoveFromCartOperation.products);
+    renderCartItems(resultRemoveFromCartOperation.products)
+    
 
     showModal(`❌🧺  محصول از سبد خرید شما حذف شد`);
 
@@ -204,9 +208,7 @@ let updateQuantity = async (operation, id , quantity) => {
         quantity: +quantity,
       })
     })
-    const resultRes = await res.json(); 
-    console.log(resultRes);
-    
+    const resultRes = await res.json();     
     renderCartItems(resultRes.cart.products)
     
   } catch (error) {

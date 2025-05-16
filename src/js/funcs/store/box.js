@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getToken } from "./storage.js";
 import { showModal } from "./ui.js";
-import { updateCartNotification } from "./cart.js";
+import { renderCartItems, updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { showAlertLogin } from "../utils.js";
 //!---------------------------------------------------------------------- variables -------------------------------------------------------
@@ -57,9 +57,8 @@ async function addToCartAndToggleButton(id) {
 
       if (response.ok) {
         showModal(`✅🛒 محصول به سبد خرید شما اضافه شد`);
-
+        
       } else if (response.status === 401) {
-        const result = await response.json();
         if (result.message === "Not authorized") {
           Swal.fire({
             title: "نشست شما منقضی شده",
@@ -75,8 +74,12 @@ async function addToCartAndToggleButton(id) {
           });
         }
       }
-
+      
+      const result = await response.json();
+      console.log(result.products);
+      
       updateCartNotification()
+      renderCartItems(result.products)      
 
     } else {
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
@@ -283,7 +286,6 @@ const addToFavorites = async (productId) => {
       updateFavoritesUI();
       
     } else {
-      // showModal("🔖 محصول از قبل در لیست علاقه مندی ها وجود دارد");
       removeFromFavorites(productId)
     }
 
@@ -337,7 +339,7 @@ async function getFavorites() {
   }
 }
 
-//todo========================================================== دریافت لیست علاقه مندی های کاربر
+//todo========================================================== علامت بوکمارک محصول UI تغییر
 export async function updateFavoritesUI() {
   try {
     const cardProductElem = document.querySelectorAll('.glide');

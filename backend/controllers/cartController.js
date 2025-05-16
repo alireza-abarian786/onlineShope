@@ -60,40 +60,178 @@ const getCart = async (req, res) => {
 
 // Add product to cart
 const addToCart = async (req, res) => {
-  const { productId, quantity } = req.body;
-  const product = await Product.findById(productId);
-  if (!product) {
-    return res.status(404).json({ message: 'Product not found' });
-  }
+  try {
+    const { productId, quantity } = req.body;
 
-  let cart = await Cart.findOne({ user: req.user.id });
-  if (!cart) {
-    cart = new Cart({ user: req.user.id, products: [] });
-  }
+    // اعتبارسنجی ورودی
+    if (!productId || quantity == null) {
+      return res.status(400).json({ message: 'productId و quantity الزامی است.' });
+    }
 
-  const productIndex = cart.products.findIndex(item => item.product.toString() === productId);
-  if (productIndex >= 0) {
-    cart.products[productIndex].quantity += quantity;
-  } else {
-    cart.products.push({ product: productId, quantity });
-  }
+    if (quantity <= 0) {
+      return res.status(400).json({ message: 'quantity باید بزرگتر از صفر باشد.' });
+    }
 
-  await cart.save();
-  res.status(201).json(cart);
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'محصول یافت نشد' });
+    }
+
+    let cart = await Cart.findOne({ user: req.user.id });
+    if (!cart) {
+      cart = new Cart({ user: req.user.id, products: [] });
+    }
+
+    const productIndex = cart.products.findIndex(item => item.product.toString() === productId);
+    if (productIndex >= 0) {
+      cart.products[productIndex].quantity += quantity;
+    } else {
+      cart.products.push({ product: productId, quantity });
+    }
+
+    await cart.save();
+    await cart.populate('products.product');
+
+    // محاسبه قیمت‌ها و تخفیف‌ها
+    let totalWithoutDiscount = 0;
+    let totalDiscountAmount = 0;
+
+    const processedProducts = cart.products.map(item => {
+      const product = item.product;
+      const qty = item.quantity;
+
+      const price = product.price || 0;
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0; // درصد تخفیف
+      const productTotal = price * qty; // قیمت کل بدون تخفیف
+      const discountAmount = (productTotal * discountPercent) / 100; // مقدار تخفیف
+      const finalPrice = productTotal - discountAmount; // قیمت نهایی
+
+      totalWithoutDiscount += productTotal;
+      totalDiscountAmount += discountAmount;
+
+      return {
+        product: item.product.toObject(),
+        quantity: item.quantity,
+        _id: item._id,
+        discountAmount,
+        discountPercent,
+        finalPrice,
+        productTotal,
+      };
+    });
+
+    const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
+
+    // پاسخ با اطلاعات کامل
+    res.status(201).json({
+      message: 'محصول با موفقیت به سبد خرید اضافه شد',
+      cart: {
+        _id: cart._id,
+        user: cart.user,
+        products: processedProducts,
+        totalWithoutDiscount,
+        totalDiscountAmount,
+        totalWithDiscount,
+        createdAt: cart.createdAt,
+        updatedAt: cart.updatedAt,
+        __v: cart.__v,
+      },
+    });
+  } catch (error) {
+    console.error('🔥 خطا در addToCart:', error);
+    res.status(500).json({ message: 'خطا در افزودن به سبد خرید' });
+  }
 };
 
 // Remove product from cart
 const removeFromCart = async (req, res) => {
-  const { productId } = req.body;
+  try {
+    const { productId } = req.body;
 
-  const cart = await Cart.findOne({ user: req.user.id });
-  if (!cart) {
-    return res.status(404).json({ message: 'Cart not found' });
+    // اعتبارسنجی ورودی
+    if (!productId) {
+      return res.status(400).json({ message: 'productId الزامی است.' });
+    }
+
+    const cart = await Cart.findOne({ user: req.user.id });
+    if (!cart) {
+      return res.status(404).json({ message: 'سبد خرید یافت نشد' });
+    }
+
+    // حذف محصول از سبد خرید
+    cart.products = cart.products.filter(item => item.product.toString() !== productId);
+    await cart.save();
+
+    // اگر سبد خرید خالی است، پاسخ بدون محاسبات برگردانده می‌شود
+    if (cart.products.length === 0) {
+      return res.status(200).json({
+        message: 'محصول با موفقیت از سبد خرید حذف شد',
+        cart: {
+          _id: cart._id,
+          user: cart.user,
+          products: [],
+          totalWithoutDiscount: 0,
+          totalDiscountAmount: 0,
+          totalWithDiscount: 0,
+          createdAt: cart.createdAt,
+          updatedAt: cart.updatedAt,
+          __v: cart.__v,
+        },
+      });
+    }
+
+    // پُپوله کردن محصولات باقی‌مانده
+    await cart.populate('products.product');
+
+    // محاسبه قیمت‌ها و تخفیف‌ها
+    let totalWithoutDiscount = 0;
+    let totalDiscountAmount = 0;
+
+    const processedProducts = cart.products.map(item => {
+      const product = item.product;
+      const qty = item.quantity;
+
+      const price = product.price || 0;
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
+      const productTotal = price * qty;
+      const discountAmount = (productTotal * discountPercent) / 100;
+      const finalPrice = productTotal - discountAmount;
+
+      totalWithoutDiscount += productTotal;
+      totalDiscountAmount += discountAmount;
+
+      return {
+        product: item.product.toObject(),
+        quantity: item.quantity,
+        _id: item._id,
+        discountAmount,
+        discountPercent,
+        finalPrice,
+        productTotal,
+      };
+    });
+
+    const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
+
+    // پاسخ با اطلاعات کامل
+    res.status(200).json({
+      message: 'محصول با موفقیت از سبد خرید حذف شد',
+      cart: {
+        _id: cart._id,
+        user: cart.user,
+        products: processedProducts,
+        totalWithoutDiscount,
+        totalDiscountAmount,
+        totalWithDiscount,
+        createdAt: cart.createdAt,
+        updatedAt: cart.updatedAt,
+        __v: cart.__v,
+      },
+    });
+  } catch (error) {
+    console.error('🔥 خطا در removeFromCart:', error);
+    res.status(500).json({ message: 'خطا در حذف از سبد خرید' });
   }
-
-  cart.products = cart.products.filter(item => item.product.toString() !== productId);
-  await cart.save();
-  res.json(cart);
 };
 
 // Update product quantity in cart

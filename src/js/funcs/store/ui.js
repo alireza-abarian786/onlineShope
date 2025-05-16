@@ -1,5 +1,4 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { clickAddBookMark } from "./bookMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { buttonsShoppingCart } from "../../shoppingCart.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
@@ -127,22 +126,6 @@ let showModal = (text) => {
 
   document.querySelector(".toast-body").innerHTML = text;
 };
-
-//todo========================================================== ✅ تابع بررسی وضعیت بوکمارک بودن یا نبودن محصولات و اعمال تغییرات متناسب
-async function initializeStatusMarks() {
-  // let Marks = await fetchDataFromApi(
-  //   "https://onlineshope.onrender.com/api/bookmarks"
-  // ); //? دریافت اطلاعات تمام بوکمارک‌ها
-  // document.querySelectorAll(".icon-bookmark").forEach(async (btn) => {
-  //   //? 🧺🔖 دسترسی به تمام بوکمارک ها و سبد خرید
-  //   let title = await extractProductTitle(btn); //? دریافت عنوان محصول
-  //   if (Marks.some((item) => item.product_name === title)) {
-  //     //? اگر محصول در لیست بوکمارک‌ ها بود
-  //     btn.parentElement.classList.add("is-mark"); //? اعمال کلاس جدید برای نشان دادن وضعیت
-  //     btn.parentElement.classList.remove("not-mark"); //? حذف کلاس قبلی
-  //   }
-  // });
-}
 
 //todo========================================================== ساخت باکس مقالات صفحه اصلی
 let createBlogs = async (element) => {
@@ -491,24 +474,12 @@ let createBoxRow = (arrCategory) => {
   }
 };
 
-//todo========================================================== تابع تغییر استایل علامت بوکمارک محصول
-function updateBookmarkUI(card, isMarked) {  
-  if (isMarked) {
-    card.querySelector(".mark-contain").classList.add("is-mark"); //* تغییر استایل برای نمایش بوکمارک بودن
-    card.querySelector(".mark-contain").classList.remove("not-mark"); //* حذف استایل بوکمارک نبودن
-  } else {
-    card.querySelector(".mark-contain").classList.remove("is-mark");
-    card.querySelector(".mark-contain").classList.add("not-mark");
-  }
-}
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 
 export {
   showModal,
-  updateBookmarkUI,
   createBoxToPageCart,
   createBox,
-  initializeStatusMarks,
   createBlogs,
   createBoxRow,
 };
