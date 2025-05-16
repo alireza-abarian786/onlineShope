@@ -134,23 +134,21 @@ const updateCart = async (req, res) => {
     let totalWithoutDiscount = 0;
     let totalDiscountAmount = 0;
 
-    // به جای map مستقیم، ابتدا محصولات را پردازش کنید
     const processedProducts = cart.products.map(item => {
       const product = item.product;
       const qty = item.quantity;
 
       const price = product.price || 0;
-      const discountAmount = product.discount ? product.discount * qty : 0;
-      const discountPercent = price ? Math.round((product.discount / price) * 100) : 0;
-      const productTotal = price * qty;
-      const finalPrice = productTotal - discountAmount;
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0; // درصد تخفیف
+      const productTotal = price * qty; // قیمت کل بدون تخفیف
+      const discountAmount = (productTotal * discountPercent) / 100; // مقدار تخفیف
+      const finalPrice = productTotal - discountAmount; // قیمت نهایی
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
 
-      // اطمینان از اینکه تمام فیلدها به خروجی اضافه می‌شوند
       return {
-        product: item.product.toObject(), // اطلاعات کامل محصول
+        product: item.product.toObject(),
         quantity: item.quantity,
         _id: item._id,
         discountAmount,
