@@ -1,5 +1,4 @@
 import {
-  changeBtnAfterDelete,
   showModal,
 } from "./ui.js";
 import {
