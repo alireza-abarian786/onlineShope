@@ -1,9 +1,9 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getToken } from "./storage.js";
 import { showModal } from "./ui.js";
-import { renderCartItems, updateCartNotification } from "./cart.js";
+import { renderCartItems, toggleCart, updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
-import { showAlertLogin } from "../utils.js";
+import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 //!---------------------------------------------------------------------- variables -------------------------------------------------------
 const productsFetchOperation = await fetch("https://onlineshope.onrender.com/api/products");
 export const resultProductsFetchOperation = await productsFetchOperation.json();
@@ -25,6 +25,7 @@ const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
 //todo============================================================= تابع افزودن محصول به سبد خرید
 async function addToCartAndToggleButton(id) {
   try {
+    showLoader()
     const cartFetchOperation = await fetch(
       "https://onlineshope.onrender.com/api/cart",
       {
@@ -35,11 +36,11 @@ async function addToCartAndToggleButton(id) {
     );
     const resultCartFetchOperation = await cartFetchOperation.json();
 
-    const chekedCart = resultCartFetchOperation.products.some((productCart) => {
+    const checkedCart = resultCartFetchOperation.products.some((productCart) => {
       return productCart.product._id === id;
     });
 
-    if (!chekedCart) {
+    if (!checkedCart) {
       const response = await fetch(
         `https://onlineshope.onrender.com/api/cart/add`,
         {
@@ -56,10 +57,12 @@ async function addToCartAndToggleButton(id) {
       );
 
       if (response.ok) {
+        hideLoader()
         showModal(`✅🛒 محصول به سبد خرید شما اضافه شد`);
         
       } else if (response.status === 401) {
         if (result.message === "Not authorized") {
+          hideLoader()
           Swal.fire({
             title: "نشست شما منقضی شده",
             text: "💫 لطفاً دوباره وارد شوید",
@@ -75,17 +78,18 @@ async function addToCartAndToggleButton(id) {
         }
       }
       
-      const result = await response.json();
-      console.log(result.products);
-      
+      const result = await response.json();      
       updateCartNotification()
-      renderCartItems(result.products)      
+      renderCartItems(result.cart.products)      
+      toggleCart()
 
     } else {
+      hideLoader()
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
     }
 
   } catch (error) {
+    hideLoader()
     throw error;
   }
 }
@@ -265,8 +269,9 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
 const addToFavorites = async (productId) => {
   try {
     if (!(await showAlertLogin())) return false;
-    const markList = await getFavorites()
+    showLoader()
 
+    const markList = await getFavorites()
     const checkedMark = markList.some(mark => {
       return mark._id === productId
     })
@@ -281,6 +286,7 @@ const addToFavorites = async (productId) => {
         body: JSON.stringify({ productId }),
       });
   
+      hideLoader()
       if (!response.ok) throw new Error('خطا در افزودن به علاقه‌مندی‌ها');
       showModal('✅ محصول به علاقه‌مندی‌ها اضافه شد');
       updateFavoritesUI();
@@ -290,6 +296,7 @@ const addToFavorites = async (productId) => {
     }
 
   } catch (error) {
+    hideLoader()
     console.error('Error in addToFavorites:', error);
     showModal('❌ خطا در افزودن به علاقه‌مندی‌ها');
   }
@@ -299,6 +306,7 @@ const addToFavorites = async (productId) => {
 async function removeFromFavorites(productId) {
   try {
     if (!(await showAlertLogin())) return false;
+    showLoader()
 
     const response = await fetch('https://onlineshope.onrender.com/api/users/favorites/remove', {
       method: 'DELETE',
@@ -309,11 +317,13 @@ async function removeFromFavorites(productId) {
       body: JSON.stringify({ productId }),
     });
 
+    hideLoader()
     if (!response.ok) throw new Error('خطا در حذف از علاقه‌ مندی‌ ها');
-
     showModal('✅ محصول از علاقه‌ مندی‌ ها حذف شد');
     updateFavoritesUI();
+
   } catch (error) {
+    hideLoader()
     console.error('Error in removeFromFavorites:', error);
     showModal('❌ خطا در حذف از علاقه‌مندی‌ها');
   }
@@ -332,6 +342,7 @@ async function getFavorites() {
 
     const data = await response.json();
     return data.favorites;
+    
   } catch (error) {
     console.error('Error in getFavorites:', error);
     showModal('❌ خطا در دریافت علاقه‌مندی‌ها');

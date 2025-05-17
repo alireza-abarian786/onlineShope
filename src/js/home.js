@@ -12,6 +12,7 @@ import { runTimer } from "./funcs/timer.js";
 import { resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
 import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
+import { createBlogs } from './funcs/store/ui.js';
 
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
@@ -23,7 +24,7 @@ const containerCategoryModes = document.querySelector(".cantainer-category-modes
 const containerArticles = document.querySelector(".box-articles");
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 
-//todo===================================== نمایش محصولات صفحه اصلی
+//todo===================================== نمایش محصولات و دسته بندی های صفحه اصلی
 const arrDiscount = resultProductsFetchOperation.filter((product) => product.discount);
 const arrAppliances = resultProductsFetchOperation.filter((item) => item.category_id === "3");
 const arrPhones = resultProductsFetchOperation.filter((item) => item.category_id === "10");
@@ -36,10 +37,18 @@ createProductsTemplateHtml(containerCategoryPhones, arrPhones);
 createProductsTemplateHtml(containerCategoryTools, arrTools);
 createProductsTemplateHtml(containerCategoryModes, arrModes);
 
+//todo========================================================== نمایش باکس مقالات صفحه اصلی
+createBlogs(containerArticles)
+
+//todo========================================================== نمایش تایمر صفحه اصلی
+runTimer();
+
+//todo========================================================== نمایش محصولات بوکمارک شده
+updateFavoritesUI()
+
+hideLoader()
 //!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 
-runTimer();
-updateFavoritesUI()
 //todo======================================== رویداد بارگذاری محتویات صفحه اصلی
 window.addEventListener("load", async () => {  
   // hideLoader()
