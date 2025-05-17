@@ -40,7 +40,7 @@
     <header class="mx-auto" style="width: 95%;">
 
       <!--? start menu -->
-      <div class="menu-box menu-box-login position-relative d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
+      <div class="menu-box menu-box-login w-100 position-relative d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
 
         <!--? icon bar -->
         <button class="icon-bar d-lg-none d-block mb-1 border-0 bg-transparent" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" data-bs-toggle="offcanvas" aria-label="باز کردن منو">
@@ -64,13 +64,13 @@
           <div class="box-brand gap-2 d-flex align-items-center justify-content-center">
             <!--? logo type -->
             <h1 class="fw-bold m-0">
-              باخرز <span class="text-primary">استور</span>
+              دیجی <span class="text-primary">استور</span>
             </h1>
 
             <!--? logo image -->
             <img
               src="./src/assets/images/home.png"
-              alt="لوگوی باخرز استور"
+              alt="لوگوی دیجی استور"
               width="32"
               height="32"
               class="d-lg-block d-none"
@@ -96,7 +96,7 @@
               <!--? image header sidebar -->
               <img
                 src="./src/assets/images/home.png"
-                alt="لوگوی باخرز استور"
+                alt="لوگوی دیجی استور"
                 width="32"
                 height="32"
                 loading="lazy"
@@ -217,12 +217,13 @@
     </header>
     <!--?----------------------------------------------------------------------- finish header  ---------------------------------------------------------->
 
+    <!--!----------------------------------------------------------------------- start main  ---------------------------------------------------------->
+    <!--? start background -->
     <div class="bacground position-absolute w-100">
       <img class="w-100 h-100" src="./src/assets/images/2.jpg" alt="">
     </div>
 
-
-    <!--? start main -->
+    <!--? start form -->
     <main class="d-flex justify-content-center align-items-center my-0 mx-auto" style="width: 95%;">
       <div class="contain h-100">
         <div class="box-form">
@@ -284,34 +285,22 @@
         </div>
       </div>
     </main>
-    <!--? finish main -->
+    <!--?----------------------------------------------------------------------- finish main  ---------------------------------------------------------->
 
+    
 
-
-
-
-
-    <!--? JavaScript bootstrap-->
+    <!--?------------------------------------------------------------------------------------------ JavaScript bootstrap-->
     <script src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
-
-    <!--? JavaScript swiper-->
+    <!--?------------------------------------------------------------------------------------------ JavaScript swiper-->
     <script src="./public/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!--? JavaScript Glide-->
+    <!--?------------------------------------------------------------------------------------------ JavaScript Glide-->
     <script src="./public/vendor/glide/glide.min.js"></script>
-
-    <!--? JavaScript sweetalert2-->
+    <!--?------------------------------------------------------------------------------------------ JavaScript sweetalert2-->
     <script src="./public/vendor/alert/sweetalert2.all.min.js"></script>
-
-    <!--? JavaScript aos-->
-    <!--? Initialize AOS -->
+    <!--?------------------------------------------------------------------------------------------ JavaScript aos-->
     <script src="./public/vendor/aos/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-
-    <!--? custom files -->
-    <script type="module" src="src/js/main.js"></script>
+    <script>AOS.init();</script>
+    <!--?------------------------------------------------------------------------------------------ custom files -->
     <script type="module" src="./src/js/login.js"></script>
   </body>
 </html>

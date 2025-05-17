@@ -2,7 +2,6 @@
 import {showModal} from "./ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader} from "../utils.js";
 import { getToken } from "./storage.js";
-import { isLogin } from "../../header.js";
 
 //! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
 const clearCartAll = document.querySelector('.clear-cart-all')
@@ -13,7 +12,6 @@ window.addEventListener("DOMContentLoaded" , () => {
   updateCartNotification()
   toggleCart()
   closeCart()
-  // isLogin()  
 })
 
 clearCartAll.addEventListener("click" , removeAllFromCart)
@@ -89,9 +87,9 @@ export function toggleCart() {
         }
       );
 
-      if (!(modalAuthorized(cartFetchOperation))) return false;
+      if (!(modalAuthorized())) return false;
       const resultCartFetchOperation = await cartFetchOperation.json(); 
-
+      
       openCart.classList.add("is-content");
       containerOpenCart.style.display = "flex";
       containerOpenCart.style.height = document.body.offsetHeight + "px";
@@ -261,7 +259,7 @@ function closeCart() {
   containerShoppingCart.addEventListener("click", async (e) => {
     try {
       if (e.target.classList.contains("container-shopping-cart")) {
-        containerShoppingCart.style.visibility = "hidden";
+        containerShoppingCart.style.display = "none";
         openCart.classList.remove("is-content");
         updateCartNotification()
       }

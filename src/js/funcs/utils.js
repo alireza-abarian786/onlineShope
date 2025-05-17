@@ -35,6 +35,7 @@ function initTooltips() {
 let showAlertLogin = async () => {
   const token = await getLocalStorage("login");
   if (!token || !token.length) {
+    hideLoader()
     Swal.fire({
       title: "شما در سایت ثبت نام نکرده اید",
       text: "⁉️ آیا مایل به ورود در سایت هستید",
@@ -125,19 +126,26 @@ async function UserInformationGetFunction() {
 
 //todo============================================ بررسی وضعیت توکن کاربر
 const modalAuthorized = () => {
-  hideLoader();
-  Swal.fire({
-    title: "نشست شما منقضی شده",
-    text: "💫 لطفاً دوباره لاگین کنید",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "باشه",
-    cancelButtonText: "لغو",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = "./login.html";
-    }
-  });
+
+  if (!getLocalStorage('isAuthorized')) {
+    hideLoader();
+    Swal.fire({
+      title: "نشست شما منقضی شده",
+      text: "💫 لطفاً دوباره لاگین کنید",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "باشه",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "./login.html";
+      }
+    });
+    
+    return false
+  } else {
+    return true
+  }
 };
 
 //!---------------------------------------------------------------------- exports -------------------------------------------------------

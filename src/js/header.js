@@ -1,7 +1,7 @@
 import './funcs/store/cart.js'
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getLocalStorage, getToken } from "./funcs/store/storage.js";
-import { fetchDataFromApi , showAlertLogin} from "./funcs/utils.js";
+import { getLocalStorage } from "./funcs/store/storage.js";
+import { fetchDataFromApi } from "./funcs/utils.js";
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const boxDropDown = document.querySelector(".category-menu + div");
 const categoryMenu = document.querySelector(".category-menu");
@@ -14,8 +14,11 @@ const loginBtnText = document.querySelector("#login span");
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 
 window.addEventListener("DOMContentLoaded" , () => {
-  fetchCategoriesForShowToMenu()
   settingsMenuDropDown()
+  fetchCategoriesForShowToMenu()
+  isLogin()
+  
+  
 
   //todo======================================== رویداد وارد کردن مقدار در سرچ
   searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
@@ -83,11 +86,10 @@ const fetchCategoriesForShowToMenu = async () => {
 };
 
 // todo============================================== وضعیت کاربر و تغییر لینک ها و ظاهر آیکون لاگین
-async function isLogin(message) {
+async function isLogin() {
   if (getLocalStorage("login").length !== 0) {
-    loginBtnText.innerHTML = getLocalStorage("login");
-
-    if (message === 'Unauthorized') {
+    loginBtnText.innerHTML = getLocalStorage("login");    
+    if (!getLocalStorage('isAuthorized')) {
       loginBtnIcon.classList.add("text-bg-danger")
       loginBtnIcon.classList.remove("bg-white")
       loginBtn.setAttribute("href", "./login.html");

@@ -3,6 +3,7 @@ import './header.js'
 import {setLocalStorage, getLocalStorage, getToken} from './funcs/store/storage.js';
 import { showLoader , hideLoader , UserInformationGetFunction} from "./funcs/utils.js";
 import { toggleCart} from './funcs/store/cart.js';
+import { isLogin } from './header.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -25,15 +26,14 @@ let emailValid = false;
 
 //! ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
-    toggleCart()
-    // closeCart()
+    isLogin()
     hideLoader()
 })
 
 //! ------------------------------------------------------------------------------------------- login
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
-    // showLoader()
+    showLoader()
 
     if (userName.value && password.value !== '') {
         loginOperationManagementFunction()
@@ -72,6 +72,7 @@ const loginOperationManagementFunction = async () => {
     })
          
     if (loginOperation.ok) {
+        hideLoader()
         Swal.fire({
             title: 'خوش آمدید',
             text: "⁉️میخواهید به پنل کاربری خود بروید",
@@ -88,6 +89,7 @@ const loginOperationManagementFunction = async () => {
 
         const resultLoginOperation = await loginOperation.json()
         setLocalStorage('token' , resultLoginOperation.token);
+        setLocalStorage('isAuthorized' , true)        
     }
 }
 
