@@ -1,7 +1,9 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getLocalStorage , getToken , setLocalStorage} from "./store/storage.js";
+import { getLocalStorage, getToken, setLocalStorage } from "./store/storage.js";
+
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const loaderElem = document.querySelector(".loader-container");
+
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo===================================== دریافت قسمت سرچ لینک
@@ -31,8 +33,8 @@ function initTooltips() {
 
 //todo===================================== نمایش الرت وضعیت لاگین کاربر
 let showAlertLogin = async () => {
-  const token = await getLocalStorage("login");       //* کاربری که لاگین کرده username
-  if (!token || !token.length) {                //* اگر کاربر لاگین نکرده بود
+  const token = await getLocalStorage("login");
+  if (!token || !token.length) {
     Swal.fire({
       title: "شما در سایت ثبت نام نکرده اید",
       text: "⁉️ آیا مایل به ورود در سایت هستید",
@@ -42,50 +44,13 @@ let showAlertLogin = async () => {
       cancelButtonText: "لغو",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "./login.html"; //* آدرس صفحه مقصد
+        window.location.href = "./login.html";
       }
     });
     return false;
   } else {
     return true;
   }
-    // const fetchLoggedInUserInformation = await fetch("https://onlineshope.onrender.com/api/user/me" , {
-    //   headers: {
-    //       Authorization: `Bearer ${getToken()}`
-    //   }
-    // })
-    // const resultFetchLoggedInUserInformation = await fetchLoggedInUserInformation.json() 
-    // console.log(resultFetchLoggedInUserInformation);
-    // console.log(fetchLoggedInUserInformation);
-       
-    // if (resultFetchLoggedInUserInformation.message === 'Not authorized') {
-    //     Swal.fire({
-    //         title: 'نشست شما منقضی شده',
-    //         text: "💫 لطفاً دوباره وارد شوید",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonText: "باشه",
-    //         cancelButtonText: "لغو",
-    //         }).then((result) => {
-    //             if (result.isConfirmed) {
-    //                 window.location.href = "./login.html";
-    //             }
-    //     });
-        
-    // } else {
-    //   Swal.fire({
-    //     title: "شما در سایت ثبت نام نکرده اید",
-    //     text: "⁉️ آیا مایل به ورود در سایت هستید",
-    //     icon: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonText: "بله، مایلم!",
-    //     cancelButtonText: "لغو",
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       window.location.href = "./login.html";
-    //     }
-    //   });
-    // }
 };
 
 //todo======================================== api دریافت اطلاعات از
@@ -104,45 +69,6 @@ const fetchDataFromApi = async (url) => {
   }
 };
 
-// const fetchDataFromApi = async (url, options = {}) => {
-//   try {
-//     console.log('Fetching data from:', url);
-    
-//     const response = await fetch(url, {
-//       method: options.method || 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         ...options.headers
-//       },
-//       body: options.body ? JSON.stringify(options.body) : undefined,
-//       ...options
-//     });
-    
-//     console.log('Response status:', response.status);
-    
-//     // برای خطاهای 4xx و 5xx
-//     if (!response.ok) {
-//       if (response.status === 404) {
-//         console.error(`URL یافت نشد: ${url}`);
-//         // سعی کنید یک مسیر دیگر را امتحان کنید
-//         if (url.includes('/api/carts/')) {
-//           const testUrl = url.replace(/\/api\/carts\/.*$/, '/api/carts/test');
-//           console.log(`آزمایش مسیر جایگزین: ${testUrl}`);
-//           const testResponse = await fetch(testUrl);
-//           console.log('پاسخ مسیر تست:', testResponse.status);
-//         }
-//       }
-//       throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
-//     }
-    
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//     throw error;
-//   }
-// };
-
 //todo============================================ تابع نمایش لودر
 function showLoader() {
   loaderElem.classList.remove("hidden");
@@ -155,50 +81,64 @@ function hideLoader() {
 
 //todo============================================ دریافت اطلاعات و بررسی وضعیت لاگین کاربر
 async function UserInformationGetFunction() {
-    const fetchLoggedInUserInformation = await fetch("https://onlineshope.onrender.com/api/user/me" , {
-        headers: {
-            Authorization: `Bearer ${getToken()}`
-        }
-    })
-    const resultFetchLoggedInUserInformation = await fetchLoggedInUserInformation.json()    
-
-    if (fetchLoggedInUserInformation.ok) {
-        setLocalStorage('login' , resultFetchLoggedInUserInformation.name);
-
-    } else if (resultFetchLoggedInUserInformation.message === 'Not authorized') {
-        Swal.fire({
-            title: 'نشست شما منقضی شده',
-            text: "💫 لطفاً دوباره وارد شوید",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "باشه",
-            cancelButtonText: "لغو",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "./login.html";
-                }
-        });
-        
-    } else {
-      Swal.fire({
-        title: "شما در سایت ثبت نام نکرده اید",
-        text: "⁉️ آیا مایل به ورود در سایت هستید",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "بله، مایلم!",
-        cancelButtonText: "لغو",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "./login.html";
-        }
-      });
+  const fetchLoggedInUserInformation = await fetch(
+    "https://onlineshope.onrender.com/api/user/me",
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
+  );
+  const resultFetchLoggedInUserInformation =
+    await fetchLoggedInUserInformation.json();
+
+  if (fetchLoggedInUserInformation.ok) {
+    setLocalStorage("login", resultFetchLoggedInUserInformation.name);
+  } else if (resultFetchLoggedInUserInformation.message === "Not authorized") {
+    Swal.fire({
+      title: "نشست شما منقضی شده",
+      text: "💫 لطفاً دوباره وارد شوید",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "باشه",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "./login.html";
+      }
+    });
+  } else {
+    Swal.fire({
+      title: "شما در سایت ثبت نام نکرده اید",
+      text: "⁉️ آیا مایل به ورود در سایت هستید",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "بله، مایلم!",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "./login.html";
+      }
+    });
+  }
 }
 
-
-
-
-
+//todo============================================ بررسی وضعیت توکن کاربر
+const modalAuthorized = () => {
+  hideLoader();
+  Swal.fire({
+    title: "نشست شما منقضی شده",
+    text: "💫 لطفاً دوباره لاگین کنید",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "باشه",
+    cancelButtonText: "لغو",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "./login.html";
+    }
+  });
+};
 
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {
@@ -210,4 +150,5 @@ export {
   showLoader,
   hideLoader,
   UserInformationGetFunction,
+  modalAuthorized,
 };

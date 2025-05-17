@@ -2,8 +2,7 @@ import './header.js'
 
 import {setLocalStorage, getLocalStorage, getToken} from './funcs/store/storage.js';
 import { showLoader , hideLoader , UserInformationGetFunction} from "./funcs/utils.js";
-import { toggleCart , closeCart } from './funcs/store/cart.js';
-// import { isLogin } from './header.js';
+import { toggleCart} from './funcs/store/cart.js';
 
 let userName = document.querySelector('.Username-input');
 let password = document.querySelector('.Password-input');
@@ -27,7 +26,7 @@ let emailValid = false;
 //! ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded" , () => {
     toggleCart()
-    closeCart()
+    // closeCart()
     hideLoader()
 })
 

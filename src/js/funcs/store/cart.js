@@ -1,16 +1,19 @@
 //! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
 import {showModal} from "./ui.js";
-import { hideLoader, showAlertLogin, showLoader} from "../utils.js";
+import { hideLoader, modalAuthorized, showAlertLogin, showLoader} from "../utils.js";
 import { getToken } from "./storage.js";
+import { isLogin } from "../../header.js";
 
 //! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
 const clearCartAll = document.querySelector('.clear-cart-all')
+
 //! ---------------------------------------------------------------------addEventListeners-----------------------------------------------------------------------
 
 window.addEventListener("DOMContentLoaded" , () => {
   updateCartNotification()
   toggleCart()
   closeCart()
+  // isLogin()  
 })
 
 clearCartAll.addEventListener("click" , removeAllFromCart)
@@ -75,20 +78,22 @@ export function toggleCart() {
   const cartNotification = document.querySelector(".cart-notification");
   
   shoppingCartIcon.addEventListener("click", async () => {
-    showLoader()
-    console.log('Opening cart');
-    const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart",{
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      }
-    );
-    const resultCartFetchOperation = await cartFetchOperation.json(); 
-
     try {
       if (!(await showAlertLogin())) return false;
+      showLoader()
+
+      const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart",{
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
+
+      if (!(modalAuthorized(cartFetchOperation))) return false;
+      const resultCartFetchOperation = await cartFetchOperation.json(); 
+
       openCart.classList.add("is-content");
-      containerOpenCart.style.visibility = "visible";
+      containerOpenCart.style.display = "flex";
       containerOpenCart.style.height = document.body.offsetHeight + "px";
       cartNotification.classList.remove("is-notification");
       renderCartItems(resultCartFetchOperation.products)
@@ -104,16 +109,20 @@ export function toggleCart() {
 
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {  
-  const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart", {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`,
-      },
-    }
-  );
-  const resultCartFetchOperation = await cartFetchOperation.json();    
-  const cartNotification = document.querySelector(".cart-notification");
-  cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
-  // hideLoader();
+  try {
+    const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart", {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      }
+    );
+    const resultCartFetchOperation = await cartFetchOperation.json();     
+    const cartNotification = document.querySelector(".cart-notification");
+    cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
+    
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 //todo=================================================================== تابع حذف محصول از سبد خرید

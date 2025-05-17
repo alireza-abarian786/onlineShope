@@ -14,11 +14,8 @@ const loginBtnText = document.querySelector("#login span");
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 
 window.addEventListener("DOMContentLoaded" , () => {
-  isLogin()
   fetchCategoriesForShowToMenu()
   settingsMenuDropDown()
-  // updateCartNotification()
-  // toggleCart()
 
   //todo======================================== رویداد وارد کردن مقدار در سرچ
   searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
@@ -85,30 +82,32 @@ const fetchCategoriesForShowToMenu = async () => {
   });
 };
 
-// todo============================================== وضعیت لاگین و تغییر لینک ها
-async function isLogin() {    
-  //* به‌روزرسانی UI
+// todo============================================== وضعیت کاربر و تغییر لینک ها و ظاهر آیکون لاگین
+async function isLogin(message) {
   if (getLocalStorage("login").length !== 0) {
-    loginBtnText.innerHTML = getLocalStorage("login"); //* نمایش نام کاربر
-    loginBtnIcon.classList.add("text-bg-success")
-    loginBtnIcon.classList.remove("bg-white")
-    loginBtn.setAttribute("href", "./doshboard.html"); //* لینک به داشبورد
+    loginBtnText.innerHTML = getLocalStorage("login");
+
+    if (message === 'Unauthorized') {
+      loginBtnIcon.classList.add("text-bg-danger")
+      loginBtnIcon.classList.remove("bg-white")
+      loginBtn.setAttribute("href", "./login.html");
+      
+    } else {
+      loginBtnIcon.classList.add("text-bg-success")
+      loginBtnIcon.classList.remove("bg-white")
+      loginBtn.setAttribute("href", "./doshboard.html");
+      
+    }    
     
   } else {
     loginBtnText.innerHTML = "ورود / عضویت";
     loginBtnIcon.classList.add("bg-white")
     loginBtn.setAttribute("href", "./login.html");
-    if (!(await showAlertLogin())) return false;
-
   }
 }
 
-
-
-
-
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
-// export {settingsMenuDropDown , searchGlobalHandler , fetchCategoriesForShowToMenu , isLogin}
+export {isLogin}
 
 
 

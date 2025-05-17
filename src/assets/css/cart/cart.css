@@ -31,7 +31,6 @@
     background-color: #fff;
     height: 30px;
     width: 30px;
-    display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -62,7 +61,8 @@
     top: -50px;
     left: -50px;
     background-color: #000000b0;
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     z-index: 999;
 }
 

@@ -3,7 +3,8 @@ import { getToken } from "./storage.js";
 import { showModal } from "./ui.js";
 import { renderCartItems, toggleCart, updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
-import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
+import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
+import { isLogin } from "../../header.js";
 //!---------------------------------------------------------------------- variables -------------------------------------------------------
 const productsFetchOperation = await fetch("https://onlineshope.onrender.com/api/products");
 export const resultProductsFetchOperation = await productsFetchOperation.json();
@@ -25,25 +26,25 @@ const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
 //todo============================================================= تابع افزودن محصول به سبد خرید
 async function addToCartAndToggleButton(id) {
   try {
+    if (!(await showAlertLogin())) return false;
     showLoader()
-    const cartFetchOperation = await fetch(
-      "https://onlineshope.onrender.com/api/cart",
-      {
+
+    const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart", {
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
       }
     );
-    const resultCartFetchOperation = await cartFetchOperation.json();
 
-    const checkedCart = resultCartFetchOperation.products.some((productCart) => {
-      return productCart.product._id === id;
-    });
+    if (cartFetchOperation.status === 401) {
+      if (!(modalAuthorized())) return false;
+    }
+    
+    const resultCartFetchOperation = await cartFetchOperation.json();
+    const checkedCart = resultCartFetchOperation.products.some((productCart) => productCart.product._id === id);
 
     if (!checkedCart) {
-      const response = await fetch(
-        `https://onlineshope.onrender.com/api/cart/add`,
-        {
+      const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -55,30 +56,16 @@ async function addToCartAndToggleButton(id) {
           }),
         }
       );
+      const result = await response.json();      
 
       if (response.ok) {
         hideLoader()
         showModal(`✅🛒 محصول به سبد خرید شما اضافه شد`);
         
-      } else if (response.status === 401) {
-        if (result.message === "Not authorized") {
-          hideLoader()
-          Swal.fire({
-            title: "نشست شما منقضی شده",
-            text: "💫 لطفاً دوباره وارد شوید",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "باشه",
-            cancelButtonText: "لغو",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = "./login.html"; //* آدرس صفحه مقصد
-            }
-          });
-        }
+      } else {
+        throw new Error("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
       }
       
-      const result = await response.json();      
       updateCartNotification()
       renderCartItems(result.cart.products)      
       toggleCart()
@@ -87,9 +74,10 @@ async function addToCartAndToggleButton(id) {
       hideLoader()
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
     }
-
+    
   } catch (error) {
     hideLoader()
+    showModal("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
     throw error;
   }
 }
@@ -272,6 +260,10 @@ const addToFavorites = async (productId) => {
     showLoader()
 
     const markList = await getFavorites()
+    if (markList.status === 401) {
+      if (!(modalAuthorized())) return false;
+    } 
+    
     const checkedMark = markList.some(mark => {
       return mark._id === productId
     })
@@ -338,11 +330,16 @@ async function getFavorites() {
       },
     });
 
-    if (!response.ok) throw new Error('خطا در دریافت علاقه‌مندی‌ها');
+    if (response.status === 401) {
+      return response
 
+    } else {
+      if (!response.ok) throw new Error('خطا در دریافت علاقه‌مندی‌ها');
+    }
+    
     const data = await response.json();
     return data.favorites;
-    
+
   } catch (error) {
     console.error('Error in getFavorites:', error);
     showModal('❌ خطا در دریافت علاقه‌مندی‌ها');
@@ -353,9 +350,17 @@ async function getFavorites() {
 //todo========================================================== علامت بوکمارک محصول UI تغییر
 export async function updateFavoritesUI() {
   try {
+    if (!(await showAlertLogin())) return false;
+
     const cardProductElem = document.querySelectorAll('.glide');
     const markList = await getFavorites();
 
+    if (markList.status === 401) {
+      isLogin('Unauthorized')
+      if (!(modalAuthorized())) return false;
+    } 
+    isLogin('Authorized')
+    
     cardProductElem.forEach(card => {
       const cardId = card.dataset.id;
       const markContain = card.querySelector('.mark-contain');
