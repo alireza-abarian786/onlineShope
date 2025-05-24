@@ -73,8 +73,19 @@
 ![مقدار اولیه کلید لاگین در قسمت هدر](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png)
 ![تغییر کلید لاگین بعد ورود کاربر](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png)
 ![مقدار کلید لاگین بعد اتمام زمان کاربر](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png)
+
 ![مقدار کلید سبد خرید خالی کاربر](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png)
 ![مقدار کلید سبد خرید پر کاربر](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png)
+### منوی دسته بندی محصولات
+![منوی دسته بندی محصولات](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png)
+### جستجوی سراسری محصول
+![جستجوی سراسری محصول](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png)
+### حالات مختلف سبد خرید
+![حالات مختلف سبد خرید](https://i.ibb.co/cKwJmw8x/Screenshot-2025-05-24-135723.png)
+---
+![حالات مختلف سبد خرید](https://i.ibb.co/ds6pFjGv/Screenshot-2025-05-24-134324.png)
+---
+![حالات مختلف سبد خرید](https://i.ibb.co/CKHxzCGN/Screenshot-2025-05-24-134420.png)
 
 
 
