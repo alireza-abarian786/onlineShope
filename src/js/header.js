@@ -21,7 +21,9 @@ window.addEventListener("DOMContentLoaded" , () => {
   
 
   //todo======================================== رویداد وارد کردن مقدار در سرچ
-  searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
+  if (searchGlobalInputElem) {
+    searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
+  }
 })
 
 //todo============================================== تنظیمات منو در سایز 992
@@ -39,20 +41,53 @@ function settingsMenuDropDown() {
 
 
 // todo============================================== سرچ سراسری محصولات
-const searchGlobalHandler = async (event) => {  
-  const ulElemListSearch = document.querySelector(".box-serch__ul-list")
-  if (event.target.value.trim()) {
-    const getAllProduct = await fetchDataFromApi('https://onlineshope.onrender.com/api/products')
-    const filterProducts = getAllProduct.filter(product => product.name.startsWith(event.target.value))
+const searchGlobalHandler = async (event) => {
+  const ulElemListSearch = document.querySelector(".box-serch__ul-list");
+  const searchValue = event.target.value.trim();
 
-    ulElemListSearch.classList.add('show')
-    ulElemListSearch.innerHTML = ''
-    filterProducts.forEach(item => { ulElemListSearch.insertAdjacentHTML('beforeend' , `<li class="w-100 p-3 border-bottom">${item.name}</li>`) })
-    return true;
+  if (searchValue) {
+    ulElemListSearch.classList.add('show');
+    
+    ulElemListSearch.innerHTML = `
+      <li class="w-100 p-3 text-center">
+        <div class="mini-loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </li>`;
+
+
+    try {
+      const getAllProduct = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
+      const filterProducts = getAllProduct.filter(product =>
+        product.name.toLowerCase().startsWith(searchValue.toLowerCase())
+      );
+
+      ulElemListSearch.innerHTML = '';
+
+      if (filterProducts.length > 0) {
+        filterProducts.forEach(item => {
+          ulElemListSearch.insertAdjacentHTML('beforeend',
+            `<li class="w-100 p-3 border-bottom">${item.name}</li>`
+          );
+        });
+      } else {
+        ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-center text-danger bg-secondary bg-opacity-25">محصولی یافت نشد</li>';
+      }
+
+    } catch (err) {
+      ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-danger">خطا در دریافت محصولات</li>';
+      console.error(err);
+    }
+
+  } else {
+    ulElemListSearch.classList.remove('show');
+    ulElemListSearch.innerHTML = '';
   }
-  
-  ulElemListSearch.classList.remove('show') 
 }
+
+
 
 // todo============================================== و نمایش در قسمت منو category دریافت
 const fetchCategoriesForShowToMenu = async () => {  

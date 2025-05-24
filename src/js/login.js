@@ -5,8 +5,8 @@ import { showLoader , hideLoader , UserInformationGetFunction} from "./funcs/uti
 import { toggleCart} from './funcs/store/cart.js';
 import { isLogin } from './header.js';
 
-let userName = document.querySelector('.Username-input');
-let password = document.querySelector('.Password-input');
+let emailLogin = document.querySelector('.email-login');
+let passwordLogin = document.querySelector('.password-login');
 let btnLogin = document.querySelector('.btn-login');
 let btnSignUp = document.querySelector('.btn-sign-up');
 let usernameSignUp = document.querySelector(".username-sign-up")
@@ -31,15 +31,15 @@ window.addEventListener("DOMContentLoaded" , () => {
 })
 
 //! ------------------------------------------------------------------------------------------- login
-btnLogin.addEventListener('click', (e) => {
+btnLogin.addEventListener('click', async (e) => {
     e.preventDefault();
     showLoader()
 
-    if (userName.value && password.value !== '') {
-        loginOperationManagementFunction()
-        UserInformationGetFunction()
+    if (emailLogin.value && passwordLogin.value !== '') {
+        await loginOperationManagementFunction()
+        await UserInformationGetFunction()
         clearInput(); 
-        hideLoader()
+        hideLoader()        
         
     } else {
         hideLoader()
@@ -53,14 +53,14 @@ btnLogin.addEventListener('click', (e) => {
 });
 
 function clearInput() {
-    userName.value = '';
-    password.value = '';
+    emailLogin.value = '';
+    passwordLogin.value = '';
 }
 
 const loginOperationManagementFunction = async () => {
     const userLoginInformation = {
-        email: userName.value.trim(),
-        password: password.value.trim()
+        email: emailLogin.value.trim(),
+        password: passwordLogin.value.trim()
     }    
 
     const loginOperation = await fetch("https://onlineshope.onrender.com/api/auth/login" , {
@@ -89,7 +89,7 @@ const loginOperationManagementFunction = async () => {
 
         const resultLoginOperation = await loginOperation.json()
         setLocalStorage('token' , resultLoginOperation.token);
-        setLocalStorage('isAuthorized' , true)        
+        setLocalStorage('isAuthorized' , true)    
     }
 }
 

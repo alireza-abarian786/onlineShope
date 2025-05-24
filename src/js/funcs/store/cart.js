@@ -1,7 +1,7 @@
 //! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
 import {showModal} from "./ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader} from "../utils.js";
-import { getToken } from "./storage.js";
+import { getLocalStorage, getToken } from "./storage.js";
 
 //! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
 const clearCartAll = document.querySelector('.clear-cart-all')
@@ -108,6 +108,10 @@ export function toggleCart() {
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید
 async function updateCartNotification() {  
   try {
+    if (getLocalStorage('login').length === 0 ) {
+      return false
+    }
+    
     const cartFetchOperation = await fetch("https://onlineshope.onrender.com/api/cart", {
         headers: {
           Authorization: `Bearer ${await getToken()}`,
@@ -115,8 +119,10 @@ async function updateCartNotification() {
       }
     );
     const resultCartFetchOperation = await cartFetchOperation.json();     
-    const cartNotification = document.querySelector(".cart-notification");
-    cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
+    const cartNotification = document.querySelector(".cart-notification");    
+    if (resultCartFetchOperation.products) {
+      cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
+    }
     
   } catch (error) {
     console.error(error)

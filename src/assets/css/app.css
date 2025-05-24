@@ -163,6 +163,7 @@ li {
   width: 92%;
   justify-content: space-around;
   height: 100%;
+  z-index: 999;
 }
 
 .navbar-syna > div > div:first-child > div:first-child > p {
