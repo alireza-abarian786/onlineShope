@@ -1,112 +1,129 @@
-# 🛒 DigiStore - پروژه فروشگاه اینترنتی
+# 🛒 DigiStore – Full-Stack E-commerce Prototype
 
-پروژه DigiStore یک نمونه اولیه (Prototype) از یک فروشگاه اینترنتی است که با استفاده از HTML، CSS و JavaScript طراحی شده و هدف آن ایجاد یک رابط کاربری ساده، قابل فهم و شبیه‌سازی تجربه خرید آنلاین است. این پروژه برای اهداف آموزشی و نمونه‌سازی طراحی شده و شامل بخش‌های کلیدی یک پلتفرم فروش آنلاین است.
+DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **JavaScript**, a custom **Node.js backend**, and **MongoDB**. It offers essential shopping functionalities such as login, registration, product search, cart/wishlist handling, and category filtering. The project is built for educational and prototyping purposes and is inspired by platforms like **Digikala**.
 
-🌐 **لینک دپلوی پروژه:**  
-[https://alireza-abarian786.github.io/onlineShope/](https://alireza-abarian786.github.io/onlineShope/)
-
----
-
-## 📌 ویژگی‌های اصلی پروژه
-
-### 🎨 طراحی رابط کاربری (UI)
-- طراحی ساده و تمیز با استفاده از HTML و CSS.
-- استفاده از رنگ‌های ملایم و فونت‌خوانا برای تجربه کاربری بهتر.
-- ساختار ماژولار صفحات و طراحی واکنش‌گرا (Responsive Design) (در حد پایه).
-
-### 🧩 دسته‌بندی‌های متنوع محصولات
-- محصولات در دسته‌های مختلف نمایش داده شده‌اند، از جمله:
-  - موبایل و دیجیتال
-  - پوشاک مردانه و زنانه
-  - لوازم آرایشی و بهداشتی
-  - محصولات سوپرمارکتی
-  - لوازم خانگی
-  - و...
-
-### 🛒 قابلیت‌های فروشگاهی اولیه
-- صفحه سبد خرید.
-- شمارش معکوس تخفیف روزانه با تایمر پویا.
-- نمایش کالاهای پیشنهادی، تخفیف‌خورده و پرطرفدار.
-- المان‌هایی مانند "خرید اقساطی"، "ثبت غرفه"، "ارسال رایگان" به عنوان مزایای فروشگاه (فعلاً خالی – در حال توسعه).
-
-### 📋 صفحات مکمل و ساختاری (فعلاً خالی – در حال توسعه)
-- **تماس با ما:** حاوی فرم تماس (نمونه‌ای)، آدرس فرضی و آیکون شبکه‌های اجتماعی.
-- **راهنمای خرید:** شامل مراحل فرضی خرید از فروشگاه.
-- **سیاست بازگشت کالا و حریم خصوصی:** برای جلب اعتماد کاربران.
+🌐 **Live Preview:**  
+[👉 View on GitHub Pages](https://alireza-abarian786.github.io/onlineShope/)
 
 ---
 
-## 🧪 تحلیل دقیق‌تر پروژه
+## ✅ Main Features
 
-### ✅ نقاط قوت:
-- ساختار صفحه اصلی شبیه به فروشگاه‌های معتبر مثل دیجی‌کالا طراحی شده.
-- ویژگی‌هایی مانند بنرهای تبلیغاتی، تایمر تخفیف، مزایای خرید، دسته‌بندی‌ها و پیشنهادات ویژه، فضای واقعی‌تری به سایت داده‌اند.
-- کدنویسی خوانا و قابل توسعه.
-- مناسب برای یادگیری طراحی رابط کاربری فروشگاه و مفاهیم اولیه طراحی وب.
+### 🎨 Frontend (HTML/CSS/JavaScript)
+- Clean and modern UI
+- Responsive homepage
+- Global and category-based product search
+- Discount countdown timer
+- Product categories with filter and grid/list view toggle
+- Interactive cart and wishlist icons
+- Simple navigation with sticky header
 
-### ⚠️ نقاط قابل بهبود:
-- هیچ محصول واقعی در پایگاه داده یا لیست خرید نمایش داده نمی‌شود.
-- برخی متن‌ها هنوز به صورت Lorem Ipsum یا غیر واقعی هستند.
-- طراحی واکنش‌گرا در موبایل بهینه نیست (برخی اجزا روی هم می‌افتند یا از کادر بیرون می‌زنند - غیر از صفحه اصلی).
-
----
-
-## 🛠 تکنولوژی‌های استفاده‌شده
-
-- **HTML5** – ساختاردهی صفحات  
-- **CSS3** – طراحی ظاهری و زیباسازی  
-- **JavaScript (Vanilla)** – پیاده‌سازی تایمر و افکت‌های ساده  
-- (در حال حاضر بدون استفاده از فریم‌ورک یا کتابخانه)
+### 🔧 Backend (Node.js & MongoDB)
+- User authentication system (login/register)
+- Token expiration handling
+- Cart and wishlist logic
+- Product search & filtering endpoints
+- Backend generated with AI-assisted Node.js logic
+- MongoDB used for data storage
 
 ---
 
----
+## 📄 Page Overview
 
-## 🚀 تصاویر پروژه
-### ورود کاربر به سایت
-![ورود به سایت و نمایش پیام لاگین](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png)
-### لاگین کاربر
-![نمایش پیام لاگین کاربر](https://i.ibb.co/DPsyPBVr/Screenshot-2025-05-24-105435.png)
-### منقضی شدن توکن کاربر
-![نمایش پیام اتمام زمان لاگین کاربر](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png)
-### نمایش حالات مختلف کلید لاگین وسبد خرید
-![مقدار اولیه کلید لاگین در قسمت هدر](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png)
-![تغییر کلید لاگین بعد ورود کاربر](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png)
-![مقدار کلید لاگین بعد اتمام زمان کاربر](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png)
-
-![مقدار کلید سبد خرید خالی کاربر](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png)
-![مقدار کلید سبد خرید پر کاربر](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png)
-### منوی دسته بندی محصولات
-![منوی دسته بندی محصولات](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png)
-### جستجوی سراسری محصول
-![جستجوی سراسری محصول](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png)
-### حالات مختلف سبد خرید
-![حالات مختلف سبد خرید](https://i.ibb.co/cKwJmw8x/Screenshot-2025-05-24-135723.png)
----
-![حالات مختلف سبد خرید](https://i.ibb.co/ds6pFjGv/Screenshot-2025-05-24-134324.png)
----
-![حالات مختلف سبد خرید](https://i.ibb.co/CKHxzCGN/Screenshot-2025-05-24-134420.png)
-
-
-
+| Page | Status | Key Features |
+|------|--------|--------------|
+| **Home Page** | ✅ Done | Responsive, dynamic, includes search, offers, timers |
+| **Category Page** | ⚠️ Semi-Done | Filters, grid/list view toggle, pagination (not yet responsive) |
+| **Cart Page** | ⚠️ Semi-Done | Functional cart, pending payment gateway integration |
+| **Articles Page** | ⚠️ Needs improvement | Basic content available, layout needs work |
+| **Product Detail Page** | 🚧 Planned | Not implemented yet |
+| **User Panel** | 🚧 Planned | Not implemented yet |
 
 ---
 
-## 🔄 قابلیت‌های آینده (پیشنهادی)
- 
-- پنل مدیریت برای فروشنده و خریدار  
-- طراحی بهینه تر برای موبایل و تبلت   
+## 🧠 Project Strengths
+
+- Full-stack with frontend & backend integration
+- Real login/logout state, token handling
+- Clean and modular code, easy to maintain
+- Inspired by real e-commerce UIs (Digikala)
+- Functional features (wishlist, search, cart, etc.)
 
 ---
 
-## ✍️ توسعه‌دهنده
+## 🛠 Technologies Used
 
-**علیرضا آباریان**  
+### Frontend:
+- HTML5  
+- CSS3  
+- JavaScript (Vanilla)
+
+### Backend:
+- Node.js  
+- Express.js  
+- MongoDB  
+- JWT (for authentication)
+
+---
+
+## 📷 Screenshots
+
+### 🔐 Authentication & Token Logic
+
+| Login State | Token Expiration |
+|-------------|------------------|
+| ![Login](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png) | ![Token Expired](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png) |
+
+---
+
+### 🕹️ Cart & Login Button State
+
+| Cart Empty | Cart Full | Before Login | After Login | Token Expiration |
+|------------|-----------|---------------------------|-------|-------|
+| ![Empty Cart](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png) | ![Full Cart](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png) | ![Before Login](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png) | ![After Login](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png) | ![Token Expiration](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png)
+
+---
+
+### 🧭 Category & Search UI
+
+| Category Menu | Global Search |
+|---------------|---------------|
+| ![Categories](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png) | ![Search](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png) |
+
+---
+
+### 🛒 Cart State
+
+| Cart | Remove Product | Clear Cart |
+|---|---|---|
+| ![Categories](https://i.ibb.co/cKwJmw8x/Screenshot-2025-05-24-135723.png) | ![Categories](https://i.ibb.co/ds6pFjGv/Screenshot-2025-05-24-134324.png) | ![Categories](https://i.ibb.co/CKHxzCGN/Screenshot-2025-05-24-134420.png) |
+
+
+
+---
+
+## 🔄 Future Plans
+
+- Full responsive design for all pages  
+- Product detail page (description, images, related items)  
+- User panel (dashboard, saved items, settings)  
+- Admin panel (product & user management)  
+- Payment gateway integration  
+- Better layout for blog/articles
+
+---
+
+## 👨‍💻 Developer
+
+**Alireza Abarian**  
 GitHub: [@alireza-abarian786](https://github.com/alireza-abarian786)  
-Email: [alireza-abarian](https://alirezaabarian786@gmail.com) 
+Email: [alirezaabarian786@gmail.com](mailto:alirezaabarian786@gmail.com)
 
 ---
 
-## 🤝 مشارکت
+## 🤝 Contribution
 
-خوشحال می‌شوم اگر باگ یا پیشنهاد جدیدی دارید، آن را از طریق Issues یا Pull Request ارسال کنید. 🙌
+Found a bug? Have a suggestion?  
+Feel free to open an Issue or Pull Request.  
+Let’s improve it together 🙌
+
