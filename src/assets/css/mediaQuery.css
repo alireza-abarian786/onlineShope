@@ -76,10 +76,6 @@
     text-align: center;
   }
 
-  footer > div > div:last-child > div {
-    width: fit-content;
-  }
-
   .box-email-footer {
     justify-self: baseline;
     width: 100%;
@@ -89,17 +85,15 @@
     width: var(--navbar-width-1400);
   }
 
-  /* .cantain-box-slider {
-    margin: 100px 0 0 0;
-  } */
-
   .box-baner {
     margin: 0;
   }
-  .baner-left , .baner-right {
+  .baner-left,
+  .baner-right {
     height: 75%;
   }
-  .baner-right > div > h4 , .baner-left > div > h4 {
+  .baner-right > div > h4,
+  .baner-left > div > h4 {
     font-size: 36px;
   }
   .box-baner-last > div > div > h3 {
@@ -163,13 +157,13 @@
   }
   .baner-left {
     margin-bottom: 2rem;
-    margin-left: 30%;
+    transform: translateX(5%);
   }
   .baner-left > div {
-    padding-left: 50%;
+    padding-left: 40%;
   }
   .baner-right {
-    margin-right: 30%;
+    transform: translateX(-5%);
   }
 
   footer > div > div:last-child {
@@ -275,7 +269,7 @@
     grid-column: 1 / 4;
     grid-row: 3 / 4;
     justify-self: center;
-    width: 70% !important;
+    width: 90% !important;
   }
 
   .navbar-syna > div {
@@ -328,7 +322,8 @@
     font-size: medium;
     margin: 3px;
   }
-  .cantain-box-slider > div:first-child > a:last-child, .cantain-box-articles > div:first-child > a:last-child {
+  .cantain-box-slider > div:first-child > a:last-child,
+  .cantain-box-articles > div:first-child > a:last-child {
     font-size: small;
     padding: 5px 15px;
     font-weight: 500;
@@ -343,7 +338,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .box-serch {
     top: 40rem;
     width: 70vw;
@@ -374,7 +368,8 @@
     gap: 0;
     padding: 0;
   }
-  .mySwiper2 , .mySwiper3 {
+  .mySwiper2,
+  .mySwiper3 {
     height: 32rem;
   }
   .discounts-title h2 {
@@ -422,30 +417,32 @@
     font-size: 0.875rem;
   }
 
-
-  .baner-right > div > h4, .baner-left > div > h4 {
+  .baner-right > div > h4,
+  .baner-left > div > h4 {
     font-size: 26px;
   }
-
 
   .cantain-box-slider > div:first-child > div:first-child > h5,
   .cantain-box-articles > div:first-child > div:first-child > h5 {
     font-size: small;
     margin: 3px;
   }
-  .cantain-box-slider > div:first-child > a:last-child, .cantain-box-articles > div:first-child > a:last-child {
+  .cantain-box-slider > div:first-child > a:last-child,
+  .cantain-box-articles > div:first-child > a:last-child {
     font-size: x-small;
     padding: 5px 15px;
     font-weight: 500;
   }
-  .cantain-box-slider > div:first-child > a:last-child > p, .cantain-box-articles > div:first-child > a:last-child > p {
+  .cantain-box-slider > div:first-child > a:last-child > p,
+  .cantain-box-articles > div:first-child > a:last-child > p {
     /* margin-bottom: 2px !important; */
   }
   .cantain-box-articles > div:first-child {
     flex-direction: row-reverse;
     padding: 0 0.5rem;
   }
-  .cantain-box-slider > div:first-child > div:first-child, .cantain-box-articles > div:first-child > div:first-child {
+  .cantain-box-slider > div:first-child > div:first-child,
+  .cantain-box-articles > div:first-child > div:first-child {
     border-right: 10px solid var(--primary-color);
     border-left: 0;
     padding: 0 5px;
@@ -455,7 +452,9 @@
     width: 100%;
   }
 
-  .mySwiper2, .mySwiper3, .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 10rem;
   }
 }
@@ -465,7 +464,9 @@
     font-size: 0.5rem;
   }
 
-  .mySwiper2 , .mySwiper3 , .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 7rem;
   }
 
@@ -480,9 +481,10 @@
     font-weight: 900;
     margin: 3px;
   }
-  .cantain-box-slider > div:first-child > a:last-child, .cantain-box-articles > div:first-child > a:last-child {
+  .cantain-box-slider > div:first-child > a:last-child,
+  .cantain-box-articles > div:first-child > a:last-child {
     font-size: xx-small;
-    padding: 5px 15px
+    padding: 5px 15px;
   }
   .cantain-box-slider > div:first-child {
     flex-direction: row-reverse;
@@ -491,12 +493,14 @@
     flex-direction: row-reverse;
     padding: 0 0.5rem;
   }
-  .cantain-box-slider > div:first-child > div:first-child, .cantain-box-articles > div:first-child > div:first-child {
+  .cantain-box-slider > div:first-child > div:first-child,
+  .cantain-box-articles > div:first-child > div:first-child {
     border-right: 10px solid var(--primary-color);
     border-left: 0;
     padding: 0 5px;
   }
-  .cantain-box-slider , .cantain-box-articles {
+  .cantain-box-slider,
+  .cantain-box-articles {
     gap: 0;
   }
   .box-articles > div > div:last-child {
@@ -520,8 +524,9 @@
 }
 
 @media screen and (max-width: 576px) {
-
-  .mySwiper2 , .mySwiper3 , .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 5rem;
   }
 
@@ -552,7 +557,7 @@
   .remove-btn i {
     font-size: 14px;
   }
-  .box-goods h6{
+  .box-goods h6 {
     margin-left: 0.2rem;
     font-size: 8px;
     padding: 7px;
@@ -587,7 +592,9 @@
   .image-slider {
     height: 5rem;
   }
-  .carousel-indicators , .carousel-control-prev , .carousel-control-next {
+  .carousel-indicators,
+  .carousel-control-prev,
+  .carousel-control-next {
     display: none;
   }
   .container-boxs-small {
@@ -647,14 +654,10 @@
     padding: 7px 15px;
   }
 
-
-  
   .box-baner {
     height: 700px;
   }
-  /* .box-baner > div {
-    height: 45%;
-  } */
+
   .baner-left {
     background-position-x: -285px;
   }
@@ -674,13 +677,6 @@
     align-self: center;
     padding: 0;
   }
-  /* .baner-left > div > h4,
-  .baner-right > div > h4 {
-    font-size: 2rem;
-  } */
-
-
-
 
   .box-baner-last > div > div > h3 {
     font-size: 1.25rem;
@@ -714,16 +710,21 @@
   .text-navbar-blue > h6 {
     font-size: 0.4rem;
   }
+  .open-cart {
+    width: 90%;
+  }
 
-  .mySwiper2, .mySwiper3 , .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 3rem;
   }
 
-    .cantainer-discounts-goods > div > div:nth-child(3) > p,
+  .cantainer-discounts-goods > div > div:nth-child(3) > p,
   .discounts-goods-slider > div > div:nth-child(3) > p {
     font-size: 0.625rem;
   }
-  
+
   .box-baner {
     gap: 0;
     flex-basis: max-content;
@@ -739,7 +740,7 @@
     background-position-x: 0;
   }
   .baner-left > div {
-    padding: 2rem;
+    padding: 2rem 4rem;
     gap: 15px;
   }
   .baner-right > div {
@@ -747,7 +748,6 @@
   }
   .box-baner > div > div {
     align-items: center;
-    justify-content: start;
   }
   .baner-left > div > .discounts-title {
     align-self: end;
@@ -773,9 +773,6 @@
     font-size: xx-small;
   }
 
-
-
-
   .box-baner-last > div > div > h3 {
     font-size: 0.7rem;
     letter-spacing: 0;
@@ -792,7 +789,9 @@
   .blue-bar {
     display: none !important;
   }
-  .mySwiper2, .mySwiper3, .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 1rem;
   }
 
@@ -838,7 +837,9 @@
 }
 
 @media screen and (max-width: 380px) {
-  .mySwiper2, .mySwiper3 , .cantain-box-slider > div {
+  .mySwiper2,
+  .mySwiper3,
+  .cantain-box-slider > div {
     padding: 0 0.5rem;
   }
 

@@ -92,11 +92,11 @@ export function toggleCart() {
       
       openCart.classList.add("is-content");
       containerOpenCart.style.display = "flex";
-      containerOpenCart.style.height = document.body.offsetHeight + "px";
       cartNotification.classList.remove("is-notification");
       renderCartItems(resultCartFetchOperation.products)
       showAlertEmptyCart(resultCartFetchOperation.products);
       hideLoader();
+      positionOpenCart()
 
     } catch (error) {
       hideLoader();
@@ -261,12 +261,14 @@ async function removeAllFromCart() {
 function closeCart() {
   const containerShoppingCart = document.querySelector(".container-shopping-cart");
   const openCart = document.querySelector(".open-cart");
+  const cartIcon = document.querySelector('.shopping-cart-icon');
 
   containerShoppingCart.addEventListener("click", async (e) => {
     try {
       if (e.target.classList.contains("container-shopping-cart")) {
         containerShoppingCart.style.display = "none";
         openCart.classList.remove("is-content");
+        cartIcon.style.zIndex = '9'
         updateCartNotification()
       }
     } catch (error) {
@@ -274,6 +276,37 @@ function closeCart() {
     }
   });
 }
+
+//todo=================================================================== 
+function positionOpenCart() {
+    const menuBox = document.querySelector('.menu-box');
+    const openCart = document.querySelector('.open-cart');
+    const cartIcon = document.querySelector('.shopping-cart-icon');
+    const menuBoxRect = menuBox.getBoundingClientRect();
+    const cartIconRect = cartIcon.getBoundingClientRect();
+    const openCartWidth = openCart.offsetWidth || 400; 
+    const viewportWidth = document.documentElement.clientWidth;
+
+    const topPosition = menuBoxRect.bottom + 20;
+    cartIcon.style.zIndex = '9999'
+
+    let rightPosition = viewportWidth - cartIconRect.right;
+
+    if (rightPosition + openCartWidth > viewportWidth) {
+        rightPosition = viewportWidth - openCartWidth - 10;
+    }
+
+    if (rightPosition < 10) {
+        rightPosition = 10; 
+    }
+
+    openCart.style.top = `${topPosition}px`;
+    openCart.style.right = `${rightPosition}px`;
+    openCart.style.left = 'auto';
+}
+
+window.addEventListener('resize', positionOpenCart);
+window.addEventListener('scroll', positionOpenCart);
 
 //! -------------------------------------------------------------------bindings-------------------------------------------------------------------------
 window.updateQuantity = updateQuantity
