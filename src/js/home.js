@@ -1,19 +1,11 @@
+//!---------------------------------------------------------------------- import -------------------------------------------------------
 import './header.js'
 import './funcs/store/box.js'
-//!---------------------------------------------------------------------- import -------------------------------------------------------
-// import { settingSliderSwiper } from "./funcs/sliders.js";
-// import { createProductsAppliances , createBlogs, initializeStatusMarks, updateCartNotification, initializeStatusCarts} from "./funcs/store/ui.js";
-// import { fetchDataFromApi, hideLoader , showAlertLogin} from "./funcs/utils.js";
-// import { fetchCategoriesForShowToMenu, isLogin, searchGlobalHandler } from "./header.js";
-// import { closeCart, toggleCart } from "./funcs/store/cart.js";
-// import { getToken } from "./funcs/store/storage.js";
-
 import { runTimer } from "./funcs/timer.js";
 import { resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
 import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
 import { createBlogs } from './funcs/store/ui.js';
-
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
@@ -44,7 +36,10 @@ createBlogs(containerArticles)
 runTimer();
 
 //todo========================================================== نمایش محصولات بوکمارک شده
-updateFavoritesUI()
+function initializePage() {
+    updateFavoritesUI();
+    hideLoader();
+}
 
 //todo========================================================== مخفی شدن لودر
 hideLoader()
@@ -53,19 +48,7 @@ hideLoader()
 
 //todo======================================== رویداد بارگذاری محتویات صفحه اصلی
 window.addEventListener("load", async () => {  
-  // hideLoader()
-  // changeBtnAfterAdd()
-  // fetchCategoriesForShowToMenu()
-  // toggleCart()
-  // closeCart()
-  // isLogin()
-  // settingSliderSwiper();
-  // getAllProduct();
-  // createBlogs(containerArticles);
-  // initializeStatusMarks();                  
-  // initializeStatusCarts()
-  // hideLoader()
-  // updateCartNotification()
+  initializePage()
 });
 
 

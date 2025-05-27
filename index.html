@@ -74,9 +74,8 @@
 
             <!--? logo image -->
             <img
-              src="./src/assets/images/home.png"
+              src="./src/assets/images/logo.png"
               alt="لوگوی دیجی استور"
-              width="32"
               height="32"
               class="d-lg-block d-none"
               loading="lazy"
@@ -87,25 +86,25 @@
 
           <!--? start menu -->
           <ul
-            class="menu p-0 d-flex flex-lg-row-reverse gap-lg-5 offcanvas-lg offcanvas-start overflow-visible m-0"
+            class="menu p-0 d-flex flex-lg-row-reverse gap-lg-5 offcanvas-lg offcanvas-start overflow-auto m-0"
             tabindex="-1"
             id="offcanvasResponsive"
             aria-labelledby="offcanvasExampleLabel"
             role="navigation"
           >
             <!--? start container header sidebar -->
-            <div
-              class="w-100 bg-white d-lg-none d-flex align-items-center justify-content-center shadow-lg"
-              style="height: 3rem"
-            >
+            <div class="position-fixed bg-white d-lg-none d-flex flex-column align-items-center justify-content-center p-3 gap-3 shadow-lg" style="width: inherit;">
               <!--? image header sidebar -->
               <img
-                src="./src/assets/images/home.png"
+                src="./src/assets/images/logo.png"
                 alt="لوگوی دیجی استور"
-                width="32"
                 height="32"
                 loading="lazy"
               />
+
+              <h4 class="fw-bold m-0">
+                دیجی <span class="text-primary">استور</span>
+              </h4>
 
               <!--? icon-close header sidebar -->
               <button
@@ -119,7 +118,7 @@
             <!--? end container header sidebar -->
 
             <!--? start menu drop-down -->
-            <li class="category-menu position-relative text-start offcanvas-body flex-grow-0 overflow-visible" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <li class="category-menu text-start offcanvas-body flex-grow-0 overflow-visible" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <!-- <li class="category-menu position-relative text-start offcanvas-body flex-grow-0 overflow-visible" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"> -->
               
               <!--? arrow menu drop-down -->
@@ -187,9 +186,10 @@
         <div class="box-apps d-flex align-items-center justify-content-center gap-0 gap-sm-3 flex-sm-row-reverse border-0" role="menu">
 
           <!--? start box search  -->
-          <div class="box-serch align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2" role="search">
-            <input class="form-control border-0 text-end p-1 pb-2 d-flex" id="search-global" type="search" placeholder="جستجو در دیجی استور" aria-label="جستجو در دیجی استور" />
-            <svg style="width: 50px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.893 16.92l3.08 3.08m-.889-8.419c0 4.187-3.383 7.581-7.555 7.581c-4.173 0-7.556-3.394-7.556-7.58C3.973 7.393 7.356 4 11.528 4c4.173 0 7.556 3.394 7.556 7.581" /></svg>
+          <div class="box-serch px-3 align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2" role="search">
+            <input class="w-100 input-tag border-0 text-end p-1 pb-2 d-flex" id="search-global" type="search" placeholder="جستجو در دیجی استور" aria-label="جستجو در دیجی استور" />
+            <i class="bi bi-search"></i>
+            <!-- <svg style="width: 50px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.893 16.92l3.08 3.08m-.889-8.419c0 4.187-3.383 7.581-7.555 7.581c-4.173 0-7.556-3.394-7.556-7.58C3.973 7.393 7.356 4 11.528 4c4.173 0 7.556 3.394 7.556 7.581" /></svg> -->
             <ul class="box-serch__ul-list show">
               <!-- data loaded from js -->
             </ul>
