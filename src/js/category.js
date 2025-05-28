@@ -4,19 +4,16 @@ import './funcs/store/cart.js'
 import './funcs/store/box.js'
 
 import { searchParams , getSearchProduct ,showLoader , hideLoader, fetchDataFromApi} from "./funcs/utils.js";
-import { settingSliderGlide, settingSliderSwiper } from "./funcs/sliders.js";
+import { settingSliderGlide } from "./funcs/sliders.js";
 import { createProductsTemplateHtml, getFavorites, resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
-import { getToken } from './funcs/store/storage.js';
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const boxSearchInput = document.querySelector(".box-search-category")
-// const boxSearchInput = document.querySelector(".box-search")
 const dropdownCategory = document.querySelector(".dropdown-category")
 const dropdownItem = document.querySelectorAll(".dropdown-item")
 const iconView = document.querySelectorAll(".btn-outline-secondary")
 const pagination = document.querySelector(".pagination")
 const containerCategoryFooter = document.querySelector(".container-category__footer")
 
-hideLoader()
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 const categoriesFetchingOperations = await fetchDataFromApi(`https://onlineshope.onrender.com/api/categories`);                               
 
@@ -31,14 +28,11 @@ const getCategoryFunc = async () => {
 //todo======================================================== تابعی برای دریافت دسته‌ بندی و نمایش باکس محصولات مرتبط
 const category = async () => { 
   const urlSearchParams = searchParams('cat');                                                                        
-  const favoritesFetchingOperations = await getFavorites()                               
-  const getProductCategory = await getCategoryFunc()                                                 
+  const getProductCategory = await getCategoryFunc()                                                   
   
   switch (urlSearchParams) {
     case 'bookmarks':{
-      const bookmarkedProducts = resultProductsFetchOperation.filter(item =>                                        
-        favoritesFetchingOperations.some(mark => mark.product_id == item.id)
-      );
+      const bookmarkedProducts = await getFavorites()    
       handlingCategoryPageFunctions([...bookmarkedProducts])
       break;
     }
@@ -86,102 +80,115 @@ let createStars = async (rating) => {
 
 //todo========================================================== category ایجاد باکس‌ های محصولات به صورت ردیفی داخل صفحه
 let createProductsRowTemplateHtml = (arrCategory) => {
-  document.querySelector(".container-category__footer").innerHTML = "";  
+  document.querySelector(".container-category__footer").innerHTML = "";
 
   if (arrCategory.length) {
     arrCategory.forEach(async (product) => {
-      containerCategoryFooter.insertAdjacentHTML("beforeend",
+      containerCategoryFooter.insertAdjacentHTML(
+        "beforeend",
         `
-          <div class="product-card swiper-slide glide h-100 product-box" data-id=${product._id}>
-            ${product.discount ? `<div class='box-discount'>${Math.floor(product.discount / 10000)}%</div>` : ""}
+          <div class="product-card glide h-100 product-box flex-md-nowrap flex-wrap" data-id=${product._id}>
+            ${
+              product.discount
+                ? `<div class='box-discount'>${Math.floor(
+                    product.discount / 10000
+                  )}% </div>`
+                : ""
+            }
             <div class="product-image-container">
-              <div class="swiper-container mySwiper5 h-100">
-
-                <div class="not-mark mark-contain" onclick="addToFavorites('${product._id}')">
-                  <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"></path>
-                  </svg>
+              <div class="not-mark mark-contain" onclick="addToFavorites('${product._id}')">
+                <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"></path>
+                </svg>
+              </div>
+              <div class="h-100">
+                <div class="glide__track h-100" data-glide-el="track">
+                  <ul class="glide__slides h-100">
+                    <li class="glide__slide"><img src="${
+                      product.images[0]
+                    }" alt="Slide 1" /></li>
+                    <li class="glide__slide"><img src="${
+                      product.images[1]
+                    }" alt="Slide 2" /></li>
+                    <li class="glide__slide"><img src="${
+                      product.images[2]
+                    }" alt="Slide 3" /></li>
+                  </ul>
                 </div>
-
-                <div class=' h-100'>
-                  <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides h-100">
-                      <li class="glide__slide"><img src="${product.images[0]}" alt="Slide 1" /></li>
-                      <li class="glide__slide"><img src="${product.images[1]}" alt="Slide 2" /></li>
-                      <li class="glide__slide"><img src="${product.images[2]}" alt="Slide 3" /></li>
-                    </ul>
-                    <div class="not-mark mark-contain">
-                      <svg class="icon-bookmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M17.6 21.945a1.483 1.483 0 0 1-1.01-.4l-4.251-3.9a.5.5 0 0 0-.68 0l-4.25 3.9a1.5 1.5 0 0 1-2.516-1.1V4.57a2.5 2.5 0 0 1 2.5-2.5h9.214a2.5 2.5 0 0 1 2.5 2.5v15.872a1.481 1.481 0 0 1-.9 1.374a1.507 1.507 0 0 1-.607.129M12 16.51a1.5 1.5 0 0 1 1.018.395l4.251 3.9a.5.5 0 0 0 .839-.368V4.57a1.5 1.5 0 0 0-1.5-1.5H7.393a1.5 1.5 0 0 0-1.5 1.5v15.872a.5.5 0 0 0 .839.368l4.251-3.91A1.5 1.5 0 0 1 12 16.51"/></svg>
-                    </div>
+                <div class="next-img-box glide__arrows box-row-arrow" data-glide-el="controls">
+                  <div class="glide__arrow--left" data-glide-dir="<" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
+                    <svg class="pretive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="M497.333 239.999H80.092l95.995-95.995l-22.627-22.627L18.837 256L153.46 390.623l22.627-22.627l-95.997-95.997h417.243z"/></svg>
                   </div>
-
-                  <div class="next-img-box glide__arrows box-row-arrow" data-glide-el="controls">
-                    <div class="glide__arrow--left" data-glide-dir="<" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
-                      <svg class="pretive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="M497.333 239.999H80.092l95.995-95.995l-22.627-22.627L18.837 256L153.46 390.623l22.627-22.627l-95.997-95.997h417.243z"/></svg>
-                    </div>
-
-                    <div class="glide__arrow--right" data-glide-dir=">" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
-                      <svg class="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="m359.873 121.377l-22.627 22.627l95.997 95.997H16v32.001h417.24l-95.994 95.994l22.627 22.627L494.498 256z" /></svg>
-                    </div>
+                  <div class="glide__arrow--right" data-glide-dir=">" onclick="updateArrowButtonColors(event, '#2563eb', '#75757533')">
+                    <svg class="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"><path fill="currentColor" d="m359.873 121.377l-22.627 22.627l95.997 95.997H16v32.001h417.24l-95.994 95.994l22.627 22.627L494.498 256z" /></svg>
                   </div>
                 </div>
-
-
-              </div>    
+              </div>
             </div>
-
-            <div class="product-info">
-                <div class="product-title product-title-category">${
-                  product.name
-                }</div>
-                <div class="product-rating">
+            <div class="product-info align-items-md-end align-items-center">
+              <div class="product-title product-title-category">${
+                product.name
+              }</div>
+              <div class="points-container d-flex justify-content-end align-items-center flex-column-reverse flex-xl-row flex-wrap">
+                <div class="product-features">
+                  <div class="feature-item"> باتری 4000 میلی‌آمپر </div>
+                  <div class="feature-item"> دوربین 64 مگاپیکسل </div>
+                  <div class="feature-item"> صفحه نمایش 6.2 اینچ </div>
+                </div>
+                <div class="product-rating ps-0 ps-xl-5">
                   ${await createStars(product.ratings)}
                   <span class='text-body'>(${product.ratings})</span>
                 </div>
-                <div class="product-description">${
-                  product.description
-                }</div>
-                <div class="price-container">
-
+              </div>
+              <div class="product-description">${product.description}</div>
+              <div class="price-container d-flex align-items-center justify-content-md-end justify-content-center flex-wrap flex-column flex-md-row position-relative">
                 ${
                   !product.discount
                     ? `<span class="price text-bg-primary rounded fw-bold px-2 position-relative d-flex align-items-center">
-                      تومان
-                      <span class="ms-1 lead p-2 fs-6">${product.price.toLocaleString()}</span>
-                      &nbsp&nbsp:قیمت محصول
-                    </span>`
+                        تومان
+                        <span class="ms-1 lead p-2 fs-6">${product.price.toLocaleString()}</span>
+                        &nbsp&nbsp:قیمت محصول
+                      </span>`
                     : `<span class="price price-before position-relative d-flex align-items-center">
-                      تومان
-                      <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
+                        تومان
+                        <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
                       </span>
-                      <span class="discount d-flex text-white p-2 fs-6">
-                      تومان
-                      <span class="ms-1">${(product.price - (product.price * (Math.floor(product.discount / 10000) / 100))).toLocaleString()}</span>
-                      &nbsp&nbsp:قیمت با تخفیف
-                    </span>`
+                      <span class="discount d-flex text-white p-2 m-0 ms-md-4 fs-6">
+                        تومان
+                        <span class="ms-1">${(
+                          product.price -
+                          product.price *
+                            (Math.floor(product.discount / 10000) / 100)
+                        ).toLocaleString()}</span>
+                        &nbsp&nbsp:قیمت با تخفیف
+                      </span>`
                 }
-
-                </div>
-                <div class="btn-cart-box buy-button" onclick="addToCartAndToggleButton('${product._id}')">اضافه به سبد خرید</div>
-                <div class="product-features">
-                    <div class="feature-item"><i class="fa fa-battery-full"></i> باتری 4000 میلی‌آمپر</div>
-                    <div class="feature-item"><i class="fa fa-camera"></i> دوربین 64 مگاپیکسل</div>
-                    <div class="feature-item"><i class="fa fa-mobile"></i> صفحه نمایش 6.2 اینچ</div>
-                </div>
+              </div>
+              <div class="btn-cart-box buy-button" onclick="addToCartAndToggleButton('${
+                product._id
+              }')"> 🧺 اضافه به سبد خرید </div>
             </div>
           </div>
         `
       );
 
+      const currentSlider = containerCategoryFooter.querySelector(`.product-card[data-id="${product._id}"]`);
+        if (currentSlider) {
+          new Glide(currentSlider, {
+            type: "slider",
+            perView: 1,
+            autoplay: 7000,
+            animationDuration: 800,
+          }).mount();
+        }
     });
-    settingSliderSwiper()
-    settingSliderGlide()
-    updateFavoritesUI()
 
+    updateFavoritesUI();
   } else {
-    containerCategoryFooter.insertAdjacentHTML("beforeend",
-        `<div class='alert alert-danger w-100 text-center'>:( کالای مورد نظر شما یافت نشد ):</div>`
-      );
+    containerCategoryFooter.insertAdjacentHTML(
+      "beforeend",
+      `<div class='alert alert-danger w-100 text-center'>:( کالای مورد نظر شما یافت نشد ):</div>`
+    );
   }
 };
 
@@ -317,16 +324,7 @@ const clickOnPagination = (param , value) => {
   category() 
 }
 
-window.clickOnPagination = clickOnPagination
-
-//!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
-//todo======================================================== رویداد بارگذاری صفحه
-window.addEventListener("DOMContentLoaded" , () => {
-  category()
-
-  console.log('window.innerWidth');
-  
-})
+//todo======================================================== تغییرات کانتینر
 if (window.innerWidth < '992') {
   const container = document.querySelector(".container")
   container.classList.add('container-fluid')
@@ -337,3 +335,9 @@ if (window.innerWidth < '768') {
   container.classList.add('container')
   container.classList.remove('container-fluid')  
 }
+
+//todo======================================================== اپدیت علاقه مندی ها
+updateFavoritesUI()
+
+//!---------------------------------------------------------------------- binding -------------------------------------------------------
+window.clickOnPagination = clickOnPagination

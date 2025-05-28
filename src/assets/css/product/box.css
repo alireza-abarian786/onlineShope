@@ -263,7 +263,8 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
 }
 
-.not-mark , .is-mark {
+.not-mark,
+.is-mark {
   position: absolute;
   top: 5%;
   left: 4%;
@@ -278,7 +279,8 @@
   cursor: pointer;
 }
 
-.not-mark svg , .is-mark svg {
+.not-mark svg,
+.is-mark svg {
   transform: rotate(-45deg);
   width: 100%;
   height: 100%;
@@ -362,7 +364,7 @@
 }
 
 .price-before::before {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 1px;
@@ -397,7 +399,7 @@
   background: linear-gradient(45deg, #0d6efd, #0d6efdb0);
 }
 
-.add-cart:hover > p ,
+.add-cart:hover > p,
 .add-cart:hover > svg {
   color: #fff !important;
 }
@@ -406,7 +408,6 @@
 }
 .add-cart-active-btn {
   background: linear-gradient(45deg, #0d6efd, #0d6efdb0);
-
 }
 
 .add-cart > svg {
@@ -430,7 +431,6 @@
   overflow: hidden;
 }
 
-
 /** --------------------------------------------------------------- slider --------------------------------------------------------------- */
 
 .glide__slide img {
@@ -439,15 +439,17 @@
   object-fit: contain;
 }
 
-.mySwiper2 , .mySwiper3 {
+.mySwiper2,
+.mySwiper3 {
   width: 100%;
-  height: 520px ;
+  height: 520px;
 }
 .mySwiper2 {
   margin: 0 1rem;
   padding: 0 0.5rem;
 }
-.mySwiper3 , .cantain-box-slider > div {
+.mySwiper3,
+.cantain-box-slider > div {
   padding: 0 2.5rem;
 }
 
@@ -503,7 +505,6 @@
   background-color: #fff !important;
 }
 
-
 /** ------------------------------------------------------------------------------------------------------ */
 
 .box-discount {
@@ -524,12 +525,11 @@
   padding-top: 2px;
 }
 
-
-
-
 /* ------------------------------------------------------------------ */
 
 .box-row-arrow {
   justify-content: space-around;
   transform: translateX(100%);
+  position: absolute;
+  bottom: 3px;
 }

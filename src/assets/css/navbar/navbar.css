@@ -8,6 +8,10 @@ header {
   width: 97%;
 }
 
+.menu {
+  z-index: 99999;
+}
+
 .icon-bar {
   width: 2rem;
 }

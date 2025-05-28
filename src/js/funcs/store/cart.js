@@ -305,7 +305,7 @@ function positionOpenCart() {
     openCart.style.left = 'auto';
 }
 
-window.addEventListener('resize', positionOpenCart);
+// window.addEventListener('resize', positionOpenCart);
 window.addEventListener('scroll', positionOpenCart);
 
 //! -------------------------------------------------------------------bindings-------------------------------------------------------------------------

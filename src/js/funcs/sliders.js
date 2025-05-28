@@ -1,12 +1,13 @@
 // ست شده روی عکس های باکس محصول Glide تابع تنظیمات اسلایدر 
-function settingSliderGlide() {    
-  // گرفتن تمام باکس‌های اسلایدر و مشخص کردن ویژگی های آن
-  document.querySelectorAll('.glide').forEach((slider, index) => {
+function settingSliderGlide() {
+  const sliders = document.querySelectorAll(".glide");
+  console.log("تعداد اسلایدرهای شناسایی‌شده:", sliders.length);
+  sliders.forEach((slider, index) => {
     new Glide(slider, {
-        type: 'slider',
-        perView: 1,
-        autoplay: 7000,
-        animationDuration: 800,
+      type: "slider",
+      perView: 1,
+      autoplay: 7000,
+      animationDuration: 800,
     }).mount();
   });
 }

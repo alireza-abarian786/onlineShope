@@ -253,11 +253,11 @@
   border-radius: 16px;
   box-shadow: var(--shadow-md);
   padding: 20px;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   transition: var(--transition);
   position: relative;
   gap: 20px;
-  flex-wrap: wrap;
   flex-direction: row-reverse;
 }
 .product-card:hover {
@@ -267,7 +267,7 @@
 .product-image-container {
   position: relative;
   width: 350px;
-  height: 260px;
+  height: 280px;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: var(--shadow-md);
@@ -275,7 +275,7 @@
 }
 .product-image-container img {
   width: 100%;
-  height: 100%;
+  height: 85%;
   object-fit: contain;
   transition: var(--transition);
 }
@@ -285,7 +285,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
-  height: 250px;
+  height: max-content;
   flex-grow: 1;
   position: relative;
 }
@@ -294,23 +294,40 @@
   font-weight: bold;
   color: var(--text-color);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+
+  border-bottom: 1.5px solid #75757533;
+  padding-bottom: 5px;
+}
+.points-container {
+  border-bottom: 1.5px solid #75757533;
+  padding-bottom: 5px;
 }
 .product-rating {
+  position: relative;
   font-size: 18px;
   color: #ffa500;
+}
+.product-rating::after {
+  content: "";
+  width: 1.5px;
+  height: 16px;
+  background-color: #75757533;
+  position: absolute;
+  top: 5px;
+  left: 23px;
 }
 .product-description {
   font-size: 14px;
   color: var(--text-light);
   line-height: 1.6;
   flex-grow: 1;
+
+  border-bottom: 1.5px solid #75757533;
+  padding-bottom: 5px;
 }
 .price-container {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 30px;
+  border-bottom: 1.5px solid #75757533;
+  padding-bottom: 5px;
 }
 .product-price {
   font-size: 22px;
@@ -339,7 +356,7 @@
   border-radius: 5px;
 }
 .buy-button {
-  background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+  background: var(--success-color);
   color: white;
   padding: 12px;
   border-radius: 10px;
@@ -350,6 +367,7 @@
   font-size: 18px;
   width: 200px;
   font-weight: bold;
+  align-self: start;
 }
 .buy-button:hover {
   background: var(--success-color);
@@ -360,12 +378,9 @@
 
 .product-features {
   display: flex;
+  justify-content: end;
   gap: 15px;
-  margin-top: 10px;
   flex-wrap: wrap;
-  position: absolute;
-  right: 0;
-  bottom: 0;
   font-size: 12px;
 }
 .feature-item {

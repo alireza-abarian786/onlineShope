@@ -374,26 +374,25 @@ export async function getFavorites() {
 
 // //todo========================================================== علامت بوکمارک محصول UI تغییر
 export async function updateFavoritesUI() {
-  console.log("updateFavoritesUI called");
   try {
     if (!(await showAlertLogin())) return false;
-
+    
     const markList = await getFavorites();
-
+    
     if (markList.status === 401) {
       setLocalStorage("isAuthorized", false);
       if (!modalAuthorized()) return false;
     }
-
+    
     setLocalStorage("isAuthorized", true);
-
-    const cardProductElem = document.querySelectorAll(".glide");
+    
+    const cardProductElem = document.querySelectorAll(".glide");    
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
       const markContain = card.querySelector(".mark-contain");
 
       const isMarked = markList.some((mark) => mark._id === cardId);
-
+      
       if (isMarked) {
         markContain.classList.add("is-mark");
         markContain.classList.remove("not-mark");
@@ -408,7 +407,7 @@ export async function updateFavoritesUI() {
   }
 }
 
-// //todo========================================================== خالی کردن کش بعد از تغییر
+// //todo========================================================== خالی کردن کش علاقه مندی ها بعد از تغییر
 export function invalidateFavoritesCache() {
   cachedFavorites = null;
 }
