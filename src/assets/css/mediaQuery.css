@@ -525,7 +525,7 @@
     width: 100%;
   }
   .product-image-container {
-    width: fit-content;
+    width: inherit;
   }
 }
 
@@ -704,9 +704,6 @@
   }
   .box-img + div > div:first-child {
     display: none;
-  }
-  .next-img-box {
-    width: 60%;
   }
   .box-img + div > div:last-child > div > svg {
     width: 25%;

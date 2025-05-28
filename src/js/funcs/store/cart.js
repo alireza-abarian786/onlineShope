@@ -288,7 +288,7 @@ function positionOpenCart() {
     const viewportWidth = document.documentElement.clientWidth;
 
     const topPosition = menuBoxRect.bottom + 20;
-    cartIcon.style.zIndex = '9999'
+    cartIcon.style.zIndex = '999'
 
     let rightPosition = viewportWidth - cartIconRect.right;
 

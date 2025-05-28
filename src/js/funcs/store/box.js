@@ -1,5 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getToken, setLocalStorage } from "./storage.js";
+import { getLocalStorage, getToken, setLocalStorage } from "./storage.js";
 import { showModal } from "./ui.js";
 import { renderCartItems, toggleCart, updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
@@ -374,8 +374,8 @@ export async function getFavorites() {
 
 // //todo========================================================== علامت بوکمارک محصول UI تغییر
 export async function updateFavoritesUI() {
-  try {
-    if (!(await showAlertLogin())) return false;
+  try {    
+    if (!(getLocalStorage('login').length)) return false;
     
     const markList = await getFavorites();
     

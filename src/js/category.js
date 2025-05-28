@@ -83,11 +83,11 @@ let createProductsRowTemplateHtml = (arrCategory) => {
   document.querySelector(".container-category__footer").innerHTML = "";
 
   if (arrCategory.length) {
-    arrCategory.forEach(async (product) => {
+    arrCategory.forEach(async (product) => {      
       containerCategoryFooter.insertAdjacentHTML(
         "beforeend",
         `
-          <div class="product-card glide h-100 product-box flex-md-nowrap flex-wrap" data-id=${product._id}>
+          <div class="product-card glide h-100 product-box flex-md-nowrap flex-wrap align-items-center justify-content-center" data-id=${product._id}>
             ${
               product.discount
                 ? `<div class='box-discount'>${Math.floor(
@@ -181,9 +181,9 @@ let createProductsRowTemplateHtml = (arrCategory) => {
             animationDuration: 800,
           }).mount();
         }
+        updateFavoritesUI();
     });
 
-    updateFavoritesUI();
   } else {
     containerCategoryFooter.insertAdjacentHTML(
       "beforeend",
@@ -317,7 +317,7 @@ const handlePagination = (array , element , showItemCountToPage , currentPage) =
 
 //todo======================================================= تابع جابجایی بین صفحات
 const clickOnPagination = (param , value) => {  
-  // showLoader()
+  showLoader()
   const urlSearchParams = new URL (location.href)
   urlSearchParams.searchParams.set(param , value)
   window.history.replaceState(null , "" , urlSearchParams.toString())
@@ -337,7 +337,7 @@ if (window.innerWidth < '768') {
 }
 
 //todo======================================================== اپدیت علاقه مندی ها
-updateFavoritesUI()
+// updateFavoritesUI()
 
 //!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.clickOnPagination = clickOnPagination
