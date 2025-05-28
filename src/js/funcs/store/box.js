@@ -14,7 +14,7 @@ const productsFetchOperation = await fetch(
   "https://onlineshope.onrender.com/api/products"
 );
 export const resultProductsFetchOperation = await productsFetchOperation.json();
-const cachedFavorites = null;
+let cachedFavorites = null;
 
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 

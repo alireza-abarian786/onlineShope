@@ -13,14 +13,15 @@ import {
 // import { toggleCart} from './funcs/store/cart.js';
 // import { isLogin } from './header.js';
 
-let emailLogin = document.querySelector(".email-login");
-let passwordLogin = document.querySelector(".password-login");
-let btnLogin = document.querySelector(".btn-login");
-let btnSignUp = document.querySelector(".btn-sign-up");
-let usernameSignUp = document.querySelector(".username-sign-up");
-let passwordSignUp = document.querySelector(".password-sign-up");
-let emailSignUp = document.querySelector(".email-sign-up");
-let phoneInput = document.querySelector(".phone-input");
+let emailLogin = document.querySelector("#login-email");
+let passwordLogin = document.querySelector("#login-password");
+let btnLogin = document.querySelector(".login-btn");
+
+let btnSignUp = document.querySelector(".register-btn");
+let usernameSignUp = document.querySelector("#register-name");
+let passwordSignUp = document.querySelector("#register-password");
+let emailSignUp = document.querySelector("#register-email");
+let phoneInput = document.querySelector("#register-phone");
 
 let usernameText = document.querySelector(".username-text");
 let passwordText = document.querySelector(".password-text");

@@ -14,8 +14,7 @@
 }
 
 /* Base Styles */
-.container {
-  width: 75%;
+.container-boxes {
   margin: 50px auto;
 }
 
@@ -213,7 +212,7 @@
   width: 100%;
   flex-wrap: wrap;
   justify-content: end;
-  column-gap: 22px;
+  column-gap: 100px;
   padding: 35px 23px;
 }
 

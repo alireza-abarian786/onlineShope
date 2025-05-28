@@ -321,6 +321,19 @@ window.clickOnPagination = clickOnPagination
 
 //!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
 //todo======================================================== رویداد بارگذاری صفحه
-window.addEventListener("load" , () => {
+window.addEventListener("DOMContentLoaded" , () => {
   category()
+
+  console.log('window.innerWidth');
+  
 })
+if (window.innerWidth < '992') {
+  const container = document.querySelector(".container")
+  container.classList.add('container-fluid')
+  container.classList.remove('container')  
+}
+if (window.innerWidth < '768') {
+  const container = document.querySelector(".container-fluid")
+  container.classList.add('container')
+  container.classList.remove('container-fluid')  
+}

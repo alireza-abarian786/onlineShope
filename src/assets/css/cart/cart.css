@@ -7,7 +7,7 @@
   gap: 20px;
 }
 
-.menu-box > div:last-child > div:nth-child(2) {
+.shopping-cart-icon  {
   border-radius: 100%;
   background-color: #fff;
   height: 30px;
