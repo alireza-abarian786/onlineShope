@@ -392,9 +392,13 @@
 }
 
 @media screen and (max-width: 768px) {
+  .discounts-goods > div > div,
+  .swiper-slide {
+    width: 90%;
+    margin: 0 auto;
+  }
   .box-serch-global {
     top: 40rem;
-    /* width: 70vw; */
     left: 12vw;
   }
 
@@ -465,6 +469,9 @@
   }
   .discounts-title div {
     justify-content: center;
+  }
+  .add-cart {
+    align-self: center;
   }
 
   .navbar-syna > div > div:first-child > div:first-child > p {
@@ -598,6 +605,11 @@
   .mySwiper3,
   .cantain-box-slider > div {
     padding: 0 5rem;
+  }
+  .discounts-goods > div > div,
+  .swiper-slide {
+    width: 100%;
+    margin: 0 auto;
   }
 
   .box-brand h1 {
@@ -869,9 +881,6 @@
 }
 
 @media screen and (max-width: 450px) {
-  /* .blue-bar {
-    display: none !important;
-  } */
   .mySwiper2,
   .mySwiper3,
   .cantain-box-slider > div {

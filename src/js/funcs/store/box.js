@@ -270,6 +270,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
 
   settingSliderSwiper();
   settingSliderGlide();
+  updateFavoritesUI()
 };
 
 // //todo========================================================== افزودن محصول به علاقه مندی ها
