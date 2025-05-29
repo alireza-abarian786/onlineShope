@@ -130,7 +130,7 @@ async function updateCartNotification() {
 }
 
 //todo=================================================================== تابع حذف محصول از سبد خرید
-async function removeFromCart(id) {
+export async function removeFromCart(id) {
   try {
     if (!(await showAlertLogin())) return false;    
     showLoader()
@@ -184,7 +184,7 @@ let showAlertEmptyCart = async (shoppingCart) => {
 };
 
 //todo=================================================================== عملیات افزایش یا کاهش تعداد محصول در سبد خرید
-let updateQuantity = async (operation, id , quantity) => {
+export let updateQuantity = async (operation, id , quantity) => {
   try {
     if (!(await showAlertLogin())) return false;   
     showLoader();    

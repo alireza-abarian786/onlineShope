@@ -28,7 +28,7 @@
     height: var(--icon-size-1400);
   }
 
-  .box-serch-global {
+  .box-search-global {
     position: absolute;
     z-index: 99;
     top: 350%;
@@ -397,7 +397,7 @@
     width: 90%;
     margin: 0 auto;
   }
-  .box-serch-global {
+  .box-search-global {
     top: 40rem;
     left: 12vw;
   }
@@ -615,7 +615,7 @@
   .box-brand h1 {
     font-size: medium !important;
   }
-  .box-serch-global {
+  .box-search-global {
     top: 14rem;
     width: 70vw;
     left: 13vw;
@@ -921,7 +921,7 @@
     margin-bottom: 0;
   }
 
-  .box-serch-global {
+  .box-search-global {
     width: 80vw;
     left: 35px;
   }

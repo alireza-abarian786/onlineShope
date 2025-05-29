@@ -42,7 +42,7 @@ function settingsMenuDropDown() {
 
 // todo============================================== سرچ سراسری محصولات
 const searchGlobalHandler = async (event) => {
-  const ulElemListSearch = document.querySelector(".box-serch__ul-list");
+  const ulElemListSearch = document.querySelector(".box-search__ul-list");
   const searchValue = event.target.value.trim();
 
   if (searchValue) {

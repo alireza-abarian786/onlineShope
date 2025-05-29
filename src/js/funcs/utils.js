@@ -72,12 +72,12 @@ const fetchDataFromApi = async (url) => {
 
 //todo============================================ تابع نمایش لودر
 function showLoader() {
-  loaderElem.classList.remove("hidden");
+  // loaderElem.classList.remove("hidden");
 }
 
 //todo============================================ تابع مخفی کردن لودر
 function hideLoader() {
-  loaderElem.classList.add("hidden");
+  // loaderElem.classList.add("hidden");
 }
 
 //todo============================================ دریافت اطلاعات و بررسی وضعیت لاگین کاربر
