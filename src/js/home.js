@@ -2,7 +2,7 @@
 import './header.js'
 import './funcs/store/box.js'
 import { runTimer } from "./funcs/timer.js";
-import { resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
+import { resultProductsFetchOperation } from './funcs/store/box.js';
 import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
 import { createBlogs } from './funcs/store/ui.js';
@@ -35,21 +35,7 @@ createBlogs(containerArticles)
 //todo========================================================== نمایش تایمر صفحه اصلی
 runTimer();
 
-//todo========================================================== نمایش محصولات بوکمارک شده
-updateFavoritesUI();
-function initializePage() {
-  hideLoader();
-}
-
 //todo========================================================== مخفی شدن لودر
 hideLoader()
-
-//!---------------------------------------------------------------------- addEventListener -------------------------------------------------------
-
-//todo======================================== رویداد بارگذاری محتویات صفحه اصلی
-window.addEventListener("load", async () => {  
-  initializePage()
-});
-
 
 

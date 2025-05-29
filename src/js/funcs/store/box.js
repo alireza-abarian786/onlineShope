@@ -255,19 +255,17 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
 
   settingSliderSwiper();
   settingSliderGlide();
-  // updateFavoritesUI()
+  updateFavoritesUI()
 };
 
 // //todo========================================================== افزودن محصول به علاقه مندی ها
 const addToFavorites = async (productId) => {
   try {
     if (!(await showAlertLogin())) return false;
-    showLoader();
 
-    const markList = await getLocalStorage('markData')
-    console.log(markList);
-    
-    const checkedMark = markList.favorites.some((mark) => mark._id === productId);
+    showLoader();
+    const markList = await getLocalStorage('markData')    
+    const checkedMark = markList.favorites.some((mark) => mark === productId);    
 
     if (!checkedMark) {
       const response = await fetch(
@@ -287,9 +285,7 @@ const addToFavorites = async (productId) => {
       const favoritesData = await response.json()
       setLocalStorage('markData' , favoritesData)
       showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
-      updateFavoritesUI();
-      console.log(favoritesData);
-      
+      updateFavoritesUI();      
 
     } else {
       removeFromFavorites(productId);
@@ -305,8 +301,8 @@ const addToFavorites = async (productId) => {
 async function removeFromFavorites(productId) {
   try {
     if (!(await showAlertLogin())) return false;
-    showLoader();
 
+    showLoader();
     const response = await fetch(
       "https://onlineshope.onrender.com/api/users/favorites/remove",
       {
@@ -352,7 +348,7 @@ export async function getFavorites() {
     }
 
     const favoritesData =  await response.json()
-    setLocalStorage('markData' , favoritesData.favorites)
+    setLocalStorage('markData' , favoritesData)
   } catch (error) {
     console.error("Error in getFavorites:", error);
     showModal("❌ خطا در دریافت علاقه‌مندی‌ها");
@@ -366,14 +362,11 @@ export async function updateFavoritesUI() {
     if (!(getLocalStorage('login').length)) return false;
     
     const markList = await getLocalStorage('markData');    
-    const cardProductElem = document.querySelectorAll(".glide"); 
-    console.log(markList);
-       
+    const cardProductElem = document.querySelectorAll(".glide");        
 
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
       const markContain = card.querySelector(".mark-contain");
-
       const isMarked = markList.favorites.some((mark) => mark === cardId);
       
       if (isMarked) {
