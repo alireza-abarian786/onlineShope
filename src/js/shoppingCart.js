@@ -35,8 +35,11 @@ export let createBoxProductToPageCart = async (shoppingCartProduct) => {
         document.querySelector(".container-Product-cards").insertAdjacentHTML(
           "beforeend",
           `
-            <div class="cart-item swiper-slide" data-id="${box._id}">
-                <button class="delete-btn" onclick="removeFromCart('${box.product._id}')"><i class="bi bi-trash3"></i>&nbsp حذف</button>
+            <div class="cart-item flex-wrap flex-md-nowrap" data-id="${box._id}">
+                <button class="delete-btn" onclick="removeFromCart('${box.product._id}')">
+                  <i class="bi bi-trash3"></i>
+                  <span class="d-none d-md-inline">&nbsp حذف</span>
+                </button>
                 <div class="product-image">    
                     <div>
                         <div><img src="${
@@ -57,11 +60,11 @@ export let createBoxProductToPageCart = async (shoppingCartProduct) => {
                         <span>(${box.product.ratings})</span>
                     </div>
                     <div class="description">${box.product.description}</div>
-                    <div class="price-contain">
+                    <div class="price-contain flex-md-row flex-column gap-2 gap-md-5">
                         <div class="product-price-cart">قیمت واحد: ${box.product.price.toLocaleString()} تومان</div>
                         <div class="discount discount-cart-page"> ${box.discountPercent}% تخفیف </div>
                     </div>
-                    <div class="container-total">
+                    <div class="container-total flex-md-row flex-column gap-2 gap-md-5">
                       <img src="src/assets/images/logo.png" alt="لوگوی برند" class="brand-logo">
                       <div class="total-price-container">جمع: 
                         <span class="total-price">${box.finalPrice.toLocaleString()}</span>
@@ -97,32 +100,32 @@ export const boxPaymentHtmlTemplate = (resultCartFetchOperation) => {
     
         boxPayment.insertAdjacentHTML('beforeend' , `
             <div class="cart-collaterals h-100">
-                <div class="cart_totals h-100">
+                <div class="cart_totals">
     
-                <aside class="cart-three-sidebar shop_table" style="height: 350px">
+                <aside class="cart-three-sidebar shop_table">
                     <div class="cart-three-sidebar-content bg-white position-relative h-100 rounded-5 d-flex align-items-center justify-content-around flex-column">
-                    <img src="./src/assets/images/total-price.png" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
-    
-                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse">: قیمت کل
-                        <div class="d-flex align-items-center">
-                        <span>تومان</span>&nbsp;
-                        <strong class="Total-cart-price total-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithoutDiscount.toLocaleString() : 0}</strong>
-                        </div>
-                    </div>
-    
-                    <div class="divider position-relative"></div>
-    
-                    <p>
-                        هزینه ارسال در ادامه بر اساس آدرس و نحوه‌ی ارسال محاسبه و
-                        اضافه خواهد شد
-                    </p>
-    
-                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse text-danger">: قیمت نهایی
-                        <div class="d-flex align-items-center">
-                        <span>تومان</span>&nbsp;
-                        <strong class="Total-cart-price final-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithDiscount.toLocaleString() : 0}</strong>
-                        </div>
-                    </div>
+                      <img src="./src/assets/images/total-price.png" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
+      
+                      <div class="d-flex flex-row-reverse flex-lg-column flex-xxl-row-reverse align-items-center justify-content-between w-100">: قیمت کل
+                          <div class="d-flex align-items-center">
+                          <span>تومان</span>&nbsp;
+                          <strong class="Total-cart-price total-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithoutDiscount.toLocaleString() : 0}</strong>
+                          </div>
+                      </div>
+      
+                      <div class="divider position-relative"></div>
+      
+                      <p>
+                          هزینه ارسال در ادامه بر اساس آدرس و نحوه‌ی ارسال محاسبه و
+                          اضافه خواهد شد
+                      </p>
+      
+                      <div class="d-flex flex-row-reverse flex-lg-column flex-xxl-row-reverse align-items-center justify-content-between w-100 text-danger">: قیمت نهایی
+                          <div class="d-flex align-items-center">
+                          <span>تومان</span>&nbsp;
+                          <strong class="Total-cart-price final-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithDiscount.toLocaleString() : 0}</strong>
+                          </div>
+                      </div>
                     </div>
                 </aside>
     

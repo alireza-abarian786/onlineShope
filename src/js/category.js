@@ -335,8 +335,5 @@ if (window.innerWidth < '768') {
   container.classList.remove('container-fluid')  
 }
 
-//todo======================================================== اپدیت علاقه مندی ها
-// updateFavoritesUI()
-
 //!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.clickOnPagination = clickOnPagination

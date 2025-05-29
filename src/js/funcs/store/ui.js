@@ -1,84 +1,4 @@
-//!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
-
-//todo========================================================== ساخت باکس های محصولات داخل صفحه ی سبد خرید
-let createBoxToPageCart = async (shoppingCartProduct) => {
-  if (document.querySelector(".container-Product-cards")) {
-    document.querySelector(".container-Product-cards").textContent = "";
-
-    if (shoppingCartProduct.length) {
-      shoppingCartProduct.forEach(async (box) => {
-        document.querySelector(".container-Product-cards").insertAdjacentHTML(
-          "beforeend",
-          `
-            <div class="cart-item swiper-slide">
-                <button class="delete-btn"><i class="bi bi-trash3"></i>&nbsp حذف</button>
-                <div class="product-image">    
-                    <div>
-                        <div><img src="${
-                          box.product_images[0]
-                        }" alt="محصول 1"></div>
-                    </div>
-                </div>
-                <div class="product-description">
-                    <div class="product-title product-title-cart">${
-                      box.product_name
-                    }</div>
-                    <div class="product-Specifications">
-                        <span>رنگ: سیاه</span>
-                        <span>وزن: ۱.۵ کیلوگرم</span>
-                    </div>
-                    <div class="score">
-                        ${await createStars(box.product_ratings)}
-                        <span>(${box.product_ratings})</span>
-                    </div>
-                    <div class="description">${box.product_description}</div>
-                    <div class="price-contain">
-                        <div class="product-price-cart">قیمت واحد: ${box.price.toLocaleString()} تومان</div>
-                        <div class="discount">${
-                          box.discount
-                            ? (box.price - (box.price * (Math.floor(box.discount / 10000) / 100))).toLocaleString() + " :قیمت با تخفیف"
-                            : ""
-                        }</div>
-                    </div>
-                    <div class="container-total">
-                      <img src="src/assets/images/home.png" alt="لوگوی برند" class="brand-logo">
-                      <div class="total-price-container">جمع: 
-                        <span class="total-price">${box.totalPriceProductCart.toLocaleString()}</span>
-                        تومان
-                      </div>
-                      <div class="quantity-box">
-                          <button class="quantity-btn"><i class="bi bi-dash-lg"></i></button>
-                          <span class="quantity-value number">${
-                            box.quantity
-                          }</span>
-                          <button class="quantity-btn"><i class="bi bi-plus-lg"></i></button>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        `
-        );
-
-        settingSliderSwiper();
-        settingSliderGlide();
-        attachProductEventListeners();
-        clickAddBookMark();
-        buttonsShoppingCart();
-      });
-    } else {
-      document.querySelector(".container-Product-cards").textContent = "";
-      document
-        .querySelector(".container-Product-cards")
-        .insertAdjacentHTML(
-          "beforeend",
-          `<div class='alert alert-danger w-100 text-center border-0'>:(     هیچ محصولی در سبد خرید شما موجود نمیباشد    ):</div>`
-        );
-    }
-  }
-};
-
 //todo========================================================== modal تابع ساخت و نمایش
 let showModal = (text) => {
   let toastContainer = document.querySelector(".toast-container");
@@ -143,6 +63,5 @@ let createBlogs = async (element) => {
 
 export {
   showModal,
-  createBoxToPageCart,
   createBlogs,
 };

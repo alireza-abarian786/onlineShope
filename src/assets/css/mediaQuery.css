@@ -111,6 +111,18 @@
   .product-card {
     width: 90%;
   }
+
+  /** --------------------------------------------- cart page */
+  .cart-three-sidebar-content .divider {
+    width: 178px;
+    margin: 25px 0;
+  }
+  .cart-three-sidebar-content .divider::before {
+    transform: translate(69px, -50%);
+  }
+  .cart-three-sidebar-content .divider::after {
+    transform: translate(-69px, -50%);
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -230,6 +242,14 @@
   }
   .product-rating::after {
     display: none;
+  }
+
+  /** --------------------------------------------- cart page */
+  .cart-three-sidebar-content .divider::before {
+    transform: translate(49px, -50%);
+  }
+  .cart-three-sidebar-content .divider::after {
+    transform: translate(-49px, -50%);
   }
 }
 
@@ -373,6 +393,21 @@
   }
   .product-card {
     width: 100%;
+  }
+
+  /** --------------------------------------------- cart page */
+  .cart-box-container > div > div {
+    width: 100%;
+  }
+  .cart-three-sidebar {
+    height: 350px;
+  }
+  .cart-three-sidebar-content {
+    padding: 80px 35px 35px;
+  }
+  .cart-three-sidebar-content .divider {
+    width: 635px;
+    margin: 6px 0;
   }
 }
 
@@ -533,6 +568,35 @@
   }
   .product-image-container {
     width: inherit;
+  }
+
+  /** --------------------------------------------- cart page */
+  .cart-three-sidebar-content .divider {
+    width: 455px;
+    margin: 6px 0;
+  }
+  .product-image {
+    width: 100%;
+    margin: 0;
+  }
+  .product-description-cart {
+    width: -webkit-fill-available;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-title-cart {
+    width: 100%;
+  }
+  .container-total {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .brand-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 
@@ -799,6 +863,12 @@
   /* .container {
     width: 100%;
   } */
+
+  /** --------------------------------------------- cart page */
+  .cart-three-sidebar-content .divider {
+    width: 102%;
+    margin: 6px 0;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -948,5 +1018,10 @@
 
   .add-cart > p {
     justify-content: center;
+  }
+
+  /** --------------------------------------------- cart page */
+  .cart-three-sidebar-content > div {
+    flex-direction: column !important;
   }
 }
