@@ -82,7 +82,7 @@ const getFavorites = async (req, res) => {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'کاربر یافت نشد' });
 
-    res.status(200).json({ favorites: user.favorites }); // فقط آیدی‌ها
+    res.status(200).json({ message: 'دریافت لیست علاقه‌مندی‌ها' , favorites: user.favorites }); // فقط آیدی‌ها
   } catch (error) {
     console.error('🔥 خطا در getFavorites:', error);
     res.status(500).json({ message: 'خطا در دریافت علاقه‌مندی‌ها' });

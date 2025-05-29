@@ -350,7 +350,7 @@ export async function getFavorites() {
     }
 
     const favoritesData =  await response.json()
-    setLocalStorage('markData' , favoritesData)
+    setLocalStorage('markData' , favoritesData.favorites)
   } catch (error) {
     console.error("Error in getFavorites:", error);
     showModal("❌ خطا در دریافت علاقه‌مندی‌ها");
