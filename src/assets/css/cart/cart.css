@@ -261,12 +261,17 @@
 }
 
 .discount {
-  background: #ff5733;
   color: white;
   font-weight: bold;
   padding: 2px 6px;
   font-size: 14px;
   border-radius: 5px;
+}
+.discount-cart-page {
+  background: #ff5733;
+}
+.discount-box {
+  background:  #2563eb;
 }
 
 .container-total {

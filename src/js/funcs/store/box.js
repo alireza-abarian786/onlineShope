@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
 import { getLocalStorage, getToken, setLocalStorage } from "./storage.js";
 import { showModal } from "./ui.js";
-import { renderCartItems, toggleCart, updateCartNotification } from "./cart.js";
+import { renderCartItems, updateCartNotification } from "./cart.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import {
   hideLoader,
@@ -10,11 +10,9 @@ import {
   showLoader,
 } from "../utils.js";
 //!---------------------------------------------------------------------- variables -------------------------------------------------------
-const productsFetchOperation = await fetch(
-  "https://onlineshope.onrender.com/api/products"
-);
+const productsFetchOperation = await fetch("https://onlineshope.onrender.com/api/products");
 export const resultProductsFetchOperation = await productsFetchOperation.json();
-let cachedFavorites = null;
+getFavorites()
 
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
@@ -34,22 +32,9 @@ const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
 async function addToCartAndToggleButton(id) {
   try {
     if (!(await showAlertLogin())) return false;
+
     showLoader();
-
-    const cartFetchOperation = await fetch(
-      "https://onlineshope.onrender.com/api/cart",
-      {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      }
-    );
-
-    if (cartFetchOperation.status === 401) {
-      if (!modalAuthorized()) return false;
-    }
-
-    const resultCartFetchOperation = await cartFetchOperation.json();
+    const resultCartFetchOperation = await getLocalStorage('cartData')
     const checkedCart = resultCartFetchOperation.products.some(
       (productCart) => productCart.product._id === id
     );
@@ -80,7 +65,7 @@ async function addToCartAndToggleButton(id) {
 
       updateCartNotification();
       renderCartItems(result.cart.products);
-      toggleCart();
+      setLocalStorage('cartData' , result.cart)
     } else {
       hideLoader();
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
@@ -93,7 +78,7 @@ async function addToCartAndToggleButton(id) {
 }
 
 //todo========================================================== ساخت باکس محصولات صفحه اصلی
-export const createProductsTemplateHtml = (element, arrProducts) => {
+export const createProductsTemplateHtml = (element, arrProducts) => {  
   element.textContent = "";
 
   if (!element) {
@@ -225,7 +210,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
                         <div class="m-0 d-flex w-100 justify-content-center flex-column align-items-center">
                             ${
                               !box.discount
-                                ? `<span class="price discount d-flex">
+                                ? `<span class="price d-flex">
                                         تومان
                                         <span class="ms-1">${box.price.toLocaleString()}</span>
                                           :قیمت محصول
@@ -234,7 +219,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
                                         تومان
                                         <span class="ms-1 lead fs-6">${box.price.toLocaleString()}</span>
                                       </span>
-                                      <span class="discount d-flex text-white">
+                                      <span class="discount discount-box d-flex text-white">
                                         تومان
                                         <span class="ms-1">${(
                                           box.price -
@@ -247,7 +232,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
                             }
                         </div>
                     </div>
-                    <div class="add-cart btn-cart-box" type="button" id="liveToastBtn-${
+                    <div class="add-cart btn-cart-box btn btn-success" type="button" id="liveToastBtn-${
                       box._id
                     }" onclick="addToCartAndToggleButton('${box._id}')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -256,7 +241,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
                                 d="M4 7a1 1 0 0 0 0 2h2.22l2.624 10.5c.223.89 1.02 1.5 1.937 1.5h12.47c.903 0 1.67-.6 1.907-1.47L27.75 10h-2.094l-2.406 9H10.78L8.157 8.5A1.984 1.984 0 0 0 6.22 7zm18 14c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3m-9 0c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3m3-14v3h-3v2h3v3h2v-3h3v-2h-3V7zm-3 16c.564 0 1 .436 1 1c0 .564-.436 1-1 1c-.564 0-1-.436-1-1c0-.564.436-1 1-1m9 0c.564 0 1 .436 1 1c0 .564-.436 1-1 1c-.564 0-1-.436-1-1c0-.564.436-1 1-1"
                             />
                         </svg>
-                        <p>اضافه به سبد خرید</p>
+                        <p class="d-flex align-items-center m-0">اضافه به سبد خرید</p>
                     </div>
                 </div>`
       );
@@ -279,12 +264,8 @@ const addToFavorites = async (productId) => {
     if (!(await showAlertLogin())) return false;
     showLoader();
 
-    const markList = await getFavorites();
-    if (markList.status === 401) {
-      if (!modalAuthorized()) return false;
-    }
-
-    const checkedMark = markList.some((mark) => mark._id === productId);
+    const markList = await getLocalStorage('markData')
+    const checkedMark = markList.favorites.some((mark) => mark._id === productId);
 
     if (!checkedMark) {
       const response = await fetch(
@@ -301,9 +282,13 @@ const addToFavorites = async (productId) => {
 
       hideLoader();
       if (!response.ok) throw new Error("خطا در افزودن به علاقه‌مندی‌ها");
+      const favoritesData = await response.json()
+      setLocalStorage('markData' , favoritesData.favorites)
       showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
-      invalidateFavoritesCache();
       updateFavoritesUI();
+      console.log(favoritesData);
+      
+
     } else {
       removeFromFavorites(productId);
     }
@@ -334,9 +319,11 @@ async function removeFromFavorites(productId) {
 
     hideLoader();
     if (!response.ok) throw new Error("خطا در حذف از علاقه‌ مندی‌ ها");
+    const favoritesData = await response.json()
+    setLocalStorage('markData' , favoritesData.favorites)
     showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
-    invalidateFavoritesCache();
-    updateFavoritesUI();
+    updateFavoritesUI();    
+
   } catch (error) {
     hideLoader();
     console.error("Error in removeFromFavorites:", error);
@@ -346,8 +333,6 @@ async function removeFromFavorites(productId) {
 
 // //todo========================================================== دریافت لیست علاقه مندی های کاربر
 export async function getFavorites() {
-  if (cachedFavorites) return cachedFavorites;
-
   try {
     const response = await fetch(
       "https://onlineshope.onrender.com/api/users/favorites",
@@ -359,13 +344,13 @@ export async function getFavorites() {
     );
 
     if (response.status === 401) {
-      return response;
+      if (!modalAuthorized()) return false;
     } else if (!response.ok) {
       throw new Error("خطا در دریافت علاقه‌مندی‌ها");
     }
 
-    cachedFavorites = await response.json().then((data) => data.favorites);
-    return cachedFavorites;
+    const favoritesData =  await response.json()
+    setLocalStorage('markData' , favoritesData)
   } catch (error) {
     console.error("Error in getFavorites:", error);
     showModal("❌ خطا در دریافت علاقه‌مندی‌ها");
@@ -378,21 +363,16 @@ export async function updateFavoritesUI() {
   try {    
     if (!(getLocalStorage('login').length)) return false;
     
-    const markList = await getFavorites();
-    
-    if (markList.status === 401) {
-      setLocalStorage("isAuthorized", false);
-      if (!modalAuthorized()) return false;
-    }
-    
-    setLocalStorage("isAuthorized", true);
-    
-    const cardProductElem = document.querySelectorAll(".glide");    
+    const markList = await getLocalStorage('markData');    
+    const cardProductElem = document.querySelectorAll(".glide"); 
+    console.log(markList);
+       
+
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
       const markContain = card.querySelector(".mark-contain");
 
-      const isMarked = markList.some((mark) => mark._id === cardId);
+      const isMarked = markList.some((mark) => mark === cardId);
       
       if (isMarked) {
         markContain.classList.add("is-mark");
@@ -406,11 +386,6 @@ export async function updateFavoritesUI() {
     console.error("Error in updateFavoritesUI:", error);
     showModal("❌ خطا در به‌روزرسانی لیست علاقه‌مندی‌ها");
   }
-}
-
-// //todo========================================================== خالی کردن کش علاقه مندی ها بعد از تغییر
-export function invalidateFavoritesCache() {
-  cachedFavorites = null;
 }
 
 //!---------------------------------------------------------------------- binding -------------------------------------------------------

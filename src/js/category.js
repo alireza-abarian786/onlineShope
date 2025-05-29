@@ -6,6 +6,7 @@ import './funcs/store/box.js'
 import { searchParams , getSearchProduct ,showLoader , hideLoader, fetchDataFromApi} from "./funcs/utils.js";
 import { settingSliderGlide } from "./funcs/sliders.js";
 import { createProductsTemplateHtml, getFavorites, resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
+import { categoriesData } from './header.js';
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const boxSearchInput = document.querySelector(".box-search-category")
 const dropdownCategory = document.querySelector(".dropdown-category")
@@ -15,12 +16,10 @@ const pagination = document.querySelector(".pagination")
 const containerCategoryFooter = document.querySelector(".container-category__footer")
 
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
-const categoriesFetchingOperations = await fetchDataFromApi(`https://onlineshope.onrender.com/api/categories`);                               
-
 //todo======================================================== URL فیلتر کردن دسته بندی ها بر اساس
 const getCategoryFunc = async () => {
   const urlSearchParams = searchParams('cat');                                                                      
-  const findCategory = await categoriesFetchingOperations.find(item => item.urlSearch === urlSearchParams);                               
+  const findCategory = await categoriesData.find(item => item.urlSearch === urlSearchParams);                               
   const getProductCategory = resultProductsFetchOperation.filter(item => item.category_id == findCategory.id);          
   return getProductCategory;
 }
@@ -153,7 +152,7 @@ let createProductsRowTemplateHtml = (arrCategory) => {
                         تومان
                         <span class="ms-1 lead fs-6">${product.price.toLocaleString()}</span>
                       </span>
-                      <span class="discount d-flex text-white p-2 m-0 ms-md-4 fs-6">
+                      <span class="discount discount-box d-flex text-white p-2 m-0 ms-md-4 fs-6">
                         تومان
                         <span class="ms-1">${(
                           product.price -

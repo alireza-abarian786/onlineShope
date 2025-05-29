@@ -1,32 +1,12 @@
 //! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
 import "./header.js";
 import "./../js/funcs/store/cart.js";
-import { getToken } from "./funcs/store/storage.js";
-import { removeFromCart, updateQuantity } from "./../js/funcs/store/cart.js";
+import { getLocalStorage } from "./funcs/store/storage.js";
+import { removeAllFromCart } from "./../js/funcs/store/cart.js";
 
 //! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
-const totalPrice = document.querySelector(".total-price")
-const finalPrice = document.querySelector(".final-price")
-
-//! ---------------------------------------------------------------------addEventListeners-----------------------------------------------------------------------
-window.addEventListener("DOMContentLoaded", async () => {
-  const cartFetchOperation = await fetch(
-    "https://onlineshope.onrender.com/api/cart",
-    {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`,
-      },
-    }
-  );
-  const resultCartFetchOperation = await cartFetchOperation.json(); 
-  console.log(resultCartFetchOperation);
-  
-
-  createBoxToPageCart(resultCartFetchOperation.products)
-
-  totalPrice.textContent = resultCartFetchOperation.totalWithoutDiscount.toLocaleString()
-  finalPrice.textContent = resultCartFetchOperation.totalWithDiscount.toLocaleString()
-});
+const boxPayment = document.querySelector(".box-payment")
+const getCartData = getLocalStorage('cartData')   
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
 //todo========================================================== ساخت ستاره ها بر اساس امتیاز محصول
@@ -46,19 +26,17 @@ let createStars = async (rating) => {
 };
 
 //todo========================================================== ساخت باکس های محصولات داخل صفحه ی سبد خرید
-let createBoxToPageCart = async (shoppingCartProduct) => {
+export let createBoxProductToPageCart = async (shoppingCartProduct) => {    
   if (document.querySelector(".container-Product-cards")) {
     document.querySelector(".container-Product-cards").textContent = "";
 
     if (shoppingCartProduct.length) {
-      shoppingCartProduct.forEach(async (box) => {
-        console.log(box.product);
-        
+      shoppingCartProduct.forEach(async (box) => {        
         document.querySelector(".container-Product-cards").insertAdjacentHTML(
           "beforeend",
           `
             <div class="cart-item swiper-slide" data-id="${box._id}">
-                <button class="delete-btn" onclick="removeFromCart('${box._id}')"><i class="bi bi-trash3"></i>&nbsp حذف</button>
+                <button class="delete-btn" onclick="removeFromCart('${box.product._id}')"><i class="bi bi-trash3"></i>&nbsp حذف</button>
                 <div class="product-image">    
                     <div>
                         <div><img src="${
@@ -81,7 +59,7 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                     <div class="description">${box.product.description}</div>
                     <div class="price-contain">
                         <div class="product-price-cart">قیمت واحد: ${box.product.price.toLocaleString()} تومان</div>
-                        <div class="discount"> ${box.discountPercent}% تخفیف </div>
+                        <div class="discount discount-cart-page"> ${box.discountPercent}% تخفیف </div>
                     </div>
                     <div class="container-total">
                       <img src="src/assets/images/logo.png" alt="لوگوی برند" class="brand-logo">
@@ -90,9 +68,9 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
                         تومان
                       </div>
                       <div class="quantity-box">
-                          <button class="quantity-btn" onclick="updateQuantity('decrease', '${box._id}', '${box.quantity}')"><i class="bi bi-dash-lg"></i></button>
+                          <button class="quantity-btn" onclick="updateQuantity('decrease', '${box.product._id}', '${box.quantity}')"><i class="bi bi-dash-lg"></i></button>
                           <span class="quantity-value number">${box.quantity}</span>
-                          <button class="quantity-btn" onclick="updateQuantity('increase', '${box._id}', '${box.quantity}')"><i class="bi bi-plus-lg"></i></button>
+                          <button class="quantity-btn" onclick="updateQuantity('increase', '${box.product._id}', '${box.quantity}')"><i class="bi bi-plus-lg"></i></button>
                       </div>
                     </div>
                 </div>
@@ -112,23 +90,63 @@ let createBoxToPageCart = async (shoppingCartProduct) => {
   }
 };
 
-
-
-function buttonsShoppingCart() {
-  document.querySelectorAll(".delete-btn").forEach((btn) => {
-    btn.addEventListener("click", removeFromCart);
-  });
-  document.querySelectorAll(".bi-plus-lg").forEach((btn) => {
-    btn.addEventListener("click", (event) => updateQuantity(event, "increase"));
-  });
-  document.querySelectorAll(".bi-dash-lg").forEach((btn) => {
-    btn.addEventListener("click", (event) => updateQuantity(event, "decrease"));
-  });
+//todo========================================================== ساخت باکس های محصولات داخل صفحه ی سبد خرید
+export const boxPaymentHtmlTemplate = (resultCartFetchOperation) => {    
+    if (boxPayment) {
+        boxPayment.innerHTML = ''
+    
+        boxPayment.insertAdjacentHTML('beforeend' , `
+            <div class="cart-collaterals h-100">
+                <div class="cart_totals h-100">
+    
+                <aside class="cart-three-sidebar shop_table" style="height: 350px">
+                    <div class="cart-three-sidebar-content bg-white position-relative h-100 rounded-5 d-flex align-items-center justify-content-around flex-column">
+                    <img src="./src/assets/images/total-price.png" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
+    
+                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse">: قیمت کل
+                        <div class="d-flex align-items-center">
+                        <span>تومان</span>&nbsp;
+                        <strong class="Total-cart-price total-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithoutDiscount.toLocaleString() : 0}</strong>
+                        </div>
+                    </div>
+    
+                    <div class="divider position-relative"></div>
+    
+                    <p>
+                        هزینه ارسال در ادامه بر اساس آدرس و نحوه‌ی ارسال محاسبه و
+                        اضافه خواهد شد
+                    </p>
+    
+                    <div class="d-flex align-items-center justify-content-between w-100 flex-row-reverse text-danger">: قیمت نهایی
+                        <div class="d-flex align-items-center">
+                        <span>تومان</span>&nbsp;
+                        <strong class="Total-cart-price final-price">${resultCartFetchOperation.products.length ? resultCartFetchOperation.totalWithDiscount.toLocaleString() : 0}</strong>
+                        </div>
+                    </div>
+                    </div>
+                </aside>
+    
+                <div>
+                    <a href="#" class="p-3 btn btn-success rounded-3 mt-4 d-flex align-items-center justify-content-center w-100">
+                    <i class="bi bi-caret-left-fill"></i>&nbsp;&nbsp;
+                    <span>اقدام به پرداخت</span>
+                    </a>
+                </div>
+                <div class="clear-cart-all mt-2 p-3 btn btn-danger rounded-3 d-flex align-items-center justify-content-center w-100" onclick="removeAllFromCart()">
+                    <i class="bi bi-trash2"></i>&nbsp;&nbsp;
+                    <span>پاک کردن سبد خرید</span>
+                </div>
+    
+                </div>
+            </div>
+        `)
+    }
 }
 
-//! -------------------------------------------------------------------bindings-------------------------------------------------------------------------
-// window.updateQuantity = updateQuantity
-// window.removeFromCart = removeFromCart
+if (getCartData) {
+    createBoxProductToPageCart(getCartData.products)
+    boxPaymentHtmlTemplate(getCartData)
+}
 
-//! -------------------------------------------------------------------export-------------------------------------------------------------------------
-export { buttonsShoppingCart };
+//! -------------------------------------------------------------------binding-------------------------------------------------------------------------
+window.removeAllFromCart = removeAllFromCart

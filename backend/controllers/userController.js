@@ -65,16 +65,29 @@ const removeFromFavorites = async (req, res) => {
 };
 
 // Get user's favorites
+// const getFavorites = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user.id).populate('favorites');
+//     if (!user) return res.status(404).json({ message: 'کاربر یافت نشد' });
+
+//     res.status(200).json({ favorites: user.favorites });
+//   } catch (error) {
+//     console.error('🔥 خطا در getFavorites:', error);
+//     res.status(500).json({ message: 'خطا در دریافت علاقه‌مندی‌ها' });
+//   }
+// };
+
 const getFavorites = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).populate('favorites');
+    const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'کاربر یافت نشد' });
 
-    res.status(200).json({ favorites: user.favorites });
+    res.status(200).json({ favorites: user.favorites }); // فقط آیدی‌ها
   } catch (error) {
     console.error('🔥 خطا در getFavorites:', error);
     res.status(500).json({ message: 'خطا در دریافت علاقه‌مندی‌ها' });
   }
 };
+
 
 module.exports = { getUserProfile, updateUserProfile, addToFavorites, removeFromFavorites, getFavorites };

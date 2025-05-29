@@ -1,7 +1,7 @@
-import './funcs/store/cart.js'
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
+import './funcs/store/cart.js'
+import { resultProductsFetchOperation } from './funcs/store/box.js';
 import { getLocalStorage } from "./funcs/store/storage.js";
-import { fetchDataFromApi } from "./funcs/utils.js";
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const boxDropDown = document.querySelector(".category-menu + div");
 const categoryMenu = document.querySelector(".category-menu");
@@ -10,21 +10,16 @@ const loginBtnIcon = document.querySelector("#login svg");
 const loginBtn = document.querySelector("#login");
 const searchGlobalInputElem = document.querySelector("#search-global");
 const loginBtnText = document.querySelector("#login span");
+const ulElemListSearch = document.querySelector(".box-search__ul-list");
+
+const categories = await fetch("https://onlineshope.onrender.com/api/categories");
+export const categoriesData = await categories.json()  
 
 //!---------------------------------------------------------------------- function -------------------------------------------------------
-
-window.addEventListener("DOMContentLoaded" , () => {
-  settingsMenuDropDown()
-  fetchCategoriesForShowToMenu()
-  isLogin()
-  
-  
-
-  //todo======================================== رویداد وارد کردن مقدار در سرچ
-  if (searchGlobalInputElem) {
-    searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
-  }
-})
+//todo======================================== رویداد وارد کردن مقدار در سرچ
+if (searchGlobalInputElem) {
+  searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
+}
 
 //todo============================================== تنظیمات منو در سایز 992
 function settingsMenuDropDown() {
@@ -39,10 +34,8 @@ function settingsMenuDropDown() {
   }
 }
 
-
 // todo============================================== سرچ سراسری محصولات
 const searchGlobalHandler = async (event) => {
-  const ulElemListSearch = document.querySelector(".box-search__ul-list");
   const searchValue = event.target.value.trim();
 
   if (searchValue) {
@@ -59,8 +52,7 @@ const searchGlobalHandler = async (event) => {
 
 
     try {
-      const getAllProduct = await fetchDataFromApi('https://onlineshope.onrender.com/api/products');
-      const filterProducts = getAllProduct.filter(product =>
+      const filterProducts = await resultProductsFetchOperation.filter(product =>
         product.name.toLowerCase().startsWith(searchValue.toLowerCase())
       );
 
@@ -87,17 +79,12 @@ const searchGlobalHandler = async (event) => {
   }
 }
 
-
-
 // todo============================================== و نمایش در قسمت منو category دریافت
 const fetchCategoriesForShowToMenu = async () => {  
-  const categories = await fetchDataFromApi(
-    "https://onlineshope.onrender.com/api/categories"
-  );
   const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
   const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
 
-  categories.forEach((item) => {
+  categoriesData.forEach((item) => {
     categoryWrapperXl.insertAdjacentHTML(
       "beforeend",
       `
@@ -108,7 +95,7 @@ const fetchCategoriesForShowToMenu = async () => {
     );
   });
 
-  categories.forEach((item) => {
+  categoriesData.forEach((item) => {
     categoryWrapperLg.insertAdjacentHTML(
       "beforeend",
       `
@@ -144,6 +131,9 @@ async function isLogin() {
 }
 
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
+settingsMenuDropDown()
+fetchCategoriesForShowToMenu()
+isLogin()
 export {isLogin}
 
 

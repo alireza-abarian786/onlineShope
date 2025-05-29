@@ -36,9 +36,9 @@ createBlogs(containerArticles)
 runTimer();
 
 //todo========================================================== نمایش محصولات بوکمارک شده
+updateFavoritesUI();
 function initializePage() {
-    updateFavoritesUI();
-    hideLoader();
+  hideLoader();
 }
 
 //todo========================================================== مخفی شدن لودر

@@ -1,7 +1,6 @@
 // ست شده روی عکس های باکس محصول Glide تابع تنظیمات اسلایدر 
 function settingSliderGlide() {
   const sliders = document.querySelectorAll(".glide");
-  console.log("تعداد اسلایدرهای شناسایی‌شده:", sliders.length);
   sliders.forEach((slider, index) => {
     new Glide(slider, {
       type: "slider",
