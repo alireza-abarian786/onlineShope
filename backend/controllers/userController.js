@@ -39,7 +39,7 @@ const addToFavorites = async (req, res) => {
       await user.save();
     }
 
-    res.status(200).json({ message: 'محصول به علاقه‌مندی‌ها اضافه شد', favorites: user.favorites });
+    res.status(200).json({ favorites: user.favorites });
   } catch (error) {
     console.error('🔥 خطا در addToFavorites:', error);
     res.status(500).json({ message: 'خطا در افزودن به علاقه‌مندی‌ها' });
@@ -57,7 +57,7 @@ const removeFromFavorites = async (req, res) => {
     user.favorites = user.favorites.filter(id => id.toString() !== productId);
     await user.save();
 
-    res.status(200).json({ message: 'محصول از علاقه‌مندی‌ها حذف شد', favorites: user.favorites });
+    res.status(200).json({ favorites: user.favorites });
   } catch (error) {
     console.error('🔥 خطا در removeFromFavorites:', error);
     res.status(500).json({ message: 'خطا در حذف از علاقه‌مندی‌ها' });
@@ -82,7 +82,7 @@ const getFavorites = async (req, res) => {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'کاربر یافت نشد' });
 
-    res.status(200).json({ message: 'دریافت لیست علاقه‌مندی‌ها' , favorites: user.favorites }); // فقط آیدی‌ها
+    res.status(200).json({ favorites: user.favorites }); // فقط آیدی‌ها
   } catch (error) {
     console.error('🔥 خطا در getFavorites:', error);
     res.status(500).json({ message: 'خطا در دریافت علاقه‌مندی‌ها' });

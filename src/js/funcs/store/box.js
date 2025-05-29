@@ -265,6 +265,8 @@ const addToFavorites = async (productId) => {
     showLoader();
 
     const markList = await getLocalStorage('markData')
+    console.log(markList);
+    
     const checkedMark = markList.favorites.some((mark) => mark._id === productId);
 
     if (!checkedMark) {
@@ -283,7 +285,7 @@ const addToFavorites = async (productId) => {
       hideLoader();
       if (!response.ok) throw new Error("خطا در افزودن به علاقه‌مندی‌ها");
       const favoritesData = await response.json()
-      setLocalStorage('markData' , favoritesData.favorites)
+      setLocalStorage('markData' , favoritesData)
       showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
       updateFavoritesUI();
       console.log(favoritesData);
@@ -320,7 +322,7 @@ async function removeFromFavorites(productId) {
     hideLoader();
     if (!response.ok) throw new Error("خطا در حذف از علاقه‌ مندی‌ ها");
     const favoritesData = await response.json()
-    setLocalStorage('markData' , favoritesData.favorites)
+    setLocalStorage('markData' , favoritesData)
     showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
     updateFavoritesUI();    
 
@@ -372,7 +374,7 @@ export async function updateFavoritesUI() {
       const cardId = card.dataset.id;
       const markContain = card.querySelector(".mark-contain");
 
-      const isMarked = markList.some((mark) => mark === cardId);
+      const isMarked = markList.favorites.some((mark) => mark === cardId);
       
       if (isMarked) {
         markContain.classList.add("is-mark");
