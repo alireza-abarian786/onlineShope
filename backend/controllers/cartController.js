@@ -20,9 +20,13 @@ const getCart = async (req, res) => {
 
     const detailedProducts = cart.products.map((item) => {
       const product = item.product;
+      if (!product) return null;
+
       const quantity = item.quantity;
-      const price = product?.price || 0;
-      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
+      const price = product.price || 0;
+      const discountPercent = product.discount
+        ? parseInt(product.discount.toString().slice(0, 2))
+        : 0;
 
       const productTotal = price * quantity;
       const discountAmount = (productTotal * discountPercent) / 100;
@@ -38,7 +42,7 @@ const getCart = async (req, res) => {
         finalPrice,
         discountPercent,
       };
-    });
+    }).filter(Boolean);
 
     const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
 
@@ -48,22 +52,16 @@ const getCart = async (req, res) => {
       totalDiscountAmount,
       totalWithDiscount,
     });
-
   } catch (error) {
     console.error('🔥 خطا در getCart:', error);
     res.status(500).json({ message: 'خطا در دریافت سبد خرید' });
   }
 };
 
-
-
-
-// Add product to cart
 const addToCart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
 
-    // اعتبارسنجی ورودی
     if (!productId || quantity == null) {
       return res.status(400).json({ message: 'productId و quantity الزامی است.' });
     }
@@ -92,19 +90,19 @@ const addToCart = async (req, res) => {
     await cart.save();
     await cart.populate('products.product');
 
-    // محاسبه قیمت‌ها و تخفیف‌ها
     let totalWithoutDiscount = 0;
     let totalDiscountAmount = 0;
 
     const processedProducts = cart.products.map(item => {
       const product = item.product;
-      const qty = item.quantity;
+      if (!product) return null;
 
+      const qty = item.quantity;
       const price = product.price || 0;
-      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0; // درصد تخفیف
-      const productTotal = price * qty; // قیمت کل بدون تخفیف
-      const discountAmount = (productTotal * discountPercent) / 100; // مقدار تخفیف
-      const finalPrice = productTotal - discountAmount; // قیمت نهایی
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
+      const productTotal = price * qty;
+      const discountAmount = (productTotal * discountPercent) / 100;
+      const finalPrice = productTotal - discountAmount;
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
@@ -118,11 +116,10 @@ const addToCart = async (req, res) => {
         finalPrice,
         productTotal,
       };
-    });
+    }).filter(Boolean);
 
     const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
 
-    // پاسخ با اطلاعات کامل
     res.status(201).json({
       message: 'محصول با موفقیت به سبد خرید اضافه شد',
       cart: {
@@ -143,12 +140,10 @@ const addToCart = async (req, res) => {
   }
 };
 
-// Remove product from cart
 const removeFromCart = async (req, res) => {
   try {
     const { productId } = req.body;
 
-    // اعتبارسنجی ورودی
     if (!productId) {
       return res.status(400).json({ message: 'productId الزامی است.' });
     }
@@ -158,11 +153,9 @@ const removeFromCart = async (req, res) => {
       return res.status(404).json({ message: 'سبد خرید یافت نشد' });
     }
 
-    // حذف محصول از سبد خرید
     cart.products = cart.products.filter(item => item.product.toString() !== productId);
     await cart.save();
 
-    // اگر سبد خرید خالی است، پاسخ بدون محاسبات برگردانده می‌شود
     if (cart.products.length === 0) {
       return res.status(200).json({
         message: 'محصول با موفقیت از سبد خرید حذف شد',
@@ -180,17 +173,16 @@ const removeFromCart = async (req, res) => {
       });
     }
 
-    // پُپوله کردن محصولات باقی‌مانده
     await cart.populate('products.product');
 
-    // محاسبه قیمت‌ها و تخفیف‌ها
     let totalWithoutDiscount = 0;
     let totalDiscountAmount = 0;
 
     const processedProducts = cart.products.map(item => {
       const product = item.product;
-      const qty = item.quantity;
+      if (!product) return null;
 
+      const qty = item.quantity;
       const price = product.price || 0;
       const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
       const productTotal = price * qty;
@@ -209,11 +201,10 @@ const removeFromCart = async (req, res) => {
         finalPrice,
         productTotal,
       };
-    });
+    }).filter(Boolean);
 
     const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
 
-    // پاسخ با اطلاعات کامل
     res.status(200).json({
       message: 'محصول با موفقیت از سبد خرید حذف شد',
       cart: {
@@ -234,7 +225,6 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-// Update product quantity in cart
 const updateCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -274,13 +264,14 @@ const updateCart = async (req, res) => {
 
     const processedProducts = cart.products.map(item => {
       const product = item.product;
-      const qty = item.quantity;
+      if (!product) return null;
 
+      const qty = item.quantity;
       const price = product.price || 0;
-      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0; // درصد تخفیف
-      const productTotal = price * qty; // قیمت کل بدون تخفیف
-      const discountAmount = (productTotal * discountPercent) / 100; // مقدار تخفیف
-      const finalPrice = productTotal - discountAmount; // قیمت نهایی
+      const discountPercent = product.discount ? parseInt(product.discount.toString().slice(0, 2)) : 0;
+      const productTotal = price * qty;
+      const discountAmount = (productTotal * discountPercent) / 100;
+      const finalPrice = productTotal - discountAmount;
 
       totalWithoutDiscount += productTotal;
       totalDiscountAmount += discountAmount;
@@ -294,7 +285,7 @@ const updateCart = async (req, res) => {
         finalPrice,
         productTotal,
       };
-    });
+    }).filter(Boolean);
 
     const totalWithDiscount = totalWithoutDiscount - totalDiscountAmount;
 
@@ -318,7 +309,6 @@ const updateCart = async (req, res) => {
   }
 };
 
-// Clear all products from cart
 const clearCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user.id });
@@ -327,7 +317,7 @@ const clearCart = async (req, res) => {
       return res.status(404).json({ message: 'سبد خرید یافت نشد' });
     }
 
-    cart.products = []; // خالی کردن محصولات
+    cart.products = [];
     await cart.save();
 
     res.status(200).json({ message: 'سبد خرید با موفقیت خالی شد', cart });
@@ -337,5 +327,4 @@ const clearCart = async (req, res) => {
   }
 };
 
-// اضافه کردن به exports
 module.exports = { getCart, addToCart, removeFromCart, updateCart, clearCart };
