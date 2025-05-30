@@ -3,7 +3,6 @@ import './header.js'
 import './funcs/store/box.js'
 import { runTimer } from "./funcs/timer.js";
 import { resultProductsFetchOperation } from './funcs/store/box.js';
-import { hideLoader } from './funcs/utils.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
 import { createBlogs } from './funcs/store/ui.js';
 
@@ -35,7 +34,5 @@ createBlogs(containerArticles)
 //todo========================================================== نمایش تایمر صفحه اصلی
 runTimer();
 
-//todo========================================================== مخفی شدن لودر
-hideLoader()
 
 

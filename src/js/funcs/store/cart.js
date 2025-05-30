@@ -37,7 +37,9 @@ clearCartAll.addEventListener("click", removeAllFromCart);
 //todo========================================================== 🛒 دریافت اطلاعات سبد خرید
 export const getCartData = async () => {
   try {
-    showLoader();
+    if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
+    // showLoader();
+
     const cartFetchOperation = await fetch(
       "https://onlineshope.onrender.com/api/cart",
       {
@@ -47,17 +49,14 @@ export const getCartData = async () => {
       }
     );
     
-    // if (cartFetchOperation.status === 401) return modalAuthorized();
     const cartData = await cartFetchOperation.json();
     setLocalStorage('cartData' , cartData);
     return cartData;
 
   } catch (error) {
+    hideLoader();
     console.error("Error in getCartData:", error);
     return null;
-
-  } finally {
-    hideLoader();
   }
 };
 
@@ -66,7 +65,7 @@ export function renderCartItems(cartItems) {
   container.innerHTML = "";
   cartItems.forEach((item) => {
     const cartHTML = `
-      <div class="box-goods d-flex align-items-end swiper-slide" data-id="${
+      <div class="box-goods d-flex align-items-end swiper-slide mb-2" data-id="${
         item._id
       }" style='transform: translateY(0);'>
         <div>
@@ -129,6 +128,7 @@ export function toggleCart() {
   shoppingCartIcon.addEventListener("click", async () => {
     try {
       if (!(await showAlertLogin())) return false;
+      if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
       showLoader();
       const getCartData = getLocalStorage("cartData")      

@@ -32,6 +32,7 @@ const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
 async function addToCartAndToggleButton(id) {
   try {
     if (!(await showAlertLogin())) return false;
+    if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
     const resultCartFetchOperation = await getLocalStorage('cartData')
@@ -262,6 +263,7 @@ export const createProductsTemplateHtml = (element, arrProducts) => {
 const addToFavorites = async (productId) => {
   try {
     if (!(await showAlertLogin())) return false;
+    if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
     const markList = await getLocalStorage('markData')    
@@ -301,6 +303,7 @@ const addToFavorites = async (productId) => {
 async function removeFromFavorites(productId) {
   try {
     if (!(await showAlertLogin())) return false;
+    if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
     const response = await fetch(
@@ -332,6 +335,7 @@ async function removeFromFavorites(productId) {
 // //todo========================================================== دریافت لیست علاقه مندی های کاربر
 export async function getFavorites() {
   try {
+    // showLoader()
     const response = await fetch(
       "https://onlineshope.onrender.com/api/users/favorites",
       {
@@ -340,8 +344,6 @@ export async function getFavorites() {
         },
       }
     );
-
-    console.log(response);
     
     if (response.status === 401) {
       modalAuthorized()
@@ -353,6 +355,8 @@ export async function getFavorites() {
 
     const favoritesData =  await response.json()
     setLocalStorage('markData' , favoritesData)
+    hideLoader()
+    
   } catch (error) {
     console.error("Error in getFavorites:", error);
     showModal("❌ خطا در دریافت علاقه‌مندی‌ها");
@@ -363,7 +367,7 @@ export async function getFavorites() {
 // //todo========================================================== علامت بوکمارک محصول UI تغییر
 export async function updateFavoritesUI() {
   try {    
-    if (!(getLocalStorage('login').length)) return false;
+    if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
     
     const markList = await getLocalStorage('markData');    
     const cardProductElem = document.querySelectorAll(".glide");        

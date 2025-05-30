@@ -35,7 +35,7 @@ export let createBoxProductToPageCart = async (shoppingCartProduct) => {
         document.querySelector(".container-Product-cards").insertAdjacentHTML(
           "beforeend",
           `
-            <div class="cart-item flex-wrap flex-md-nowrap" data-id="${box._id}">
+            <div class="cart-item flex-wrap flex-md-nowrap position-relative" data-id="${box._id}">
                 <button class="delete-btn" onclick="removeFromCart('${box.product._id}')">
                   <i class="bi bi-trash3"></i>
                   <span class="d-none d-md-inline">&nbsp حذف</span>
@@ -115,7 +115,7 @@ export const boxPaymentHtmlTemplate = (resultCartFetchOperation) => {
       
                       <div class="divider position-relative"></div>
       
-                      <p>
+                      <p class="text-center text-xxl-end">
                           هزینه ارسال در ادامه بر اساس آدرس و نحوه‌ی ارسال محاسبه و
                           اضافه خواهد شد
                       </p>
