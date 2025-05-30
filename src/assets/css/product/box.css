@@ -485,11 +485,6 @@
 .glide:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-
-/* .mySwiper3 .glide {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-} */
-
 .swiper-slide:hover {
   transform: translateY(-10px);
   transition: transform 0.4s ease, box-shadow 0.3s ease;

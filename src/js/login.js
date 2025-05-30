@@ -1,17 +1,12 @@
-// import './header.js'
-
 import {
   setLocalStorage,
   getLocalStorage,
-  getToken,
 } from "./funcs/store/storage.js";
 import {
   showLoader,
   hideLoader,
   UserInformationGetFunction,
 } from "./funcs/utils.js";
-// import { toggleCart} from './funcs/store/cart.js';
-// import { isLogin } from './header.js';
 
 let emailLogin = document.querySelector("#login-email");
 let passwordLogin = document.querySelector("#login-password");
@@ -35,7 +30,6 @@ let emailValid = false;
 
 //! ------------------------------------------------------------------------------------------- all
 window.addEventListener("DOMContentLoaded", () => {
-  // isLogin()
   hideLoader();
 
   document.querySelectorAll(".form-control").forEach((input) => {

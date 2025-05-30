@@ -1,12 +1,12 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import './header.js'
-import './funcs/store/cart.js'
-import './funcs/store/box.js'
+// import './header.js'
+// import './funcs/store/cart.js'
+// import './funcs/store/box.js'
 
-import { searchParams , getSearchProduct ,showLoader , hideLoader, fetchDataFromApi} from "./funcs/utils.js";
-import { settingSliderGlide } from "./funcs/sliders.js";
-import { createProductsTemplateHtml, getFavorites, resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
-import { categoriesData } from './header.js';
+// import { searchParams , getSearchProduct ,showLoader , hideLoader, fetchDataFromApi} from "./funcs/utils.js";
+// import { settingSliderGlide } from "./funcs/sliders.js";
+// import { createProductsTemplateHtml, getFavorites, resultProductsFetchOperation, updateFavoritesUI } from './funcs/store/box.js';
+// import { categoriesData } from './header.js';
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const boxSearchInput = document.querySelector(".box-search-category")
 const dropdownCategory = document.querySelector(".dropdown-category")
@@ -18,9 +18,11 @@ const containerCategoryFooter = document.querySelector(".container-category__foo
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 //todo======================================================== URL فیلتر کردن دسته بندی ها بر اساس
 const getCategoryFunc = async () => {
+  const cartItemsData = await categoriesData()
+  const resultProductsFetch = await resultProductsFetchOperation()
   const urlSearchParams = searchParams('cat');                                                                      
-  const findCategory = await categoriesData.find(item => item.urlSearch === urlSearchParams);                               
-  const getProductCategory = resultProductsFetchOperation.filter(item => item.category_id == findCategory.id);          
+  const findCategory = await cartItemsData.find(item => item.urlSearch === urlSearchParams);                               
+  const getProductCategory = resultProductsFetch.filter(item => item.category_id == findCategory.id);          
   return getProductCategory;
 }
 

@@ -1,5 +1,6 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getCartData, updateCartNotification } from "./store/cart.js";
+import { updateCartNotification } from "./header/cartBtn.js";
+import { getCartData } from "./store/cart.js";
 import { getLocalStorage, getToken, setLocalStorage } from "./store/storage.js";
 
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
