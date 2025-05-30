@@ -1,4 +1,3 @@
-import { searchGlobalHandler } from "./funcs/fetchProducts.js";
 import { toggleCart, updateCartNotification } from "./funcs/header/cartBtn.js";
 import { closeCart } from "./funcs/header/closeCart.js";
 import { isLogin } from "./funcs/header/loginBtn.js";
@@ -8,7 +7,6 @@ import { fetchCategoriesForShowToMenu } from "./funcs/header/menu.js";
 const searchGlobalInputElem = document.querySelector("#search-global");
 
 //todo======================================== 
-searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 isLogin()
 fetchCategoriesForShowToMenu()
 toggleCart()

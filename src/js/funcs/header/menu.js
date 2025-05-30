@@ -1,12 +1,4 @@
-//todo======================================== دریافت کل دسته بندی ها
-const categoriesData = async () => {
-  const categories = await fetch(
-    "https://onlineshope.onrender.com/api/categories"
-  );
-  const categoriesData = await categories.json();
-
-  return categoriesData;
-};
+import { categoriesData } from "../fetchCategories.js";
 
 //todo============================================== تنظیمات منو در سایز 992
 function settingsMenuDropDown() {
@@ -29,10 +21,9 @@ function settingsMenuDropDown() {
 const fetchCategoriesForShowToMenu = async () => {
   const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
   const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
-  const cartItemsData = await categoriesData();
 
   if (categoryWrapperXl) {
-    cartItemsData.forEach((item) => {
+    categoriesData.forEach((item) => {
       categoryWrapperXl.insertAdjacentHTML(
         "beforeend",
         `
@@ -45,7 +36,7 @@ const fetchCategoriesForShowToMenu = async () => {
   }
 
   if (categoryWrapperLg) {
-    cartItemsData.forEach((item) => {
+    categoriesData.forEach((item) => {
       categoryWrapperLg.insertAdjacentHTML(
         "beforeend",
         `

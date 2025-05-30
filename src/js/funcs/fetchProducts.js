@@ -73,4 +73,4 @@ const searchGlobalHandler = async (event) => {
 }
 
 
-export { showProductHomePage , searchGlobalHandler}
+export { showProductHomePage , searchGlobalHandler , resultProductsFetchOperation}
