@@ -23,11 +23,11 @@ const container = document.querySelector(".cantain-box-goods");
 
 //! ---------------------------------------------------------------------addEventListeners-----------------------------------------------------------------------
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   updateCartNotification();
   toggleCart();
   closeCart();
-  getCartData()
+  // getCartData()
 });
 
 clearCartAll.addEventListener("click", removeAllFromCart);
@@ -38,7 +38,6 @@ clearCartAll.addEventListener("click", removeAllFromCart);
 export const getCartData = async () => {
   try {
     if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
-    // showLoader();
 
     const cartFetchOperation = await fetch(
       "https://onlineshope.onrender.com/api/cart",
@@ -49,9 +48,10 @@ export const getCartData = async () => {
       }
     );
     
-    const cartData = await cartFetchOperation.json();
+    const cartData = await cartFetchOperation.json();    
     setLocalStorage('cartData' , cartData);
-    return cartData;
+    updateCartNotification()
+    hideLoader();
 
   } catch (error) {
     hideLoader();
@@ -154,10 +154,7 @@ async function updateCartNotification() {
     const resultCartFetchOperation = await getLocalStorage("cartData")
 
     if (resultCartFetchOperation.products) {
-      cartNotification.classList.toggle(
-        "is-notification",
-        resultCartFetchOperation.products.length > 0
-      );
+      cartNotification.classList.toggle("is-notification", resultCartFetchOperation.products.length > 0);
     }
   } catch (error) {
     console.error(error);
@@ -191,7 +188,10 @@ export async function removeFromCart(id) {
     }
 
     renderCartItems(resultRemoveFromCartOperation.cart.products);
+    createBoxProductToPageCart(resultRemoveFromCartOperation.cart.products);
+    boxPaymentHtmlTemplate(resultRemoveFromCartOperation.cart);
     setLocalStorage('cartData' , resultRemoveFromCartOperation.cart)
+    updateCartNotification();    
 
     hideLoader();
     showModal(`❌🧺  محصول از سبد خرید شما حذف شد`);

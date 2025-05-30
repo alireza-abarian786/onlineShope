@@ -5,6 +5,8 @@ import { runTimer } from "./funcs/timer.js";
 import { resultProductsFetchOperation } from './funcs/store/box.js';
 import { createProductsTemplateHtml } from './funcs/store/box.js';
 import { createBlogs } from './funcs/store/ui.js';
+import { refreshedPage } from './funcs/utils.js';
+import { getCartData, updateCartNotification } from './funcs/store/cart.js';
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const discountsGoodsSlider = document.querySelector(".cantainer-category-discounts");
@@ -34,5 +36,6 @@ createBlogs(containerArticles)
 //todo========================================================== نمایش تایمر صفحه اصلی
 runTimer();
 
-
+//todo========================================================== رفرش شدن بعد از بازگشت به صفحه
+refreshedPage()
 

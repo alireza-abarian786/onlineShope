@@ -64,9 +64,9 @@ async function addToCartAndToggleButton(id) {
         throw new Error("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
       }
 
-      updateCartNotification();
       renderCartItems(result.cart.products);
       setLocalStorage('cartData' , result.cart)
+      updateCartNotification();
     } else {
       hideLoader();
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);

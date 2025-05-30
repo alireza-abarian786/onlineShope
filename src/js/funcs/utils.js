@@ -1,4 +1,5 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
+import { getCartData, updateCartNotification } from "./store/cart.js";
 import { getLocalStorage, getToken, setLocalStorage } from "./store/storage.js";
 
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
@@ -141,6 +142,16 @@ const modalAuthorized = () => {
   });
 };
 
+//todo============================================ رفرش صفحه بعد از بازگشت با کلید بک مرورگر
+const refreshedPage = () => {  
+  if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    window.addEventListener("pageshow" , async () => {
+      await getCartData()
+      updateCartNotification()
+    })
+  }
+}
+
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {
   searchParams,
@@ -152,4 +163,5 @@ export {
   hideLoader,
   UserInformationGetFunction,
   modalAuthorized,
+  refreshedPage
 };
