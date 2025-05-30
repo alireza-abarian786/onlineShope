@@ -46,10 +46,10 @@ export const getCartData = async () => {
         },
       }
     );
-
-    if (!modalAuthorized()) return false;
+    
+    // if (cartFetchOperation.status === 401) return modalAuthorized();
     const cartData = await cartFetchOperation.json();
-    setLocalStorage('cartData' , cartData); // ذخیره در localStorage
+    setLocalStorage('cartData' , cartData);
     return cartData;
 
   } catch (error) {

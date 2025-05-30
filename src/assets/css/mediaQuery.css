@@ -207,12 +207,7 @@
   .navbar-syna > div > div > div:last-child > a {
     font-size: 0.75rem;
   }
-
-  /* .cantainer-discounts-goods > div > div:nth-child(4),
-  .discounts-goods-slider > div > div:nth-child(4) {
-    width: 90%;
-  } */
-
+  
   .discounts-box {
     width: 100%;
   }
@@ -528,10 +523,6 @@
     font-size: x-small;
     padding: 5px 15px;
     font-weight: 500;
-  }
-  .cantain-box-slider > div:first-child > a:last-child > p,
-  .cantain-box-articles > div:first-child > a:last-child > p {
-    /* margin-bottom: 2px !important; */
   }
   .cantain-box-articles > div:first-child {
     flex-direction: row-reverse;
@@ -860,9 +851,6 @@
   .container-boxes {
     margin: 10px auto;
   }
-  /* .container {
-    width: 100%;
-  } */
 
   /** --------------------------------------------- cart page */
   .cart-three-sidebar-content .divider {

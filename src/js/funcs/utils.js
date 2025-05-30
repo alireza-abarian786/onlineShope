@@ -126,26 +126,19 @@ async function UserInformationGetFunction() {
 
 //todo============================================ بررسی وضعیت توکن کاربر
 const modalAuthorized = () => {
-
-  if (!getLocalStorage('isAuthorized')) {
-    hideLoader();
-    Swal.fire({
-      title: "نشست شما منقضی شده",
-      text: "💫 لطفاً دوباره لاگین کنید",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "باشه",
-      cancelButtonText: "لغو",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "./login.html";
-      }
-    });
-    
-    return false
-  } else {
-    return true
-  }
+  hideLoader();
+  Swal.fire({
+    title: "نشست شما منقضی شده",
+    text: "💫 لطفاً دوباره لاگین کنید",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "باشه",
+    cancelButtonText: "لغو",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "./login.html";
+    }
+  });
 };
 
 //!---------------------------------------------------------------------- exports -------------------------------------------------------

@@ -341,8 +341,12 @@ export async function getFavorites() {
       }
     );
 
+    console.log(response);
+    
     if (response.status === 401) {
-      if (!modalAuthorized()) return false;
+      modalAuthorized()
+      setLocalStorage("isAuthorized" , false)
+      return false;
     } else if (!response.ok) {
       throw new Error("خطا در دریافت علاقه‌مندی‌ها");
     }
