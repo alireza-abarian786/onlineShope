@@ -32,10 +32,10 @@ async function removeFromCart(id) {
     }
 
     // renderCartItems(resultRemoveFromCartOperation.cart.products);
-    shoppingCartModal(resultRemoveFromCartOperation.cart.products)
-    createBoxProductToPageCart(resultRemoveFromCartOperation.cart.products);
-    boxPaymentHtmlTemplate(resultRemoveFromCartOperation.cart);
     // showAlertEmptyCart(resultRemoveFromCartOperation.cart.products)
+    shoppingCartModal(resultRemoveFromCartOperation.cart.products)
+    createBoxProductToPageCart(resultRemoveFromCartOperation.cart);
+    boxPaymentHtmlTemplate(resultRemoveFromCartOperation.cart);
     setLocalStorage('cartData' , resultRemoveFromCartOperation.cart)
     updateCartNotification();    
 

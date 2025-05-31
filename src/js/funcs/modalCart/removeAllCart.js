@@ -30,7 +30,7 @@ async function removeAllFromCart() {
 
     positionOpenCart()
     shoppingCartModal(data.cart.products)
-    createBoxProductToPageCart(data.cart.products);
+    createBoxProductToPageCart(data.cart);
     boxPaymentHtmlTemplate(data.cart);
     setLocalStorage('cartData' , data.cart)
     updateCartNotification();

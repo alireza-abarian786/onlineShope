@@ -1,22 +1,21 @@
 import {
   setLocalStorage,
-  getLocalStorage,
 } from "./funcs/store/storage.js";
 import {
   showLoader,
   hideLoader,
-  UserInformationGetFunction,
 } from "./funcs/utils.js";
 
-let emailLogin = document.querySelector("#login-email");
-let passwordLogin = document.querySelector("#login-password");
-let btnLogin = document.querySelector(".login-btn");
+//! ------------------------------------------------------------------------------------------- variables
+const emailLogin = document.querySelector("#login-email");
+const passwordLogin = document.querySelector("#login-password");
+const btnLogin = document.querySelector(".login-btn");
 
-let btnSignUp = document.querySelector(".register-btn");
-let usernameSignUp = document.querySelector("#register-name");
-let passwordSignUp = document.querySelector("#register-password");
-let emailSignUp = document.querySelector("#register-email");
-let phoneInput = document.querySelector("#register-phone");
+const btnSignUp = document.querySelector(".register-btn");
+const usernameSignUp = document.querySelector("#register-name");
+const passwordSignUp = document.querySelector("#register-password");
+const emailSignUp = document.querySelector("#register-email");
+const phoneInput = document.querySelector("#register-phone");
 
 let usernameText = document.querySelector(".username-text");
 let passwordText = document.querySelector(".password-text");
@@ -28,7 +27,7 @@ let passwordValid = false;
 let phoneValid = false;
 let emailValid = false;
 
-//! ------------------------------------------------------------------------------------------- all
+//! ------------------------------------------------------------------------------------------- addEventListener
 window.addEventListener("DOMContentLoaded", () => {
   hideLoader();
 
@@ -45,39 +44,40 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 //! ------------------------------------------------------------------------------------------- login
+//todo================================================================ اطمینان از وارد خالی نبودن
 btnLogin.addEventListener("click", async (e) => {
   e.preventDefault();
   showLoader();
-
-  if (emailLogin.value && passwordLogin.value !== "") {
+  
+  if (!!emailLogin.value && !!passwordLogin.value) {
     await loginOperationManagementFunction();
-    await UserInformationGetFunction();
     clearInput();
     hideLoader();
   } else {
     hideLoader();
     Swal.fire({
       title: "ورود ناموفق",
-      text: "لطفا نام کاربری یا رمز عبور را به درستی وارد کنید",
+      text: "لطفا نام کاربری و رمز عبور را وارد کنید",
       icon: "error",
       button: "تایید",
     });
   }
 });
 
+//todo================================================================ خالی کرد اینپوت های لاگین
 function clearInput() {
   emailLogin.value = "";
   passwordLogin.value = "";
 }
 
+//todo================================================================ عملیات لاگین
 const loginOperationManagementFunction = async () => {
   const userLoginInformation = {
     email: emailLogin.value.trim(),
     password: passwordLogin.value.trim(),
   };
 
-  const loginOperation = await fetch(
-    "https://onlineshope.onrender.com/api/auth/login",
+  const loginOperation = await fetch("https://onlineshope.onrender.com/api/auth/login",
     {
       method: "POST",
       headers: {
@@ -97,102 +97,78 @@ const loginOperationManagementFunction = async () => {
       confirmButtonText: "بله، برو!",
       cancelButtonText: "لغو",
     }).then((result) => {
-      // isLogin();
       if (result.isConfirmed) {
         window.location.href = "./doshboard.html";
       }
     });
 
-    const resultLoginOperation = await loginOperation.json();
+    const resultLoginOperation = await loginOperation.json();    
     setLocalStorage("token", resultLoginOperation.token);
     setLocalStorage("isAuthorized", true);
+    setLocalStorage("login", resultLoginOperation.username);
+
+  } else if (loginOperation.status === 400) {
+    hideLoader();
+    Swal.fire({
+      title: "ورود ناموفق",
+      text: "نام کاربری یا رمز عبور اشتباه است",
+      icon: "error",
+      button: "تایید",
+    });
   }
 };
 
 //! ------------------------------------------------------------------------------------------- sign up
-btnSignUp.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  // showLoader()
-  if (!usernameSignUp.value || !passwordSignUp.value || !phoneInput.value) {
-    hideLoader();
-    Swal.fire({
-      title: "لطفا بیشتر دقت کنید (:",
-      text: "❗ ورودی‌ها خالی هستند، ارسال انجام نمی‌شود ❗",
-      icon: "warning",
-      button: "تایید",
-    });
-    return;
-  }
-
-  statusLogin(usernameSignUp.value);
-});
-
-let statusLogin = async (username) => {
-  let loginName = getLocalStorage("login");
-  if (loginName.length === 0) {
-    if (usernameValid && passwordValid && phoneValid && emailValid) {
-      let newUser = {
-        name: usernameSignUp.value.trim(),
-        email: emailSignUp.value.trim(),
-        password: passwordSignUp.value.trim(),
-        phone: phoneInput.value.trim(),
-      };
-
-      try {
-        let res = await fetch(
-          "https://onlineshope.onrender.com/api/auth/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          }
-        );
-
-        const data = await res.json();
-        console.log(data);
-
-        if (!res.ok) {
-          throw new Error(
-            data.error || data.details || `HTTP error! status: ${res.status}`
-          );
+//todo================================================================ عملیات ثبت نام
+btnSignUp.addEventListener("click", async (event) => {
+  event.preventDefault();  
+  if (usernameValid && passwordValid && phoneValid && emailValid) {
+    const newUser = {
+      name: usernameSignUp.value.trim(),
+      email: emailSignUp.value.trim(),
+      password: passwordSignUp.value.trim(),
+      phone: phoneInput.value.trim(),
+    };
+  
+    try {
+      const res = await fetch(
+        "https://onlineshope.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
         }
-
-        setLocalStorage("login", username);
-        setLocalStorage("token", data.token);
-        // isLogin();
-        clearInputSignUp();
-
-        hideLoader();
-        Swal.fire({
-          title: "ثبت نام شما با موفقیت انجام شد",
-          text: "⁉️میخواهید به پنل کاربری خود بروید",
-          icon: "success",
-          showCancelButton: true,
-          confirmButtonText: "بله، برو!",
-          cancelButtonText: "لغو",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "./doshboard.html";
-          }
-        });
-      } catch (error) {
-        hideLoader();
-        console.error("خطا در ارسال درخواست به سرور:", error);
-        Swal.fire({
-          title: "خطا در ثبت نام",
-          text: error.message || "مشکلی در ثبت نام رخ داده است",
-          icon: "error",
-          button: "تایید",
-        });
-      }
-    } else {
+      );
+  
+      const data = await res.json();
+      if (!res.ok) { throw new Error(data.message) }
+  
+      setLocalStorage("login", usernameSignUp.value.trim());
+      setLocalStorage("token", data.token);
+      setLocalStorage("isAuthorized", true);
+      clearInputSignUp();
+  
       hideLoader();
       Swal.fire({
-        title: "خطا در اعتبارسنجی",
-        text: "لطفاً تمام فیلدها را به درستی پر کنید",
+        title: "ثبت نام شما با موفقیت انجام شد",
+        text: "⁉️میخواهید به پنل کاربری خود بروید",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "بله، برو!",
+        cancelButtonText: "لغو",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "./doshboard.html";
+        }
+      });
+    } catch (error) {
+      hideLoader();
+      console.error("خطا در ارسال درخواست به سرور:", error);
+      Swal.fire({
+        title: "خطا در ثبت نام",
+        text: error.message || "مشکلی در ثبت نام رخ داده است",
         icon: "error",
         button: "تایید",
       });
@@ -200,170 +176,79 @@ let statusLogin = async (username) => {
   } else {
     hideLoader();
     Swal.fire({
-      title: "شما قبلا ثبت نام کرده اید",
-      text: "⁉️میخواهید به پنل کاربری خود بروید",
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonText: "بله، برو!",
-      cancelButtonText: "لغو",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "./doshboard.html";
-      }
+      title: "خطا در اعتبارسنجی",
+      text: "لطفاً تمام فیلدها را به درستی پر کنید",
+      icon: "error",
+      button: "تایید",
     });
-  }
-};
-
-function clearInputSignUp() {
-  usernameSignUp.value = "";
-  passwordSignUp.value = "";
-  phoneInput.value = "";
-}
-
-function isLengthFalse(data) {
-  if (usernameSignUp.value.length < 5) {
-    showText(usernameText, "نام کاربری باید بیشتر از 5 کاراکتر باشد");
-    isUserName(data);
-  }
-
-  if (passwordSignUp.value.length < 8) {
-    showText(passwordText, "رمز عبور باید بیشتر از 8 کاراکتر باشد");
-    passwordKey();
-  }
-
-  if (phoneInput.value.length < 11 || phoneInput.value.length >= 12) {
-    showText(phoneText, "شماره تلفن باید به درستی وارد شود");
-    phoneKey();
-  }
-}
-
-function isUserName(data) {
-  let item = data.find((user) => user.name === usernameSignUp.value);
-
-  if (item !== undefined) {
-    if (item.name === usernameSignUp.value) {
-      showText(usernameText, "نام کاربری از قبل موجود میباشد");
-      usernameValid = false;
-
-      usernameSignUp.addEventListener("keyup", (e) => {
-        if (usernameSignUp.value.length < 5) {
-          showText(usernameText, "نام کاربری باید بیشتر از 5 کاراکتر باشد");
-          usernameValid = false;
-        } else {
-          if (item.name === usernameSignUp.value) {
-            showText(usernameText, "نام کاربری از قبل موجود میباشد");
-            usernameValid = false;
-          } else {
-            fadeAnimated(usernameText, "صحیح میباشد");
-            usernameValid = true;
-          }
-        }
-      });
-    }
-  } else {
-    usernameKey(data, item);
-  }
-}
-
-let usernameKey = (data, item) => {
-  usernameSignUp.addEventListener("keyup", (e) => {
-    if (usernameSignUp.value.length < 5) {
-      showText(usernameText, "نام کاربری باید بیشتر از 5 کاراکتر باشد");
-      usernameValid = false;
-    } else {
-      usernameValid = true;
-      fadeAnimated(usernameText, "صحیح میباشد");
-      isUserName(data);
-    }
-  });
-};
-
-let passwordKey = () => {
-  passwordSignUp.addEventListener("keyup", () => {
-    if (passwordSignUp.value.length > 8) {
-      fadeAnimated(passwordText, "صحیح میباشد");
-      passwordValid = true;
-    } else {
-      showText(passwordText, "رمز عبور باید بیشتر از 8 کاراکتر باشد");
-      passwordValid = false;
-    }
-  });
-};
-
-function phoneKey() {
-  phoneInput.addEventListener("keyup", (e) => {
-    if (phoneInput.value.length == 11) {
-      fadeAnimated(phoneText, "صحیح میباشد");
-      phoneValid = true;
-    } else {
-      showText(phoneText, "شماره تلفن باید به درستی وارد شود");
-      phoneValid = false;
-    }
-  });
-}
-
-let fadeAnimated = (element, text) => {
-  element.innerHTML = text;
-
-  if (text === "صحیح میباشد") {
-    // setTimeout(() => {
-    element.style.display = "none";
-    // }, 1000);
-  } else {
-    element.style.display = "block";
-  }
-};
-let showText = (element, text) => {
-  element.style.display = "block";
-  element.innerHTML = text;
-};
-
-// اعتبارسنجی نام کاربری
-usernameSignUp.addEventListener("input", (e) => {
-  const value = e.target.value.trim();
-  usernameValid = value.length >= 3;
-  if (!usernameValid) {
-    fadeAnimated(usernameText, "نام کاربری باید حداقل 3 کاراکتر باشد");
-  } else {
-    showText(usernameText, "نام کاربری معتبر است");
   }
 });
 
-// اعتبارسنجی رمز عبور
+//todo================================================================ خالی کردن اینپوت ها
+const clearInputSignUp = () => {
+  usernameSignUp.value = "";
+  passwordSignUp.value = "";
+  phoneInput.value = "";
+  emailSignUp.value ='';
+}
+
+//todo================================================================ نمایش پیام صحیح نبودن مقدار ورودی
+const inValidText = (element, text) => {
+  element.innerHTML = text;
+};
+
+//todo================================================================ نمایش پیام صحیح بودن مقدار ورودی
+const validText = (element, text) => {
+  element.innerHTML = text;
+};
+
+//todo================================================================ اعتبارسنجی نام کاربری
+usernameSignUp.addEventListener("input", (e) => {
+  const value = e.target.value.trim();
+  usernameValid = value.length >= 5;
+  console.log(usernameValid);
+  if (!usernameValid) {
+    inValidText(usernameText, "نام کاربری باید حداقل 5 کاراکتر باشد");
+  } else {
+    validText(usernameText, "نام کاربری معتبر است");
+  }
+});
+
+//todo================================================================ اعتبارسنجی رمز عبور
 passwordSignUp.addEventListener("input", (e) => {
   const value = e.target.value.trim();
   passwordValid = value.length >= 6;
   if (!passwordValid) {
-    fadeAnimated(passwordText, "رمز عبور باید حداقل 6 کاراکتر باشد");
+    inValidText(passwordText, "رمز عبور باید حداقل 6 کاراکتر باشد");
   } else {
-    showText(passwordText, "رمز عبور معتبر است");
+    validText(passwordText, "رمز عبور معتبر است");
   }
 });
 
-// اعتبارسنجی شماره تلفن
+//todo================================================================ اعتبارسنجی شماره تلفن
 phoneInput.addEventListener("input", (e) => {
   const value = e.target.value.trim();
   const phoneRegex = /^09[0-9]{9}$/;
   phoneValid = phoneRegex.test(value);
   if (!phoneValid) {
-    fadeAnimated(phoneText, "شماره تلفن باید با 09 شروع شود و 11 رقم باشد");
+    inValidText(phoneText, "شماره تلفن باید با 09 شروع شود و 11 رقم باشد");
   } else {
-    showText(phoneText, "شماره تلفن معتبر است");
+    validText(phoneText, "شماره تلفن معتبر است");
   }
 });
 
-// اعتبارسنجی ایمیل
+//todo================================================================ اعتبارسنجی ایمیل
 emailSignUp.addEventListener("input", (e) => {
   const value = e.target.value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   emailValid = emailRegex.test(value);
   if (!emailValid) {
     if (emailText) {
-      fadeAnimated(emailText, "لطفاً یک ایمیل معتبر وارد کنید");
+      inValidText(emailText, "لطفاً یک ایمیل معتبر وارد کنید");
     }
   } else {
     if (emailText) {
-      showText(emailText, "ایمیل معتبر است");
+      validText(emailText, "ایمیل معتبر است");
     }
   }
 });

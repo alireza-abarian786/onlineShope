@@ -1,7 +1,7 @@
 import { positionOpenCart } from "../modalCart/positionCart.js";
 import { getLocalStorage } from "../store/storage.js";
 import { renderCartItems, shoppingCartModal } from "../store/ui.js";
-import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
+import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
 //todo========================================================== 🛒 تابع نمایش یا عدم نمایش نوتیف سبد خرید

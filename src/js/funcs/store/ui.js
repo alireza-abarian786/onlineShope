@@ -1,3 +1,4 @@
+import { getFavorites } from "../fetchMarks.js";
 import { settingSliderGlide, settingSliderSwiper } from "../sliders.js";
 import { getLocalStorage } from "./storage.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
@@ -266,72 +267,7 @@ updateFavoritesUI()
   `)
  }
 
-//todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
-// function renderCartItems(cartItems) {
-//   const container = document.querySelector(".contain-box-goods");
-
-//   container.innerHTML = "";
-//   cartItems.forEach((item) => {
-//     const cartHTML = `
-//       <div class="box-goods d-flex align-items-end swiper-slide mb-2" data-id="${
-//         item._id
-//       }" style='transform: translateY(0);'>
-//         <div>
-//           <span class="plus-btn" onclick="updateQuantity('increase', '${
-//             item.product._id
-//           }', '${item.quantity}')">+</span>
-//           <span class="number">${item.quantity}</span>
-//           <span class="minus-btn" onclick="updateQuantity('decrease', '${
-//             item.product._id
-//           }', '${item.quantity}')">-</span>
-//         </div>
-//         <div>
-//           <div class='box-info-product h-100 d-flex flex-column align-items-center'>
-//             <div class='row w-100 h-100'>
-//               <div class='col'>
-//                 <div class='row'>
-//                   <div class='col-1 p-0'>
-//                     <button type="button" class="btn btn-danger mb-1 rounded remove-btn" onclick="removeFromCart('${
-//                       item.product._id
-//                     }')">
-//                       <i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i>
-//                     </button>
-//                   </div>
-//                   <div class='col-11 pe-1'>
-//                     <h6 class='bg-white rounded text-center'>${
-//                       item.product.name
-//                     }</h6>
-//                   </div>
-//                 </div>
-//                 <div class='row'>
-//                   <p class='text-white fw-light px-2 m-0 rounded'>${
-//                     item.product.description
-//                   }</p>
-//                 </div>
-//               </div>
-//               <div class='col-4 p-0'>
-//                 <img src="${
-//                   item.product.images[0]
-//                 }" alt="img" class='rounded w-100 h-100'>
-//               </div>
-//             </div>
-//           </div>
-//           <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
-//             <span class='d-flex'>
-//               تومان
-//               <span class='price ms-1 total-price'>${item.finalPrice.toLocaleString()}</span>
-//             </span>
-//             <span>:قیمت محصول</span>
-//           </div>
-//         </div>
-//       </div>
-//     `;
-//     container.insertAdjacentHTML("afterbegin", cartHTML);
-//   });
-//   // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
-// }
-
-
+//todo========================================================== 🛒 تابع ساخت باکس محصول در مودال سبد خرید
 function renderCartItems(cartItems) {
   let html = "";
 
@@ -384,10 +320,10 @@ function renderCartItems(cartItems) {
 // //todo========================================================== علامت بوکمارک محصول UI تغییر
 async function updateFavoritesUI() {
   try {    
-    if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
+    if (!(getLocalStorage('login').length)) return false;
     
     const markList = await getLocalStorage('markData');    
-    const cardProductElem = document.querySelectorAll(".glide");            
+    const cardProductElem = document.querySelectorAll(".glide");   
 
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
@@ -423,7 +359,7 @@ const updateArrowButtonColors = (event, nextBtnColor, prevBtnColor) => {
 //todo========================================================== ساخت باکس های محصولات داخل صفحه ی سبد خرید
 let createBoxProductToPageCart = (shoppingCartProduct) => {   
   if (document.querySelector(".container-Product-cards")) {
-    document.querySelector(".container-Product-cards").textContent = "";
+    document.querySelector(".container-Product-cards").textContent = "";        
 
     if (shoppingCartProduct.products.length) {
       shoppingCartProduct.products.forEach(async (box) => {        
@@ -569,7 +505,7 @@ let createProductsRowTemplateHtml = (arrCategory) => {
       containerCategoryFooter.insertAdjacentHTML(
         "beforeend",
         `
-          <div class="product-card glide h-100 product-box flex-md-nowrap flex-wrap align-items-center justify-content-center" data-id=${product._id}>
+          <div class="product-card glide h-100 product-box flex-md-nowrap flex-wrap align-items-center justify-content-center" data-id=${product._id} data-aos="fade-up" data-aos-anchor-placement="top-bottom">
             ${
               product.discount
                 ? `<div class='box-discount'>${Math.floor(

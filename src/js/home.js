@@ -3,6 +3,7 @@ import { runTimer } from "./funcs/timer.js";
 import { createBlogs } from './funcs/store/ui.js';
 import { hideLoader } from "./funcs/utils.js";
 import { searchGlobalHandler, showProductHomePage } from "./funcs/fetchProducts.js";
+import { setLocalStorage } from "./funcs/store/storage.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const containerArticles = document.querySelector(".box-articles");
@@ -21,5 +22,6 @@ runTimer();
 //todo========================================================== جستجوی سراسری محصولات
 searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 
+// setLocalStorage('login' , "ali")
 hideLoader()
 console.log('home');

@@ -1,11 +1,11 @@
 import { updateCartNotification } from "./header/cartBtn.js";
 import { getLocalStorage, getToken, setLocalStorage } from "./store/storage.js";
-import { hideLoader } from "./utils.js";
+import { hideLoader, modalAuthorized } from "./utils.js";
 
 //todo========================================================== 🛒 دریافت اطلاعات سبد خرید
 const getCartData = async () => {
   try {
-    if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
+    if (!(getLocalStorage('login').length)) return false;
 
     const cartFetchOperation = await fetch(
       "https://onlineshope.onrender.com/api/cart",
@@ -15,6 +15,14 @@ const getCartData = async () => {
         },
       }
     );
+
+    if (cartFetchOperation.status === 401) {
+      modalAuthorized()
+      setLocalStorage("isAuthorized" , false)
+      return false;
+    } else if (!cartFetchOperation.ok) {
+      throw new Error("خطا در دریافت علاقه‌مندی‌ها");
+    }
     
     const cartData = await cartFetchOperation.json();    
     setLocalStorage('cartData' , cartData);
