@@ -2,11 +2,7 @@ import { toggleCart, updateCartNotification } from "./funcs/header/cartBtn.js";
 import { closeCart } from "./funcs/header/closeCart.js";
 import { isLogin } from "./funcs/header/loginBtn.js";
 import { fetchCategoriesForShowToMenu } from "./funcs/header/menu.js";
-
 //!----------------------------------------------------------------------  -------------------------------------------------------
-const searchGlobalInputElem = document.querySelector("#search-global");
-
-//todo======================================== 
 isLogin()
 fetchCategoriesForShowToMenu()
 toggleCart()

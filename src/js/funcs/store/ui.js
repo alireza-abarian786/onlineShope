@@ -266,18 +266,6 @@ updateFavoritesUI()
   `)
  }
 
-{/* <div class="open-cart">
-<div class="contain-box-goods rounded"></div>
-<!-- <i class="bi bi-arrow-down-circle-fill"></i> -->
-<div class="alert alert-danger alert-cart d-none">
-  🛒 هیچ محصولی در سبد موجود نمیباشد
-</div>
-<div class="btn-modol-cart-box d-flex align-items-center justify-content-center flex-column w-100">
-  <a href="./cart.html" class="btn btn-success w-100 mb-2 final-buy-cart">نهایی کردن خرید</a>
-  <button class="clear-cart-all btn btn-danger w-100">پاک کردن سبد خرید</button>
-</div>
-</div> */}
-
 //todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
 // function renderCartItems(cartItems) {
 //   const container = document.querySelector(".contain-box-goods");
@@ -472,7 +460,7 @@ let createBoxProductToPageCart = (shoppingCartProduct) => {
                         <div class="discount discount-cart-page"> ${box.discountPercent}% تخفیف </div>
                     </div>
                     <div class="container-total flex-md-row flex-column gap-2 gap-md-5">
-                      <img src="src/assets/images/logo.png" alt="لوگوی برند" class="brand-logo">
+                      <img src="src/assets/images/logo.webp" alt="لوگوی برند" class="brand-logo">
                       <div class="total-price-container">جمع: 
                         <span class="total-price">${box.finalPrice.toLocaleString()}</span>
                         تومان
@@ -513,7 +501,7 @@ const boxPaymentHtmlTemplate = (resultCartFetchOperation) => {
     
                 <aside class="cart-three-sidebar shop_table">
                     <div class="cart-three-sidebar-content bg-white position-relative h-100 rounded-5 d-flex align-items-center justify-content-around flex-column">
-                      <img src="./src/assets/images/total-price.png" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
+                      <img src="./src/assets/images/total-price.webp" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
       
                       <div class="d-flex flex-row-reverse flex-lg-column flex-xxl-row-reverse align-items-center justify-content-between w-100">: قیمت کل
                           <div class="d-flex align-items-center">

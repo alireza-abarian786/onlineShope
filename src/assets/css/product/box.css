@@ -136,7 +136,7 @@
   flex-direction: row-reverse;
   padding-right: 30px;
   /* gap: 50px; */
-  background-image: url("../../images/img.png");
+  background-image: url("../../images/img.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: color-burn;

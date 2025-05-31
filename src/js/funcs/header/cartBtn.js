@@ -1,4 +1,3 @@
-import { showAlertEmptyCart } from "../modalCart/alertEmpty.js";
 import { positionOpenCart } from "../modalCart/positionCart.js";
 import { getLocalStorage } from "../store/storage.js";
 import { renderCartItems, shoppingCartModal } from "../store/ui.js";
@@ -25,9 +24,7 @@ async function updateCartNotification() {
 
 //todo=================================================================== تابع کلیک روی ایکون سبد خرید و باز کردن سبد خرید
 function toggleCart() {
-  const cartNotification = document.querySelector(".cart-notification");
   const containerOpenCart = document.querySelector(".container-shopping-cart");
-  const openCart = document.querySelector(".open-cart");
   const shoppingCartIcon = document.querySelector(".shopping-cart-icon");
 
 
@@ -40,13 +37,9 @@ function toggleCart() {
         showLoader();
         const getCartData = getLocalStorage("cartData")  
         
-        shoppingCartModal(getCartData.products)
-        console.log(openCart);
-        // openCart.classList.add("is-content");
         containerOpenCart.style.display = "flex";
-        // cartNotification.classList.remove("is-notification");
+        shoppingCartModal(getCartData.products)
         renderCartItems(getCartData.products);
-        // showAlertEmptyCart(getCartData.products);
         positionOpenCart();
         hideLoader();
   
