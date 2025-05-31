@@ -1,7 +1,7 @@
 import { showAlertEmptyCart } from "../modalCart/alertEmpty.js";
 import { positionOpenCart } from "../modalCart/positionCart.js";
 import { getLocalStorage } from "../store/storage.js";
-import { renderCartItems } from "../store/ui.js";
+import { renderCartItems, shoppingCartModal } from "../store/ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
@@ -38,12 +38,15 @@ function toggleCart() {
         if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
   
         showLoader();
-        const getCartData = getLocalStorage("cartData")      
-        openCart.classList.add("is-content");
+        const getCartData = getLocalStorage("cartData")  
+        
+        shoppingCartModal(getCartData.products)
+        console.log(openCart);
+        // openCart.classList.add("is-content");
         containerOpenCart.style.display = "flex";
-        cartNotification.classList.remove("is-notification");
+        // cartNotification.classList.remove("is-notification");
         renderCartItems(getCartData.products);
-        showAlertEmptyCart(getCartData.products);
+        // showAlertEmptyCart(getCartData.products);
         positionOpenCart();
         hideLoader();
   

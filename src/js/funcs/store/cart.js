@@ -1,35 +1,18 @@
 //! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
+import { getCartData } from "../fetchCart.js";
 import { updateQuantity } from "../modalCart/quantity.js";
+import { removeAllFromCart } from "../modalCart/removeAllCart.js";
 import { removeFromCart } from "../modalCart/removeItemCart.js";
-import { getLocalStorage, getToken, setLocalStorage } from "./storage.js";
 
 //! ---------------------------------------------------------------------variables-----------------------------------------------------------------------
-//todo========================================================== 🛒 دریافت اطلاعات سبد خرید
-export const getCartData = async () => {
-  try {
-    if (!(getLocalStorage('login').length) || (getLocalStorage('isAuthorized') === false)) return false;
+// const clearCartAll = document.querySelector(".clear-cart-all");
 
-    const cartFetchOperation = await fetch(
-      "https://onlineshope.onrender.com/api/cart",
-      {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      }
-    );
-    
-    const cartData = await cartFetchOperation.json();    
-    setLocalStorage('cartData' , cartData);
-    updateCartNotification()
-    hideLoader();
+getCartData()
+// clearCartAll.addEventListener("click", removeAllFromCart);
 
-  } catch (error) {
-    hideLoader();
-    console.error("Error in getCartData:", error);
-    return null;
-  }
-};
+console.log('cart');
 
 //! -------------------------------------------------------------------bindings-------------------------------------------------------------------------
 window.updateQuantity = updateQuantity;
 window.removeFromCart = removeFromCart;
+window.removeAllFromCart = removeAllFromCart

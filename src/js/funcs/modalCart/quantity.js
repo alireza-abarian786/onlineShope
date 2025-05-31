@@ -1,5 +1,5 @@
 import { getToken, setLocalStorage } from "../store/storage.js";
-import { boxPaymentHtmlTemplate, createBoxProductToPageCart, renderCartItems, showModal } from "../store/ui.js";
+import { boxPaymentHtmlTemplate, createBoxProductToPageCart, renderCartItems, shoppingCartModal, showModal } from "../store/ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
@@ -8,6 +8,8 @@ let updateQuantity = async (operation, id, quantity) => {
   try {
     if (!(await showAlertLogin())) return false;
     showLoader();
+    console.log(1111111);
+    
 
     quantity = Number(quantity);
     if (operation === "increase") {
@@ -35,7 +37,8 @@ let updateQuantity = async (operation, id, quantity) => {
       }
     );
     const resultRes = await res.json();
-    renderCartItems(resultRes.cart.products);
+    // renderCartItems(resultRes.cart.products);
+    shoppingCartModal(resultRes.cart.products)
     createBoxProductToPageCart(resultRes.cart.products);
     boxPaymentHtmlTemplate(resultRes.cart);
     setLocalStorage('cartData' , resultRes.cart)

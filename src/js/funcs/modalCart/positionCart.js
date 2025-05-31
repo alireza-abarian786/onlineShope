@@ -1,5 +1,7 @@
 //todo=================================================================== محل قرار گیری مودال سبد خرید
 function positionOpenCart() {
+  console.log(123322);
+  
   const shoppingCartIcon = document.querySelector(".shopping-cart-icon");
   const openCart = document.querySelector(".open-cart");
   const menuBox = document.querySelector(".menu-box");

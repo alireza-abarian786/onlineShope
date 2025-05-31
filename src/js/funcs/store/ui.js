@@ -243,24 +243,117 @@ settingSliderGlide();
 updateFavoritesUI()
 };
 
-//todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
-function renderCartItems(cartItems) {
-  const container = document.querySelector(".cantain-box-goods");
+//todo========================================================== 🛒 تابع ساخت مودال سبد خرید
+ const shoppingCartModal = (cartData) => {
+  const containerShoppingCart = document.querySelector(".container-shopping-cart")
+  containerShoppingCart.innerHTML = ''
 
-  container.innerHTML = "";
+  containerShoppingCart.insertAdjacentHTML('beforeend' , `
+    <div class="open-cart">
+      <div class="contain-box-goods rounded overflow-auto">
+      <div>
+          ${
+            cartData.length ? renderCartItems(cartData) : '<div class="alert alert-danger alert-cart">🛒 هیچ محصولی در سبد موجود نمیباشد</div>'
+          }
+      </div>
+      </div>
+
+      <div class="btn-modol-cart-box d-flex align-items-center justify-content-center flex-column w-100">
+        <a href="./cart.html" class="btn btn-success w-100 mb-2 final-buy-cart">نهایی کردن خرید</a>
+        <button class="clear-cart-all btn btn-danger w-100" onclick="removeAllFromCart()">پاک کردن سبد خرید</button>
+      </div>
+    </div>
+  `)
+ }
+
+{/* <div class="open-cart">
+<div class="contain-box-goods rounded"></div>
+<!-- <i class="bi bi-arrow-down-circle-fill"></i> -->
+<div class="alert alert-danger alert-cart d-none">
+  🛒 هیچ محصولی در سبد موجود نمیباشد
+</div>
+<div class="btn-modol-cart-box d-flex align-items-center justify-content-center flex-column w-100">
+  <a href="./cart.html" class="btn btn-success w-100 mb-2 final-buy-cart">نهایی کردن خرید</a>
+  <button class="clear-cart-all btn btn-danger w-100">پاک کردن سبد خرید</button>
+</div>
+</div> */}
+
+//todo========================================================== 🛒 تابع ساخت باکس محصول در سبد خرید
+// function renderCartItems(cartItems) {
+//   const container = document.querySelector(".contain-box-goods");
+
+//   container.innerHTML = "";
+//   cartItems.forEach((item) => {
+//     const cartHTML = `
+//       <div class="box-goods d-flex align-items-end swiper-slide mb-2" data-id="${
+//         item._id
+//       }" style='transform: translateY(0);'>
+//         <div>
+//           <span class="plus-btn" onclick="updateQuantity('increase', '${
+//             item.product._id
+//           }', '${item.quantity}')">+</span>
+//           <span class="number">${item.quantity}</span>
+//           <span class="minus-btn" onclick="updateQuantity('decrease', '${
+//             item.product._id
+//           }', '${item.quantity}')">-</span>
+//         </div>
+//         <div>
+//           <div class='box-info-product h-100 d-flex flex-column align-items-center'>
+//             <div class='row w-100 h-100'>
+//               <div class='col'>
+//                 <div class='row'>
+//                   <div class='col-1 p-0'>
+//                     <button type="button" class="btn btn-danger mb-1 rounded remove-btn" onclick="removeFromCart('${
+//                       item.product._id
+//                     }')">
+//                       <i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i>
+//                     </button>
+//                   </div>
+//                   <div class='col-11 pe-1'>
+//                     <h6 class='bg-white rounded text-center'>${
+//                       item.product.name
+//                     }</h6>
+//                   </div>
+//                 </div>
+//                 <div class='row'>
+//                   <p class='text-white fw-light px-2 m-0 rounded'>${
+//                     item.product.description
+//                   }</p>
+//                 </div>
+//               </div>
+//               <div class='col-4 p-0'>
+//                 <img src="${
+//                   item.product.images[0]
+//                 }" alt="img" class='rounded w-100 h-100'>
+//               </div>
+//             </div>
+//           </div>
+//           <div class='text-price-cart-box w-100 text-start text-white px-2 pt-3 pb-1 rounded d-flex justify-content-between'>
+//             <span class='d-flex'>
+//               تومان
+//               <span class='price ms-1 total-price'>${item.finalPrice.toLocaleString()}</span>
+//             </span>
+//             <span>:قیمت محصول</span>
+//           </div>
+//         </div>
+//       </div>
+//     `;
+//     container.insertAdjacentHTML("afterbegin", cartHTML);
+//   });
+//   // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
+// }
+
+
+function renderCartItems(cartItems) {
+  let html = "";
+
   cartItems.forEach((item) => {
-    const cartHTML = `
-      <div class="box-goods d-flex align-items-end swiper-slide mb-2" data-id="${
-        item._id
-      }" style='transform: translateY(0);'>
+    html += `
+      <div class="box-goods d-flex align-items-end swiper-slide mb-2" data-id="${item._id}" style='transform: translateY(0);'>
         <div>
-          <span class="plus-btn" onclick="updateQuantity('increase', '${
-            item.product._id
-          }', '${item.quantity}')">+</span>
+          <span class="plus-btn" onclick="updateQuantity('increase', '${item.product._id}', '${item.quantity}')">+</span>
           <span class="number">${item.quantity}</span>
-          <span class="minus-btn" onclick="updateQuantity('decrease', '${
-            item.product._id
-          }', '${item.quantity}')">-</span>
+          <span class="minus-btn" onclick="updateQuantity('decrease', '${item.product._id}', '${item.quantity}')">-</span>
         </div>
         <div>
           <div class='box-info-product h-100 d-flex flex-column align-items-center'>
@@ -268,28 +361,20 @@ function renderCartItems(cartItems) {
               <div class='col'>
                 <div class='row'>
                   <div class='col-1 p-0'>
-                    <button type="button" class="btn btn-danger mb-1 rounded remove-btn" onclick="removeFromCart('${
-                      item.product._id
-                    }')">
+                    <button type="button" class="btn btn-danger mb-1 rounded remove-btn" onclick="removeFromCart('${item.product._id}')">
                       <i class="bi bi-x-circle-fill d-flex align-items-center justify-center"></i>
                     </button>
                   </div>
                   <div class='col-11 pe-1'>
-                    <h6 class='bg-white rounded text-center'>${
-                      item.product.name
-                    }</h6>
+                    <h6 class='bg-white rounded text-center'>${item.product.name}</h6>
                   </div>
                 </div>
                 <div class='row'>
-                  <p class='text-white fw-light px-2 m-0 rounded'>${
-                    item.product.description
-                  }</p>
+                  <p class='text-white fw-light px-2 m-0 rounded'>${item.product.description}</p>
                 </div>
               </div>
               <div class='col-4 p-0'>
-                <img src="${
-                  item.product.images[0]
-                }" alt="img" class='rounded w-100 h-100'>
+                <img src="${item.product.images[0]}" alt="img" class='rounded w-100 h-100'>
               </div>
             </div>
           </div>
@@ -303,9 +388,9 @@ function renderCartItems(cartItems) {
         </div>
       </div>
     `;
-    container.insertAdjacentHTML("afterbegin", cartHTML);
   });
-  // initTooltips(); //? فعال‌سازی تمام تولتیپ‌ها
+
+  return html;
 }
 
 // //todo========================================================== علامت بوکمارک محصول UI تغییر
@@ -612,5 +697,5 @@ export {
   createBoxProductToPageCart,
   boxPaymentHtmlTemplate,
   createProductsRowTemplateHtml,
-
+  shoppingCartModal,
 };

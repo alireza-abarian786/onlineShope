@@ -11,8 +11,8 @@ function closeCart() {
       try {
         if (e.target.classList.contains("container-shopping-cart")) {
           containerOpenCart.style.display = "none";
-          openCart.classList.remove("is-content");
-          shoppingCartIcon.style.zIndex = "9";
+          // openCart.classList.remove("is-content");
+          // shoppingCartIcon.style.zIndex = "9";
           updateCartNotification();
         }
       } catch (error) {

@@ -1,7 +1,8 @@
 import { updateCartNotification } from "../header/cartBtn.js";
 import { getToken, setLocalStorage } from "../store/storage.js";
-import { boxPaymentHtmlTemplate, createBoxProductToPageCart, renderCartItems, showModal } from "../store/ui.js";
+import { boxPaymentHtmlTemplate, createBoxProductToPageCart, renderCartItems, shoppingCartModal, showModal } from "../store/ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
+import { showAlertEmptyCart } from "./alertEmpty.js";
 
 //! -------------------------------------------------------------------function-------------------------------------------------------------------------
 //todo=================================================================== تابع حذف محصول از سبد خرید
@@ -30,9 +31,11 @@ async function removeFromCart(id) {
       );
     }
 
-    renderCartItems(resultRemoveFromCartOperation.cart.products);
+    // renderCartItems(resultRemoveFromCartOperation.cart.products);
+    shoppingCartModal(resultRemoveFromCartOperation.cart.products)
     createBoxProductToPageCart(resultRemoveFromCartOperation.cart.products);
     boxPaymentHtmlTemplate(resultRemoveFromCartOperation.cart);
+    // showAlertEmptyCart(resultRemoveFromCartOperation.cart.products)
     setLocalStorage('cartData' , resultRemoveFromCartOperation.cart)
     updateCartNotification();    
 

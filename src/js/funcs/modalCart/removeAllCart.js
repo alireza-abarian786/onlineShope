@@ -1,16 +1,15 @@
 import { updateCartNotification } from "../header/cartBtn.js";
 import { getToken, setLocalStorage } from "../store/storage.js";
-import { boxPaymentHtmlTemplate, createBoxProductToPageCart, showModal } from "../store/ui.js";
+import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../store/ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
-import { showAlertEmptyCart } from "./alertEmpty.js";
+import { positionOpenCart } from "./positionCart.js";
 
-const clearCartAll = document.querySelector(".clear-cart-all");
 //! -------------------------------------------------------------------function-------------------------------------------------------------------------
 //todo=================================================================== تابع حذف همه موارد موجود از سبد خرید
 async function removeAllFromCart() {
   try {
     if (!(await showAlertLogin())) return false;
-    showLoader();
+    showLoader();    
 
     const response = await fetch(
       "https://onlineshope.onrender.com/api/cart/clear",
@@ -29,8 +28,8 @@ async function removeAllFromCart() {
       throw new Error(data.message || "مشکل در خالی کردن سبد خرید");
     }
 
-    container.innerHTML = "";
-    showAlertEmptyCart(data.cart.products);
+    positionOpenCart()
+    shoppingCartModal(data.cart.products)
     createBoxProductToPageCart(data.cart.products);
     boxPaymentHtmlTemplate(data.cart);
     setLocalStorage('cartData' , data.cart)
@@ -45,7 +44,6 @@ async function removeAllFromCart() {
   }
 }
 
-clearCartAll.addEventListener("click", removeAllFromCart);
 
 //! -------------------------------------------------------------------exports-------------------------------------------------------------------------
 export { removeAllFromCart }

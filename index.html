@@ -74,6 +74,7 @@
 
             <!--? logo image -->
             <img
+              loading="lazy"
               src="./src/assets/images/logo.png"
               alt="لوگوی دیجی استور"
               height="32"
@@ -96,6 +97,7 @@
             <div class="position-fixed bg-white d-lg-none d-flex flex-column align-items-center justify-content-center p-3 gap-3 shadow-lg" style="width: inherit;">
               <!--? image header sidebar -->
               <img
+                loading="lazy"
                 src="./src/assets/images/logo.png"
                 alt="لوگوی دیجی استور"
                 height="32"
@@ -205,17 +207,7 @@
 
           <!--? box cart -->
           <div class="container-shopping-cart">
-            <div class="open-cart">
-              <div class="cantain-box-goods rounded"></div>
-              <!-- <i class="bi bi-arrow-down-circle-fill"></i> -->
-              <div class="alert alert-danger alert-cart d-none">
-                🛒 هیچ محصولی در سبد موجود نمیباشد
-              </div>
-              <div class="btn-modol-cart-box d-flex align-items-center justify-content-center flex-column w-100">
-                <a href="./cart.html" class="btn btn-success w-100 mb-2 final-buy-cart">نهایی کردن خرید</a>
-                <button class="clear-cart-all btn btn-danger w-100">پاک کردن سبد خرید</button>
-              </div>
-            </div>
+            <!--todo = data loaded from js -->
           </div>
           <!--? end box cart -->
 
@@ -394,6 +386,7 @@
               <div class="carousel-inner h-100">
                 <div class="carousel-item h-100 active" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-0.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -406,6 +399,7 @@
 
                 <div class="carousel-item h-100" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-1.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -418,6 +412,7 @@
 
                 <div class="carousel-item h-100" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-2.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -430,6 +425,7 @@
 
                 <div class="carousel-item h-100" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-3.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -442,6 +438,7 @@
 
                 <div class="carousel-item h-100" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-4.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -454,6 +451,7 @@
 
                 <div class="carousel-item h-100" data-bs-interval="5000">
                   <img
+                    loading="lazy"
                     src="./src/assets/images/img-big/image-5.jpg"
                     class="d-block w-100 h-100"
                     alt="..."
@@ -512,6 +510,7 @@
                   <a href="#">
                     <div class="img h-100">
                       <img
+                        loading="lazy"
                         src="./src/assets/images/img-big/image-0.jpg"
                         alt="img"
                       />
@@ -535,6 +534,7 @@
                   <a href="#">
                     <div class="img h-100">
                       <img
+                        loading="lazy"
                         src="./src/assets/images/img-big/image-2.jpg"
                         alt="img"
                       />
@@ -565,6 +565,7 @@
                   <a href="#">
                     <div class="img h-100">
                       <img
+                        loading="lazy"
                         src="./src/assets/images/img-big/image-3.jpg"
                         alt="img"
                       />
@@ -590,6 +591,7 @@
                   <a href="#">
                     <div class="img h-100">
                       <img
+                        loading="lazy"
                         src="./src/assets/images/img-big/image-1.jpg"
                         alt="img"
                       />
@@ -787,7 +789,7 @@
 
       <!--? start category appliances -->
       <div
-        class="cantain-box-slider"
+        class="contain-box-slider"
         data-aos="fade-up"
         data-aos-anchor-placement="top-center"
       >
@@ -851,7 +853,7 @@
 
       <!--? start category phones -->
       <div
-        class="cantain-box-slider"
+        class="contain-box-slider"
         data-aos="fade-up"
         data-aos-anchor-placement="top-center"
       >
@@ -926,7 +928,7 @@
 
       <!--? start category tools -->
       <div
-        class="cantain-box-slider"
+        class="contain-box-slider"
         data-aos="fade-up"
         data-aos-anchor-placement="top-center"
       >
@@ -975,7 +977,7 @@
 
       <!--? start category modes -->
       <div
-        class="cantain-box-slider"
+        class="contain-box-slider"
         data-aos="fade-up"
         data-aos-anchor-placement="top-center"
       >
@@ -1002,7 +1004,7 @@
       <!--? finish category modes -->
 
       <!--? start category blog -->
-      <div class="cantain-box-articles" data-aos="zoom-in-up">
+      <div class="contain-box-articles" data-aos="zoom-in-up">
         <div>
           <div>
             <h5>آموزشی و وبلاگ</h5>
@@ -1426,8 +1428,9 @@
     <script src="./public/vendor/aos/aos.js"></script>
     <script>AOS.init();</script>
     <!--?----------------------------------------------------------------------- custom files  ---------------------------------------------------------->
-    <script type="module" src="src/js/header.js"></script>
-    <script type="module" src="src/js/funcs/store/box.js"></script>
-    <script type="module" src="src/js/home.js"></script>
+    <script defer type="module" src="src/js/header.js"></script>
+    <script defer type="module" src="src/js/funcs/store/cart.js"></script>
+    <script defer type="module" src="src/js/funcs/store/box.js"></script>
+    <script defer type="module" src="src/js/home.js"></script>
   </body>
 </html>
