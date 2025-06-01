@@ -20,7 +20,12 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: ['http://127.0.0.1:5501', 'https://onlineshope.onrender.com'], // ✅ فقط دامنه مجاز
+  credentials: true // ✅ اجازه ارسال کوکی
+}));
+
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
