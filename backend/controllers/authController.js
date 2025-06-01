@@ -50,8 +50,10 @@ const registerUser = async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: true, // فقط در HTTPS روشن بشه
-    sameSite: "strict", // جلوگیری از حمله CSRF
+    // secure: true, // فقط در HTTPS روشن بشه
+    // sameSite: "strict", // جلوگیری از حمله CSRF
+    secure: false, // چون روی HTTP هستی
+    sameSite: "lax", // یا "none" اگه دامنه‌ها متفاوت‌ان
     maxAge: 1000 * 60 * 60 * 72, // ۳ روز
   });
 
@@ -81,8 +83,10 @@ const loginUser = async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: true, // فقط در HTTPS روشن بشه
-    sameSite: "strict", // جلوگیری از حمله CSRF
+    // secure: true, // فقط در HTTPS روشن بشه
+    // sameSite: "strict", // جلوگیری از حمله CSRF
+    secure: false, // چون روی HTTP هستی
+    sameSite: "lax", // یا "none" اگه دامنه‌ها متفاوت‌ان
     maxAge: 1000 * 60 * 60 * 72, // ۳ روز
   });
 
