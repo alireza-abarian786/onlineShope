@@ -138,16 +138,21 @@ btnSignUp.addEventListener("click", async (event) => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify(newUser),
         }
       );
+      console.log(res);
+      
   
       const data = await res.json();
+      console.log(data);
+      
       if (!res.ok) { throw new Error(data.message) }
   
-      setLocalStorage("login", usernameSignUp.value.trim());
-      setLocalStorage("token", data.token);
-      setLocalStorage("isAuthorized", true);
+      // setLocalStorage("login", usernameSignUp.value.trim());
+      // setLocalStorage("token", data.token);
+      // setLocalStorage("isAuthorized", true);
       clearInputSignUp();
   
       hideLoader();
@@ -206,7 +211,6 @@ const validText = (element, text) => {
 usernameSignUp.addEventListener("input", (e) => {
   const value = e.target.value.trim();
   usernameValid = value.length >= 5;
-  console.log(usernameValid);
   if (!usernameValid) {
     inValidText(usernameText, "نام کاربری باید حداقل 5 کاراکتر باشد");
   } else {

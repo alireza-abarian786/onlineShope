@@ -11,7 +11,8 @@ const getCartData = async () => {
       "https://onlineshope.onrender.com/api/cart",
       {
         headers: {
-          Authorization: `Bearer ${await getToken()}`,
+          // Authorization: `Bearer ${await getToken()}`,
+          credentials: "include"
         },
       }
     );
@@ -24,7 +25,9 @@ const getCartData = async () => {
       throw new Error("خطا در دریافت سبد خرید");
     }
     
-    const cartData = await cartFetchOperation.json();    
+    const cartData = await cartFetchOperation.json();  
+    console.log(cartData);
+      
     setLocalStorage('cartData' , cartData);
     updateCartNotification()
     hideLoader();

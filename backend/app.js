@@ -22,9 +22,17 @@ const app = express();
 // Middleware
 // app.use(cors());
 app.use(cors({
-  origin: ['http://127.0.0.1:5501', 'https://onlineshope.onrender.com'], // ✅ فقط دامنه مجاز
-  credentials: true // ✅ اجازه ارسال کوکی
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://127.0.0.1:5501', 'https://onlineshope.onrender.com'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());
 app.use(morgan('dev'));

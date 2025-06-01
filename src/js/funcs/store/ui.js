@@ -324,10 +324,7 @@ async function updateFavoritesUI() {
     
     const markList = await getFavorites()    
     const cardProductElem = document.querySelectorAll(".glide");  
-    console.log(markList);
-    console.log(cardProductElem);
-    
-     
+    console.log(markList);    
 
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
