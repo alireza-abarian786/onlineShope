@@ -48,13 +48,20 @@ const registerUser = async (req, res) => {
     expiresIn: "72h",
   });
 
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   secure: true, // فقط در HTTPS روشن بشه
+  //   sameSite: "strict", // جلوگیری از حمله CSRF
+  //   maxAge: 1000 * 60 * 60 * 72, // ۳ روز
+  // });
+
+  const isDev = process.env.NODE_ENV !== "production";
+
   res.cookie("token", token, {
     httpOnly: true,
-    // secure: true, // فقط در HTTPS روشن بشه
-    // sameSite: "strict", // جلوگیری از حمله CSRF
-    secure: false, // چون روی HTTP هستی
-    sameSite: "lax", // یا "none" اگه دامنه‌ها متفاوت‌ان
-    maxAge: 1000 * 60 * 60 * 72, // ۳ روز
+    secure: !isDev, // روی dev = false، روی production = true
+    sameSite: isDev ? "lax" : "none",
+    maxAge: 1000 * 60 * 60 * 72,
   });
 
   res.json({ username: user.name }); // فقط اطلاعات غیرحساس برگردون
@@ -81,20 +88,26 @@ const loginUser = async (req, res) => {
     expiresIn: "72h",
   });
 
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   secure: true, // فقط در HTTPS روشن بشه
+  //   sameSite: "strict", // جلوگیری از حمله CSRF
+  //   maxAge: 1000 * 60 * 60 * 72, // ۳ روز
+  // });
+
+  const isDev = process.env.NODE_ENV !== "production";
+
   res.cookie("token", token, {
     httpOnly: true,
-    // secure: true, // فقط در HTTPS روشن بشه
-    // sameSite: "strict", // جلوگیری از حمله CSRF
-    secure: false, // چون روی HTTP هستی
-    sameSite: "lax", // یا "none" اگه دامنه‌ها متفاوت‌ان
-    maxAge: 1000 * 60 * 60 * 72, // ۳ روز
+    secure: !isDev, // روی dev = false، روی production = true
+    sameSite: isDev ? "lax" : "none",
+    maxAge: 1000 * 60 * 60 * 72,
   });
 
   res.json({ username: user.name }); // فقط اطلاعات غیرحساس برگردون
 
   // res.json({ token , username: user.name});
 };
-
 
 const logoutUser = (req, res) => {
   res.clearCookie("token", {
@@ -106,5 +119,4 @@ const logoutUser = (req, res) => {
   res.status(200).json({ message: "خروج با موفقیت انجام شد" });
 };
 
-
-module.exports = { registerUser, loginUser , logoutUser};
+module.exports = { registerUser, loginUser, logoutUser };

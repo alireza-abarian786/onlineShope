@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "node backend/index.js"
+    "start": "node backend/index.js",
+    "start-app": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

@@ -7,29 +7,31 @@ async function getFavorites() {
   try {
     if (!(getLocalStorage('login').length)) return false;
 
-    const response = await fetch(
-      "https://onlineshope.onrender.com/api/users/favorites",
-      {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      }
-    );
+    // const response = await fetch(
+    //   "https://onlineshope.onrender.com/api/users/favorites",
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${await getToken()}`,
+    //     },
+    //   }
+    // );
     
-    if (response.status === 401) {
-      modalAuthorized()
-      setLocalStorage("isAuthorized" , false)
-      return false;
-    } else if (!response.ok) {
-      throw new Error("خطا در دریافت علاقه‌مندی‌ها");
-    }
+    // if (response.status === 401) {
+    //   modalAuthorized()
+    //   setLocalStorage("isAuthorized" , false)
+    //   return false;
+    // } else if (!response.ok) {
+    //   throw new Error("خطا در دریافت علاقه‌مندی‌ها");
+    // }
 
-    const favoritesData =  await response.json()
-    console.log(favoritesData.favorites);
+    // console.log(response);
     
-    setLocalStorage('markData' , favoritesData)
-    hideLoader()
-    return favoritesData;
+    // const favoritesData =  await response.json()
+    // console.log(favoritesData.favorites);
+    
+    // setLocalStorage('markData' , favoritesData)
+    // hideLoader()
+    // return favoritesData;
     
   } catch (error) {
     console.error("Error in getFavorites:", error);

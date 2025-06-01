@@ -83,6 +83,7 @@ const loginOperationManagementFunction = async () => {
       headers: {
         "Content-type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify(userLoginInformation),
     }
   );
@@ -102,8 +103,10 @@ const loginOperationManagementFunction = async () => {
       }
     });
 
-    const resultLoginOperation = await loginOperation.json();    
-    setLocalStorage("token", resultLoginOperation.token);
+    const resultLoginOperation = await loginOperation.json();  
+    console.log(resultLoginOperation);
+      
+    // setLocalStorage("token", resultLoginOperation.token);
     setLocalStorage("isAuthorized", true);
     setLocalStorage("login", resultLoginOperation.username);
 
@@ -141,18 +144,14 @@ btnSignUp.addEventListener("click", async (event) => {
           credentials: 'include',
           body: JSON.stringify(newUser),
         }
-      );
-      console.log(res);
-      
+      );      
   
-      const data = await res.json();
-      console.log(data);
-      
+      const data = await res.json();      
       if (!res.ok) { throw new Error(data.message) }
   
-      // setLocalStorage("login", usernameSignUp.value.trim());
+      setLocalStorage("login", data.username);
       // setLocalStorage("token", data.token);
-      // setLocalStorage("isAuthorized", true);
+      setLocalStorage("isAuthorized", true);
       clearInputSignUp();
   
       hideLoader();

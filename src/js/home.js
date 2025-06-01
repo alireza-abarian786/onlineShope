@@ -22,6 +22,26 @@ runTimer();
 //todo========================================================== جستجوی سراسری محصولات
 searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 
+// const res = await fetch("https://onlineshope.onrender.com/api/user/me" , {
+//     method: 'GET',
+//     credentials: 'include'
+// })
+
+fetch("https://onlineshope.onrender.com/api/user/me", {
+  method: "GET",
+  credentials: "include", // ⬅️ خیلی مهم برای ارسال کوکی
+})
+  .then(res => res.json())
+  .then(data => {
+    console.log("✅ کاربر:", data);
+  })
+  .catch(err => {
+    console.error("❌ خطا در گرفتن پروفایل", err);
+  });
+
+// console.log(res);
+
+
 // setLocalStorage('login' , "ali")
 hideLoader()
 console.log('home');

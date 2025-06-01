@@ -322,23 +322,23 @@ async function updateFavoritesUI() {
   try {    
     if (!(getLocalStorage('login').length)) return false;
     
-    const markList = await getFavorites()    
-    const cardProductElem = document.querySelectorAll(".glide");  
-    console.log(markList);    
+    // const markList = await getFavorites()    
+    // const cardProductElem = document.querySelectorAll(".glide");  
+    // console.log(markList);    
 
-    cardProductElem.forEach((card) => {
-      const cardId = card.dataset.id;
-      const markContain = card.querySelector(".mark-contain");
-      const isMarked = markList.favorites.some((mark) => mark === cardId);
+    // cardProductElem.forEach((card) => {
+    //   const cardId = card.dataset.id;
+    //   const markContain = card.querySelector(".mark-contain");
+    //   const isMarked = markList.favorites.some((mark) => mark === cardId);
       
-      if (isMarked) {
-        markContain.classList.add("is-mark");
-        markContain.classList.remove("not-mark");
-      } else {
-        markContain.classList.remove("is-mark");
-        markContain.classList.add("not-mark");
-      }
-    });
+    //   if (isMarked) {
+    //     markContain.classList.add("is-mark");
+    //     markContain.classList.remove("not-mark");
+    //   } else {
+    //     markContain.classList.remove("is-mark");
+    //     markContain.classList.add("not-mark");
+    //   }
+    // });
   } catch (error) {
     console.error("Error in updateFavoritesUI:", error);
     showModal("❌ خطا در به‌روزرسانی لیست علاقه‌مندی‌ها");

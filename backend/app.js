@@ -21,9 +21,25 @@ const app = express();
 
 // Middleware
 // app.use(cors());
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     const allowedOrigins = ['http://127.0.0.1:5501', 'https://onlineshope.onrender.com'];
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true
+// }));
+
+const allowedOrigins = [
+  "http://127.0.0.1:5501", // لوکال
+  "https://alireza-abarian786.github.io", // GitHub Pages
+];
+
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = ['http://127.0.0.1:5501', 'https://onlineshope.onrender.com'];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -32,6 +48,7 @@ app.use(cors({
   },
   credentials: true
 }));
+
 
 
 app.use(express.json());

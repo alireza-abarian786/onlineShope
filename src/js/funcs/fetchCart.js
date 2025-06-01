@@ -17,13 +17,15 @@ const getCartData = async () => {
       }
     );
 
-    if (cartFetchOperation.status === 401) {
-      modalAuthorized()
-      setLocalStorage("isAuthorized" , false)
-      return false;
-    } else if (!cartFetchOperation.ok) {
-      throw new Error("خطا در دریافت سبد خرید");
-    }
+    // if (cartFetchOperation.status === 401) {
+    //   modalAuthorized()
+    //   setLocalStorage("isAuthorized" , false)
+    //   return false;
+    // } else if (!cartFetchOperation.ok) {
+    //   throw new Error("خطا در دریافت سبد خرید");
+    // }
+    
+    console.log(cartFetchOperation);
     
     const cartData = await cartFetchOperation.json();  
     console.log(cartData);
