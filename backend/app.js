@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
+const cookieParser = require("cookie-parser");
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -16,14 +17,13 @@ const cartRoutes = require('./routes/cartRoutes');
 const userPanelRoutes = require('./routes/userPanelRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
-
-
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 console.log("Mounting cart routes...");
 

@@ -5,6 +5,8 @@ import { hideLoader, modalAuthorized } from "./utils.js";
 //todo========================================================== دریافت لیست علاقه مندی های کاربر
 async function getFavorites() {
   try {
+    if (!(getLocalStorage('login').length)) return false;
+
     const response = await fetch(
       "https://onlineshope.onrender.com/api/users/favorites",
       {
@@ -23,8 +25,11 @@ async function getFavorites() {
     }
 
     const favoritesData =  await response.json()
+    console.log(favoritesData.favorites);
+    
     setLocalStorage('markData' , favoritesData)
     hideLoader()
+    return favoritesData;
     
   } catch (error) {
     console.error("Error in getFavorites:", error);

@@ -21,13 +21,14 @@ const getCartData = async () => {
       setLocalStorage("isAuthorized" , false)
       return false;
     } else if (!cartFetchOperation.ok) {
-      throw new Error("خطا در دریافت علاقه‌مندی‌ها");
+      throw new Error("خطا در دریافت سبد خرید");
     }
     
     const cartData = await cartFetchOperation.json();    
     setLocalStorage('cartData' , cartData);
     updateCartNotification()
     hideLoader();
+    return cartData;
 
   } catch (error) {
     hideLoader();

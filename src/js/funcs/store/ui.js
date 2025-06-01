@@ -322,8 +322,12 @@ async function updateFavoritesUI() {
   try {    
     if (!(getLocalStorage('login').length)) return false;
     
-    const markList = await getLocalStorage('markData');    
-    const cardProductElem = document.querySelectorAll(".glide");   
+    const markList = await getFavorites()    
+    const cardProductElem = document.querySelectorAll(".glide");  
+    console.log(markList);
+    console.log(cardProductElem);
+    
+     
 
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
