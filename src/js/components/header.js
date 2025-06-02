@@ -1,13 +1,14 @@
-import { toggleCart, updateCartNotification } from "./funcs/header/cartBtn.js";
-import { closeCart } from "./funcs/header/closeCart.js";
-import { isLogin } from "./funcs/header/loginBtn.js";
-import { fetchCategoriesForShowToMenu } from "./funcs/header/menu.js";
+import { toggleCart, updateCartNotification } from "../funcs/header/cartBtn.js";
+import { closeCart } from "../funcs/header/closeCart.js";
+import { isLogin } from "../funcs/header/loginBtn.js";
+import { fetchCategoriesForShowToMenu } from "../funcs/header/menu.js";
+
 //!----------------------------------------------------------------------  -------------------------------------------------------
 isLogin()
-fetchCategoriesForShowToMenu()
+closeCart()
 toggleCart()
 updateCartNotification()
-closeCart()
+fetchCategoriesForShowToMenu()
 
 console.log('header');
 

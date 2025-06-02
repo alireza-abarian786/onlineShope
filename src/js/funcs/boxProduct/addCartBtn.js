@@ -1,6 +1,7 @@
+import { getCartData, updateCartCache } from "../fetchData/fetchCart.js";
 import { updateCartNotification } from "../header/cartBtn.js";
-import { getLocalStorage, getToken, setLocalStorage } from "../store/storage.js";
-import { renderCartItems, showModal } from "../store/ui.js";
+import { getLocalStorage } from "../storage.js";
+import { renderCartItems, showModal } from "../ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
 
 //!---------------------------------------------------------------------- function -------------------------------------------------------
@@ -11,20 +12,18 @@ async function addToCartAndToggleButton(id) {
     if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
-    const resultCartFetchOperation = await getLocalStorage('cartData')
+    const resultCartFetchOperation = await getCartData()
     const checkedCart = resultCartFetchOperation.products.some(
       (productCart) => productCart.product._id === id
     );
 
     if (!checkedCart) {
-      const response = await fetch(
-        `https://onlineshope.onrender.com/api/cart/add`,
-        {
+      const response = await fetch(`https://onlineshope.onrender.com/api/cart/add`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${await getToken()}`,
           },
+          credentials: 'include',
           body: JSON.stringify({
             productId: id,
             quantity: 1,
@@ -40,9 +39,11 @@ async function addToCartAndToggleButton(id) {
         throw new Error("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
       }
 
-      renderCartItems(result.cart.products);
-      setLocalStorage('cartData' , result.cart)
+      updateCartCache(result.cart)
+
+      renderCartItems(result.cart.products);      
       updateCartNotification();
+
     } else {
       hideLoader();
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);

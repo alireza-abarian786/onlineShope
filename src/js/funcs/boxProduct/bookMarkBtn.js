@@ -1,5 +1,5 @@
-import { getLocalStorage, getToken, setLocalStorage } from "../store/storage.js";
-import { showModal, updateFavoritesUI } from "../store/ui.js";
+import { getLocalStorage, getToken, setLocalStorage } from "../storage.js";
+import { showModal, updateFavoritesUI } from "../ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
 
 //!---------------------------------------------------------------------- function -------------------------------------------------------
@@ -29,7 +29,6 @@ const addToFavorites = async (productId) => {
       hideLoader();
       if (!response.ok) throw new Error("خطا در افزودن به علاقه‌مندی‌ها");
       const favoritesData = await response.json()
-      setLocalStorage('markData' , favoritesData)
       showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
       updateFavoritesUI();      
 
@@ -65,7 +64,6 @@ async function removeFromFavorites(productId) {
     hideLoader();
     if (!response.ok) throw new Error("خطا در حذف از علاقه‌ مندی‌ ها");
     const favoritesData = await response.json()
-    setLocalStorage('markData' , favoritesData)
     showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
     updateFavoritesUI();    
 

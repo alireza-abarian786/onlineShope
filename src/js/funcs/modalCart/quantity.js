@@ -1,6 +1,7 @@
-import { getToken, setLocalStorage } from "../store/storage.js";
-import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../store/ui.js";
+import { getToken, setLocalStorage } from "../storage.js";
+import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
+import { positionOpenCart } from "./positionCart.js";
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
 //todo=================================================================== عملیات افزایش یا کاهش تعداد محصول در سبد خرید
@@ -26,20 +27,22 @@ let updateQuantity = async (operation, id, quantity) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
         },
+        credentials: 'include',
         body: JSON.stringify({
           productId: id,
           quantity: +quantity,
         }),
       }
     );
+    
     const resultRes = await res.json();
     shoppingCartModal(resultRes.cart.products)
     createBoxProductToPageCart(resultRes.cart);
     boxPaymentHtmlTemplate(resultRes.cart);
-    setLocalStorage('cartData' , resultRes.cart)
+    positionOpenCart()
     hideLoader();
+
   } catch (error) {
     hideLoader();
     console.error("Error in Function updateQuantity =>", error);

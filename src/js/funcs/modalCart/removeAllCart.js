@@ -1,6 +1,4 @@
-import { updateCartNotification } from "../header/cartBtn.js";
-import { getToken, setLocalStorage } from "../store/storage.js";
-import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../store/ui.js";
+import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 import { positionOpenCart } from "./positionCart.js";
 
@@ -17,8 +15,8 @@ async function removeAllFromCart() {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
         },
+        credentials: 'include'
       }
     );
     const data = await response.json();
@@ -28,12 +26,10 @@ async function removeAllFromCart() {
       throw new Error(data.message || "مشکل در خالی کردن سبد خرید");
     }
 
-    positionOpenCart()
     shoppingCartModal(data.cart.products)
     createBoxProductToPageCart(data.cart);
     boxPaymentHtmlTemplate(data.cart);
-    setLocalStorage('cartData' , data.cart)
-    updateCartNotification();
+    positionOpenCart()
 
     hideLoader();
     showModal("✅ سبد خرید با موفقیت خالی شد!");

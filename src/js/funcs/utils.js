@@ -1,7 +1,7 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { getCartData } from "./fetchCart.js";
+import { getCartData } from "./fetchData/fetchCart.js";
 import { updateCartNotification } from "./header/cartBtn.js";
-import { getLocalStorage, getToken, setLocalStorage } from "./store/storage.js";
+import { getLocalStorage, getToken, setLocalStorage } from "./storage.js";
 
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const loaderElem = document.querySelector(".loader-container");
@@ -128,7 +128,7 @@ async function UserInformationGetFunction() {
 
 //todo============================================ بررسی وضعیت توکن کاربر
 const modalAuthorized = () => {
-  hideLoader();
+  // hideLoader();
   Swal.fire({
     title: "نشست شما منقضی شده",
     text: "💫 لطفاً دوباره لاگین کنید",

@@ -1,4 +1,4 @@
-import { createProductsRowTemplateHtml, createProductsTemplateHtml } from "../store/ui.js"
+import { createProductsRowTemplateHtml, createProductsTemplateHtml } from "../../funcs/ui.js"
 
 const containerCategoryFooter = document.querySelector(".container-category__footer")
 

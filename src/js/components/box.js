@@ -1,9 +1,9 @@
 //!---------------------------------------------------------------------- imports -------------------------------------------------------
-import { updateArrowButtonColors, updateFavoritesUI } from "./ui.js";
-import { addToCartAndToggleButton } from "../boxProduct/addCartBtn.js";
-import { addToFavorites } from "../boxProduct/bookMarkBtn.js";
+import { updateArrowButtonColors, updateFavoritesUI } from "../funcs/ui.js";
+import { addToCartAndToggleButton } from "../funcs/boxProduct/addCartBtn.js";
+import { addToFavorites } from "../funcs/boxProduct/bookMarkBtn.js";
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
-// updateFavoritesUI()
+updateFavoritesUI()
 console.log('box');
 //!---------------------------------------------------------------------- binding -------------------------------------------------------
 window.addToCartAndToggleButton = addToCartAndToggleButton;

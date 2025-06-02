@@ -1,14 +1,15 @@
-import { getLocalStorage } from "../store/storage.js";
+import { getLocalStorage } from "../storage.js";
+import { showLoader } from "../utils.js";
 
 // todo============================================== وضعیت کاربر و تغییر لینک ها و ظاهر آیکون لاگین
 async function isLogin() {
     const loginBtnIcon = document.querySelector("#login svg");
     const loginBtn = document.querySelector("#login");
     const loginBtnText = document.querySelector("#login span");
-
+    
     if (loginBtnText && loginBtnIcon && loginBtn) {
         if (getLocalStorage("login").length !== 0) {
-        loginBtnText.innerHTML = getLocalStorage("login");    
+            loginBtnText.innerHTML = getLocalStorage("login");    
         if (!getLocalStorage('isAuthorized')) {
             loginBtnIcon.classList.add("text-bg-danger")
             loginBtnIcon.classList.remove("bg-white")

@@ -1,4 +1,5 @@
-import { categoriesData } from "../fetchCategories.js";
+import { categories } from "../fetchData/fetchCategories.js";
+const data = await categories();
 
 //todo============================================== تنظیمات منو در سایز 992
 function settingsMenuDropDown() {
@@ -20,10 +21,10 @@ function settingsMenuDropDown() {
 // todo============================================== و نمایش در قسمت منو category دریافت
 const fetchCategoriesForShowToMenu = async () => {
   const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
-  const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
+  const categoryWrapperLg = document.querySelector(".category-wrapper-lg");  
 
   if (categoryWrapperXl) {
-    categoriesData.forEach((item) => {
+    data.forEach((item) => {
       categoryWrapperXl.insertAdjacentHTML(
         "beforeend",
         `
@@ -36,7 +37,7 @@ const fetchCategoriesForShowToMenu = async () => {
   }
 
   if (categoryWrapperLg) {
-    categoriesData.forEach((item) => {
+    data.forEach((item) => {
       categoryWrapperLg.insertAdjacentHTML(
         "beforeend",
         `
@@ -49,4 +50,4 @@ const fetchCategoriesForShowToMenu = async () => {
   }
 };
 
-export { fetchCategoriesForShowToMenu, settingsMenuDropDown, categoriesData };
+export { settingsMenuDropDown , fetchCategoriesForShowToMenu};

@@ -1,8 +1,8 @@
 {
   "scripts": {
     "start": "node backend/index.js",
-    "start-app": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js"
+    "starter": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -16,5 +16,8 @@
     "mongodb": "^6.16.0",
     "mongoose": "^8.13.2",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

@@ -1,6 +1,6 @@
 import {
   setLocalStorage,
-} from "./funcs/store/storage.js";
+} from "./funcs/storage.js";
 import {
   showLoader,
   hideLoader,
