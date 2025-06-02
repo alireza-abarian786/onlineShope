@@ -1,5 +1,5 @@
 import { showLoader } from "../utils.js"
-import { category } from "../../category.js"
+import { category } from "./showBoxes.js"
 
 //todo======================================================= تابع تنظیم استایل کلید های جابجایی بین صفحات
 const handlePagination = (array , element , showItemCountToPage , currentPage) => {    

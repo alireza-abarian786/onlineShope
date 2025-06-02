@@ -4,7 +4,7 @@ import { updateQuantity } from "../modalCart/quantity.js";
 import { removeAllFromCart } from "../modalCart/removeAllCart.js";
 import { removeFromCart } from "../modalCart/removeItemCart.js";
 import { getLocalStorage } from "../storage.js";
-import { renderCartItems, shoppingCartModal } from "../ui.js";
+import { shoppingCartModal } from "../ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
 
 //! -------------------------------------------------------------------functions-------------------------------------------------------------------------
@@ -14,7 +14,7 @@ async function updateCartNotification() {
 
   try {
     if (getLocalStorage("login").length === 0) return false;
-    const resultCartFetchOperation = await getCartData()    
+    const resultCartFetchOperation = await getCartData()        
     
     if (resultCartFetchOperation.products) {
       if (cartNotification) {
@@ -38,11 +38,10 @@ function toggleCart() {
 
       showLoader();
 
-      const getData = await getCartData()          
+      const getData = await getCartData()              
       containerOpenCart.style.display = "flex";
       shoppingCartIcon.style.zIndex = '9999'
       shoppingCartModal(getData.products)
-      renderCartItems(getData.products);
       positionOpenCart();
       hideLoader();
 

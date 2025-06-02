@@ -1,8 +1,26 @@
+import { searchParams } from "../utils.js";
+import { getProducts } from "./fetchProducts.js";
+import { safeFetchWithCache } from "./FetchWithCache.js";
+
 //todo======================================================== URL فیلتر کردن دسته بندی ها بر اساس
-const categories = async () => {
-  const fetchCategories = await fetch('https://onlineshope.onrender.com/api/categories')
-  const categoriesData = await fetchCategories.json()
-  return categoriesData;
+async function getCategories() {
+  const data = await safeFetchWithCache("https://onlineshope.onrender.com/api/categories", { maxAge: 60 * 60 * 1000 });
+  
+  if (Array.isArray(data)) {
+    return data;
+  }
+
+  return [];
 }
 
-export {categories}
+//todo======================================================== URL فیلتر کردن دسته بندی ها بر اساس
+const getCategoryFunc = async () => {
+  const categoriesData = await getCategories()  
+  const productsData = await getProducts()    
+  const urlSearchParamsCategory = searchParams('cat'); 
+  const findCategoryRequested = await categoriesData.find(item => item.urlSearch === urlSearchParamsCategory);                                 
+  const getProductCategoryRequested = await productsData.filter(item => item.category_id == findCategoryRequested.id);            
+  return getProductCategoryRequested;
+}
+
+export {getCategories , getCategoryFunc}

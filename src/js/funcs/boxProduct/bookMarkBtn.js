@@ -1,4 +1,6 @@
-import { getLocalStorage, getToken, setLocalStorage } from "../storage.js";
+import { getFavorites } from "../fetchData/fetchMarks.js";
+import { updateCache } from "../fetchData/FetchWithCache.js";
+import { getLocalStorage } from "../storage.js";
 import { showModal, updateFavoritesUI } from "../ui.js";
 import { hideLoader, modalAuthorized, showAlertLogin, showLoader } from "../utils.js";
 
@@ -10,31 +12,32 @@ const addToFavorites = async (productId) => {
     if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
-    const markList = await getLocalStorage('markData')    
-    const checkedMark = markList.favorites.some((mark) => mark === productId);    
+    const markList = await getFavorites()    
+    const checkedMark = markList.favorites.includes(productId);    
 
     if (!checkedMark) {
-      const response = await fetch(
-        "https://onlineshope.onrender.com/api/users/favorites/add",
-        {
+      const response = await fetch("https://onlineshope.onrender.com/api/users/favorites/add", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${await getToken()}`,
           },
+          credentials: 'include',
           body: JSON.stringify({ productId }),
         }
       );
 
-      hideLoader();
       if (!response.ok) throw new Error("خطا در افزودن به علاقه‌مندی‌ها");
+
       const favoritesData = await response.json()
-      showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
+      updateCache('https://onlineshope.onrender.com/api/users/favorites' , favoritesData )
       updateFavoritesUI();      
+      hideLoader()
+      showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
 
     } else {
       removeFromFavorites(productId);
     }
+
   } catch (error) {
     hideLoader();
     console.error("Error in addToFavorites:", error);
@@ -49,23 +52,23 @@ async function removeFromFavorites(productId) {
     if (getLocalStorage('isAuthorized') === false) return modalAuthorized()
 
     showLoader();
-    const response = await fetch(
-      "https://onlineshope.onrender.com/api/users/favorites/remove",
-      {
+    const response = await fetch("https://onlineshope.onrender.com/api/users/favorites/remove", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
         },
+        credentials: 'include',
         body: JSON.stringify({ productId }),
       }
     );
 
-    hideLoader();
     if (!response.ok) throw new Error("خطا در حذف از علاقه‌ مندی‌ ها");
+
     const favoritesData = await response.json()
-    showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
+    updateCache('https://onlineshope.onrender.com/api/users/favorites' , favoritesData)
     updateFavoritesUI();    
+    hideLoader();
+    showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
 
   } catch (error) {
     hideLoader();

@@ -1,3 +1,5 @@
+import { updateCache } from "../fetchData/FetchWithCache.js";
+import { updateCartNotification } from "../header/cartBtn.js";
 import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 import { positionOpenCart } from "./positionCart.js";
@@ -22,16 +24,16 @@ async function removeFromCart(id) {
       }
     );
 
-    const resultRemoveFromCartOperation = await removeFromCartOperation.json();
     if (!removeFromCartOperation.ok) {
-      throw new Error(
-        resultRemoveFromCartOperation.error || "Failed to delete item from cart"
-      );
+      throw new Error("Failed to delete item from cart");
     }
-
-    shoppingCartModal(resultRemoveFromCartOperation.cart.products)
-    createBoxProductToPageCart(resultRemoveFromCartOperation.cart);
-    boxPaymentHtmlTemplate(resultRemoveFromCartOperation.cart);
+    
+    const resultRemoveFromCart = await removeFromCartOperation.json();
+    updateCache('https://onlineshope.onrender.com/api/cart' , resultRemoveFromCart.cart)
+    shoppingCartModal(resultRemoveFromCart.cart.products)
+    createBoxProductToPageCart(resultRemoveFromCart.cart);
+    boxPaymentHtmlTemplate(resultRemoveFromCart.cart);
+    updateCartNotification()
     positionOpenCart()
 
     hideLoader();

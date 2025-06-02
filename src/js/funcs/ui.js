@@ -317,7 +317,7 @@ function renderCartItems(cartItems) {
   return html;
 }
 
-// //todo========================================================== علامت بوکمارک محصول UI تغییر
+//todo========================================================== علامت بوکمارک محصول UI تغییر
 async function updateFavoritesUI() {
   try {    
     if (!(getLocalStorage('login').length)) return false;
@@ -328,15 +328,11 @@ async function updateFavoritesUI() {
     cardProductElem.forEach((card) => {
       const cardId = card.dataset.id;
       const markContain = card.querySelector(".mark-contain");
-      const isMarked = markList.favorites.some((mark) => mark === cardId);
       
-      if (isMarked) {
-        markContain.classList.add("is-mark");
-        markContain.classList.remove("not-mark");
-      } else {
-        markContain.classList.remove("is-mark");
-        markContain.classList.add("not-mark");
-      }
+      const isMarked = markList.favorites.includes(cardId);
+      
+      markContain.classList.toggle('is-mark' , isMarked)
+      markContain.classList.toggle('not-mark' , !isMarked)
     });
   } catch (error) {
     console.error("Error in updateFavoritesUI:", error);
