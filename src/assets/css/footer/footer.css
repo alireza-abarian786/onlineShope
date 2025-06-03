@@ -1,7 +1,7 @@
 /* -----------------------****** Start Footer ********-------------------------------------------------------------------- */
 
 footer > div {
-    background-color: #2563eb;
+    background-color: var(--primary-color);
     padding: 30px;
     width: 100%;
     margin-top: 70px;

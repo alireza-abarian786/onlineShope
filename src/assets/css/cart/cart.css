@@ -157,7 +157,7 @@
 
 .container-Product-cards {
   width: 75%;
-  background: linear-gradient(135deg, #2563eb, #4c9aff);
+  background: linear-gradient(135deg, var(--primary-color), #4c9aff);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -272,7 +272,7 @@
   background: #ff5733;
 }
 .discount-box {
-  background: #2563eb;
+  background: var(--primary-color);
 }
 
 .container-total {
@@ -291,7 +291,7 @@
 }
 
 .quantity-btn {
-  background-color: #2563eb;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   padding: 8px 12px;

@@ -91,7 +91,7 @@ function settingSliderSwiper() {
       930: { slidesPerView: 3, spaceBetween: 10 },
       1024: { slidesPerView: 3, spaceBetween: 50 },
       1330: { slidesPerView: 4, spaceBetween: 10 },
-      1455: { slidesPerView: 3, spaceBetween: 10 },
+      1455: { slidesPerView: 3, spaceBetween: 20 },
     },
   });
 

@@ -43,23 +43,22 @@ let createBlogs = async (element) => {
     element.insertAdjacentHTML(
       "beforeend",
       `
-              <div class="swiper-slide">
-                <div class="pt-3">
-                  <img src="${blog.image}" alt="image" />
-                </div>
-    
-                <div>
-                  <h6>${blog.title}</h6>
-                  <p>${blog.content}</p>
-                  <a href="./blog.html">مطالعه مقاله
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                      <path fill="currentColor" d="M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672zm256 0a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672z"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-        `
-    );
+        <div class="swiper-slide card-content container-blog">
+          <div class="w-100">
+            <img src="${blog.image}" alt="image-blog" />
+          </div>
+
+          <div>
+            <h6>${blog.title}</h6>
+            <p>${blog.content}</p>
+            <a href="./blog.html">مطالعه مقاله
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                <path fill="currentColor" d="M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672zm256 0a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+    `);
   });
 };
 
@@ -80,7 +79,7 @@ if (arrProducts.length) {
     arrProducts.forEach((box) => {
       element.insertAdjacentHTML(
           "beforeend",
-          `<div class="swiper-slide glide product-box" data-id=${box._id}>
+          `<div class="swiper-slide glide product-box card-content" data-id=${box._id}>
                       ${
                       box.discount
                           ? `<div class='box-discount'>${Math.floor(
@@ -605,6 +604,23 @@ let createProductsRowTemplateHtml = (arrCategory) => {
     );
   }
 };
+
+//todo==========================================================  ایجاد باکس‌ های دسته بندی ها داخل صفحه اصلی
+const boxCategoriesTemplateHtml = async (categoriesData) => {
+  const containerCategoryBoxIcon  = document.querySelector(".category-box-icon ")  
+  
+  categoriesData.slice(0 , -3).forEach(item => {    
+    containerCategoryBoxIcon.insertAdjacentHTML('beforeend' , `
+      <div class="swiper-slide swiper-slide-active" role="group" aria-label="2 / 15" style="width: 310.4px;" data-id=${item._id}>
+        <div>
+          <a href="./category.html?cat=digital&amp;page=1" class="page"></a>
+        </div>
+        <h6>${item.name}</h6>
+      </div>
+    `)
+  })
+}
+
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 
 export {
@@ -618,4 +634,5 @@ export {
   boxPaymentHtmlTemplate,
   createProductsRowTemplateHtml,
   shoppingCartModal,
+  boxCategoriesTemplateHtml
 };

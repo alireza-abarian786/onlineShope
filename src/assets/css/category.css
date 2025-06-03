@@ -1,16 +1,13 @@
 /* CSS Variables */
 :root {
-  --primary-color: #2563eb;
   --secondary-color: #0d6efd;
   --success-color: #28a745;
   --danger-color: #ff5733;
-  --text-color: #333;
   --text-light: #666;
   --text-lighter: #999;
   --shadow-sm: 0px 0px 15px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 6px 30px rgba(0, 0, 0, 0.15);
-  --transition: all 0.3s ease;
 }
 
 /* Base Styles */

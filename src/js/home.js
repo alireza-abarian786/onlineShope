@@ -1,7 +1,8 @@
 //!---------------------------------------------------------------------- import -------------------------------------------------------
 import { runTimer } from "./funcs/timer.js";
-import { createBlogs , createProductsTemplateHtml} from './funcs/ui.js';
+import { boxCategoriesTemplateHtml, createBlogs , createProductsTemplateHtml} from './funcs/ui.js';
 import { getProducts } from "./funcs/fetchData/fetchProducts.js";
+import { getCategories } from "./funcs/fetchData/fetchCategories.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const containerArticles = document.querySelector(".box-articles");
@@ -17,6 +18,8 @@ const containerCategoryModes = document.querySelector(".container-category-modes
 //todo===================================== نمایش محصولات بر اساس دسته بندی در صفحه اصلی
 const showProductHomePage = async () => {
   const productsData = await getProducts()
+  const categoriesData = await getCategories()
+
   const arrDiscount = productsData.filter((product) => product.discount);
   const arrAppliances = productsData.filter((item) => item.category_id === "3");
   const arrPhones = productsData.filter((item) => item.category_id === "10");
@@ -27,7 +30,9 @@ const showProductHomePage = async () => {
   createProductsTemplateHtml(containerCategoryAppliances, arrAppliances);
   createProductsTemplateHtml(containerCategoryPhones, arrPhones);
   createProductsTemplateHtml(containerCategoryTools, arrTools);
-  createProductsTemplateHtml(containerCategoryModes, arrModes);  
+  createProductsTemplateHtml(containerCategoryModes, arrModes);
+
+  boxCategoriesTemplateHtml(categoriesData)  
 };
 
 // todo============================================== سرچ سراسری محصولات

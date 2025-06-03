@@ -24,7 +24,7 @@
 
 .contain-box-slider > div:first-child > div:first-child,
 .contain-box-articles > div:first-child > div:first-child {
-  border-right: 10px solid #2563eb;
+  border-right: 10px solid var(--primary-color);
   border-radius: 8px;
   padding-right: 30px;
 }
@@ -38,23 +38,24 @@
 .contain-box-articles > div:first-child > div:first-child > h5 {
   font-size: 22px;
   font-weight: 900;
+  margin: 5px 0;
 }
 
 .contain-box-slider > div:first-child > a:last-child,
 .contain-box-articles > div:first-child > a:last-child {
-  border: 2px solid #2563eb;
+  border: 2px solid var(--primary-color);
   padding: 10px 20px;
   border-radius: 15px;
   font-size: 18px;
   font-weight: bold;
-  color: #2563eb;
+  color: var(--primary-color);
   cursor: pointer;
 }
 
 .contain-box-slider > div:first-child > a:last-child:hover,
 .contain-box-articles > div:first-child > a:last-child:hover {
   color: #fff;
-  background-color: #2563eb;
+  background-color: var(--primary-color);
   transition: all 0.4s ease 0.1ms;
 }
 
@@ -66,7 +67,7 @@
 
 .arrow-left-box-slider {
   width: 40px;
-  color: #2563eb;
+  color: var(--primary-color);
   cursor: pointer;
 }
 /* ========================================= */
@@ -92,7 +93,7 @@
 
 .arrow-right-box-slider {
   width: 40px;
-  color: #2563eb;
+  color: var(--primary-color);
   cursor: pointer;
 }
 
@@ -135,7 +136,6 @@
   align-items: center;
   flex-direction: row-reverse;
   padding-right: 30px;
-  /* gap: 50px; */
   background-image: url("../../images/img.webp");
   background-size: cover;
   background-repeat: no-repeat;
@@ -190,7 +190,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2563eb;
+  color: var(--primary-color);
 }
 .discounts-title > div > div > div > h6 {
   font-size: 1.7rem !important;
@@ -323,7 +323,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2563eb;
+  color: var(--primary-color);
 }
 .box-img + div > div:last-child > div:first-child {
   border-right: 1.5px solid rgba(117, 117, 117, 0.2);
@@ -447,9 +447,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .glide:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-.swiper-slide:hover {
+.card-content:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-10px);
   transition: transform 0.4s ease, box-shadow 0.3s ease;
   cursor: pointer;

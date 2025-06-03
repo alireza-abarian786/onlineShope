@@ -8,20 +8,25 @@ import { handlingCategoryPageFunctions } from "./searchProduct.js";
 const category = async () => { 
   const urlSearchParams = searchParams('cat');                                                                        
   const getProductCategory = await getCategoryFunc()                                                   
+  const productsData = await getProducts()  
   
   switch (urlSearchParams) {
     case 'bookmarks':{
-      const bookmarkedProducts = await getFavorites()    
-      handlingCategoryPageFunctions([...bookmarkedProducts])
+      const bookmarkedProductsID = await getFavorites()    
+      const bookmarkedProductsData = productsData.filter(product => {
+        return bookmarkedProductsID.favorites.includes(product._id);
+      });          
+      
+      handlingCategoryPageFunctions([...bookmarkedProductsData])
       break;
     }
     case 'discounts':{
-      const discountedProducts = getProducts.filter(item => item.discount)
+      const discountedProducts = productsData.filter(item => item.discount)
       handlingCategoryPageFunctions([...discountedProducts])      
       break;
     }
     case 'allProducts':{
-      handlingCategoryPageFunctions([...getProducts])  
+      handlingCategoryPageFunctions([...productsData])  
       break;
     }
     default:

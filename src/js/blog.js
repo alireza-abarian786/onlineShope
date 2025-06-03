@@ -1,8 +1,7 @@
-import { createBlogs } from "./funcs/store/ui.js"
+import { createBlogs } from "./funcs/ui.js"
 
-let cantainerBlogs = document.querySelector('.cantainer-category')
-
+let containerBlogs = document.querySelector('.container-category')
 document.addEventListener('DOMContentLoaded', () => {    
-    createBlogs(cantainerBlogs)
-
+    createBlogs(containerBlogs)
+    console.log('blog');
 })
