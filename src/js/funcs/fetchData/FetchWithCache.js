@@ -1,3 +1,5 @@
+import { hideLoader, showLoader } from "../utils.js";
+
 let cacheMap = new Map()
 const pendingRequests = new Map();
 
@@ -13,7 +15,8 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
         if (pendingRequests.has(url)) {
             return pendingRequests.get(url);
         }
-
+        
+        showLoader()
         const fetchPromise = fetch(url, { credentials: 'include' })
             .then((res) => {
                 if (!res.ok) throw new Error("خطا در fetch");
@@ -28,10 +31,15 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
                 pendingRequests.delete(url);
                 console.error("❌ خطا:", url, err);
                 return null;
-            });
+            })
+            .finally(() => {
+                hideLoader()
+            })
 
         pendingRequests.set(url, fetchPromise);
-        return fetchPromise;
+
+        const data = await fetchPromise;
+        return data;
         
     } catch (error) {
         console.error("❌ خطا در دریافت از:", url, error);

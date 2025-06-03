@@ -31,7 +31,6 @@ const addToFavorites = async (productId) => {
       const favoritesData = await response.json()
       updateCache('https://onlineshope.onrender.com/api/users/favorites' , favoritesData )
       updateFavoritesUI();      
-      hideLoader()
       showModal("✅ محصول به علاقه‌مندی‌ها اضافه شد");
 
     } else {
@@ -39,9 +38,10 @@ const addToFavorites = async (productId) => {
     }
 
   } catch (error) {
-    hideLoader();
     console.error("Error in addToFavorites:", error);
     showModal("❌ خطا در افزودن به علاقه‌مندی‌ها");
+  } finally {
+    hideLoader()
   }
 };
 
@@ -67,13 +67,13 @@ async function removeFromFavorites(productId) {
     const favoritesData = await response.json()
     updateCache('https://onlineshope.onrender.com/api/users/favorites' , favoritesData)
     updateFavoritesUI();    
-    hideLoader();
     showModal("✅ محصول از علاقه‌ مندی‌ ها حذف شد");
 
   } catch (error) {
-    hideLoader();
     console.error("Error in removeFromFavorites:", error);
     showModal("❌ خطا در حذف از علاقه‌مندی‌ها");
+  } finally {
+    hideLoader()
   }
 }
 

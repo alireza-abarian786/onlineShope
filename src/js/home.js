@@ -1,7 +1,6 @@
 //!---------------------------------------------------------------------- import -------------------------------------------------------
 import { runTimer } from "./funcs/timer.js";
 import { createBlogs , createProductsTemplateHtml} from './funcs/ui.js';
-import { hideLoader } from "./funcs/utils.js";
 import { getProducts } from "./funcs/fetchData/fetchProducts.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
@@ -89,5 +88,4 @@ runTimer();
 //todo========================================================== جستجوی سراسری محصولات
 searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
 
-hideLoader()
 console.log('home');

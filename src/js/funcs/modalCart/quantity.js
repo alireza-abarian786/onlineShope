@@ -41,12 +41,12 @@ let updateQuantity = async (operation, id, quantity) => {
     createBoxProductToPageCart(resultRes.cart);
     boxPaymentHtmlTemplate(resultRes.cart);
     positionOpenCart()
-    hideLoader();
 
   } catch (error) {
-    hideLoader();
     console.error("Error in Function updateQuantity =>", error);
     showModal("❌ مشکل در به‌روزرسانی تعداد محصول");
+  } finally {
+    hideLoader()
   }
 };
 

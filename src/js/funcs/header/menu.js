@@ -22,7 +22,7 @@ const fetchCategoriesForShowToMenu = async () => {
   const categoriesData = await getCategories();
   const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
   const categoryWrapperLg = document.querySelector(".category-wrapper-lg");  
-
+  
   if (categoryWrapperXl) {
     categoriesData.forEach((item) => {
       categoryWrapperXl.insertAdjacentHTML(
@@ -48,6 +48,7 @@ const fetchCategoriesForShowToMenu = async () => {
       );
     });
   }
+
 };
 
 export { settingsMenuDropDown , fetchCategoriesForShowToMenu};

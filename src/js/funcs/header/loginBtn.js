@@ -1,5 +1,4 @@
 import { getLocalStorage } from "../storage.js";
-import { showLoader } from "../utils.js";
 
 // todo============================================== وضعیت کاربر و تغییر لینک ها و ظاهر آیکون لاگین
 async function isLogin() {

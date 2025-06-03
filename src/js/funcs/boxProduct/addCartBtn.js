@@ -33,7 +33,6 @@ async function addToCartAndToggleButton(id) {
       );
 
       if (response.ok) {
-        hideLoader();
         showModal(`✅🛒 محصول به سبد خرید شما اضافه شد`);
       } else {
         throw new Error("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
@@ -45,13 +44,13 @@ async function addToCartAndToggleButton(id) {
       updateCartNotification();
 
     } else {
-      hideLoader();
       showModal(`✅🛒 این محصول از قبل در سبد خرید شما موجود است`);
     }
   } catch (error) {
-    hideLoader();
     showModal("❌ مشکلی در افزودن محصول به سبد خرید وجود دارد");
     throw error;
+  } finally {
+    hideLoader()
   }
 }
 

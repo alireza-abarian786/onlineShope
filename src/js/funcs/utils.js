@@ -2,10 +2,12 @@
 import { getCartData } from "./fetchData/fetchCart.js";
 import { updateCartNotification } from "./header/cartBtn.js";
 import { getLocalStorage, getToken, setLocalStorage } from "./storage.js";
+import { showModal } from "./ui.js";
 
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const loaderElem = document.querySelector(".loader-container");
-
+let activeRequests = 0;
+let loaderTimeout = null;
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo===================================== دریافت قسمت سرچ لینک
@@ -74,12 +76,31 @@ const fetchDataFromApi = async (url) => {
 
 //todo============================================ تابع نمایش لودر
 function showLoader() {
-  loaderElem.classList.remove("hidden");
+  if (activeRequests === 0) { 
+    loaderElem.classList.remove("hidden");
+    loaderTimeout = setTimeout(() => {
+      if (activeRequests > 0) { 
+        loaderElem.classList.add("hidden");
+        activeRequests = 0;
+        console.warn("⚠️ لودر به دلیل طولانی شدن درخواست‌ها (بیش از 10 ثانیه) مخفی شد.");
+        showModal("⚠️ درخواست‌ها طولانی شد، لطفاً کمی صبر کنید یا صفحه را رفرش کنید.");
+      }
+    }, 10000);
+  }
+  activeRequests++;
 }
 
 //todo============================================ تابع مخفی کردن لودر
 function hideLoader() {
-  loaderElem.classList.add("hidden");
+  activeRequests--;
+  if (activeRequests <= 0) { 
+    loaderElem.classList.add("hidden");
+    activeRequests = 0;
+    if (loaderTimeout) {
+      clearTimeout(loaderTimeout);
+      loaderTimeout = null;
+    }
+  }
 }
 
 //todo============================================ دریافت اطلاعات و بررسی وضعیت لاگین کاربر
@@ -128,7 +149,6 @@ async function UserInformationGetFunction() {
 
 //todo============================================ بررسی وضعیت توکن کاربر
 const modalAuthorized = () => {
-  // hideLoader();
   Swal.fire({
     title: "نشست شما منقضی شده",
     text: "💫 لطفاً دوباره لاگین کنید",
