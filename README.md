@@ -11,7 +11,7 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 
 ### 🎨 Frontend (HTML/CSS/JavaScript)
 - Clean and modern UI
-- Responsive homepage
+- Responsive
 - Global and category-based product search
 - Discount countdown timer
 - Product categories with filter and grid/list view toggle
@@ -33,9 +33,9 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 | Page | Status | Key Features |
 |------|--------|--------------|
 | **Home Page** | ✅ Done | Responsive, dynamic, includes search, offers, timers |
-| **Category Page** | ⚠️ Semi-Done | Filters, grid/list view toggle, pagination (not yet responsive) |
-| **Cart Page** | ⚠️ Semi-Done | Functional cart, pending payment gateway integration |
-| **Articles Page** | ⚠️ Needs improvement | Basic content available, layout needs work |
+| **Category Page** | ✅ Done | Filters, grid/list view toggle, pagination, responsive) |
+| **Cart Page** | ✅ Done | Functional cart, pending payment gateway integration |
+| **Articles Page** | ⚠️ Semi-Done | Basic content available, layout needs work |
 | **Product Detail Page** | 🚧 Planned | Not implemented yet |
 | **User Panel** | 🚧 Planned | Not implemented yet |
 
@@ -70,41 +70,48 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 
 ### 🔐 Authentication & Token Logic
 
-| Login State | Token Expiration |
-|-------------|------------------|
-| ![Login](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png) | ![Token Expired](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png) |
-
+| <p align='center'>Login State</p> | 
+|-------------|
+| ![Login](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png) |
+| <p align='center'>Token Expiration</p> |
+| ![Token Expired](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png) |
 ---
 
-### 🕹️ Cart & Login Button State
+### 🛒 Cart Button State
 
-| Cart Empty | Cart Full | Before Login | After Login | Token Expiration |
-|------------|-----------|---------------------------|-------|-------|
-| ![Empty Cart](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png) | ![Full Cart](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png) | ![Before Login](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png) | ![After Login](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png) | ![Token Expiration](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png)
+| Cart Empty | Cart Full |
+|------------|-----------|
+| ![Empty Cart](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png) | ![Full Cart](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png) |
+---
 
+### 🕹️ Login Button State
+| Before Login | After Login | Token Expiration |
+|--------------|-------------|------------------|
+| ![Before Login](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png) | ![After Login](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png) | ![Token Expiration](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png) |
 ---
 
 ### 🧭 Category & Search UI
 
-| Category Menu | Global Search |
-|---------------|---------------|
-| ![Categories](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png) | ![Search](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png) |
+| Category Menu |
+|---------------|
+| ![Categories](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png) |
+| <p align='center'>Global Search</p> |
+| ![Search](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png) |
 
 ---
 
 ### 🛒 Cart State
 
-| Cart | Remove Product | Clear Cart |
-|---|---|---|
-| ![Categories](https://i.ibb.co/cKwJmw8x/Screenshot-2025-05-24-135723.png) | ![Categories](https://i.ibb.co/ds6pFjGv/Screenshot-2025-05-24-134324.png) | ![Categories](https://i.ibb.co/CKHxzCGN/Screenshot-2025-05-24-134420.png) |
-
-
+| Cart |
+|---|
+| ![Categories](https://i.ibb.co/Xk5P27JG/Screenshot-2025-06-03-154131jjjjjjjjjjjjjjj.png) | 
+| Remove Product |
+| ![Categories](https://i.ibb.co/kF11wCq/Screenshot-2025-06-03-154248.png) |
 
 ---
 
 ## 🔄 Future Plans
 
-- Full responsive design for all pages  
 - Product detail page (description, images, related items)  
 - User panel (dashboard, saved items, settings)  
 - Admin panel (product & user management)  
