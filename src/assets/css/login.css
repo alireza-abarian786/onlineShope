@@ -243,13 +243,13 @@ form > div > p {
 }
 
 .box-form > p > span > a {
-  color: #1e40af;
   text-decoration: underline;
   transition: color 0.3s ease;
+  color: #ea580c;
 }
 
 .box-form > p > span > a:hover {
-  color: #ea580c;
+  color: #1e40af;
 }
 
 .nav-tabs {

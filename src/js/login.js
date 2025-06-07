@@ -106,7 +106,6 @@ const loginOperationManagementFunction = async () => {
     const resultLoginOperation = await loginOperation.json();  
     console.log(resultLoginOperation);
       
-    // setLocalStorage("token", resultLoginOperation.token);
     setLocalStorage("isAuthorized", true);
     setLocalStorage("login", resultLoginOperation.username);
 
@@ -150,7 +149,6 @@ btnSignUp.addEventListener("click", async (event) => {
       if (!res.ok) { throw new Error(data.message) }
   
       setLocalStorage("login", data.username);
-      // setLocalStorage("token", data.token);
       setLocalStorage("isAuthorized", true);
       clearInputSignUp();
   
