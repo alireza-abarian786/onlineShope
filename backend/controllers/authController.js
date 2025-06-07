@@ -112,8 +112,10 @@ const loginUser = async (req, res) => {
 const logoutUser = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: true,
-    sameSite: "strict",
+    // secure: true,
+    // sameSite: "strict",
+    secure: !isDev, // روی dev = false، روی production = true
+    sameSite: isDev ? "lax" : "none",
   });
 
   res.status(200).json({ message: "خروج با موفقیت انجام شد" });
