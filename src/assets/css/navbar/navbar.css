@@ -87,13 +87,15 @@ header {
   visibility: visible;
 }
 
-.menu li > a {
+.menu li > a,
+.logout-btn {
   color: #333;
 }
 .menu li > span {
   color: #333;
 }
-.menu li:hover > a {
+.menu li:hover > a ,
+.menu li:hover .logout-btn {
   color: var(--primary-color);
 }
 .menu li:hover > span {

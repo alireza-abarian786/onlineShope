@@ -1,9 +1,26 @@
-import { hideLoader, showLoader } from "../funcs/utils.js";
+import { isLogin } from "../funcs/header/loginBtn.js";
+import { hideLoader, pagesInLoginState, showLoader } from "../funcs/utils.js";
 
 const logoutBtn = document.querySelector(".logout-btn");
 
+window.addEventListener("load", async () => {
+  const Response = await fetch("https://onlineshope.onrender.com/api/user/me", {
+    credentials: "include",
+  });
+  const data = await Response.json();
+//   console.log("User data:", data);
+
+  if (Response.ok) {
+    console.error("fetching user data:", data.message);
+  } else {
+    console.error("Error fetching user data:", data.message);
+  }
+  isLogin();
+  pagesInLoginState();
+  hideLoader();
+});
+
 logoutBtn.addEventListener("click", () => {
-  console.log(1111);
   Swal.fire({
     title: "خروج از حساب",
     text: "آیا قصد شما خروج از این حساب میباشد؟",
@@ -21,7 +38,7 @@ logoutBtn.addEventListener("click", () => {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: 'include'
+          credentials: "include",
         }
       );
 
@@ -34,8 +51,8 @@ logoutBtn.addEventListener("click", () => {
           icon: "success",
           button: "ok",
         }).then(() => {
-            localStorage.clear();
-            window.location.href = "./login.html";
+          localStorage.clear();
+          window.location.href = "./login.html";
         });
       } else {
         hideLoader();

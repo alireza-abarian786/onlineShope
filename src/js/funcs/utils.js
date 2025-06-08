@@ -37,8 +37,8 @@ function initTooltips() {
 
 //todo===================================== نمایش الرت وضعیت لاگین کاربر
 let showAlertLogin = async () => {
-  const token = await getLocalStorage("login");
-  if (!token || !token.length) {
+  const login = await getLocalStorage("login");
+  if (!login || !login.length) {
     hideLoader()
     Swal.fire({
       title: "شما در سایت ثبت نام نکرده اید",
@@ -58,24 +58,9 @@ let showAlertLogin = async () => {
   }
 };
 
-//todo======================================== api دریافت اطلاعات از
-const fetchDataFromApi = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch data from ${url}. Status: ${response.status}`
-      );
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-    throw error;
-  }
-};
-
 //todo============================================ تابع نمایش لودر
 function showLoader() {
+  console.log("Show Loader - activeRequests:", activeRequests);
   if (activeRequests === 0) { 
     loaderElem.classList.remove("hidden");
     loaderTimeout = setTimeout(() => {
@@ -92,6 +77,7 @@ function showLoader() {
 
 //todo============================================ تابع مخفی کردن لودر
 function hideLoader() {
+  console.log("Hide Loader - activeRequests:", activeRequests);
   activeRequests--;
   if (activeRequests <= 0) { 
     loaderElem.classList.add("hidden");
@@ -100,50 +86,6 @@ function hideLoader() {
       clearTimeout(loaderTimeout);
       loaderTimeout = null;
     }
-  }
-}
-
-//todo============================================ دریافت اطلاعات و بررسی وضعیت لاگین کاربر
-async function UserInformationGetFunction() {
-  const fetchLoggedInUserInformation = await fetch(
-    "https://onlineshope.onrender.com/api/user/me",
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }
-  );
-  const resultFetchLoggedInUserInformation =
-    await fetchLoggedInUserInformation.json();
-
-  if (fetchLoggedInUserInformation.ok) {
-    setLocalStorage("login", resultFetchLoggedInUserInformation.name);
-  } else if (resultFetchLoggedInUserInformation.message === "Not authorized") {
-    Swal.fire({
-      title: "نشست شما منقضی شده",
-      text: "💫 لطفاً دوباره وارد شوید",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "باشه",
-      cancelButtonText: "لغو",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "./login.html";
-      }
-    });
-  } else {
-    Swal.fire({
-      title: "شما در سایت ثبت نام نکرده اید",
-      text: "⁉️ آیا مایل به ورود در سایت هستید",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "بله، مایلم!",
-      cancelButtonText: "لغو",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "./login.html";
-      }
-    });
   }
 }
 
@@ -173,16 +115,30 @@ const refreshedPage = () => {
   }
 }
 
+//todo============================================ رفرش صفحه بعد از بازگشت با کلید بک مرورگر
+const pagesInLoginState = () => {
+  const url = window.location.pathname  
+  console.log(!getLocalStorage('isAuthorized') || !getLocalStorage('login').length);
+  
+  if (!!getLocalStorage('isAuthorized') && !!getLocalStorage('login').length) return false;
+  
+  if (url === '/cart.html' || '/doshboard.html') {
+    console.log(url);
+    window.location.href = "./login.html";
+    
+  }
+}
+
+
 //!---------------------------------------------------------------------- exports -------------------------------------------------------
 export {
   searchParams,
   getSearchProduct,
   initTooltips,
   showAlertLogin,
-  fetchDataFromApi,
   showLoader,
   hideLoader,
-  UserInformationGetFunction,
   modalAuthorized,
-  refreshedPage
+  refreshedPage,
+  pagesInLoginState,
 };
