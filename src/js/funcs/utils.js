@@ -115,7 +115,7 @@ const refreshedPage = () => {
   }
 }
 
-//todo============================================ رفرش صفحه بعد از بازگشت با کلید بک مرورگر
+//todo============================================ جلوگیری از ورود به بعضی صفحات قبل از لاگین
 const pagesInLoginState = () => {
   const url = window.location.pathname  
   console.log(!getLocalStorage('isAuthorized') || !getLocalStorage('login').length);

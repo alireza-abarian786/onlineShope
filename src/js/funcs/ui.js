@@ -45,7 +45,7 @@ let createBlogs = async (element) => {
       `
         <div class="swiper-slide card-content container-blog">
           <div class="w-100">
-            <img src="${blog.image}" alt="image-blog" />
+            <img src="${blog.image}" alt="image-blog" loading="lazy" />
           </div>
 
           <div>
@@ -93,18 +93,21 @@ if (arrProducts.length) {
                                   <img
                                       src="${box.images[0]}"
                                       alt="Slide 1"
+                                      loading="lazy"
                                   />
                               </li>
                               <li class="glide__slide">
                                   <img
                                       src="${box.images[1]}"
                                       alt="Slide 2"
+                                      loading="lazy"
                                   />
                               </li>
                               <li class="glide__slide">
                                   <img
                                       src="${box.images[2]}"
                                       alt="Slide 3"
+                                      loading="lazy"
                                   />
                               </li>
                           </ul>
@@ -297,7 +300,7 @@ function renderCartItems(cartItems) {
                 </div>
               </div>
               <div class='col-4 p-0'>
-                <img src="${item.product.images[0]}" alt="img" class='rounded w-100 h-100'>
+                <img src="${item.product.images[0]}" alt="img" class='rounded w-100 h-100' loading="lazy">
               </div>
             </div>
           </div>
@@ -368,9 +371,7 @@ let createBoxProductToPageCart = (shoppingCartProduct) => {
                 </button>
                 <div class="product-image">    
                     <div>
-                        <div><img src="${
-                          box.product.images[0]
-                        }" alt="محصول 1"></div>
+                        <div><img src="${box.product.images[0]}" alt="محصول 1" loading="lazy" /></div>
                     </div>
                 </div>
                 <div class="product-description-cart">
@@ -391,7 +392,7 @@ let createBoxProductToPageCart = (shoppingCartProduct) => {
                         <div class="discount discount-cart-page"> ${box.discountPercent}% تخفیف </div>
                     </div>
                     <div class="container-total flex-md-row flex-column gap-2 gap-md-5">
-                      <img src="src/assets/images/logo.webp" alt="لوگوی برند" class="brand-logo">
+                      <img src="src/assets/images/logo.webp" alt="لوگوی برند" class="brand-logo" loading="lazy">
                       <div class="total-price-container">جمع: 
                         <span class="total-price">${box.finalPrice.toLocaleString()}</span>
                         تومان
@@ -432,7 +433,7 @@ const boxPaymentHtmlTemplate = (resultCartFetchOperation) => {
     
                 <aside class="cart-three-sidebar shop_table">
                     <div class="cart-three-sidebar-content bg-white position-relative h-100 rounded-5 d-flex align-items-center justify-content-around flex-column">
-                      <img src="./src/assets/images/total-price.webp" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;"/>
+                      <img src="./src/assets/images/total-price.webp" alt="image" width="73" height="63" class="position-absolute" style="top: -5%;" loading="lazy"/>
       
                       <div class="d-flex flex-row-reverse flex-lg-column flex-xxl-row-reverse align-items-center justify-content-between w-100">: قیمت کل
                           <div class="d-flex align-items-center">
@@ -519,13 +520,13 @@ let createProductsRowTemplateHtml = (arrCategory) => {
                   <ul class="glide__slides h-100">
                     <li class="glide__slide"><img src="${
                       product.images[0]
-                    }" alt="Slide 1" /></li>
+                    }" alt="Slide 1" loading="lazy" /></li>
                     <li class="glide__slide"><img src="${
                       product.images[1]
-                    }" alt="Slide 2" /></li>
+                    }" alt="Slide 2" loading="lazy" /></li>
                     <li class="glide__slide"><img src="${
                       product.images[2]
-                    }" alt="Slide 3" /></li>
+                    }" alt="Slide 3" loading="lazy" /></li>
                   </ul>
                 </div>
                 <div class="next-img-box glide__arrows box-row-arrow" data-glide-el="controls">

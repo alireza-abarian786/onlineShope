@@ -1,4 +1,3 @@
-import { updateCartNotification } from "./cartBtn.js";
 
 //todo=================================================================== تابع بستن سبد خرید
 function closeCart() {
@@ -9,7 +8,6 @@ function closeCart() {
       try {
         if (e.target.classList.contains("container-shopping-cart")) {
           containerOpenCart.style.display = "none";
-          updateCartNotification();
         }
       } catch (error) {
         console.error("Error in Function closeCart =>", error);

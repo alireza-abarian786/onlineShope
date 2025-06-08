@@ -323,7 +323,7 @@ form > div > p {
   outline: 0;
 }
 
-i {
+.input-box > i {
   font-size: 15px;
   line-height: 0.8;
 }
