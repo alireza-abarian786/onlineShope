@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,192 +10,179 @@
     <title>دیجی استور | فروشگاه اینترنتی</title>
     <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
 
-
-    <!--?----------------------------------------------------------------------------------- CSS font-vazirmatn-->
-    <!-- <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" /> -->
-    <!--?-------------------------------------------------------------------------------------- CSS font-icon-->
-    <link rel="stylesheet" href="./public/vendor/font-icon/bootstrap-icons.min.css">
-    <!--?-------------------------------------------------------------------------------------- CSS bootstrap-->
-    <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css">
-    <!--?-------------------------------------------------------------------------------------- CSS swiper-->
-    <link rel="stylesheet" href="./public/vendor/swiper/swiper-bundle.min.css">
-    <!--?-------------------------------------------------------------------------------------- CSS Glide-->
-    <link rel="stylesheet" href="./public/vendor/glide/glide.core.min.css">
-    <!--?-------------------------------------------------------------------------------------- CSS aos-->
-    <link rel="stylesheet" href="./public/vendor/aos/aos.css">
-    <!--?-------------------------------------------------------------------------------------- custom css file link -->
-    <link rel="stylesheet" href="src/assets/css/app.css" />
-    <link rel="stylesheet" href="src/assets/css/mediaQuery.css" />
+    <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css" />
+    <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
+    <link rel="stylesheet" href="./src/assets/css/panel.css">
 </head>
-<body>
 
-    <!--!----------------------------------------------------------------------- start loader ---------------------------------------------------------->
-    <div class="loader-container">
-      <div class="loader">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+<body class="bg-gray-100">
+
+  <!--!----------------------------------------------------------------------- start loader  ---------------------------------------------------------->
+  <div class="loader-container" role="status" aria-label="در حال بارگذاری">
+    <div class="loader-global ">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!--!--------------------------------------------------------------- اعلان ----------------------------------------------------->
+  <div id="notification" class="notification"></div>
+
+  <!--!--------------------------------------------------------------- هدر ----------------------------------------------------->
+  <header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="./src/assets/images/logo.webp" alt="logo" height="30" width="30">
+        <h1 class="text-2xl font-bold text-gray-800">دیجی استور</h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <button id="themeToggle" class="text-gray-700 hover:text-blue-800">تغییر تم</button>
+        <!-- <a href="#" class="text-gray-700 hover:text-blue-800">ورود / عضویت</a> -->
       </div>
     </div>
-    <!--?----------------------------------------------------------------------- finish loader ---------------------------------------------------------->
+  </header>
 
-    <!--!----------------------------------------------------------------------- start header  ---------------------------------------------------------->
-    <header class="mx-auto" role="banner">
-      <!--? start menu -->
-      <div class="menu-box position-relative d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
+  <!--!--------------------------------------------------------------- محتوای اصلی ----------------------------------------------------->
+  <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+    <!--!--------------------------------------------------------------- منوی کناری ----------------------------------------------------->
+    <aside class="w-full md:w-1/4 bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">منوی کاربری</h2>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 1</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 2</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 3</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 4</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 5</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 6</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 7</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 8</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 9</a></li>
+        <li><a href="#" class="logout-btn text-gray-700 hover:text-blue-800">خروج از حساب کاربری</a></li>
+      </ul>
+    </aside>
 
-        <!--? icon bar -->
-        <button class="icon-bar d-lg-none d-block mb-1 border-0 bg-transparent" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" data-bs-toggle="offcanvas" aria-label="باز کردن منو">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 32 32"
-            fill="none"
-            stroke="currentcolor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
-          </svg>
-        </button>
-
-        <!--? start logo and menu -->
-        <div class="container-box-brand d-flex align-items-center justify-content-center flex-row-reverse gap-1 gap-lg-4 align-lg-self-baseline align-self-auto">
-          <!--? start container logo -->
-          <div class="box-brand gap-2 d-flex align-items-center justify-content-center">
-            <!--? logo type -->
-            <h1 class="fw-bold m-0">
-              دیجی <span class="text-primary">استور</span>
-            </h1>
-
-            <!--? logo image -->
-            <img
-              src="./src/assets/images/logo.webp"
-              alt="لوگوی دیجی استور"
-              height="32"
-              class="d-lg-block d-none"
-              loading="lazy"
-            />
-          </div>
-
-          <!--? end container logo -->
-
-          <!--? start menu -->
-          <ul
-            class="menu p-0 d-flex flex-lg-row-reverse gap-lg-5 offcanvas-lg offcanvas-start overflow-auto m-0"
-            tabindex="-1"
-            id="offcanvasResponsive"
-            aria-labelledby="offcanvasExampleLabel"
-            role="navigation"
-          >
-            <!--? start container header sidebar -->
-            <div class="position-fixed bg-white d-lg-none d-flex flex-column align-items-center justify-content-center p-3 gap-3 shadow-lg" style="width: inherit;">
-              <!--? image header sidebar -->
-              <img
-                src="./src/assets/images/logo.webp"
-                alt="لوگوی دیجی استور"
-                height="32"
-                loading="lazy"
-              />
-
-              <h4 class="fw-bold m-0">
-                دیجی <span class="text-primary">استور</span>
-              </h4>
-
-              <!--? icon-close header sidebar -->
-              <button
-                type="button"
-                class="btn-close icon-close"
-                data-bs-dismiss="offcanvas"
-                data-bs-target="#offcanvasResponsive"
-                aria-label="بستن منو"
-              ></button>
-            </div>
-            <!--? end container header sidebar -->
-
-            <div class="d-lg-none collapse category-wrapper-lg" id="collapseExample">
-                <!--? data menu category loaded from js -->
-            </div>
-
-            <!--? text menu contact -->
-            <li class="category-menu offcanvas-body flex-grow-0 text-start overflow-visible">
-              <a
-                class="text-decoration-none"
-                href="./contact.html"
-                role="menuitem"
-                >تماس با ما</a
-              >
-            </li>
-
-            <!--? text menu about -->
-            <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
-              <a
-                class="text-decoration-none"
-                href="./about.html"
-                role="menuitem"
-                >درباره ما</a
-              >
-            </li>
-
-            <!--? text menu guide -->
-            <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
-              <a
-                class="text-decoration-none"
-                href="./guide.html"
-                role="menuitem"
-                >راهنما</a
-              >
-            </li>
-
-            <!--? text menu guide -->
-            <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
-              <button class="logout-btn bg-transparent border-0">خروج از حساب</button>
-            </li>
-          </ul>
-          <!--? end menu -->
-        </div>
-        <!--? end logo and menu -->
-
-        <!--? box apps -->
-        <div class="box-apps d-flex align-items-center justify-content-center gap-0 gap-sm-3 flex-sm-row-reverse border-0" role="menu">
-
-          <!--? btn login -->
-          <a href="" id="login" class="page py-2 ps-2 pe-2 text-decoration-none rounded-5 d-flex align-items-center justify-content-between gap-2" style="background-color: #0f172a">
-            <svg class="p-1 rounded-circle" style="width: 35px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8m-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4z" clip-rule="evenodd" /></svg>
-            <span class="text-white d-xl-block d-none w-100 text-center">ورود / عضویت</span>
-          </a>
-          <!--? end btn login -->
-
-        </div>
-        <!--? end box apps -->
-
+    <!--!--------------------------------------------------------------- داشبورد اصلی ----------------------------------------------------->
+    <main class="w-full md:w-3/4">
+      <!--!--------------------------------------------------------------- پیام خوشامد ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold text-gray-800" id="welcomeMessage"></h2>
       </div>
-    </header>
-    <!--?----------------------------------------------------------------------- finish header  ---------------------------------------------------------->
 
-    <!--!------------------------------------------------------------------------ start main ------------------------------------------------------------->
-    <main>
+      <!--!--------------------------------------------------------------- پروفایل کاربر ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">پروفایل شما</h3>
+        <form id="profileForm" class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">نام</label>
+            <input type="text" id="name" class="mt-1 p-2 w-full border rounded-md" disabled>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">ایمیل</label>
+            <input type="email" id="email" class="mt-1 p-2 w-full border rounded-md" disabled>
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700">شماره تلفن</label>
+            <input type="text" id="phone" class="mt-1 p-2 w-full border rounded-md" disabled>
+          </div>
+          <button type="button" id="editProfile" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">ویرایش</button>
+          <button type="submit" id="saveProfile" class="hidden bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">ذخیره</button>
+        </form>
+      </div>
 
+      <!--!--------------------------------------------------------------- آمار حساب ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">آمار حساب شما</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-blue-100 p-4 rounded-lg text-center">
+            <p class="text-sm text-gray-600">تعداد کل سفارشات</p>
+            <p class="text-2xl font-bold text-blue-600" id="totalOrders">0</p>
+          </div>
+          <div class="bg-green-100 p-4 rounded-lg text-center">
+            <p class="text-sm text-gray-600">مجموع خریدها</p>
+            <p class="text-2xl font-bold text-green-600" id="totalSpent">0 تومان</p>
+          </div>
+          <div class="bg-purple-100 p-4 rounded-lg text-center">
+            <p class="text-sm text-gray-600">تعداد علاقه‌مندی‌ها</p>
+            <p class="text-2xl font-bold text-purple-600" id="totalFavorites">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!--!--------------------------------------------------------------- وظایف در انتظار ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">وظایف در انتظار</h3>
+        <ul id="pendingTasks" class="space-y-2"></ul>
+      </div>
+
+      <!--!--------------------------------------------------------------- محصولات پیشنهادی ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">محصولات پیشنهادی</h3>
+        <div id="recommendedProducts" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!--!--------------------------------------------------------------- موجودی حساب ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">موجودی حساب</h3>
+        <p class="text-2xl font-bold text-gray-800" id="accountBalance">0 تومان</p>
+        <button id="addBalance" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">افزایش موجودی</button>
+      </div>
+
+      <!--!--------------------------------------------------------------- آخرین خریدها ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">آخرین خریدهای من</h3>
+        <div class="flex justify-between items-center mb-4">
+          <input type="text" id="purchaseSearch" class="p-2 border rounded-md" placeholder="جستجوی خریدها...">
+          <div id="purchaseLoader" class="loader"></div>
+        </div>
+        <table class="w-full text-right" id="purchaseTable">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-2">عنوان</th>
+              <th class="p-2">مبلغ</th>
+              <th class="p-2">وضعیت</th>
+            </tr>
+          </thead>
+          <tbody id="purchaseBody"></tbody>
+        </table>
+      </div>
+
+      <!--!--------------------------------------------------------------- آخرین علاقه‌مندی‌ها ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">آخرین علاقه‌مندی‌های من</h3>
+        <div class="flex justify-between items-center mb-4">
+          <input type="text" id="favoriteSearch" class="p-2 border rounded-md" placeholder="جستجوی علاقه‌مندی‌ها...">
+          <div id="favoriteLoader" class="loader"></div>
+        </div>
+        <table class="w-full text-right" id="favoriteTable">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-2">عنوان</th>
+              <th class="p-2">قیمت</th>
+              <th class="p-2">توضیحات</th>
+            </tr>
+          </thead>
+          <tbody id="favoriteBody"></tbody>
+        </table>
+      </div>
+
+      <!--!--------------------------------------------------------------- فعالیت‌های اخیر ----------------------------------------------------->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">فعالیت‌های اخیر</h3>
+        <ul id="recentActivities" class="space-y-2"></ul>
+      </div>
     </main>
-    <!--?------------------------------------------------------------------------ finish main ------------------------------------------------------------->
+  </div>
 
 
-    
-    <!--?----------------------------------------------------------------- JavaScript bootstrap ----------------------------------------------------------->
-    <script defer src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
-    <!--?----------------------------------------------------------------- JavaScript swiper ----------------------------------------------------------->
-    <script defer src="./public/vendor/swiper/swiper-bundle.min.js"></script>
-    <!--?----------------------------------------------------------------- JavaScript Glide ----------------------------------------------------------->
-    <script defer src="./public/vendor/glide/glide.min.js"></script>
-    <!--?----------------------------------------------------------------- JavaScript sweetalert2 ----------------------------------------------------------->
-    <script defer src="./public/vendor/alert/sweetalert2.all.min.js"></script>
-    <!--?----------------------------------------------------------------- JavaScript aos ----------------------------------------------------------->
-    <script src="./public/vendor/aos/aos.js"></script>
-    <script>AOS.init();</script>
-    <!--?----------------------------------------------------------------- custom files  ----------------------------------------------------------->
-    <!-- <script defer type="module" src="./src/js/components/header.js"></script> -->
-    <script defer type="module" src="./src/js/panel/panel.js"></script>
+
+  <script defer  src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!--?----------------------------------------------------------------------- JavaScript bootstrap ---------------------------------------------------------->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--?----------------------------------------------------------------------- JavaScript sweetalert2 ---------------------------------------------------------->
+  <script defer  src="./public/vendor/alert/sweetalert2.all.min.js"></script>
+  <!--?----------------------------------------------------------------------- custom files  ---------------------------------------------------------->
+  <script type="module" src="./src/js/panel/panel.js"></script>
 </body>
 </html>

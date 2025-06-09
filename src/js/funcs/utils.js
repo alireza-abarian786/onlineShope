@@ -60,7 +60,6 @@ let showAlertLogin = async () => {
 
 //todo============================================ تابع نمایش لودر
 function showLoader() {
-  console.log("Show Loader - activeRequests:", activeRequests);
   if (activeRequests === 0) { 
     loaderElem.classList.remove("hidden");
     loaderTimeout = setTimeout(() => {
@@ -77,7 +76,6 @@ function showLoader() {
 
 //todo============================================ تابع مخفی کردن لودر
 function hideLoader() {
-  console.log("Hide Loader - activeRequests:", activeRequests);
   activeRequests--;
   if (activeRequests <= 0) { 
     loaderElem.classList.add("hidden");
