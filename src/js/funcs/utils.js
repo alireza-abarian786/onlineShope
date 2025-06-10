@@ -88,19 +88,24 @@ function hideLoader() {
 }
 
 //todo============================================ بررسی وضعیت توکن کاربر
+let isFlag = null
 const modalAuthorized = () => {
-  Swal.fire({
-    title: "نشست شما منقضی شده",
-    text: "💫 لطفاً دوباره لاگین کنید",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "باشه",
-    cancelButtonText: "لغو",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = "./login.html";
-    }
-  });
+  if (!isFlag) {    
+    Swal.fire({
+      title: "نشست شما منقضی شده",
+      text: "💫 لطفاً دوباره لاگین کنید",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "باشه",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "./login.html";
+      }
+    });
+
+    isFlag = true
+  }
 };
 
 //todo============================================ رفرش صفحه بعد از بازگشت با کلید بک مرورگر
@@ -115,15 +120,12 @@ const refreshedPage = () => {
 
 //todo============================================ جلوگیری از ورود به بعضی صفحات قبل از لاگین
 const pagesInLoginState = () => {
-  const url = window.location.pathname  
-  console.log(!getLocalStorage('isAuthorized') || !getLocalStorage('login').length);
-  
-  if (!!getLocalStorage('isAuthorized') && !!getLocalStorage('login').length) return false;
+  const url = window.location.pathname    
+  if (document.cookie) return false;
   
   if (url === '/cart.html' || '/doshboard.html') {
-    console.log(url);
     window.location.href = "./login.html";
-    
+    localStorage.clear()   
   }
 }
 

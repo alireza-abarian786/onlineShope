@@ -10,6 +10,8 @@
     <title>دیجی استور | فروشگاه اینترنتی</title>
     <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
 
+    <link rel="stylesheet" href="./public/vendor/font-icon/bootstrap-icons.min.css"/>
+    <!--?----------------------------------------------------------------------------------- CSS font icon bootstrap-->
     <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css" />
     <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
     <link rel="stylesheet" href="./src/assets/css/panel.css">
@@ -37,9 +39,8 @@
         <img src="./src/assets/images/logo.webp" alt="logo" height="30" width="30">
         <h1 class="text-2xl font-bold text-gray-800">دیجی استور</h1>
       </div>
-      <div class="flex items-center gap-4">
-        <button id="themeToggle" class="text-gray-700 hover:text-blue-800">تغییر تم</button>
-        <!-- <a href="#" class="text-gray-700 hover:text-blue-800">ورود / عضویت</a> -->
+      <div class="flex items-center border rounded hover:bg-gray-100">
+        <button id="themeToggle" class="text-gray-700"><i class="bi bi-moon-stars theme-icon hover:text-blue-400"></i></button>
       </div>
     </div>
   </header>
@@ -50,16 +51,16 @@
     <aside class="w-full md:w-1/4 bg-white rounded-lg shadow-md p-6">
       <h2 class="text-lg font-semibold text-gray-800 mb-4">منوی کاربری</h2>
       <ul class="space-y-2">
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 1</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 2</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 3</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 4</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 5</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 6</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 7</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 8</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-blue-800">منو آیتم شماره 9</a></li>
-        <li><a href="#" class="logout-btn text-gray-700 hover:text-blue-800">خروج از حساب کاربری</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 1</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 2</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 3</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 4</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 5</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 6</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 7</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 8</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-blue-400">منو آیتم شماره 9</a></li>
+        <li><a href="#" class="logout-btn text-gray-700 hover:text-blue-400">خروج از حساب کاربری</a></li>
       </ul>
     </aside>
 
@@ -76,15 +77,15 @@
         <form id="profileForm" class="space-y-4">
           <div>
             <label for="name" class="block text-sm font-medium text-gray-700">نام</label>
-            <input type="text" id="name" class="mt-1 p-2 w-full border rounded-md" disabled>
+            <input type="text" id="name" class="mt-1 p-2 w-full border rounded-md bg-gray-200" disabled>
           </div>
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700">ایمیل</label>
-            <input type="email" id="email" class="mt-1 p-2 w-full border rounded-md" disabled>
+            <input type="email" id="email" class="mt-1 p-2 w-full border rounded-md bg-gray-200" disabled>
           </div>
           <div>
             <label for="phone" class="block text-sm font-medium text-gray-700">شماره تلفن</label>
-            <input type="text" id="phone" class="mt-1 p-2 w-full border rounded-md" disabled>
+            <input type="text" id="phone" class="mt-1 p-2 w-full border rounded-md bg-gray-200" disabled>
           </div>
           <button type="button" id="editProfile" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">ویرایش</button>
           <button type="submit" id="saveProfile" class="hidden bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">ذخیره</button>
@@ -133,7 +134,7 @@
       <div class="bg-white rounded-lg shadow-md p-6 mb-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">آخرین خریدهای من</h3>
         <div class="flex justify-between items-center mb-4">
-          <input type="text" id="purchaseSearch" class="p-2 border rounded-md" placeholder="جستجوی خریدها...">
+          <input type="text" id="purchaseSearch" class="p-2 border rounded-md bg-gray-200" placeholder="جستجوی خریدها...">
           <div id="purchaseLoader" class="loader"></div>
         </div>
         <table class="w-full text-right" id="purchaseTable">
@@ -152,7 +153,7 @@
       <div class="bg-white rounded-lg shadow-md p-6 mb-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">آخرین علاقه‌مندی‌های من</h3>
         <div class="flex justify-between items-center mb-4">
-          <input type="text" id="favoriteSearch" class="p-2 border rounded-md" placeholder="جستجوی علاقه‌مندی‌ها...">
+          <input type="text" id="favoriteSearch" class="p-2 border rounded-md bg-gray-200" placeholder="جستجوی علاقه‌مندی‌ها...">
           <div id="favoriteLoader" class="loader"></div>
         </div>
         <table class="w-full text-right" id="favoriteTable">

@@ -1,11 +1,14 @@
 import { getCartData } from "../funcs/fetchData/fetchCart.js";
 import { getProducts } from "../funcs/fetchData/fetchProducts.js";
+import { getLocalStorage, setLocalStorage } from "../funcs/storage.js";
 import { showModal } from "../funcs/ui.js";
 import { hideLoader, showLoader } from "../funcs/utils.js";
 
+// !--------------------------------------------------------------- variables----------------------------------------------------->
 const logoutBtn = document.querySelector(".logout-btn");
 
-window.addEventListener("load", async () => {
+// !--------------------------------------------------------------- functions ----------------------------------------------------->
+window.addEventListener("load", async () => {  
   showLoader()
   const response = await fetch("https://onlineshope.onrender.com/api/user/me", {
     credentials: "include",
@@ -103,22 +106,25 @@ window.addEventListener("load", async () => {
       phone: document.getElementById('phone').value,
     };
     try {
-      // const response = await fetch(`me`, {
-      //   method: 'PUT',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(updates),
-      //   credentials: 'include',
-      // });
-      // const updatedUser = await response.json();
-      // showModal('پروفایل با موفقیت به‌روزرسانی شد!');
-      // isEditing = false;
-      // document.getElementById('name').disabled = true;
-      // document.getElementById('email').disabled = true;
-      // document.getElementById('phone').disabled = true;
-      // document.getElementById('editProfile').classList.remove('hidden');
-      // document.getElementById('saveProfile').classList.add('hidden');
-      // document.getElementById('welcomeMessage').textContent = `${updatedUser.name} عزیز، به پنل کاربری‌تان خوش آمدید 🎉`;
+      showLoader()
+      const response = await fetch(`https://onlineshope.onrender.com/api/user/me`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+        credentials: 'include',
+      });
+      const updatedUser = await response.json();
+      hideLoader()
+      showModal('پروفایل با موفقیت به‌روزرسانی شد!');
+      isEditing = false;
+      document.getElementById('name').disabled = true;
+      document.getElementById('email').disabled = true;
+      document.getElementById('phone').disabled = true;
+      document.getElementById('editProfile').classList.remove('hidden');
+      document.getElementById('saveProfile').classList.add('hidden');
+      document.getElementById('welcomeMessage').textContent = `${updatedUser.name} عزیز، به پنل کاربری‌تان خوش آمدید 🎉`;
     } catch (error) {
+      hideLoader()
       showModal('خطا در به‌روزرسانی پروفایل!');
     }
   });
@@ -169,23 +175,21 @@ window.addEventListener("load", async () => {
     });
   }
   
-  //todo================================================================= شبیه‌سازی لود داده‌ها
+  //todo================================================================= لود داده‌ها
   function loadData() {
     const purchaseLoader = document.getElementById("purchaseLoader");
     const favoriteLoader = document.getElementById("favoriteLoader");
     purchaseLoader.style.display = "block";
     favoriteLoader.style.display = "block";
   
-    setTimeout(() => {
-      renderProfile()
-      renderUserStats();
-      renderPendingTasks(pendingTasks);
-      renderRecommendedProducts(recommendedProducts);
-      renderRecentActivities(recentActivities);
-      renderFavorites(productsFavorites);
-      purchaseLoader.style.display = "none";
-      favoriteLoader.style.display = "none";
-    }, 1000);
+    renderProfile()
+    renderUserStats();
+    renderPendingTasks(pendingTasks);
+    renderRecommendedProducts(recommendedProducts);
+    renderRecentActivities(recentActivities);
+    renderFavorites(productsFavorites);
+    purchaseLoader.style.display = "none";
+    favoriteLoader.style.display = "none";
   }
   
   //todo================================================================= جستجوی خریدها
@@ -202,12 +206,15 @@ window.addEventListener("load", async () => {
   
   //todo================================================================= تغییر تم
   document.getElementById("themeToggle").addEventListener("click", () => {
+    const iconTheme = document.querySelector(".theme-icon")
     document.body.classList.toggle("dark-mode");
-    localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    setLocalStorage("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    getLocalStorage('theme') === 'dark' ? iconTheme.classList.replace('bi-moon-stars' ,'bi-sun-fill') : iconTheme.classList.replace('bi-sun-fill' , 'bi-moon-stars')
+    
   });
   
   //todo================================================================= لود تم ذخیره‌شده
-  if (localStorage.getItem("theme") === "dark") {
+  if (getLocalStorage("theme") === "dark") {
     document.body.classList.add("dark-mode");
   }
   

@@ -1,3 +1,9 @@
+@import './font.css';
+@import './loader/loader.css';
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+}
 .bacground {
   z-index: -1;
   height: 100vh;

@@ -46,13 +46,10 @@ window.addEventListener("DOMContentLoaded", () => {
 //! ------------------------------------------------------------------------------------------- login
 //todo================================================================ اطمینان از وارد خالی نبودن
 btnLogin.addEventListener("click", async (e) => {
-  e.preventDefault();
-  showLoader();
-  
+  e.preventDefault();  
   if (!!emailLogin.value && !!passwordLogin.value) {
     await loginOperationManagementFunction();
     clearInput();
-    hideLoader();
   } else {
     hideLoader();
     Swal.fire({
@@ -77,6 +74,7 @@ const loginOperationManagementFunction = async () => {
     password: passwordLogin.value.trim(),
   };
 
+  showLoader()
   const loginOperation = await fetch("https://onlineshope.onrender.com/api/auth/login",
     {
       method: "POST",
@@ -133,6 +131,7 @@ btnSignUp.addEventListener("click", async (event) => {
     };
   
     try {
+      showLoader()
       const res = await fetch(
         "https://onlineshope.onrender.com/api/auth/register",
         {

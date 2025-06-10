@@ -1,4 +1,5 @@
-import { hideLoader, showLoader } from "../utils.js";
+import { setLocalStorage } from "../storage.js";
+import { hideLoader, modalAuthorized, showLoader } from "../utils.js";
 
 let cacheMap = new Map()
 const pendingRequests = new Map();
@@ -18,7 +19,14 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
         
         showLoader()
         const fetchPromise = fetch(url, { credentials: 'include' })
-            .then((res) => {
+            .then(async (res) => {
+
+                if (res.status === 401) {
+                    modalAuthorized()    
+                    setLocalStorage('isAuthorized' , false)               
+                    throw new Error('دسترسی غیر مجاز - توکن معتر نمیباشد')   
+                }
+                
                 if (!res.ok) throw new Error("خطا در fetch");
                 return res.json();
             })
