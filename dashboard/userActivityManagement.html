@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="دیجی استور - فروشگاه اینترنتی محصولات با کیفیت و قیمت مناسب"/>
+  <meta name="keywords" content="دیجی استور, فروشگاه اینترنتی, خرید آنلاین, محصولات با کیفیت"/>
+  <meta name="author" content="Digi Store" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>دیجی استور | فروشگاه اینترنتی</title>
+  <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/css/panel.css">
+</head>
+
+<body class="bg-gray-100">
+  
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">پنل کاربری</h1>
+    <div class="notification" id="notification"></div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">اضافه کردن وظیفه جدید</h2>
+      <input type="text" id="taskInput" class="border p-2 w-full mb-2" placeholder="وظیفه جدید (مثلاً: پرداخت سفارش)">
+      <button id="addTask" class="bg-blue-500 text-white p-2 rounded">اضافه کردن</button>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">اضافه کردن فعالیت جدید</h2>
+      <input type="text" id="activityInput" class="border p-2 w-full mb-2" placeholder="فعالیت جدید (مثلاً: خرید محصول)">
+      <button id="addActivity" class="bg-blue-500 text-white p-2 rounded">اضافه کردن</button>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">افزایش موجودی</h2>
+      <input type="number" id="balanceInput" class="border p-2 w-full mb-2" placeholder="مبلغ (تومان)">
+      <button id="addBalance" class="bg-blue-500 text-white p-2 rounded">افزایش موجودی</button>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">خریدها</h2>
+      <ul id="purchases" class="list-disc pl-5"></ul>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">وظایف در انتظار</h2>
+      <ul id="pendingTasks" class="list-disc pl-5"></ul>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">محصولات پیشنهادی</h2>
+      <ul id="recommendedProducts" class="list-disc pl-5"></ul>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">فعالیت‌های اخیر</h2>
+      <ul id="recentActivities" class="list-disc pl-5"></ul>
+    </div>
+
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-xl font-semibold mb-2">موجودی حساب</h2>
+      <p id="accountBalance">0 تومان</p>
+    </div>
+  </div>
+
+</body>
+</html>

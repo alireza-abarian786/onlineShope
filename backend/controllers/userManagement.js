@@ -2,25 +2,6 @@ const asyncHandler = require('express-async-handler');
 const PendingTask = require('../models/PendingTask');
 const RecentActivity = require('../models/RecentActivity');
 const User = require('../models/User');
-// مدل‌های دیگه (مثل Order یا Product) که برای purchases یا recommended-products نیازه
-const Order = require('../models/Order'); // فرضی
-const Product = require('../models/Product'); // فرضی
-
-// @desc    دریافت خریدها
-// @route   GET /api/dashboard/purchases
-// @access  Private
-const getPurchases = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id });
-  res.json(orders);
-});
-
-// @desc    دریافت وظایف در انتظار
-// @route   GET /api/dashboard/pending-tasks
-// @access  Private
-const getPendingTasks = asyncHandler(async (req, res) => {
-  const tasks = await PendingTask.find({ user: req.user._id });
-  res.json(tasks);
-});
 
 // @desc    اضافه کردن وظیفه جدید
 // @route   POST /api/dashboard/pending-tasks
@@ -58,20 +39,12 @@ const deletePendingTask = asyncHandler(async (req, res) => {
   res.json({ message: 'وظیفه حذف شد' });
 });
 
-// @desc    دریافت محصولات پیشنهادی
-// @route   GET /api/dashboard/recommended-products
+// @desc    دریافت وظایف
+// @route   GET /api/dashboard/pending-tasks
 // @access  Private
-const getRecommendedProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find().limit(5); // مثال ساده
-  res.json(products);
-});
-
-// @desc    دریافت فعالیت‌های اخیر
-// @route   GET /api/dashboard/recent-activities
-// @access  Private
-const getRecentActivities = asyncHandler(async (req, res) => {
-  const activities = await RecentActivity.find({ user: req.user._id });
-  res.json(activities);
+const getPendingTasks = asyncHandler(async (req, res) => {
+  const tasks = await PendingTask.find({ user: req.user._id });
+  res.json(tasks);
 });
 
 // @desc    اضافه کردن فعالیت جدید
@@ -110,6 +83,14 @@ const deleteRecentActivity = asyncHandler(async (req, res) => {
   res.json({ message: 'فعالیت حذف شد' });
 });
 
+// @desc    دریافت فعالیت‌ها
+// @route   GET /api/dashboard/recent-activities
+// @access  Private
+const getRecentActivities = asyncHandler(async (req, res) => {
+  const activities = await RecentActivity.find({ user: req.user._id });
+  res.json(activities);
+});
+
 // @desc    دریافت موجودی
 // @route   GET /api/dashboard/balance
 // @access  Private
@@ -136,14 +117,12 @@ const addBalance = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getPurchases,
-  getPendingTasks,
   addPendingTask,
   deletePendingTask,
-  getRecommendedProducts,
-  getRecentActivities,
+  getPendingTasks,
   addRecentActivity,
   deleteRecentActivity,
+  getRecentActivities,
   getBalance,
   addBalance,
 };

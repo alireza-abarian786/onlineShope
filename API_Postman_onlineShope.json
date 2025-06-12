@@ -12,13 +12,7 @@
           "name": "Get User Profile",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/user/profile",
               "protocol": "https",
@@ -32,11 +26,6 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -64,13 +53,7 @@
           "name": "Get Cart",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/cart",
               "protocol": "https",
@@ -87,11 +70,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
@@ -116,11 +94,6 @@
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
               }
             ],
             "body": {
@@ -143,11 +116,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
@@ -172,13 +140,7 @@
           "name": "Get All Users",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/admin/users",
               "protocol": "https",
@@ -197,13 +159,7 @@
           "name": "Get User Profile",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/user/me",
               "protocol": "https",
@@ -218,11 +174,6 @@
           "request": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -300,6 +251,7 @@
           "name": "Get All Products",
           "request": {
             "method": "GET",
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/products",
               "protocol": "https",
@@ -316,10 +268,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
               }
             ],
             "body": {
@@ -342,10 +290,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
               }
             ],
             "body": {
@@ -364,12 +308,7 @@
           "name": "Delete Product",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/products/PRODUCT_ID_HERE",
               "protocol": "https",
@@ -387,6 +326,7 @@
           "name": "Get All Categories",
           "request": {
             "method": "GET",
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/categories",
               "protocol": "https",
@@ -404,6 +344,7 @@
           "name": "Get All Blogs",
           "request": {
             "method": "GET",
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/blogs",
               "protocol": "https",
@@ -425,10 +366,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
               }
             ],
             "body": {
@@ -447,12 +384,7 @@
           "name": "Get Wishlist",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/users/wishlist",
               "protocol": "https",
@@ -474,10 +406,6 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
               }
             ],
             "body": {
@@ -496,12 +424,7 @@
           "name": "Get My Orders",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/orders/my",
               "protocol": "https",
@@ -520,11 +443,6 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -549,11 +467,6 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -575,13 +488,7 @@
           "name": "Get Favorites",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/users/favorites",
               "protocol": "https",
@@ -596,16 +503,23 @@
       "name": "Dashboard",
       "item": [
         {
+          "name": "Get Purchases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/purchases",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "purchases"]
+            }
+          }
+        },
+        {
           "name": "Get Pending Tasks",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/dashboard/pending-tasks",
               "protocol": "https",
@@ -615,16 +529,59 @@
           }
         },
         {
-          "name": "Get Recent Activities",
+          "name": "Add Pending Task",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
+                "key": "Content-Type",
+                "value": "application/json",
                 "type": "text"
               }
             ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"پرداخت سفارش جدید\"\n}"
+            },
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/pending-tasks",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "pending-tasks"]
+            }
+          }
+        },
+        {
+          "name": "Delete Pending Task",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/pending-tasks/TASK_ID",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "pending-tasks", "TASK_ID"]
+            }
+          }
+        },
+        {
+          "name": "Get Recommended Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/recommended-products",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "recommended-products"]
+            }
+          }
+        },
+        {
+          "name": "Get Recent Activities",
+          "request": {
+            "method": "GET",
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/dashboard/recent-activities",
               "protocol": "https",
@@ -634,16 +591,46 @@
           }
         },
         {
-          "name": "Get Account Balance",
+          "name": "Add Recent Activity",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
+                "key": "Content-Type",
+                "value": "application/json",
                 "type": "text"
               }
             ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activity\": \"اضافه کردن محصول به سبد خرید\"\n}"
+            },
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/recent-activities",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api","ovingController.js"]
+            }
+          }
+        },
+        {
+          "name": "Delete Recent Activity",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/recent-activities/ACTIVITY_ID",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "recent-activities", "ACTIVITY_ID"]
+            }
+          }
+        },
+        {
+          "name": "Get Account Balance",
+          "request": {
+            "method": "GET",
+            "header": [],
             "url": {
               "raw": "https://onlineshope.onrender.com/api/dashboard/balance",
               "protocol": "https",
@@ -654,14 +641,9 @@
         },
         {
           "name": "Add Account Balance",
-          "request": {
+          "Neurorequest": {
             "method": "PUT",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
