@@ -93,7 +93,6 @@ if (arrProducts.length) {
                                   <img
                                       src="${box.images[0]}"
                                       alt="Slide 1"
-                                      loading="lazy"
                                   />
                               </li>
                               <li class="glide__slide">

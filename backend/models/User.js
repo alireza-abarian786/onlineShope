@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  balance: {
+    type: Number,
+    default: 0,
+  },
   favorites: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',

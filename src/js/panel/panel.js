@@ -188,6 +188,7 @@ window.addEventListener("load", async () => {
     renderRecommendedProducts(recommendedProducts);
     renderRecentActivities(recentActivities);
     renderFavorites(productsFavorites);
+    changeIconTheme()
     purchaseLoader.style.display = "none";
     favoriteLoader.style.display = "none";
   }
@@ -206,16 +207,20 @@ window.addEventListener("load", async () => {
   
   //todo================================================================= تغییر تم
   document.getElementById("themeToggle").addEventListener("click", () => {
-    const iconTheme = document.querySelector(".theme-icon")
     document.body.classList.toggle("dark-mode");
     setLocalStorage("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-    getLocalStorage('theme') === 'dark' ? iconTheme.classList.replace('bi-moon-stars' ,'bi-sun-fill') : iconTheme.classList.replace('bi-sun-fill' , 'bi-moon-stars')
-    
+    changeIconTheme()
   });
   
   //todo================================================================= لود تم ذخیره‌شده
   if (getLocalStorage("theme") === "dark") {
     document.body.classList.add("dark-mode");
+  }
+
+  //todo================================================================= تغییر ایکون تم
+  const changeIconTheme = () => {
+    const iconTheme = document.querySelector(".theme-icon")
+    getLocalStorage('theme') === "dark" ? iconTheme.classList.replace('bi-moon-stars' ,'bi-sun-fill') : iconTheme.classList.replace('bi-sun-fill' , 'bi-moon-stars')
   }
   
   //todo================================================================= افزایش موجودی

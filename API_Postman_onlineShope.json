@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "OnlineShop API Collection",
-    "_postman_id": "abcd1234-5678-90ef-ghij-klmnopqrstuv", 
+    "_postman_id": "abcd1234-5678-90ef-ghij-klmnopqrstuv",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -33,7 +33,7 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization", 
+                "key": "Authorization",
                 "value": "Bearer {{token}}",
                 "type": "text"
               },
@@ -49,7 +49,7 @@
             },
             "url": {
               "raw": "https://onlineshope.onrender.com/api/user/profile",
-              "protocol": "https", 
+              "protocol": "https",
               "host": ["onlineshope", "onrender", "com"],
               "path": ["api", "user", "profile"]
             }
@@ -539,7 +539,7 @@
               "raw": "https://onlineshope.onrender.com/api/users/favorites/add",
               "protocol": "https",
               "host": ["onlineshope", "onrender", "com"],
-              "path": ["api", "user", "favorites", "add"]
+              "path": ["api", "users", "favorites", "add"]
             }
           }
         },
@@ -567,7 +567,7 @@
               "raw": "https://onlineshope.onrender.com/api/users/favorites/remove",
               "protocol": "https",
               "host": ["onlineshope", "onrender", "com"],
-              "path": ["api", "user", "favorites", "remove"]
+              "path": ["api", "users", "favorites", "remove"]
             }
           }
         },
@@ -586,7 +586,97 @@
               "raw": "https://onlineshope.onrender.com/api/users/favorites",
               "protocol": "https",
               "host": ["onlineshope", "onrender", "com"],
-              "path": ["api", "user", "favorites"]
+              "path": ["api", "users", "favorites"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Pending Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/pending-tasks",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "pending-tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get Recent Activities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/recent-activities",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "recent-activities"]
+            }
+          }
+        },
+        {
+          "name": "Get Account Balance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/balance",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "balance"]
+            }
+          }
+        },
+        {
+          "name": "Add Account Balance",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1000000\n}"
+            },
+            "url": {
+              "raw": "https://onlineshope.onrender.com/api/dashboard/balance",
+              "protocol": "https",
+              "host": ["onlineshope", "onrender", "com"],
+              "path": ["api", "dashboard", "balance"]
             }
           }
         }

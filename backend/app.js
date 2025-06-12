@@ -16,6 +16,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const userPanelRoutes = require('./routes/userPanelRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 const app = express();
 
@@ -66,6 +67,7 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/user', userPanelRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 
 // Error handler
