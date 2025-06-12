@@ -88,9 +88,7 @@ function hideLoader() {
 }
 
 //todo============================================ بررسی وضعیت توکن کاربر
-let isFlag = null
 const modalAuthorized = () => {
-  if (!isFlag) {    
     Swal.fire({
       title: "نشست شما منقضی شده",
       text: "💫 لطفاً دوباره لاگین کنید",
@@ -103,9 +101,6 @@ const modalAuthorized = () => {
         window.location.href = "./login.html";
       }
     });
-
-    isFlag = true
-  }
 };
 
 //todo============================================ رفرش صفحه بعد از بازگشت با کلید بک مرورگر

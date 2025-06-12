@@ -1,6 +1,7 @@
 import { setLocalStorage } from "../storage.js";
 import { hideLoader, modalAuthorized, showLoader } from "../utils.js";
 
+let isFlag = null
 let cacheMap = new Map()
 const pendingRequests = new Map();
 
@@ -22,7 +23,11 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
             .then(async (res) => {
 
                 if (res.status === 401) {
-                    modalAuthorized()    
+                    if (!isFlag) {
+                        modalAuthorized()    
+                        isFlag = true
+                    }
+
                     setLocalStorage('isAuthorized' , false)               
                     throw new Error('دسترسی غیر مجاز - توکن معتر نمیباشد')   
                 }
