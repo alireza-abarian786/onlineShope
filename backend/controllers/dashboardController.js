@@ -3,7 +3,7 @@ const PendingTask = require('../models/pendingTask');
 const RecentActivity = require('../models/recentActivity');
 const User = require('../models/User');
 // مدل‌های دیگه (مثل Order یا Product) که برای purchases یا recommended-products نیازه
-const Order = require('../models/Order'); // فرضی
+const Order = require('../models/Cart'); // فرضی
 const Product = require('../models/Product'); // فرضی
 
 // @desc    دریافت خریدها
