@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const PendingTask = require('../models/PendingTask');
-const RecentActivity = require('../models/RecentActivity');
+const PendingTask = require('../models/pendingTask');
+const RecentActivity = require('../models/recentActivity');
 const User = require('../models/User');
 // مدل‌های دیگه (مثل Order یا Product) که برای purchases یا recommended-products نیازه
 const Order = require('../models/Order'); // فرضی
