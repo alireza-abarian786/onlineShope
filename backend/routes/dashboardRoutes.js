@@ -12,7 +12,7 @@ const {
   getBalance,
   addBalance,
 } = require('../controllers/dashboardController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect } = require('../middlewares/authMiddleware');
 
 router.get('/purchases', protect, getPurchases);
 router.route('/pending-tasks')
