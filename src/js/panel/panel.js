@@ -1,4 +1,5 @@
 import { getCartData } from "../funcs/fetchData/fetchCart.js";
+import getDataMe from "../funcs/fetchData/fetchMe.js";
 import { getProducts } from "../funcs/fetchData/fetchProducts.js";
 import { getLocalStorage, setLocalStorage } from "../funcs/storage.js";
 import { showModal } from "../funcs/ui.js";
@@ -10,16 +11,8 @@ const logoutBtn = document.querySelector(".logout-btn");
 // !--------------------------------------------------------------- functions ----------------------------------------------------->
 window.addEventListener("load", async () => {  
   showLoader()
-  const response = await fetch("https://onlineshope.onrender.com/api/user/me", {
-    credentials: "include",
-  });
-
-  if (response.status === 401) {
-    window.location.href = '/login.html';
-    return;
-  }
-
-  const userData = await response.json();
+  
+  const userData = await getDataMe()
   const productData = await getProducts();
   const cartData = await getCartData()
   const productsFavorites = productData.filter(product => {    

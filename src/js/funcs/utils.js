@@ -115,11 +115,13 @@ const refreshedPage = () => {
 
 //todo============================================ جلوگیری از ورود به بعضی صفحات قبل از لاگین
 const pagesInLoginState = () => {
-  const url = window.location.pathname    
+  const url = window.location.pathname   
+  console.log(url);
+   
   if (document.cookie) return false;
   
-  if (url === '/cart.html' || '/doshboard.html') {
-    window.location.href = "./login.html";
+  if (url === '/cart.html' || '/doshboard.html' , '/userActivityManagement.html') {
+    window.location.href = "/login.html";
     localStorage.clear()   
   }
 }

@@ -10,11 +10,27 @@
   <title>دیجی استور | فروشگاه اینترنتی</title>
   <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
 
+  <!--?----------------------------------------------------------------------------------- CSS font icon bootstrap-->
+  <link rel="stylesheet" href="../public/vendor/font-icon/bootstrap-icons.min.css"/>
+  <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
+  <link rel="stylesheet" href="../public/vendor/bootstrap/bootstrap.min.css" />
+
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../src/assets/css/panel.css">
 </head>
 
 <body class="bg-gray-100">
+
+  <!--!----------------------------------------------------------------------- start loader  ---------------------------------------------------------->
+  <div class="loader-container">
+    <div class="loader-global">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <!--?----------------------------------------------------------------------- finish loader  ---------------------------------------------------------->
   
   <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">پنل کاربری</h1>
@@ -60,9 +76,15 @@
 
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-xl font-semibold mb-2">موجودی حساب</h2>
-      <p id="accountBalance">0 تومان</p>
+      <p id="accountBalance"></p>
     </div>
   </div>
 
+
+
+  <!--?----------------------------------------------------------------------- JavaScript bootstrap ---------------------------------------------------------->
+  <script defer src="../public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+  <script type="module" src="../src/js/panel/userActivityManagement.js"></script>
 </body>
 </html>
