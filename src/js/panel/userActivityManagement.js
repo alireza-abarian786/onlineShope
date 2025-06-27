@@ -15,7 +15,7 @@ const balanceInput = document.querySelector("#balanceInput");
 // ! _______________________________________________________________________ functions  __________________________________________
 window.addEventListener("load" , async () => {
     const getMe = await getDataMe()    
-    if (!getMe) return pagesInLoginState()
+    // if (!getMe) return pagesInLoginState()
     hideLoader()
 
     // todo ================================================================= اضافه کردن وظیفه جدید
@@ -115,6 +115,21 @@ window.addEventListener("load" , async () => {
             `)
         });
     }
+
+    // todo ================================================================= نمایش خرید های کاربر
+    const showUserBuysUI = async () => {
+        const purchasesUlElem = document.querySelector("#purchases")
+        const getPurchases = await fetch("https://onlineshope.onrender.com/api/dashboard/purchases" , { credentials: 'include' })
+        const resultGetPurchases = await getPurchases.json()
+
+        purchasesUlElem.innerHTML = '';
+        resultGetPurchases.forEach(purchase => {
+            purchasesUlElem.insertAdjacentHTML('beforeend' , `
+                <li class="text-gray-700">${purchase.activity}</li>
+            `)
+        });
+    }
+    
     // todo ================================================================= نمایش فعالیت های کاربر
     const showRecentActivitiesUI = async () => {
         const recentActivitiesUlElem = document.querySelector("#recentActivities")
@@ -128,6 +143,7 @@ window.addEventListener("load" , async () => {
             `)
         });
     }
+
     // todo ================================================================= نمایش موجودی کاربر
     const showBalanceUI = async () => {
         const accountBalancePElem = document.querySelector("#accountBalance")

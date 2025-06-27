@@ -142,8 +142,19 @@ window.addEventListener("load", async () => {
   }
   
   //todo================================================================= رندر فعالیت‌های اخیر
-  function renderRecentActivities(data) {
+  async function renderRecentActivities() {
     const activityList = document.getElementById("recentActivities");
+    const getRecentActivities = await fetch("https://onlineshope.onrender.com/api/dashboard/recent-activities" , { credentials: 'include' })
+    const resultGetRecentActivities = await getRecentActivities.json()
+    console.log(resultGetRecentActivities);
+    
+
+    activityList.innerHTML = '';
+      resultGetRecentActivities.forEach(task => {
+        activityList.insertAdjacentHTML('beforeend' , `
+            <li class="text-gray-700">${task.activity}</li>
+        `)
+    });
 
   }
   
@@ -179,9 +190,10 @@ window.addEventListener("load", async () => {
     renderUserStats();
     renderPendingTasks(pendingTasks);
     renderRecommendedProducts(recommendedProducts);
-    renderRecentActivities(recentActivities);
+    renderRecentActivities();
     renderFavorites(productsFavorites);
     changeIconTheme()
+    showBalanceUI()
     purchaseLoader.style.display = "none";
     favoriteLoader.style.display = "none";
   }
@@ -216,11 +228,13 @@ window.addEventListener("load", async () => {
     getLocalStorage('theme') === "dark" ? iconTheme.classList.replace('bi-moon-stars' ,'bi-sun-fill') : iconTheme.classList.replace('bi-sun-fill' , 'bi-moon-stars')
   }
   
-  //todo================================================================= افزایش موجودی
-  document.getElementById("addBalance").addEventListener("click", () => {
-    const currentBalance = parseInt(document.getElementById("accountBalance").textContent);
+  // //todo================================================================= نمایش موجودی
+  const showBalanceUI = async () => {
+    const accountBalancePElem = document.getElementById('accountBalance')
+    const getMe = await getDataMe()
 
-  });
+    accountBalancePElem.textContent = getMe.balance.toLocaleString() + ' تومان '
+  }
 
   loadData();
 });
