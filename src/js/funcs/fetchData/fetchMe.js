@@ -25,7 +25,6 @@ const getDataMe = async () => {
         const data = await response.json()    
         cacheMe = data
         cacheMeTime = now
-        console.log(cacheMe);
         return cacheMe
         
     } catch (error) {

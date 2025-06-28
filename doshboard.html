@@ -97,15 +97,15 @@
         <h3 class="text-lg font-semibold text-gray-800 mb-4">آمار حساب شما</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-blue-100 p-4 rounded-lg text-center">
-            <p class="text-sm text-gray-600">تعداد کل سفارشات</p>
+            <p class="text-sm text-gray-600 mb-1">تعداد کل سفارشات</p>
             <p class="text-2xl font-bold text-blue-600" id="totalOrders">0</p>
           </div>
           <div class="bg-green-100 p-4 rounded-lg text-center">
-            <p class="text-sm text-gray-600">مجموع خریدها</p>
+            <p class="text-sm text-gray-600 mb-1">مجموع خریدها</p>
             <p class="text-2xl font-bold text-green-600" id="totalSpent">0 تومان</p>
           </div>
           <div class="bg-purple-100 p-4 rounded-lg text-center">
-            <p class="text-sm text-gray-600">تعداد علاقه‌مندی‌ها</p>
+            <p class="text-sm text-gray-600 mb-1">تعداد علاقه‌مندی‌ها</p>
             <p class="text-2xl font-bold text-purple-600" id="totalFavorites">0</p>
           </div>
         </div>
@@ -114,13 +114,16 @@
       <!--!--------------------------------------------------------------- وظایف در انتظار ----------------------------------------------------->
       <div class="bg-white rounded-lg shadow-md p-6 mb-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">وظایف در انتظار</h3>
-        <ul id="pendingTasks" class="space-y-2"></ul>
+        <ul id="pendingTasks" class="space-y-2 list-disc"></ul>
       </div>
 
       <!--!--------------------------------------------------------------- محصولات پیشنهادی ----------------------------------------------------->
       <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">محصولات پیشنهادی</h3>
-        <div id="recommendedProducts" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">محصولات پیشنهادی</h3>
+          <div id="recommendedProducts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- محصولات به‌صورت داینامیک اینجا رندر می‌شوند -->
+          </div>
+          <p id="noProductsMessage" class="text-gray-500 text-center mt-4 hidden">هیچ محصولی یافت نشد.</p>
       </div>
 
       <!--!--------------------------------------------------------------- موجودی حساب ----------------------------------------------------->
@@ -171,7 +174,7 @@
       <!--!--------------------------------------------------------------- فعالیت‌های اخیر ----------------------------------------------------->
       <div class="bg-white rounded-lg shadow-md p-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">فعالیت‌های اخیر</h3>
-        <ul id="recentActivities" class="space-y-2"></ul>
+        <ul id="recentActivities" class="space-y-2 list-disc"></ul>
       </div>
     </main>
   </div>

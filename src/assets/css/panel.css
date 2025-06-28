@@ -14,8 +14,14 @@ body {
 .dark-mode .bg-white {
   background-color: #374151 !important;
 }
-.dark-mode .bg-gray-200 {
-  background-color: #4b5563 !important;
+.dark-mode .bg-gray-200 ,
+.dark-mode .bg-gray-50 ,
+.dark-mode .bg-gray-100 {
+  background-color: rgba(75, 85, 99 , 1) ;
+}
+.dark-mode .bg-gray-100:hover ,
+.dark-mode table tbody > tr:hover {
+  background-color: rgba(229 ,231 ,235 , 0.3) ;
 }
 .dark-mode .text-gray-700 ,
 .dark-mode .text-gray-800 {

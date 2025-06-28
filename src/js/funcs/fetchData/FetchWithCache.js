@@ -5,7 +5,7 @@ let isFlag = null
 let cacheMap = new Map()
 const pendingRequests = new Map();
 
-const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
+const safeFetchWithCache = async (url , { maxTime = 5000 ,  showLoaderFlag = true } = {}) => {
     const now = Date.now()
     let cached = cacheMap.get(url)    
 
@@ -18,7 +18,7 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
             return pendingRequests.get(url);
         }
         
-        showLoader()
+        if (showLoaderFlag) showLoader();
         const fetchPromise = fetch(url, { credentials: 'include' })
             .then(async (res) => {
 
@@ -46,7 +46,7 @@ const safeFetchWithCache = async (url , { maxTime = 5000} = {}) => {
                 return null;
             })
             .finally(() => {
-                hideLoader()
+                if (showLoaderFlag) hideLoader();
             })
 
         pendingRequests.set(url, fetchPromise);
