@@ -1,4 +1,5 @@
 import getDataMe from "../funcs/fetchData/fetchMe.js";
+import { getLocalStorage, setLocalStorage } from "../funcs/storage.js";
 import { showModal } from "../funcs/ui.js";
 import { showLoader, hideLoader } from "../funcs/utils.js";
 import { fetchPendingTasks, addPendingTask, deletePendingTask } from "./api.js";
@@ -12,6 +13,7 @@ const addActivityBtn = document.querySelector("#addActivity");
 const activityInput = document.querySelector("#activityInput");
 const addBalanceBtn = document.querySelector("#addBalance");
 const balanceInput = document.querySelector("#balanceInput");
+const themeToggle = document.querySelector("#themeToggle");
 
 // !--------------------------------------------------------------------------------------------- Initialize on page load
 window.addEventListener("load", async () => {
@@ -23,6 +25,12 @@ window.addEventListener("load", async () => {
     }
 
     await loadData();
+
+    // todo================================================================= Theme initialization
+    if (getLocalStorage("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+
     hideLoader();
 });
 
@@ -84,7 +92,27 @@ if (addBalanceBtn) {
     });
 }
 
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        setLocalStorage("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        changeIconTheme();
+    });
+}
+
 // !------------------------------------------------------------------------------------------- Render Functions
+
+// todo================================================================= Theme Icon Change
+function changeIconTheme() {
+    const iconTheme = document.querySelector(".theme-icon");
+    if (!iconTheme) return;
+    if (getLocalStorage("theme") === "dark") {
+        iconTheme.classList.replace("bi-moon-stars", "bi-sun-fill");
+    } else {
+        iconTheme.classList.replace("bi-sun-fill", "bi-moon-stars");
+    }
+}
+
 async function renderPendingTasks() {
     const taskList = document.querySelector("#pendingTasks");
     if (!taskList) return;
@@ -98,7 +126,7 @@ async function renderPendingTasks() {
         tasks.forEach((task) => {
             taskList.insertAdjacentHTML(
                 "beforeend",
-                `<li class="flex justify-between items-center p-2 bg-gray-50 rounded hover:bg-gray-100 transition">
+                `<li class="flex justify-between items-center p-2 bg-gray-100 rounded hover:bg-gray-300 transition">
                     <span>${task.task}</span>
                     <i class="bi bi-trash3-fill text-red-500 cursor-pointer" onclick="deletePendingTasks('${task._id}')"></i>
                 </li>`
@@ -123,7 +151,7 @@ async function renderRecentActivities() {
         activities.forEach((activity) => {
             activityList.insertAdjacentHTML(
                 "beforeend",
-                `<li class="flex justify-between items-center p-2 bg-gray-50 rounded hover:bg-gray-100 transition">
+                `<li class="flex justify-between items-center p-2 bg-gray-100 rounded hover:bg-gray-300 transition">
                     <span>${activity.activity}</span>
                     <i class="bi bi-trash3-fill text-red-500 cursor-pointer" onclick="deleteRecentActivity('${activity._id}')"></i>
                 </li>`
@@ -150,7 +178,7 @@ async function renderPurchases() {
         purchases.forEach((purchase) => {
             purchaseList.insertAdjacentHTML(
                 "beforeend",
-                `<li class="flex justify-between items-center p-2 bg-gray-50 rounded hover:bg-gray-100 transition">
+                `<li class="flex justify-between items-center p-2 bg-gray-100 rounded hover:bg-gray-300 transition">
                     <span>${purchase.name || purchase.activity}</span>
                     <span>${purchase.price ? purchase.price.toLocaleString() + ' تومان' : 'نامشخص'}</span>
                 </li>`

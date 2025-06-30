@@ -59,13 +59,13 @@ body {
   padding: 8px 10px;
 } 
 
-#addingNewTasks {
+/* #addingNewTasks {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-}
+} */
 
 #addingNewTasks > div{
-  width: 49%;
+  /* width: 49%; */
 }

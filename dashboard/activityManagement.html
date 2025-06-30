@@ -8,14 +8,13 @@
   <meta name="author" content="Digi Store" />
   <meta name="theme-color" content="#2563eb" />
   <title>دیجی استور | فروشگاه اینترنتی</title>
-  <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
+  <link rel="icon" href="../src/assets/images/logo.png" type="image/png">
 
   <!--?----------------------------------------------------------------------------------- CSS font icon bootstrap-->
   <link rel="stylesheet" href="../public/vendor/font-icon/bootstrap-icons.min.css"/>
   <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
   <link rel="stylesheet" href="../public/vendor/bootstrap/bootstrap.min.css" />
-
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!--?----------------------------------------------------------------------------------- CSS custom -->
   <link rel="stylesheet" href="../src/assets/css/panel.css">
 </head>
 
@@ -33,31 +32,37 @@
   <!--?----------------------------------------------------------------------- finish loader  ---------------------------------------------------------->
   
   <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">مدیریت وظایف و فعالیت ها</h1>
+    <div class="flex items-baseline justify-between">
+      <h1 class="text-2xl font-bold mb-4">مدیریت وظایف و فعالیت ها</h1>
 
-    <div id="addingNewTasks">
-      <div class="bg-white p-4 rounded shadow mb-4">
+      <div class="flex items-center border rounded hover:bg-gray-100">
+        <button id="themeToggle" class="text-gray-700"><i class="bi bi-moon-stars theme-icon hover:text-blue-400"></i></button>
+      </div>
+    </div>
+
+    <div id="addingNewTasks" class="block lg:grid grid-cols-2 grid-rows-2 gap-x-5">
+      <div class="bg-white flex flex-col w-full p-4 rounded shadow mb-4">
         <h2 class="text-xl font-semibold mb-2">اضافه کردن وظیفه جدید</h2>
-        <input type="text" id="taskInput" class="border p-2 w-full mb-2" placeholder="وظیفه جدید (مثلاً: پرداخت سفارش)">
-        <button id="addTask" class="bg-blue-500 text-white p-2 rounded">اضافه کردن</button>
+        <input type="text" id="taskInput" class="border bg-gray-200 rounded p-2 w-full mb-2" placeholder="وظیفه جدید (مثلاً: پرداخت سفارش)">
+        <button id="addTask" class="bg-blue-500 w-fit self-end text-white p-2 rounded">اضافه کردن</button>
       </div>
   
-      <div class="bg-white p-4 rounded shadow mb-4">
+      <div class="bg-white flex flex-col w-full p-4 rounded shadow mb-4">
         <h2 class="text-xl font-semibold mb-2">اضافه کردن فعالیت جدید</h2>
-        <input type="text" id="activityInput" class="border p-2 w-full mb-2" placeholder="فعالیت جدید (مثلاً: خرید محصول)">
-        <button id="addActivity" class="bg-blue-500 text-white p-2 rounded">اضافه کردن</button>
+        <input type="text" id="activityInput" class="border bg-gray-200 rounded p-2 w-full mb-2" placeholder="فعالیت جدید (مثلاً: خرید محصول)">
+        <button id="addActivity" class="bg-blue-500 w-fit self-end text-white p-2 rounded">اضافه کردن</button>
       </div>
   
-      <div class="bg-white p-4 rounded shadow mb-4">
+      <div class="bg-white flex flex-col w-full p-4 rounded shadow mb-4">
         <h2 class="text-xl font-semibold mb-2">افزایش موجودی</h2>
-        <input type="number" id="balanceInput" class="border p-2 w-full mb-2" placeholder="مبلغ (تومان)">
-        <button id="addBalance" class="bg-blue-500 text-white p-2 rounded">افزایش موجودی</button>
+        <input type="number" id="balanceInput" class="border bg-gray-200 rounded p-2 w-full mb-2" placeholder="مبلغ (تومان)">
+        <button id="addBalance" class="bg-blue-500 w-fit self-end text-white p-2 rounded">افزایش موجودی</button>
       </div>
 
-      <div class="bg-white p-4 rounded shadow mb-4">
+      <div class="bg-white flex flex-col w-full p-4 rounded shadow mb-4">
         <h2 class="text-xl font-semibold mb-2">افزایش موجودی</h2>
-        <input type="number" id="balanceInput" class="border p-2 w-full mb-2" placeholder="مبلغ (تومان)">
-        <button id="addBalance" class="bg-blue-500 text-white p-2 rounded">افزایش موجودی</button>
+        <input type="number" id="balanceInput" class="border bg-gray-200 rounded p-2 w-full mb-2" placeholder="مبلغ (تومان)">
+        <button id="addBalance" class="bg-blue-500 w-fit self-end text-white p-2 rounded">افزایش موجودی</button>
       </div>
     </div>
 
@@ -65,17 +70,17 @@
     
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-xl font-semibold mb-2">وظایف در انتظار</h2>
-      <ul id="pendingTasks" class="list-disc"></ul>
+      <ul id="pendingTasks" class="list-disc space-y-2"></ul>
     </div>
 
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-xl font-semibold mb-2">فعالیت‌های اخیر</h2>
-      <ul id="recentActivities" class="list-disc"></ul>
+      <ul id="recentActivities" class="list-disc space-y-2"></ul>
     </div>
     
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-xl font-semibold mb-2">خریدها</h2>
-      <ul id="purchases" class="list-disc pr-5"></ul>
+      <ul id="purchases" class="list-disc space-y-2 pr-5"></ul>
     </div>
 
     <div class="bg-white p-4 rounded shadow mb-4">
@@ -88,6 +93,8 @@
 
   <!--?----------------------------------------------------------------------- JavaScript bootstrap ---------------------------------------------------------->
   <script defer src="../public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!--?----------------------------------------------------------------------- tailwind css ---------------------------------------------------------->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <script type="module" src="../src/js/panel/activityManagement.js"></script>
 </body>
