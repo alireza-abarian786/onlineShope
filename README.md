@@ -34,10 +34,10 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 |------|--------|--------------|
 | **Home Page** | ✅ Done | Responsive, dynamic, includes search, offers, timers |
 | **Category Page** | ✅ Done | Filters, grid/list view toggle, pagination, responsive) |
-| **Cart Page** | ✅ Done | Functional cart, pending payment gateway integration |
-| **Articles Page** | ⚠️ Semi-Done | Basic content available, layout needs work |
+| **Cart Page** | ✅ Done | Functional cart, pending payment gateway integration, Responsive |
+| **Articles Page** | ✅ Done | Basic content available, layout needs work, Responsive |
+| **User Panel** | ✅ Done | Functional, Responsive, dynamic, includes search |
 | **Product Detail Page** | 🚧 Planned | Not implemented yet |
-| **User Panel** | 🚧 Planned | Not implemented yet |
 
 ---
 
@@ -57,6 +57,8 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 - HTML5  
 - CSS3  
 - JavaScript (Vanilla)
+- bootstrap
+- tailwind
 
 ### Backend:
 - Node.js  
@@ -105,7 +107,7 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 | Cart |
 |---|
 | ![Categories](https://i.ibb.co/Xk5P27JG/Screenshot-2025-06-03-154131jjjjjjjjjjjjjjj.png) | 
-| Remove Product |
+| <p align='center'>Remove Product</p> |
 | ![Categories](https://i.ibb.co/kF11wCq/Screenshot-2025-06-03-154248.png) |
 
 ---
@@ -113,7 +115,6 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 ## 🔄 Future Plans
 
 - Product detail page (description, images, related items)  
-- User panel (dashboard, saved items, settings)  
 - Admin panel (product & user management)  
 - Payment gateway integration  
 - Better layout for blog/articles
