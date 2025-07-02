@@ -1,8 +1,10 @@
 import { safeFetchWithCache } from "./FetchWithCache.js";
 
 // //todo========================================================== 🛒 دریافت اطلاعات سبد خرید
-async function getCartData() {
-  const data = await safeFetchWithCache("https://onlineshope.onrender.com/api/cart");
+async function getCartData(showLoaderFlag = true) {
+  const data = await safeFetchWithCache("https://onlineshope.onrender.com/api/cart" , {
+    showLoaderFlag,
+  });
 
   if (Array.isArray(data?.products)) {
     return data;

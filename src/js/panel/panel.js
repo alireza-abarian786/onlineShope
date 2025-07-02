@@ -22,13 +22,14 @@ window.addEventListener("load", async () => {
   }
   
   await loadData();
-  hideLoader();
-
+  
   // todo================================================================= Theme initialization
   if (getLocalStorage("theme") === "dark") {
-      document.body.classList.add("dark-mode");
-      changeIconTheme();
+    document.body.classList.add("dark-mode");
+    changeIconTheme();
   }
+
+  hideLoader();
 });
 
 // todo================================================================= Event Listeners
@@ -128,14 +129,15 @@ if (profileForm) {
 const purchaseSearch = document.getElementById("purchaseSearch");
 if (purchaseSearch) {
     purchaseSearch.addEventListener("input", async (e) => {
+        hideLoader()
         const purchaseLoader = document.getElementById("purchaseLoader");
         if (purchaseLoader) purchaseLoader.style.display = "block";
 
         const query = e.target.value.toLowerCase();
-        const cartData = await getCartData();
+        const cartData = await getCartData(false);
         const purchaseBody = document.getElementById("purchaseBody");
         purchaseBody.innerHTML = "";
-        const filteredPurchases = cartData.products.filter((purchase) => purchase.name.toLowerCase().includes(query));
+        const filteredPurchases = cartData.products.filter((purchase) => purchase.product.name.toLowerCase().includes(query));
         if (filteredPurchases.length === 0) {
             purchaseBody.innerHTML = '<tr><td colspan="3" class="p-2 text-gray-500 text-center">هیچ خریدی یافت نشد.</td></tr>';
             if (purchaseLoader) purchaseLoader.style.display = "none";
@@ -145,9 +147,9 @@ if (purchaseSearch) {
             purchaseBody.insertAdjacentHTML(
                 "beforeend",
                 `<tr class="hover:bg-gray-50">
-                    <td class="p-2">${purchase.name}</td>
-                    <td class="p-2">${purchase.price.toLocaleString()} تومان</td>
-                    <td class="p-2">${purchase.description}</td>
+                    <td class="p-2">${purchase.product.name}</td>
+                    <td class="p-2">${purchase.product.price.toLocaleString()} تومان</td>
+                    <td class="p-2">${purchase.product.description}</td>
                 </tr>`
             );
         });
@@ -273,13 +275,15 @@ async function renderPurchases() {
             purchaseBody.innerHTML = '<tr><td colspan="3" class="p-2 text-gray-500 text-center">هیچ خریدی یافت نشد.</td></tr>';
             return;
         }
-        cartData.products.forEach((purchase) => {
+
+        
+        cartData.products.forEach((purchase) => {            
             purchaseBody.insertAdjacentHTML(
                 "beforeend",
                 `<tr class="hover:bg-gray-50">
-                    <td class="p-2">${purchase.name}</td>
-                    <td class="p-2">${purchase.price} تومان</td>
-                    <td class="p-2">${purchase.description}</td>
+                    <td class="p-2">${purchase.product.name}</td>
+                    <td class="p-2">${purchase.product.price} تومان</td>
+                    <td class="p-2">${purchase.product.description}</td>
                 </tr>`
             );
         });
@@ -385,9 +389,11 @@ async function renderUserStats() {
     if (!totalOrders || !totalSpent || !totalFavorites) return;
     try {
         const cartData = await getCartData();
+        console.log(cartData);
+        
         const userData = await getDataMe();
         totalOrders.textContent = cartData.products.length;
-        totalSpent.textContent = cartData.products.reduce((sum, item) => sum + item.price, 0).toLocaleString() + " تومان";
+        totalSpent.textContent = cartData.totalWithDiscount.toLocaleString() + " تومان";
         totalFavorites.textContent = userData.favorites.length;
     } catch (error) {
         totalOrders.textContent = "خطا";
@@ -424,22 +430,28 @@ async function loadData() {
 
 // todo================================================================= Global delete functions
 window.deletePendingTasks = async (id) => {
+    showLoader()
     try {
         await deletePendingTask(id);
         await renderPendingTasks();
+        hideLoader()
         showModal("حذف با موفقیت انجام شد ✅");
     } catch (error) {
+        hideLoader()
         showModal("❌ خطا در حذف وظیفه");
         console.error("Error deleting task:", error);
     }
 };
 
 window.deleteRecentActivity = async (id) => {
+    showLoader()
     try {
         await deleteRecentActivity(id);
         await renderRecentActivities();
+        hideLoader()
         showModal("حذف با موفقیت انجام شد ✅");
     } catch (error) {
+        hideLoader()
         showModal("❌ خطا در حذف فعالیت");
         console.error("Error deleting activity:", error);
     }

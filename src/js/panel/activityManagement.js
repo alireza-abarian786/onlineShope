@@ -214,22 +214,28 @@ async function loadData() {
 
 // !--------------------------------------------------------------------------------------- Global delete functions
 window.deletePendingTasks = async (id) => {
+    showLoader()
     try {
         await deletePendingTask(id);
         await renderPendingTasks();
+        hideLoader()
         showModal("حذف با موفقیت انجام شد ✅");
     } catch (error) {
+        hideLoader()
         showModal("❌ خطا در حذف وظیفه");
         console.error("Error deleting task:", error);
     }
 };
 
 window.deleteRecentActivity = async (id) => {
+    showLoader()
     try {
         await deleteRecentActivity(id);
         await renderRecentActivities();
+        hideLoader()
         showModal("حذف با موفقیت انجام شد ✅");
     } catch (error) {
+        hideLoader()
         showModal("❌ خطا در حذف فعالیت");
         console.error("Error deleting activity:", error);
     }
