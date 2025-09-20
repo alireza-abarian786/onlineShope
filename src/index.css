@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+:root {
+  font-family: vazir;
+  scrollbar-width: none;
+}
+
+a {
+  text-decoration: inherit;
+}

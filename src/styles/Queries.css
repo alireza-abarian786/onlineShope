@@ -1,0 +1,98 @@
+@media (max-width: 1280px) {
+  .quran::before,
+  .quran::after {
+    width: 1.5rem;
+    height: 2rem;
+  }
+}
+@media (max-width: 1024px) {
+  .quran::before,
+  .quran::after {
+    width: 1rem;
+    height: 1.5rem;
+    bottom: 3%;
+  }
+}
+
+/* @media (max-width: 1200px) {
+  .navbar-item:first-child {
+    width: 59%;
+    justify-content: space-between;
+  }
+  .menu {
+    display: none;
+  }
+  .emamain-img-container {
+    padding: 20px;
+  }
+  .img-item {
+    width: 70px;
+    height: 100px;
+    border: 3px solid #3e5618;
+    border-radius: 20px;
+    box-shadow: 0px 4px 14px 0px #ffffff40;
+    background-size: cover;
+  }
+  .title-item:first-child {
+    padding: 2% 4% 1%;
+    top: 50px;
+    gap: 5px;
+  }
+  .quran {
+    font-size: 12px;
+    margin: 0;
+  }
+  .quran::after {
+    left: -5%;
+    top: 15%;
+    width: 10px;
+    height: 25px;
+  }
+  .quran::before {
+    right: -5%;
+    top: -15%;
+    width: 10px;
+    height: 25px;
+  }
+  .quran-translation {
+    width: 322px;
+    line-height: 16px;
+    font-size: 10px;
+  }
+  .divider-img {
+    width: 120px;
+  }
+  .verse-number {
+    font-size: 8px;
+  }
+  .title-item:last-child {
+    padding: 2% 4%;
+    top: 190px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .title-description {
+    font-size: 12px;
+    width: 380px;
+    text-align: center;
+  }
+  .search-container {
+    height: 35px;
+    margin-top: 10px;
+  }
+  .search-btn {
+    width: 14%;
+  }
+  .search-input {
+    font-size: small;
+  }
+  .search-btn > svg {
+    width: 20px;
+  }
+
+  .footer-background {
+    height: 90px;
+    bottom: -15%;
+  }
+} */
