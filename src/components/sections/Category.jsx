@@ -3,12 +3,14 @@ import Title from "../ui/Title";
 import "../../styles/Category.css";
 
 import moghavemat from "../../assets/images/moghavemat.png";
+import GoToPageBtn from "../ui/GoToPageBtn";
 
 export default function Category() {
   return (
-    <section className="category-container mt-[15rem] flex flex-col items-center gap-[50px]">
+    <section className="section-container mt-[15rem] grid col-span-1 gap-5 justify-center">
       <Title headline={"دسته بندی جامع شهدا"} underHeadline={"تمامی اطلاعات، تصاویر، وصایا و خاطرات شهدا در یک مکان متمرکز و منظم"}/>
-      <div className="category-box-wrapper p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 overflow-hidden justify-items-center gap-[35px] w-max h-max">
+
+      <div className="category-box-wrapper relative p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 overflow-hidden justify-items-center gap-[35px] w-full h-max">
 
         <div
           className="category-box-item overflow-hidden xl:w-[413px] xl:h-[391px] rounded-[30px] p-[50px]
@@ -245,6 +247,8 @@ export default function Category() {
         </div>
 
       </div>
+
+        <GoToPageBtn page="دسته بندی" />
     </section>
   );
 }

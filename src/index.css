@@ -3,8 +3,8 @@
 :root {
   font-family: vazir;
   scrollbar-width: none;
+  background-color: #f9f9f9;
 }
-
 a {
   text-decoration: inherit;
 }
