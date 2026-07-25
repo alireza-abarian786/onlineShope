@@ -1,82 +1,93 @@
-# 🛒 DigiStore – Full-Stack E-commerce Prototype
+# 🛒 DigiStore – Offline E-Commerce Platform
 
-DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **JavaScript**, a custom **Node.js backend**, and **MongoDB**. It offers essential shopping functionalities such as login, registration, product search, cart/wishlist handling, and category filtering. The project is built for educational and prototyping purposes and is inspired by platforms like **Digikala**.
+DigiStore is a fully offline e-commerce web application built with **HTML**, **CSS**, and **Vanilla JavaScript**. All data is stored locally in the browser using **localStorage**, eliminating the need for a backend server or database. The project is designed for educational purposes and takes inspiration from modern e-commerce platforms like **Digikala**.
 
-🌐 **Live Preview:**  
+🌐 **Live Demo:**  
 [👉 View on GitHub Pages](https://alireza-abarian786.github.io/onlineShope/)
 
 ---
 
-## ✅ Main Features
+## ✨ Key Features
 
-### 🎨 Frontend (HTML/CSS/JavaScript)
-- Clean and modern UI
-- Responsive
-- Global and category-based product search
-- Discount countdown timer
-- Product categories with filter and grid/list view toggle
-- Interactive cart and wishlist icons
-- Simple navigation with sticky header
-
-### 🔧 Backend (Node.js & MongoDB)
-- User authentication system (login/register)
-- Token expiration handling
-- Cart and wishlist logic
-- Product search & filtering endpoints
-- Backend generated with AI-assisted Node.js logic
-- MongoDB used for data storage
+- Fully **offline** – no server or internet connection required
+- **Responsive design** – optimized for mobile, tablet, and desktop
+- **Advanced search** with support for Persian typo handling and space-insensitive matching
+- **Local authentication** system with user registration and login
+- **Shopping cart** management with quantity controls and total calculation
+- **Wishlist (bookmarks)** for saving favorite products
+- **Discount system** with live countdown timer
+- **Product detail page** with image gallery and related products
+- **User dashboard** with statistics, tasks, recent activities, and balance
+- **Category filtering**, sorting, and pagination
+- **Blog and articles** section on the homepage
 
 ---
 
-## 📄 Page Overview
+## 🛠️ Technologies Used
 
-| Page | Status | Key Features |
-|------|--------|--------------|
-| **Home Page** | ✅ Done | Responsive, dynamic, includes search, offers, timers |
-| **Category Page** | ✅ Done | Filters, grid/list view toggle, pagination, responsive) |
-| **Cart Page** | ✅ Done | Functional cart, pending payment gateway integration, Responsive |
-| **Articles Page** | ✅ Done | Basic content available, layout needs work, Responsive |
-| **User Panel** | ✅ Done | Functional, Responsive, dynamic, includes search |
-| **Product Detail Page** | 🚧 Planned | Not implemented yet |
+- HTML5, CSS3, JavaScript (Vanilla ES Modules)
+- Bootstrap 5, Swiper.js, Glide.js, AOS, SweetAlert2
+- localStorage for data persistence
 
 ---
 
-## 🧠 Project Strengths
+## 🚀 How to Run
 
-- Full-stack with frontend & backend integration
-- Real login/logout state, token handling
-- Clean and modular code, easy to maintain
-- Inspired by real e-commerce UIs (Digikala)
-- Functional features (wishlist, search, cart, etc.)
+```bash
+# Clone the repository
+git clone https://github.com/alireza-abarian786/onlineShope.git
+
+# Open with Live Server (VS Code)
+# Right-click on index.html → Open with Live Server
+```
+
+**Or simply open `index.html` directly in your browser.**
+
+**Live Demo:**  
+[https://alireza-abarian786.github.io/onlineShope/](https://alireza-abarian786.github.io/onlineShope/)
 
 ---
 
-## 🛠 Technologies Used
+## 👤 Default Users
 
-### Frontend:
-- HTML5  
-- CSS3  
-- JavaScript (Vanilla)
-- bootstrap
-- tailwind
+| Email | Password | Role |
+|-------|----------|------|
+| admin@example.com | admin123 | Admin |
+| test@example.com | test123 | Regular User |
 
-### Backend:
-- Node.js  
-- Express.js  
-- MongoDB  
-- JWT (for authentication)
+> 💡 You can also register a new account directly from the login page.
+
+---
+
+## 📁 Project Structure
+
+```
+onlineShope/
+├── src/
+│   ├── data/          ← Mock data (products, users, blogs)
+│   ├── js/
+│   │   ├── funcs/     ← Utility functions (cart, wishlist, menu)
+│   │   ├── panel/     ← User dashboard logic
+│   │   └── *.js       ← Main page scripts
+│   └── assets/
+│       ├── css/       ← Stylesheets
+│       └── images/    ← Product images and icons
+├── public/vendor/     ← Third-party libraries
+├── *.html             ← HTML pages
+├── .nojekyll          ← Disables Jekyll for GitHub Pages
+└── README.md
+```
 
 ---
 
 ## 📷 Screenshots
 
-### 🔐 Authentication & Token Logic
+### 🔐 Authentication
 
-| <p align='center'>Login State</p> | 
-|-------------|
-| ![Login](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png) |
-| <p align='center'>Token Expiration</p> |
-| ![Token Expired](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png) |
+| Login State | Token Expiration |
+|-------------|------------------|
+| ![Login](https://i.ibb.co/XkVHw1XX/Screenshot-2025-05-24-124255.png) | ![Token Expired](https://i.ibb.co/Fkx8s5vG/Screenshot-2025-05-24-113119.png) |
+
 ---
 
 ### 🛒 Cart Button State
@@ -84,54 +95,57 @@ DigiStore is a full-stack e-commerce prototype built with **HTML**, **CSS**, **J
 | Cart Empty | Cart Full |
 |------------|-----------|
 | ![Empty Cart](https://i.ibb.co/QFqzsfxh/Screenshot-2025-05-24-122836.png) | ![Full Cart](https://i.ibb.co/4ZqVpLPF/Screenshot-2025-05-24-123414.png) |
+
 ---
 
 ### 🕹️ Login Button State
+
 | Before Login | After Login | Token Expiration |
 |--------------|-------------|------------------|
 | ![Before Login](https://i.ibb.co/RkXC90Y0/Screenshot-2025-05-24-105318.png) | ![After Login](https://i.ibb.co/sdphfwbQ/Screenshot-2025-05-24-112531.png) | ![Token Expiration](https://i.ibb.co/3Y0knkYr/Screenshot-2025-05-24-113148.png) |
+
 ---
 
 ### 🧭 Category & Search UI
 
-| Category Menu |
-|---------------|
-| ![Categories](https://i.ibb.co/b5tBMKqL/Screenshot-2025-05-24-133502.png) |
-| <p align='center'>Global Search</p> |
-| ![Search](https://i.ibb.co/YTyCZ2LJ/Screenshot-2025-05-24-133914.png) |
+| Category Menu | Global Search |
+|---------------|---------------|
+| ![Categories](https://i.ibb.co/qLL1NX4d/Screenshot-2026-07-26-012254.png) | ![Search](https://i.ibb.co/nMrSXKJR/Screenshot-2026-07-26-012707.png) |
 
 ---
 
 ### 🛒 Cart State
 
-| Cart |
-|---|
-| ![Categories](https://i.ibb.co/Xk5P27JG/Screenshot-2025-06-03-154131jjjjjjjjjjjjjjj.png) | 
-| <p align='center'>Remove Product</p> |
-| ![Categories](https://i.ibb.co/kF11wCq/Screenshot-2025-06-03-154248.png) |
+| Cart View | Remove Product |
+|-----------|----------------|
+| ![Cart](https://i.ibb.co/Xk5P27JG/Screenshot-2025-06-03-154131jjjjjjjjjjjjjjj.png) | ![Remove](https://i.ibb.co/kF11wCq/Screenshot-2025-06-03-154248.png) |
 
 ---
 
-## 🔄 Future Plans
+## 📄 Page Status
 
-- Product detail page (description, images, related items)  
-- Admin panel (product & user management)  
-- Payment gateway integration  
-- Better layout for blog/articles
+| Page | Status |
+|------|--------|
+| Homepage | ✅ Complete |
+| Category | ✅ Complete |
+| Product Detail | ✅ Complete |
+| Shopping Cart | ✅ Complete |
+| User Dashboard | ✅ Complete |
+| Login / Register | ✅ Complete |
+| Blog | ✅ Complete |
 
 ---
 
 ## 👨‍💻 Developer
 
 **Alireza Abarian**  
-GitHub: [@alireza-abarian786](https://github.com/alireza-abarian786)  
-Email: [alirezaabarian786@gmail.com](mailto:alirezaabarian786@gmail.com)
+[GitHub](https://github.com/alireza-abarian786) · [Email](mailto:alirezaabarian786@gmail.com)
 
 ---
 
-## 🤝 Contribution
+## 🤝 Contributing
 
 Found a bug? Have a suggestion?  
-Feel free to open an Issue or Pull Request.  
-Let’s improve it together 🙌
+Feel free to open an **Issue** or submit a **Pull Request**.
 
+⭐ If you like this project, don't forget to give it a **Star**!
