@@ -1,33 +1,30 @@
-import { showModal } from "./funcs/store/ui.js";
+// src/js/components/footer.js
+
+import { showModal } from "../funcs/ui.js";
+
 let btnFooter = document.querySelector(".btn-footer");
 let inputFooter = document.querySelector(".input-footer");
 
 function btnEmailFooter() {
   btnFooter.addEventListener("click", () => {
-
-      let emailUser = {
-        email: inputFooter.value,
-      }
+    const email = inputFooter.value.trim();
     
-      if (inputFooter.value) {
-        fetch("http://localhost:3000/email", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(emailUser),
-          }).then((res) => res.json())
-            .then((data) => {
-            inputFooter.value = "";
-            showModal("📧 ایمیل شما با موفقیت ثبت شد")
-          });
+    if (email) {
+      // ✅ ذخیره ایمیل در localStorage (بدون سرور)
+      const emails = JSON.parse(localStorage.getItem('subscribedEmails')) || [];
+      
+      if (!emails.includes(email)) {
+        emails.push(email);
+        localStorage.setItem('subscribedEmails', JSON.stringify(emails));
+        inputFooter.value = "";
+        showModal("📧 ایمیل شما با موفقیت ثبت شد");
+      } else {
+        showModal("⚠️ این ایمیل قبلاً ثبت شده است");
       }
+    } else {
+      showModal("⚠️ لطفاً ایمیل خود را وارد کنید");
+    }
   });
 }
 
-
-export {btnEmailFooter}
-
-
-
-
+export { btnEmailFooter };
