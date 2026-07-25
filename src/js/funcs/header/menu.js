@@ -1,5 +1,7 @@
+// src/js/funcs/header/menu.js
+
 import fakeCategories from "../../../data/CategoriesData.js";
-// import { getCategories } from "../fetchData/fetchCategories.js";
+import { fixPathsArray } from "../pathHelper.js";
 
 //todo============================================== تنظیمات منو در سایز 992
 function settingsMenuDropDown() {
@@ -18,10 +20,13 @@ function settingsMenuDropDown() {
   }
 }
 
-// todo============================================== نمایش دسته‌بندی‌ها در منو
+// todo============================================== نمایش دسته‌بندی‌ها در منو (بدون سرور)
 const fetchCategoriesForShowToMenu = () => {
-    // fakeCategories از قبل import شده، نیاز به await نیست
-    const categoriesData = fakeCategories.filter(cat => cat.isActive);
+    // ✅ استفاده از دیتای فیک به جای فراخوانی سرور
+    const categoriesData = fakeCategories.filter(cat => cat.isActive !== false);
+    
+    // ✅ اصلاح مسیر آیکون‌ها برای GitHub Pages
+    const fixedCategories = fixPathsArray(categoriesData, ['icon']);
     
     const categoryWrapperXl = document.querySelector(".category-wrapper-xl");
     const categoryWrapperLg = document.querySelector(".category-wrapper-lg");
@@ -33,9 +38,9 @@ const fetchCategoriesForShowToMenu = () => {
     
     // ========== منوی دسکتاپ (XL) ==========
     if (categoryWrapperXl) {
-        categoryWrapperXl.innerHTML = ""; // پاک کردن محتوای قبلی
+        categoryWrapperXl.innerHTML = "";
         
-        categoriesData.forEach((item) => {
+        fixedCategories.forEach((item) => {
             categoryWrapperXl.insertAdjacentHTML(
                 "beforeend",
                 `
@@ -58,9 +63,8 @@ const fetchCategoriesForShowToMenu = () => {
     
     // ========== منوی موبایل (LG) ==========
     if (categoryWrapperLg) {
-        categoryWrapperLg.innerHTML = ""; // پاک کردن محتوای قبلی
+        categoryWrapperLg.innerHTML = "";
         
-        // اضافه کردن دکمه بستن
         categoryWrapperLg.insertAdjacentHTML(
             "beforeend",
             `
@@ -73,8 +77,7 @@ const fetchCategoriesForShowToMenu = () => {
             `
         );
         
-        // اضافه کردن دسته‌بندی‌ها
-        categoriesData.forEach((item) => {
+        fixedCategories.forEach((item) => {
             categoryWrapperLg.insertAdjacentHTML(
                 "beforeend",
                 `
@@ -99,4 +102,4 @@ const fetchCategoriesForShowToMenu = () => {
     }
 };
 
-export { settingsMenuDropDown , fetchCategoriesForShowToMenu};
+export { settingsMenuDropDown, fetchCategoriesForShowToMenu };

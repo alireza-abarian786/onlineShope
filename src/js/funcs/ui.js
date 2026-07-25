@@ -2,6 +2,11 @@ import fakeBlogs from "../../data/BlogsData.js";
 import { fakeFavorites } from "../../data/FavoriteData.js";  
 import { settingSliderGlide, settingSliderSwiper } from "./sliders.js";
 import { getLocalStorage } from "./storage.js";
+import { fixPathsArray } from "./pathHelper.js";
+
+// ✅ اصلاح مسیرهای بلاگ‌ها
+const fixedBlogs = fixPathsArray(fakeBlogs, ['image', 'thumbnail', 'author.avatar']);
+
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
 //todo========================================================== modal تابع ساخت و نمایش
@@ -55,7 +60,7 @@ let createBlogs = async (element) => {
             <img src="${blog.image}" 
                  alt="${blog.title}" 
                  loading="lazy"
-                 onerror="this.src='src/assets/images/blog-2.webp'" />
+                 onerror="this.src='./src/assets/images/blog-2.webp'" />
           </div>
 
           <div class="blog-info">
@@ -160,7 +165,7 @@ const createProductsTemplateHtml = (element, arrProducts) => {
                                     src="${img}"
                                     alt="${box.name} - تصویر ${i + 1}"
                                     ${i > 0 ? 'loading="lazy"' : ''}
-                                    onerror="this.src='src/assets/images/placeholder.webp'"
+                                    onerror="this.src='./src/assets/images/placeholder.webp'"
                                 />
                             </li>
                         `).join('')}

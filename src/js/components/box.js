@@ -10,7 +10,7 @@ updateFavoritesUI();
 
 //!---------------------------------------------------------------------- کلیک روی کارت محصول
 document.addEventListener('click', (e) => {
-    const productBox = e.target.closest('.product-box');
+    const productBox = e.target.closest('.product-box, .product-card');
     if (!productBox) return;
     
     // اگه روی دکمه‌ها کلیک شده، نادیده بگیر

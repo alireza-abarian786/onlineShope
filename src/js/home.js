@@ -3,9 +3,18 @@
 import { runTimer } from "./funcs/timer.js";
 import { boxCategoriesTemplateHtml, createBlogs, createProductsTemplateHtml } from './funcs/ui.js';
 import { hideLoader } from './funcs/utils.js';
+import { updateCartButtons } from './funcs/boxProduct/addCartBtn.js';
+import { fixPathsArray } from './funcs/pathHelper.js';
 import fakeProducts from "../data/ProductData.js";
 import fakeCategories from "../data/CategoriesData.js";
-import { updateCartButtons } from "./funcs/boxProduct/addCartBtn.js";
+
+// ✅ اصلاح مسیرها برای GitHub Pages
+const products = fixPathsArray(fakeProducts, ['image', 'thumbnail', 'images']);
+const categories = fixPathsArray(fakeCategories, ['icon']);
+
+// ✅ ذخیره دیتا در localStorage
+localStorage.setItem('productsData', JSON.stringify(products));
+localStorage.setItem('categoriesData', JSON.stringify(categories));
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const containerArticles = document.querySelector(".box-articles");
@@ -17,19 +26,11 @@ const containerCategoryPhones = document.querySelector(".container-category-phon
 const containerCategoryTools = document.querySelector(".container-category-tools");
 const containerCategoryModes = document.querySelector(".container-category-modes");
 
-// ✅ ذخیره دیتا در localStorage برای دسترسی سایر بخش‌ها
-if (!localStorage.getItem('productsData')) {
-    localStorage.setItem('productsData', JSON.stringify(fakeProducts));
-}
-if (!localStorage.getItem('categoriesData')) {
-    localStorage.setItem('categoriesData', JSON.stringify(fakeCategories));
-}
-
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 //todo===================================== نمایش محصولات بر اساس دسته بندی در صفحه اصلی
 const showProductHomePage = async () => {
-  const productsData = fakeProducts;
-  const categoriesData = fakeCategories;
+  const productsData = products;
+  const categoriesData = categories;
 
   const arrDiscount = productsData.filter((product) => product.discount > 0);
   const arrAppliances = productsData.filter((item) => item.category === "kitchen");

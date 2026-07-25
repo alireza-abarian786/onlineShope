@@ -3,10 +3,12 @@
 import { getLocalStorage, setLocalStorage } from "./storage.js";
 import { showModal } from "./ui.js";
 
+// src/js/funcs/utils.js
+
 //!---------------------------------------------------------------------- Variables -------------------------------------------------------
 const loaderElem = document.querySelector(".loader-container");
 let loaderTimeout = null;
-const LOADER_TIMEOUT_MS = 5000; // 5 ثانیه
+const LOADER_TIMEOUT_MS = 3000; // ✅ کاهش به 3 ثانیه
 
 //!---------------------------------------------------------------------- functions -------------------------------------------------------
 
@@ -35,6 +37,7 @@ function hideLoader() {
         loaderTimeout = null;
     }
 }
+
 
 //todo============================================ تابع گرفتن پارامترهای URL
 let searchParams = (key) => {

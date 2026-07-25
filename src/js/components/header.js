@@ -5,16 +5,14 @@ import { closeCart } from "../funcs/header/closeCart.js";
 import { isLogin } from "../funcs/header/loginBtn.js";
 import { fetchCategoriesForShowToMenu } from "../funcs/header/menu.js";
 import { hideLoader } from "../funcs/utils.js";
-import { getLocalStorage } from "../funcs/storage.js";
 
 //!---------------------------------------------------------------------- اجرا -------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // اجرای توابع هدر
     isLogin();
     closeCart();
     toggleCart();
     updateCartNotification();
-    fetchCategoriesForShowToMenu();
+    fetchCategoriesForShowToMenu(); // ✅ این دیگه از سرور نمیگیره
     hideLoader();
     
     // گوش دادن به تغییرات localStorage
@@ -29,4 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-console.log('✅ Header components loaded successfully');
+console.log('✅ Header loaded successfully');
