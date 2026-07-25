@@ -416,7 +416,7 @@ let createBoxProductToPageCart = (shoppingCartProduct) => {
                         <div class="discount discount-cart-page"> ${box.discountPercent}% تخفیف </div>
                     </div>
                     <div class="container-total flex-md-row flex-column gap-2 gap-md-5">
-                      <img src="src/assets/images/logo.webp" alt="لوگوی برند" class="brand-logo" loading="lazy">
+                      <img src="./src/assets/images/logo.webp" alt="لوگوی برند" class="brand-logo" loading="lazy">
                       <div class="total-price-container">جمع: 
                         <span class="total-price">${box.finalPrice.toLocaleString()}</span>
                         تومان

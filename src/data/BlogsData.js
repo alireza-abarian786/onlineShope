@@ -7,11 +7,11 @@ const fakeBlogs = [
         slug: "gaming-laptop-buying-guide-1405",
         author: {
             name: "علی محمدی",
-            avatar: "/src/assets/images/img-0.webp",
+            avatar: "./src/assets/images/img-0.webp",
             role: "کارشناس سخت‌افزار"
         },
-        image: "/src/assets/images/blog-2.webp",
-        thumbnail: "/src/assets/images/img-big/image-0.webp",
+        image: "./src/assets/images/blog-2.webp",
+        thumbnail: "./src/assets/images/img-big/image-0.webp",
         category: "digital",
         categoryLabel: "دیجیتال",
         tags: ["لپ‌تاپ", "گیمینگ", "راهنمای خرید", "سخت‌افزار"],
@@ -69,11 +69,11 @@ const fakeBlogs = [
         slug: "increase-phone-battery-life-tips",
         author: {
             name: "زهرا کریمی",
-            avatar: "/src/assets/images/img-1.webp",
+            avatar: "./src/assets/images/img-1.webp",
             role: "کارشناس موبایل"
         },
-        image: "/src/assets/images/img-big/image-1.webp",
-        thumbnail: "/src/assets/images/img-head/img-0.webp",
+        image: "./src/assets/images/img-big/image-1.webp",
+        thumbnail: "./src/assets/images/img-head/img-0.webp",
         category: "phone",
         categoryLabel: "موبایل",
         tags: ["موبایل", "باتری", "نگهداری", "آیفون", "اندروید"],
@@ -127,11 +127,11 @@ const fakeBlogs = [
         slug: "how-to-build-smart-kitchen",
         author: {
             name: "مریم قاسمی",
-            avatar: "/src/assets/images/img-2.webp",
+            avatar: "./src/assets/images/img-2.webp",
             role: "کارشناس لوازم خانگی"
         },
-        image: "/src/assets/images/img-big/image-2.webp",
-        thumbnail: "/src/assets/images/img-head/img-1.webp",
+        image: "./src/assets/images/img-big/image-2.webp",
+        thumbnail: "./src/assets/images/img-head/img-1.webp",
         category: "kitchen",
         categoryLabel: "آشپزخانه",
         tags: ["آشپزخانه", "هوشمند", "لوازم خانگی", "تکنولوژی"],
@@ -178,11 +178,11 @@ const fakeBlogs = [
         slug: "perfume-selection-guide-personality",
         author: {
             name: "نرگس تهرانی",
-            avatar: "/src/assets/images/img-4.webp",
+            avatar: "./src/assets/images/img-4.webp",
             role: "کارشناس مد و زیبایی"
         },
-        image: "/src/assets/images/img-big/image-3.webp",
-        thumbnail: "/src/assets/images/img-head/img-2.webp",
+        image: "./src/assets/images/img-big/image-3.webp",
+        thumbnail: "./src/assets/images/img-head/img-2.webp",
         category: "mode",
         categoryLabel: "مد و پوشاک",
         tags: ["عطر", "ادکلن", "مد", "زیبایی", "شخصیت"],
@@ -245,11 +245,11 @@ const fakeBlogs = [
         slug: "10-essential-tools-for-every-home",
         author: {
             name: "رضا عباسی",
-            avatar: "/src/assets/images/img-5.webp",
+            avatar: "./src/assets/images/img-5.webp",
             role: "کارشناس ابزارآلات"
         },
-        image: "/src/assets/images/img-big/image-4.webp",
-        thumbnail: "/src/assets/images/img-head/img-3.webp",
+        image: "./src/assets/images/img-big/image-4.webp",
+        thumbnail: "./src/assets/images/img-head/img-3.webp",
         category: "tools",
         categoryLabel: "ابزارآلات",
         tags: ["ابزار", "خانه", "تعمیرات", "کاربردی"],
@@ -309,11 +309,11 @@ const fakeBlogs = [
         slug: "gold-types-and-purity-testing",
         author: {
             name: "حسین طلافروش",
-            avatar: "/src/assets/images/img-7.webp",
+            avatar: "./src/assets/images/img-7.webp",
             role: "کارشناس طلا و جواهر"
         },
-        image: "/src/assets/images/img-big/image-5.webp",
-        thumbnail: "/src/assets/images/img-head/img-33.webp",
+        image: "./src/assets/images/img-big/image-5.webp",
+        thumbnail: "./src/assets/images/img-head/img-33.webp",
         category: "jewellery",
         categoryLabel: "طلا و جواهرات",
         tags: ["طلا", "عیار", "جواهرات", "سرمایه‌گذاری"],
@@ -373,11 +373,11 @@ const fakeBlogs = [
         slug: "best-smartwatches-1405-review",
         author: {
             name: "پویا نادری",
-            avatar: "/src/assets/images/img-17.webp",
+            avatar: "./src/assets/images/img-17.webp",
             role: "کارشناس گجت‌های هوشمند"
         },
-        image: "/src/assets/images/img-big/image-22.webp",
-        thumbnail: "/src/assets/images/modes/mode-2.webp",
+        image: "./src/assets/images/img-big/image-22.webp",
+        thumbnail: "./src/assets/images/modes/mode-2.webp",
         category: "digital",
         categoryLabel: "دیجیتال",
         tags: ["ساعت هوشمند", "گجت", "تکنولوژی", "بررسی"],
@@ -420,11 +420,11 @@ const fakeBlogs = [
         slug: "complete-stationery-guide-for-students",
         author: {
             name: "لیلا رضوی",
-            avatar: "/src/assets/images/img-0.webp",
+            avatar: "./src/assets/images/img-0.webp",
             role: "مشاور تحصیلی"
         },
-        image: "/src/assets/images/img-big/image-33.webp",
-        thumbnail: "/src/assets/images/stationerys/stationery-1.webp",
+        image: "./src/assets/images/img-big/image-33.webp",
+        thumbnail: "./src/assets/images/stationerys/stationery-1.webp",
         category: "stationery",
         categoryLabel: "لوازم تحریر",
         tags: ["لوازم تحریر", "دانشجو", "مدرسه", "دفتر"],
