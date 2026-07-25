@@ -13,8 +13,12 @@ const products = fixPathsArray(fakeProducts, ['image', 'thumbnail', 'images']);
 const categories = fixPathsArray(fakeCategories, ['icon']);
 
 // ✅ ذخیره دیتا در localStorage
-localStorage.setItem('productsData', JSON.stringify(products));
-localStorage.setItem('categoriesData', JSON.stringify(categories));
+if (!localStorage.getItem('productsData')) {
+    localStorage.setItem('productsData', JSON.stringify(products));
+}
+if (!localStorage.getItem('categoriesData')) {
+    localStorage.setItem('categoriesData', JSON.stringify(categories));
+}
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const containerArticles = document.querySelector(".box-articles");
@@ -29,6 +33,7 @@ const containerCategoryModes = document.querySelector(".container-category-modes
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 //todo===================================== نمایش محصولات بر اساس دسته بندی در صفحه اصلی
 const showProductHomePage = async () => {
+  // ✅ استفاده از دیتای فیک
   const productsData = products;
   const categoriesData = categories;
 
@@ -46,9 +51,6 @@ const showProductHomePage = async () => {
 
   boxCategoriesTemplateHtml(categoriesData);
 };
-
-
-
 
 // todo============================================== سرچ سراسری محصولات
 const searchGlobalHandler = (event) => {
@@ -70,7 +72,8 @@ const searchGlobalHandler = (event) => {
             </li>`;
 
         setTimeout(() => {
-            const filterProducts = fakeProducts.filter(product =>
+            // ✅ استفاده از products (دیتای فیک با مسیرهای اصلاح شده)
+            const filterProducts = products.filter(product =>
                 product.name.toLowerCase().includes(searchValue.toLowerCase()) ||
                 product.brand?.toLowerCase().includes(searchValue.toLowerCase()) ||
                 product.category?.toLowerCase().includes(searchValue.toLowerCase())
@@ -79,26 +82,25 @@ const searchGlobalHandler = (event) => {
             ulElemListSearch.innerHTML = '';
 
             if (filterProducts.length > 0) {
-
-                    filterProducts.forEach(item => {
-                        ulElemListSearch.insertAdjacentHTML('beforeend',
-                            `<li class="w-100 p-3 border-bottom d-flex align-items-center gap-2" 
-                                style="cursor: pointer;"
-                                onclick="window.location.href='./product.html?id=${item._id}'">
-                                <img src="${item.image}" alt="${item.name}" 
-                                    width="40" height="40" 
-                                    style="object-fit: contain; border-radius: 6px;"
-                                    onerror="this.src='/src/assets/images/placeholder.webp'" />
-                                <div>
-                                    <div class="fw-bold" style="font-size: 14px;">${item.name}</div>
-                                    <div style="font-size: 12px; color: #666;">
-                                        ${item.price.toLocaleString()} تومان
-                                        ${item.discount > 0 ? `<span class="text-danger ms-2">${item.discount}%</span>` : ''}
-                                    </div>
+                filterProducts.forEach(item => {
+                    ulElemListSearch.insertAdjacentHTML('beforeend',
+                        `<li class="w-100 p-3 border-bottom d-flex align-items-center gap-2" 
+                             style="cursor: pointer;"
+                             onclick="window.location.href='./product.html?id=${item._id}'">
+                            <img src="${item.image}" alt="${item.name}" 
+                                 width="40" height="40" 
+                                 style="object-fit: contain; border-radius: 6px;"
+                                 onerror="this.src='./src/assets/images/placeholder.webp'" />
+                            <div>
+                                <div class="fw-bold" style="font-size: 14px;">${item.name}</div>
+                                <div style="font-size: 12px; color: #666;">
+                                    ${item.price.toLocaleString()} تومان
+                                    ${item.discount > 0 ? `<span class="text-danger ms-2">${item.discount}%</span>` : ''}
                                 </div>
-                            </li>`
-                        );
-                    });
+                            </div>
+                        </li>`
+                    );
+                });
             } else {
                 ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-center text-danger bg-secondary bg-opacity-25">محصولی یافت نشد</li>';
             }
@@ -109,9 +111,6 @@ const searchGlobalHandler = (event) => {
         ulElemListSearch.innerHTML = '';
     }
 };
-
-
-
 
 //todo========================================================== نمایش محصولات صفحه اصلی
 showProductHomePage();

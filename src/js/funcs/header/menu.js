@@ -20,12 +20,10 @@ function settingsMenuDropDown() {
   }
 }
 
-// todo============================================== نمایش دسته‌بندی‌ها در منو (بدون سرور)
+// todo============================================== نمایش دسته‌بندی‌ها در منو
 const fetchCategoriesForShowToMenu = () => {
-    // ✅ استفاده از دیتای فیک به جای فراخوانی سرور
+    // ✅ استفاده از دیتای فیک
     const categoriesData = fakeCategories.filter(cat => cat.isActive !== false);
-    
-    // ✅ اصلاح مسیر آیکون‌ها برای GitHub Pages
     const fixedCategories = fixPathsArray(categoriesData, ['icon']);
     
     const categoryWrapperXl = document.querySelector(".category-wrapper-xl");

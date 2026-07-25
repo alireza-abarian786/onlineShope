@@ -40,72 +40,80 @@ let showModal = (text) => {
   document.querySelector(".toast-body").innerHTML = text;
 };
 
+
 //todo========================================================== ساخت باکس مقالات صفحه اصلی
 let createBlogs = async (element) => {
-  const blogs = fakeBlogs.filter(blog => blog.isPublished);
+  // ✅ استفاده از دیتای فیک با مسیرهای اصلاح شده
+  import('../../data/BlogsData.js').then(module => {
+    const fakeBlogs = module.default;
+    const { fixPathsArray } = require('./pathHelper.js');
+    const fixedBlogs = fixPathsArray(fakeBlogs, ['image', 'thumbnail', 'author.avatar']);
+    const blogs = fixedBlogs.filter(blog => blog.isPublished);
 
-  if (!element) {
-    console.error("Element not found for blogs");
-    return;
-  }
+    if (!element) {
+      console.error("Element not found for blogs");
+      return;
+    }
 
-  element.innerHTML = ""; // پاک کردن محتوای قبلی
+    element.innerHTML = "";
 
-  blogs.forEach((blog) => {
-    element.insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="swiper-slide card-content container-blog">
-          <div class="w-100 blog-image-container">
-            <img src="${blog.image}" 
-                 alt="${blog.title}" 
-                 loading="lazy"
-                 onerror="this.src='./src/assets/images/blog-2.webp'" />
-          </div>
+    if (blogs.length === 0) {
+      element.innerHTML = `<div class="alert alert-info w-100 text-center">هیچ مقاله‌ای یافت نشد</div>`;
+      return;
+    }
 
-          <div class="blog-info">
-            <div class="blog-meta">
-              <span class="blog-category">${blog.categoryLabel}</span>
-              <span class="blog-date">${blog.createdAt}</span>
-              <span class="blog-readtime">${blog.readTime} دقیقه مطالعه</span>
+    blogs.forEach((blog) => {
+      element.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="swiper-slide card-content container-blog">
+            <div class="w-100 blog-image-container">
+              <img src="${blog.image}" 
+                   alt="${blog.title}" 
+                   loading="lazy"
+                   onerror="this.src='./src/assets/images/blog-2.webp'" />
             </div>
-            
-            <h6 class="blog-title">
-              <a href="./blog.html?slug=${blog.slug}">${blog.title}</a>
-            </h6>
-            
-            <p class="blog-excerpt">${blog.excerpt || blog.content.substring(0, 150) + '...'}</p>
-            
-            <div class="blog-footer">
-              <div class="blog-author">
-                <img src="${blog.author.avatar}" alt="${blog.author.name}" class="author-avatar" />
-                <span>${blog.author.name}</span>
+            <div class="blog-info">
+              <div class="blog-meta">
+                <span class="blog-category">${blog.categoryLabel || ''}</span>
+                <span class="blog-date">${blog.createdAt || ''}</span>
+                <span class="blog-readtime">${blog.readTime || 0} دقیقه مطالعه</span>
               </div>
-              
-              <div class="blog-stats">
-                <span><i class="bi bi-eye"></i> ${blog.views.toLocaleString()}</span>
-                <span><i class="bi bi-heart"></i> ${blog.likes}</span>
-                <span><i class="bi bi-chat"></i> ${blog.comments.length}</span>
+              <h6 class="blog-title">
+                <a href="./blog.html?slug=${blog.slug}">${blog.title}</a>
+              </h6>
+              <p class="blog-excerpt">${blog.excerpt || blog.content?.substring(0, 150) + '...' || ''}</p>
+              <div class="blog-footer">
+                <div class="blog-author">
+                  <img src="${blog.author?.avatar || './src/assets/images/avatar-default.png'}" alt="${blog.author?.name || 'نویسنده'}" class="author-avatar" />
+                  <span>${blog.author?.name || 'نویسنده'}</span>
+                </div>
+                <div class="blog-stats">
+                  <span><i class="bi bi-eye"></i> ${blog.views?.toLocaleString() || 0}</span>
+                  <span><i class="bi bi-heart"></i> ${blog.likes || 0}</span>
+                  <span><i class="bi bi-chat"></i> ${blog.comments?.length || 0}</span>
+                </div>
               </div>
+              <a href="./blog.html?slug=${blog.slug}" class="read-more-btn">
+                مطالعه مقاله
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="16" height="16">
+                  <path fill="currentColor" d="M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672zm256 0a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672z"/>
+                </svg>
+              </a>
             </div>
-            
-            <a href="./blog.html?slug=${blog.slug}" class="read-more-btn">
-              مطالعه مقاله
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="16" height="16">
-                <path fill="currentColor" d="M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672zm256 0a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672z"/>
-              </svg>
-            </a>
           </div>
-        </div>
-    `);
+        `
+      );
+    });
+    
+    if (window.blogSwiper) {
+      window.blogSwiper.update();
+    }
+  }).catch(err => {
+    console.error("Error loading blogs:", err);
+    element.innerHTML = `<div class="alert alert-danger w-100 text-center">خطا در بارگذاری مقالات</div>`;
   });
-  
-  if (window.blogSwiper) {
-    window.blogSwiper.update();
-  }
 };
-
-// src/js/funcs/ui.js
 
 //todo========================================================== ساخت باکس محصولات صفحه اصلی
 const createProductsTemplateHtml = (element, arrProducts) => {  
