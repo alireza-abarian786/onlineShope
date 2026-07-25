@@ -1,13 +1,21 @@
-import { getCartData } from "./funcs/fetchData/fetchCart.js";
+// src/js/shoppingCart.js
+
 import { boxPaymentHtmlTemplate, createBoxProductToPageCart } from "./funcs/ui.js";
 import { hideLoader, pagesInLoginState } from "./funcs/utils.js";
+import { updateCartButtons } from "./funcs/boxProduct/addCartBtn.js";
 
-const cartData = await getCartData() 
-//! ---------------------------------------------------------------------imports-----------------------------------------------------------------------
-createBoxProductToPageCart(cartData)
-boxPaymentHtmlTemplate(cartData)
+// ✅ دریافت دیتا از localStorage
+const cartData = JSON.parse(localStorage.getItem('cartData')) || { products: [] };
 
-hideLoader()
-pagesInLoginState()
+//! --------------------------------------------------------------------- نمایش سبد خرید
+createBoxProductToPageCart(cartData);
+boxPaymentHtmlTemplate(cartData);
 
-console.log('shoppingCart');
+// ✅ بروزرسانی دکمه‌های سبد خرید در صفحه سبد خرید
+document.addEventListener('DOMContentLoaded', () => {
+    hideLoader();
+    pagesInLoginState();
+    updateCartButtons();
+});
+
+console.log('✅ Shopping cart page loaded successfully');

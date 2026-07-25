@@ -7,7 +7,7 @@
     <meta name="keywords" content="دیجی استور, فروشگاه اینترنتی, خرید آنلاین, محصولات با کیفیت"/>
     <meta name="author" content="Digi Store" />
     <meta name="theme-color" content="#2563eb" />
-    <title>دیجی استور | فروشگاه اینترنتی</title>
+    <title id="pageTitle">دیجی استور | دسته‌بندی محصولات</title>
     <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
 
 
@@ -330,43 +330,45 @@
 
                 <div class="container-category swiper-wrapper discounts-goods-slider d-flex flex-column">
 
-                  <div class="container-category__header w-100 d-flex flex-wrap flex-md-nowrap gap-5 gap-lg-0 align-items-center p-3 justify-content-center justify-content-sm-between border-bottom">
+                  <!-- category.html - بخش container-category__header -->
+                  <div class="container-category__header w-100 d-flex flex-wrap flex-md-nowrap gap-5 gap-lg-0 align-items-center p-3 justify-content-between justify-content-sm-between border-bottom">
 
-                    <div class="container-category__header-item d-flex justify-content-center">
-                      <div class="box-search box-search-category align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2">
-                        <!--? input search -->
-                        <input class="form-control border-0 text-end p-1 pb-2 d-flex" type="text" placeholder="جستجو در دیجی استور">
-            
-                        <svg style="width: 50px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.893 16.92l3.08 3.08m-.889-8.419c0 4.187-3.383 7.581-7.555 7.581c-4.173 0-7.556-3.394-7.556-7.58C3.973 7.393 7.356 4 11.528 4c4.173 0 7.556 3.394 7.556 7.581"></path>
-                        </svg>
-                      </div>
-                    </div>
-
-                    <div class="container-category__header-item d-flex align-items-center justify-content-between justify-content-md-end">
-                      <div class="dropdown">
-                        <button class="btn btn-secondary rounded-3 dropdown-toggle text-end dropdown-category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          مرتب سازی پیش فرض 
-                        </button>
-                        <ul class="dropdown-menu text-end">
-                          <li><a class="dropdown-item active" href="#" data-sorting="default">مرتب سازی بر اساس پیش فرض</a></li>
-                          <li><a class="dropdown-item" href="#" data-sorting="cheapest">مرتب سازی بر اساس ارزان ترین</a></li>
-                          <li><a class="dropdown-item" href="#" data-sorting="expensive">مرتب سازی بر اساس گران ترین</a></li>
-                          <li><a class="dropdown-item" href="#" data-sorting="discount">مرتب سازی بر اساس تخفیف</a></li>
-                          <li><a class="dropdown-item" href="#" data-sorting="score">مرتب سازی بر اساس امتیاز</a></li>
-                        </ul>
+                      <div class="container-category__header-item d-flex">
+                          <div class="box-search box-search-category align-items-center justify-content-center rounded-5 d-flex w-custom mb-sm-0 mb-2">
+                              <input class="form-control border-0 text-end p-1 pb-2 d-flex" type="text" placeholder="جستجو در دیجی استور" id="categorySearch">
+                              <svg style="width: 50px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.893 16.92l3.08 3.08m-.889-8.419c0 4.187-3.383 7.581-7.555 7.581c-4.173 0-7.556-3.394-7.556-7.58C3.973 7.393 7.356 4 11.528 4c4.173 0 7.556 3.394 7.556 7.581"></path>
+                              </svg>
+                          </div>
                       </div>
 
-                      <div class="btn-group ms-3">
-                        <button type="button" class="btn btn-outline-secondary btn-row">
-                          <i class="bi bi-distribute-vertical"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary btn-col active-view">
-                          <i class="bi bi-distribute-horizontal"></i>
-                        </button>
+                      <div class="category-page-title-container d-flex align-items-center" >
+                          <h2 class="category-page-title fw-bold m-0 text-primary" id="categoryTitle">همه محصولات</h2>
                       </div>
 
-                    </div>
+                      <div class="container-category__header-item d-flex align-items-center justify-content-between justify-content-md-end">
+                          <div class="dropdown">
+                              <button class="btn btn-secondary rounded-3 dropdown-toggle text-end dropdown-category" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  مرتب سازی پیش فرض 
+                              </button>
+                              <ul class="dropdown-menu text-end">
+                                  <li><a class="dropdown-item active" href="#" data-sorting="default">مرتب سازی بر اساس پیش فرض</a></li>
+                                  <li><a class="dropdown-item" href="#" data-sorting="cheapest">مرتب سازی بر اساس ارزان ترین</a></li>
+                                  <li><a class="dropdown-item" href="#" data-sorting="expensive">مرتب سازی بر اساس گران ترین</a></li>
+                                  <li><a class="dropdown-item" href="#" data-sorting="discount">مرتب سازی بر اساس تخفیف</a></li>
+                                  <li><a class="dropdown-item" href="#" data-sorting="score">مرتب سازی بر اساس امتیاز</a></li>
+                              </ul>
+                          </div>
+
+                          <div class="btn-group ms-3">
+                              <button type="button" class="btn btn-outline-secondary btn-row">
+                                  <i class="bi bi-distribute-vertical"></i>
+                              </button>
+                              <button type="button" class="btn btn-outline-secondary btn-col active-view">
+                                  <i class="bi bi-distribute-horizontal"></i>
+                              </button>
+                          </div>
+                      </div>
 
                   </div>
 

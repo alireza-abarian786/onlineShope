@@ -1,7 +1,20 @@
-// تاریخ هدف (مثال: اوایل سال 2024)
-const targetDate = new Date("2025-06-17T00:00:00");
+// src/js/funcs/timer.js
 
-const targetDate2 = new Date("2025-06-17T00:00:00");
+// ✅ تاریخ هدف داینامیک (مثلاً 7 روز بعد)
+function getTargetDate() {
+    const saved = localStorage.getItem('saleEndDate');
+    if (saved) {
+        return new Date(saved);
+    }
+    // 7 روز بعد
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    localStorage.setItem('saleEndDate', date.toISOString());
+    return date;
+}
+
+const targetDate = getTargetDate();
+const targetDate2 = getTargetDate();
 
 // ارجاع به عناصر HTML
 const daysElement = document.getElementById("days");
@@ -14,48 +27,42 @@ const hoursElement2 = document.getElementById("hours2");
 const minutesElement2 = document.getElementById("minutes2");
 const secondsElement2 = document.getElementById("seconds2");
 
-
-
 // تابع برای به‌روزرسانی ساعت شمار
 function updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement) {
-  // تاریخ فعلی
   const now = new Date();
-
-  // تفاوت زمانی بین تاریخ هدف و تاریخ فعلی (به میلی‌ثانیه)
   const diff = targetDate - now;
 
-  // اگر زمان باقی‌مانده منفی شد، ساعت شمار تمام شده است
   if (diff <= 0) {
-    daysElement.textContent = "00";
+    // ✅ اگر زمان تموم شد، دوباره ست کن
+    const newDate = new Date();
+    newDate.setDate(newDate.getDate() + 7);
+    localStorage.setItem('saleEndDate', newDate.toISOString());
+    daysElement.textContent = "07";
     hoursElement.textContent = "00";
     minutesElement.textContent = "00";
     secondsElement.textContent = "00";
-    clearInterval(); // متوقف کردن بروزرسانی
     return;
   }
 
-  // محاسبه روزها، ساعات، دقایق و ثانیه‌ها
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24)); // روزها
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // ساعات
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); // دقایق
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000); // ثانیه‌ها
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-  // نمایش ساعات، دقایق و ثانیه‌ها در عناصر مربوطه
-  daysElement.textContent = String(days).padStart(2, "0"); // اطمینان از دو رقمی بودن
+  daysElement.textContent = String(days).padStart(2, "0");
   hoursElement.textContent = String(hours).padStart(2, "0");
   minutesElement.textContent = String(minutes).padStart(2, "0");
   secondsElement.textContent = String(seconds).padStart(2, "0");
 }
 
 let runTimer = () => {
-  // فراخوانی تابع updateTimer هر ثانیه یکبار
-  setInterval(() => updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement) , 1000);
-  setInterval(() => updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2) , 1000);
+  // هر ثانیه یکبار آپدیت کن
+  setInterval(() => updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement), 1000);
+  setInterval(() => updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2), 1000);
   
-  // اجرای اولیه تابع برای نمایش زمان بدون انتظار یک ثانیه
-  updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement)
-  updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2)
-
+  // اجرای اولیه
+  updateTimer(targetDate, daysElement, hoursElement, minutesElement, secondsElement);
+  updateTimer(targetDate2, daysElement2, hoursElement2, minutesElement2, secondsElement2);
 }
 
 export { runTimer };

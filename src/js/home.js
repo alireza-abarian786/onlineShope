@@ -1,8 +1,11 @@
-//!---------------------------------------------------------------------- import -------------------------------------------------------
+// src/js/home.js
+
 import { runTimer } from "./funcs/timer.js";
-import { boxCategoriesTemplateHtml, createBlogs , createProductsTemplateHtml} from './funcs/ui.js';
-import { getProducts } from "./funcs/fetchData/fetchProducts.js";
-import { getCategories } from "./funcs/fetchData/fetchCategories.js";
+import { boxCategoriesTemplateHtml, createBlogs, createProductsTemplateHtml } from './funcs/ui.js';
+import { hideLoader } from './funcs/utils.js';
+import fakeProducts from "../data/ProductData.js";
+import fakeCategories from "../data/CategoriesData.js";
+import { updateCartButtons } from "./funcs/boxProduct/addCartBtn.js";
 
 //!---------------------------------------------------------------------- Variable -------------------------------------------------------
 const containerArticles = document.querySelector(".box-articles");
@@ -14,17 +17,25 @@ const containerCategoryPhones = document.querySelector(".container-category-phon
 const containerCategoryTools = document.querySelector(".container-category-tools");
 const containerCategoryModes = document.querySelector(".container-category-modes");
 
+// ✅ ذخیره دیتا در localStorage برای دسترسی سایر بخش‌ها
+if (!localStorage.getItem('productsData')) {
+    localStorage.setItem('productsData', JSON.stringify(fakeProducts));
+}
+if (!localStorage.getItem('categoriesData')) {
+    localStorage.setItem('categoriesData', JSON.stringify(fakeCategories));
+}
+
 //!---------------------------------------------------------------------- function -------------------------------------------------------
 //todo===================================== نمایش محصولات بر اساس دسته بندی در صفحه اصلی
 const showProductHomePage = async () => {
-  const productsData = await getProducts()
-  const categoriesData = await getCategories()
+  const productsData = fakeProducts;
+  const categoriesData = fakeCategories;
 
-  const arrDiscount = productsData.filter((product) => product.discount);
-  const arrAppliances = productsData.filter((item) => item.category_id === "3");
-  const arrPhones = productsData.filter((item) => item.category_id === "10");
-  const arrTools = productsData.filter((item) => item.category_id === "9");
-  const arrModes = productsData.filter((item) => item.category_id === "2");
+  const arrDiscount = productsData.filter((product) => product.discount > 0);
+  const arrAppliances = productsData.filter((item) => item.category === "kitchen");
+  const arrPhones = productsData.filter((item) => item.category === "phone");
+  const arrTools = productsData.filter((item) => item.category === "tools");
+  const arrModes = productsData.filter((item) => item.category === "mode");
 
   createProductsTemplateHtml(discountsGoodsSlider, arrDiscount);
   createProductsTemplateHtml(containerCategoryAppliances, arrAppliances);
@@ -32,57 +43,77 @@ const showProductHomePage = async () => {
   createProductsTemplateHtml(containerCategoryTools, arrTools);
   createProductsTemplateHtml(containerCategoryModes, arrModes);
 
-  boxCategoriesTemplateHtml(categoriesData)  
+  boxCategoriesTemplateHtml(categoriesData);
 };
 
+
+
+
 // todo============================================== سرچ سراسری محصولات
-const searchGlobalHandler = async (event) => {
-  const searchValue = event.target.value.trim();
-  const ulElemListSearch = document.querySelector(".box-search__ul-list");  
+const searchGlobalHandler = (event) => {
+    const searchValue = event.target.value.trim();
+    const ulElemListSearch = document.querySelector(".box-search__ul-list");
 
-  if (searchValue) {
-    ulElemListSearch.classList.add('show');
-    
-    ulElemListSearch.innerHTML = `
-      <li class="w-100 p-3 text-center">
-        <div class="mini-loader">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </li>`;
+    if (!ulElemListSearch) return;
 
+    if (searchValue) {
+        ulElemListSearch.classList.add('show');
 
-    try {
-      const filterProducts = await resultProductsFetchOperation.filter(product =>
-        product.name.toLowerCase().startsWith(searchValue.toLowerCase())
-      );
+        ulElemListSearch.innerHTML = `
+            <li class="w-100 p-3 text-center">
+                <div class="mini-loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </li>`;
 
-      ulElemListSearch.innerHTML = '';
+        setTimeout(() => {
+            const filterProducts = fakeProducts.filter(product =>
+                product.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                product.brand?.toLowerCase().includes(searchValue.toLowerCase()) ||
+                product.category?.toLowerCase().includes(searchValue.toLowerCase())
+            );
 
-      if (filterProducts.length > 0) {
-        filterProducts.forEach(item => {
-          ulElemListSearch.insertAdjacentHTML('beforeend',
-            `<li class="w-100 p-3 border-bottom">${item.name}</li>`
-          );
-        });
-      } else {
-        ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-center text-danger bg-secondary bg-opacity-25">محصولی یافت نشد</li>';
-      }
+            ulElemListSearch.innerHTML = '';
 
-    } catch (err) {
-      ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-danger">خطا در دریافت محصولات</li>';
-      console.error(err);
+            if (filterProducts.length > 0) {
+
+                    filterProducts.forEach(item => {
+                        ulElemListSearch.insertAdjacentHTML('beforeend',
+                            `<li class="w-100 p-3 border-bottom d-flex align-items-center gap-2" 
+                                style="cursor: pointer;"
+                                onclick="window.location.href='./product.html?id=${item._id}'">
+                                <img src="${item.image}" alt="${item.name}" 
+                                    width="40" height="40" 
+                                    style="object-fit: contain; border-radius: 6px;"
+                                    onerror="this.src='/src/assets/images/placeholder.webp'" />
+                                <div>
+                                    <div class="fw-bold" style="font-size: 14px;">${item.name}</div>
+                                    <div style="font-size: 12px; color: #666;">
+                                        ${item.price.toLocaleString()} تومان
+                                        ${item.discount > 0 ? `<span class="text-danger ms-2">${item.discount}%</span>` : ''}
+                                    </div>
+                                </div>
+                            </li>`
+                        );
+                    });
+            } else {
+                ulElemListSearch.innerHTML = '<li class="w-100 p-3 text-center text-danger bg-secondary bg-opacity-25">محصولی یافت نشد</li>';
+            }
+        }, 300);
+
+    } else {
+        ulElemListSearch.classList.remove('show');
+        ulElemListSearch.innerHTML = '';
     }
+};
 
-  } else {
-    ulElemListSearch.classList.remove('show');
-    ulElemListSearch.innerHTML = '';
-  }
-}
+
+
 
 //todo========================================================== نمایش محصولات صفحه اصلی
-showProductHomePage()
+showProductHomePage();
 
 // todo========================================================== نمایش مقالات صفحه اصلی
 createBlogs(containerArticles);
@@ -91,6 +122,18 @@ createBlogs(containerArticles);
 runTimer();
 
 //todo========================================================== جستجوی سراسری محصولات
-searchGlobalInputElem.addEventListener("keyup" , (event) => searchGlobalHandler(event))
+searchGlobalInputElem.addEventListener("keyup", (event) => searchGlobalHandler(event));
 
-console.log('home');
+// ✅ آپدیت دکمه‌های سبد خرید بعد از رندر کامل
+setTimeout(() => {
+    updateCartButtons();
+}, 500);
+
+// ✅ گوش دادن به تغییرات سبد خرید در سایر تب‌ها
+window.addEventListener('storage', (e) => {
+    if (e.key === 'cartData') {
+        updateCartButtons();
+    }
+});
+
+console.log('✅ Home page loaded successfully');

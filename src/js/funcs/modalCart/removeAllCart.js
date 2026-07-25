@@ -1,38 +1,36 @@
-import { updateCache } from "../fetchData/FetchWithCache.js";
+// src/js/funcs/modalCart/removeAllCart.js
+
 import { updateCartNotification } from "../header/cartBtn.js";
 import { boxPaymentHtmlTemplate, createBoxProductToPageCart, shoppingCartModal, showModal } from "../ui.js";
 import { hideLoader, showAlertLogin, showLoader } from "../utils.js";
 import { positionOpenCart } from "./positionCart.js";
+import { updateCartButtons } from "../boxProduct/addCartBtn.js";
 
-//! -------------------------------------------------------------------function-------------------------------------------------------------------------
 //todo=================================================================== تابع حذف همه موارد موجود از سبد خرید
 async function removeAllFromCart() {
   try {
     if (!(await showAlertLogin())) return false;
     showLoader();    
 
-    const response = await fetch(
-      "https://onlineshope.onrender.com/api/cart/clear",
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: 'include'
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(data.message || "مشکل در خالی کردن سبد خرید");
-    }
-
-    const data = await response.json();
-    updateCache('https://onlineshope.onrender.com/api/cart' , data.cart)
-    shoppingCartModal(data.cart.products)
-    createBoxProductToPageCart(data.cart);
-    boxPaymentHtmlTemplate(data.cart);
-    updateCartNotification()
-    positionOpenCart()
+    // ✅ خالی کردن سبد خرید در localStorage
+    const emptyCart = {
+      products: [],
+      totalWithoutDiscount: 0,
+      totalWithDiscount: 0
+    };
+    
+    localStorage.setItem('cartData', JSON.stringify(emptyCart));
+    
+    // ✅ بروزرسانی UI
+    shoppingCartModal(emptyCart.products);
+    createBoxProductToPageCart(emptyCart);
+    boxPaymentHtmlTemplate(emptyCart);
+    updateCartNotification();
+    positionOpenCart();
+    
+    // ✅ آپدیت دکمه‌های سبد خرید در صفحه محصولات
+    updateCartButtons();
+    
     hideLoader();
     showModal("✅ سبد خرید با موفقیت خالی شد!");
 
@@ -43,5 +41,4 @@ async function removeAllFromCart() {
   }
 }
 
-//! -------------------------------------------------------------------exports-------------------------------------------------------------------------
-export { removeAllFromCart }
+export { removeAllFromCart };

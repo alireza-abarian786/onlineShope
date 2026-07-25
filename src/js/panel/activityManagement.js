@@ -1,10 +1,8 @@
-import getDataMe from "../funcs/fetchData/fetchMe.js";
+// src/js/panel/activityManagement.js
+
 import { getLocalStorage, setLocalStorage } from "../funcs/storage.js";
 import { showModal } from "../funcs/ui.js";
 import { showLoader, hideLoader } from "../funcs/utils.js";
-import { fetchPendingTasks, addPendingTask, deletePendingTask } from "./api.js";
-import { fetchRecentActivities, addRecentActivity, deleteRecentActivity } from "./api.js";
-import { updateBalance, fetchBalance } from "./api.js";
 
 // !--------------------------------------------------------------------------------------------- Variables
 const addTaskBtn = document.querySelector("#addTask");
@@ -18,8 +16,12 @@ const themeToggle = document.querySelector("#themeToggle");
 // !--------------------------------------------------------------------------------------------- Initialize on page load
 window.addEventListener("load", async () => {
     showLoader();
-    const userData = await getDataMe();
-    if (!userData) {
+    
+    // ✅ چک کردن لاگین
+    const userId = getLocalStorage("userId");
+    const userData = getLocalStorage("userData");
+    
+    if (!userId || !userData) {
         window.location.href = "./login.html";
         return;
     }
@@ -29,6 +31,7 @@ window.addEventListener("load", async () => {
     // todo================================================================= Theme initialization
     if (getLocalStorage("theme") === "dark") {
         document.body.classList.add("dark-mode");
+        changeIconTheme();
     }
 
     hideLoader();
@@ -39,9 +42,24 @@ if (addTaskBtn) {
     addTaskBtn.addEventListener("click", async () => {
         const task = taskInput.value.trim();
         if (!task) return showModal("لطفاً وظیفه را وارد کنید!");
+        
         try {
             showLoader();
-            await addPendingTask(task);
+            
+            // ✅ ذخیره در localStorage
+            const tasks = JSON.parse(localStorage.getItem('pendingTasks')) || [];
+            const newTask = {
+                _id: "task_" + Date.now(),
+                task: task,
+                completed: false,
+                createdAt: new Date().toLocaleDateString('fa-IR'),
+            };
+            tasks.push(newTask);
+            localStorage.setItem('pendingTasks', JSON.stringify(tasks));
+            
+            // ✅ اضافه کردن به فعالیت‌های اخیر
+            addToRecentActivities(`وظیفه جدید اضافه شد: ${task}`);
+            
             await renderPendingTasks();
             taskInput.value = "";
             hideLoader();
@@ -58,9 +76,10 @@ if (addActivityBtn) {
     addActivityBtn.addEventListener("click", async () => {
         const activity = activityInput.value.trim();
         if (!activity) return showModal("لطفاً فعالیت را وارد کنید!");
+        
         try {
             showLoader();
-            await addRecentActivity(activity);
+            addToRecentActivities(activity);
             await renderRecentActivities();
             activityInput.value = "";
             hideLoader();
@@ -75,11 +94,25 @@ if (addActivityBtn) {
 
 if (addBalanceBtn) {
     addBalanceBtn.addEventListener("click", async () => {
-        const amount = +balanceInput.value.trim();
+        const amount = parseInt(balanceInput.value.trim());
         if (!amount || amount <= 0) return showModal("لطفاً مقدار معتبر وارد کنید!");
+        
         try {
             showLoader();
-            await updateBalance(amount);
+            
+            // ✅ بروزرسانی موجودی
+            const userData = getLocalStorage("userData");
+            const users = JSON.parse(localStorage.getItem('usersData')) || [];
+            const userIndex = users.findIndex(u => u._id === userData._id);
+            
+            if (userIndex !== -1) {
+                users[userIndex].balance = (users[userIndex].balance || 0) + amount;
+                localStorage.setItem('usersData', JSON.stringify(users));
+                setLocalStorage("userData", users[userIndex]);
+                
+                addToRecentActivities(`موجودی به ${(users[userIndex].balance || 0).toLocaleString()} تومان افزایش یافت`);
+            }
+            
             await showBalanceUI();
             balanceInput.value = "";
             hideLoader();
@@ -100,7 +133,23 @@ if (themeToggle) {
     });
 }
 
-// !------------------------------------------------------------------------------------------- Render Functions
+// !------------------------------------------------------------------------------------------- Helper Functions
+
+// ✅ اضافه کردن به فعالیت‌های اخیر
+function addToRecentActivities(activityText) {
+    const activities = JSON.parse(localStorage.getItem('recentActivities')) || [];
+    const newActivity = {
+        _id: "act_" + Date.now(),
+        activity: activityText,
+        createdAt: 'همین الان',
+    };
+    activities.unshift(newActivity);
+    // محدود کردن به 50 فعالیت آخر
+    if (activities.length > 50) {
+        activities.length = 50;
+    }
+    localStorage.setItem('recentActivities', JSON.stringify(activities));
+}
 
 // todo================================================================= Theme Icon Change
 function changeIconTheme() {
@@ -113,16 +162,20 @@ function changeIconTheme() {
     }
 }
 
+// todo================================================================= Render Functions
 async function renderPendingTasks() {
     const taskList = document.querySelector("#pendingTasks");
     if (!taskList) return;
     taskList.innerHTML = "";
+    
     try {
-        const tasks = await fetchPendingTasks();
+        const tasks = JSON.parse(localStorage.getItem('pendingTasks')) || [];
+        
         if (tasks.length === 0) {
             taskList.innerHTML = '<li class="text-gray-500">هیچ وظیفه‌ای یافت نشد.</li>';
             return;
         }
+        
         tasks.forEach((task) => {
             taskList.insertAdjacentHTML(
                 "beforeend",
@@ -142,12 +195,15 @@ async function renderRecentActivities() {
     const activityList = document.querySelector("#recentActivities");
     if (!activityList) return;
     activityList.innerHTML = "";
+    
     try {
-        const activities = await fetchRecentActivities();
+        const activities = JSON.parse(localStorage.getItem('recentActivities')) || [];
+        
         if (activities.length === 0) {
             activityList.innerHTML = '<li class="text-gray-500">هیچ فعالیتی یافت نشد.</li>';
             return;
         }
+        
         activities.forEach((activity) => {
             activityList.insertAdjacentHTML(
                 "beforeend",
@@ -163,38 +219,13 @@ async function renderRecentActivities() {
     }
 }
 
-async function renderPurchases() {
-    const purchaseList = document.querySelector("#purchases");
-    if (!purchaseList) return;
-    purchaseList.innerHTML = "";
-    try {
-        const response = await fetch("https://onlineshope.onrender.com/api/dashboard/purchases", { credentials: "include" });
-        if (!response.ok) throw new Error("Failed to fetch purchases");
-        const purchases = await response.json();
-        if (purchases.length === 0) {
-            purchaseList.innerHTML = '<li class="text-gray-500">هیچ خریدی یافت نشد.</li>';
-            return;
-        }
-        purchases.forEach((purchase) => {
-            purchaseList.insertAdjacentHTML(
-                "beforeend",
-                `<li class="flex justify-between items-center p-2 bg-gray-100 rounded hover:bg-gray-300 transition">
-                    <span>${purchase.name || purchase.activity}</span>
-                    <span>${purchase.price ? purchase.price.toLocaleString() + ' تومان' : 'نامشخص'}</span>
-                </li>`
-            );
-        });
-    } catch (error) {
-        purchaseList.innerHTML = '<li class="text-red-500">خطا در بارگذاری خریدها!</li>';
-        console.error("Error rendering purchases:", error);
-    }
-}
-
 async function showBalanceUI() {
     const accountBalancePElem = document.querySelector("#accountBalance");
     if (!accountBalancePElem) return;
+    
     try {
-        const balance = await fetchBalance();
+        const userData = getLocalStorage("userData");
+        const balance = userData?.balance || 0;
         accountBalancePElem.textContent = `${balance.toLocaleString()} تومان`;
     } catch (error) {
         accountBalancePElem.textContent = "خطا در بارگذاری موجودی!";
@@ -202,40 +233,43 @@ async function showBalanceUI() {
     }
 }
 
-// !--------------------------------------------------------------------------------------------  Load data
+// todo================================================================= Load data
 async function loadData() {
     await Promise.all([
         renderPendingTasks(),
         renderRecentActivities(),
-        renderPurchases(),
         showBalanceUI(),
     ]);
 }
 
-// !--------------------------------------------------------------------------------------- Global delete functions
+// todo================================================================= Global delete functions
 window.deletePendingTasks = async (id) => {
-    showLoader()
+    showLoader();
     try {
-        await deletePendingTask(id);
+        const tasks = JSON.parse(localStorage.getItem('pendingTasks')) || [];
+        const updatedTasks = tasks.filter(t => t._id !== id);
+        localStorage.setItem('pendingTasks', JSON.stringify(updatedTasks));
         await renderPendingTasks();
-        hideLoader()
-        showModal("حذف با موفقیت انجام شد ✅");
+        hideLoader();
+        showModal("✅ حذف با موفقیت انجام شد");
     } catch (error) {
-        hideLoader()
+        hideLoader();
         showModal("❌ خطا در حذف وظیفه");
         console.error("Error deleting task:", error);
     }
 };
 
 window.deleteRecentActivity = async (id) => {
-    showLoader()
+    showLoader();
     try {
-        await deleteRecentActivity(id);
+        const activities = JSON.parse(localStorage.getItem('recentActivities')) || [];
+        const updatedActivities = activities.filter(a => a._id !== id);
+        localStorage.setItem('recentActivities', JSON.stringify(updatedActivities));
         await renderRecentActivities();
-        hideLoader()
-        showModal("حذف با موفقیت انجام شد ✅");
+        hideLoader();
+        showModal("✅ حذف با موفقیت انجام شد");
     } catch (error) {
-        hideLoader()
+        hideLoader();
         showModal("❌ خطا در حذف فعالیت");
         console.error("Error deleting activity:", error);
     }

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="دیجی استور - فروشگاه اینترنتی محصولات با کیفیت و قیمت مناسب"/>
+    <meta name="keywords" content="دیجی استور, فروشگاه اینترنتی, خرید آنلاین, محصولات با کیفیت"/>
+    <meta name="author" content="Digi Store" />
+    <meta name="theme-color" content="#2563eb" />
+    <title id="pageTitle">دیجی استور | جزئیات محصول</title>
+    <link rel="icon" href="./src/assets/images/logo.png" type="image/png">
+
+    <!--?----------------------------------------------------------------------------------- CSS font icon bootstrap-->
+    <link rel="stylesheet" href="./public/vendor/font-icon/bootstrap-icons.min.css"/>
+    <!--?----------------------------------------------------------------------------------- CSS bootstrap-->
+    <link rel="stylesheet" href="./public/vendor/bootstrap/bootstrap.min.css" />
+    <!--?----------------------------------------------------------------------------------- CSS swiper-->
+    <link rel="stylesheet" href="./public/vendor/swiper/swiper-bundle.min.css"/>
+    <!--?----------------------------------------------------------------------------------- CSS aos-->
+    <link rel="stylesheet" href="./public/vendor/aos/aos.css" />
+    <!--?----------------------------------------------------------------------------------- custom css file link -->
+    <link rel="stylesheet" href="src/assets/css/app.css" />
+    <link rel="stylesheet" href="src/assets/css/product.css" />
+    <link rel="stylesheet" href="src/assets/css/mediaQuery.css" />
+</head>
+
+<body class="overflow-x-hidden">
+
+    <!--!----------------------------------------------------------------------- start loader  ---------------------------------------------------------->
+    <div class="loader-container" role="status" aria-label="در حال بارگذاری">
+        <div class="loader-global">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!--?----------------------------------------------------------------------- finish loader  ---------------------------------------------------------->
+
+    <!--!----------------------------------------------------------------------- start header  ---------------------------------------------------------->
+    <header class="mx-auto" role="banner">
+        <!--? start menu -->
+        <div class="menu-box position-relative d-flex align-items-center justify-content-between flex-row-reverse my-sm-4 my-3 mx-auto dropdown-center">
+
+            <!--? icon bar -->
+            <button class="icon-bar d-lg-none d-block mb-1 border-0 bg-transparent" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive" data-bs-toggle="offcanvas" aria-label="باز کردن منو">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true">
+                    <path d="M4 8 L28 8 M4 16 L28 16 M4 24 L28 24" />
+                </svg>
+            </button>
+
+            <!--? start logo and menu -->
+            <div class="container-box-brand d-flex align-items-center justify-content-center flex-row-reverse gap-1 gap-lg-4 align-lg-self-baseline align-self-auto">
+                <!--? start container logo -->
+                <div class="box-brand gap-2 d-flex align-items-center justify-content-center">
+                    <h1 class="fw-bold m-0">دیجی <span class="text-primary">استور</span></h1>
+                    <img src="./src/assets/images/logo.webp" alt="لوگوی دیجی استور" height="32" class="d-lg-block d-none" loading="lazy" />
+                </div>
+
+                <!--? start menu -->
+                <ul class="menu p-0 d-flex flex-lg-row-reverse gap-lg-5 offcanvas-lg offcanvas-start overflow-auto m-0" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasExampleLabel" role="navigation">
+                    <div class="position-fixed bg-white d-lg-none d-flex flex-column align-items-center justify-content-center p-3 gap-3 shadow-lg" style="width: inherit;">
+                        <img src="./src/assets/images/logo.webp" alt="لوگوی دیجی استور" height="32" loading="lazy" />
+                        <h4 class="fw-bold m-0">دیجی <span class="text-primary">استور</span></h4>
+                        <button type="button" class="btn-close icon-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="بستن منو"></button>
+                    </div>
+
+                    <li class="category-menu text-start offcanvas-body flex-grow-0 overflow-visible" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <svg class="icon-category-menu icon-xl-window d-none d-lg-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true">
+                            <path fill="currentColor" d="M831.872 340.864L512 652.672L192.128 340.864a30.59 30.59 0 0 0-42.752 0a29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728a30.59 30.59 0 0 0-42.752 0z"/>
+                        </svg>
+                        <span>دسته بندی محصولات</span>
+                        <div class="open-slide-child-li text-end p-lg-3 p-1 d-none d-lg-grid category-wrapper-xl" role="menu"></div>
+                    </li>
+
+                    <div class="d-lg-none collapse category-wrapper-lg" id="collapseExample"></div>
+
+                    <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
+                        <a class="text-decoration-none" href="./contact.html" role="menuitem">تماس با ما</a>
+                    </li>
+                    <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
+                        <a class="text-decoration-none" href="./about.html" role="menuitem">درباره ما</a>
+                    </li>
+                    <li class="offcanvas-body flex-grow-0 text-start overflow-visible">
+                        <a class="text-decoration-none" href="./guide.html" role="menuitem">راهنما</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--? box apps -->
+            <div class="box-apps d-flex align-items-center justify-content-center gap-0 gap-sm-3 flex-sm-row-reverse border-0" role="menu">
+                <div class="page shopping-cart-icon position-relative bg-white rounded-circle d-flex align-items-center justify-content-center mb-sm-0">
+                    <svg style="width: 18px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon-cart">
+                        <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+                    </svg>
+                    <div class="cart-notification"></div>
+                </div>
+
+                <div class="container-shopping-cart"></div>
+
+                <a href="" id="login" class="page py-2 ps-2 pe-2 text-decoration-none rounded-5 d-flex align-items-center justify-content-between gap-2" style="background-color: #0f172a">
+                    <svg class="p-1 rounded-circle" style="width: 35px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8m-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-white d-xl-block d-none w-100 text-center">ورود / عضویت</span>
+                </a>
+            </div>
+        </div>
+
+        <!--? start box blue bar -->
+        <div class="blue-bar d-flex align-items-center justify-content-center justify-content-lg-between bg-primary p-3 w-100 start-0">
+            <div class="Social-networks d-flex align-items-center justify-content-between gap-4 d-lg-flex d-none">
+                <a href="#" class="text-dark">
+                    <div class="p-1 bg-white rounded-circle z-0 d-flex align-items-center justify-content-center" style="width: 2.2rem; height: 2.2rem">
+                        <svg class="svg-navbar-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                            <path fill="currentColor" d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94a336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6c0 13.2 1.6 26.4 4.2 39.1c-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9c-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850C671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2c33.2-24.3 62.3-54.4 85.5-88.2"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="#" class="text-dark">
+                    <div class="p-1 bg-white rounded-circle z-0 d-flex align-items-center justify-content-center" style="width: 2.2rem; height: 2.2rem">
+                        <svg class="svg-navbar-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248a4.623 4.623 0 0 0 0-9.248m0 7.627a3.004 3.004 0 1 1 0-6.008a3.004 3.004 0 0 1 0 6.008"/>
+                            <circle cx="16.806" cy="7.207" r="1.078" fill="currentColor"/>
+                            <path fill="currentColor" d="M20.533 6.111A4.605 4.605 0 0 0 17.9 3.479a6.606 6.606 0 0 0-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 0 0-2.184.42a4.6 4.6 0 0 0-2.633 2.632a6.585 6.585 0 0 0-.419 2.186c-.043.962-.056 1.267-.056 3.71c0 2.442 0 2.753.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632a6.584 6.584 0 0 0 2.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 0 0 2.186-.419a4.613 4.613 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.186c.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 0 0-.421-2.217m-1.218 9.532a5.043 5.043 0 0 1-.311 1.688a2.987 2.987 0 0 1-1.712 1.711a4.985 4.985 0 0 1-1.67.311c-.95.044-1.218.055-3.654.055c-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 0 1-1.669-.311a2.985 2.985 0 0 1-1.719-1.711a5.08 5.08 0 0 1-.311-1.669c-.043-.95-.053-1.218-.053-3.654c0-2.437 0-2.686.053-3.655a5.038 5.038 0 0 1 .311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 0 1 1.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 0 1 1.67.311a2.991 2.991 0 0 1 1.712 1.712a5.08 5.08 0 0 1 .311 1.669c.043.951.054 1.218.054 3.655c0 2.436 0 2.698-.043 3.654z"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="#" class="text-dark">
+                    <div class="p-1 bg-white rounded-circle z-0 d-flex align-items-center justify-content-center" style="width: 2.2rem; height: 2.2rem">
+                        <svg class="svg-navbar-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14.2 2.875A4.625 4.625 0 0 0 9.575 7.5v2.575H7.1c-.124 0-.225.1-.225.225v3.4c0 .124.1.225.225.225h2.475V20.9c0 .124.1.225.225.225h3.4c.124 0 .225-.1.225-.225v-6.975h2.497c.103 0 .193-.07.218-.17l.85-3.4a.225.225 0 0 0-.218-.28h-3.347V7.5a.775.775 0 0 1 .775-.775h2.6c.124 0 .225-.1.225-.225V3.1c0-.124-.1-.225-.225-.225z"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="#" class="text-dark">
+                    <div class="p-1 bg-white rounded-circle z-0 d-flex align-items-center justify-content-center" style="width: 2.2rem; height: 2.2rem">
+                        <svg class="svg-navbar-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001l-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15l4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            <div class="text-navbar-blue d-flex align-items-center justify-content-between gap-5 text-white">
+                <h6>دسترسی سریع</h6>
+                <h6>تنوع محصولات</h6>
+                <h6>خرید آنلاین</h6>
+                <h6>ارسال محصول</h6>
+                <h6>ثبت غرفه شخصی</h6>
+            </div>
+        </div>
+    </header>
+    <!--?----------------------------------------------------------------------- finish header  ---------------------------------------------------------->
+
+    <!--!----------------------------------------------------------------------- start main  ---------------------------------------------------------->
+    <main>
+        <div class="container product-detail-container py-4">
+            <!-- لودینگ -->
+            <div id="productLoader" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">در حال بارگذاری...</span>
+                </div>
+                <p class="mt-3">در حال بارگذاری محصول...</p>
+            </div>
+
+            <!-- محتوای محصول -->
+            <div id="productContent" class="d-none">
+                <!-- مسیر (Breadcrumb) -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id="breadcrumb">
+                        <li class="breadcrumb-item"><a href="./index.html">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="./category.html?cat=allProducts&page=1">همه محصولات</a></li>
+                        <li class="breadcrumb-item active" id="breadcrumbCategory">دسته‌بندی</li>
+                    </ol>
+                </nav>
+
+                <div class="row g-4">
+                    <!-- گالری تصاویر -->
+                    <div class="col-lg-6">
+                        <div class="product-gallery">
+                            <div class="main-image">
+                                <img id="productMainImage" src="" alt="تصویر محصول" class="img-fluid rounded-3" />
+                            </div>
+                            <div class="thumbnail-images mt-3 d-flex gap-2" id="thumbnailImages">
+                                <!-- تامبنیل‌ها توسط JS ساخته میشن -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- اطلاعات محصول -->
+                    <div class="col-lg-6">
+                        <div class="product-info">
+                            <h1 id="productName" class="fw-bold"></h1>
+                            
+                            <div class="d-flex align-items-center gap-3 mt-2">
+                                <div class="product-rating" id="productRating"></div>
+                                <span class="text-muted" id="productReviews"></span>
+                                <span class="badge bg-success" id="productStock">موجود</span>
+                            </div>
+
+                            <div class="product-price mt-4">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="price-original" id="productOriginalPrice"></span>
+                                    <span class="price-discount text-danger fw-bold" id="productDiscountPrice"></span>
+                                </div>
+                                <div class="discount-badge" id="productDiscountBadge"></div>
+                            </div>
+
+                            <div class="product-description mt-4">
+                                <h6>توضیحات محصول</h6>
+                                <p id="productDescription" class="text-muted"></p>
+                            </div>
+
+                            <div class="product-features mt-4" id="productFeatures">
+                                <h6>ویژگی‌ها</h6>
+                                <ul class="list-unstyled" id="featuresList"></ul>
+                            </div>
+
+                            <div class="product-actions mt-4">
+                                <div class="d-flex gap-3 flex-wrap">
+                                    <button class="btn btn-success btn-lg flex-grow-1" id="addToCartBtn">
+                                        <i class="bi bi-cart-plus"></i> اضافه به سبد خرید
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-lg" id="favoriteBtn">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- محصولات مرتبط -->
+                <div class="related-products mt-5">
+                    <h3 class="fw-bold mb-4">محصولات مرتبط</h3>
+                    <div class="row g-4" id="relatedProducts">
+                        <!-- توسط JS ساخته میشه -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--?----------------------------------------------------------------------- finish main  ---------------------------------------------------------->
+
+    <!--!----------------------------------------------------------------------- start footer  ---------------------------------------------------------->
+    <footer>
+        <div data-aos="fade">
+            <div>
+                <div>
+                    <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M41.9305 29.6715L41.9074 29.5196C41.7378 28.4116 41.7248 27.9845 41.8499 27.5209C41.9685 27.0821 42.1898 26.7306 42.8787 25.8818C43.8101 24.7345 44.0439 24.3034 44.0438 23.625C44.0438 22.9469 43.8099 22.5157 42.8786 21.3685L42.8037 21.2763C42.195 20.5246 41.9636 20.1505 41.8499 19.7296C41.7639 19.411 41.7476 19.0404 41.7974 18.5417C41.818 18.3354 41.8426 18.1548 41.9075 17.731C42.1272 16.2967 42.1136 15.8324 41.7846 15.2696C41.4613 14.7163 41.019 14.4415 39.7705 13.9594L39.6688 13.9202C38.6248 13.5182 38.2483 13.3189 37.9132 12.9872C37.5782 12.6555 37.3772 12.2832 36.9712 11.2499L36.9314 11.1489C36.4444 9.91296 36.1665 9.47468 35.6078 9.15476C35.0667 8.84478 34.5428 8.82328 33.2251 9.01842L33.0953 9.03786C32.6952 9.09783 32.5144 9.1219 32.3079 9.14216C31.802 9.19181 31.4262 9.17573 31.1032 9.09029C30.6592 8.97284 30.3039 8.75363 29.4462 8.07148C28.2875 7.14984 27.8527 6.91876 27.1689 6.91876C26.5704 6.91876 26.056 7.16668 25.2241 7.80948C25.1428 7.87226 25.0635 7.93472 24.8918 8.07114C24.0339 8.75342 23.6786 8.97263 23.2347 9.09008C22.7655 9.21415 22.3328 9.20117 21.2137 9.03322C19.7661 8.81588 19.2979 8.82929 18.7303 9.15436C18.1527 9.48514 17.9013 9.88936 17.367 11.2494C16.9611 12.2824 16.7599 12.6549 16.4248 12.9866C16.1184 13.2899 15.717 13.5115 14.9035 13.8289C14.8415 13.8531 14.7925 13.8721 14.6692 13.9195L14.5671 13.9589C13.3188 14.4409 12.8766 14.7157 12.5532 15.2689C12.2395 15.8057 12.2178 16.3254 12.4151 17.6312L12.4346 17.759C12.4952 18.155 12.5195 18.3339 12.54 18.5382C12.5901 19.0385 12.5738 19.41 12.4877 19.7291C12.3685 20.1703 12.1441 20.5239 11.4124 21.4255C11.3165 21.5438 11.2558 21.6195 11.1953 21.6962C10.5446 22.5212 10.2938 23.0309 10.2938 23.625C10.2938 24.2184 10.5445 24.7284 11.1932 25.5511C11.257 25.6321 11.3206 25.7111 11.4588 25.8815C12.1476 26.73 12.3691 27.0818 12.4876 27.5207C12.5737 27.8394 12.59 28.2103 12.5401 28.7095C12.5194 28.9156 12.4949 29.0959 12.43 29.5192C12.2104 30.9533 12.2239 31.4177 12.5529 31.9806C12.8763 32.5338 13.3186 32.8086 14.567 33.2907L14.6687 33.3299C15.7127 33.7319 16.0893 33.9312 16.4244 34.263C16.7594 34.5946 16.9605 34.9669 17.3664 36.0002L17.4062 36.1013C17.8933 37.3372 18.1712 37.7754 18.7299 38.0954C19.271 38.4053 19.7949 38.4268 21.113 38.2316L21.2432 38.2121C21.6439 38.152 21.8252 38.1279 22.0321 38.1077C22.2223 38.089 22.39 38.0799 22.5446 38.0799C22.806 38.0799 23.0317 38.1061 23.2344 38.1597C23.6784 38.2772 24.0337 38.4964 24.8914 39.1785C26.0502 40.1002 26.4849 40.3313 27.1688 40.3313C27.8526 40.3313 28.2873 40.1002 29.446 39.1786L29.5393 39.1045C30.2988 38.5017 30.677 38.2725 31.1029 38.1598C31.5721 38.0357 32.0042 38.0487 33.1239 38.2167C34.5715 38.434 35.0397 38.4206 35.6074 38.0956C36.1849 37.7648 36.4364 37.3606 36.9707 36.0005C37.3765 34.9676 37.5777 34.595 37.9128 34.2634C38.248 33.9315 38.6243 33.7324 39.6684 33.3304L39.7705 33.291C41.0188 32.809 41.4611 32.5342 41.7844 31.981C42.0981 31.4442 42.1199 30.9245 41.9305 29.6715ZM42.3141 23.6252C42.3141 23.7684 42.0987 24.107 41.5314 24.8059C40.6679 25.8698 40.3754 26.3504 40.1792 27.077C39.9769 27.826 39.9869 28.4022 40.2009 29.8004L40.22 29.9259C40.3267 30.6325 40.3395 31.0324 40.288 31.1206C40.2286 31.2223 39.8684 31.4122 39.143 31.6923L39.0425 31.731C37.7409 32.2321 37.2373 32.5081 36.6909 33.049C36.1444 33.59 35.8652 34.0892 35.359 35.3776C35.0402 36.1891 34.8519 36.5471 34.7425 36.6098C34.6436 36.6665 34.2334 36.6481 33.3827 36.5204C31.9929 36.3118 31.4117 36.3025 30.6571 36.5022C29.9509 36.689 29.4266 36.9968 28.4586 37.765L28.364 37.8402C27.6568 38.4026 27.315 38.6156 27.1688 38.6156C27.0225 38.6156 26.6806 38.4025 25.9735 37.8401C24.8989 36.9855 24.4136 36.6961 23.6802 36.5021C23.3276 36.4087 22.9548 36.3643 22.5446 36.3643C22.3313 36.3643 22.1082 36.3762 21.8622 36.4003C21.6169 36.4243 21.4138 36.4514 20.9311 36.5238L20.8045 36.5427C20.0895 36.6486 19.6849 36.6612 19.5948 36.6096C19.4917 36.5506 19.3002 36.1948 19.0172 35.4767L18.978 35.3772C18.4717 34.0885 18.1928 33.5897 17.6464 33.0487C17.1 32.5078 16.5961 32.2316 15.2947 31.7306L15.1945 31.692C14.4689 31.4118 14.1088 31.2219 14.0493 31.1201C13.9925 31.023 14.0119 30.6138 14.1445 29.7481C14.2103 29.3188 14.2373 29.1191 14.2613 28.8788C14.3318 28.1737 14.3027 27.6111 14.1584 27.0768C13.9612 26.3466 13.6664 25.8654 12.7604 24.7493C12.6687 24.6362 12.6113 24.5647 12.5557 24.4942C12.2002 24.0433 12.0234 23.7371 12.0234 23.625C12.0234 23.5127 12.2006 23.2059 12.5576 22.7533C12.6153 22.6802 12.6743 22.6067 12.8064 22.4439C13.6697 21.3801 13.9622 20.8995 14.1585 20.1729C14.3029 19.638 14.3319 19.0749 14.2612 18.3686C14.2369 18.1263 14.2096 17.9259 14.1368 17.4495L14.1177 17.3241C14.0109 16.6174 13.9981 16.2175 14.0496 16.1293C14.1091 16.0276 14.4692 15.8378 15.1946 15.5576L15.2951 15.5189C15.4211 15.4704 15.4717 15.4508 15.5367 15.4255C16.5875 15.0155 17.143 14.6996 17.6468 14.2008C18.1932 13.6598 18.4723 13.1608 18.9786 11.8724C19.2974 11.0608 19.4857 10.7028 19.5952 10.6401C19.6941 10.5835 20.1042 10.6018 20.9549 10.7295C22.3439 10.938 22.9258 10.9473 23.6803 10.7478C24.4175 10.5528 24.903 10.2613 26.0309 9.36428C26.1444 9.27409 26.2162 9.21766 26.287 9.16292C26.7442 8.80971 27.0541 8.63439 27.1689 8.63439C27.3151 8.63439 27.657 8.84748 28.3642 9.40995C29.4387 10.2645 29.924 10.5539 30.6574 10.748C31.1972 10.8907 31.7654 10.9194 32.4782 10.8494C32.723 10.8254 32.9254 10.7984 33.4071 10.7262L33.5338 10.7073C34.2483 10.6015 34.6527 10.5889 34.7428 10.6405C34.846 10.6995 35.0374 11.0553 35.3204 11.7734L35.3596 11.8729C35.8659 13.1617 36.1448 13.6604 36.6913 14.2014C37.2377 14.7423 37.7413 15.0184 39.0428 15.5195L39.143 15.5581C39.8686 15.8383 40.2287 16.0282 40.2882 16.13C40.345 16.2272 40.3256 16.6364 40.193 17.502C40.1272 17.932 40.1001 18.132 40.0761 18.3727C40.0058 19.0771 40.0349 19.6394 40.1791 20.1734C40.368 20.873 40.6791 21.3923 41.4553 22.3508L41.5313 22.4444C42.0987 23.1434 42.3141 23.482 42.3141 23.6252Z" fill="#fff"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M27.5063 34.425C33.3777 34.425 38.1375 29.7408 38.1375 23.9625C38.1375 18.1842 33.3777 13.5 27.5063 13.5C21.6348 13.5 16.875 18.1842 16.875 23.9625C16.875 29.7408 21.6348 34.425 27.5063 34.425ZM34.0442 17.725C33.6315 17.4276 33.0539 17.5184 32.754 17.9277L25.2686 28.1471L21.7478 25.3759C21.3483 25.0614 20.7673 25.1277 20.4502 25.5239C20.1331 25.9202 20.1999 26.4965 20.5995 26.811L24.8752 30.1764C25.2869 30.5004 25.8878 30.419 26.1966 29.9973L34.2486 19.0045C34.5484 18.5952 34.4569 18.0223 34.0442 17.725Z" fill="#ff879f"/>
+                        <path d="M27.5063 12.825C27.8917 12.825 28.2042 13.1328 28.2042 13.5125C28.2042 13.8922 27.8917 14.2 27.5063 14.2C22.0329 14.2 17.5958 18.5708 17.5958 23.9625C17.5958 29.3542 22.0329 33.725 27.5063 33.725C32.9796 33.725 37.4167 29.3542 37.4167 23.9625C37.4167 23.5828 37.7291 23.275 38.1146 23.275C38.5 23.275 38.8125 23.5828 38.8125 23.9625C38.8125 30.1136 33.7505 35.1 27.5063 35.1C21.262 35.1 16.2 30.1136 16.2 23.9625C16.2 17.8114 21.262 12.825 27.5063 12.825Z" fill="#fff"/>
+                        <path d="M35.5928 39.557C35.5928 39.1458 35.9358 38.8125 36.3589 38.8125C36.782 38.8125 37.125 39.1458 37.125 39.557V46.5052C37.125 46.9845 36.6658 47.3389 36.1854 47.2303L27.5734 45.284L18.8246 47.2309C18.3449 47.3376 17.8875 46.9835 17.8875 46.5052V41.873C17.8875 41.4619 18.2305 41.1286 18.6536 41.1286C19.0767 41.1286 19.4197 41.4619 19.4197 41.873V45.571L27.4038 43.7943C27.5172 43.7691 27.635 43.7693 27.7483 43.7949L35.5928 45.5678V39.557Z" fill="#fff"/>
+                        <path d="M18.7313 38.8125C18.5094 38.8125 18.2917 38.9028 18.1347 39.0597C17.9778 39.2167 17.8875 39.4343 17.8875 39.6571C17.8875 39.8782 17.9778 40.0958 18.1347 40.2536C18.2917 40.4106 18.5094 40.5 18.7313 40.5C18.9532 40.5 19.1709 40.4106 19.3278 40.2536C19.4847 40.0958 19.575 39.879 19.575 39.6571C19.575 39.4343 19.4847 39.2167 19.3278 39.0597C19.1709 38.9028 18.9532 38.8125 18.7313 38.8125Z" fill="#fff"/>
+                        <path d="M30.2062 12.825C29.9843 12.825 29.7666 12.9153 29.6097 13.0722C29.4528 13.2292 29.3625 13.4469 29.3625 13.6696C29.3625 13.8907 29.4528 14.1084 29.6097 14.2661C29.7666 14.4231 29.9843 14.5125 30.2062 14.5125C30.4281 14.5125 30.6458 14.4231 30.8028 14.2661C30.9597 14.1084 31.05 13.8915 31.05 13.6696C31.05 13.4469 30.9597 13.2292 30.8028 13.0722C30.6458 12.9153 30.4281 12.825 30.2062 12.825Z" fill="#fff"/>
+                    </svg>
+                    <p>حذف واسطه ها</p>
+                </div>
+                <!-- بقیه آیتم‌های فوتر... -->
+            </div>
+        </div>
+    </footer>
+
+
+<!--?----------------------------------------------------------------------- JavaScript bootstrap ---------------------------------------------------------->
+<script defer src="./public/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<!--?----------------------------------------------------------------------- JavaScript sweetalert2 ---------------------------------------------------------->
+<script defer src="./public/vendor/alert/sweetalert2.all.min.js"></script>
+
+<!-- ✅ اضافه کردن اسکریپت‌های هدر (باید قبل از product.js بیاد) -->
+<script defer type="module" src="./src/js/components/header.js"></script>
+
+<!-- ✅ اسکریپت اصلی صفحه محصول -->
+<script defer type="module" src="./src/js/product.js"></script>
+</body>
+</html>

@@ -1,10 +1,14 @@
+// src/js/login.js
+
 import {
   setLocalStorage,
+  getLocalStorage,
 } from "./funcs/storage.js";
 import {
   showLoader,
   hideLoader,
 } from "./funcs/utils.js";
+import fakeUsers from "../data/UsersData.js";
 
 //! ------------------------------------------------------------------------------------------- variables
 const emailLogin = document.querySelector("#login-email");
@@ -26,6 +30,35 @@ let usernameValid = false;
 let passwordValid = false;
 let phoneValid = false;
 let emailValid = false;
+
+// ✅ ایجاد دیتای کاربران در localStorage اگر وجود نداشت
+if (!localStorage.getItem('usersData')) {
+    const defaultUsers = [
+        {
+            _id: "user_001",
+            name: "مدیر سایت",
+            email: "admin@example.com",
+            password: "admin123",
+            phone: "09123456789",
+            favorites: [],
+            balance: 2500000,
+            isAdmin: true,
+            createdAt: "۱۴۰۵/۰۱/۰۱",
+        },
+        {
+            _id: "user_002",
+            name: "کاربر تست",
+            email: "test@example.com",
+            password: "test123",
+            phone: "09123456788",
+            favorites: [],
+            balance: 500000,
+            isAdmin: false,
+            createdAt: "۱۴۰۵/۰۲/۱۵",
+        }
+    ];
+    localStorage.setItem('usersData', JSON.stringify(defaultUsers));
+}
 
 //! ------------------------------------------------------------------------------------------- addEventListener
 window.addEventListener("DOMContentLoaded", () => {
@@ -56,7 +89,7 @@ btnLogin.addEventListener("click", async (e) => {
       title: "ورود ناموفق",
       text: "لطفا نام کاربری و رمز عبور را وارد کنید",
       icon: "error",
-      button: "تایید",
+      confirmButtonText: "تایید",
     });
   }
 });
@@ -67,120 +100,128 @@ function clearInput() {
   passwordLogin.value = "";
 }
 
-//todo================================================================ عملیات لاگین
+//todo================================================================ عملیات لاگین (بدون سرور)
 const loginOperationManagementFunction = async () => {
-  const userLoginInformation = {
-    email: emailLogin.value.trim(),
-    password: passwordLogin.value.trim(),
-  };
+  const email = emailLogin.value.trim();
+  const password = passwordLogin.value.trim();
 
-  showLoader()
-  const loginOperation = await fetch("https://onlineshope.onrender.com/api/auth/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      credentials: 'include',
-      body: JSON.stringify(userLoginInformation),
-    }
-  );
+  showLoader();
 
-  if (loginOperation.ok) {
+  // ✅ دریافت کاربران از localStorage
+  const users = JSON.parse(localStorage.getItem('usersData')) || [];
+  
+  // ✅ جستجوی کاربر
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if (user) {
     hideLoader();
+    
+    // ✅ ذخیره اطلاعات کاربر در localStorage
+    setLocalStorage("login", user.name);
+    setLocalStorage("userId", user._id);
+    setLocalStorage("isAuthorized", true);
+    setLocalStorage("userData", user);
+    
+    // ✅ ذخیره علاقه‌مندی‌ها
+    const favoritesData = {
+      items: user.favorites.map(productId => ({
+        _id: "fav_" + Date.now() + Math.random(),
+        productId: productId,
+        addedAt: new Date().toLocaleDateString('fa-IR'),
+      }))
+    };
+    localStorage.setItem('favoritesData', JSON.stringify(favoritesData));
+    
     Swal.fire({
       title: "خوش آمدید",
-      text: "⁉️میخواهید به پنل کاربری خود بروید",
+      text: `✅ ${user.name} عزیز، به دیجی استور خوش آمدید`,
       icon: "success",
-      showCancelButton: true,
-      confirmButtonText: "بله، برو!",
-      cancelButtonText: "لغو",
+      confirmButtonText: "ورود به پنل کاربری",
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = "./doshboard.html";
       }
     });
 
-    const resultLoginOperation = await loginOperation.json();  
-    console.log(resultLoginOperation);
-      
-    setLocalStorage("isAuthorized", true);
-    setLocalStorage("login", resultLoginOperation.username);
-
-  } else if (loginOperation.status === 400) {
+  } else {
     hideLoader();
     Swal.fire({
       title: "ورود ناموفق",
-      text: "نام کاربری یا رمز عبور اشتباه است",
+      text: "ایمیل یا رمز عبور اشتباه است",
       icon: "error",
-      button: "تایید",
+      confirmButtonText: "تایید",
     });
   }
 };
 
 //! ------------------------------------------------------------------------------------------- sign up
-//todo================================================================ عملیات ثبت نام
+//todo================================================================ عملیات ثبت نام (بدون سرور)
 btnSignUp.addEventListener("click", async (event) => {
   event.preventDefault();  
+  
   if (usernameValid && passwordValid && phoneValid && emailValid) {
+    showLoader();
+    
+    // ✅ دریافت کاربران موجود
+    const users = JSON.parse(localStorage.getItem('usersData')) || [];
+    
+    // ✅ چک کردن تکراری نبودن ایمیل
+    if (users.some(u => u.email === emailSignUp.value.trim())) {
+      hideLoader();
+      Swal.fire({
+        title: "خطا در ثبت نام",
+        text: "این ایمیل قبلاً ثبت نام کرده است",
+        icon: "error",
+        confirmButtonText: "تایید",
+      });
+      return;
+    }
+    
+    // ✅ ایجاد کاربر جدید
     const newUser = {
+      _id: "user_" + Date.now(),
       name: usernameSignUp.value.trim(),
       email: emailSignUp.value.trim(),
       password: passwordSignUp.value.trim(),
       phone: phoneInput.value.trim(),
+      favorites: [],
+      balance: 0,
+      isAdmin: false,
+      createdAt: new Date().toLocaleDateString('fa-IR'),
     };
-  
-    try {
-      showLoader()
-      const res = await fetch(
-        "https://onlineshope.onrender.com/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: 'include',
-          body: JSON.stringify(newUser),
-        }
-      );      
-  
-      const data = await res.json();      
-      if (!res.ok) { throw new Error(data.message) }
-  
-      setLocalStorage("login", data.username);
-      setLocalStorage("isAuthorized", true);
-      clearInputSignUp();
-  
-      hideLoader();
-      Swal.fire({
-        title: "ثبت نام شما با موفقیت انجام شد",
-        text: "⁉️میخواهید به پنل کاربری خود بروید",
-        icon: "success",
-        showCancelButton: true,
-        confirmButtonText: "بله، برو!",
-        cancelButtonText: "لغو",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "./doshboard.html";
-        }
-      });
-    } catch (error) {
-      hideLoader();
-      console.error("خطا در ارسال درخواست به سرور:", error);
-      Swal.fire({
-        title: "خطا در ثبت نام",
-        text: error.message || "مشکلی در ثبت نام رخ داده است",
-        icon: "error",
-        button: "تایید",
-      });
-    }
+    
+    // ✅ ذخیره کاربر
+    users.push(newUser);
+    localStorage.setItem('usersData', JSON.stringify(users));
+    
+    // ✅ لاگین خودکار
+    setLocalStorage("login", newUser.name);
+    setLocalStorage("userId", newUser._id);
+    setLocalStorage("isAuthorized", true);
+    setLocalStorage("userData", newUser);
+    
+    // ✅ خالی کردن اینپوت‌ها
+    clearInputSignUp();
+    hideLoader();
+    
+    Swal.fire({
+      title: "ثبت نام با موفقیت انجام شد",
+      text: `✅ ${newUser.name} عزیز، به دیجی استور خوش آمدید`,
+      icon: "success",
+      confirmButtonText: "ورود به پنل کاربری",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "./doshboard.html";
+      }
+    });
+    
   } else {
     hideLoader();
     Swal.fire({
       title: "خطا در اعتبارسنجی",
       text: "لطفاً تمام فیلدها را به درستی پر کنید",
       icon: "error",
-      button: "تایید",
+      confirmButtonText: "تایید",
     });
   }
 });
@@ -190,7 +231,7 @@ const clearInputSignUp = () => {
   usernameSignUp.value = "";
   passwordSignUp.value = "";
   phoneInput.value = "";
-  emailSignUp.value ='';
+  emailSignUp.value = '';
 }
 
 //todo================================================================ نمایش پیام صحیح نبودن مقدار ورودی
@@ -210,7 +251,7 @@ usernameSignUp.addEventListener("input", (e) => {
   if (!usernameValid) {
     inValidText(usernameText, "نام کاربری باید حداقل 5 کاراکتر باشد");
   } else {
-    validText(usernameText, "نام کاربری معتبر است");
+    validText(usernameText, "✅ نام کاربری معتبر است");
   }
 });
 
@@ -221,7 +262,7 @@ passwordSignUp.addEventListener("input", (e) => {
   if (!passwordValid) {
     inValidText(passwordText, "رمز عبور باید حداقل 6 کاراکتر باشد");
   } else {
-    validText(passwordText, "رمز عبور معتبر است");
+    validText(passwordText, "✅ رمز عبور معتبر است");
   }
 });
 
@@ -233,7 +274,7 @@ phoneInput.addEventListener("input", (e) => {
   if (!phoneValid) {
     inValidText(phoneText, "شماره تلفن باید با 09 شروع شود و 11 رقم باشد");
   } else {
-    validText(phoneText, "شماره تلفن معتبر است");
+    validText(phoneText, "✅ شماره تلفن معتبر است");
   }
 });
 
@@ -248,7 +289,7 @@ emailSignUp.addEventListener("input", (e) => {
     }
   } else {
     if (emailText) {
-      validText(emailText, "ایمیل معتبر است");
+      validText(emailText, "✅ ایمیل معتبر است");
     }
   }
 });

@@ -1,7 +1,12 @@
-import { createBlogs } from "./funcs/ui.js"
+// src/js/blog.js
 
-let containerBlogs = document.querySelector('.container-category')
+import { createBlogs } from "./funcs/ui.js";
+import { hideLoader } from "./funcs/utils.js";
+
+let containerBlogs = document.querySelector('.container-category');
+
 document.addEventListener('DOMContentLoaded', () => {    
-    createBlogs(containerBlogs)
-    console.log('blog');
-})
+    createBlogs(containerBlogs);
+    hideLoader();
+    console.log('✅ Blog page loaded successfully');
+});
